@@ -1,0 +1,356 @@
+﻿@model NDHSITE.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Modify";
+    var agency = ViewBag.AGENCY as NDHSITE.Models.C2Info;
+}
+
+<div class="page-header">
+    <h3 class="page-title">Thông tin đại lý cấp 2</h3>
+
+    <ol class="breadcrumb">
+        <li><a href="/home">Trang chủ</a></li>
+        <li><a href="#">Đại lý cấp 2</a></li>
+    </ol>
+</div> <!-- /.page-header -->
+
+<div class="portlet portlet-boxed">
+
+    <div class="portlet-body">
+        <div class="layout layout-main-right layout-stack-sm">
+            <div class="col-md-2 col-sm-3 layout-sidebar">
+                <ul id="myTab" class="nav nav-layout-sidebar nav-stacked">
+                    <li class="active">
+                        <a href="#allagency" data-toggle="tab">
+                            Thông tin khách hàng
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#addagency" data-toggle="tab">
+                            Tài khoản
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-10 col-sm-9 layout-main">
+                <div id="settings-content" class="tab-content stacked-content">
+                    <div class="tab-pane fade in active" id="allagency">
+                        <form method="post" onsubmit="if(!confirm('Chỉnh sửa khách hàng?')){return false;}">
+                            <fieldset>
+                                <input type="hidden" value="@agency.Id" name="Id" />
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Đại lý cấp 1</label>
+                                            <input class="form-control c1search" type="text" name="C1Code" required  value="@agency.C1Info.Code">
+                                            <p class="c1name"><i></i></p>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Chi nhánh</label>
+                                            <select class="form-control selectpicker" data-live-search="true" name="BranchCode">
+                                                @foreach (var item in ViewBag.BranchAll)
+                                                {
+                                                    if (item.Code == agency.CInfoCommon.BranchCode)
+                                                    {
+                                                         <option value="@item.Code" selected>@item.Name</option>
+                                                    }
+                                                    else
+                                                    {
+                                                         <option value="@item.Code">@item.Name</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Mã nhân viên thị trường</label>
+                                            <input class="form-control staffsearch" type="text" name="StaffCode" autocomplete="off" required autofocus data-provide="typeahead" value="@(agency.HaiStaff != null? agency.HaiStaff.Code: "")">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Mã đại lý</label>
+                                            <input type="text" name="Code" class="form-control" required value="@agency.Code" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Tên cửa hàng</label>
+                                            <input type="text" name="StoreName" class="form-control" required value="@agency.StoreName" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Người đại diện</label>
+                                            <input type="text" name="Deputy" class="form-control" required value="@agency.Deputy" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Phone</label>
+                                            <input type="text" name="Phone" class="form-control" required value="@agency.CInfoCommon.Phone" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>CMND</label>
+                                            <input type="text" name="IdentityCard" class="form-control"  value="@agency.CInfoCommon.IdentityCard" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>TK ngân hàng</label>
+                                            <input type="text" name="BankAccount" class="form-control" required value="@agency.CInfoCommon.BankAccount" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Người hưởng thụ</label>
+                                            <input type="text" name="BankAccountHolder" class="form-control" required value="@agency.CInfoCommon.BankAccountHolder" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Ngân hàng - chi nhánh</label>
+                                            <input type="text" name="BackName" class="form-control" required value="@agency.CInfoCommon.BackName" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Mã số thuế</label>
+                                            <input type="text" name="TaxCode" class="form-control" required value="@agency.CInfoCommon.TaxCode" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Giấy phép kinh doanh</label>
+                                            <input type="text" name="BusinessLicense" class="form-control" required value="@agency.CInfoCommon.BusinessLicense" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Ghi chú</label>
+                                            <textarea name="Notes" class="form-control">@agency.CInfoCommon.Notes</textarea>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="text" name="Email" class="form-control" value="@agency.CInfoCommon.Email" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Ngày sinh</label>
+                                            <input type="text" name="birthday" class="form-control" id="datetimecreate" value="@agency.CInfoCommon.BirthDay" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nơi sinh</label>
+                                            <input type="text" name="PlaceOfBirth" class="form-control" value="@agency.CInfoCommon.PlaceOfBirth" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Địa chỉ</label>
+                                            <input type="text" name="AddressInfo" class="form-control" value="@agency.CInfoCommon.AddressInfo, @agency.CInfoCommon.DistrictName, @agency.CInfoCommon.ProvinceName " />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Thành phố/tỉnh</label>
+
+                                            <select class="form-control selectpicker" data-live-search="true" id="dsprovince">
+                                                <option value="-1">--Chọn--</option>
+                                                @foreach (var item in ViewBag.Provinces)
+                                                {
+                                                    if (ViewBag.ProvinceId == item.Id)
+                                                    {
+                                                        <option data-tokens="@item.Name" value="@item.Id" selected>@item.Name</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
+                                                    }
+                                                }
+                                            </select>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Quận/huyện</label>
+
+                                            <select class="form-control" id="dsdistrict">
+                                                @if (ViewBag.District != null)
+                                                {
+                                                    foreach (var item in ViewBag.District)
+                                                    {
+                                                        if (ViewBag.DistrictId == item.Id)
+                                                        {
+                                                            <option data-tokens="@item.Name" value="@item.Id" selected>@item.Name</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
+                                                        }
+                                                    }
+                                                }
+
+                                            </select>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Phường/xã</label>
+
+                                            <select class="form-control" id="dsward" name="WardId">
+                                                @if (ViewBag.Ward != null)
+                                                {
+                                                    foreach (var item in ViewBag.Ward)
+                                                    {
+                                                        if (agency.CInfoCommon.WardId == item.Id)
+                                                        {
+                                                            <option data-tokens="@item.Name" value="@item.Id" selected>@item.Name</option>
+                                                        }
+                                                        else
+                                                        {
+                                                            <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
+                                                        }
+                                                    }
+                                                }
+                                            </select>
+
+                                        </div>
+                                      
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary" type="submit">Chỉnh sửa</button>
+                                </div>
+                            </fieldset>
+
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="addagency">
+                        @if (agency.CInfoCommon.UserLogin == null)
+                        {
+                            using (Html.BeginForm("RegisterAgency", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                <input type="hidden" name="AgencyType" value="CII" />
+                                <input type="hidden" name="AgencyId" value="@agency.Id" />
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary()
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+                                    <div class="col-md-10">
+                                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                                    <div class="col-md-10">
+                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                                    <div class="col-md-10">
+                                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label">Chọn quyền</label>
+                                    <div class="col-md-10">
+                                        <select name="role" class="form-control">
+                                            @foreach (var item in ViewBag.RoleList)
+                                            {
+                                                <option value="@item.Name">@item.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" class="btn btn-primary" value="Register" />
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <h4>Tài khoản hiện tại: @agency.CInfoCommon.UserLogin</h4>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section styles {
+
+    <!-- bootstrap select-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/css/bootstrap-select.min.css">
+    <link href="~/content/bootstrap-datetimepicker.min.css" rel="stylesheet">
+}
+
+@section scripts {
+    <!-- bootstrap select js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/js/bootstrap-select.min.js"></script>
+    <!-- date bootstrap -->
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/scripts/moment-with-locales.min.js"></script>
+    <script src="~/scripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/scripts/bootstrap-typeahead.js"></script>
+
+    <script type="text/javascript">
+
+        $('#datetimecreate').datetimepicker({
+            locale: 'vi',
+            format: 'MM/DD/YYYY HH:mm',
+            defaultDate: new Date()
+        });
+
+        databranch();
+
+        function databranch() {
+            $.ajax({
+                url: "/agency/c1json",
+                type: "get",
+                success: function (response) {
+
+                    $('.c1search').typeahead({
+                        source: response,
+                        display: 'Code',
+                        val: 'Name',
+                        itemSelected: displayResult
+                    });
+
+                }
+            });
+        }
+
+
+        function displayResult(item, val, text) {
+            console.log(item);
+            $('.c1name').show().html('<i>' + val + '</i>');
+        }
+
+        $("#dsprovince").change(function () {
+            var id = $("#dsprovince").val();
+
+            if (id == -1) {
+                $("#dsdistrict").html("");
+            } else {
+                $.ajax({
+                    url: "/Agency/JsonDistict",
+                    data: { Provinceid: id },
+                    success: function (response) {
+                        $("#dsdistrict").html("");
+                        $("<option value='-1'></option>").html("--chọn--").appendTo("#dsdistrict");
+                        $(response).each(function (i, e) {
+                            $("<option value='" + e.Id + "'></option>").html(e.Name).appendTo("#dsdistrict");
+                        });
+                    }
+                });
+            }
+        });
+
+        $("#dsdistrict").change(function () {
+            var id = $("#dsdistrict").val();
+
+            if (id == -1) {
+                $("#dsward").html("");
+            } else {
+                $.ajax({
+                    url: "/Agency/JsonWard",
+                    data: { Id: id },
+                    success: function (response) {
+                        $("#dsward").html("");
+                        $(response).each(function (i, e) {
+
+                            $("<option value='" + e.Id + "'></option>").html(e.Name).appendTo("#dsward");
+                        });
+                    }
+                });
+            }
+        });
+
+
+    </script>
+}

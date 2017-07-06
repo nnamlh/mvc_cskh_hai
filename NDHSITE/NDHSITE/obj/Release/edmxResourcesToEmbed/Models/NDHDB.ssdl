@@ -1,0 +1,1571 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NDHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AgencySavePoint">
+    <Key>
+      <PropertyRef Name="EventId" />
+      <PropertyRef Name="CInfoId" />
+    </Key>
+    <Property Name="EventId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CInfoId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="PointSave" Type="int" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="ModifyTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="AllStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SName" Type="nvarchar" MaxLength="256" />
+    <Property Name="SType" Type="nvarchar" MaxLength="32" />
+    <Property Name="SCode" Type="nvarchar" MaxLength="32" />
+    <Property Name="SNotes" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="APIAuthHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserLogin" Type="nvarchar" MaxLength="100" />
+    <Property Name="UserRole" Type="nvarchar" MaxLength="100" />
+    <Property Name="LoginTime" Type="datetime" />
+    <Property Name="IsExpired" Type="int" />
+    <Property Name="Token" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="APIDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BaseUrl" Type="nvarchar" MaxLength="500" />
+    <Property Name="Describe" Type="nvarchar" MaxLength="500" />
+    <Property Name="Method" Type="nvarchar" MaxLength="55" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="APIHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="APIUrl" Type="nvarchar" MaxLength="500" />
+    <Property Name="Content" Type="nvarchar(max)" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="Sucess" Type="int" />
+    <Property Name="Error" Type="nvarchar" MaxLength="500" />
+    <Property Name="ReturnInfo" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="APILogoutHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserLogin" Type="nvarchar" MaxLength="100" />
+    <Property Name="UserRole" Type="nvarchar" MaxLength="100" />
+    <Property Name="LogoutTime" Type="datetime" />
+    <Property Name="Token" Type="nvarchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="GroupRole" Type="nvarchar" MaxLength="128" />
+    <Property Name="ShowInfoRole" Type="int" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+    <Property Name="User_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="IsActivced" Type="int" />
+    <Property Name="AccountType" Type="nvarchar" MaxLength="128" />
+    <Property Name="FireBaseId" Type="nvarchar" MaxLength="512" />
+  </EntityType>
+  <EntityType Name="AwardInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" />
+    <Property Name="Point" Type="int" />
+    <Property Name="Thumbnail" Type="nvarchar" MaxLength="512" />
+    <Property Name="CreateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="BarcodeHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Barcode" Type="nvarchar" MaxLength="256" />
+    <Property Name="CaseCode" Type="nvarchar" MaxLength="256" />
+    <Property Name="Messenge" Type="nvarchar(max)" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="PStatus" Type="nvarchar" MaxLength="32" />
+    <Property Name="WareHouse" Type="nvarchar" MaxLength="128" />
+    <Property Name="WareHouseType" Type="nvarchar" MaxLength="32" />
+    <Property Name="Quantity" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="WareRelative" Type="nvarchar" MaxLength="128" />
+    <Property Name="WareRelativeType" Type="nvarchar" MaxLength="32" />
+    <Property Name="StaffHelp" Type="nvarchar" MaxLength="512" />
+    <Property Name="UserLogin" Type="nvarchar(max)" />
+    <Property Name="LocationStaff" Type="nvarchar(max)" />
+    <Property Name="StaffHelpIssue" Type="nvarchar(max)" />
+    <Property Name="IsSuccess" Type="int" />
+    <Property Name="WareHouseName" Type="nvarchar(max)" />
+    <Property Name="WareRelativeName" Type="nvarchar(max)" />
+    <Property Name="ProductCode" Type="nvarchar" MaxLength="32" />
+    <Property Name="ProductName" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="BasicNotification">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="512" />
+    <Property Name="Messenge" Type="nvarchar(max)" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="TocpicCode" Type="nvarchar" MaxLength="32" />
+    <Property Name="UserSend" Type="nvarchar" MaxLength="128" />
+    <Property Name="UserAccept" Type="nvarchar" MaxLength="128" />
+    <Property Name="MessengeResult" Type="nvarchar(max)" />
+    <Property Name="ImageAttach" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="C1Info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="32" />
+    <Property Name="StoreName" Type="nvarchar" MaxLength="512" />
+    <Property Name="Deputy" Type="nvarchar" MaxLength="255" />
+    <Property Name="IsActive" Type="int" />
+    <Property Name="IsLock" Type="int" />
+    <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
+    <Property Name="HaiBrandId" Type="int" />
+    <Property Name="Position" Type="nvarchar" MaxLength="256" />
+    <Property Name="Decison1" Type="nvarchar" MaxLength="512" />
+    <Property Name="Decision1Birthday" Type="nvarchar" MaxLength="128" />
+    <Property Name="Decision1Phone" Type="nvarchar" MaxLength="32" />
+    <Property Name="Decison2" Type="nvarchar" MaxLength="512" />
+    <Property Name="Decision2Birthday" Type="nvarchar" MaxLength="128" />
+    <Property Name="Decision2Phone" Type="nvarchar" MaxLength="32" />
+    <Property Name="C1Position" Type="nvarchar" MaxLength="512" />
+    <Property Name="WeddingDate" Type="datetime" />
+    <Property Name="FoundingDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="C2Info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="32" />
+    <Property Name="StoreName" Type="nvarchar" MaxLength="512" />
+    <Property Name="Deputy" Type="nvarchar" MaxLength="255" />
+    <Property Name="IsActive" Type="int" />
+    <Property Name="IsLock" Type="int" />
+    <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
+    <Property Name="C1Id" Type="nvarchar" MaxLength="128" />
+    <Property Name="Decision" Type="nvarchar" MaxLength="512" />
+  </EntityType>
+  <EntityType Name="CInfoCommon">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CName" Type="nvarchar" MaxLength="512" />
+    <Property Name="IdentityCard" Type="nvarchar" MaxLength="128" />
+    <Property Name="AddressInfo" Type="nvarchar" MaxLength="1000" />
+    <Property Name="WardId" Type="nvarchar" MaxLength="32" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="128" />
+    <Property Name="Fax" Type="nvarchar" MaxLength="128" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="BirthDay" Type="date" />
+    <Property Name="PlaceOfBirth" Type="nvarchar" MaxLength="255" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="255" />
+    <Property Name="UserLogin" Type="nvarchar" MaxLength="255" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="ModifyDate" Type="datetime" />
+    <Property Name="CType" Type="nvarchar" MaxLength="32" />
+    <Property Name="AreaId" Type="int" />
+    <Property Name="ProvinceName" Type="nvarchar" MaxLength="256" />
+    <Property Name="DistrictName" Type="nvarchar" MaxLength="256" />
+    <Property Name="BranchCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="CCode" Type="nvarchar" MaxLength="32" />
+    <Property Name="CDeputy" Type="nvarchar" MaxLength="512" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="128" />
+    <Property Name="IsClock" Type="int" />
+    <Property Name="BankAccount" Type="nvarchar" MaxLength="256" />
+    <Property Name="BankAccountHolder" Type="nvarchar" MaxLength="512" />
+    <Property Name="BackName" Type="nvarchar(max)" />
+    <Property Name="CStatus" Type="int" />
+    <Property Name="TaxCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="BusinessLicense" Type="nvarchar" MaxLength="512" />
+    <Property Name="Lat" Type="float" />
+    <Property Name="Lng" Type="float" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="DType" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="Location" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Provinceid" Type="nvarchar" MaxLength="32" />
+  </EntityType>
+  <EntityType Name="EventArea">
+    <Key>
+      <PropertyRef Name="EventId" />
+      <PropertyRef Name="AreaId" />
+    </Key>
+    <Property Name="EventId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="AreaId" Type="int" Nullable="false" />
+    <Property Name="AllAgency" Type="int" />
+  </EntityType>
+  <EntityType Name="EventAreaFarmer">
+    <Key>
+      <PropertyRef Name="EventId" />
+      <PropertyRef Name="AreaId" />
+    </Key>
+    <Property Name="EventId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="AreaId" Type="int" Nullable="false" />
+    <Property Name="AllAgency" Type="int" />
+  </EntityType>
+  <EntityType Name="EventAward">
+    <Key>
+      <PropertyRef Name="EventId" />
+      <PropertyRef Name="AwardId" />
+    </Key>
+    <Property Name="EventId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="AwardId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EventCustomer">
+    <Key>
+      <PropertyRef Name="EventId" />
+      <PropertyRef Name="CInfoId" />
+    </Key>
+    <Property Name="EventId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CInfoId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="IsJoint" Type="int" />
+  </EntityType>
+  <EntityType Name="EventCustomerFarmer">
+    <Key>
+      <PropertyRef Name="EventId" />
+      <PropertyRef Name="CInfoId" />
+    </Key>
+    <Property Name="EventId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CInfoId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="IsJoint" Type="int" />
+  </EntityType>
+  <EntityType Name="EventInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" />
+    <Property Name="BeginTime" Type="date" />
+    <Property Name="EndTime" Type="date" />
+    <Property Name="Descibe" Type="nvarchar" MaxLength="512" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="UserCretea" Type="nvarchar" MaxLength="128" />
+    <Property Name="Thumbnail" Type="nvarchar" MaxLength="512" />
+    <Property Name="ESTT" Type="int" />
+    <Property Name="ModifyTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="EventProduct">
+    <Key>
+      <PropertyRef Name="EventId" />
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="EventId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProductId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Point" Type="int" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="FarmerInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="32" />
+    <Property Name="FarmerName" Type="nvarchar" MaxLength="512" />
+    <Property Name="IsActive" Type="int" />
+    <Property Name="IsLock" Type="int" />
+    <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
+    <Property Name="TreeType" Type="nvarchar" MaxLength="256" />
+    <Property Name="Tree" Type="nvarchar" MaxLength="256" />
+    <Property Name="Acreage" Type="nvarchar" MaxLength="32" />
+  </EntityType>
+  <EntityType Name="FuncGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="128" />
+    <Property Name="Number" Type="int" />
+  </EntityType>
+  <EntityType Name="FuncInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" />
+    <Property Name="Position" Type="int" />
+    <Property Name="Number" Type="int" />
+    <Property Name="GroupId" Type="int" />
+    <Property Name="Code" Type="nvarchar" MaxLength="128" />
+    <Property Name="UrlInfo" Type="nvarchar" MaxLength="256" />
+    <Property Name="IconInfo" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="FuncRole">
+    <Key>
+      <PropertyRef Name="FuncId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="FuncId" Type="int" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="IsAll" Type="int" />
+  </EntityType>
+  <EntityType Name="HaiArea">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="255" />
+    <Property Name="Code" Type="nvarchar" MaxLength="55" />
+  </EntityType>
+  <EntityType Name="HaiBranch">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="AddressInfo" Type="nvarchar" MaxLength="512" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="255" />
+    <Property Name="AreaId" Type="int" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="255" />
+    <Property Name="Code" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="HaiDepartment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="255" />
+    <Property Name="Code" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="HaiPosition">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="255" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="255" />
+    <Property Name="Code" Type="nvarchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="HaiStaff">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="100" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+    <Property Name="BirthDay" Type="datetime" />
+    <Property Name="PlaceOfBirth" Type="nvarchar" MaxLength="255" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="20" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" />
+    <Property Name="Code" Type="nvarchar" MaxLength="20" />
+    <Property Name="PositionId" Type="int" />
+    <Property Name="BranchId" Type="int" />
+    <Property Name="DepartmentId" Type="int" />
+    <Property Name="IsLock" Type="int" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="255" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="TimeLeave" Type="datetime" />
+    <Property Name="UserLogin" Type="nvarchar" MaxLength="255" />
+    <Property Name="PositionName" Type="nvarchar" MaxLength="256" />
+    <Property Name="BranchName" Type="nvarchar" MaxLength="512" />
+    <Property Name="DepartmentName" Type="nvarchar" MaxLength="512" />
+    <Property Name="AvatarUrl" Type="nvarchar" MaxLength="512" />
+    <Property Name="SignatureUrl" Type="nvarchar" MaxLength="512" />
+  </EntityType>
+  <EntityType Name="HappyBirthday">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CInfoId" Type="nvarchar" MaxLength="128" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="Content" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="ImeiUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" />
+    <Property Name="Imei" Type="nvarchar" MaxLength="512" />
+    <Property Name="IsActive" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ModifyDate" Type="datetime" />
+    <Property Name="IsUpdate" Type="int" />
+  </EntityType>
+  <EntityType Name="MessegeToHai">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Messenge" Type="nvarchar" MaxLength="512" />
+    <Property Name="UserLogin" Type="nvarchar" MaxLength="128" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="MsgType" Type="nvarchar" MaxLength="32" />
+    <Property Name="IsSeen" Type="int" />
+    <Property Name="UserSeen" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="MobileFunction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="100" />
+    <Property Name="Decribe" Type="nvarchar" MaxLength="255" />
+    <Property Name="ScreenType" Type="nvarchar" MaxLength="32" />
+    <Property Name="Lvl" Type="int" />
+  </EntityType>
+  <EntityType Name="MobileRole">
+    <Key>
+      <PropertyRef Name="MobileId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="MobileId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MSGPoint">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CInfoId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserLogin" Type="nvarchar" MaxLength="128" />
+    <Property Name="AcceptTime" Type="datetime" />
+    <Property Name="Barcode" Type="nvarchar" MaxLength="128" />
+    <Property Name="ProductId" Type="nvarchar" MaxLength="128" />
+    <Property Name="MSGType" Type="nvarchar" MaxLength="32" />
+  </EntityType>
+  <EntityType Name="MSGPointEvent">
+    <Key>
+      <PropertyRef Name="EventId" />
+      <PropertyRef Name="MSGPointId" />
+    </Key>
+    <Property Name="EventId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="MSGPointId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Point" Type="int" />
+  </EntityType>
+  <EntityType Name="NotificationTopic">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Topic" Type="nvarchar" MaxLength="256" />
+    <Property Name="Code" Type="nvarchar" MaxLength="32" />
+    <Property Name="TopicType" Type="nvarchar" MaxLength="32" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="PHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Barcode" Type="nvarchar" MaxLength="128" />
+    <Property Name="PStatus" Type="nvarchar" MaxLength="32" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UserSend" Type="nvarchar" MaxLength="128" />
+    <Property Name="WType" Type="nvarchar" MaxLength="128" />
+    <Property Name="WName" Type="nvarchar" MaxLength="512" />
+    <Property Name="WCode" Type="nvarchar" MaxLength="512" />
+    <Property Name="CaseCode" Type="nvarchar" MaxLength="32" />
+    <Property Name="BoxCode" Type="nvarchar" MaxLength="32" />
+    <Property Name="ProductCode" Type="nvarchar" MaxLength="32" />
+    <Property Name="Quantity" Type="decimal" Precision="5" Scale="2" />
+  </EntityType>
+  <EntityType Name="ProductInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="PName" Type="nvarchar" MaxLength="256" />
+    <Property Name="PCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="Material" Type="nvarchar" MaxLength="512" />
+    <Property Name="Utility" Type="nvarchar" MaxLength="512" />
+    <Property Name="Unit" Type="nvarchar" MaxLength="128" />
+    <Property Name="Producer" Type="nvarchar" MaxLength="256" />
+    <Property Name="PGroup" Type="nvarchar" MaxLength="256" />
+    <Property Name="PMajor" Type="nvarchar" MaxLength="256" />
+    <Property Name="Acronym" Type="nvarchar" MaxLength="128" />
+    <Property Name="CardPoint" Type="nvarchar" MaxLength="32" />
+    <Property Name="BoxPoint" Type="nvarchar" MaxLength="32" />
+    <Property Name="IsLock" Type="int" />
+    <Property Name="Barcode" Type="nvarchar" MaxLength="32" />
+    <Property Name="QuantityBox" Type="int" />
+    <Property Name="IsBox" Type="int" />
+  </EntityType>
+  <EntityType Name="ProductSeri">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="32" />
+    <Property Name="BeginTime" Type="datetime" />
+    <Property Name="ExpireTime" Type="datetime" />
+    <Property Name="IsUse" Type="int" />
+    <Property Name="ProductId" Type="nvarchar" MaxLength="128" />
+    <Property Name="Seri" Type="int" />
+    <Property Name="SeriType" Type="int" />
+    <Property Name="ModifyTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Province">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="PType" Type="nvarchar" MaxLength="64" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PTracking">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="PStatus" Type="nvarchar" MaxLength="32" />
+    <Property Name="WCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="WName" Type="nvarchar" MaxLength="512" />
+    <Property Name="ImportTime" Type="datetime" />
+    <Property Name="ExportTime" Type="datetime" />
+    <Property Name="WType" Type="nvarchar" MaxLength="128" />
+    <Property Name="ProductId" Type="nvarchar" MaxLength="128" />
+    <Property Name="CaseCode" Type="nvarchar" MaxLength="32" />
+    <Property Name="Quantity" Type="decimal" Precision="5" Scale="2" />
+  </EntityType>
+  <EntityType Name="RegFirebase">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserLogin" Type="nvarchar" MaxLength="128" />
+    <Property Name="RegId" Type="nvarchar" MaxLength="512" />
+    <Property Name="UserType" Type="nvarchar" MaxLength="128" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ModifyDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="RoleCheckImei">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="256" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="512" />
+  </EntityType>
+  <EntityType Name="SendSmsHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Messenge" Type="nvarchar" MaxLength="512" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="16" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="UserSend" Type="nvarchar" MaxLength="128" />
+    <Property Name="StatusSend" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="ServerInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="512" />
+    <Property Name="Code" Type="nvarchar" MaxLength="64" />
+    <Property Name="Content" Type="nvarchar" MaxLength="512" />
+  </EntityType>
+  <EntityType Name="SmsAccount">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AddressSend" Type="nvarchar" MaxLength="256" />
+    <Property Name="PortSend" Type="int" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="128" />
+    <Property Name="Pass" Type="nvarchar" MaxLength="128" />
+    <Property Name="BrandName" Type="nvarchar" MaxLength="256" />
+    <Property Name="Method" Type="nvarchar" MaxLength="32" />
+  </EntityType>
+  <EntityType Name="SMSCode">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserLogin" Type="nvarchar" MaxLength="512" />
+    <Property Name="Code" Type="nvarchar" MaxLength="128" />
+    <Property Name="CStatus" Type="int" />
+    <Property Name="CreateAt" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SMSHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="16" />
+    <Property Name="ContentSend" Type="nvarchar(max)" />
+    <Property Name="ContentReturn" Type="nvarchar(max)" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="AgencyType" Type="nvarchar" MaxLength="256" />
+    <Property Name="Success" Type="int" />
+  </EntityType>
+  <EntityType Name="StaffCheckIn">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="StaffUser" Type="nvarchar" MaxLength="100" />
+    <Property Name="StaffId" Type="nvarchar" MaxLength="128" />
+    <Property Name="AcceptTime" Type="datetime" />
+    <Property Name="ImageUrl" Type="nvarchar" MaxLength="255" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="500" />
+    <Property Name="Longitude" Type="float" />
+    <Property Name="Latitude" Type="float" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="Agency" Type="nvarchar" MaxLength="128" />
+    <Property Name="AgencyName" Type="nvarchar" MaxLength="256" />
+    <Property Name="AgencyAddress" Type="nvarchar" MaxLength="512" />
+    <Property Name="AgencyType" Type="nvarchar" MaxLength="32" />
+    <Property Name="AgencyTypeName" Type="nvarchar" MaxLength="256" />
+  </EntityType>
+  <EntityType Name="StaffWithC1">
+    <Key>
+      <PropertyRef Name="C1Id" />
+      <PropertyRef Name="StaffId" />
+    </Key>
+    <Property Name="C1Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="StaffId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StaffWithC2">
+    <Key>
+      <PropertyRef Name="C2Id" />
+      <PropertyRef Name="StaffId" />
+    </Key>
+    <Property Name="C2Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="StaffId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TreeInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" />
+    <Property Name="TreeType" Type="nvarchar" MaxLength="128" />
+    <Property Name="Acreage" Type="nvarchar" MaxLength="32" />
+    <Property Name="STT" Type="nvarchar" MaxLength="128" />
+    <Property Name="CreateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Ward">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="WType" Type="nvarchar" MaxLength="32" Nullable="false" />
+    <Property Name="Location" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="Districtid" Type="nvarchar" MaxLength="32" />
+  </EntityType>
+  <Association Name="FK__AgencySav__CInfo__6497E884">
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="1" />
+    <End Role="AgencySavePoint" Type="Self.AgencySavePoint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CInfoCommon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AgencySavePoint">
+        <PropertyRef Name="CInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AgencySav__Event__63A3C44B">
+    <End Role="EventInfo" Type="Self.EventInfo" Multiplicity="1" />
+    <End Role="AgencySavePoint" Type="Self.AgencySavePoint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AgencySavePoint">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__C1Info__HaiBrand__72910220">
+    <End Role="HaiBranch" Type="Self.HaiBranch" Multiplicity="0..1" />
+    <End Role="C1Info" Type="Self.C1Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiBranch">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="C1Info">
+        <PropertyRef Name="HaiBrandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__C1Info__InfoId__681373AD">
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="0..1" />
+    <End Role="C1Info" Type="Self.C1Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CInfoCommon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="C1Info">
+        <PropertyRef Name="InfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__C2Info__C1Id__73852659">
+    <End Role="C1Info" Type="Self.C1Info" Multiplicity="0..1" />
+    <End Role="C2Info" Type="Self.C2Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C1Info">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="C2Info">
+        <PropertyRef Name="C1Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__C2Info__InfoId__6CD828CA">
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="0..1" />
+    <End Role="C2Info" Type="Self.C2Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CInfoCommon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="C2Info">
+        <PropertyRef Name="InfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CInfoComm__AreaI__52E34C9D">
+    <End Role="HaiArea" Type="Self.HaiArea" Multiplicity="0..1" />
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiArea">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CInfoCommon">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CInfoComm__WardI__634EBE90">
+    <End Role="Ward" Type="Self.Ward" Multiplicity="0..1" />
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ward">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CInfoCommon">
+        <PropertyRef Name="WardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__District__Provin__07C12930">
+    <End Role="Province" Type="Self.Province" Multiplicity="0..1" />
+    <End Role="District" Type="Self.District" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="District">
+        <PropertyRef Name="Provinceid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventArea__AreaI__39AD8A7F">
+    <End Role="HaiArea" Type="Self.HaiArea" Multiplicity="1" />
+    <End Role="EventAreaFarmer" Type="Self.EventAreaFarmer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiArea">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventAreaFarmer">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventArea__AreaI__54968AE5">
+    <End Role="HaiArea" Type="Self.HaiArea" Multiplicity="1" />
+    <End Role="EventArea" Type="Self.EventArea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiArea">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventArea">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventArea__Event__38B96646">
+    <End Role="EventInfo" Type="Self.EventInfo" Multiplicity="1" />
+    <End Role="EventAreaFarmer" Type="Self.EventAreaFarmer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventAreaFarmer">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventArea__Event__53A266AC">
+    <End Role="EventInfo" Type="Self.EventInfo" Multiplicity="1" />
+    <End Role="EventArea" Type="Self.EventArea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventArea">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventAwar__Award__0DCF0841">
+    <End Role="AwardInfo" Type="Self.AwardInfo" Multiplicity="1" />
+    <End Role="EventAward" Type="Self.EventAward" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AwardInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventAward">
+        <PropertyRef Name="AwardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventAwar__Event__0CDAE408">
+    <End Role="EventInfo" Type="Self.EventInfo" Multiplicity="1" />
+    <End Role="EventAward" Type="Self.EventAward" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventAward">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventCust__CInfo__1387E197">
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="1" />
+    <End Role="EventCustomer" Type="Self.EventCustomer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CInfoCommon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventCustomer">
+        <PropertyRef Name="CInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventCust__CInfo__3F6663D5">
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="1" />
+    <End Role="EventCustomerFarmer" Type="Self.EventCustomerFarmer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CInfoCommon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventCustomerFarmer">
+        <PropertyRef Name="CInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventCust__Event__1293BD5E">
+    <End Role="EventInfo" Type="Self.EventInfo" Multiplicity="1" />
+    <End Role="EventCustomer" Type="Self.EventCustomer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventCustomer">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventCust__Event__3E723F9C">
+    <End Role="EventInfo" Type="Self.EventInfo" Multiplicity="1" />
+    <End Role="EventCustomerFarmer" Type="Self.EventCustomerFarmer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventCustomerFarmer">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventProd__Event__4DE98D56">
+    <End Role="EventInfo" Type="Self.EventInfo" Multiplicity="1" />
+    <End Role="EventProduct" Type="Self.EventProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventProduct">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventProd__Produ__4EDDB18F">
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="1" />
+    <End Role="EventProduct" Type="Self.EventProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventProduct">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FarmerInf__InfoI__7EF6D905">
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="0..1" />
+    <End Role="FarmerInfo" Type="Self.FarmerInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CInfoCommon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FarmerInfo">
+        <PropertyRef Name="InfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FuncInfo__GroupI__6E565CE8">
+    <End Role="FuncGroup" Type="Self.FuncGroup" Multiplicity="0..1" />
+    <End Role="FuncInfo" Type="Self.FuncInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FuncGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FuncInfo">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FuncRole__FuncId__79C80F94">
+    <End Role="FuncInfo" Type="Self.FuncInfo" Multiplicity="1" />
+    <End Role="FuncRole" Type="Self.FuncRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FuncInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FuncRole">
+        <PropertyRef Name="FuncId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FuncRole__RoleId__7ABC33CD">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+    <End Role="FuncRole" Type="Self.FuncRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FuncRole">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiBranch__AreaI__145C0A3F">
+    <End Role="HaiArea" Type="Self.HaiArea" Multiplicity="0..1" />
+    <End Role="HaiBranch" Type="Self.HaiBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiArea">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiBranch">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiStaff__Branch__24927208">
+    <End Role="HaiBranch" Type="Self.HaiBranch" Multiplicity="0..1" />
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiBranch">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiStaff">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiStaff__Depart__25869641">
+    <End Role="HaiDepartment" Type="Self.HaiDepartment" Multiplicity="0..1" />
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiDepartment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiStaff">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiStaff__Positi__239E4DCF">
+    <End Role="HaiPosition" Type="Self.HaiPosition" Multiplicity="0..1" />
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiPosition">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiStaff">
+        <PropertyRef Name="PositionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MobileRol__Mobil__7D98A078">
+    <End Role="MobileFunction" Type="Self.MobileFunction" Multiplicity="1" />
+    <End Role="MobileRole" Type="Self.MobileRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MobileFunction">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MobileRole">
+        <PropertyRef Name="MobileId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MobileRol__RoleI__7E8CC4B1">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
+    <End Role="MobileRole" Type="Self.MobileRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MobileRole">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MSGPoint__CInfoI__5614BF03">
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="1" />
+    <End Role="MSGPoint" Type="Self.MSGPoint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CInfoCommon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MSGPoint">
+        <PropertyRef Name="CInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MSGPoint__Produc__5708E33C">
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
+    <End Role="MSGPoint" Type="Self.MSGPoint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MSGPoint">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MSGPointE__Event__5BCD9859">
+    <End Role="EventInfo" Type="Self.EventInfo" Multiplicity="1" />
+    <End Role="MSGPointEvent" Type="Self.MSGPointEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MSGPointEvent">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MSGPointE__MSGPo__5CC1BC92">
+    <End Role="MSGPoint" Type="Self.MSGPoint" Multiplicity="1" />
+    <End Role="MSGPointEvent" Type="Self.MSGPointEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MSGPoint">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MSGPointEvent">
+        <PropertyRef Name="MSGPointId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductSe__Produ__10416098">
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
+    <End Role="ProductSeri" Type="Self.ProductSeri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductSeri">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PTracking__Produ__00FF1D08">
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
+    <End Role="PTracking" Type="Self.PTracking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PTracking">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StaffChec__Staff__47DBAE45">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
+    <End Role="StaffCheckIn" Type="Self.StaffCheckIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaffCheckIn">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StaffWith__Staff__45A94D10">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="1" />
+    <End Role="StaffWithC1" Type="Self.StaffWithC1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaffWithC1">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StaffWith__Staff__4979DDF4">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="1" />
+    <End Role="StaffWithC2" Type="Self.StaffWithC2" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaffWithC2">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StaffWithC__C1Id__44B528D7">
+    <End Role="C1Info" Type="Self.C1Info" Multiplicity="1" />
+    <End Role="StaffWithC1" Type="Self.StaffWithC1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C1Info">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaffWithC1">
+        <PropertyRef Name="C1Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StaffWithC__C2Id__4885B9BB">
+    <End Role="C2Info" Type="Self.C2Info" Multiplicity="1" />
+    <End Role="StaffWithC2" Type="Self.StaffWithC2" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C2Info">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaffWithC2">
+        <PropertyRef Name="C2Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ward__Districtid__0C85DE4D">
+    <End Role="District" Type="Self.District" Multiplicity="0..1" />
+    <End Role="Ward" Type="Self.Ward" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ward">
+        <PropertyRef Name="Districtid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="report_event_agency" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CType" Type="nvarchar" Mode="In" />
+    <Parameter Name="EventId" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="report_remain_product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Product" Type="nvarchar" Mode="In" />
+    <Parameter Name="DFrom" Type="nvarchar" Mode="In" />
+    <Parameter Name="DTo" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="report_remain_wcode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="WCode" Type="nvarchar" Mode="In" />
+    <Parameter Name="DFrom" Type="nvarchar" Mode="In" />
+    <Parameter Name="DTo" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="NDHDBModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AgencySavePoint" EntityType="Self.AgencySavePoint" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AllStatus" EntityType="Self.AllStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="APIAuthHistory" EntityType="Self.APIAuthHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="APIDetail" EntityType="Self.APIDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="APIHistory" EntityType="Self.APIHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="APILogoutHistory" EntityType="Self.APILogoutHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AwardInfo" EntityType="Self.AwardInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BarcodeHistory" EntityType="Self.BarcodeHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BasicNotification" EntityType="Self.BasicNotification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="C1Info" EntityType="Self.C1Info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="C2Info" EntityType="Self.C2Info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CInfoCommon" EntityType="Self.CInfoCommon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventArea" EntityType="Self.EventArea" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventAreaFarmer" EntityType="Self.EventAreaFarmer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventAward" EntityType="Self.EventAward" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventCustomer" EntityType="Self.EventCustomer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventCustomerFarmer" EntityType="Self.EventCustomerFarmer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventInfo" EntityType="Self.EventInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventProduct" EntityType="Self.EventProduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FarmerInfo" EntityType="Self.FarmerInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FuncGroup" EntityType="Self.FuncGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FuncInfo" EntityType="Self.FuncInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FuncRole" EntityType="Self.FuncRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HaiArea" EntityType="Self.HaiArea" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HaiBranch" EntityType="Self.HaiBranch" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HaiDepartment" EntityType="Self.HaiDepartment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HaiPosition" EntityType="Self.HaiPosition" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HaiStaff" EntityType="Self.HaiStaff" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HappyBirthday" EntityType="Self.HappyBirthday" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ImeiUser" EntityType="Self.ImeiUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MessegeToHai" EntityType="Self.MessegeToHai" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MobileFunction" EntityType="Self.MobileFunction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MobileRole" EntityType="Self.MobileRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MSGPoint" EntityType="Self.MSGPoint" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MSGPointEvent" EntityType="Self.MSGPointEvent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NotificationTopic" EntityType="Self.NotificationTopic" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PHistory" EntityType="Self.PHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductInfo" EntityType="Self.ProductInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductSeri" EntityType="Self.ProductSeri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Province" EntityType="Self.Province" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PTracking" EntityType="Self.PTracking" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RegFirebase" EntityType="Self.RegFirebase" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoleCheckImei" EntityType="Self.RoleCheckImei" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SendSmsHistory" EntityType="Self.SendSmsHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ServerInfo" EntityType="Self.ServerInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SmsAccount" EntityType="Self.SmsAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SMSCode" EntityType="Self.SMSCode" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SMSHistory" EntityType="Self.SMSHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StaffCheckIn" EntityType="Self.StaffCheckIn" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StaffWithC1" EntityType="Self.StaffWithC1" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StaffWithC2" EntityType="Self.StaffWithC2" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TreeInfo" EntityType="Self.TreeInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ward" EntityType="Self.Ward" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__AgencySav__CInfo__6497E884" Association="Self.FK__AgencySav__CInfo__6497E884">
+      <End Role="CInfoCommon" EntitySet="CInfoCommon" />
+      <End Role="AgencySavePoint" EntitySet="AgencySavePoint" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AgencySav__Event__63A3C44B" Association="Self.FK__AgencySav__Event__63A3C44B">
+      <End Role="EventInfo" EntitySet="EventInfo" />
+      <End Role="AgencySavePoint" EntitySet="AgencySavePoint" />
+    </AssociationSet>
+    <AssociationSet Name="FK__C1Info__HaiBrand__72910220" Association="Self.FK__C1Info__HaiBrand__72910220">
+      <End Role="HaiBranch" EntitySet="HaiBranch" />
+      <End Role="C1Info" EntitySet="C1Info" />
+    </AssociationSet>
+    <AssociationSet Name="FK__C1Info__InfoId__681373AD" Association="Self.FK__C1Info__InfoId__681373AD">
+      <End Role="CInfoCommon" EntitySet="CInfoCommon" />
+      <End Role="C1Info" EntitySet="C1Info" />
+    </AssociationSet>
+    <AssociationSet Name="FK__C2Info__C1Id__73852659" Association="Self.FK__C2Info__C1Id__73852659">
+      <End Role="C1Info" EntitySet="C1Info" />
+      <End Role="C2Info" EntitySet="C2Info" />
+    </AssociationSet>
+    <AssociationSet Name="FK__C2Info__InfoId__6CD828CA" Association="Self.FK__C2Info__InfoId__6CD828CA">
+      <End Role="CInfoCommon" EntitySet="CInfoCommon" />
+      <End Role="C2Info" EntitySet="C2Info" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CInfoComm__AreaI__52E34C9D" Association="Self.FK__CInfoComm__AreaI__52E34C9D">
+      <End Role="HaiArea" EntitySet="HaiArea" />
+      <End Role="CInfoCommon" EntitySet="CInfoCommon" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CInfoComm__WardI__634EBE90" Association="Self.FK__CInfoComm__WardI__634EBE90">
+      <End Role="Ward" EntitySet="Ward" />
+      <End Role="CInfoCommon" EntitySet="CInfoCommon" />
+    </AssociationSet>
+    <AssociationSet Name="FK__District__Provin__07C12930" Association="Self.FK__District__Provin__07C12930">
+      <End Role="Province" EntitySet="Province" />
+      <End Role="District" EntitySet="District" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventArea__AreaI__39AD8A7F" Association="Self.FK__EventArea__AreaI__39AD8A7F">
+      <End Role="HaiArea" EntitySet="HaiArea" />
+      <End Role="EventAreaFarmer" EntitySet="EventAreaFarmer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventArea__AreaI__54968AE5" Association="Self.FK__EventArea__AreaI__54968AE5">
+      <End Role="HaiArea" EntitySet="HaiArea" />
+      <End Role="EventArea" EntitySet="EventArea" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventArea__Event__38B96646" Association="Self.FK__EventArea__Event__38B96646">
+      <End Role="EventInfo" EntitySet="EventInfo" />
+      <End Role="EventAreaFarmer" EntitySet="EventAreaFarmer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventArea__Event__53A266AC" Association="Self.FK__EventArea__Event__53A266AC">
+      <End Role="EventInfo" EntitySet="EventInfo" />
+      <End Role="EventArea" EntitySet="EventArea" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventAwar__Award__0DCF0841" Association="Self.FK__EventAwar__Award__0DCF0841">
+      <End Role="AwardInfo" EntitySet="AwardInfo" />
+      <End Role="EventAward" EntitySet="EventAward" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventAwar__Event__0CDAE408" Association="Self.FK__EventAwar__Event__0CDAE408">
+      <End Role="EventInfo" EntitySet="EventInfo" />
+      <End Role="EventAward" EntitySet="EventAward" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventCust__CInfo__1387E197" Association="Self.FK__EventCust__CInfo__1387E197">
+      <End Role="CInfoCommon" EntitySet="CInfoCommon" />
+      <End Role="EventCustomer" EntitySet="EventCustomer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventCust__CInfo__3F6663D5" Association="Self.FK__EventCust__CInfo__3F6663D5">
+      <End Role="CInfoCommon" EntitySet="CInfoCommon" />
+      <End Role="EventCustomerFarmer" EntitySet="EventCustomerFarmer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventCust__Event__1293BD5E" Association="Self.FK__EventCust__Event__1293BD5E">
+      <End Role="EventInfo" EntitySet="EventInfo" />
+      <End Role="EventCustomer" EntitySet="EventCustomer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventCust__Event__3E723F9C" Association="Self.FK__EventCust__Event__3E723F9C">
+      <End Role="EventInfo" EntitySet="EventInfo" />
+      <End Role="EventCustomerFarmer" EntitySet="EventCustomerFarmer" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventProd__Event__4DE98D56" Association="Self.FK__EventProd__Event__4DE98D56">
+      <End Role="EventInfo" EntitySet="EventInfo" />
+      <End Role="EventProduct" EntitySet="EventProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventProd__Produ__4EDDB18F" Association="Self.FK__EventProd__Produ__4EDDB18F">
+      <End Role="ProductInfo" EntitySet="ProductInfo" />
+      <End Role="EventProduct" EntitySet="EventProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FarmerInf__InfoI__7EF6D905" Association="Self.FK__FarmerInf__InfoI__7EF6D905">
+      <End Role="CInfoCommon" EntitySet="CInfoCommon" />
+      <End Role="FarmerInfo" EntitySet="FarmerInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FuncInfo__GroupI__6E565CE8" Association="Self.FK__FuncInfo__GroupI__6E565CE8">
+      <End Role="FuncGroup" EntitySet="FuncGroup" />
+      <End Role="FuncInfo" EntitySet="FuncInfo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FuncRole__FuncId__79C80F94" Association="Self.FK__FuncRole__FuncId__79C80F94">
+      <End Role="FuncInfo" EntitySet="FuncInfo" />
+      <End Role="FuncRole" EntitySet="FuncRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FuncRole__RoleId__7ABC33CD" Association="Self.FK__FuncRole__RoleId__7ABC33CD">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="FuncRole" EntitySet="FuncRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiBranch__AreaI__145C0A3F" Association="Self.FK__HaiBranch__AreaI__145C0A3F">
+      <End Role="HaiArea" EntitySet="HaiArea" />
+      <End Role="HaiBranch" EntitySet="HaiBranch" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiStaff__Branch__24927208" Association="Self.FK__HaiStaff__Branch__24927208">
+      <End Role="HaiBranch" EntitySet="HaiBranch" />
+      <End Role="HaiStaff" EntitySet="HaiStaff" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiStaff__Depart__25869641" Association="Self.FK__HaiStaff__Depart__25869641">
+      <End Role="HaiDepartment" EntitySet="HaiDepartment" />
+      <End Role="HaiStaff" EntitySet="HaiStaff" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiStaff__Positi__239E4DCF" Association="Self.FK__HaiStaff__Positi__239E4DCF">
+      <End Role="HaiPosition" EntitySet="HaiPosition" />
+      <End Role="HaiStaff" EntitySet="HaiStaff" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MobileRol__Mobil__7D98A078" Association="Self.FK__MobileRol__Mobil__7D98A078">
+      <End Role="MobileFunction" EntitySet="MobileFunction" />
+      <End Role="MobileRole" EntitySet="MobileRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MobileRol__RoleI__7E8CC4B1" Association="Self.FK__MobileRol__RoleI__7E8CC4B1">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="MobileRole" EntitySet="MobileRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MSGPoint__CInfoI__5614BF03" Association="Self.FK__MSGPoint__CInfoI__5614BF03">
+      <End Role="CInfoCommon" EntitySet="CInfoCommon" />
+      <End Role="MSGPoint" EntitySet="MSGPoint" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MSGPoint__Produc__5708E33C" Association="Self.FK__MSGPoint__Produc__5708E33C">
+      <End Role="ProductInfo" EntitySet="ProductInfo" />
+      <End Role="MSGPoint" EntitySet="MSGPoint" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MSGPointE__Event__5BCD9859" Association="Self.FK__MSGPointE__Event__5BCD9859">
+      <End Role="EventInfo" EntitySet="EventInfo" />
+      <End Role="MSGPointEvent" EntitySet="MSGPointEvent" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MSGPointE__MSGPo__5CC1BC92" Association="Self.FK__MSGPointE__MSGPo__5CC1BC92">
+      <End Role="MSGPoint" EntitySet="MSGPoint" />
+      <End Role="MSGPointEvent" EntitySet="MSGPointEvent" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductSe__Produ__10416098" Association="Self.FK__ProductSe__Produ__10416098">
+      <End Role="ProductInfo" EntitySet="ProductInfo" />
+      <End Role="ProductSeri" EntitySet="ProductSeri" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PTracking__Produ__00FF1D08" Association="Self.FK__PTracking__Produ__00FF1D08">
+      <End Role="ProductInfo" EntitySet="ProductInfo" />
+      <End Role="PTracking" EntitySet="PTracking" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StaffChec__Staff__47DBAE45" Association="Self.FK__StaffChec__Staff__47DBAE45">
+      <End Role="HaiStaff" EntitySet="HaiStaff" />
+      <End Role="StaffCheckIn" EntitySet="StaffCheckIn" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StaffWith__Staff__45A94D10" Association="Self.FK__StaffWith__Staff__45A94D10">
+      <End Role="HaiStaff" EntitySet="HaiStaff" />
+      <End Role="StaffWithC1" EntitySet="StaffWithC1" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StaffWith__Staff__4979DDF4" Association="Self.FK__StaffWith__Staff__4979DDF4">
+      <End Role="HaiStaff" EntitySet="HaiStaff" />
+      <End Role="StaffWithC2" EntitySet="StaffWithC2" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StaffWithC__C1Id__44B528D7" Association="Self.FK__StaffWithC__C1Id__44B528D7">
+      <End Role="C1Info" EntitySet="C1Info" />
+      <End Role="StaffWithC1" EntitySet="StaffWithC1" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StaffWithC__C2Id__4885B9BB" Association="Self.FK__StaffWithC__C2Id__4885B9BB">
+      <End Role="C2Info" EntitySet="C2Info" />
+      <End Role="StaffWithC2" EntitySet="StaffWithC2" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ward__Districtid__0C85DE4D" Association="Self.FK__Ward__Districtid__0C85DE4D">
+      <End Role="District" EntitySet="District" />
+      <End Role="Ward" EntitySet="Ward" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

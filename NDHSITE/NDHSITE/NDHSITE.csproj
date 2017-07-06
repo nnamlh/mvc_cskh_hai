@@ -1,0 +1,632 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CE7E66EE-5C10-4941-97E3-6032226CE8F6}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NDHSITE</RootNamespace>
+    <AssemblyName>NDHSITE</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EPPlus, Version=3.1.3.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="SMSUtl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\SMSUtl.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <Private>True</Private>
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.1.0.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.2.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.0.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.2.0.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.0.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.0.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.2.0.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.2.0.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.2.0.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AgencyController.cs" />
+    <Compile Include="Controllers\EventManageController.cs" />
+    <Compile Include="Controllers\HaiReportController.cs" />
+    <Compile Include="Controllers\HaiStaffController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\ShowInfoController.cs" />
+    <Compile Include="Controllers\TrackingController.cs" />
+    <Compile Include="Controllers\TreeController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="Controllers\UserImeiController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AgencySavePoint.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AllStatu.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\APIAuthHistory.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\APIDetail.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\APIHistory.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\APILogoutHistory.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetRole.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AwardInfo.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BarcodeHistory.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BasicNotification.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\C1Info.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\C2Info.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CInfoCommon.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\District.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ErrorInfo.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EventArea.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EventAreaFarmer.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EventCustomer.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EventCustomerFarmer.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EventInfo.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EventProduct.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FarmerInfo.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FuncGroup.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FuncInfo.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FuncRole.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HaiArea.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HaiBranch.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HaiDepartment.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HaiPosition.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HaiStaff.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HappyBirthday.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ImeiUser.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MessegeToHai.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MobileFunction.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MSGPoint.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MSGPointEvent.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MyImage.cs" />
+    <Compile Include="Models\NDHDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NDHDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NDHDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NDHDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NDHDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NotificationTopic.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PHistory.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductInfo.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductSeri.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Province.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PTracking.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RegFirebase.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\report_event_agency_Result.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\report_remain_product_Result.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\report_remain_wcode_Result.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\RoleCheckImei.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SendSmsHistory.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ServerInfo.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SmsAccount.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SMSCode.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SMSHistory.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StaffCheckIn.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TokenData.cs" />
+    <Compile Include="Models\TreeInfo.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Utitl.cs" />
+    <Compile Include="Models\Ward.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Warehouse.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\css\jquery.steps.css" />
+    <Content Include="Content\css\mvpready-admin.css" />
+    <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\logofull.png" />
+    <Content Include="Content\img\market_logo.png" />
+    <Content Include="Content\img\user\default.png" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="haiupload\defaultevent.png" />
+    <Content Include="haiupload\DMSP.xlsx" />
+    <Content Include="haiupload\DS SERI SP.xlsx" />
+    <Content Include="haiupload\DSKH CII.xlsx" />
+    <Content Include="haiupload\exceleventaward.xlsx" />
+    <Content Include="haiupload\exceleventproduct.xlsx" />
+    <Content Include="haiupload\exceleventcustomer.xlsx" />
+    <Content Include="haiupload\DS NONG DAN.xlsx" />
+    <Content Include="haiupload\DS CAY TRONG.xlsx" />
+    <Content Include="haiupload\DSKH - CI.xlsx" />
+    <Content Include="haiupload\agencyreport.xlsx" />
+    <Content Include="haiupload\productremain.xlsx" />
+    <Content Include="haiupload\warehouseremain.xlsx" />
+    <Content Include="haiupload\DSSERI.xlsx" />
+    <Content Include="haiupload\historytracking.xlsx" />
+    <Content Include="haiupload\account.xlsx" />
+    <Content Include="haiupload\accountresult.xlsx" />
+    <Content Include="haiupload\exceleventfarmer.xlsx" />
+    <Content Include="haiupload\areacustomerevent.xlsx" />
+    <EntityDeploy Include="Models\NDHDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NDHDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\NDHDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NDHDB.edmx</DependentUpon>
+      <LastGenOutput>NDHDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\NDHDB.edmx.diagram">
+      <DependentUpon>NDHDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\NDHDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NDHDB.edmx</DependentUpon>
+      <LastGenOutput>NDHDB.cs</LastGenOutput>
+    </Content>
+    <None Include="Properties\PublishProfiles\home.pubxml" />
+    <None Include="Properties\PublishProfiles\ndhsite.pubxml" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap-typeahead.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\js\flot\auto.js" />
+    <Content Include="Scripts\js\flot\donut.js" />
+    <Content Include="Scripts\js\flot\excanvas.min.js" />
+    <Content Include="Scripts\js\flot\horizontal.js" />
+    <Content Include="Scripts\js\flot\jquery.flot.categories.js" />
+    <Content Include="Scripts\js\flot\jquery.flot.js" />
+    <Content Include="Scripts\js\flot\jquery.flot.orderBars.js" />
+    <Content Include="Scripts\js\flot\jquery.flot.pie.js" />
+    <Content Include="Scripts\js\flot\jquery.flot.resize.js" />
+    <Content Include="Scripts\js\flot\jquery.flot.stack.js" />
+    <Content Include="Scripts\js\flot\jquery.flot.time.js" />
+    <Content Include="Scripts\js\flot\line.js" />
+    <Content Include="Scripts\js\flot\pie.js" />
+    <Content Include="Scripts\js\flot\scatter.js" />
+    <Content Include="Scripts\js\flot\stacked-area.js" />
+    <Content Include="Scripts\js\flot\stacked-horizontal.js" />
+    <Content Include="Scripts\js\flot\vertical.js" />
+    <Content Include="Scripts\js\jquery.slimscroll.min.js" />
+    <Content Include="Scripts\js\jquery.steps.js" />
+    <Content Include="Scripts\js\mvpready-account.js" />
+    <Content Include="Scripts\js\mvpready-admin.js" />
+    <Content Include="Scripts\js\mvpready-core.js" />
+    <Content Include="Scripts\js\mvpready-helpers.js" />
+    <Content Include="Scripts\js\parsley.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\myjs\checkin.js" />
+    <Content Include="Scripts\myjs\modifyevent.js" />
+    <Content Include="Scripts\myscript.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\js\wizard.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
+    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Role\Manager.cshtml" />
+    <Content Include="Views\HaiStaff\CreateBrand.cshtml" />
+    <Content Include="Views\HaiStaff\CreateStaff.cshtml" />
+    <Content Include="Views\HaiStaff\ModifyStaff.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Product\Manage.cshtml" />
+    <Content Include="Views\Notification\Send.cshtml" />
+    <Content Include="Views\Agency\ManageCI.cshtml" />
+    <Content Include="Views\Agency\ModifyCI.cshtml" />
+    <Content Include="Views\Agency\ManageCII.cshtml" />
+    <Content Include="Views\Agency\ModifyCII.cshtml" />
+    <Content Include="Views\Agency\ManageFarmer.cshtml" />
+    <Content Include="Views\Agency\ModifyFarmer.cshtml" />
+    <Content Include="Views\Product\ModifyProduct.cshtml" />
+    <Content Include="Views\ShowInfo\ShowCheckIn.cshtml" />
+    <Content Include="Views\EventManage\ManageEvent.cshtml" />
+    <Content Include="Views\EventManage\ModifyEvent.cshtml" />
+    <Content Include="Views\ShowInfo\ShowStaff.cshtml" />
+    <Content Include="Views\ShowInfo\ShowBranch.cshtml" />
+    <Content Include="Views\ShowInfo\ShowProduct.cshtml" />
+    <Content Include="Views\ShowInfo\ShowCII.cshtml" />
+    <Content Include="Views\ShowInfo\ShowCI.cshtml" />
+    <Content Include="Views\ShowInfo\ShowFarmer.cshtml" />
+    <Content Include="Views\EventManage\eventAreaModify.cshtml" />
+    <Content Include="Views\HaiStaff\ModifyBranch.cshtml" />
+    <Content Include="Views\HaiStaff\ModifyArea.cshtml" />
+    <Content Include="Views\HaiStaff\CreateDepartment.cshtml" />
+    <Content Include="Views\HaiStaff\ModifyDepartment.cshtml" />
+    <Content Include="Views\HaiStaff\CreatePosition.cshtml" />
+    <Content Include="Views\HaiStaff\ModifyPosition.cshtml" />
+    <Content Include="Views\Role\Permission.cshtml" />
+    <Content Include="Views\Shared\_MenuHai.cshtml" />
+    <Content Include="Views\Shared\_MenuAdmin.cshtml" />
+    <Content Include="Views\Home\ReLogin.cshtml" />
+    <Content Include="Views\Role\MobileFunction.cshtml" />
+    <Content Include="Views\EventManage\AwardManage.cshtml" />
+    <Content Include="Views\EventManage\ModifyAward.cshtml" />
+    <Content Include="Views\EventManage\ShowAppHistory.cshtml" />
+    <Content Include="Views\Tree\Manage.cshtml" />
+    <Content Include="Views\Tree\Modify.cshtml" />
+    <Content Include="Views\Tree\ShowTree.cshtml" />
+    <Content Include="Views\EventManage\EventAreaFarmerModify.cshtml" />
+    <Content Include="Views\ShowInfo\ShowEvent.cshtml" />
+    <Content Include="Views\ShowInfo\ShowEventDetail.cshtml" />
+    <Content Include="Views\EventManage\ShowSavePoint.cshtml" />
+    <Content Include="Views\HaiReport\ChooseEvent.cshtml" />
+    <Content Include="Views\ShowInfo\ShowMsg.cshtml" />
+    <Content Include="Views\ShowInfo\UserInfo.cshtml" />
+    <Content Include="Views\HaiReport\AgencyReport.cshtml" />
+    <Content Include="Views\Account\AdminManage.cshtml" />
+    <Content Include="Views\Notification\SendSMS.cshtml" />
+    <Content Include="Views\HaiReport\ProductRemain.cshtml" />
+    <Content Include="Views\HaiReport\WarehouseRemain.cshtml" />
+    <Content Include="Views\Product\ProductSeri.cshtml" />
+    <Content Include="Views\Product\GeneralSeri.cshtml" />
+    <Content Include="Views\Tracking\ProductTracking.cshtml" />
+    <Content Include="Views\Tracking\HistoryTracking.cshtml" />
+    <Content Include="Views\Account\DeleteUser.cshtml" />
+    <Content Include="Views\Account\AddUser.cshtml" />
+    <Content Include="Views\Account\UserInfo.cshtml" />
+    <Content Include="Views\UserImei\CheckImei.cshtml" />
+    <Content Include="Views\ShowInfo\SMSHistory.cshtml" />
+    <Content Include="Views\ShowInfo\HappyBirthday.cshtml" />
+    <Content Include="Views\Home\Policy.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="haiupload\award\" />
+    <Folder Include="haiupload\event\" />
+    <Folder Include="haiupload\notification\" />
+    <Folder Include="staff\" />
+    <Folder Include="temp\" />
+    <Folder Include="uploadfolder\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>4896</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:4896/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

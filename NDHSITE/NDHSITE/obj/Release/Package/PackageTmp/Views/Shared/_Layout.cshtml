@@ -1,0 +1,202 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+<head>
+    <title>NONG DUOC HAI</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Google Font -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,300' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- Font awesome CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+   
+
+    <!-- App CSS -->
+    <link rel="stylesheet" href="~/content/css/mvpready-admin.css">
+
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+    @RenderSection("Styles", false)
+
+  
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class=" ">
+
+    <div id="wrapper">
+
+        <header class="navbar" role="banner">
+
+            <div class="container">
+
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <i class="fa fa-cog"></i>
+                    </button>
+
+                    <a href="/home" class="navbar-brand navbar-brand-img">
+                        <img src="~/content/img/logo.png" alt="NONG DUOC HAI">
+                    </a>
+                </div> <!-- /.navbar-header -->
+
+                <nav class="collapse navbar-collapse" role="navigation">
+
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li>
+                            <a href="http://www.congtyhai.com/" target="_blank">Trang Nông Dược Hai</a>
+                        </li>
+
+                        <li>
+                            <a href="#">Hổ trợ</a>
+                        </li>
+
+                        <li class="dropdown navbar-profile">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">
+                                <img src="~/content/img/logo.png" class="navbar-profile-avatar" alt="">
+                                <span class="visible-xs-inline"> &nbsp;</span>
+                                <i class="fa fa-caret-down"></i>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-user"></i>
+                                        &nbsp;&nbsp;@User.Identity.Name
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="/account/manage">
+                                        <i class="fa fa-sign-out"></i>
+                                        &nbsp;&nbsp;Đổi mật khẩu
+                                    </a>
+                                </li>
+                                @Html.Action("AdminMenu", "Home")
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="javascript:document.getElementById('logoutForm').submit()">
+                                        <i class="fa fa-sign-out"></i>
+                                        &nbsp;&nbsp;Logout
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </li>
+
+                    </ul>
+
+                </nav>
+
+            </div> <!-- /.container -->
+
+        </header>
+
+
+        <div class="mainnav ">
+
+            <div class="container">
+
+                <a class="mainnav-toggle" data-toggle="collapse" data-target=".mainnav-collapse">
+                    <span class="sr-only">NÔNG DƯỢC HAI</span>
+                    <i class="fa fa-bars"></i>
+                </a>
+                @Html.Action("ShowMenu", "Home")
+               
+
+            </div> <!-- /.container -->
+
+        </div> <!-- /.mainnav -->
+
+        <div class="content">
+
+            <div class="container">
+
+                @RenderBody()
+
+            </div> <!-- /.container -->
+
+        </div> <!-- .content -->
+
+    </div> <!-- /#wrapper -->
+
+    <!-- Modal Start here-->
+    <div class="modal fade bs-example-modal-sm" id="myPleaseWait" tabindex="-1"
+         role="dialog" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span class="glyphicon glyphicon-time"></span>Please Wait
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-info
+                    progress-bar-striped active"
+                             style="width: 100%">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
+
+        }
+    }
+    <footer class="footer">
+        <div class="container">
+            <p class="pull-left">Copyright &copy; 2016 CÔNG TY CỔ PHẦN NÔNG DƯỢC HAI</p>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Core JS -->
+    <!-- Core JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script src="~/scripts/js/jquery.slimscroll.min.js"></script>
+    @RenderSection("Scripts", false)
+    <!-- App JS -->
+    <script src="~/scripts/js/mvpready-core.js"></script>
+    <script src="~/scripts/js/mvpready-helpers.js"></script>
+    <script src="~/scripts/js/mvpready-admin.js"></script>
+
+   <script src="~/scripts/myscript.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,136 @@
+﻿@model PagedList.IPagedList<NDHSITE.Models.MSGPoint>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "ShowAppHistory";
+}
+
+<div class="portlet portlet-boxed">
+    <div class="portlet-header">
+        <h4 class="portlet-title">
+            Danh sách tin nhắn
+        </h4>
+    </div> <!-- /.portlet-header -->
+
+    <div class="portlet-body">
+
+        <form method="get">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>Từ ngày</label>
+                        <input type="text" class="form-control datetime" name="DateFrom" value="@ViewBag.DateFrom.ToString("dd/MM/yyyy")" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Đến ngày</label>
+                        <input type="text" class="form-control datetime" name="DateTo" value="@ViewBag.DateTo.ToString("dd/MM/yyyy")" />
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>Chọn loại tin</label>
+                        <select class="form-control" name="MSGType">
+                            <option value="" @(ViewBag.MSGType == "" ? "selected" : "")>Tất cả</option>
+                            <option value="APP" @(ViewBag.MSGType == "APP" ? "selected" : "")>Từ ứng dụng mobile</option>
+                            <option value="SMS" @(ViewBag.MSGType == "SMS" ? "selected" : "")>Từ tin nhắn sms</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Loại khách hàng</label>
+                        <select class="form-control" name="Agency">
+                            <option value="" @(ViewBag.Agency == "" ? "selected" : "")>Tất cả</option>
+                            <option value="CII" @(ViewBag.Agency == "CII" ? "selected" : "")>Cấp 2</option>
+                            <option value="FARMER" @(ViewBag.Agency == "FARMER" ? "selected" : "")>Nông dân</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>Nhập mã, sdt hoặc tên</label>
+                        <input type="text" class="form-control" name="search" value="@ViewBag.SearchText" />
+                    </div>
+                    <br />
+                    <button class="btn btn-primary" type="submit">Xem</button>
+                </div>
+            </div>
+
+        </form>
+
+
+        <fieldset>
+            <table class="table table-striped table-bordered thumbnail-table">
+                <thead>
+                    <tr>
+                        <th>Tên cửa hàng</th>
+                        <th>Số điện thoại</th>
+                        <th>Loại đại lý</th>
+                        <th>Thông tin</th>
+                        <th>Chương trình KM</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.CInfoCommon.CName</td>
+                            <td>@item.CInfoCommon.Phone</td>
+                            <td>
+                                @if (item.CInfoCommon.CType == "CII")
+                                {
+                                    <p>Đại lý cấp 2</p>
+                                }
+                                else if (item.CInfoCommon.CType == "FARMER")
+                                {
+                                    <p>Nông dân</p>
+                                }
+                                <p>Mã: @item.CInfoCommon.CCode</p>
+                            </td>
+                            <td class="file-info">
+                                <span><strong class="semibold">Barcode:</strong> @item.Barcode</span> <br />
+                                <span><strong class="semibold">Sản phẩm:</strong> @item.ProductInfo.PName</span> <br />
+                                <span><strong class="semibold">Username:</strong> @item.UserLogin</span> <br />
+                                <span><strong class="semibold">Khu vực:</strong> @item.CInfoCommon.HaiArea.Name</span> <br />
+                                <span><strong class="semibold">Thời gian gửi:</strong> @item.AcceptTime.Value.ToString("dd/MM/yyyy HH:mm")</span>
+                            </td>
+                            <td class="file-info">
+                                @foreach (var km in item.MSGPointEvents.ToList())
+                                {
+                                    <span><strong class="semibold">@km.EventInfo.Name : </strong> + @km.Point điểm</span> <br />
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("showapphistory",
+                                                         new { page, search = ViewBag.SearchText, DateFrom = ViewBag.DateFrom.ToString("dd/MM/yyyy"), DateTo = ViewBag.DateTo.ToString("dd/MM/yyyy"), MSGType = ViewBag.MSGType, Agency = ViewBag.Agency }))
+        </fieldset>
+
+    </div>
+</div>
+
+
+@section styles {
+
+    <link href="~/content/bootstrap-datetimepicker.min.css" rel="stylesheet">
+}
+
+@section scripts {
+    <!-- date bootstrap -->
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/scripts/moment-with-locales.min.js"></script>
+    <script src="~/scripts/bootstrap-datetimepicker.min.js"></script>
+
+    <script type="text/javascript">
+        $('.datetime').datetimepicker({
+            locale: 'vi',
+            format: 'DD/MM/YYYY',
+            defaultDate: new Date()
+        });
+    </script>
+}

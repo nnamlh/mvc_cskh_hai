@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Tạo seri";
+}
+
+<div class="portlet portlet-boxed">
+    <div class="portlet-header">
+        <h4 class="portlet-title">
+            Tạo mã khuyến mãi
+        </h4>
+    </div> <!-- /.portlet-header -->
+    <div class="portlet-body">
+
+        <form method="post">
+
+            <div class="row">
+
+                <div class="col-sm-6">
+                    @if (ViewBag.MSG != null)
+                    {
+                        <h4>@ViewBag.MSG</h4>
+                    }
+                    <div class="form-group">
+                        <input type="number" name="Quantity" class="form-control" value="5000000" />
+                       
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">Tạo</button>
+                </div>
+
+            </div>
+
+        </form>
+
+
+    </div>
+</div>

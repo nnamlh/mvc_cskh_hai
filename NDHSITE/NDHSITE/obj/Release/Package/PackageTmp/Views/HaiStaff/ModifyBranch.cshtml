@@ -1,0 +1,88 @@
+﻿@model NDHSITE.Models.HaiBranch
+@{
+    ViewBag.Title = "ModifyBranch";
+}
+<div class="page-header">
+    <h3 class="page-title">Thông tin chi nhánh</h3>
+
+    <ol class="breadcrumb">
+        <li><a href="/home">Trang chủ</a></li>
+        <li><a href="#">Chi nhánh</a></li>
+    </ol>
+</div> <!-- /.page-header -->
+
+<p>Đây là phần chỉnh sửa thông tin cho chi nhánh. Quay về danh sách sự chi nhánh <a href="/haistaff/createbrand">đây</a></p>
+
+<div class="portlet portlet-boxed">
+    <div class="portlet-header">
+        <h4 class="portlet-title">
+            Thông tin chi nhánh
+        </h4>
+    </div> <!-- /.portlet-header -->
+    <div class="portlet-body">
+        <form method="post" onsubmit="if(!confirm('Chỉnh sửa chi nhánh?')){return false;}">
+            <fieldset>
+                <div class="row">
+                    <input type="hidden" name="Id" value="@Model.Id" />
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Tên chi nhánh</label>
+                            <input type="text" class="form-control" name="Name" required="" value="@Model.Name">
+                        </div> <!-- /.form-group -->
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Mã chi nhánh</label>
+                            <input type="text" class="form-control" name="Code" required="" value="@Model.Code">
+                        </div> <!-- /.form-group -->
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Địa chỉ</label>
+                            <input name="AddressInfo" type="text" class="form-control" value="@Model.AddressInfo">
+                        </div> <!-- /.form-group -->
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Điện thoại</label>
+                            <input name="Phone" type="text" class="form-control" value="@Model.Phone">
+                        </div> <!-- /.form-group -->
+                    </div>
+                    <div class="col-sm-6">
+
+                        <div class="form-group">
+                            <label>Khu vực</label>
+                            <select class="form-control" name="AreaId">
+                                @foreach (var are in ViewBag.AllArea)
+                                {
+                                    if (Model.AreaId == are.Id)
+                                    {
+                                        <option value="@are.Id" selected>@are.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@are.Id">@are.Name</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>Ghi chú</label>
+                                <textarea name="Notes" class="form-control">@Model.Notes</textarea>
+                            </div> <!-- /.form-group -->
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Chỉnh sửa chi nhánh</button>
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+</div>
+
+

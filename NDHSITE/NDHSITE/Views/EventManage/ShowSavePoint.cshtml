@@ -1,0 +1,93 @@
+﻿@model PagedList.IPagedList<NDHSITE.Models.AgencySavePoint>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "ShowSavePoint";
+}
+
+<div class="portlet portlet-boxed">
+    <div class="portlet-header">
+        <h4 class="portlet-title">
+            Thông tin tích điểm
+        </h4>
+    </div> <!-- /.portlet-header -->
+
+    <div class="portlet-body">
+
+        <form method="get">
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Nhập mã, sdt hoặc tên khách hàng</label>
+                        <input type="text" class="form-control" name="atext" value="@ViewBag.Agency" />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nhập tên khuyến mãi</label>
+                        <input type="text" class="form-control" name="etext" value="@ViewBag.Event" />
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Loại khuyến mãi</label>
+                        <select class="form-control" name="status">
+                            <option value="1" @(ViewBag.Status == 1 ? "selected" : "")>Đang diễn ra</option>
+                            <option value="2" @(ViewBag.Status == 2 ? "selected" : "")>Đã kết thúc</option>
+                        </select>
+                    </div>
+
+                    <br />
+                    <button class="btn btn-primary" type="submit">Xem</button>
+                </div>
+
+            </div>
+
+        </form>
+
+
+
+        <fieldset>
+            <table class="table table-striped table-bordered thumbnail-table">
+                <thead>
+                    <tr>
+                        <th>Thông tin khách hàng</th>
+                        <th>Chương trình khuyển mãi</th>
+                        <th>Tin nhắn</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="file-info">
+                                <span><strong class="semibold">Tên:</strong> @item.CInfoCommon.CName</span> <br />
+                                <span><strong class="semibold">Mã:</strong> @item.CInfoCommon.CCode</span> <br />
+                                <span><strong class="semibold">DT:</strong> @item.CInfoCommon.Phone</span> <br />
+                                <span><strong class="semibold">Loại:</strong> @(item.CInfoCommon.CType == "CII" ? "Cấp 2" : "Nông dân") </span> <br />
+                                <span><strong class="semibold">Khu vực:</strong> @item.CInfoCommon.HaiArea.Name</span>
+                            </td>
+                            <td class="file-info">
+                                <span><strong class="semibold">@item.EventInfo.Name</strong></span> <br />
+                                <span><strong class="semibold">Bắt đầu:</strong> @item.EventInfo.BeginTime.Value.ToShortDateString()</span> <br />
+                                <span><strong class="semibold">Kết thúc:</strong> @item.EventInfo.EndTime.Value.ToShortDateString()</span> <br />
+                                <span><strong class="semibold">Điểm tích:</strong> @item.PointSave</span> <br />
+                                <span><strong class="semibold">Ngày bắt đầu tích điểm:</strong> @item.CreateTime.Value.ToShortDateString()</span><br />
+                                <span><strong class="semibold">Ngày tích điểm giần nhất:</strong> @item.ModifyTime</span>
+                            </td>
+                            <td>
+                                <a href="/EventManage/ShowAppHistory?DateFrom=@Html.Raw(item.CreateTime.Value.ToString("dd/MM/yyyy"))&search=@item.CInfoCommon.Phone" target="_blank">Xem lịch sử nhắn tin</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("showsavepoint",
+                                       new { page, atext = ViewBag.Agency, etext = ViewBag.Event, status = ViewBag.Status }))
+        </fieldset>
+
+    </div>
+</div>
+

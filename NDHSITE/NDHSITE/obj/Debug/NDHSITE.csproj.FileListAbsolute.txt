@@ -1,0 +1,241 @@
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\NDHSITE.dll.config
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\NDHSITE.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\NDHSITE.pdb
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Antlr3.Runtime.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\EntityFramework.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\EntityFramework.SqlServer.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.Owin.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Newtonsoft.Json.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Owin.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\PagedList.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\PagedList.Mvc.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\System.Web.Helpers.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\System.Web.Mvc.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\System.Web.Optimization.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\System.Web.Razor.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\System.Web.WebPages.Deployment.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\System.Web.WebPages.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\System.Web.WebPages.Razor.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\WebGrease.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\PagedList.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\PagedList.Mvc.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\System.Web.Helpers.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\System.Web.Mvc.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\System.Web.Optimization.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\System.Web.Razor.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\System.Web.WebPages.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\System.Web.WebPages.Deployment.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\System.Web.WebPages.Razor.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Newtonsoft.Json.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Antlr3.Runtime.pdb
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\EntityFramework.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\EntityFramework.SqlServer.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.Owin.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\obj\Debug\NDHSITE.csprojResolveAssemblyReference.cache
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\obj\Debug\NDHSITE.dll
+C:\Users\NAM\Documents\Visual Studio 2013\Projects\NDHSITE\NDHSITE\obj\Debug\NDHSITE.pdb
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\NDHSITE.dll.config
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\NDHSITE.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\NDHSITE.pdb
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Antlr3.Runtime.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\EntityFramework.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\EntityFramework.SqlServer.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\EPPlus.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.Core.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.Owin.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Cookies.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Facebook.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Google.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.OAuth.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Twitter.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.Web.Infrastructure.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Newtonsoft.Json.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Owin.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\PagedList.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\PagedList.Mvc.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\System.Web.Helpers.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\System.Web.Mvc.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\System.Web.Optimization.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\System.Web.Razor.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\System.Web.WebPages.Deployment.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\System.Web.WebPages.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\System.Web.WebPages.Razor.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\WebGrease.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\PagedList.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\PagedList.Mvc.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\System.Web.Helpers.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\System.Web.Mvc.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\System.Web.Optimization.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\System.Web.Razor.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\System.Web.WebPages.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\System.Web.WebPages.Deployment.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\System.Web.WebPages.Razor.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Newtonsoft.Json.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Antlr3.Runtime.pdb
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\EntityFramework.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\EntityFramework.SqlServer.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.Core.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.Owin.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Facebook.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Cookies.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.OAuth.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Google.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Twitter.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\workplace\mvc\NDHSITE\NDHSITE\obj\Debug\NDHSITE.dll
+D:\workplace\mvc\NDHSITE\NDHSITE\obj\Debug\NDHSITE.pdb
+D:\workplace\mvc\NDHSITE\NDHSITE\obj\Debug\NDHSITE.csprojResolveAssemblyReference.cache
+D:\mvc learn\NDHSITE\NDHSITE\bin\NDHSITE.dll.config
+D:\mvc learn\NDHSITE\NDHSITE\bin\NDHSITE.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\NDHSITE.pdb
+D:\mvc learn\NDHSITE\NDHSITE\bin\Antlr3.Runtime.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\EntityFramework.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\EntityFramework.SqlServer.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\EPPlus.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.Core.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.Owin.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Cookies.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Facebook.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Google.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.OAuth.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Twitter.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.Web.Infrastructure.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\Newtonsoft.Json.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\Owin.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\PagedList.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\PagedList.Mvc.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\SMSUtl.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\System.Web.Helpers.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\System.Web.Mvc.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\System.Web.Optimization.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\System.Web.Razor.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\System.Web.WebPages.Deployment.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\System.Web.WebPages.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\System.Web.WebPages.Razor.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\WebGrease.dll
+D:\mvc learn\NDHSITE\NDHSITE\bin\PagedList.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\PagedList.Mvc.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\System.Web.Helpers.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\System.Web.Mvc.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\System.Web.Optimization.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\System.Web.Razor.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\System.Web.WebPages.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\System.Web.WebPages.Deployment.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\System.Web.WebPages.Razor.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\Newtonsoft.Json.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\Antlr3.Runtime.pdb
+D:\mvc learn\NDHSITE\NDHSITE\bin\EntityFramework.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\EntityFramework.SqlServer.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.Core.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.Owin.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Facebook.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Cookies.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.OAuth.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Google.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Twitter.xml
+D:\mvc learn\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\mvc learn\NDHSITE\NDHSITE\obj\Debug\NDHSITE.dll
+D:\mvc learn\NDHSITE\NDHSITE\obj\Debug\NDHSITE.pdb
+D:\mvc learn\NDHSITE\NDHSITE\obj\Debug\NDHSITE.csprojResolveAssemblyReference.cache
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\NDHSITE.dll.config
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\NDHSITE.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\NDHSITE.pdb
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Antlr3.Runtime.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\EntityFramework.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\EntityFramework.SqlServer.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\EPPlus.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.Core.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.Owin.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Cookies.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Facebook.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Google.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.OAuth.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Twitter.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.Web.Infrastructure.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Newtonsoft.Json.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Owin.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\PagedList.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\PagedList.Mvc.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\SMSUtl.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\System.Web.Helpers.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\System.Web.Mvc.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\System.Web.Optimization.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\System.Web.Razor.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\System.Web.WebPages.Deployment.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\System.Web.WebPages.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\System.Web.WebPages.Razor.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\WebGrease.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\PagedList.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\PagedList.Mvc.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\System.Web.Helpers.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\System.Web.Mvc.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\System.Web.Optimization.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\System.Web.Razor.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\System.Web.WebPages.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\System.Web.WebPages.Deployment.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\System.Web.WebPages.Razor.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Newtonsoft.Json.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Antlr3.Runtime.pdb
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\EntityFramework.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\EntityFramework.SqlServer.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.Core.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.Owin.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Facebook.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Cookies.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.OAuth.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Google.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Twitter.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\work\web mvc\project\NDHSITE\NDHSITE\obj\Debug\NDHSITE.csprojResolveAssemblyReference.cache
+D:\work\web mvc\project\NDHSITE\NDHSITE\obj\Debug\NDHSITE.dll
+D:\work\web mvc\project\NDHSITE\NDHSITE\obj\Debug\NDHSITE.pdb

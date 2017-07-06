@@ -1,0 +1,610 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\HAI\Desktop\temp\nongduochaiweb</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>09/23/2016 14:14:48</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>09/23/2016 14:14:49</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>09/23/2016 14:14:49</publishTime>
+    </File>
+    <File Include="bin/EPPlus.dll">
+      <publishTime>04/11/2013 16:16:48</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
+      <publishTime>09/23/2016 14:14:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.Identity.EntityFramework.dll">
+      <publishTime>09/23/2016 14:14:51</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.Identity.Owin.dll">
+      <publishTime>09/23/2016 14:14:51</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.dll">
+      <publishTime>09/23/2016 14:14:51</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
+      <publishTime>09/23/2016 14:14:51</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.Cookies.dll">
+      <publishTime>09/23/2016 14:14:51</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.dll">
+      <publishTime>09/23/2016 14:14:51</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.Facebook.dll">
+      <publishTime>09/23/2016 14:14:51</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.Google.dll">
+      <publishTime>09/23/2016 14:14:52</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.MicrosoftAccount.dll">
+      <publishTime>09/23/2016 14:14:52</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.OAuth.dll">
+      <publishTime>09/23/2016 14:14:51</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.Twitter.dll">
+      <publishTime>09/23/2016 14:14:52</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>09/23/2016 14:14:47</publishTime>
+    </File>
+    <File Include="bin/NDHSITE.dll">
+      <publishTime>07/03/2017 23:58:51</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>09/23/2016 14:14:47</publishTime>
+    </File>
+    <File Include="bin/Owin.dll">
+      <publishTime>09/23/2016 14:14:51</publishTime>
+    </File>
+    <File Include="bin/PagedList.dll">
+      <publishTime>10/20/2016 10:15:43</publishTime>
+    </File>
+    <File Include="bin/PagedList.Mvc.dll">
+      <publishTime>10/20/2016 10:15:43</publishTime>
+    </File>
+    <File Include="bin/SMSUtl.dll">
+      <publishTime>08/06/2016 11:29:09</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>09/23/2016 14:14:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>09/23/2016 14:14:47</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>09/23/2016 14:14:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>09/23/2016 14:14:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>09/23/2016 14:14:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>09/23/2016 14:14:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>09/23/2016 14:14:46</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>09/23/2016 14:14:48</publishTime>
+    </File>
+    <File Include="Content/bootstrap-datetimepicker.min.css">
+      <publishTime>10/29/2016 16:19:24</publishTime>
+    </File>
+    <File Include="Content/css/jquery.steps.css">
+      <publishTime>11/15/2016 10:06:09</publishTime>
+    </File>
+    <File Include="Content/css/mvpready-admin.css">
+      <publishTime>12/03/2016 10:44:16</publishTime>
+    </File>
+    <File Include="Content/img/logo.png">
+      <publishTime>09/27/2016 14:14:03</publishTime>
+    </File>
+    <File Include="Content/img/logofull.png">
+      <publishTime>09/27/2016 15:41:40</publishTime>
+    </File>
+    <File Include="Content/img/market_logo.png">
+      <publishTime>06/09/2017 01:38:10</publishTime>
+    </File>
+    <File Include="Content/img/user/default.png">
+      <publishTime>09/27/2016 16:21:16</publishTime>
+    </File>
+    <File Include="Content/PagedList.css">
+      <publishTime>10/20/2016 10:15:44</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>09/27/2016 15:16:28</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.eot">
+      <publishTime>09/23/2016 14:14:43</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.svg">
+      <publishTime>09/23/2016 14:14:43</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>09/23/2016 14:14:43</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff">
+      <publishTime>09/23/2016 14:14:43</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>09/23/2016 14:14:41</publishTime>
+    </File>
+    <File Include="haiupload/account.xlsx">
+      <publishTime>01/20/2017 15:21:45</publishTime>
+    </File>
+    <File Include="haiupload/accountresult.xlsx">
+      <publishTime>01/20/2017 15:41:58</publishTime>
+    </File>
+    <File Include="haiupload/agencyreport.xlsx">
+      <publishTime>12/18/2016 23:29:50</publishTime>
+    </File>
+    <File Include="haiupload/areacustomerevent.xlsx">
+      <publishTime>03/28/2017 16:33:56</publishTime>
+    </File>
+    <File Include="haiupload/defaultevent.png">
+      <publishTime>11/17/2016 22:37:25</publishTime>
+    </File>
+    <File Include="haiupload/DMSP.xlsx">
+      <publishTime>11/17/2016 15:09:44</publishTime>
+    </File>
+    <File Include="haiupload/DS CAY TRONG.xlsx">
+      <publishTime>11/22/2016 00:46:40</publishTime>
+    </File>
+    <File Include="haiupload/DS NONG DAN.xlsx">
+      <publishTime>12/12/2016 14:24:38</publishTime>
+    </File>
+    <File Include="haiupload/DS SERI SP.xlsx">
+      <publishTime>11/17/2016 15:41:40</publishTime>
+    </File>
+    <File Include="haiupload/DSKH - CI.xlsx">
+      <publishTime>12/12/2016 14:24:15</publishTime>
+    </File>
+    <File Include="haiupload/DSKH CII.xlsx">
+      <publishTime>12/12/2016 14:25:05</publishTime>
+    </File>
+    <File Include="haiupload/DSSERI.xlsx">
+      <publishTime>01/11/2017 16:36:49</publishTime>
+    </File>
+    <File Include="haiupload/exceleventaward.xlsx">
+      <publishTime>11/17/2016 21:57:16</publishTime>
+    </File>
+    <File Include="haiupload/exceleventcustomer.xlsx">
+      <publishTime>11/20/2016 18:53:50</publishTime>
+    </File>
+    <File Include="haiupload/exceleventfarmer.xlsx">
+      <publishTime>03/28/2017 14:58:50</publishTime>
+    </File>
+    <File Include="haiupload/exceleventproduct.xlsx">
+      <publishTime>11/17/2016 21:57:16</publishTime>
+    </File>
+    <File Include="haiupload/historytracking.xlsx">
+      <publishTime>01/12/2017 14:42:06</publishTime>
+    </File>
+    <File Include="haiupload/productremain.xlsx">
+      <publishTime>01/05/2017 12:52:09</publishTime>
+    </File>
+    <File Include="haiupload/warehouseremain.xlsx">
+      <publishTime>01/05/2017 12:52:10</publishTime>
+    </File>
+    <File Include="Models/NDHDB.edmx.diagram">
+      <publishTime>07/03/2017 14:05:37</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>10/20/2016 10:15:44</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap-datetimepicker.min.js">
+      <publishTime>10/29/2016 16:19:05</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap-typeahead.js">
+      <publishTime>11/26/2016 11:13:27</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.js">
+      <publishTime>09/23/2016 14:14:52</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js">
+      <publishTime>09/23/2016 14:14:52</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.js">
+      <publishTime>09/23/2016 14:14:52</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js">
+      <publishTime>09/23/2016 14:14:52</publishTime>
+    </File>
+    <File Include="Scripts/js/flot/auto.js">
+      <publishTime>10/20/2016 11:27:08</publishTime>
+    </File>
+    <File Include="Scripts/js/flot/donut.js">
+      <publishTime>10/20/2016 11:27:08</publishTime>
+    </File>
+    <File Include="Scripts/js/flot/excanvas.min.js">
+      <publishTime>10/20/2016 11:27:08</publishTime>
+    </File>
+    <File Include="Scripts/js/flot/horizontal.js">
+      <publishTime>10/20/2016 11:27:08</publishTime>
+    </File>
+    <File Include="Scripts/js/flot/jquery.flot.categories.js">
+      <publishTime>10/20/2016 11:27:08</publishTime>
+    </File>
+    <File Include="Scripts/js/flot/jquery.flot.js">
+      <publishTime>10/20/2016 11:27:08</publishTime>
+    </File>
+    <File Include="Scripts/js/flot/jquery.flot.orderBars.js">
+      <publishTime>10/20/2016 11:27:08</publishTime>
+    </File>
+    <File Include="Scripts/js/flot/jquery.flot.pie.js">
+      <publishTime>10/20/2016 11:27:08</publishTime>
+    </File>
+    <File Include="Scripts/js/flot/jquery.flot.resize.js">
+      <publishTime>10/20/2016 11:27:08</publishTime>
+    </File>
+    <File Include="Scripts/js/flot/jquery.flot.stack.js">
+      <publishTime>10/20/2016 11:27:08</publishTime>
+    </File>
+    <File Include="Scripts/js/flot/jquery.flot.time.js">
+      <publishTime>10/20/2016 11:27:08</publishTime>
+    </File>
+    <File Include="Scripts/js/flot/line.js">
+      <publishTime>10/20/2016 11:27:08</publishTime>
+    </File>
+    <File Include="Scripts/js/flot/pie.js">
+      <publishTime>10/20/2016 11:27:08</publishTime>
+    </File>
+    <File Include="Scripts/js/flot/scatter.js">
+      <publishTime>10/20/2016 11:27:09</publishTime>
+    </File>
+    <File Include="Scripts/js/flot/stacked-area.js">
+      <publishTime>10/20/2016 11:27:09</publishTime>
+    </File>
+    <File Include="Scripts/js/flot/stacked-horizontal.js">
+      <publishTime>10/20/2016 11:27:09</publishTime>
+    </File>
+    <File Include="Scripts/js/flot/vertical.js">
+      <publishTime>10/20/2016 11:27:09</publishTime>
+    </File>
+    <File Include="Scripts/js/jquery.slimscroll.min.js">
+      <publishTime>09/23/2016 17:26:06</publishTime>
+    </File>
+    <File Include="Scripts/js/jquery.steps.js">
+      <publishTime>11/15/2016 11:07:32</publishTime>
+    </File>
+    <File Include="Scripts/js/mvpready-account.js">
+      <publishTime>09/27/2016 15:33:27</publishTime>
+    </File>
+    <File Include="Scripts/js/mvpready-admin.js">
+      <publishTime>09/23/2016 17:26:35</publishTime>
+    </File>
+    <File Include="Scripts/js/mvpready-core.js">
+      <publishTime>09/23/2016 17:26:35</publishTime>
+    </File>
+    <File Include="Scripts/js/mvpready-helpers.js">
+      <publishTime>09/23/2016 17:26:35</publishTime>
+    </File>
+    <File Include="Scripts/js/parsley.js">
+      <publishTime>11/15/2016 10:08:04</publishTime>
+    </File>
+    <File Include="Scripts/js/wizard.js">
+      <publishTime>11/15/2016 13:26:49</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.6.2.js">
+      <publishTime>09/23/2016 14:14:47</publishTime>
+    </File>
+    <File Include="Scripts/moment-with-locales.min.js">
+      <publishTime>10/29/2016 16:19:05</publishTime>
+    </File>
+    <File Include="Scripts/moment.min.js">
+      <publishTime>10/29/2016 16:19:05</publishTime>
+    </File>
+    <File Include="Scripts/myjs/checkin.js">
+      <publishTime>12/03/2016 15:53:17</publishTime>
+    </File>
+    <File Include="Scripts/myjs/modifyevent.js">
+      <publishTime>12/19/2016 15:08:37</publishTime>
+    </File>
+    <File Include="Scripts/myscript.js">
+      <publishTime>12/05/2016 17:24:39</publishTime>
+    </File>
+    <File Include="Scripts/respond.js">
+      <publishTime>09/23/2016 14:14:48</publishTime>
+    </File>
+    <File Include="Scripts/respond.min.js">
+      <publishTime>09/23/2016 14:14:48</publishTime>
+    </File>
+    <File Include="Scripts/_references.js">
+      <publishTime>12/05/2016 17:24:38</publishTime>
+    </File>
+    <File Include="Views/Account/AddUser.cshtml">
+      <publishTime>07/03/2017 23:40:36</publishTime>
+    </File>
+    <File Include="Views/Account/AdminManage.cshtml">
+      <publishTime>03/02/2017 13:53:50</publishTime>
+    </File>
+    <File Include="Views/Account/DeleteUser.cshtml">
+      <publishTime>01/18/2017 14:25:11</publishTime>
+    </File>
+    <File Include="Views/Account/ExternalLoginConfirmation.cshtml">
+      <publishTime>09/23/2016 14:14:48</publishTime>
+    </File>
+    <File Include="Views/Account/ExternalLoginFailure.cshtml">
+      <publishTime>09/23/2016 14:14:48</publishTime>
+    </File>
+    <File Include="Views/Account/Login.cshtml">
+      <publishTime>06/09/2017 01:41:23</publishTime>
+    </File>
+    <File Include="Views/Account/Manage.cshtml">
+      <publishTime>09/28/2016 09:31:44</publishTime>
+    </File>
+    <File Include="Views/Account/Register.cshtml">
+      <publishTime>10/29/2016 12:56:20</publishTime>
+    </File>
+    <File Include="Views/Account/RegisterStaff.cshtml">
+      <publishTime>10/20/2016 10:09:35</publishTime>
+    </File>
+    <File Include="Views/Account/UserInfo.cshtml">
+      <publishTime>01/20/2017 17:07:28</publishTime>
+    </File>
+    <File Include="Views/Account/_ChangePasswordPartial.cshtml">
+      <publishTime>09/28/2016 09:29:52</publishTime>
+    </File>
+    <File Include="Views/Account/_ExternalLoginsListPartial.cshtml">
+      <publishTime>09/23/2016 14:14:48</publishTime>
+    </File>
+    <File Include="Views/Account/_RemoveAccountPartial.cshtml">
+      <publishTime>09/23/2016 14:14:48</publishTime>
+    </File>
+    <File Include="Views/Account/_SetPasswordPartial.cshtml">
+      <publishTime>09/28/2016 09:30:10</publishTime>
+    </File>
+    <File Include="Views/Agency/Manage.cshtml">
+      <publishTime>10/31/2016 08:42:18</publishTime>
+    </File>
+    <File Include="Views/Agency/ManageCI.cshtml">
+      <publishTime>06/13/2017 11:42:14</publishTime>
+    </File>
+    <File Include="Views/Agency/ManageCII.cshtml">
+      <publishTime>07/03/2017 14:08:54</publishTime>
+    </File>
+    <File Include="Views/Agency/ManageFarmer.cshtml">
+      <publishTime>12/17/2016 17:39:08</publishTime>
+    </File>
+    <File Include="Views/Agency/Modify.cshtml">
+      <publishTime>10/31/2016 09:06:34</publishTime>
+    </File>
+    <File Include="Views/Agency/ModifyCI.cshtml">
+      <publishTime>06/13/2017 11:42:37</publishTime>
+    </File>
+    <File Include="Views/Agency/ModifyCII.cshtml">
+      <publishTime>06/13/2017 09:04:59</publishTime>
+    </File>
+    <File Include="Views/Agency/ModifyFarmer.cshtml">
+      <publishTime>03/02/2017 15:04:25</publishTime>
+    </File>
+    <File Include="Views/EventManage/AwardManage.cshtml">
+      <publishTime>11/22/2016 01:36:28</publishTime>
+    </File>
+    <File Include="Views/EventManage/CreateEvent.cshtml">
+      <publishTime>11/15/2016 14:18:36</publishTime>
+    </File>
+    <File Include="Views/EventManage/CustomerPoint.cshtml">
+      <publishTime>11/22/2016 01:27:35</publishTime>
+    </File>
+    <File Include="Views/EventManage/EventAreaFarmerModify.cshtml">
+      <publishTime>03/28/2017 16:54:25</publishTime>
+    </File>
+    <File Include="Views/EventManage/eventAreaModify.cshtml">
+      <publishTime>03/28/2017 16:59:19</publishTime>
+    </File>
+    <File Include="Views/EventManage/ManageEvent.cshtml">
+      <publishTime>03/28/2017 15:59:25</publishTime>
+    </File>
+    <File Include="Views/EventManage/ModifyAward.cshtml">
+      <publishTime>11/22/2016 01:35:23</publishTime>
+    </File>
+    <File Include="Views/EventManage/ModifyEvent.cshtml">
+      <publishTime>05/21/2017 21:06:38</publishTime>
+    </File>
+    <File Include="Views/EventManage/ShowAppHistory.cshtml">
+      <publishTime>04/26/2017 13:53:37</publishTime>
+    </File>
+    <File Include="Views/EventManage/ShowSavePoint.cshtml">
+      <publishTime>12/19/2016 16:05:10</publishTime>
+    </File>
+    <File Include="Views/HaiProduct/Index.cshtml">
+      <publishTime>10/20/2016 11:21:44</publishTime>
+    </File>
+    <File Include="Views/HaiReport/AgencyReport.cshtml">
+      <publishTime>05/21/2017 23:25:45</publishTime>
+    </File>
+    <File Include="Views/HaiReport/ChooseEvent.cshtml">
+      <publishTime>12/19/2016 00:04:49</publishTime>
+    </File>
+    <File Include="Views/HaiReport/ProductRemain.cshtml">
+      <publishTime>01/19/2017 14:09:43</publishTime>
+    </File>
+    <File Include="Views/HaiReport/WarehouseRemain.cshtml">
+      <publishTime>01/18/2017 14:50:23</publishTime>
+    </File>
+    <File Include="Views/HaiStaff/CreateBranch.cshtml">
+      <publishTime>10/19/2016 16:26:04</publishTime>
+    </File>
+    <File Include="Views/HaiStaff/CreateBrand.cshtml">
+      <publishTime>12/15/2016 15:54:10</publishTime>
+    </File>
+    <File Include="Views/HaiStaff/CreateDepartment.cshtml">
+      <publishTime>12/15/2016 20:22:58</publishTime>
+    </File>
+    <File Include="Views/HaiStaff/CreatePosition.cshtml">
+      <publishTime>12/15/2016 20:20:59</publishTime>
+    </File>
+    <File Include="Views/HaiStaff/CreateStaff.cshtml">
+      <publishTime>12/19/2016 11:12:36</publishTime>
+    </File>
+    <File Include="Views/HaiStaff/ModifyArea.cshtml">
+      <publishTime>11/18/2016 16:07:45</publishTime>
+    </File>
+    <File Include="Views/HaiStaff/ModifyBranch.cshtml">
+      <publishTime>11/18/2016 15:38:20</publishTime>
+    </File>
+    <File Include="Views/HaiStaff/ModifyDepartment.cshtml">
+      <publishTime>11/18/2016 16:24:51</publishTime>
+    </File>
+    <File Include="Views/HaiStaff/ModifyPosition.cshtml">
+      <publishTime>11/18/2016 16:38:46</publishTime>
+    </File>
+    <File Include="Views/HaiStaff/ModifyStaff.cshtml">
+      <publishTime>03/02/2017 15:02:20</publishTime>
+    </File>
+    <File Include="Views/HaiStaff/ShowBranch.cshtml">
+      <publishTime>10/20/2016 11:11:42</publishTime>
+    </File>
+    <File Include="Views/HaiStaff/ShowCheckIn.cshtml">
+      <publishTime>11/01/2016 10:46:52</publishTime>
+    </File>
+    <File Include="Views/HaiStaff/ShowStaff.cshtml">
+      <publishTime>10/20/2016 11:10:51</publishTime>
+    </File>
+    <File Include="Views/Home/About.cshtml">
+      <publishTime>09/23/2016 14:14:41</publishTime>
+    </File>
+    <File Include="Views/Home/Contact.cshtml">
+      <publishTime>09/23/2016 14:14:41</publishTime>
+    </File>
+    <File Include="Views/Home/Error.cshtml">
+      <publishTime>10/30/2016 15:05:13</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>05/13/2017 00:08:28</publishTime>
+    </File>
+    <File Include="Views/Home/ReLogin.cshtml">
+      <publishTime>11/20/2016 16:15:38</publishTime>
+    </File>
+    <File Include="Views/Notification/Send.cshtml">
+      <publishTime>03/20/2017 15:46:09</publishTime>
+    </File>
+    <File Include="Views/Notification/SendSMS.cshtml">
+      <publishTime>01/03/2017 14:57:01</publishTime>
+    </File>
+    <File Include="Views/Product/CatProduct.cshtml">
+      <publishTime>10/31/2016 10:48:05</publishTime>
+    </File>
+    <File Include="Views/Product/GeneralSeri.cshtml">
+      <publishTime>01/11/2017 15:12:58</publishTime>
+    </File>
+    <File Include="Views/Product/Manage.cshtml">
+      <publishTime>01/11/2017 16:46:25</publishTime>
+    </File>
+    <File Include="Views/Product/ModifyProduct.cshtml">
+      <publishTime>01/11/2017 10:59:15</publishTime>
+    </File>
+    <File Include="Views/Product/ProductSeri.cshtml">
+      <publishTime>04/07/2017 15:07:44</publishTime>
+    </File>
+    <File Include="Views/Product/ShowSeri.cshtml">
+      <publishTime>11/23/2016 01:32:45</publishTime>
+    </File>
+    <File Include="Views/Role/Manager.cshtml">
+      <publishTime>03/02/2017 15:12:44</publishTime>
+    </File>
+    <File Include="Views/Role/MobileFunction.cshtml">
+      <publishTime>03/02/2017 13:58:05</publishTime>
+    </File>
+    <File Include="Views/Role/Permission.cshtml">
+      <publishTime>03/02/2017 13:56:10</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>09/23/2016 14:14:48</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>12/05/2016 17:26:32</publishTime>
+    </File>
+    <File Include="Views/Shared/_LoginPartial.cshtml">
+      <publishTime>03/02/2017 14:00:46</publishTime>
+    </File>
+    <File Include="Views/Shared/_MenuAdmin.cshtml">
+      <publishTime>03/02/2017 14:00:20</publishTime>
+    </File>
+    <File Include="Views/Shared/_MenuHai.cshtml">
+      <publishTime>11/19/2016 16:33:22</publishTime>
+    </File>
+    <File Include="Views/ShowInfo/HappyBirthday.cshtml">
+      <publishTime>05/21/2017 23:19:44</publishTime>
+    </File>
+    <File Include="Views/ShowInfo/ShowBranch.cshtml">
+      <publishTime>05/12/2017 16:29:14</publishTime>
+    </File>
+    <File Include="Views/ShowInfo/ShowCheckIn.cshtml">
+      <publishTime>06/13/2017 10:12:15</publishTime>
+    </File>
+    <File Include="Views/ShowInfo/ShowCI.cshtml">
+      <publishTime>06/23/2017 15:26:54</publishTime>
+    </File>
+    <File Include="Views/ShowInfo/ShowCII.cshtml">
+      <publishTime>06/23/2017 15:24:43</publishTime>
+    </File>
+    <File Include="Views/ShowInfo/ShowEvent.cshtml">
+      <publishTime>12/21/2016 18:05:00</publishTime>
+    </File>
+    <File Include="Views/ShowInfo/ShowEventDetail.cshtml">
+      <publishTime>12/21/2016 17:57:33</publishTime>
+    </File>
+    <File Include="Views/ShowInfo/ShowFarmer.cshtml">
+      <publishTime>12/15/2016 20:05:47</publishTime>
+    </File>
+    <File Include="Views/ShowInfo/ShowMsg.cshtml">
+      <publishTime>04/26/2017 13:44:23</publishTime>
+    </File>
+    <File Include="Views/ShowInfo/ShowProduct.cshtml">
+      <publishTime>12/15/2016 20:01:11</publishTime>
+    </File>
+    <File Include="Views/ShowInfo/ShowStaff.cshtml">
+      <publishTime>06/13/2017 11:57:25</publishTime>
+    </File>
+    <File Include="Views/ShowInfo/SMSHistory.cshtml">
+      <publishTime>04/17/2017 14:06:21</publishTime>
+    </File>
+    <File Include="Views/ShowInfo/UserInfo.cshtml">
+      <publishTime>12/17/2016 17:48:37</publishTime>
+    </File>
+    <File Include="Views/Tracking/HistoryTracking.cshtml">
+      <publishTime>03/28/2017 17:00:48</publishTime>
+    </File>
+    <File Include="Views/Tracking/ProductTracking.cshtml">
+      <publishTime>03/28/2017 17:02:52</publishTime>
+    </File>
+    <File Include="Views/Tree/Manage.cshtml">
+      <publishTime>11/22/2016 01:00:02</publishTime>
+    </File>
+    <File Include="Views/Tree/Modify.cshtml">
+      <publishTime>11/22/2016 01:07:07</publishTime>
+    </File>
+    <File Include="Views/Tree/ShowTree.cshtml">
+      <publishTime>12/15/2016 20:02:08</publishTime>
+    </File>
+    <File Include="Views/UserImei/CheckImei.cshtml">
+      <publishTime>02/13/2017 12:25:28</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>09/23/2016 14:14:41</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>09/23/2016 14:14:41</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>07/03/2017 23:47:14</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

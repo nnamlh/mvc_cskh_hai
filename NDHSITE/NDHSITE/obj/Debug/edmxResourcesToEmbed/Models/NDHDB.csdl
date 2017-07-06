@@ -1,0 +1,1575 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NDHDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AgencySavePoint">
+    <Key>
+      <PropertyRef Name="EventId" />
+      <PropertyRef Name="CInfoId" />
+    </Key>
+    <Property Name="EventId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CInfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PointSave" Type="Int32" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="ModifyTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__AgencySav__CInfo__6497E884" FromRole="AgencySavePoint" ToRole="CInfoCommon" />
+    <NavigationProperty Name="EventInfo" Relationship="Self.FK__AgencySav__Event__63A3C44B" FromRole="AgencySavePoint" ToRole="EventInfo" />
+  </EntityType>
+  <EntityType Name="AllStatu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="SType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="SCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="SNotes" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="APIAuthHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserLogin" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UserRole" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LoginTime" Type="DateTime" Precision="3" />
+    <Property Name="IsExpired" Type="Int32" />
+    <Property Name="Token" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="APIDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BaseUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Describe" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Method" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="APIHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="APIUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="Sucess" Type="Int32" />
+    <Property Name="Error" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ReturnInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="APILogoutHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserLogin" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UserRole" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LogoutTime" Type="DateTime" Precision="3" />
+    <Property Name="Token" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GroupRole" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ShowInfoRole" Type="Int32" />
+    <NavigationProperty Name="FuncRoles" Relationship="Self.FK__FuncRole__RoleId__7ABC33CD" FromRole="AspNetRoles" ToRole="FuncRole" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+    <NavigationProperty Name="MobileFunctions" Relationship="Self.MobileRole" FromRole="AspNetRoles" ToRole="MobileFunction" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+    </Key>
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Discriminator" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FullName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsActivced" Type="Int32" />
+    <Property Name="AccountType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="FireBaseId" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="AwardInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Point" Type="Int32" />
+    <Property Name="Thumbnail" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="EventInfoes" Relationship="Self.EventAward" FromRole="AwardInfo" ToRole="EventInfo" />
+  </EntityType>
+  <EntityType Name="BarcodeHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Barcode" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CaseCode" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Messenge" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="PStatus" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="WareHouse" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="WareHouseType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="WareRelative" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="WareRelativeType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="StaffHelp" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="UserLogin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LocationStaff" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StaffHelpIssue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsSuccess" Type="Int32" />
+    <Property Name="WareHouseName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="WareRelativeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProductCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="BasicNotification">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Messenge" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="TocpicCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="UserSend" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserAccept" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="MessengeResult" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ImageAttach" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="C1Info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="StoreName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Deputy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Int32" />
+    <Property Name="IsLock" Type="Int32" />
+    <Property Name="InfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="HaiBrandId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Position" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="C1Position" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="WeddingDate" Type="DateTime" Precision="3" />
+    <Property Name="FoundingDate" Type="DateTime" Precision="3" />
+    <Property Name="Decison1" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Decision1Birthday" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Decision1Phone" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Decison2" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Decision2Birthday" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Decision2Phone" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiBranch" Relationship="Self.FK__C1Info__HaiBrand__72910220" FromRole="C1Info" ToRole="HaiBranch" />
+    <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C1Info__InfoId__681373AD" FromRole="C1Info" ToRole="CInfoCommon" />
+    <NavigationProperty Name="HaiStaff" Relationship="Self.FK__C1Info__StaffId__2DD1C37F" FromRole="C1Info" ToRole="HaiStaff" />
+    <NavigationProperty Name="C2Info" Relationship="Self.FK__C2Info__C1Id__73852659" FromRole="C1Info" ToRole="C2Info" />
+    <NavigationProperty Name="HaiStaffs" Relationship="Self.StaffWithC1" FromRole="C1Info" ToRole="HaiStaff" />
+  </EntityType>
+  <EntityType Name="C2Info">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="StoreName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Deputy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Int32" />
+    <Property Name="IsLock" Type="Int32" />
+    <Property Name="InfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="C1Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Decision" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="C1Info" Relationship="Self.FK__C2Info__C1Id__73852659" FromRole="C2Info" ToRole="C1Info" />
+    <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C2Info__InfoId__6CD828CA" FromRole="C2Info" ToRole="CInfoCommon" />
+    <NavigationProperty Name="HaiStaff" Relationship="Self.FK__C2Info__StaffId__2CDD9F46" FromRole="C2Info" ToRole="HaiStaff" />
+    <NavigationProperty Name="HaiStaffs" Relationship="Self.StaffWithC2" FromRole="C2Info" ToRole="HaiStaff" />
+  </EntityType>
+  <EntityType Name="CInfoCommon">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="IdentityCard" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="AddressInfo" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="WardId" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Fax" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="BirthDay" Type="DateTime" Precision="0" />
+    <Property Name="PlaceOfBirth" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="UserLogin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+    <Property Name="CType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="AreaId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProvinceName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="DistrictName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="BranchCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="CDeputy" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IsClock" Type="Int32" />
+    <Property Name="BankAccount" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="BankAccountHolder" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="BackName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CStatus" Type="Int32" />
+    <Property Name="TaxCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="BusinessLicense" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Lat" Type="Double" />
+    <Property Name="Lng" Type="Double" />
+    <NavigationProperty Name="AgencySavePoints" Relationship="Self.FK__AgencySav__CInfo__6497E884" FromRole="CInfoCommon" ToRole="AgencySavePoint" />
+    <NavigationProperty Name="C1Info" Relationship="Self.FK__C1Info__InfoId__681373AD" FromRole="CInfoCommon" ToRole="C1Info" />
+    <NavigationProperty Name="C2Info" Relationship="Self.FK__C2Info__InfoId__6CD828CA" FromRole="CInfoCommon" ToRole="C2Info" />
+    <NavigationProperty Name="HaiArea" Relationship="Self.FK__CInfoComm__AreaI__52E34C9D" FromRole="CInfoCommon" ToRole="HaiArea" />
+    <NavigationProperty Name="Ward" Relationship="Self.FK__CInfoComm__WardI__634EBE90" FromRole="CInfoCommon" ToRole="Ward" />
+    <NavigationProperty Name="EventCustomers" Relationship="Self.FK__EventCust__CInfo__1387E197" FromRole="CInfoCommon" ToRole="EventCustomer" />
+    <NavigationProperty Name="EventCustomerFarmers" Relationship="Self.FK__EventCust__CInfo__3F6663D5" FromRole="CInfoCommon" ToRole="EventCustomerFarmer" />
+    <NavigationProperty Name="FarmerInfoes" Relationship="Self.FK__FarmerInf__InfoI__7EF6D905" FromRole="CInfoCommon" ToRole="FarmerInfo" />
+    <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="CInfoCommon" ToRole="MSGPoint" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Provinceid" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Province" Relationship="Self.FK__District__Provin__07C12930" FromRole="District" ToRole="Province" />
+    <NavigationProperty Name="Wards" Relationship="Self.FK__Ward__Districtid__0C85DE4D" FromRole="District" ToRole="Ward" />
+  </EntityType>
+  <EntityType Name="ErrorInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="EventArea">
+    <Key>
+      <PropertyRef Name="EventId" />
+      <PropertyRef Name="AreaId" />
+    </Key>
+    <Property Name="EventId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AreaId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AllAgency" Type="Int32" />
+    <NavigationProperty Name="HaiArea" Relationship="Self.FK__EventArea__AreaI__54968AE5" FromRole="EventArea" ToRole="HaiArea" />
+    <NavigationProperty Name="EventInfo" Relationship="Self.FK__EventArea__Event__53A266AC" FromRole="EventArea" ToRole="EventInfo" />
+  </EntityType>
+  <EntityType Name="EventAreaFarmer">
+    <Key>
+      <PropertyRef Name="EventId" />
+      <PropertyRef Name="AreaId" />
+    </Key>
+    <Property Name="EventId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AreaId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AllAgency" Type="Int32" />
+    <NavigationProperty Name="HaiArea" Relationship="Self.FK__EventArea__AreaI__39AD8A7F" FromRole="EventAreaFarmer" ToRole="HaiArea" />
+    <NavigationProperty Name="EventInfo" Relationship="Self.FK__EventArea__Event__38B96646" FromRole="EventAreaFarmer" ToRole="EventInfo" />
+  </EntityType>
+  <EntityType Name="EventCustomer">
+    <Key>
+      <PropertyRef Name="EventId" />
+      <PropertyRef Name="CInfoId" />
+    </Key>
+    <Property Name="EventId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CInfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsJoint" Type="Int32" />
+    <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__EventCust__CInfo__1387E197" FromRole="EventCustomer" ToRole="CInfoCommon" />
+    <NavigationProperty Name="EventInfo" Relationship="Self.FK__EventCust__Event__1293BD5E" FromRole="EventCustomer" ToRole="EventInfo" />
+  </EntityType>
+  <EntityType Name="EventCustomerFarmer">
+    <Key>
+      <PropertyRef Name="EventId" />
+      <PropertyRef Name="CInfoId" />
+    </Key>
+    <Property Name="EventId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CInfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsJoint" Type="Int32" />
+    <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__EventCust__CInfo__3F6663D5" FromRole="EventCustomerFarmer" ToRole="CInfoCommon" />
+    <NavigationProperty Name="EventInfo" Relationship="Self.FK__EventCust__Event__3E723F9C" FromRole="EventCustomerFarmer" ToRole="EventInfo" />
+  </EntityType>
+  <EntityType Name="EventInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="BeginTime" Type="DateTime" Precision="0" />
+    <Property Name="EndTime" Type="DateTime" Precision="0" />
+    <Property Name="Descibe" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="UserCretea" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Thumbnail" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="ESTT" Type="Int32" />
+    <Property Name="ModifyTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AgencySavePoints" Relationship="Self.FK__AgencySav__Event__63A3C44B" FromRole="EventInfo" ToRole="AgencySavePoint" />
+    <NavigationProperty Name="EventAreas" Relationship="Self.FK__EventArea__Event__53A266AC" FromRole="EventInfo" ToRole="EventArea" />
+    <NavigationProperty Name="EventAreaFarmers" Relationship="Self.FK__EventArea__Event__38B96646" FromRole="EventInfo" ToRole="EventAreaFarmer" />
+    <NavigationProperty Name="EventCustomers" Relationship="Self.FK__EventCust__Event__1293BD5E" FromRole="EventInfo" ToRole="EventCustomer" />
+    <NavigationProperty Name="EventCustomerFarmers" Relationship="Self.FK__EventCust__Event__3E723F9C" FromRole="EventInfo" ToRole="EventCustomerFarmer" />
+    <NavigationProperty Name="EventProducts" Relationship="Self.FK__EventProd__Event__4DE98D56" FromRole="EventInfo" ToRole="EventProduct" />
+    <NavigationProperty Name="MSGPointEvents" Relationship="Self.FK__MSGPointE__Event__5BCD9859" FromRole="EventInfo" ToRole="MSGPointEvent" />
+    <NavigationProperty Name="AwardInfoes" Relationship="Self.EventAward" FromRole="EventInfo" ToRole="AwardInfo" />
+  </EntityType>
+  <EntityType Name="EventProduct">
+    <Key>
+      <PropertyRef Name="EventId" />
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="EventId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProductId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Point" Type="Int32" />
+    <Property Name="ProductName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="EventInfo" Relationship="Self.FK__EventProd__Event__4DE98D56" FromRole="EventProduct" ToRole="EventInfo" />
+    <NavigationProperty Name="ProductInfo" Relationship="Self.FK__EventProd__Produ__4EDDB18F" FromRole="EventProduct" ToRole="ProductInfo" />
+  </EntityType>
+  <EntityType Name="FarmerInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="FarmerName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Int32" />
+    <Property Name="IsLock" Type="Int32" />
+    <Property Name="InfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="TreeType" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Tree" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Acreage" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__FarmerInf__InfoI__7EF6D905" FromRole="FarmerInfo" ToRole="CInfoCommon" />
+    <NavigationProperty Name="HaiStaff" Relationship="Self.FK__FarmerInf__Staff__2EC5E7B8" FromRole="FarmerInfo" ToRole="HaiStaff" />
+  </EntityType>
+  <EntityType Name="FuncGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Number" Type="Int32" />
+    <NavigationProperty Name="FuncInfoes" Relationship="Self.FK__FuncInfo__GroupI__6E565CE8" FromRole="FuncGroup" ToRole="FuncInfo" />
+  </EntityType>
+  <EntityType Name="FuncInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Position" Type="Int32" />
+    <Property Name="Number" Type="Int32" />
+    <Property Name="GroupId" Type="Int32" />
+    <Property Name="Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UrlInfo" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="IconInfo" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="FuncGroup" Relationship="Self.FK__FuncInfo__GroupI__6E565CE8" FromRole="FuncInfo" ToRole="FuncGroup" />
+    <NavigationProperty Name="FuncRoles" Relationship="Self.FK__FuncRole__FuncId__79C80F94" FromRole="FuncInfo" ToRole="FuncRole" />
+  </EntityType>
+  <EntityType Name="FuncRole">
+    <Key>
+      <PropertyRef Name="FuncId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="FuncId" Type="Int32" Nullable="false" />
+    <Property Name="RoleId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsAll" Type="Int32" />
+    <NavigationProperty Name="AspNetRole" Relationship="Self.FK__FuncRole__RoleId__7ABC33CD" FromRole="FuncRole" ToRole="AspNetRoles" />
+    <NavigationProperty Name="FuncInfo" Relationship="Self.FK__FuncRole__FuncId__79C80F94" FromRole="FuncRole" ToRole="FuncInfo" />
+  </EntityType>
+  <EntityType Name="HaiArea">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CInfoCommons" Relationship="Self.FK__CInfoComm__AreaI__52E34C9D" FromRole="HaiArea" ToRole="CInfoCommon" />
+    <NavigationProperty Name="EventAreas" Relationship="Self.FK__EventArea__AreaI__54968AE5" FromRole="HaiArea" ToRole="EventArea" />
+    <NavigationProperty Name="EventAreaFarmers" Relationship="Self.FK__EventArea__AreaI__39AD8A7F" FromRole="HaiArea" ToRole="EventAreaFarmer" />
+    <NavigationProperty Name="HaiBranches" Relationship="Self.FK__HaiBranch__AreaI__145C0A3F" FromRole="HaiArea" ToRole="HaiBranch" />
+  </EntityType>
+  <EntityType Name="HaiBranch">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="AddressInfo" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="AreaId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="C1Info" Relationship="Self.FK__C1Info__HaiBrand__72910220" FromRole="HaiBranch" ToRole="C1Info" />
+    <NavigationProperty Name="HaiArea" Relationship="Self.FK__HaiBranch__AreaI__145C0A3F" FromRole="HaiBranch" ToRole="HaiArea" />
+    <NavigationProperty Name="HaiStaffs" Relationship="Self.FK__HaiStaff__Branch__24927208" FromRole="HaiBranch" ToRole="HaiStaff" />
+  </EntityType>
+  <EntityType Name="HaiDepartment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiStaffs" Relationship="Self.FK__HaiStaff__Depart__25869641" FromRole="HaiDepartment" ToRole="HaiStaff" />
+  </EntityType>
+  <EntityType Name="HaiPosition">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiStaffs" Relationship="Self.FK__HaiStaff__Positi__239E4DCF" FromRole="HaiPosition" ToRole="HaiStaff" />
+  </EntityType>
+  <EntityType Name="HaiStaff">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="BirthDay" Type="DateTime" Precision="3" />
+    <Property Name="PlaceOfBirth" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PositionId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="BranchId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DepartmentId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IsLock" Type="Int32" />
+    <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="TimeLeave" Type="DateTime" Precision="3" />
+    <Property Name="UserLogin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="PositionName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="BranchName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="DepartmentName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="AvatarUrl" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="SignatureUrl" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="C1Info" Relationship="Self.FK__C1Info__StaffId__2DD1C37F" FromRole="HaiStaff" ToRole="C1Info" />
+    <NavigationProperty Name="C2Info" Relationship="Self.FK__C2Info__StaffId__2CDD9F46" FromRole="HaiStaff" ToRole="C2Info" />
+    <NavigationProperty Name="FarmerInfoes" Relationship="Self.FK__FarmerInf__Staff__2EC5E7B8" FromRole="HaiStaff" ToRole="FarmerInfo" />
+    <NavigationProperty Name="HaiBranch" Relationship="Self.FK__HaiStaff__Branch__24927208" FromRole="HaiStaff" ToRole="HaiBranch" />
+    <NavigationProperty Name="HaiDepartment" Relationship="Self.FK__HaiStaff__Depart__25869641" FromRole="HaiStaff" ToRole="HaiDepartment" />
+    <NavigationProperty Name="HaiPosition" Relationship="Self.FK__HaiStaff__Positi__239E4DCF" FromRole="HaiStaff" ToRole="HaiPosition" />
+    <NavigationProperty Name="StaffCheckIns" Relationship="Self.FK__StaffChec__Staff__47DBAE45" FromRole="HaiStaff" ToRole="StaffCheckIn" />
+    <NavigationProperty Name="C1Info1" Relationship="Self.StaffWithC1" FromRole="HaiStaff" ToRole="C1Info" />
+    <NavigationProperty Name="C2Info1" Relationship="Self.StaffWithC2" FromRole="HaiStaff" ToRole="C2Info" />
+  </EntityType>
+  <EntityType Name="HappyBirthday">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CInfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ImeiUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Imei" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+    <Property Name="IsUpdate" Type="Int32" />
+  </EntityType>
+  <EntityType Name="MessegeToHai">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Messenge" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="UserLogin" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="MsgType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="IsSeen" Type="Int32" />
+    <Property Name="UserSeen" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="MobileFunction">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Decribe" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ScreenType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Lvl" Type="Int32" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.MobileRole" FromRole="MobileFunction" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="MSGPoint">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CInfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserLogin" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="AcceptTime" Type="DateTime" Precision="3" />
+    <Property Name="Barcode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProductId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="MSGType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="MSGPoint" ToRole="CInfoCommon" />
+    <NavigationProperty Name="ProductInfo" Relationship="Self.FK__MSGPoint__Produc__5708E33C" FromRole="MSGPoint" ToRole="ProductInfo" />
+    <NavigationProperty Name="MSGPointEvents" Relationship="Self.FK__MSGPointE__MSGPo__5CC1BC92" FromRole="MSGPoint" ToRole="MSGPointEvent" />
+  </EntityType>
+  <EntityType Name="MSGPointEvent">
+    <Key>
+      <PropertyRef Name="EventId" />
+      <PropertyRef Name="MSGPointId" />
+    </Key>
+    <Property Name="EventId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="MSGPointId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Point" Type="Int32" />
+    <NavigationProperty Name="EventInfo" Relationship="Self.FK__MSGPointE__Event__5BCD9859" FromRole="MSGPointEvent" ToRole="EventInfo" />
+    <NavigationProperty Name="MSGPoint" Relationship="Self.FK__MSGPointE__MSGPo__5CC1BC92" FromRole="MSGPointEvent" ToRole="MSGPoint" />
+  </EntityType>
+  <EntityType Name="NotificationTopic">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Topic" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="TopicType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="PHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Barcode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PStatus" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserSend" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="WType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="WName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="WCode" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="CaseCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="BoxCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="ProductCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Decimal" Precision="5" Scale="2" />
+  </EntityType>
+  <EntityType Name="ProductInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="PCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Material" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Utility" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Unit" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Producer" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="PGroup" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="PMajor" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Acronym" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CardPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="BoxPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="IsLock" Type="Int32" />
+    <Property Name="Barcode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="QuantityBox" Type="Int32" />
+    <Property Name="IsBox" Type="Int32" />
+    <NavigationProperty Name="EventProducts" Relationship="Self.FK__EventProd__Produ__4EDDB18F" FromRole="ProductInfo" ToRole="EventProduct" />
+    <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__Produc__5708E33C" FromRole="ProductInfo" ToRole="MSGPoint" />
+    <NavigationProperty Name="ProductSeris" Relationship="Self.FK__ProductSe__Produ__10416098" FromRole="ProductInfo" ToRole="ProductSeri" />
+    <NavigationProperty Name="PTrackings" Relationship="Self.FK__PTracking__Produ__00FF1D08" FromRole="ProductInfo" ToRole="PTracking" />
+  </EntityType>
+  <EntityType Name="ProductSeri">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="BeginTime" Type="DateTime" Precision="3" />
+    <Property Name="ExpireTime" Type="DateTime" Precision="3" />
+    <Property Name="IsUse" Type="Int32" />
+    <Property Name="ProductId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Seri" Type="Int32" />
+    <Property Name="SeriType" Type="Int32" />
+    <Property Name="ModifyTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ProductInfo" Relationship="Self.FK__ProductSe__Produ__10416098" FromRole="ProductSeri" ToRole="ProductInfo" />
+  </EntityType>
+  <EntityType Name="Province">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PType" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Districts" Relationship="Self.FK__District__Provin__07C12930" FromRole="Province" ToRole="District" />
+  </EntityType>
+  <EntityType Name="PTracking">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PStatus" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="WCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="WName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="ImportTime" Type="DateTime" Precision="3" />
+    <Property Name="ExportTime" Type="DateTime" Precision="3" />
+    <Property Name="WType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProductId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CaseCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Decimal" Precision="5" Scale="2" />
+    <NavigationProperty Name="ProductInfo" Relationship="Self.FK__PTracking__Produ__00FF1D08" FromRole="PTracking" ToRole="ProductInfo" />
+  </EntityType>
+  <EntityType Name="RegFirebase">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserLogin" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="RegId" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="UserType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="RoleCheckImei">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="SendSmsHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Messenge" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="UserSend" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="StatusSend" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ServerInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="Content" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="SmsAccount">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AddressSend" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="PortSend" Type="Int32" />
+    <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Pass" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="BrandName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Method" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="SMSCode">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserLogin" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CStatus" Type="Int32" />
+    <Property Name="CreateAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="SMSHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="ContentSend" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContentReturn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="AgencyType" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Success" Type="Int32" />
+  </EntityType>
+  <EntityType Name="StaffCheckIn">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StaffUser" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="AcceptTime" Type="DateTime" Precision="3" />
+    <Property Name="ImageUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Longitude" Type="Double" />
+    <Property Name="Latitude" Type="Double" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="Agency" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="AgencyName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="AgencyAddress" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="AgencyType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="AgencyTypeName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiStaff" Relationship="Self.FK__StaffChec__Staff__47DBAE45" FromRole="StaffCheckIn" ToRole="HaiStaff" />
+  </EntityType>
+  <EntityType Name="TreeInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="TreeType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Acreage" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="STT" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="Ward">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="WType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Location" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Districtid" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CInfoCommons" Relationship="Self.FK__CInfoComm__WardI__634EBE90" FromRole="Ward" ToRole="CInfoCommon" />
+    <NavigationProperty Name="District" Relationship="Self.FK__Ward__Districtid__0C85DE4D" FromRole="Ward" ToRole="District" />
+  </EntityType>
+  <EntityType Name="Warehouse">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ScanImport" Type="Int32" />
+    <Property Name="ScanExport" Type="Int32" />
+    <Property Name="InputReceive" Type="Int32" />
+    <Property Name="WareReceive" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="IsScanBox" Type="Int32" />
+  </EntityType>
+  <Association Name="FK__AgencySav__CInfo__6497E884">
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="1" />
+    <End Role="AgencySavePoint" Type="Self.AgencySavePoint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CInfoCommon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AgencySavePoint">
+        <PropertyRef Name="CInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AgencySav__Event__63A3C44B">
+    <End Role="EventInfo" Type="Self.EventInfo" Multiplicity="1" />
+    <End Role="AgencySavePoint" Type="Self.AgencySavePoint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AgencySavePoint">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FuncRole__RoleId__7ABC33CD">
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="1" />
+    <End Role="FuncRole" Type="Self.FuncRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FuncRole">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="User_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__C1Info__HaiBrand__72910220">
+    <End Role="HaiBranch" Type="Self.HaiBranch" Multiplicity="0..1" />
+    <End Role="C1Info" Type="Self.C1Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiBranch">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="C1Info">
+        <PropertyRef Name="HaiBrandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__C1Info__InfoId__681373AD">
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="0..1" />
+    <End Role="C1Info" Type="Self.C1Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CInfoCommon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="C1Info">
+        <PropertyRef Name="InfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__C1Info__StaffId__2DD1C37F">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
+    <End Role="C1Info" Type="Self.C1Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="C1Info">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__C2Info__C1Id__73852659">
+    <End Role="C1Info" Type="Self.C1Info" Multiplicity="0..1" />
+    <End Role="C2Info" Type="Self.C2Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C1Info">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="C2Info">
+        <PropertyRef Name="C1Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__C2Info__InfoId__6CD828CA">
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="0..1" />
+    <End Role="C2Info" Type="Self.C2Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CInfoCommon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="C2Info">
+        <PropertyRef Name="InfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__C2Info__StaffId__2CDD9F46">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
+    <End Role="C2Info" Type="Self.C2Info" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="C2Info">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CInfoComm__AreaI__52E34C9D">
+    <End Role="HaiArea" Type="Self.HaiArea" Multiplicity="0..1" />
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiArea">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CInfoCommon">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CInfoComm__WardI__634EBE90">
+    <End Role="Ward" Type="Self.Ward" Multiplicity="0..1" />
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ward">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CInfoCommon">
+        <PropertyRef Name="WardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventCust__CInfo__1387E197">
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="1" />
+    <End Role="EventCustomer" Type="Self.EventCustomer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CInfoCommon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventCustomer">
+        <PropertyRef Name="CInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventCust__CInfo__3F6663D5">
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="1" />
+    <End Role="EventCustomerFarmer" Type="Self.EventCustomerFarmer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CInfoCommon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventCustomerFarmer">
+        <PropertyRef Name="CInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FarmerInf__InfoI__7EF6D905">
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="0..1" />
+    <End Role="FarmerInfo" Type="Self.FarmerInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CInfoCommon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FarmerInfo">
+        <PropertyRef Name="InfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MSGPoint__CInfoI__5614BF03">
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="1" />
+    <End Role="MSGPoint" Type="Self.MSGPoint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CInfoCommon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MSGPoint">
+        <PropertyRef Name="CInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__District__Provin__07C12930">
+    <End Role="Province" Type="Self.Province" Multiplicity="0..1" />
+    <End Role="District" Type="Self.District" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Province">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="District">
+        <PropertyRef Name="Provinceid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Ward__Districtid__0C85DE4D">
+    <End Role="District" Type="Self.District" Multiplicity="0..1" />
+    <End Role="Ward" Type="Self.Ward" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Ward">
+        <PropertyRef Name="Districtid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventArea__AreaI__54968AE5">
+    <End Role="HaiArea" Type="Self.HaiArea" Multiplicity="1" />
+    <End Role="EventArea" Type="Self.EventArea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiArea">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventArea">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventArea__Event__53A266AC">
+    <End Role="EventInfo" Type="Self.EventInfo" Multiplicity="1" />
+    <End Role="EventArea" Type="Self.EventArea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventArea">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventArea__AreaI__39AD8A7F">
+    <End Role="HaiArea" Type="Self.HaiArea" Multiplicity="1" />
+    <End Role="EventAreaFarmer" Type="Self.EventAreaFarmer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiArea">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventAreaFarmer">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventArea__Event__38B96646">
+    <End Role="EventInfo" Type="Self.EventInfo" Multiplicity="1" />
+    <End Role="EventAreaFarmer" Type="Self.EventAreaFarmer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventAreaFarmer">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventCust__Event__1293BD5E">
+    <End Role="EventInfo" Type="Self.EventInfo" Multiplicity="1" />
+    <End Role="EventCustomer" Type="Self.EventCustomer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventCustomer">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventCust__Event__3E723F9C">
+    <End Role="EventInfo" Type="Self.EventInfo" Multiplicity="1" />
+    <End Role="EventCustomerFarmer" Type="Self.EventCustomerFarmer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventCustomerFarmer">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventProd__Event__4DE98D56">
+    <End Role="EventInfo" Type="Self.EventInfo" Multiplicity="1" />
+    <End Role="EventProduct" Type="Self.EventProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventProduct">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MSGPointE__Event__5BCD9859">
+    <End Role="EventInfo" Type="Self.EventInfo" Multiplicity="1" />
+    <End Role="MSGPointEvent" Type="Self.MSGPointEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EventInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MSGPointEvent">
+        <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EventProd__Produ__4EDDB18F">
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="1" />
+    <End Role="EventProduct" Type="Self.EventProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventProduct">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FarmerInf__Staff__2EC5E7B8">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
+    <End Role="FarmerInfo" Type="Self.FarmerInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FarmerInfo">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FuncInfo__GroupI__6E565CE8">
+    <End Role="FuncGroup" Type="Self.FuncGroup" Multiplicity="0..1" />
+    <End Role="FuncInfo" Type="Self.FuncInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FuncGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FuncInfo">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FuncRole__FuncId__79C80F94">
+    <End Role="FuncInfo" Type="Self.FuncInfo" Multiplicity="1" />
+    <End Role="FuncRole" Type="Self.FuncRole" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FuncInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FuncRole">
+        <PropertyRef Name="FuncId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiBranch__AreaI__145C0A3F">
+    <End Role="HaiArea" Type="Self.HaiArea" Multiplicity="0..1" />
+    <End Role="HaiBranch" Type="Self.HaiBranch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiArea">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiBranch">
+        <PropertyRef Name="AreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiStaff__Branch__24927208">
+    <End Role="HaiBranch" Type="Self.HaiBranch" Multiplicity="0..1" />
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiBranch">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiStaff">
+        <PropertyRef Name="BranchId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiStaff__Depart__25869641">
+    <End Role="HaiDepartment" Type="Self.HaiDepartment" Multiplicity="0..1" />
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiDepartment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiStaff">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiStaff__Positi__239E4DCF">
+    <End Role="HaiPosition" Type="Self.HaiPosition" Multiplicity="0..1" />
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiPosition">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiStaff">
+        <PropertyRef Name="PositionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StaffChec__Staff__47DBAE45">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
+    <End Role="StaffCheckIn" Type="Self.StaffCheckIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaffCheckIn">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MSGPoint__Produc__5708E33C">
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
+    <End Role="MSGPoint" Type="Self.MSGPoint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MSGPoint">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MSGPointE__MSGPo__5CC1BC92">
+    <End Role="MSGPoint" Type="Self.MSGPoint" Multiplicity="1" />
+    <End Role="MSGPointEvent" Type="Self.MSGPointEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MSGPoint">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MSGPointEvent">
+        <PropertyRef Name="MSGPointId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductSe__Produ__10416098">
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
+    <End Role="ProductSeri" Type="Self.ProductSeri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductSeri">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PTracking__Produ__00FF1D08">
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
+    <End Role="PTracking" Type="Self.PTracking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PTracking">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+  </Association>
+  <Association Name="EventAward">
+    <End Role="AwardInfo" Type="Self.AwardInfo" Multiplicity="*" />
+    <End Role="EventInfo" Type="Self.EventInfo" Multiplicity="*" />
+  </Association>
+  <Association Name="MobileRole">
+    <End Role="MobileFunction" Type="Self.MobileFunction" Multiplicity="*" />
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+  </Association>
+  <Association Name="StaffWithC1">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="*" />
+    <End Role="C1Info" Type="Self.C1Info" Multiplicity="*" />
+  </Association>
+  <Association Name="StaffWithC2">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="*" />
+    <End Role="C2Info" Type="Self.C2Info" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="NDHDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AgencySavePoints" EntityType="Self.AgencySavePoint" />
+    <EntitySet Name="AllStatus" EntityType="Self.AllStatu" />
+    <EntitySet Name="APIAuthHistories" EntityType="Self.APIAuthHistory" />
+    <EntitySet Name="APIDetails" EntityType="Self.APIDetail" />
+    <EntitySet Name="APIHistories" EntityType="Self.APIHistory" />
+    <EntitySet Name="APILogoutHistories" EntityType="Self.APILogoutHistory" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+    <EntitySet Name="AwardInfoes" EntityType="Self.AwardInfo" />
+    <EntitySet Name="BarcodeHistories" EntityType="Self.BarcodeHistory" />
+    <EntitySet Name="BasicNotifications" EntityType="Self.BasicNotification" />
+    <EntitySet Name="C1Info" EntityType="Self.C1Info" />
+    <EntitySet Name="C2Info" EntityType="Self.C2Info" />
+    <EntitySet Name="CInfoCommons" EntityType="Self.CInfoCommon" />
+    <EntitySet Name="Districts" EntityType="Self.District" />
+    <EntitySet Name="ErrorInfoes" EntityType="Self.ErrorInfo" />
+    <EntitySet Name="EventAreas" EntityType="Self.EventArea" />
+    <EntitySet Name="EventAreaFarmers" EntityType="Self.EventAreaFarmer" />
+    <EntitySet Name="EventCustomers" EntityType="Self.EventCustomer" />
+    <EntitySet Name="EventCustomerFarmers" EntityType="Self.EventCustomerFarmer" />
+    <EntitySet Name="EventInfoes" EntityType="Self.EventInfo" />
+    <EntitySet Name="EventProducts" EntityType="Self.EventProduct" />
+    <EntitySet Name="FarmerInfoes" EntityType="Self.FarmerInfo" />
+    <EntitySet Name="FuncGroups" EntityType="Self.FuncGroup" />
+    <EntitySet Name="FuncInfoes" EntityType="Self.FuncInfo" />
+    <EntitySet Name="FuncRoles" EntityType="Self.FuncRole" />
+    <EntitySet Name="HaiAreas" EntityType="Self.HaiArea" />
+    <EntitySet Name="HaiBranches" EntityType="Self.HaiBranch" />
+    <EntitySet Name="HaiDepartments" EntityType="Self.HaiDepartment" />
+    <EntitySet Name="HaiPositions" EntityType="Self.HaiPosition" />
+    <EntitySet Name="HaiStaffs" EntityType="Self.HaiStaff" />
+    <EntitySet Name="HappyBirthdays" EntityType="Self.HappyBirthday" />
+    <EntitySet Name="ImeiUsers" EntityType="Self.ImeiUser" />
+    <EntitySet Name="MessegeToHais" EntityType="Self.MessegeToHai" />
+    <EntitySet Name="MobileFunctions" EntityType="Self.MobileFunction" />
+    <EntitySet Name="MSGPoints" EntityType="Self.MSGPoint" />
+    <EntitySet Name="MSGPointEvents" EntityType="Self.MSGPointEvent" />
+    <EntitySet Name="NotificationTopics" EntityType="Self.NotificationTopic" />
+    <EntitySet Name="PHistories" EntityType="Self.PHistory" />
+    <EntitySet Name="ProductInfoes" EntityType="Self.ProductInfo" />
+    <EntitySet Name="ProductSeris" EntityType="Self.ProductSeri" />
+    <EntitySet Name="Provinces" EntityType="Self.Province" />
+    <EntitySet Name="PTrackings" EntityType="Self.PTracking" />
+    <EntitySet Name="RegFirebases" EntityType="Self.RegFirebase" />
+    <EntitySet Name="RoleCheckImeis" EntityType="Self.RoleCheckImei" />
+    <EntitySet Name="SendSmsHistories" EntityType="Self.SendSmsHistory" />
+    <EntitySet Name="ServerInfoes" EntityType="Self.ServerInfo" />
+    <EntitySet Name="SmsAccounts" EntityType="Self.SmsAccount" />
+    <EntitySet Name="SMSCodes" EntityType="Self.SMSCode" />
+    <EntitySet Name="SMSHistories" EntityType="Self.SMSHistory" />
+    <EntitySet Name="StaffCheckIns" EntityType="Self.StaffCheckIn" />
+    <EntitySet Name="TreeInfoes" EntityType="Self.TreeInfo" />
+    <EntitySet Name="Wards" EntityType="Self.Ward" />
+    <EntitySet Name="Warehouses" EntityType="Self.Warehouse" />
+    <AssociationSet Name="FK__AgencySav__CInfo__6497E884" Association="Self.FK__AgencySav__CInfo__6497E884">
+      <End Role="CInfoCommon" EntitySet="CInfoCommons" />
+      <End Role="AgencySavePoint" EntitySet="AgencySavePoints" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AgencySav__Event__63A3C44B" Association="Self.FK__AgencySav__Event__63A3C44B">
+      <End Role="EventInfo" EntitySet="EventInfoes" />
+      <End Role="AgencySavePoint" EntitySet="AgencySavePoints" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FuncRole__RoleId__7ABC33CD" Association="Self.FK__FuncRole__RoleId__7ABC33CD">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="FuncRole" EntitySet="FuncRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK__C1Info__HaiBrand__72910220" Association="Self.FK__C1Info__HaiBrand__72910220">
+      <End Role="HaiBranch" EntitySet="HaiBranches" />
+      <End Role="C1Info" EntitySet="C1Info" />
+    </AssociationSet>
+    <AssociationSet Name="FK__C1Info__InfoId__681373AD" Association="Self.FK__C1Info__InfoId__681373AD">
+      <End Role="CInfoCommon" EntitySet="CInfoCommons" />
+      <End Role="C1Info" EntitySet="C1Info" />
+    </AssociationSet>
+    <AssociationSet Name="FK__C1Info__StaffId__2DD1C37F" Association="Self.FK__C1Info__StaffId__2DD1C37F">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="C1Info" EntitySet="C1Info" />
+    </AssociationSet>
+    <AssociationSet Name="FK__C2Info__C1Id__73852659" Association="Self.FK__C2Info__C1Id__73852659">
+      <End Role="C1Info" EntitySet="C1Info" />
+      <End Role="C2Info" EntitySet="C2Info" />
+    </AssociationSet>
+    <AssociationSet Name="FK__C2Info__InfoId__6CD828CA" Association="Self.FK__C2Info__InfoId__6CD828CA">
+      <End Role="CInfoCommon" EntitySet="CInfoCommons" />
+      <End Role="C2Info" EntitySet="C2Info" />
+    </AssociationSet>
+    <AssociationSet Name="FK__C2Info__StaffId__2CDD9F46" Association="Self.FK__C2Info__StaffId__2CDD9F46">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="C2Info" EntitySet="C2Info" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CInfoComm__AreaI__52E34C9D" Association="Self.FK__CInfoComm__AreaI__52E34C9D">
+      <End Role="HaiArea" EntitySet="HaiAreas" />
+      <End Role="CInfoCommon" EntitySet="CInfoCommons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CInfoComm__WardI__634EBE90" Association="Self.FK__CInfoComm__WardI__634EBE90">
+      <End Role="Ward" EntitySet="Wards" />
+      <End Role="CInfoCommon" EntitySet="CInfoCommons" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventCust__CInfo__1387E197" Association="Self.FK__EventCust__CInfo__1387E197">
+      <End Role="CInfoCommon" EntitySet="CInfoCommons" />
+      <End Role="EventCustomer" EntitySet="EventCustomers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventCust__CInfo__3F6663D5" Association="Self.FK__EventCust__CInfo__3F6663D5">
+      <End Role="CInfoCommon" EntitySet="CInfoCommons" />
+      <End Role="EventCustomerFarmer" EntitySet="EventCustomerFarmers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FarmerInf__InfoI__7EF6D905" Association="Self.FK__FarmerInf__InfoI__7EF6D905">
+      <End Role="CInfoCommon" EntitySet="CInfoCommons" />
+      <End Role="FarmerInfo" EntitySet="FarmerInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MSGPoint__CInfoI__5614BF03" Association="Self.FK__MSGPoint__CInfoI__5614BF03">
+      <End Role="CInfoCommon" EntitySet="CInfoCommons" />
+      <End Role="MSGPoint" EntitySet="MSGPoints" />
+    </AssociationSet>
+    <AssociationSet Name="FK__District__Provin__07C12930" Association="Self.FK__District__Provin__07C12930">
+      <End Role="Province" EntitySet="Provinces" />
+      <End Role="District" EntitySet="Districts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Ward__Districtid__0C85DE4D" Association="Self.FK__Ward__Districtid__0C85DE4D">
+      <End Role="District" EntitySet="Districts" />
+      <End Role="Ward" EntitySet="Wards" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventArea__AreaI__54968AE5" Association="Self.FK__EventArea__AreaI__54968AE5">
+      <End Role="HaiArea" EntitySet="HaiAreas" />
+      <End Role="EventArea" EntitySet="EventAreas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventArea__Event__53A266AC" Association="Self.FK__EventArea__Event__53A266AC">
+      <End Role="EventInfo" EntitySet="EventInfoes" />
+      <End Role="EventArea" EntitySet="EventAreas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventArea__AreaI__39AD8A7F" Association="Self.FK__EventArea__AreaI__39AD8A7F">
+      <End Role="HaiArea" EntitySet="HaiAreas" />
+      <End Role="EventAreaFarmer" EntitySet="EventAreaFarmers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventArea__Event__38B96646" Association="Self.FK__EventArea__Event__38B96646">
+      <End Role="EventInfo" EntitySet="EventInfoes" />
+      <End Role="EventAreaFarmer" EntitySet="EventAreaFarmers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventCust__Event__1293BD5E" Association="Self.FK__EventCust__Event__1293BD5E">
+      <End Role="EventInfo" EntitySet="EventInfoes" />
+      <End Role="EventCustomer" EntitySet="EventCustomers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventCust__Event__3E723F9C" Association="Self.FK__EventCust__Event__3E723F9C">
+      <End Role="EventInfo" EntitySet="EventInfoes" />
+      <End Role="EventCustomerFarmer" EntitySet="EventCustomerFarmers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventProd__Event__4DE98D56" Association="Self.FK__EventProd__Event__4DE98D56">
+      <End Role="EventInfo" EntitySet="EventInfoes" />
+      <End Role="EventProduct" EntitySet="EventProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MSGPointE__Event__5BCD9859" Association="Self.FK__MSGPointE__Event__5BCD9859">
+      <End Role="EventInfo" EntitySet="EventInfoes" />
+      <End Role="MSGPointEvent" EntitySet="MSGPointEvents" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EventProd__Produ__4EDDB18F" Association="Self.FK__EventProd__Produ__4EDDB18F">
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+      <End Role="EventProduct" EntitySet="EventProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FarmerInf__Staff__2EC5E7B8" Association="Self.FK__FarmerInf__Staff__2EC5E7B8">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="FarmerInfo" EntitySet="FarmerInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FuncInfo__GroupI__6E565CE8" Association="Self.FK__FuncInfo__GroupI__6E565CE8">
+      <End Role="FuncGroup" EntitySet="FuncGroups" />
+      <End Role="FuncInfo" EntitySet="FuncInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FuncRole__FuncId__79C80F94" Association="Self.FK__FuncRole__FuncId__79C80F94">
+      <End Role="FuncInfo" EntitySet="FuncInfoes" />
+      <End Role="FuncRole" EntitySet="FuncRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiBranch__AreaI__145C0A3F" Association="Self.FK__HaiBranch__AreaI__145C0A3F">
+      <End Role="HaiArea" EntitySet="HaiAreas" />
+      <End Role="HaiBranch" EntitySet="HaiBranches" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiStaff__Branch__24927208" Association="Self.FK__HaiStaff__Branch__24927208">
+      <End Role="HaiBranch" EntitySet="HaiBranches" />
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiStaff__Depart__25869641" Association="Self.FK__HaiStaff__Depart__25869641">
+      <End Role="HaiDepartment" EntitySet="HaiDepartments" />
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiStaff__Positi__239E4DCF" Association="Self.FK__HaiStaff__Positi__239E4DCF">
+      <End Role="HaiPosition" EntitySet="HaiPositions" />
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StaffChec__Staff__47DBAE45" Association="Self.FK__StaffChec__Staff__47DBAE45">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="StaffCheckIn" EntitySet="StaffCheckIns" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MSGPoint__Produc__5708E33C" Association="Self.FK__MSGPoint__Produc__5708E33C">
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+      <End Role="MSGPoint" EntitySet="MSGPoints" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MSGPointE__MSGPo__5CC1BC92" Association="Self.FK__MSGPointE__MSGPo__5CC1BC92">
+      <End Role="MSGPoint" EntitySet="MSGPoints" />
+      <End Role="MSGPointEvent" EntitySet="MSGPointEvents" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductSe__Produ__10416098" Association="Self.FK__ProductSe__Produ__10416098">
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+      <End Role="ProductSeri" EntitySet="ProductSeris" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PTracking__Produ__00FF1D08" Association="Self.FK__PTracking__Produ__00FF1D08">
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+      <End Role="PTracking" EntitySet="PTrackings" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="EventAward" Association="Self.EventAward">
+      <End Role="AwardInfo" EntitySet="AwardInfoes" />
+      <End Role="EventInfo" EntitySet="EventInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="MobileRole" Association="Self.MobileRole">
+      <End Role="MobileFunction" EntitySet="MobileFunctions" />
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+    </AssociationSet>
+    <AssociationSet Name="StaffWithC1" Association="Self.StaffWithC1">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="C1Info" EntitySet="C1Info" />
+    </AssociationSet>
+    <AssociationSet Name="StaffWithC2" Association="Self.StaffWithC2">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="C2Info" EntitySet="C2Info" />
+    </AssociationSet>
+    <FunctionImport Name="report_event_agency" ReturnType="Collection(NDHDBModel.report_event_agency_Result)">
+      <Parameter Name="CType" Mode="In" Type="String" />
+      <Parameter Name="EventId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="report_remain_product" ReturnType="Collection(NDHDBModel.report_remain_product_Result)">
+      <Parameter Name="Product" Mode="In" Type="String" />
+      <Parameter Name="DFrom" Mode="In" Type="String" />
+      <Parameter Name="DTo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="report_remain_wcode" ReturnType="Collection(NDHDBModel.report_remain_wcode_Result)">
+      <Parameter Name="WCode" Mode="In" Type="String" />
+      <Parameter Name="DFrom" Mode="In" Type="String" />
+      <Parameter Name="DTo" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="report_event_agency_Result">
+    <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="CDeputy" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="CCode" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="AddressInfo" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="IdentityCard" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="ProvinceName" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="DistrictName" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="BranchCode" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="quantity" Nullable="true" />
+    <Property Type="Int32" Name="Point" Nullable="true" />
+    <Property Type="Int32" Name="AllPoint" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="report_remain_product_Result">
+    <Property Type="String" Name="WCode" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="WType" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="WName" Nullable="true" MaxLength="512" />
+    <Property Type="Decimal" Name="countNK" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="countXK" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="ProductCode" Nullable="true" MaxLength="32" />
+  </ComplexType>
+  <ComplexType Name="report_remain_wcode_Result">
+    <Property Type="Decimal" Name="countNK" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="countXK" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="ProductCode" Nullable="true" MaxLength="32" />
+  </ComplexType>
+</Schema>

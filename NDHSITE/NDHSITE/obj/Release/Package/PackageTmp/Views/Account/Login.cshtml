@@ -1,0 +1,137 @@
+﻿@model NDHSITE.Models.LoginViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+<head>
+    <title>Login &middot; MVP Ready</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic,800,800italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:400,300,700">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- Font awesome CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- App CSS -->
+    <link rel="stylesheet" href="~/content/css/mvpready-admin.css">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="account-bg">
+
+    <header class="navbar" role="banner">
+
+        <div class="container">
+
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">NÔNG DƯỢC HAI</span>
+                    <i class="fa fa-cog"></i>
+                </button>
+
+                <a href="#" class="navbar-brand navbar-brand-img">
+                    <img src="~/content/img/logo.png" alt="MVP Ready">
+                </a>
+            </div> <!-- /.navbar-header -->
+
+        </div> <!-- /.container -->
+
+    </header>
+
+
+    <br class="xs-80">
+
+    <div class="account-wrapper">
+
+        <div class="account-body">
+
+            <img src="~/content/img/logofull.png" alt="MVP Ready" class="img-response">
+
+
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form account-form", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.UserName, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-1">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+
+                            <div class="pull-right">
+                                <small><a href="#">Forgot Password?</a></small>
+                            </div>
+                        </div>
+                    </div>
+                    <p style="color:red;">@ViewBag.MSG</p>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="ĐĂNG NHẬP" class="btn btn-primary btn-block btn-lg" />
+                </div>
+                <div class="form-group">
+                    <a href="http://221.133.7.58:802/cskh_hai.apk"><img class="img-responsive img-thumbnail" src="~/content/img/market_logo.png" alt="Chania"></a>
+                </div>
+            }
+
+
+
+        </div> <!-- /.account-body -->
+
+
+    </div> <!-- /.account-wrapper -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Core JS -->
+    <!-- Core JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script src="~/scripts/js/jquery.slimscroll.min.js"></script>
+
+    <!-- App JS -->
+    <script src="~/scripts/js/mvpready-core.js"></script>
+    <script src="~/scripts/js/mvpready-helpers.js"></script>
+    <script src="~/scripts/js/mvpready-admin.js"></script>
+
+    <!-- Demo JS -->
+    <script src="~/scripts/js/mvpready-account.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+</body>
+</html>

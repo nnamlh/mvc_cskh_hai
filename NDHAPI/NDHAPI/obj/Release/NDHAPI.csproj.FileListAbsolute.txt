@@ -1,0 +1,254 @@
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\NDHAPI.dll.config
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\NDHAPI.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\NDHAPI.pdb
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Antlr3.Runtime.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\EntityFramework.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\EntityFramework.SqlServer.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.Owin.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Newtonsoft.Json.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Owin.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\System.Net.Http.Formatting.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\System.Web.Helpers.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\System.Web.Http.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\System.Web.Http.WebHost.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\System.Web.Mvc.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\System.Web.Optimization.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\System.Web.Razor.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\System.Web.WebPages.Deployment.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\System.Web.WebPages.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\System.Web.WebPages.Razor.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\WebGrease.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\System.Web.Helpers.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\System.Web.Mvc.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\System.Web.Optimization.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\System.Web.Razor.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\System.Web.WebPages.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\System.Web.WebPages.Deployment.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\System.Web.WebPages.Razor.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Newtonsoft.Json.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Antlr3.Runtime.pdb
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\System.Net.Http.Formatting.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\System.Web.Http.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\System.Web.Http.WebHost.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\EntityFramework.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\EntityFramework.SqlServer.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.Owin.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\obj\Release\NDHAPI.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\obj\Release\NDHAPI.pdb
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Dapper.dll
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\bin\Dapper.xml
+C:\Users\NAM\documents\visual studio 2013\Projects\NDHAPI\NDHAPI\obj\Release\NDHAPI.csprojResolveAssemblyReference.cache
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\NDHAPI.dll.config
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\NDHAPI.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\NDHAPI.pdb
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Antlr3.Runtime.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Dapper.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\EntityFramework.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\EntityFramework.SqlServer.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.Core.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.Owin.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Cookies.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Facebook.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Google.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.OAuth.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Twitter.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.Web.Infrastructure.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Newtonsoft.Json.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Owin.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\System.Net.Http.Formatting.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\System.Web.Helpers.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\System.Web.Http.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\System.Web.Http.WebHost.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\System.Web.Mvc.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\System.Web.Optimization.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\System.Web.Razor.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\System.Web.WebPages.Deployment.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\System.Web.WebPages.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\System.Web.WebPages.Razor.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\WebGrease.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Dapper.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\System.Web.Helpers.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\System.Web.Mvc.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\System.Web.Optimization.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\System.Web.Razor.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\System.Web.WebPages.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\System.Web.WebPages.Deployment.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\System.Web.WebPages.Razor.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Newtonsoft.Json.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Antlr3.Runtime.pdb
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\System.Net.Http.Formatting.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\System.Web.Http.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\System.Web.Http.WebHost.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\EntityFramework.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\EntityFramework.SqlServer.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.Core.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.Owin.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Facebook.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Cookies.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.OAuth.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Google.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Twitter.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\workplace\mvc\NDHAPI\NDHAPI\obj\Release\NDHAPI.csprojResolveAssemblyReference.cache
+D:\workplace\mvc\NDHAPI\NDHAPI\obj\Release\NDHAPI.dll
+D:\workplace\mvc\NDHAPI\NDHAPI\obj\Release\NDHAPI.pdb
+D:\mvc learn\NDHAPI\NDHAPI\bin\NDHAPI.dll.config
+D:\mvc learn\NDHAPI\NDHAPI\bin\NDHAPI.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\NDHAPI.pdb
+D:\mvc learn\NDHAPI\NDHAPI\bin\Antlr3.Runtime.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\Dapper.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\EntityFramework.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\EntityFramework.SqlServer.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.Core.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.Owin.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Cookies.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Facebook.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Google.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.OAuth.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Twitter.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.Web.Infrastructure.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\Newtonsoft.Json.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\Owin.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Net.Http.Formatting.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Web.Helpers.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Web.Http.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Web.Http.WebHost.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Web.Mvc.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Web.Optimization.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Web.Razor.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Web.WebPages.Deployment.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Web.WebPages.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Web.WebPages.Razor.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\WebGrease.dll
+D:\mvc learn\NDHAPI\NDHAPI\bin\Dapper.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Web.Helpers.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Web.Mvc.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Web.Optimization.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Web.Razor.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Web.WebPages.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Web.WebPages.Deployment.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Web.WebPages.Razor.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\Newtonsoft.Json.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\Antlr3.Runtime.pdb
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Net.Http.Formatting.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Web.Http.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Web.Http.WebHost.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\EntityFramework.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\EntityFramework.SqlServer.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.Core.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.Owin.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Facebook.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Cookies.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.OAuth.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Google.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Twitter.xml
+D:\mvc learn\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\mvc learn\NDHAPI\NDHAPI\obj\Release\NDHAPI.csprojResolveAssemblyReference.cache
+D:\mvc learn\NDHAPI\NDHAPI\obj\Release\NDHAPI.dll
+D:\mvc learn\NDHAPI\NDHAPI\obj\Release\NDHAPI.pdb
+D:\mvc learn\NDHAPI\NDHAPI\bin\System.Web.Extensions.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\NDHAPI.dll.config
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\NDHAPI.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\NDHAPI.pdb
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Antlr3.Runtime.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Dapper.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\EntityFramework.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\EntityFramework.SqlServer.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.Core.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.Owin.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Cookies.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Facebook.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Google.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.OAuth.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Twitter.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.Web.Infrastructure.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Newtonsoft.Json.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Owin.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Net.Http.Formatting.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Web.Extensions.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Web.Helpers.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Web.Http.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Web.Http.WebHost.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Web.Mvc.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Web.Optimization.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Web.Razor.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Web.WebPages.Deployment.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Web.WebPages.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Web.WebPages.Razor.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\WebGrease.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Dapper.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Web.Helpers.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Web.Mvc.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Web.Optimization.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Web.Razor.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Web.WebPages.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Web.WebPages.Deployment.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Web.WebPages.Razor.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Newtonsoft.Json.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Antlr3.Runtime.pdb
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Net.Http.Formatting.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Web.Http.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\System.Web.Http.WebHost.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\EntityFramework.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\EntityFramework.SqlServer.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.Core.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.Owin.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Facebook.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Cookies.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.OAuth.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Google.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.Twitter.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\work\web mvc\project\NDHAPI\NDHAPI\obj\Release\NDHAPI.csprojResolveAssemblyReference.cache
+D:\work\web mvc\project\NDHAPI\NDHAPI\obj\Release\NDHAPI.dll
+D:\work\web mvc\project\NDHAPI\NDHAPI\obj\Release\NDHAPI.pdb

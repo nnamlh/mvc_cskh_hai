@@ -1,0 +1,89 @@
+﻿@model PagedList.IPagedList<NDHSITE.Models.HaiBranch>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Danh sách chi nhánh";
+}
+
+<div class="portlet portlet-boxed">
+    <div class="portlet-header">
+        <h4 class="portlet-title">
+            Danh sách chi nhánh
+        </h4>
+    </div> <!-- /.portlet-header -->
+    <div class="portlet-body">
+
+        <form method="get">
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <select class="form-control selectpicker" name="areaId" data-live-search="true">
+                            @if (ViewBag.AreaId == -1)
+                            {
+                                 <option value="-1" selected>--Tất cả--</option>
+                            }
+                            else
+                            {
+                                <option value="-1" >--Tất cả--</option>
+                            }
+                            @foreach (var item in ViewBag.AllArea)
+                            {
+ 
+                                if (item.Id == ViewBag.AreaId)
+                                {
+                                    <option data-tokens="@item.Name" value="@item.Id" selected>@item.Name</option>
+                                }
+                                else
+                                {
+                                    <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tìm theo tên hoặc mã chi nhánh</label>
+                        <input type="text" name="search" value="@ViewBag.SearchText" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <button type="submit" class="btn btn-primary">Xem chi nhánh</button>
+                </div>
+
+            </div>
+            
+        </form>
+        <fieldset>
+            <table class="table table-striped table-bordered thumbnail-table">
+
+                <thead>
+                    <tr>
+                        <th>Tên chi nhánh</th>
+                        <th>Thông tin</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td class="file-info valign-middle">
+                                <span><strong class="semibold">Mã chi nhánh:</strong> @item.Code</span> <br />
+                                <span><strong class="semibold">Khu vực:</strong> @item.HaiArea.Name</span> <br />
+                                <span><strong class="semibold">Số điện thoái:</strong> @item.Phone</span> <br />
+                                <span><strong class="semibold">Địa chỉ:</strong> @item.AddressInfo</span> <br />
+                                <span><strong class="semibold">Thông tin thêm:</strong> @item.Notes</span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <br />
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("showbranch",
+                                                         new { page, areaId = ViewBag.AreaId, search = ViewBag.SearchText }))
+        </fieldset>
+    </div>
+</div>
+

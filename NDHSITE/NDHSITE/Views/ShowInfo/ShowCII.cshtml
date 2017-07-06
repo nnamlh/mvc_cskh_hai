@@ -1,0 +1,114 @@
+﻿@model PagedList.IPagedList<NDHSITE.Models.C2Info>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Danh sách đại lý cấp 2";
+}
+
+<p>Xem danh sách <strong>đại lý cấp 1 : </strong> <a href="/showinfo/showci">xem</a> </p>
+<div class="portlet portlet-boxed">
+    <div class="portlet-header">
+        <h4 class="portlet-title">
+            Danh sách đại lý cấp 2
+        </h4>
+    </div> <!-- /.portlet-header -->
+    <div class="portlet-body">
+
+        <div class="row">
+            <form method="get">
+                <div class="col-sm-6">
+                    <input type="hidden" value="@ViewBag.SType" name="type" />
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" value="@ViewBag.SearchText" name="search" class="form-control" />
+                            <div class="input-group-btn">
+                                <button id="btnchoose" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@ViewBag.STypeName</button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="javascript:addtype(1, 'Mã đại lý')">Mã đại lý</a></li>
+                                    <li><a href="javascript:addtype(2, 'Số điện thoại')">Số điện thoại</a></li>
+                                    <li><a href="javascript:addtype(3 , 'Tên cửa hàng')">Tên cửa hàng</a></li>
+                                    <li><a href="javascript:addtype(4 , 'Mã cấp 1')">Mã cấp 1</a></li>
+                                </ul>
+                            </div><!-- /btn-group -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <button type="submit" class="btn btn-primary">Xem thông tin</button>
+                </div>
+
+            </form>
+        </div>
+
+
+
+        <fieldset>
+            <table class="table table-striped table-bordered thumbnail-table">
+                <thead>
+                    <tr>
+                        <th>Tên cửa hàng</th>
+                        <th>Người đại diện</th>
+                        <th>Thông tin cá nhân</th>
+                        <th>Thông tin liên hệ</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.StoreName</td>
+                            <td>@item.Deputy</td>
+                            <td>
+                                <span><strong class="semibold">Mã cấp 2:</strong> @item.CInfoCommon.CCode</span> <br />
+                                <span><strong class="semibold">Khu vực:</strong> @item.CInfoCommon.HaiArea.Name</span> <br />
+                                <span><strong class="semibold">Chi nhánh:</strong> @item.CInfoCommon.BranchCode</span> <br />
+                                <span><strong class="semibold">Đại lý cấp 1:</strong> @item.C1Info.StoreName - @item.C1Info.Code</span> <br />
+                                <span><strong class="semibold">Tài khoản:</strong> @item.CInfoCommon.UserLogin</span><br />
+                                <span><strong class="semibold">CMND:</strong> @item.CInfoCommon.IdentityCard</span><br />
+                                <span><strong class="semibold">Mã số thuế:</strong> @item.CInfoCommon.TaxCode</span> <br />
+                                <span><strong class="semibold">Giấy phép kinh doanh:</strong> @item.CInfoCommon.BusinessLicense</span> <br />
+                                <span><strong class="semibold">Tình trạng:</strong> @item.CInfoCommon.Notes</span>
+                            </td>
+                            <td>
+                                <span><strong class="semibold">Số điện thoái:</strong> @item.CInfoCommon.Phone</span> <br />
+                                <span><strong class="semibold">Địa chỉ:</strong> @item.CInfoCommon.AddressInfo</span> <br />
+                                <span><strong class="semibold">Tỉnh thành:</strong> @item.CInfoCommon.ProvinceName</span> <br />
+                                <span><strong class="semibold">Quận/huyện:</strong> @item.CInfoCommon.DistrictName</span> <br />
+                                <span><strong class="semibold">Email:</strong> @item.CInfoCommon.Email</span> <br />
+                                <span><strong class="semibold">Tài khoản ngân hàng:</strong> @item.CInfoCommon.BankAccount</span> <br />
+                                <span><strong class="semibold">Chủ tài khoản:</strong> @item.CInfoCommon.BankAccountHolder</span> <br />
+                                <span><strong class="semibold">Tên ngân hàng:</strong> @item.CInfoCommon.BackName</span> <br />
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("showcii",
+                                                                     new { page, areaId = ViewBag.AreaId, search = ViewBag.SearchText, type = ViewBag.SType }))
+
+        </fieldset>
+
+    </div>
+
+</div>
+@section styles {
+
+    <!-- bootstrap select-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/css/bootstrap-select.min.css">
+}
+
+@section scripts {
+    <!-- bootstrap select js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript">
+
+        function addtype(id, name) {
+            console.log(name);
+            $('input[name=type]').val(id);
+            $('#btnchoose').html(name);
+        }
+    </script>
+}

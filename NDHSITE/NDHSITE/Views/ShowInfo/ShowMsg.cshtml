@@ -1,0 +1,125 @@
+﻿@model PagedList.IPagedList<NDHSITE.Models.MessegeToHai>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Tin nhắn tới HAI";
+}
+
+<div class="page-header">
+    <h3 class="page-title">Tin nhắn từ khách hàng</h3>
+
+    <ol class="breadcrumb">
+        <li><a href="/home">Trang chủ</a></li>
+        <li><a href="#">Tin nhắn từ khách hàng</a></li>
+    </ol>
+</div> <!-- /.page-header -->
+
+<div class="portlet portlet-boxed">
+    <div class="portlet-header">
+        <h4 class="portlet-title">
+            Danh sách khuyến mãi
+        </h4>
+    </div> <!-- /.portlet-header -->
+    <div class="portlet-body">
+        <form method="get">
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Từ ngày</label>
+                        <input type="text" class="form-control datetime" name="DateFrom" value="@ViewBag.DateFrom.ToString("dd/MM/yyyy")" />
+                    </div>
+                    <div class="form-group">
+                        <label>Đến ngày</label>
+                        <input type="text" class="form-control datetime" name="DateTo" value="@ViewBag.DateTo.ToString("dd/MM/yyyy")" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Xem thông tin</button>
+                </div>
+
+            </div>
+
+        </form>
+        <br />
+        <fieldset>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Tin nhắn</th>
+                        <th>Thời gian</th>
+                        <th>Loại tin nhắn</th>
+                        <th>Tình trạng</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr class="@(item.IsSeen == 1?"":"info")">
+                            <td><a href="/showinfo/userinfo?user=@item.UserLogin" target="_blank">@item.UserLogin</a></td>
+                            <td>
+                                @item.Messenge
+                            </td>
+                            <td>
+                                @item.CreateTime.Value.ToString("dd/MM/yyyy HH:mm")
+                            </td>
+                            <td>
+                                @if (item.MsgType == "sp")
+                                {
+                                    <p>Hổ trợ</p>
+                                }
+                                else
+                                {
+                                    <p>Sự cố</p>
+                                }
+                            </td>
+                            <td>
+                                @if (item.IsSeen == 1)
+                                {
+                                    <p>Đã xem</p>
+                                }
+                                else
+                                {
+                                    <a href="/showinfo/acceptmsg?id=@item.Id">Xác nhận</a>
+                                }
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("showmsg",new { page, DateFrom = ViewBag.DateFrom.ToString("dd/MM/yyyy"), DateTo = ViewBag.DateTo.ToString("dd/MM/yyyy") }))
+
+        </fieldset>
+
+
+    </div>
+</div>
+
+
+
+@section styles {
+    <link href="~/content/bootstrap-datetimepicker.min.css" rel="stylesheet">
+}
+
+
+
+
+@section scripts {
+    <!-- date bootstrap -->
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/scripts/moment-with-locales.min.js"></script>
+    <script src="~/scripts/bootstrap-datetimepicker.min.js"></script>
+
+    <script type="text/javascript">
+
+        $('.datetime').datetimepicker({
+            locale: 'vi',
+            format: 'DD/MM/YYYY',
+            defaultDate: new Date()
+        });
+
+    </script>
+}
+
+
