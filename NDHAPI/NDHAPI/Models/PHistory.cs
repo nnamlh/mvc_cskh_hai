@@ -22,9 +22,9 @@ namespace NDHAPI.Models
         public string WType { get; set; }
         public string WName { get; set; }
         public string WCode { get; set; }
+        public string CaseCode { get; set; }
         public string BoxCode { get; set; }
         public string ProductCode { get; set; }
-        public string CaseCode { get; set; }
         public Nullable<decimal> Quantity { get; set; }
     }
 }

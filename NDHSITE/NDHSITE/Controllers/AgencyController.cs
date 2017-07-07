@@ -556,74 +556,77 @@ namespace NDHSITE.Controllers
                     for (int i = 2; i <= totalRows; i++)
                     {
                         string code = Convert.ToString(sheet.Cells[i, 1].Value);
+                        var checkCI = db.C1Info.Where(p => p.Code == code).FirstOrDefault();
 
-                        string brandCode = Convert.ToString(sheet.Cells[i, 2].Value).Trim();
-
-                        var branchInfo = db.HaiBranches.Where(p => p.Code == brandCode).FirstOrDefault();
-
-                        if (branchInfo != null)
+                        if (checkCI == null)
                         {
-                            string storeName = Convert.ToString(sheet.Cells[i, 5].Value);
+                            string brandCode = Convert.ToString(sheet.Cells[i, 2].Value).Trim();
 
-                            string deputy = Convert.ToString(sheet.Cells[i, 3].Value);
+                            var branchInfo = db.HaiBranches.Where(p => p.Code == brandCode).FirstOrDefault();
 
-                            string position = Convert.ToString(sheet.Cells[i, 4].Value);
-
-                            string identityCard = Convert.ToString(sheet.Cells[i, 25].Value);
-
-                            string addressInfo = Convert.ToString(sheet.Cells[i, 6].Value);
-
-                            string phone = Convert.ToString(sheet.Cells[i, 9].Value);
-
-                            string fax = Convert.ToString(sheet.Cells[i, 21].Value);
-
-                            string email = Convert.ToString(sheet.Cells[i, 19].Value);
-
-                            string birth = Convert.ToString(sheet.Cells[i, 11].Value);
-
-                            string mobile = Convert.ToString(sheet.Cells[i, 15].Value);
-
-                            var cInfo = new CInfoCommon()
+                            if (branchInfo != null)
                             {
-                                Id = Guid.NewGuid().ToString(),
-                                CName = storeName,
-                                IdentityCard = identityCard,
-                                AddressInfo = addressInfo,
-                                Phone = phone,
-                                Fax = fax,
-                                Email = email,
-                                CreateTime = DateTime.Now,
-                                CType = "CI",
-                                AreaId = branchInfo.AreaId,
-                                WardId = "11111",
-                                BranchCode = brandCode,
-                                CCode = code,
-                                CDeputy = deputy
-                            };
+                                string storeName = Convert.ToString(sheet.Cells[i, 5].Value);
+
+                                string deputy = Convert.ToString(sheet.Cells[i, 3].Value);
+
+                                string position = Convert.ToString(sheet.Cells[i, 4].Value);
+
+                                string identityCard = Convert.ToString(sheet.Cells[i, 25].Value);
+
+                                string addressInfo = Convert.ToString(sheet.Cells[i, 6].Value);
+
+                                string phone = Convert.ToString(sheet.Cells[i, 9].Value);
+
+                                string fax = Convert.ToString(sheet.Cells[i, 21].Value);
+
+                                string email = Convert.ToString(sheet.Cells[i, 19].Value);
+
+                                string birth = Convert.ToString(sheet.Cells[i, 11].Value);
+
+                                string mobile = Convert.ToString(sheet.Cells[i, 15].Value);
+
+                                var cInfo = new CInfoCommon()
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    CName = storeName,
+                                    IdentityCard = identityCard,
+                                    AddressInfo = addressInfo,
+                                    Phone = phone,
+                                    Fax = fax,
+                                    Email = email,
+                                    CreateTime = DateTime.Now,
+                                    CType = "CI",
+                                    AreaId = branchInfo.AreaId,
+                                    WardId = "11111",
+                                    BranchCode = brandCode,
+                                    CCode = code,
+                                    CDeputy = deputy
+                                };
 
 
-                            var c1Info = new C1Info()
-                            {
-                                Id = Guid.NewGuid().ToString(),
-                                InfoId = cInfo.Id,
-                                HaiBrandId = branchInfo.Id,
-                                Code = code,
-                                IsLock = 0,
-                                IsActive = 1,
-                                Position = position,
-                                StoreName = storeName,
-                                Deputy = deputy
+                                var c1Info = new C1Info()
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    InfoId = cInfo.Id,
+                                    HaiBrandId = branchInfo.Id,
+                                    Code = code,
+                                    IsLock = 0,
+                                    IsActive = 1,
+                                    Position = position,
+                                    StoreName = storeName,
+                                    Deputy = deputy
 
-                            };
+                                };
 
-                            db.CInfoCommons.Add(cInfo);
-                            db.SaveChanges();
+                                db.CInfoCommons.Add(cInfo);
+                                db.SaveChanges();
 
 
-                            db.C1Info.Add(c1Info);
-                            db.SaveChanges();
+                                db.C1Info.Add(c1Info);
+                                db.SaveChanges();
+                            }
                         }
-
 
                     }
                 }

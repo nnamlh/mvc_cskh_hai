@@ -1,16 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="NDHDBModelStoreContainer" CdmEntityContainer="NDHDBEntities">
-    <EntitySetMapping Name="C__MigrationHistory">
-      <EntityTypeMapping TypeName="NDHDBModel.C__MigrationHistory">
-        <MappingFragment StoreEntitySet="__MigrationHistory">
-          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
-          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
-          <ScalarProperty Name="Model" ColumnName="Model" />
-          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="AgencySavePoints">
       <EntityTypeMapping TypeName="NDHDBModel.AgencySavePoint">
         <MappingFragment StoreEntitySet="AgencySavePoint">
@@ -83,10 +73,10 @@
     <EntitySetMapping Name="AspNetRoles">
       <EntityTypeMapping TypeName="NDHDBModel.AspNetRole">
         <MappingFragment StoreEntitySet="AspNetRoles">
-          <ScalarProperty Name="ShowInfoRole" ColumnName="ShowInfoRole" />
-          <ScalarProperty Name="GroupRole" ColumnName="GroupRole" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="GroupRole" ColumnName="GroupRole" />
+          <ScalarProperty Name="ShowInfoRole" ColumnName="ShowInfoRole" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -135,10 +125,35 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="BarcodeHistories">
+      <EntityTypeMapping TypeName="NDHDBModel.BarcodeHistory">
+        <MappingFragment StoreEntitySet="BarcodeHistory">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="CaseCode" ColumnName="CaseCode" />
+          <ScalarProperty Name="Messenge" ColumnName="Messenge" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="PStatus" ColumnName="PStatus" />
+          <ScalarProperty Name="WareHouse" ColumnName="WareHouse" />
+          <ScalarProperty Name="WareHouseType" ColumnName="WareHouseType" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="WareRelative" ColumnName="WareRelative" />
+          <ScalarProperty Name="WareRelativeType" ColumnName="WareRelativeType" />
+          <ScalarProperty Name="StaffHelp" ColumnName="StaffHelp" />
+          <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+          <ScalarProperty Name="LocationStaff" ColumnName="LocationStaff" />
+          <ScalarProperty Name="StaffHelpIssue" ColumnName="StaffHelpIssue" />
+          <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
+          <ScalarProperty Name="WareHouseName" ColumnName="WareHouseName" />
+          <ScalarProperty Name="WareRelativeName" ColumnName="WareRelativeName" />
+          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="BasicNotifications">
       <EntityTypeMapping TypeName="NDHDBModel.BasicNotification">
         <MappingFragment StoreEntitySet="BasicNotification">
-          <ScalarProperty Name="ImageAttach" ColumnName="ImageAttach" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Messenge" ColumnName="Messenge" />
@@ -147,21 +162,13 @@
           <ScalarProperty Name="UserSend" ColumnName="UserSend" />
           <ScalarProperty Name="UserAccept" ColumnName="UserAccept" />
           <ScalarProperty Name="MessengeResult" ColumnName="MessengeResult" />
+          <ScalarProperty Name="ImageAttach" ColumnName="ImageAttach" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="C1Info">
       <EntityTypeMapping TypeName="NDHDBModel.C1Info">
         <MappingFragment StoreEntitySet="C1Info">
-          <ScalarProperty Name="FoundingDate" ColumnName="FoundingDate" />
-          <ScalarProperty Name="WeddingDate" ColumnName="WeddingDate" />
-          <ScalarProperty Name="C1Position" ColumnName="C1Position" />
-          <ScalarProperty Name="Decision2Phone" ColumnName="Decision2Phone" />
-          <ScalarProperty Name="Decision2Birthday" ColumnName="Decision2Birthday" />
-          <ScalarProperty Name="Decison2" ColumnName="Decison2" />
-          <ScalarProperty Name="Decision1Phone" ColumnName="Decision1Phone" />
-          <ScalarProperty Name="Decision1Birthday" ColumnName="Decision1Birthday" />
-          <ScalarProperty Name="Decison1" ColumnName="Decison1" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="StoreName" ColumnName="StoreName" />
@@ -171,13 +178,21 @@
           <ScalarProperty Name="InfoId" ColumnName="InfoId" />
           <ScalarProperty Name="HaiBrandId" ColumnName="HaiBrandId" />
           <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="C1Position" ColumnName="C1Position" />
+          <ScalarProperty Name="WeddingDate" ColumnName="WeddingDate" />
+          <ScalarProperty Name="FoundingDate" ColumnName="FoundingDate" />
+          <ScalarProperty Name="Decison1" ColumnName="Decison1" />
+          <ScalarProperty Name="Decision1Birthday" ColumnName="Decision1Birthday" />
+          <ScalarProperty Name="Decision1Phone" ColumnName="Decision1Phone" />
+          <ScalarProperty Name="Decison2" ColumnName="Decison2" />
+          <ScalarProperty Name="Decision2Birthday" ColumnName="Decision2Birthday" />
+          <ScalarProperty Name="Decision2Phone" ColumnName="Decision2Phone" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="C2Info">
       <EntityTypeMapping TypeName="NDHDBModel.C2Info">
         <MappingFragment StoreEntitySet="C2Info">
-          <ScalarProperty Name="Decision" ColumnName="Decision" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="StoreName" ColumnName="StoreName" />
@@ -186,20 +201,13 @@
           <ScalarProperty Name="IsLock" ColumnName="IsLock" />
           <ScalarProperty Name="InfoId" ColumnName="InfoId" />
           <ScalarProperty Name="C1Id" ColumnName="C1Id" />
+          <ScalarProperty Name="Decision" ColumnName="Decision" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CInfoCommons">
       <EntityTypeMapping TypeName="NDHDBModel.CInfoCommon">
         <MappingFragment StoreEntitySet="CInfoCommon">
-          <ScalarProperty Name="Lng" ColumnName="Lng" />
-          <ScalarProperty Name="Lat" ColumnName="Lat" />
-          <ScalarProperty Name="BusinessLicense" ColumnName="BusinessLicense" />
-          <ScalarProperty Name="TaxCode" ColumnName="TaxCode" />
-          <ScalarProperty Name="CStatus" ColumnName="CStatus" />
-          <ScalarProperty Name="BackName" ColumnName="BackName" />
-          <ScalarProperty Name="BankAccountHolder" ColumnName="BankAccountHolder" />
-          <ScalarProperty Name="BankAccount" ColumnName="BankAccount" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CName" ColumnName="CName" />
           <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
@@ -223,6 +231,14 @@
           <ScalarProperty Name="CDeputy" ColumnName="CDeputy" />
           <ScalarProperty Name="Mobile" ColumnName="Mobile" />
           <ScalarProperty Name="IsClock" ColumnName="IsClock" />
+          <ScalarProperty Name="BankAccount" ColumnName="BankAccount" />
+          <ScalarProperty Name="BankAccountHolder" ColumnName="BankAccountHolder" />
+          <ScalarProperty Name="BackName" ColumnName="BackName" />
+          <ScalarProperty Name="CStatus" ColumnName="CStatus" />
+          <ScalarProperty Name="TaxCode" ColumnName="TaxCode" />
+          <ScalarProperty Name="BusinessLicense" ColumnName="BusinessLicense" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="Lng" ColumnName="Lng" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -234,6 +250,15 @@
           <ScalarProperty Name="DType" ColumnName="DType" />
           <ScalarProperty Name="Location" ColumnName="Location" />
           <ScalarProperty Name="Provinceid" ColumnName="Provinceid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ErrorInfoes">
+      <EntityTypeMapping TypeName="NDHDBModel.ErrorInfo">
+        <MappingFragment StoreEntitySet="ErrorInfo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -417,6 +442,29 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="HappyBirthdays">
+      <EntityTypeMapping TypeName="NDHDBModel.HappyBirthday">
+        <MappingFragment StoreEntitySet="HappyBirthday">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CInfoId" ColumnName="CInfoId" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ImeiUsers">
+      <EntityTypeMapping TypeName="NDHDBModel.ImeiUser">
+        <MappingFragment StoreEntitySet="ImeiUser">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Imei" ColumnName="Imei" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="IsUpdate" ColumnName="IsUpdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="MessegeToHais">
       <EntityTypeMapping TypeName="NDHDBModel.MessegeToHai">
         <MappingFragment StoreEntitySet="MessegeToHai">
@@ -433,11 +481,11 @@
     <EntitySetMapping Name="MobileFunctions">
       <EntityTypeMapping TypeName="NDHDBModel.MobileFunction">
         <MappingFragment StoreEntitySet="MobileFunction">
-          <ScalarProperty Name="Lvl" ColumnName="Lvl" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="Decribe" ColumnName="Decribe" />
           <ScalarProperty Name="ScreenType" ColumnName="ScreenType" />
+          <ScalarProperty Name="Lvl" ColumnName="Lvl" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -517,8 +565,6 @@
     <EntitySetMapping Name="ProductSeris">
       <EntityTypeMapping TypeName="NDHDBModel.ProductSeri">
         <MappingFragment StoreEntitySet="ProductSeri">
-          <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
-          <ScalarProperty Name="SeriType" ColumnName="SeriType" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
@@ -526,6 +572,8 @@
           <ScalarProperty Name="IsUse" ColumnName="IsUse" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="Seri" ColumnName="Seri" />
+          <ScalarProperty Name="SeriType" ColumnName="SeriType" />
+          <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -566,6 +614,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="RoleCheckImeis">
+      <EntityTypeMapping TypeName="NDHDBModel.RoleCheckImei">
+        <MappingFragment StoreEntitySet="RoleCheckImei">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="SendSmsHistories">
       <EntityTypeMapping TypeName="NDHDBModel.SendSmsHistory">
         <MappingFragment StoreEntitySet="SendSmsHistory">
@@ -575,6 +632,16 @@
           <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
           <ScalarProperty Name="UserSend" ColumnName="UserSend" />
           <ScalarProperty Name="StatusSend" ColumnName="StatusSend" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServerInfoes">
+      <EntityTypeMapping TypeName="NDHDBModel.ServerInfo">
+        <MappingFragment StoreEntitySet="ServerInfo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -588,6 +655,30 @@
           <ScalarProperty Name="Pass" ColumnName="Pass" />
           <ScalarProperty Name="BrandName" ColumnName="BrandName" />
           <ScalarProperty Name="Method" ColumnName="Method" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SMSCodes">
+      <EntityTypeMapping TypeName="NDHDBModel.SMSCode">
+        <MappingFragment StoreEntitySet="SMSCode">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="CStatus" ColumnName="CStatus" />
+          <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SMSHistories">
+      <EntityTypeMapping TypeName="NDHDBModel.SMSHistory">
+        <MappingFragment StoreEntitySet="SMSHistory">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="ContentSend" ColumnName="ContentSend" />
+          <ScalarProperty Name="ContentReturn" ColumnName="ContentReturn" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="AgencyType" ColumnName="AgencyType" />
+          <ScalarProperty Name="Success" ColumnName="Success" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -608,17 +699,6 @@
           <ScalarProperty Name="AgencyAddress" ColumnName="AgencyAddress" />
           <ScalarProperty Name="AgencyType" ColumnName="AgencyType" />
           <ScalarProperty Name="AgencyTypeName" ColumnName="AgencyTypeName" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="sysdiagrams">
-      <EntityTypeMapping TypeName="NDHDBModel.sysdiagram">
-        <MappingFragment StoreEntitySet="sysdiagrams">
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-          <ScalarProperty Name="version" ColumnName="version" />
-          <ScalarProperty Name="definition" ColumnName="definition" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -645,6 +725,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Warehouses">
+      <EntityTypeMapping TypeName="NDHDBModel.Warehouse">
+        <MappingFragment StoreEntitySet="Warehouse">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="ScanImport" ColumnName="ScanImport" />
+          <ScalarProperty Name="ScanExport" ColumnName="ScanExport" />
+          <ScalarProperty Name="InputReceive" ColumnName="InputReceive" />
+          <ScalarProperty Name="WareReceive" ColumnName="WareReceive" />
+          <ScalarProperty Name="IsScanBox" ColumnName="IsScanBox" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="AspNetUserRoles" TypeName="NDHDBModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
       <EndProperty Name="AspNetRoles">
         <ScalarProperty Name="Id" ColumnName="RoleId" />
@@ -667,6 +762,22 @@
       </EndProperty>
       <EndProperty Name="AspNetRoles">
         <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="StaffWithC1" TypeName="NDHDBModel.StaffWithC1" StoreEntitySet="StaffWithC1">
+      <EndProperty Name="HaiStaff">
+        <ScalarProperty Name="Id" ColumnName="StaffId" />
+      </EndProperty>
+      <EndProperty Name="C1Info">
+        <ScalarProperty Name="Id" ColumnName="C1Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="StaffWithC2" TypeName="NDHDBModel.StaffWithC2" StoreEntitySet="StaffWithC2">
+      <EndProperty Name="HaiStaff">
+        <ScalarProperty Name="Id" ColumnName="StaffId" />
+      </EndProperty>
+      <EndProperty Name="C2Info">
+        <ScalarProperty Name="Id" ColumnName="C2Id" />
       </EndProperty>
     </AssociationSetMapping>
     <FunctionImportMapping FunctionImportName="report_event_agency" FunctionName="NDHDBModel.Store.report_event_agency">
@@ -711,113 +822,5 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <EntitySetMapping Name="ImeiUsers">
-      <EntityTypeMapping TypeName="NDHDBModel.ImeiUser">
-        <MappingFragment StoreEntitySet="ImeiUser">
-          <ScalarProperty Name="IsUpdate" ColumnName="IsUpdate" />
-          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="Imei" ColumnName="Imei" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="RoleCheckImeis">
-      <EntityTypeMapping TypeName="NDHDBModel.RoleCheckImei">
-        <MappingFragment StoreEntitySet="RoleCheckImei">
-          <ScalarProperty Name="Notes" ColumnName="Notes" />
-          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="SMSHistories">
-      <EntityTypeMapping TypeName="NDHDBModel.SMSHistory">
-        <MappingFragment StoreEntitySet="SMSHistory">
-          <ScalarProperty Name="Success" ColumnName="Success" />
-          <ScalarProperty Name="AgencyType" ColumnName="AgencyType" />
-          <ScalarProperty Name="ContentReturn" ColumnName="ContentReturn" />
-          <ScalarProperty Name="ContentSend" ColumnName="ContentSend" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ServerInfoes">
-      <EntityTypeMapping TypeName="NDHDBModel.ServerInfo">
-        <MappingFragment StoreEntitySet="ServerInfo">
-          <ScalarProperty Name="Content" ColumnName="Content" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="HappyBirthdays">
-      <EntityTypeMapping TypeName="NDHDBModel.HappyBirthday">
-        <MappingFragment StoreEntitySet="HappyBirthday">
-          <ScalarProperty Name="Content" ColumnName="Content" />
-          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
-          <ScalarProperty Name="CInfoId" ColumnName="CInfoId" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="BarcodeHistories">
-      <EntityTypeMapping TypeName="NDHDBModel.BarcodeHistory">
-        <MappingFragment StoreEntitySet="BarcodeHistory">
-          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-          <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
-          <ScalarProperty Name="WareRelativeName" ColumnName="WareRelativeName" />
-          <ScalarProperty Name="WareHouseName" ColumnName="WareHouseName" />
-          <ScalarProperty Name="IsSuccess" ColumnName="IsSuccess" />
-          <ScalarProperty Name="StaffHelpIssue" ColumnName="StaffHelpIssue" />
-          <ScalarProperty Name="LocationStaff" ColumnName="LocationStaff" />
-          <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
-          <ScalarProperty Name="StaffHelp" ColumnName="StaffHelp" />
-          <ScalarProperty Name="WareRelativeType" ColumnName="WareRelativeType" />
-          <ScalarProperty Name="WareRelative" ColumnName="WareRelative" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="WareHouseType" ColumnName="WareHouseType" />
-          <ScalarProperty Name="WareHouse" ColumnName="WareHouse" />
-          <ScalarProperty Name="PStatus" ColumnName="PStatus" />
-          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-          <ScalarProperty Name="Messenge" ColumnName="Messenge" />
-          <ScalarProperty Name="CaseCode" ColumnName="CaseCode" />
-          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <AssociationSetMapping Name="StaffWithC1" TypeName="NDHDBModel.StaffWithC1" StoreEntitySet="StaffWithC1">
-      <EndProperty Name="C1Info">
-        <ScalarProperty Name="Id" ColumnName="C1Id" />
-      </EndProperty>
-      <EndProperty Name="HaiStaff">
-        <ScalarProperty Name="Id" ColumnName="StaffId" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <AssociationSetMapping Name="StaffWithC2" TypeName="NDHDBModel.StaffWithC2" StoreEntitySet="StaffWithC2">
-      <EndProperty Name="C2Info">
-        <ScalarProperty Name="Id" ColumnName="C2Id" />
-      </EndProperty>
-      <EndProperty Name="HaiStaff">
-        <ScalarProperty Name="Id" ColumnName="StaffId" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <EntitySetMapping Name="SMSCodes">
-      <EntityTypeMapping TypeName="NDHDBModel.SMSCode">
-        <MappingFragment StoreEntitySet="SMSCode">
-          <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
-          <ScalarProperty Name="CStatus" ColumnName="CStatus" />
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

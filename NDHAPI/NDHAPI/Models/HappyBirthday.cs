@@ -12,11 +12,11 @@ namespace NDHAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class C__MigrationHistory
+    public partial class HappyBirthday
     {
-        public string MigrationId { get; set; }
-        public string ContextKey { get; set; }
-        public byte[] Model { get; set; }
-        public string ProductVersion { get; set; }
+        public string Id { get; set; }
+        public string CInfoId { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
+        public string Content { get; set; }
     }
 }

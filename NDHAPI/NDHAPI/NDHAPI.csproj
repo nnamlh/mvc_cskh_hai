@@ -236,9 +236,6 @@
     <Compile Include="Models\CInfoCommon.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>NDHDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\District.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -289,6 +286,9 @@
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HaiStaff.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HappyBirthday.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -365,9 +365,6 @@
     </Compile>
     <Compile Include="Models\SMSRequest.cs" />
     <Compile Include="Models\StaffCheckIn.cs">
-      <DependentUpon>NDHDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TreeInfo.cs">

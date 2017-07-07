@@ -22,7 +22,7 @@ namespace NDHAPI.Models
             this.HaiBranches = new HashSet<HaiBranch>();
         }
     
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Notes { get; set; }
         public string Code { get; set; }

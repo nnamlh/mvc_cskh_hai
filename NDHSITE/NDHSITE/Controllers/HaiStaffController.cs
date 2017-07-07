@@ -48,6 +48,8 @@ namespace NDHSITE.Controllers
             ViewBag.DepartmentId = departmentId;
             ViewBag.PosId = posId;
 
+            ViewBag.MaxId = db.HaiStaffs.Max(p => p.Code); 
+
 
             switch (func)
             {
@@ -62,7 +64,7 @@ namespace NDHSITE.Controllers
                 case 4:
                     return View(db.HaiStaffs.Where(p => p.PositionId == posId && p.IsLock != 1).OrderByDescending(p => p.CreateDate).ToPagedList(pageNumber, pageSize));
                 case 5:
-                    return View(db.HaiStaffs.Where(p => p.FullName.Contains(search)).OrderByDescending(p => p.CreateDate).ToPagedList(pageNumber, pageSize));
+                    return View(db.HaiStaffs.Where(p => p.Code.Contains(search) || p.FullName.Contains(search)).OrderByDescending(p => p.CreateDate).ToPagedList(pageNumber, pageSize));
 
             }
 
@@ -100,7 +102,7 @@ namespace NDHSITE.Controllers
             });
             arr.Add(new FuncShow()
             {
-                Name = "Tìm theo tên",
+                Name = "Tìm theo tên hoặc mã",
                 Value = 5
             });
             return arr;

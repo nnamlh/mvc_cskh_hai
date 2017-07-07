@@ -16,12 +16,9 @@ namespace NDHSITE.Models
     {
         public HaiStaff()
         {
+            this.StaffCheckIns = new HashSet<StaffCheckIn>();
             this.C1Info = new HashSet<C1Info>();
             this.C2Info = new HashSet<C2Info>();
-            this.FarmerInfoes = new HashSet<FarmerInfo>();
-            this.StaffCheckIns = new HashSet<StaffCheckIn>();
-            this.C1Info1 = new HashSet<C1Info>();
-            this.C2Info1 = new HashSet<C2Info>();
         }
     
         public string Id { get; set; }
@@ -47,14 +44,11 @@ namespace NDHSITE.Models
         public string AvatarUrl { get; set; }
         public string SignatureUrl { get; set; }
     
-        public virtual ICollection<C1Info> C1Info { get; set; }
-        public virtual ICollection<C2Info> C2Info { get; set; }
-        public virtual ICollection<FarmerInfo> FarmerInfoes { get; set; }
         public virtual HaiBranch HaiBranch { get; set; }
         public virtual HaiDepartment HaiDepartment { get; set; }
         public virtual HaiPosition HaiPosition { get; set; }
         public virtual ICollection<StaffCheckIn> StaffCheckIns { get; set; }
-        public virtual ICollection<C1Info> C1Info1 { get; set; }
-        public virtual ICollection<C2Info> C2Info1 { get; set; }
+        public virtual ICollection<C1Info> C1Info { get; set; }
+        public virtual ICollection<C2Info> C2Info { get; set; }
     }
 }

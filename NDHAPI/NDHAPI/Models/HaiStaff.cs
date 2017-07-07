@@ -30,9 +30,9 @@ namespace NDHAPI.Models
         public string Phone { get; set; }
         public string Email { get; set; }
         public string Code { get; set; }
-        public Nullable<int> PositionId { get; set; }
-        public Nullable<int> BranchId { get; set; }
-        public Nullable<int> DepartmentId { get; set; }
+        public string PositionId { get; set; }
+        public string BranchId { get; set; }
+        public string DepartmentId { get; set; }
         public Nullable<int> IsLock { get; set; }
         public string Notes { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }

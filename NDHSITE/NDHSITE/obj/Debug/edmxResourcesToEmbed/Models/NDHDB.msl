@@ -187,7 +187,6 @@
           <ScalarProperty Name="Decison2" ColumnName="Decison2" />
           <ScalarProperty Name="Decision2Birthday" ColumnName="Decision2Birthday" />
           <ScalarProperty Name="Decision2Phone" ColumnName="Decision2Phone" />
-          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -202,7 +201,6 @@
           <ScalarProperty Name="IsLock" ColumnName="IsLock" />
           <ScalarProperty Name="InfoId" ColumnName="InfoId" />
           <ScalarProperty Name="C1Id" ColumnName="C1Id" />
-          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
           <ScalarProperty Name="Decision" ColumnName="Decision" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -338,7 +336,6 @@
           <ScalarProperty Name="TreeType" ColumnName="TreeType" />
           <ScalarProperty Name="Tree" ColumnName="Tree" />
           <ScalarProperty Name="Acreage" ColumnName="Acreage" />
-          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

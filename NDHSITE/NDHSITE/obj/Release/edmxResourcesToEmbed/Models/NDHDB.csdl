@@ -1,15 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="NDHDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="C__MigrationHistory">
-    <Key>
-      <PropertyRef Name="MigrationId" />
-      <PropertyRef Name="ContextKey" />
-    </Key>
-    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
-  </EntityType>
   <EntityType Name="AgencySavePoint">
     <Key>
       <PropertyRef Name="EventId" />
@@ -82,11 +72,11 @@
     </Key>
     <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GroupRole" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ShowInfoRole" Type="Int32" />
     <NavigationProperty Name="FuncRoles" Relationship="Self.FK__FuncRole__RoleId__7ABC33CD" FromRole="AspNetRoles" ToRole="FuncRole" />
     <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
     <NavigationProperty Name="MobileFunctions" Relationship="Self.MobileRole" FromRole="AspNetRoles" ToRole="MobileFunction" />
-    <Property Name="GroupRole" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="ShowInfoRole" Type="Int32" />
   </EntityType>
   <EntityType Name="AspNetUserClaim">
     <Key>
@@ -137,6 +127,31 @@
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="EventInfoes" Relationship="Self.EventAward" FromRole="AwardInfo" ToRole="EventInfo" />
   </EntityType>
+  <EntityType Name="BarcodeHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Barcode" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CaseCode" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Messenge" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="PStatus" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="WareHouse" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="WareHouseType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="WareRelative" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="WareRelativeType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="StaffHelp" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="UserLogin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LocationStaff" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StaffHelpIssue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsSuccess" Type="Int32" />
+    <Property Name="WareHouseName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="WareRelativeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProductCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="BasicNotification">
     <Key>
       <PropertyRef Name="Id" />
@@ -162,21 +177,21 @@
     <Property Name="IsActive" Type="Int32" />
     <Property Name="IsLock" Type="Int32" />
     <Property Name="InfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="HaiBrandId" Type="Int32" />
+    <Property Name="HaiBrandId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Position" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="HaiBranch" Relationship="Self.FK__C1Info__HaiBrand__72910220" FromRole="C1Info" ToRole="HaiBranch" />
-    <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C1Info__InfoId__681373AD" FromRole="C1Info" ToRole="CInfoCommon" />
-    <NavigationProperty Name="C2Info" Relationship="Self.FK__C2Info__C1Id__73852659" FromRole="C1Info" ToRole="C2Info" />
+    <Property Name="C1Position" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="WeddingDate" Type="DateTime" Precision="3" />
+    <Property Name="FoundingDate" Type="DateTime" Precision="3" />
     <Property Name="Decison1" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="Decision1Birthday" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Decision1Phone" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="Decison2" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="Decision2Birthday" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Decision2Phone" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="C1Position" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="WeddingDate" Type="DateTime" Precision="3" />
-    <Property Name="FoundingDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="HaiStaffs" Relationship="NDHDBModel.StaffWithC1" FromRole="C1Info" ToRole="HaiStaff" />
+    <NavigationProperty Name="HaiBranch" Relationship="Self.FK__C1Info__HaiBrand__72910220" FromRole="C1Info" ToRole="HaiBranch" />
+    <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C1Info__InfoId__681373AD" FromRole="C1Info" ToRole="CInfoCommon" />
+    <NavigationProperty Name="C2Info" Relationship="Self.FK__C2Info__C1Id__73852659" FromRole="C1Info" ToRole="C2Info" />
+    <NavigationProperty Name="HaiStaffs" Relationship="Self.StaffWithC1" FromRole="C1Info" ToRole="HaiStaff" />
   </EntityType>
   <EntityType Name="C2Info">
     <Key>
@@ -190,10 +205,10 @@
     <Property Name="IsLock" Type="Int32" />
     <Property Name="InfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="C1Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Decision" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="C1Info" Relationship="Self.FK__C2Info__C1Id__73852659" FromRole="C2Info" ToRole="C1Info" />
     <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C2Info__InfoId__6CD828CA" FromRole="C2Info" ToRole="CInfoCommon" />
-    <Property Name="Decision" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="HaiStaffs" Relationship="NDHDBModel.StaffWithC2" FromRole="C2Info" ToRole="HaiStaff" />
+    <NavigationProperty Name="HaiStaffs" Relationship="Self.StaffWithC2" FromRole="C2Info" ToRole="HaiStaff" />
   </EntityType>
   <EntityType Name="CInfoCommon">
     <Key>
@@ -214,7 +229,7 @@
     <Property Name="CreateTime" Type="DateTime" Precision="3" />
     <Property Name="ModifyDate" Type="DateTime" Precision="3" />
     <Property Name="CType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="AreaId" Type="Int32" />
+    <Property Name="AreaId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="ProvinceName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="DistrictName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="BranchCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
@@ -222,6 +237,14 @@
     <Property Name="CDeputy" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="Mobile" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="IsClock" Type="Int32" />
+    <Property Name="BankAccount" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="BankAccountHolder" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="BackName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CStatus" Type="Int32" />
+    <Property Name="TaxCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="BusinessLicense" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Lat" Type="Double" />
+    <Property Name="Lng" Type="Double" />
     <NavigationProperty Name="AgencySavePoints" Relationship="Self.FK__AgencySav__CInfo__6497E884" FromRole="CInfoCommon" ToRole="AgencySavePoint" />
     <NavigationProperty Name="C1Info" Relationship="Self.FK__C1Info__InfoId__681373AD" FromRole="CInfoCommon" ToRole="C1Info" />
     <NavigationProperty Name="C2Info" Relationship="Self.FK__C2Info__InfoId__6CD828CA" FromRole="CInfoCommon" ToRole="C2Info" />
@@ -231,14 +254,6 @@
     <NavigationProperty Name="EventCustomerFarmers" Relationship="Self.FK__EventCust__CInfo__3F6663D5" FromRole="CInfoCommon" ToRole="EventCustomerFarmer" />
     <NavigationProperty Name="FarmerInfoes" Relationship="Self.FK__FarmerInf__InfoI__7EF6D905" FromRole="CInfoCommon" ToRole="FarmerInfo" />
     <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="CInfoCommon" ToRole="MSGPoint" />
-    <Property Name="BankAccount" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="BankAccountHolder" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="BackName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CStatus" Type="Int32" />
-    <Property Name="TaxCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="BusinessLicense" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="Lat" Type="Double" />
-    <Property Name="Lng" Type="Double" />
   </EntityType>
   <EntityType Name="District">
     <Key>
@@ -252,13 +267,21 @@
     <NavigationProperty Name="Province" Relationship="Self.FK__District__Provin__07C12930" FromRole="District" ToRole="Province" />
     <NavigationProperty Name="Wards" Relationship="Self.FK__Ward__Districtid__0C85DE4D" FromRole="District" ToRole="Ward" />
   </EntityType>
+  <EntityType Name="ErrorInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="EventArea">
     <Key>
       <PropertyRef Name="EventId" />
       <PropertyRef Name="AreaId" />
     </Key>
     <Property Name="EventId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="AreaId" Type="Int32" Nullable="false" />
+    <Property Name="AreaId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="AllAgency" Type="Int32" />
     <NavigationProperty Name="HaiArea" Relationship="Self.FK__EventArea__AreaI__54968AE5" FromRole="EventArea" ToRole="HaiArea" />
     <NavigationProperty Name="EventInfo" Relationship="Self.FK__EventArea__Event__53A266AC" FromRole="EventArea" ToRole="EventInfo" />
@@ -269,7 +292,7 @@
       <PropertyRef Name="AreaId" />
     </Key>
     <Property Name="EventId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="AreaId" Type="Int32" Nullable="false" />
+    <Property Name="AreaId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="AllAgency" Type="Int32" />
     <NavigationProperty Name="HaiArea" Relationship="Self.FK__EventArea__AreaI__39AD8A7F" FromRole="EventAreaFarmer" ToRole="HaiArea" />
     <NavigationProperty Name="EventInfo" Relationship="Self.FK__EventArea__Event__38B96646" FromRole="EventAreaFarmer" ToRole="EventInfo" />
@@ -385,7 +408,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Code" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
@@ -398,11 +421,11 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="AddressInfo" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="AreaId" Type="Int32" />
+    <Property Name="AreaId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="C1Info" Relationship="Self.FK__C1Info__HaiBrand__72910220" FromRole="HaiBranch" ToRole="C1Info" />
@@ -413,7 +436,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -423,7 +446,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -442,9 +465,9 @@
     <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="PositionId" Type="Int32" />
-    <Property Name="BranchId" Type="Int32" />
-    <Property Name="DepartmentId" Type="Int32" />
+    <Property Name="PositionId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="BranchId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DepartmentId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="IsLock" Type="Int32" />
     <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
@@ -459,8 +482,29 @@
     <NavigationProperty Name="HaiDepartment" Relationship="Self.FK__HaiStaff__Depart__25869641" FromRole="HaiStaff" ToRole="HaiDepartment" />
     <NavigationProperty Name="HaiPosition" Relationship="Self.FK__HaiStaff__Positi__239E4DCF" FromRole="HaiStaff" ToRole="HaiPosition" />
     <NavigationProperty Name="StaffCheckIns" Relationship="Self.FK__StaffChec__Staff__47DBAE45" FromRole="HaiStaff" ToRole="StaffCheckIn" />
-    <NavigationProperty Name="C1Info" Relationship="NDHDBModel.StaffWithC1" FromRole="HaiStaff" ToRole="C1Info" />
-    <NavigationProperty Name="C2Info" Relationship="NDHDBModel.StaffWithC2" FromRole="HaiStaff" ToRole="C2Info" />
+    <NavigationProperty Name="C1Info" Relationship="Self.StaffWithC1" FromRole="HaiStaff" ToRole="C1Info" />
+    <NavigationProperty Name="C2Info" Relationship="Self.StaffWithC2" FromRole="HaiStaff" ToRole="C2Info" />
+  </EntityType>
+  <EntityType Name="HappyBirthday">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CInfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ImeiUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Imei" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+    <Property Name="IsUpdate" Type="Int32" />
   </EntityType>
   <EntityType Name="MessegeToHai">
     <Key>
@@ -482,8 +526,8 @@
     <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Decribe" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="ScreenType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="AspNetRoles" Relationship="Self.MobileRole" FromRole="MobileFunction" ToRole="AspNetRoles" />
     <Property Name="Lvl" Type="Int32" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.MobileRole" FromRole="MobileFunction" ToRole="AspNetRoles" />
   </EntityType>
   <EntityType Name="MSGPoint">
     <Key>
@@ -560,7 +604,7 @@
     <Property Name="IsBox" Type="Int32" />
     <NavigationProperty Name="EventProducts" Relationship="Self.FK__EventProd__Produ__4EDDB18F" FromRole="ProductInfo" ToRole="EventProduct" />
     <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__Produc__5708E33C" FromRole="ProductInfo" ToRole="MSGPoint" />
-    <NavigationProperty Name="ProductSeris" Relationship="Self.FK__ProductSe__Produ__7869D707" FromRole="ProductInfo" ToRole="ProductSeri" />
+    <NavigationProperty Name="ProductSeris" Relationship="Self.FK__ProductSe__Produ__10416098" FromRole="ProductInfo" ToRole="ProductSeri" />
     <NavigationProperty Name="PTrackings" Relationship="Self.FK__PTracking__Produ__00FF1D08" FromRole="ProductInfo" ToRole="PTracking" />
   </EntityType>
   <EntityType Name="ProductSeri">
@@ -574,9 +618,9 @@
     <Property Name="IsUse" Type="Int32" />
     <Property Name="ProductId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Seri" Type="Int32" />
-    <NavigationProperty Name="ProductInfo" Relationship="Self.FK__ProductSe__Produ__7869D707" FromRole="ProductSeri" ToRole="ProductInfo" />
     <Property Name="SeriType" Type="Int32" />
     <Property Name="ModifyTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ProductInfo" Relationship="Self.FK__ProductSe__Produ__10416098" FromRole="ProductSeri" ToRole="ProductInfo" />
   </EntityType>
   <EntityType Name="Province">
     <Key>
@@ -614,6 +658,14 @@
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
     <Property Name="ModifyDate" Type="DateTime" Precision="3" />
   </EntityType>
+  <EntityType Name="RoleCheckImei">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="SendSmsHistory">
     <Key>
       <PropertyRef Name="Id" />
@@ -624,6 +676,15 @@
     <Property Name="CreateTime" Type="DateTime" Precision="3" />
     <Property Name="UserSend" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="StatusSend" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ServerInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+    <Property Name="Content" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="SmsAccount">
     <Key>
@@ -636,6 +697,28 @@
     <Property Name="Pass" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="BrandName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="Method" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="SMSCode">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserLogin" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CStatus" Type="Int32" />
+    <Property Name="CreateAt" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="SMSHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="ContentSend" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContentReturn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="AgencyType" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Success" Type="Int32" />
   </EntityType>
   <EntityType Name="StaffCheckIn">
     <Key>
@@ -656,16 +739,6 @@
     <Property Name="AgencyType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="AgencyTypeName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="HaiStaff" Relationship="Self.FK__StaffChec__Staff__47DBAE45" FromRole="StaffCheckIn" ToRole="HaiStaff" />
-  </EntityType>
-  <EntityType Name="sysdiagram">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="TreeInfo">
     <Key>
@@ -689,6 +762,20 @@
     <Property Name="Districtid" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="CInfoCommons" Relationship="Self.FK__CInfoComm__WardI__634EBE90" FromRole="Ward" ToRole="CInfoCommon" />
     <NavigationProperty Name="District" Relationship="Self.FK__Ward__Districtid__0C85DE4D" FromRole="Ward" ToRole="District" />
+  </EntityType>
+  <EntityType Name="Warehouse">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ScanImport" Type="Int32" />
+    <Property Name="ScanExport" Type="Int32" />
+    <Property Name="InputReceive" Type="Int32" />
+    <Property Name="WareReceive" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="IsScanBox" Type="Int32" />
   </EntityType>
   <Association Name="FK__AgencySav__CInfo__6497E884">
     <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="1" />
@@ -1114,7 +1201,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProductSe__Produ__7869D707">
+  <Association Name="FK__ProductSe__Produ__10416098">
     <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
     <End Role="ProductSeri" Type="Self.ProductSeri" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1150,8 +1237,15 @@
     <End Role="MobileFunction" Type="Self.MobileFunction" Multiplicity="*" />
     <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
   </Association>
+  <Association Name="StaffWithC1">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="*" />
+    <End Role="C1Info" Type="Self.C1Info" Multiplicity="*" />
+  </Association>
+  <Association Name="StaffWithC2">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="*" />
+    <End Role="C2Info" Type="Self.C2Info" Multiplicity="*" />
+  </Association>
   <EntityContainer Name="NDHDBEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
     <EntitySet Name="AgencySavePoints" EntityType="Self.AgencySavePoint" />
     <EntitySet Name="AllStatus" EntityType="Self.AllStatu" />
     <EntitySet Name="APIAuthHistories" EntityType="Self.APIAuthHistory" />
@@ -1163,11 +1257,13 @@
     <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
     <EntitySet Name="AwardInfoes" EntityType="Self.AwardInfo" />
+    <EntitySet Name="BarcodeHistories" EntityType="Self.BarcodeHistory" />
     <EntitySet Name="BasicNotifications" EntityType="Self.BasicNotification" />
     <EntitySet Name="C1Info" EntityType="Self.C1Info" />
     <EntitySet Name="C2Info" EntityType="Self.C2Info" />
     <EntitySet Name="CInfoCommons" EntityType="Self.CInfoCommon" />
     <EntitySet Name="Districts" EntityType="Self.District" />
+    <EntitySet Name="ErrorInfoes" EntityType="Self.ErrorInfo" />
     <EntitySet Name="EventAreas" EntityType="Self.EventArea" />
     <EntitySet Name="EventAreaFarmers" EntityType="Self.EventAreaFarmer" />
     <EntitySet Name="EventCustomers" EntityType="Self.EventCustomer" />
@@ -1183,6 +1279,8 @@
     <EntitySet Name="HaiDepartments" EntityType="Self.HaiDepartment" />
     <EntitySet Name="HaiPositions" EntityType="Self.HaiPosition" />
     <EntitySet Name="HaiStaffs" EntityType="Self.HaiStaff" />
+    <EntitySet Name="HappyBirthdays" EntityType="Self.HappyBirthday" />
+    <EntitySet Name="ImeiUsers" EntityType="Self.ImeiUser" />
     <EntitySet Name="MessegeToHais" EntityType="Self.MessegeToHai" />
     <EntitySet Name="MobileFunctions" EntityType="Self.MobileFunction" />
     <EntitySet Name="MSGPoints" EntityType="Self.MSGPoint" />
@@ -1194,12 +1292,16 @@
     <EntitySet Name="Provinces" EntityType="Self.Province" />
     <EntitySet Name="PTrackings" EntityType="Self.PTracking" />
     <EntitySet Name="RegFirebases" EntityType="Self.RegFirebase" />
+    <EntitySet Name="RoleCheckImeis" EntityType="Self.RoleCheckImei" />
     <EntitySet Name="SendSmsHistories" EntityType="Self.SendSmsHistory" />
+    <EntitySet Name="ServerInfoes" EntityType="Self.ServerInfo" />
     <EntitySet Name="SmsAccounts" EntityType="Self.SmsAccount" />
+    <EntitySet Name="SMSCodes" EntityType="Self.SMSCode" />
+    <EntitySet Name="SMSHistories" EntityType="Self.SMSHistory" />
     <EntitySet Name="StaffCheckIns" EntityType="Self.StaffCheckIn" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="TreeInfoes" EntityType="Self.TreeInfo" />
     <EntitySet Name="Wards" EntityType="Self.Ward" />
+    <EntitySet Name="Warehouses" EntityType="Self.Warehouse" />
     <AssociationSet Name="FK__AgencySav__CInfo__6497E884" Association="Self.FK__AgencySav__CInfo__6497E884">
       <End Role="CInfoCommon" EntitySet="CInfoCommons" />
       <End Role="AgencySavePoint" EntitySet="AgencySavePoints" />
@@ -1340,7 +1442,7 @@
       <End Role="MSGPoint" EntitySet="MSGPoints" />
       <End Role="MSGPointEvent" EntitySet="MSGPointEvents" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProductSe__Produ__7869D707" Association="Self.FK__ProductSe__Produ__7869D707">
+    <AssociationSet Name="FK__ProductSe__Produ__10416098" Association="Self.FK__ProductSe__Produ__10416098">
       <End Role="ProductInfo" EntitySet="ProductInfoes" />
       <End Role="ProductSeri" EntitySet="ProductSeris" />
     </AssociationSet>
@@ -1360,6 +1462,14 @@
       <End Role="MobileFunction" EntitySet="MobileFunctions" />
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />
     </AssociationSet>
+    <AssociationSet Name="StaffWithC1" Association="Self.StaffWithC1">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="C1Info" EntitySet="C1Info" />
+    </AssociationSet>
+    <AssociationSet Name="StaffWithC2" Association="Self.StaffWithC2">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="C2Info" EntitySet="C2Info" />
+    </AssociationSet>
     <FunctionImport Name="report_event_agency" ReturnType="Collection(NDHDBModel.report_event_agency_Result)">
       <Parameter Name="CType" Mode="In" Type="String" />
       <Parameter Name="EventId" Mode="In" Type="String" />
@@ -1374,21 +1484,6 @@
       <Parameter Name="DFrom" Mode="In" Type="String" />
       <Parameter Name="DTo" Mode="In" Type="String" />
     </FunctionImport>
-    <EntitySet Name="ImeiUsers" EntityType="NDHDBModel.ImeiUser" />
-    <EntitySet Name="RoleCheckImeis" EntityType="NDHDBModel.RoleCheckImei" />
-    <EntitySet Name="SMSHistories" EntityType="NDHDBModel.SMSHistory" />
-    <EntitySet Name="ServerInfoes" EntityType="NDHDBModel.ServerInfo" />
-    <EntitySet Name="HappyBirthdays" EntityType="NDHDBModel.HappyBirthday" />
-    <EntitySet Name="BarcodeHistories" EntityType="NDHDBModel.BarcodeHistory" />
-    <AssociationSet Name="StaffWithC1" Association="NDHDBModel.StaffWithC1">
-      <End Role="HaiStaff" EntitySet="HaiStaffs" />
-      <End Role="C1Info" EntitySet="C1Info" />
-    </AssociationSet>
-    <AssociationSet Name="StaffWithC2" Association="NDHDBModel.StaffWithC2">
-      <End Role="HaiStaff" EntitySet="HaiStaffs" />
-      <End Role="C2Info" EntitySet="C2Info" />
-    </AssociationSet>
-    <EntitySet Name="SMSCodes" EntityType="NDHDBModel.SMSCode" />
   </EntityContainer>
   <ComplexType Name="report_event_agency_Result">
     <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -1420,97 +1515,4 @@
     <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
     <Property Type="String" Name="ProductCode" Nullable="true" MaxLength="32" />
   </ComplexType>
-  <EntityType Name="ImeiUser">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="Imei" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="IsActive" Type="Int32" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
-    <Property Name="IsUpdate" Type="Int32" />
-  </EntityType>
-  <EntityType Name="RoleCheckImei">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="Notes" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="SMSHistory">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CreateTime" Type="DateTime" Precision="3" />
-    <Property Name="PhoneNumber" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-    <Property Name="ContentSend" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ContentReturn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="AgencyType" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="Success" Type="Int32" />
-  </EntityType>
-  <EntityType Name="ServerInfo">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="Code" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
-    <Property Name="Content" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="HappyBirthday">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CInfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="BarcodeHistory">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Barcode" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="CaseCode" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="Messenge" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CreateTime" Type="DateTime" Precision="3" />
-    <Property Name="PStatus" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="WareHouse" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="WareHouseType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="Quantity" Type="Decimal" Precision="5" Scale="2" />
-    <Property Name="WareRelative" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="WareRelativeType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="StaffHelp" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="UserLogin" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="LocationStaff" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="StaffHelpIssue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="IsSuccess" Type="Int32" />
-    <Property Name="WareHouseName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="WareRelativeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ProductCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <Association Name="StaffWithC1">
-    <End Type="NDHDBModel.HaiStaff" Role="HaiStaff" Multiplicity="*" />
-    <End Type="NDHDBModel.C1Info" Role="C1Info" Multiplicity="*" />
-  </Association>
-  <Association Name="StaffWithC2">
-    <End Type="NDHDBModel.HaiStaff" Role="HaiStaff" Multiplicity="*" />
-    <End Type="NDHDBModel.C2Info" Role="C2Info" Multiplicity="*" />
-  </Association>
-  <EntityType Name="SMSCode">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="UserLogin" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CStatus" Type="Int32" />
-    <Property Name="CreateAt" Type="DateTime" Precision="3" />
-  </EntityType>
 </Schema>

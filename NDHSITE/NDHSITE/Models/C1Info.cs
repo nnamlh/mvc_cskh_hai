@@ -38,11 +38,9 @@ namespace NDHSITE.Models
         public string Decison2 { get; set; }
         public string Decision2Birthday { get; set; }
         public string Decision2Phone { get; set; }
-        public string StaffId { get; set; }
     
         public virtual HaiBranch HaiBranch { get; set; }
         public virtual CInfoCommon CInfoCommon { get; set; }
-        public virtual HaiStaff HaiStaff { get; set; }
         public virtual ICollection<C2Info> C2Info { get; set; }
         public virtual ICollection<HaiStaff> HaiStaffs { get; set; }
     }

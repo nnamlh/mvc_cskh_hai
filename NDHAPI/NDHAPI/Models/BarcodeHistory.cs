@@ -16,9 +16,9 @@ namespace NDHAPI.Models
     {
         public string Id { get; set; }
         public string Barcode { get; set; }
-        public Nullable<System.DateTime> CreateTime { get; set; }
         public string CaseCode { get; set; }
         public string Messenge { get; set; }
+        public Nullable<System.DateTime> CreateTime { get; set; }
         public string PStatus { get; set; }
         public string WareHouse { get; set; }
         public string WareHouseType { get; set; }

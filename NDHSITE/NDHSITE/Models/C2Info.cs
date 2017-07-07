@@ -27,12 +27,10 @@ namespace NDHSITE.Models
         public Nullable<int> IsLock { get; set; }
         public string InfoId { get; set; }
         public string C1Id { get; set; }
-        public string StaffId { get; set; }
         public string Decision { get; set; }
     
         public virtual C1Info C1Info { get; set; }
         public virtual CInfoCommon CInfoCommon { get; set; }
-        public virtual HaiStaff HaiStaff { get; set; }
         public virtual ICollection<HaiStaff> HaiStaffs { get; set; }
     }
 }

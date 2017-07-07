@@ -15,10 +15,10 @@ namespace NDHAPI.Models
     public partial class SMSHistory
     {
         public string Id { get; set; }
-        public Nullable<System.DateTime> CreateTime { get; set; }
         public string PhoneNumber { get; set; }
         public string ContentSend { get; set; }
         public string ContentReturn { get; set; }
+        public Nullable<System.DateTime> CreateTime { get; set; }
         public string AgencyType { get; set; }
         public Nullable<int> Success { get; set; }
     }

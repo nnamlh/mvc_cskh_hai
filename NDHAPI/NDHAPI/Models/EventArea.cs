@@ -15,7 +15,7 @@ namespace NDHAPI.Models
     public partial class EventArea
     {
         public string EventId { get; set; }
-        public int AreaId { get; set; }
+        public string AreaId { get; set; }
         public Nullable<int> AllAgency { get; set; }
     
         public virtual HaiArea HaiArea { get; set; }

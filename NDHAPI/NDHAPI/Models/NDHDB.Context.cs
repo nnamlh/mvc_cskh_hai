@@ -25,7 +25,6 @@ namespace NDHAPI.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<AgencySavePoint> AgencySavePoints { get; set; }
         public virtual DbSet<AllStatu> AllStatus { get; set; }
         public virtual DbSet<APIAuthHistory> APIAuthHistories { get; set; }
@@ -37,11 +36,13 @@ namespace NDHAPI.Models
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<AwardInfo> AwardInfoes { get; set; }
+        public virtual DbSet<BarcodeHistory> BarcodeHistories { get; set; }
         public virtual DbSet<BasicNotification> BasicNotifications { get; set; }
         public virtual DbSet<C1Info> C1Info { get; set; }
         public virtual DbSet<C2Info> C2Info { get; set; }
         public virtual DbSet<CInfoCommon> CInfoCommons { get; set; }
         public virtual DbSet<District> Districts { get; set; }
+        public virtual DbSet<ErrorInfo> ErrorInfoes { get; set; }
         public virtual DbSet<EventArea> EventAreas { get; set; }
         public virtual DbSet<EventAreaFarmer> EventAreaFarmers { get; set; }
         public virtual DbSet<EventCustomer> EventCustomers { get; set; }
@@ -57,6 +58,8 @@ namespace NDHAPI.Models
         public virtual DbSet<HaiDepartment> HaiDepartments { get; set; }
         public virtual DbSet<HaiPosition> HaiPositions { get; set; }
         public virtual DbSet<HaiStaff> HaiStaffs { get; set; }
+        public virtual DbSet<HappyBirthday> HappyBirthdays { get; set; }
+        public virtual DbSet<ImeiUser> ImeiUsers { get; set; }
         public virtual DbSet<MessegeToHai> MessegeToHais { get; set; }
         public virtual DbSet<MobileFunction> MobileFunctions { get; set; }
         public virtual DbSet<MSGPoint> MSGPoints { get; set; }
@@ -64,23 +67,19 @@ namespace NDHAPI.Models
         public virtual DbSet<NotificationTopic> NotificationTopics { get; set; }
         public virtual DbSet<PHistory> PHistories { get; set; }
         public virtual DbSet<ProductInfo> ProductInfoes { get; set; }
+        public virtual DbSet<ProductSeri> ProductSeris { get; set; }
         public virtual DbSet<Province> Provinces { get; set; }
         public virtual DbSet<PTracking> PTrackings { get; set; }
         public virtual DbSet<RegFirebase> RegFirebases { get; set; }
-        public virtual DbSet<StaffCheckIn> StaffCheckIns { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<TreeInfo> TreeInfoes { get; set; }
-        public virtual DbSet<Ward> Wards { get; set; }
-        public virtual DbSet<ProductSeri> ProductSeris { get; set; }
-        public virtual DbSet<SMSHistory> SMSHistories { get; set; }
-        public virtual DbSet<ImeiUser> ImeiUsers { get; set; }
         public virtual DbSet<RoleCheckImei> RoleCheckImeis { get; set; }
         public virtual DbSet<SendSmsHistory> SendSmsHistories { get; set; }
         public virtual DbSet<ServerInfo> ServerInfoes { get; set; }
         public virtual DbSet<SmsAccount> SmsAccounts { get; set; }
-        public virtual DbSet<BarcodeHistory> BarcodeHistories { get; set; }
-        public virtual DbSet<Warehouse> Warehouses { get; set; }
-        public virtual DbSet<ErrorInfo> ErrorInfoes { get; set; }
         public virtual DbSet<SMSCode> SMSCodes { get; set; }
+        public virtual DbSet<SMSHistory> SMSHistories { get; set; }
+        public virtual DbSet<StaffCheckIn> StaffCheckIns { get; set; }
+        public virtual DbSet<TreeInfo> TreeInfoes { get; set; }
+        public virtual DbSet<Ward> Wards { get; set; }
+        public virtual DbSet<Warehouse> Warehouses { get; set; }
     }
 }

@@ -27,7 +27,7 @@ namespace NDHAPI.Models
         public Nullable<int> IsActive { get; set; }
         public Nullable<int> IsLock { get; set; }
         public string InfoId { get; set; }
-        public Nullable<int> HaiBrandId { get; set; }
+        public string HaiBrandId { get; set; }
         public string Position { get; set; }
         public string C1Position { get; set; }
         public Nullable<System.DateTime> WeddingDate { get; set; }

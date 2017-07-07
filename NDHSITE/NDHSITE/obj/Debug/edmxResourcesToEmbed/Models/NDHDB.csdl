@@ -188,10 +188,8 @@
     <Property Name="Decison2" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="Decision2Birthday" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Decision2Phone" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="HaiBranch" Relationship="Self.FK__C1Info__HaiBrand__72910220" FromRole="C1Info" ToRole="HaiBranch" />
     <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C1Info__InfoId__681373AD" FromRole="C1Info" ToRole="CInfoCommon" />
-    <NavigationProperty Name="HaiStaff" Relationship="Self.FK__C1Info__StaffId__2DD1C37F" FromRole="C1Info" ToRole="HaiStaff" />
     <NavigationProperty Name="C2Info" Relationship="Self.FK__C2Info__C1Id__73852659" FromRole="C1Info" ToRole="C2Info" />
     <NavigationProperty Name="HaiStaffs" Relationship="Self.StaffWithC1" FromRole="C1Info" ToRole="HaiStaff" />
   </EntityType>
@@ -207,11 +205,9 @@
     <Property Name="IsLock" Type="Int32" />
     <Property Name="InfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="C1Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Decision" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="C1Info" Relationship="Self.FK__C2Info__C1Id__73852659" FromRole="C2Info" ToRole="C1Info" />
     <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C2Info__InfoId__6CD828CA" FromRole="C2Info" ToRole="CInfoCommon" />
-    <NavigationProperty Name="HaiStaff" Relationship="Self.FK__C2Info__StaffId__2CDD9F46" FromRole="C2Info" ToRole="HaiStaff" />
     <NavigationProperty Name="HaiStaffs" Relationship="Self.StaffWithC2" FromRole="C2Info" ToRole="HaiStaff" />
   </EntityType>
   <EntityType Name="CInfoCommon">
@@ -371,9 +367,7 @@
     <Property Name="TreeType" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="Tree" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="Acreage" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__FarmerInf__InfoI__7EF6D905" FromRole="FarmerInfo" ToRole="CInfoCommon" />
-    <NavigationProperty Name="HaiStaff" Relationship="Self.FK__FarmerInf__Staff__2EC5E7B8" FromRole="FarmerInfo" ToRole="HaiStaff" />
   </EntityType>
   <EntityType Name="FuncGroup">
     <Key>
@@ -484,15 +478,12 @@
     <Property Name="DepartmentName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="AvatarUrl" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="SignatureUrl" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="C1Info" Relationship="Self.FK__C1Info__StaffId__2DD1C37F" FromRole="HaiStaff" ToRole="C1Info" />
-    <NavigationProperty Name="C2Info" Relationship="Self.FK__C2Info__StaffId__2CDD9F46" FromRole="HaiStaff" ToRole="C2Info" />
-    <NavigationProperty Name="FarmerInfoes" Relationship="Self.FK__FarmerInf__Staff__2EC5E7B8" FromRole="HaiStaff" ToRole="FarmerInfo" />
     <NavigationProperty Name="HaiBranch" Relationship="Self.FK__HaiStaff__Branch__24927208" FromRole="HaiStaff" ToRole="HaiBranch" />
     <NavigationProperty Name="HaiDepartment" Relationship="Self.FK__HaiStaff__Depart__25869641" FromRole="HaiStaff" ToRole="HaiDepartment" />
     <NavigationProperty Name="HaiPosition" Relationship="Self.FK__HaiStaff__Positi__239E4DCF" FromRole="HaiStaff" ToRole="HaiPosition" />
     <NavigationProperty Name="StaffCheckIns" Relationship="Self.FK__StaffChec__Staff__47DBAE45" FromRole="HaiStaff" ToRole="StaffCheckIn" />
-    <NavigationProperty Name="C1Info1" Relationship="Self.StaffWithC1" FromRole="HaiStaff" ToRole="C1Info" />
-    <NavigationProperty Name="C2Info1" Relationship="Self.StaffWithC2" FromRole="HaiStaff" ToRole="C2Info" />
+    <NavigationProperty Name="C1Info" Relationship="Self.StaffWithC1" FromRole="HaiStaff" ToRole="C1Info" />
+    <NavigationProperty Name="C2Info" Relationship="Self.StaffWithC2" FromRole="HaiStaff" ToRole="C2Info" />
   </EntityType>
   <EntityType Name="HappyBirthday">
     <Key>
@@ -874,18 +865,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__C1Info__StaffId__2DD1C37F">
-    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
-    <End Role="C1Info" Type="Self.C1Info" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiStaff">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="C1Info">
-        <PropertyRef Name="StaffId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__C2Info__C1Id__73852659">
     <End Role="C1Info" Type="Self.C1Info" Multiplicity="0..1" />
     <End Role="C2Info" Type="Self.C2Info" Multiplicity="*" />
@@ -907,18 +886,6 @@
       </Principal>
       <Dependent Role="C2Info">
         <PropertyRef Name="InfoId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__C2Info__StaffId__2CDD9F46">
-    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
-    <End Role="C2Info" Type="Self.C2Info" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiStaff">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="C2Info">
-        <PropertyRef Name="StaffId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1123,18 +1090,6 @@
       </Principal>
       <Dependent Role="EventProduct">
         <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__FarmerInf__Staff__2EC5E7B8">
-    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
-    <End Role="FarmerInfo" Type="Self.FarmerInfo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiStaff">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="FarmerInfo">
-        <PropertyRef Name="StaffId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1375,20 +1330,12 @@
       <End Role="CInfoCommon" EntitySet="CInfoCommons" />
       <End Role="C1Info" EntitySet="C1Info" />
     </AssociationSet>
-    <AssociationSet Name="FK__C1Info__StaffId__2DD1C37F" Association="Self.FK__C1Info__StaffId__2DD1C37F">
-      <End Role="HaiStaff" EntitySet="HaiStaffs" />
-      <End Role="C1Info" EntitySet="C1Info" />
-    </AssociationSet>
     <AssociationSet Name="FK__C2Info__C1Id__73852659" Association="Self.FK__C2Info__C1Id__73852659">
       <End Role="C1Info" EntitySet="C1Info" />
       <End Role="C2Info" EntitySet="C2Info" />
     </AssociationSet>
     <AssociationSet Name="FK__C2Info__InfoId__6CD828CA" Association="Self.FK__C2Info__InfoId__6CD828CA">
       <End Role="CInfoCommon" EntitySet="CInfoCommons" />
-      <End Role="C2Info" EntitySet="C2Info" />
-    </AssociationSet>
-    <AssociationSet Name="FK__C2Info__StaffId__2CDD9F46" Association="Self.FK__C2Info__StaffId__2CDD9F46">
-      <End Role="HaiStaff" EntitySet="HaiStaffs" />
       <End Role="C2Info" EntitySet="C2Info" />
     </AssociationSet>
     <AssociationSet Name="FK__CInfoComm__AreaI__52E34C9D" Association="Self.FK__CInfoComm__AreaI__52E34C9D">
@@ -1458,10 +1405,6 @@
     <AssociationSet Name="FK__EventProd__Produ__4EDDB18F" Association="Self.FK__EventProd__Produ__4EDDB18F">
       <End Role="ProductInfo" EntitySet="ProductInfoes" />
       <End Role="EventProduct" EntitySet="EventProducts" />
-    </AssociationSet>
-    <AssociationSet Name="FK__FarmerInf__Staff__2EC5E7B8" Association="Self.FK__FarmerInf__Staff__2EC5E7B8">
-      <End Role="HaiStaff" EntitySet="HaiStaffs" />
-      <End Role="FarmerInfo" EntitySet="FarmerInfoes" />
     </AssociationSet>
     <AssociationSet Name="FK__FuncInfo__GroupI__6E565CE8" Association="Self.FK__FuncInfo__GroupI__6E565CE8">
       <End Role="FuncGroup" EntitySet="FuncGroups" />

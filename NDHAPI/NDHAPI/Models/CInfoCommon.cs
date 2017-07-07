@@ -40,7 +40,7 @@ namespace NDHAPI.Models
         public Nullable<System.DateTime> CreateTime { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public string CType { get; set; }
-        public Nullable<int> AreaId { get; set; }
+        public string AreaId { get; set; }
         public string ProvinceName { get; set; }
         public string DistrictName { get; set; }
         public string BranchCode { get; set; }

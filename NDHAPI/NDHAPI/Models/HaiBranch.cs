@@ -20,11 +20,11 @@ namespace NDHAPI.Models
             this.HaiStaffs = new HashSet<HaiStaff>();
         }
     
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
         public string AddressInfo { get; set; }
         public string Notes { get; set; }
-        public Nullable<int> AreaId { get; set; }
+        public string AreaId { get; set; }
         public string Phone { get; set; }
         public string Code { get; set; }
     

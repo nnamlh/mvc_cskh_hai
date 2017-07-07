@@ -23,9 +23,7 @@ namespace NDHSITE.Models
         public string TreeType { get; set; }
         public string Tree { get; set; }
         public string Acreage { get; set; }
-        public string StaffId { get; set; }
     
         public virtual CInfoCommon CInfoCommon { get; set; }
-        public virtual HaiStaff HaiStaff { get; set; }
     }
 }

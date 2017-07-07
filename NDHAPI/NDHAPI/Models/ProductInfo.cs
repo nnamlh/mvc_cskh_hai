@@ -18,8 +18,8 @@ namespace NDHAPI.Models
         {
             this.EventProducts = new HashSet<EventProduct>();
             this.MSGPoints = new HashSet<MSGPoint>();
-            this.PTrackings = new HashSet<PTracking>();
             this.ProductSeris = new HashSet<ProductSeri>();
+            this.PTrackings = new HashSet<PTracking>();
         }
     
         public string Id { get; set; }
@@ -41,7 +41,7 @@ namespace NDHAPI.Models
     
         public virtual ICollection<EventProduct> EventProducts { get; set; }
         public virtual ICollection<MSGPoint> MSGPoints { get; set; }
-        public virtual ICollection<PTracking> PTrackings { get; set; }
         public virtual ICollection<ProductSeri> ProductSeris { get; set; }
+        public virtual ICollection<PTracking> PTrackings { get; set; }
     }
 }

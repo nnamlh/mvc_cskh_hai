@@ -1,15 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="NDHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="__MigrationHistory">
-    <Key>
-      <PropertyRef Name="MigrationId" />
-      <PropertyRef Name="ContextKey" />
-    </Key>
-    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
-    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
-    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
-    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
-  </EntityType>
   <EntityType Name="AgencySavePoint">
     <Key>
       <PropertyRef Name="EventId" />
@@ -184,17 +174,17 @@
     <Property Name="IsActive" Type="int" />
     <Property Name="IsLock" Type="int" />
     <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
-    <Property Name="HaiBrandId" Type="int" />
+    <Property Name="HaiBrandId" Type="nvarchar" MaxLength="128" />
     <Property Name="Position" Type="nvarchar" MaxLength="256" />
+    <Property Name="C1Position" Type="nvarchar" MaxLength="512" />
+    <Property Name="WeddingDate" Type="datetime" />
+    <Property Name="FoundingDate" Type="datetime" />
     <Property Name="Decison1" Type="nvarchar" MaxLength="512" />
     <Property Name="Decision1Birthday" Type="nvarchar" MaxLength="128" />
     <Property Name="Decision1Phone" Type="nvarchar" MaxLength="32" />
     <Property Name="Decison2" Type="nvarchar" MaxLength="512" />
     <Property Name="Decision2Birthday" Type="nvarchar" MaxLength="128" />
     <Property Name="Decision2Phone" Type="nvarchar" MaxLength="32" />
-    <Property Name="C1Position" Type="nvarchar" MaxLength="512" />
-    <Property Name="WeddingDate" Type="datetime" />
-    <Property Name="FoundingDate" Type="datetime" />
   </EntityType>
   <EntityType Name="C2Info">
     <Key>
@@ -229,7 +219,7 @@
     <Property Name="CreateTime" Type="datetime" />
     <Property Name="ModifyDate" Type="datetime" />
     <Property Name="CType" Type="nvarchar" MaxLength="32" />
-    <Property Name="AreaId" Type="int" />
+    <Property Name="AreaId" Type="nvarchar" MaxLength="128" />
     <Property Name="ProvinceName" Type="nvarchar" MaxLength="256" />
     <Property Name="DistrictName" Type="nvarchar" MaxLength="256" />
     <Property Name="BranchCode" Type="nvarchar" MaxLength="128" />
@@ -256,13 +246,21 @@
     <Property Name="Location" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="Provinceid" Type="nvarchar" MaxLength="32" />
   </EntityType>
+  <EntityType Name="ErrorInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="32" />
+    <Property Name="Content" Type="nvarchar(max)" />
+  </EntityType>
   <EntityType Name="EventArea">
     <Key>
       <PropertyRef Name="EventId" />
       <PropertyRef Name="AreaId" />
     </Key>
     <Property Name="EventId" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="AreaId" Type="int" Nullable="false" />
+    <Property Name="AreaId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="AllAgency" Type="int" />
   </EntityType>
   <EntityType Name="EventAreaFarmer">
@@ -271,7 +269,7 @@
       <PropertyRef Name="AreaId" />
     </Key>
     <Property Name="EventId" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="AreaId" Type="int" Nullable="false" />
+    <Property Name="AreaId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="AllAgency" Type="int" />
   </EntityType>
   <EntityType Name="EventAward">
@@ -373,7 +371,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="255" />
     <Property Name="Notes" Type="nvarchar" MaxLength="255" />
     <Property Name="Code" Type="nvarchar" MaxLength="55" />
@@ -382,11 +380,11 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="255" />
     <Property Name="AddressInfo" Type="nvarchar" MaxLength="512" />
     <Property Name="Notes" Type="nvarchar" MaxLength="255" />
-    <Property Name="AreaId" Type="int" />
+    <Property Name="AreaId" Type="nvarchar" MaxLength="128" />
     <Property Name="Phone" Type="nvarchar" MaxLength="255" />
     <Property Name="Code" Type="nvarchar" MaxLength="20" />
   </EntityType>
@@ -394,7 +392,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="255" />
     <Property Name="Notes" Type="nvarchar" MaxLength="255" />
     <Property Name="Code" Type="nvarchar" MaxLength="20" />
@@ -403,7 +401,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="255" />
     <Property Name="Notes" Type="nvarchar" MaxLength="255" />
     <Property Name="Code" Type="nvarchar" MaxLength="20" />
@@ -421,9 +419,9 @@
     <Property Name="Phone" Type="nvarchar" MaxLength="20" />
     <Property Name="Email" Type="nvarchar" MaxLength="100" />
     <Property Name="Code" Type="nvarchar" MaxLength="20" />
-    <Property Name="PositionId" Type="int" />
-    <Property Name="BranchId" Type="int" />
-    <Property Name="DepartmentId" Type="int" />
+    <Property Name="PositionId" Type="nvarchar" MaxLength="128" />
+    <Property Name="BranchId" Type="nvarchar" MaxLength="128" />
+    <Property Name="DepartmentId" Type="nvarchar" MaxLength="128" />
     <Property Name="IsLock" Type="int" />
     <Property Name="Notes" Type="nvarchar" MaxLength="255" />
     <Property Name="CreateDate" Type="datetime" />
@@ -700,16 +698,6 @@
     <Property Name="C2Id" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="StaffId" Type="nvarchar" MaxLength="128" Nullable="false" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
   <EntityType Name="TreeInfo">
     <Key>
       <PropertyRef Name="Id" />
@@ -730,6 +718,20 @@
     <Property Name="WType" Type="nvarchar" MaxLength="32" Nullable="false" />
     <Property Name="Location" Type="nvarchar" MaxLength="64" Nullable="false" />
     <Property Name="Districtid" Type="nvarchar" MaxLength="32" />
+  </EntityType>
+  <EntityType Name="Warehouse">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="512" />
+    <Property Name="Code" Type="nvarchar" MaxLength="32" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="ScanImport" Type="int" />
+    <Property Name="ScanExport" Type="int" />
+    <Property Name="InputReceive" Type="int" />
+    <Property Name="WareReceive" Type="nvarchar" MaxLength="512" />
+    <Property Name="IsScanBox" Type="int" />
   </EntityType>
   <Association Name="FK__AgencySav__CInfo__6497E884">
     <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="1" />
@@ -1187,19 +1189,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__StaffWith__Staff__45A94D10">
-    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="1" />
-    <End Role="StaffWithC1" Type="Self.StaffWithC1" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiStaff">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="StaffWithC1">
-        <PropertyRef Name="StaffId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__StaffWith__Staff__4979DDF4">
+  <Association Name="FK__StaffWith__Staff__4C564A9F">
     <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="1" />
     <End Role="StaffWithC2" Type="Self.StaffWithC2" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1211,7 +1201,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__StaffWithC__C1Id__44B528D7">
+  <Association Name="FK__StaffWith__Staff__5026DB83">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="1" />
+    <End Role="StaffWithC1" Type="Self.StaffWithC1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaffWithC1">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StaffWithC__C1Id__4F32B74A">
     <End Role="C1Info" Type="Self.C1Info" Multiplicity="1" />
     <End Role="StaffWithC1" Type="Self.StaffWithC1" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1223,7 +1225,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__StaffWithC__C2Id__4885B9BB">
+  <Association Name="FK__StaffWithC__C2Id__4B622666">
     <End Role="C2Info" Type="Self.C2Info" Multiplicity="1" />
     <End Role="StaffWithC2" Type="Self.StaffWithC2" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1318,7 +1320,6 @@
     <Parameter Name="DTo" Type="nvarchar" Mode="In" />
   </Function>
   <EntityContainer Name="NDHDBModelStoreContainer">
-    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AgencySavePoint" EntityType="Self.AgencySavePoint" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AllStatus" EntityType="Self.AllStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="APIAuthHistory" EntityType="Self.APIAuthHistory" Schema="dbo" store:Type="Tables" />
@@ -1337,6 +1338,7 @@
     <EntitySet Name="C2Info" EntityType="Self.C2Info" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CInfoCommon" EntityType="Self.CInfoCommon" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ErrorInfo" EntityType="Self.ErrorInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EventArea" EntityType="Self.EventArea" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EventAreaFarmer" EntityType="Self.EventAreaFarmer" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EventAward" EntityType="Self.EventAward" Schema="dbo" store:Type="Tables" />
@@ -1376,9 +1378,9 @@
     <EntitySet Name="StaffCheckIn" EntityType="Self.StaffCheckIn" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StaffWithC1" EntityType="Self.StaffWithC1" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StaffWithC2" EntityType="Self.StaffWithC2" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TreeInfo" EntityType="Self.TreeInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ward" EntityType="Self.Ward" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__AgencySav__CInfo__6497E884" Association="Self.FK__AgencySav__CInfo__6497E884">
       <End Role="CInfoCommon" EntitySet="CInfoCommon" />
       <End Role="AgencySavePoint" EntitySet="AgencySavePoint" />
@@ -1531,19 +1533,19 @@
       <End Role="HaiStaff" EntitySet="HaiStaff" />
       <End Role="StaffCheckIn" EntitySet="StaffCheckIn" />
     </AssociationSet>
-    <AssociationSet Name="FK__StaffWith__Staff__45A94D10" Association="Self.FK__StaffWith__Staff__45A94D10">
-      <End Role="HaiStaff" EntitySet="HaiStaff" />
-      <End Role="StaffWithC1" EntitySet="StaffWithC1" />
-    </AssociationSet>
-    <AssociationSet Name="FK__StaffWith__Staff__4979DDF4" Association="Self.FK__StaffWith__Staff__4979DDF4">
+    <AssociationSet Name="FK__StaffWith__Staff__4C564A9F" Association="Self.FK__StaffWith__Staff__4C564A9F">
       <End Role="HaiStaff" EntitySet="HaiStaff" />
       <End Role="StaffWithC2" EntitySet="StaffWithC2" />
     </AssociationSet>
-    <AssociationSet Name="FK__StaffWithC__C1Id__44B528D7" Association="Self.FK__StaffWithC__C1Id__44B528D7">
+    <AssociationSet Name="FK__StaffWith__Staff__5026DB83" Association="Self.FK__StaffWith__Staff__5026DB83">
+      <End Role="HaiStaff" EntitySet="HaiStaff" />
+      <End Role="StaffWithC1" EntitySet="StaffWithC1" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StaffWithC__C1Id__4F32B74A" Association="Self.FK__StaffWithC__C1Id__4F32B74A">
       <End Role="C1Info" EntitySet="C1Info" />
       <End Role="StaffWithC1" EntitySet="StaffWithC1" />
     </AssociationSet>
-    <AssociationSet Name="FK__StaffWithC__C2Id__4885B9BB" Association="Self.FK__StaffWithC__C2Id__4885B9BB">
+    <AssociationSet Name="FK__StaffWithC__C2Id__4B622666" Association="Self.FK__StaffWithC__C2Id__4B622666">
       <End Role="C2Info" EntitySet="C2Info" />
       <End Role="StaffWithC2" EntitySet="StaffWithC2" />
     </AssociationSet>
