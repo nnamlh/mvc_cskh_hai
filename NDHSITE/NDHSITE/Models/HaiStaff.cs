@@ -43,6 +43,7 @@ namespace NDHSITE.Models
         public string DepartmentName { get; set; }
         public string AvatarUrl { get; set; }
         public string SignatureUrl { get; set; }
+        public Nullable<int> IsDelete { get; set; }
     
         public virtual HaiBranch HaiBranch { get; set; }
         public virtual HaiDepartment HaiDepartment { get; set; }

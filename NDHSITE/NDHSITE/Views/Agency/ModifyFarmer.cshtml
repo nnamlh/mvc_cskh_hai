@@ -29,12 +29,21 @@
                             Tài khoản
                         </a>
                     </li>
+                    <li>
+                        <a href="#manageagency" data-toggle="tab">
+                            Quản lý tài khoản
+                        </a>
+                    </li>
                 </ul>
             </div>
 
             <div class="col-md-10 col-sm-9 layout-main">
                 <div id="settings-content" class="tab-content stacked-content">
                     <div class="tab-pane fade in active" id="allagency">
+                        @if (agency.CInfoCommon.IsClock == 1)
+                        {
+                            <p class="label label-primary">Đã khóa</p>
+                        } 
                         <form method="post" onsubmit="if(!confirm('Chỉnh sửa khách hàng?')){return false;}">
                             <fieldset>
                                 <input type="hidden" value="@agency.Id" name="Id" />
@@ -214,6 +223,30 @@
                         {
                             <h4>Tài khoản hiện tại: @agency.CInfoCommon.UserLogin</h4>
                         }
+                    </div>
+                    <div class="tab-pane fade" id="manageagency">
+                        <form method="post" onsubmit="if(!confirm('Thực hiện thao tác?')){return false;}" action="/agency/LockUser">
+                            <input type="hidden" value="@agency.CInfoCommon.Id" name="Id" />
+                            <input type="hidden" value="@agency.Id" name="Agency" />
+                            <input type="hidden" value="CI" name="Type" />
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <select class="form-control" name="Status">
+                                        @if (agency.CInfoCommon.IsClock == 1)
+                                        {
+                                            <option value="2">Mở tài khoản</option>
+                                            <option value="0">Xóa tài khoản</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="1">Khóa tài khoản</option>
+                                        }
+                                    </select>
+                                    <br />
+                                    <button type="submit" class="btn btn-primary">Thực hiện</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

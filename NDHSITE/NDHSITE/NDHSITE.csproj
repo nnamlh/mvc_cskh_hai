@@ -575,6 +575,9 @@
     <Content Include="Views\ShowInfo\SMSHistory.cshtml" />
     <Content Include="Views\ShowInfo\HappyBirthday.cshtml" />
     <Content Include="Views\Home\Policy.cshtml" />
+    <Content Include="Views\Shared\_AdminSlideMenu.cshtml" />
+    <Content Include="Views\Account\ChangeUserName.cshtml" />
+    <Content Include="Views\Tracking\ShowBarcodeHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -89,7 +89,11 @@ namespace NDHSITE.Controllers
             return PartialView("_MenuAdmin", role);
          }
 
-
+        [Authorize]
+         public ActionResult AdminSlideMenu(string code)
+         {
+             return PartialView("_AdminSlideMenu", code);
+         }
 
         [Authorize]
         public ActionResult ShowMenu()

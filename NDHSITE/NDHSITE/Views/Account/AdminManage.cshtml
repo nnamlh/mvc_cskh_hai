@@ -20,33 +20,7 @@
     <div class="portlet-body">
         <div class="layout layout-main-right layout-stack-sm">
             <div class="col-md-3 col-sm-3 layout-sidebar">
-                <ul id="myTab" class="nav nav-layout-sidebar nav-stacked">
-                    <li>
-                        <a href="/role/manager">
-                            Phần quyền cho user
-                        </a>
-                    </li>
-                    <li class="active">
-                        <a href="/account/adminmanage" data-toggle="tab">
-                            Đổi mật khẩu cho USER
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/role/permission">
-                            Phân quyền WEB
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/role/mobilefunction">
-                            Phân quyền APP
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/account/adduser">
-                            Tạo tài khoản khách hàng
-                        </a>
-                    </li>
-                </ul>
+               @Html.Action("AdminSlideMenu", "Home", new { code = "accountadminmanage" })
             </div>
             <div class="col-md-9 col-sm-9 layout-main">
                 <div id="settings-content" class="tab-content stacked-content">

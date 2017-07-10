@@ -23,7 +23,7 @@
                         <label>Chi nhánh</label>
                         <select class="form-control selectpicker" data-live-search="true" name="brand" id="allbrand" @(ViewBag.IsDisable == 1?"disabled":"") >
 
-                            @if (ViewBag.BranchId == -1)
+                            @if (ViewBag.BranchId == "-1")
                             {
                                 <option data-tokens="Tất cả" value="-1" selected>Tất cả chi nhánh</option>
                             }

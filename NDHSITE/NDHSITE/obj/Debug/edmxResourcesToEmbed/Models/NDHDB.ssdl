@@ -235,6 +235,7 @@
     <Property Name="BusinessLicense" Type="nvarchar" MaxLength="512" />
     <Property Name="Lat" Type="float" />
     <Property Name="Lng" Type="float" />
+    <Property Name="IsDelete" Type="int" />
   </EntityType>
   <EntityType Name="District">
     <Key>
@@ -432,6 +433,7 @@
     <Property Name="DepartmentName" Type="nvarchar" MaxLength="512" />
     <Property Name="AvatarUrl" Type="nvarchar" MaxLength="512" />
     <Property Name="SignatureUrl" Type="nvarchar" MaxLength="512" />
+    <Property Name="IsDelete" Type="int" />
   </EntityType>
   <EntityType Name="HappyBirthday">
     <Key>

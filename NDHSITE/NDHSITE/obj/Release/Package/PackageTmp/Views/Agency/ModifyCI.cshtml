@@ -29,6 +29,11 @@
                             Tài khoản
                         </a>
                     </li>
+                    <li>
+                        <a href="#manageagency" data-toggle="tab">
+                            Quản lý tài khoản
+                        </a>
+                    </li>
                 </ul>
             </div>
 
@@ -41,11 +46,15 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
+                                            <label>Mã đại lý</label>
+                                            <input type="text" name="Code" class="form-control" required value="@agency.Code" />
+                                        </div>
+                                        <div class="form-group">
                                             <label>Chi nhánh</label>
-                                            <input class="form-control branchsearch" type="text" name="BranchCode"  required value="@agency.HaiBranch.Code">
+                                            <input class="form-control branchsearch" type="text" name="BranchCode" required value="@agency.HaiBranch.Code">
                                             <p class="branchname"><i></i></p>
                                         </div>
-         
+
                                         <div class="form-group">
                                             <label>Tên cửa hàng</label>
                                             <input type="text" name="StoreName" class="form-control" value="@agency.StoreName" />
@@ -68,48 +77,41 @@
                                         </div>
                                         <div class="form-group">
                                             <label>TK ngân hàng</label>
-                                            <input type="text" name="BankAccount" class="form-control" required value="@agency.CInfoCommon.BankAccount" />
+                                            <input type="text" name="BankAccount" class="form-control" value="@agency.CInfoCommon.BankAccount" />
                                         </div>
                                         <div class="form-group">
                                             <label>Người hưởng thụ</label>
-                                            <input type="text" name="BankAccountHolder" class="form-control" required value="@agency.CInfoCommon.BankAccountHolder"/>
+                                            <input type="text" name="BankAccountHolder" class="form-control" value="@agency.CInfoCommon.BankAccountHolder" />
                                         </div>
                                         <div class="form-group">
-                                            <label>Ngân hàng - chi nhánh</label>
-                                            <input type="text" name="BackName" class="form-control" required value="@agency.CInfoCommon.BackName" />
+                                            <label>Tên ngân hàng</label>
+                                            <input type="text" name="BackName" class="form-control" value="@agency.CInfoCommon.BackName" />
                                         </div>
                                         <div class="form-group">
                                             <label>Mã số thuế</label>
-                                            <input type="text" name="TaxCode" class="form-control" required value="@agency.CInfoCommon.TaxCode"/>
+                                            <input type="text" name="TaxCode" class="form-control" value="@agency.CInfoCommon.TaxCode" />
                                         </div>
                                         <div class="form-group">
                                             <label>Giấy phép kinh doanh</label>
-                                            <input type="text" name="BusinessLicense" class="form-control" required value="@agency.CInfoCommon.BusinessLicense" />
+                                            <input type="text" name="BusinessLicense" class="form-control" value="@agency.CInfoCommon.BusinessLicense" />
                                         </div>
                                         <div class="form-group">
                                             <label>Chức vụ</label>
-                                            <input type="text" name="C1Position" class="form-control" required value="@agency.C1Position"/>
+                                            <input type="text" name="C1Position" class="form-control" value="@agency.C1Position" />
                                         </div>
                                         <div class="form-group">
                                             <label>Ngày thành lập</label>
-                                            <input type="text" name="FoundingDate" class="form-control" id="FoundingDate" value="@agency.FoundingDate"/>
+                                            <input type="text" name="FoundingDate" class="form-control" id="FoundingDate" value="@agency.FoundingDate" />
                                         </div>
                                         <div class="form-group">
                                             <label>Ngày cưới</label>
                                             <input type="text" name="WeddingDate" class="form-control" id="WeddingDate" value="@agency.WeddingDate" />
                                         </div>
                                     </div>
-                          
+
                                     <div class="col-sm-6">
-                                       
-                                        <div class="form-group">
-                                            <label>Ngày sinh</label>
-                                            <input type="text" name="birthday" class="form-control" id="datetimecreate" value="@agency.CInfoCommon.BirthDay" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Nơi sinh</label>
-                                            <input type="text" name="PlaceOfBirth" class="form-control" value="@agency.CInfoCommon.PlaceOfBirth" />
-                                        </div>
+
+
                                         <div class="form-group">
                                             <label>Địa chỉ</label>
                                             <input type="text" name="AddressInfo" class="form-control" value="@agency.CInfoCommon.AddressInfo" />
@@ -123,11 +125,11 @@
                                                 {
                                                     if (ViewBag.ProvinceId == item.Id)
                                                     {
-                                                        <option data-tokens="@item.Name" value="@item.Id" selected>@item.Name</option>
+                                                <option data-tokens="@item.Name" value="@item.Id" selected>@item.Name</option>
                                                     }
                                                     else
                                                     {
-                                                        <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
+                                                <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
                                                     }
                                                 }
                                             </select>
@@ -141,11 +143,11 @@
                                                 {
                                                     if (ViewBag.DistrictId == item.Id)
                                                     {
-                                                        <option data-tokens="@item.Name" value="@item.Id" selected>@item.Name</option>
+                                                <option data-tokens="@item.Name" value="@item.Id" selected>@item.Name</option>
                                                     }
                                                     else
                                                     {
-                                                        <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
+                                                <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
                                                     }
                                                 }
                                             </select>
@@ -159,11 +161,11 @@
                                                 {
                                                     if (agency.CInfoCommon.WardId == item.Id)
                                                     {
-                                                        <option data-tokens="@item.Name" value="@item.Id" selected>@item.Name</option>
+                                                <option data-tokens="@item.Name" value="@item.Id" selected>@item.Name</option>
                                                     }
                                                     else
                                                     {
-                                                        <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
+                                                <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
                                                     }
                                                 }
                                             </select>
@@ -173,17 +175,24 @@
                                             <label>Ghi chú</label>
                                             <textarea name="Notes" class="form-control">@agency.CInfoCommon.Notes</textarea>
                                         </div>
-
+                                        <div class="form-group">
+                                            <label>Ngày sinh</label>
+                                            <input type="text" name="birthday" class="form-control" id="datetimecreate" value="@agency.CInfoCommon.BirthDay" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nơi sinh</label>
+                                            <input type="text" name="PlaceOfBirth" class="form-control" value="@agency.CInfoCommon.PlaceOfBirth" />
+                                        </div>
                                         <div class="form-group">
                                             <label>Người quyết định 1</label>
-                                            <input type="text" name="Decison1" class="form-control" required value="@agency.Decison1" />
+                                            <input type="text" name="Decison1" class="form-control" value="@agency.Decison1" />
                                         </div>
                                         <div class="form-group">
                                             <label>Ngày tháng năm sinh</label>
                                             <input type="text" name="Decision1Birthday" class="form-control" id="Decision1Birthday" value="@agency.Decision1Birthday" />
                                         </div>
                                         <div class="form-group">
-                                            <label>Số điện thoại</label>
+                                            <label>Số điện thoại quyết đinh 1</label>
                                             <input type="text" name="Decision1Phone" class="form-control" value="@agency.Decision1Phone" />
                                         </div>
                                         <div class="form-group">
@@ -199,7 +208,7 @@
                                             <input type="text" name="Decision2Phone" class="form-control" value="@agency.Decision2Phone" />
                                         </div>
                                     </div>
-      
+
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-primary" type="submit">Chỉnh sửa</button>
@@ -213,52 +222,75 @@
                         {
                             using (Html.BeginForm("RegisterAgency", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                             {
-                                <input type="hidden" name="AgencyType" value="CI" />
-                                <input type="hidden" name="AgencyId" value="@agency.Id" />
-                                @Html.AntiForgeryToken()
-                                @Html.ValidationSummary()
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-                                    <div class="col-md-10">
-                                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                                    <div class="col-md-10">
-                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                    </div>
-                                </div>
+                        <input type="hidden" name="AgencyType" value="CI" />
+                        <input type="hidden" name="AgencyId" value="@agency.Id" />
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary()
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            </div>
+                        </div>
 
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-                                    <div class="col-md-10">
-                                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label">Chọn quyền</label>
-                                    <div class="col-md-10">
-                                        <select name="role" class="form-control">
-                                            @foreach (var item in ViewBag.RoleList)
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Chọn quyền</label>
+                            <div class="col-md-10">
+                                <select name="role" class="form-control">
+                                    @foreach (var item in ViewBag.RoleList)
                                             {
-                                                <option value="@item.Name">@item.Name</option>
+                                            <option value="@item.Name">@item.Name</option>
                                             }
-                                        </select>
-                                    </div>
-                                </div>
+                                </select>
+                            </div>
+                        </div>
 
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-10">
-                                        <input type="submit" class="btn btn-primary" value="Register" />
-                                    </div>
-                                </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" class="btn btn-primary" value="Register" />
+                            </div>
+                        </div>
                             }
                         }
                         else
                         {
-                            <h4>Tài khoản hiện tại: @agency.CInfoCommon.UserLogin</h4>
+                        <h4>Tài khoản hiện tại: @agency.CInfoCommon.UserLogin</h4>
                         }
+                    </div>
+                    <div class="tab-pane fade" id="manageagency">
+                        <form method="post" onsubmit="if(!confirm('Thực hiện thao tác?')){return false;}" action="/agency/LockUser">
+                            <input type="hidden" value="@agency.CInfoCommon.Id" name="Id" />
+                            <input type="hidden" value="@agency.Id" name="Agency" />
+                            <input type="hidden" value="CI" name="Type" />
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <select class="form-control" name="Status">
+                                        @if (agency.CInfoCommon.IsClock == 1)
+                                        {
+                                            <option value="2">Mở tài khoản</option>
+                                            <option value="0">Xóa tài khoản</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="1">Khóa tài khoản</option>
+                                        }
+                                    </select>
+                                    <button type="submit" class="btn btn-primary">Thực hiện</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -274,7 +306,7 @@
 }
 
 @section scripts {
-   
+
     <!-- bootstrap select js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/js/bootstrap-select.min.js"></script>
     <!-- date bootstrap -->
@@ -293,7 +325,7 @@
                 url: "/agency/branchjson",
                 type: "get",
                 success: function (response) {
-                  //  console.log(response);
+                    //  console.log(response);
                     $('.branchsearch').typeahead({
                         source: response,
                         display: 'Code',
@@ -307,7 +339,7 @@
 
 
         function displayResult(item, val, text) {
-           // console.log(item);
+            // console.log(item);
             $('.branchname').show().html('<i>' + val + '</i>');
         }
 

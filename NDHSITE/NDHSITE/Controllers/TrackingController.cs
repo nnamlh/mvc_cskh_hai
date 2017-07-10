@@ -7,6 +7,7 @@ using NDHSITE.Models;
 using PagedList;
 using System.IO;
 using OfficeOpenXml;
+using System.Data.Entity;
 
 namespace NDHSITE.Controllers
 {
@@ -232,6 +233,36 @@ namespace NDHSITE.Controllers
 
 
             return File(pathTo, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", string.Format("danh-sach-seri" + DateTime.Now.ToString("ddMMyyyyhhmmss") + ".{0}", "xlsx"));
+        }
+
+        public ActionResult ShowBarcodeHistory(string search, string ware, int? page = 1, string DateFrom = null, string DateTo = null)
+        {
+           
+
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+
+            DateTime dFrom = DateTime.Now;
+            DateTime dTo = DateTime.Now;
+            if (DateFrom != null && DateTo != null)
+            {
+                dFrom = DateTime.ParseExact(DateFrom, "MM/dd/yyyy", null);
+                dTo = DateTime.ParseExact(DateTo, "MM/dd/yyyy", null);
+            }
+
+            ViewBag.Ware = ware;
+
+            ViewBag.DateFrom = dFrom.ToString("MM/dd/yyyy");
+            ViewBag.DateTo = dTo.ToString("MM/dd/yyyy");
+            ViewBag.SearchText = search;
+
+            var allBarcode = (from log in db.BarcodeHistories
+                              where DbFunctions.TruncateTime(log.CreateTime)
+                                                 >= DbFunctions.TruncateTime(dFrom) && DbFunctions.TruncateTime(log.CreateTime)
+                                                 <= DbFunctions.TruncateTime(dTo) && log.Barcode.Contains(search) && log.WareHouse.Contains(ware)
+                              select log).OrderByDescending(p => p.CreateTime).ToPagedList(pageNumber, pageSize);
+
+            return View(allBarcode);
         }
     }
 }

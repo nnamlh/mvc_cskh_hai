@@ -1,0 +1,121 @@
+﻿@model PagedList.IPagedList<NDHSITE.Models.BarcodeHistory>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Tra cứu hành trình sản phẩm";
+}
+
+<div class="portlet portlet-boxed">
+    <div class="portlet-header">
+        <h4 class="portlet-title">
+            Tra cứu hành trình sản phẩm
+        </h4>
+    </div> <!-- /.portlet-header -->
+    <div class="portlet-body">
+        <form>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Nhập mã barcode sản phẩm: </label>
+                        <input type="text" value="@ViewBag.SearchText" name="search" class="form-control"  />
+                    </div>
+                    <div class="form-group">
+                        <label>Nhập kho: </label>
+                        <input type="text" value="@ViewBag.Ware" name="ware" class="form-control" />
+                    </div>
+                    <button class="btn btn-primary" type="submit">Xem</button>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Từ ngày</label>
+                                <input type="text" class="form-control" id="datefrom" name="DateFrom" value="@ViewBag.DateFrom" />
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Đến ngày</label>
+                                <input type="text" class="form-control" id="dateto" name="DateTo" value="@ViewBag.DateTo" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+        <br />
+        <fieldset>
+            <table class="table table-striped table-bordered thumbnail-table">
+
+                <thead>
+                    <tr>
+                        <th>Barcode</th>
+                        <th>Kho</th>
+                        <th>Trạng thái</th>
+                        <th>Thời gian</th>
+                        <th>User</th>
+                        <th>Sản phẩm</th>
+                        <th>Thông tin</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                   @foreach (var item in Model)
+                   {
+                       <tr class="@(item.IsSuccess == 0? "danger":"")">
+                           <td>@item.Barcode</td>
+                           <td>@item.WareHouse</td>
+                           <td>@item.PStatus</td>
+                           <td>@item.CreateTime</td>
+                           <td>@item.UserLogin</td>
+                           <td>@item.ProductName</td>
+                           <td>
+                               <span><strong>Thông báo: </strong>@item.Messenge</span><br />
+                               <span><strong>Kho liên quan: </strong>@item.WareRelative</span><br />
+                               <span><strong>Nhân viên quét giúp:</strong>@item.StaffHelp</span>
+                           </td>
+                       </tr>
+                   }
+                </tbody>
+            </table>
+
+        </fieldset>
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+        @Html.PagedListPager(Model, page => Url.Action("showbarcodehistory",
+                                                         new { page, ware = ViewBag.Ware, search = ViewBag.SearchText, DateFrom = ViewBag.DateFrom, DateTo = ViewBag.DateTo }))
+    </div>
+</div>
+
+@section styles {
+
+
+    <link href="~/content/bootstrap-datetimepicker.min.css" rel="stylesheet">
+}
+
+
+@section scripts {
+ 
+
+    <!-- date bootstrap -->
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/scripts/moment-with-locales.min.js"></script>
+    <script src="~/scripts/bootstrap-datetimepicker.min.js"></script>
+
+    <script type="text/javascript">
+        $('#dateto').datetimepicker({
+            locale: 'vi',
+            format: 'MM/DD/YYYY',
+            defaultDate: new Date()
+        });
+        $('#datefrom').datetimepicker({
+            locale: 'vi',
+            format: 'MM/DD/YYYY',
+            defaultDate: new Date()
+        });
+    </script>
+
+
+}

@@ -50,7 +50,26 @@
                         <form method="get">
                             <input type="hidden" value="@ViewBag.SType" name="type" />
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-8">
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text" value="@ViewBag.SearchText" name="search" class="form-control" />
+                                            <div class="input-group-btn">
+                                                <button id="btnchoose" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@ViewBag.STypeName</button>
+                                                <ul class="dropdown-menu dropdown-menu-right">
+                                                    <li><a href="javascript:addtype(1, 'Mã đại lý')">Mã đại lý</a></li>
+                                                    <li><a href="javascript:addtype(2, 'Số điện thoại')">Số điện thoại</a></li>
+                                                    <li><a href="javascript:addtype(3 , 'Tên cửa hàng')">Tên cửa hàng</a></li>
+                                                    <li><a href="javascript:addtype(4 , 'Mã chi nhánh')">Mã chi nhánh</a></li>
+                                                </ul>
+                                            </div><!-- /btn-group -->
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm-3">
                                     <div class="form-group">
                                         <select class="form-control selectpicker" data-live-search="true" name="areaId">
                                             @if (ViewBag.AreaId == "-1")
@@ -74,34 +93,23 @@
                                             }
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Tìm kiếm</label>
-                                        <div class="input-group">
-                                            <input type="text" value="@ViewBag.SearchText" name="search" class="form-control" />
-                                            <div class="input-group-btn">
-                                                <button id="btnchoose" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@ViewBag.STypeName</button>
-                                                <ul class="dropdown-menu dropdown-menu-right">
-                                                    <li><a href="javascript:addtype(1, 'Mã đại lý')">Mã đại lý</a></li>
-                                                    <li><a href="javascript:addtype(2, 'Số điện thoại')">Số điện thoại</a></li>
-                                                    <li><a href="javascript:addtype(3 , 'Tên cửa hàng')">Tên cửa hàng</a></li>
-                                                    <li><a href="javascript:addtype(4 , 'Mã chi nhánh')">Mã chi nhánh</a></li>
-                                                </ul>
-                                            </div><!-- /btn-group -->
-                                        </div>
-                                    </div>
+
                                 </div>
 
-                                <div class="col-sm-6">
+
+                                <div class="col-sm-1">
                                     <button class="btn btn-primary" type="submit">Xem</button>
+
                                 </div>
 
                             </div>
                         </form>
+                        <br />
                         <fieldset>
                             <table class="table table-striped table-bordered thumbnail-table">
                                 <thead>
                                     <tr>
-                                        <th>Thông tin</th>
+                                        <th>Khách hàng</th>
                                         <th>Thông tin thêm</th>
                                         <th>#</th>
                                     </tr>
@@ -110,38 +118,28 @@
 
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
+                                        <tr class="@(item.CInfoCommon.IsClock == 1?"warning":"")">
                                             <td>
+                                                <span><strong class="semibold">Mã đại lý:</strong> @item.Code</span> <br />
+                                                <span><strong class="semibold">Chi nhánh:</strong> @item.HaiBranch.Name</span> <br />
+                                                <span><strong class="semibold">Khu vực:</strong> @item.CInfoCommon.HaiArea.Name</span> <br />
                                                 <span><strong class="semibold">Tên doanh nghiệp:</strong> @item.StoreName</span> <br />
                                                 <span><strong class="semibold">Chủ doanh nghiệp:</strong> @item.Deputy</span> <br />
-                                                <span><strong class="semibold">Khu vực:</strong> @item.CInfoCommon.HaiArea.Name</span> <br />
-                                                <span><strong class="semibold">Chi nhánh:</strong> @item.HaiBranch.Name</span> <br />
-                                                <span><strong class="semibold">Mã đại lý:</strong> @item.Code</span> <br />
                                                 <span><strong class="semibold">Số điện thoái:</strong> @item.CInfoCommon.Phone</span> <br />
                                                 <span><strong class="semibold">Email:</strong> @item.CInfoCommon.Email</span> <br />
-                                                <span><strong class="semibold">Tài khoản:</strong> @item.CInfoCommon.UserLogin</span><br />
                                                 <span><strong class="semibold">CMND:</strong> @item.CInfoCommon.IdentityCard</span><br />
-                                                <span><strong class="semibold">Tình trạng:</strong> @item.CInfoCommon.Notes</span>
                                             </td>
                                             <td class="file-info valign-middle">
+                                                <span><strong class="semibold">Tài khoản:</strong> @item.CInfoCommon.UserLogin</span><br />
                                                 <span><strong class="semibold">Mã số thuế:</strong> @item.CInfoCommon.TaxCode</span> <br />
-                                                <span><strong class="semibold">Giấy phép kinh doanh:</strong> @item.CInfoCommon.BusinessLicense</span> <br />
                                                 <span><strong class="semibold">Giấy phép kinh doanh:</strong> @item.CInfoCommon.BusinessLicense</span> <br />
                                                 <span><strong class="semibold">Tài khoản ngân hàng:</strong> @item.CInfoCommon.BankAccount</span> <br />
                                                 <span><strong class="semibold">Chủ tài khoản:</strong> @item.CInfoCommon.BankAccountHolder</span> <br />
                                                 <span><strong class="semibold">Tên ngân hàng:</strong> @item.CInfoCommon.BackName</span> <br />
-                                                <span><strong class="semibold">Người quyết định 1:</strong> @item.Decison1</span> <br />
-                                                <span><strong class="semibold">Ngày sinh 1:</strong> @item.Decision1Birthday</span> <br />
-                                                <span><strong class="semibold">Só điện thoại 1:</strong> @item.Decision1Phone</span> <br />
-                                                <span><strong class="semibold">Người quyết định 2:</strong> @item.Decison2</span> <br />
-                                                <span><strong class="semibold">Ngày sinh 2:</strong> @item.Decision2Birthday</span> <br />
-                                                <span><strong class="semibold">Số điện thoại 2:</strong> @item.Decision2Phone</span> <br />
-                                                <span><strong class="semibold">Ngày thành lập:</strong> @item.FoundingDate</span> <br />
-                                                <span><strong class="semibold">Ngày cưới:</strong> @item.WeddingDate</span> <br />
+                                                <span><strong class="semibold">Ghi chú:</strong> @item.CInfoCommon.Notes</span>
                                             </td>
                                             <td class="text-center valign-middle">
-                                                <a href="/agency/modifyci/@item.Id" target="_blank">Sửa</a>
-                                                &nbsp;&nbsp;<a href="javascript:removeArea('@item.Id')" target="_blank">Xóa</a>
+                                                <a href="/agency/modifyci/@item.Id" target="_blank">Chi tiết</a>
                                             </td>
                                         </tr>
                                     }
@@ -161,27 +159,32 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <label>Chi nhánh</label>
-                                            <input class="form-control branchsearch" type="text" name="BranchCode" autocomplete="off" required autofocus data-provide="typeahead">
-                                            <p class="branchname"><i></i></p>
+                                            <label>Mã đại lý</label>
+                                            <input type="text" name="Code" class="form-control" required />
                                         </div>
                                         <div class="form-group">
-                                            <label>Nhân viên theo dỏi</label>
-                                            <input class="form-control staffsearch" type="text" name="StaffCode" >
+                                            <label>Tên cửa hàng</label>
+                                            <input type="text" name="StoreName" class="form-control" required />
                                         </div>
                                         <div class="form-group">
                                             <label>Chủ doanh nghiệp</label>
                                             <input type="text" name="Deputy" class="form-control" required />
                                         </div>
                                         <div class="form-group">
+                                            <label>Chi nhánh</label>
+                                            <input class="form-control branchsearch" type="text" name="BranchCode" autocomplete="off" required autofocus data-provide="typeahead">
+                                            <p class="branchname"><i></i></p>
+                                        </div>
+                                       
+                                        <div class="form-group">
                                             <label>Phone</label>
                                             <input type="text" name="Phone" class="form-control" required />
                                         </div>
                                         <div class="form-group">
                                             <label>Địa chỉ</label>
-                                            <input type="text" name="AddressInfo" class="form-control" />
+                                            <input type="text" name="AddressInfo" class="form-control" required/>
                                         </div>
-                                  
+
                                         <div class="form-group">
                                             <label>Thành phố/tỉnh</label>
 
@@ -208,27 +211,27 @@
                                         </div>
                                         <div class="form-group">
                                             <label>TK ngân hàng</label>
-                                            <input type="text" name="BankAccount" class="form-control" required />
+                                            <input type="text" name="BankAccount" class="form-control"  />
                                         </div>
                                         <div class="form-group">
                                             <label>Người hưởng thụ</label>
-                                            <input type="text" name="BankAccountHolder" class="form-control" required />
+                                            <input type="text" name="BankAccountHolder" class="form-control"  />
                                         </div>
                                         <div class="form-group">
-                                            <label>Ngân hàng - chi nhánh</label>
-                                            <input type="text" name="BackName" class="form-control" required />
+                                            <label>Ngân hàng</label>
+                                            <input type="text" name="BackName" class="form-control"  />
                                         </div>
                                         <div class="form-group">
                                             <label>Mã số thuế</label>
-                                            <input type="text" name="TaxCode" class="form-control" required />
+                                            <input type="text" name="TaxCode" class="form-control"  />
                                         </div>
                                         <div class="form-group">
                                             <label>Giấy phép kinh doanh</label>
-                                            <input type="text" name="BusinessLicense" class="form-control" required />
+                                            <input type="text" name="BusinessLicense" class="form-control"  />
                                         </div>
                                         <div class="form-group">
                                             <label>Chức vụ</label>
-                                            <input type="text" name="C1Position" class="form-control" required />
+                                            <input type="text" name="C1Position" class="form-control"  />
                                         </div>
                                         <div class="form-group">
                                             <label>Ngày thành lập</label>
@@ -241,15 +244,7 @@
                                     </div>
 
                                     <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Tên cửa hàng</label>
-                                            <input type="text" name="StoreName" class="form-control" required />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Mã đại lý</label>
-                                            <input type="text" name="Code" class="form-control" required />
-                                        </div>
-                                  
+                                      
                                         <div class="form-group">
                                             <label>Ngày sinh</label>
                                             <input type="text" name="birthday" class="form-control" id="datetimecreate" />
@@ -266,14 +261,14 @@
                                             <label>Email</label>
                                             <input type="text" name="Email" class="form-control" />
                                         </div>
-                                     
+
                                         <div class="form-group">
                                             <label>Ghi chú</label>
                                             <textarea name="Notes" class="form-control"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label>Người quyết định 1</label>
-                                            <input type="text" name="Decison1" class="form-control" required />
+                                            <input type="text" name="Decison1" class="form-control"  />
                                         </div>
                                         <div class="form-group">
                                             <label>Ngày tháng năm sinh</label>
@@ -281,11 +276,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Số điện thoại</label>
-                                            <input type="text" name="Decision1Phone" class="form-control"  />
+                                            <input type="text" name="Decision1Phone" class="form-control" />
                                         </div>
                                         <div class="form-group">
                                             <label>Người quyết định 2</label>
-                                            <input type="text" name="Decison2" class="form-control"  />
+                                            <input type="text" name="Decison2" class="form-control" />
                                         </div>
                                         <div class="form-group">
                                             <label>Ngày tháng năm sinh</label>
@@ -293,9 +288,9 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Số điện thoại</label>
-                                            <input type="text" name="Decision2Phone" class="form-control"  />
+                                            <input type="text" name="Decision2Phone" class="form-control" />
                                         </div>
-                                      
+
                                     </div>
 
                                 </div>
@@ -330,10 +325,6 @@
         </div>
     </div>
 </div>
-
-<form method="post" action="/agency/RemoveCI" onsubmit="if(!confirm('Xóa đại lý?')){return false;}" id="formagency">
-    <input type="hidden" name="id" id="idagency" />
-</form>
 
 @section styles {
 
@@ -372,39 +363,37 @@
 
 
         function displayResult(item, val, text) {
-           // console.log(item);
+            // console.log(item);
             $('.branchname').show().html('<i>' + val + '</i>');
         }
 
-
-
         $('#datetimecreate').datetimepicker({
             locale: 'vi',
-            format: 'MM/DD/YYYY HH:mm',
+            format: 'MM/DD/YYYY',
             defaultDate: new Date()
         });
 
         $('#Decision1Birthday').datetimepicker({
             locale: 'vi',
-            format: 'MM/DD/YYYY HH:mm',
+            format: 'MM/DD/YYYY',
             defaultDate: new Date()
         });
 
         $('#Decision2Birthday').datetimepicker({
             locale: 'vi',
-            format: 'MM/DD/YYYY HH:mm',
+            format: 'MM/DD/YYYY',
             defaultDate: new Date()
         });
 
         $('#WeddingDate').datetimepicker({
             locale: 'vi',
-            format: 'MM/DD/YYYY HH:mm',
+            format: 'MM/DD/YYYY',
             defaultDate: new Date()
         });
 
         $('#FoundingDate').datetimepicker({
             locale: 'vi',
-            format: 'MM/DD/YYYY HH:mm',
+            format: 'MM/DD/YYYY',
             defaultDate: new Date()
         });
 
@@ -453,11 +442,6 @@
                 });
             }
         });
-
-        function removeArea(id) {
-            $('#idagency').val(id);
-            $('#formagency').submit();
-        }
 
     </script>
 }

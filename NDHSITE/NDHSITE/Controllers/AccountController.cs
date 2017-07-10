@@ -676,7 +676,7 @@ namespace NDHSITE.Controllers
         [Authorize(Roles = "Administrator")]
         public ActionResult AddUser()
         {
-            ViewBag.RoleList = db.AspNetRoles.Where(p=> p.GroupRole == "CUS").ToList();
+            ViewBag.RoleList = db.AspNetRoles.Where(p => p.GroupRole == "CUS").ToList();
             return View();
         }
 
@@ -838,10 +838,8 @@ namespace NDHSITE.Controllers
 
 
         [Authorize(Roles = "Administrator")]
-        // xoa tai khoan
         public ActionResult UserInfo(string user = "")
         {
-
 
             var cInfo = db.CInfoCommons.Where(p => p.UserLogin == user).FirstOrDefault();
 
@@ -895,6 +893,7 @@ namespace NDHSITE.Controllers
             return View();
         }
 
+        /*
         public ActionResult DeleteAccount(string user)
         {
             var userCheck = UserManager.FindByName(user);
@@ -935,5 +934,77 @@ namespace NDHSITE.Controllers
             return RedirectToAction("UserInfo", "Account", new { user = user });
 
         }
+         * */
+
+        [Authorize(Roles = "Administrator")]
+        public ActionResult ChangeUserName(string msg)
+        {
+            ViewBag.msg = msg;
+
+
+
+            return View();
+        }
+
+
+        [Authorize(Roles = "Administrator")]
+        [HttpPost]
+        public ActionResult ChangeUserName(string user, string newuser)
+        {
+            string msg = "";
+
+            try
+            {
+                if (String.IsNullOrEmpty(user) || String.IsNullOrEmpty(newuser))
+                    throw new Exception("Không để trống dữ liệu");
+
+
+                var checkUser = db.AspNetUsers.Where(p => p.UserName == user).FirstOrDefault();
+
+                if (checkUser == null)
+                    throw new Exception("Sai tài khoản");
+
+                var checkNewUser = db.AspNetUsers.Where(p => p.UserName == newuser).FirstOrDefault();
+
+                if (checkUser != null)
+                    throw new Exception("Tài khoản mới đã có ng dùng");
+
+                if (checkUser.AccountType == "STAFF")
+                {
+                    var staff = db.HaiStaffs.Where(p => p.UserLogin == user).FirstOrDefault();
+                    if (staff == null)
+                        throw new Exception("Không tim thấy nhân viên");
+
+                    staff.UserLogin = newuser;
+                    db.Entry(staff).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    var agency = db.CInfoCommons.Where(p => p.UserLogin == user).FirstOrDefault();
+
+                    if (agency == null)
+                        throw new Exception("Không tim thấy khách hàng");
+
+                    agency.UserLogin = newuser;
+                    db.Entry(agency).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+                checkUser.UserName = newuser;
+                db.Entry(checkUser).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+                msg = "Đã đổi";
+
+            }
+            catch (Exception e)
+            {
+                msg = e.Message;
+            }
+
+            return RedirectToAction("changeusername", "account", new { msg = msg });
+        }
+
     }
 }

@@ -240,6 +240,7 @@
           <Property Name="BusinessLicense" Type="nvarchar" MaxLength="512" />
           <Property Name="Lat" Type="float" />
           <Property Name="Lng" Type="float" />
+          <Property Name="IsDelete" Type="int" />
         </EntityType>
         <EntityType Name="District">
           <Key>
@@ -437,6 +438,7 @@
           <Property Name="DepartmentName" Type="nvarchar" MaxLength="512" />
           <Property Name="AvatarUrl" Type="nvarchar" MaxLength="512" />
           <Property Name="SignatureUrl" Type="nvarchar" MaxLength="512" />
+          <Property Name="IsDelete" Type="int" />
         </EntityType>
         <EntityType Name="HappyBirthday">
           <Key>
@@ -1833,6 +1835,7 @@
           <NavigationProperty Name="EventCustomerFarmers" Relationship="Self.FK__EventCust__CInfo__3F6663D5" FromRole="CInfoCommon" ToRole="EventCustomerFarmer" />
           <NavigationProperty Name="FarmerInfoes" Relationship="Self.FK__FarmerInf__InfoI__7EF6D905" FromRole="CInfoCommon" ToRole="FarmerInfo" />
           <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="CInfoCommon" ToRole="MSGPoint" />
+          <Property Name="IsDelete" Type="Int32" />
         </EntityType>
         <EntityType Name="District">
           <Key>
@@ -2063,6 +2066,7 @@
           <NavigationProperty Name="StaffCheckIns" Relationship="Self.FK__StaffChec__Staff__47DBAE45" FromRole="HaiStaff" ToRole="StaffCheckIn" />
           <NavigationProperty Name="C1Info" Relationship="Self.StaffWithC1" FromRole="HaiStaff" ToRole="C1Info" />
           <NavigationProperty Name="C2Info" Relationship="Self.StaffWithC2" FromRole="HaiStaff" ToRole="C2Info" />
+          <Property Name="IsDelete" Type="Int32" />
         </EntityType>
         <EntityType Name="HappyBirthday">
           <Key>
@@ -3307,6 +3311,7 @@
           <EntitySetMapping Name="CInfoCommons">
             <EntityTypeMapping TypeName="NDHDBModel.CInfoCommon">
               <MappingFragment StoreEntitySet="CInfoCommon">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CName" ColumnName="CName" />
                 <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
@@ -3516,6 +3521,7 @@
           <EntitySetMapping Name="HaiStaffs">
             <EntityTypeMapping TypeName="NDHDBModel.HaiStaff">
               <MappingFragment StoreEntitySet="HaiStaff">
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />

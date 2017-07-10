@@ -55,7 +55,7 @@
 
                     @foreach (var item in Model)
                     {
-                        <tr>
+                        <tr class="@(item.CInfoCommon.IsClock == 1?"warning":"")">
                             <td>@item.StoreName</td>
                             <td>@item.Deputy</td>
                             <td>

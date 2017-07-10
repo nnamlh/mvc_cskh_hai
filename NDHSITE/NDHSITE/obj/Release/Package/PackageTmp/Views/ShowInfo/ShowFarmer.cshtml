@@ -14,11 +14,29 @@
 
         <div class="row">
             <form method="get">
-                <div class="col-sm-6">
+                <div class="col-sm-8">
                     <input type="hidden" value="@ViewBag.SType" name="type" />
+                 
+                    <div class="form-group">
+       
+                        <div class="input-group">
+                            <input type="text" value="@ViewBag.SearchText" name="search" class="form-control" />
+                            <div class="input-group-btn">
+                                <button id="btnchoose" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@ViewBag.STypeName</button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="javascript:addtype(2, 'Số điện thoại')">Số điện thoại</a></li>
+                                    <li><a href="javascript:addtype(1, 'Mã khách hàng')">Mã khách hàng</a></li>
+                                    <li><a href="javascript:addtype(3 , 'Tên khách hàng')">Tên khách hàng</a></li>
+                                    <li><a href="javascript:addtype(4 , 'Mã chi nhánh')">Mã chi nhánh</a></li>
+                                </ul>
+                            </div><!-- /btn-group -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
                     <div class="form-group">
                         <select class="form-control" name="areaId">
-                            @if (ViewBag.AreaId == -1)
+                            @if (ViewBag.AreaId == "-1")
                             {
                                 <option value="-1" selected>Tất cả</option>
                             }
@@ -40,24 +58,9 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label>Tìm kiếm</label>
-                        <div class="input-group">
-                            <input type="text" value="@ViewBag.SearchText" name="search" class="form-control" />
-                            <div class="input-group-btn">
-                                <button id="btnchoose" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@ViewBag.STypeName</button>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a href="javascript:addtype(2, 'Số điện thoại')">Số điện thoại</a></li>
-                                    <li><a href="javascript:addtype(1, 'Mã khách hàng')">Mã khách hàng</a></li>
-                                    <li><a href="javascript:addtype(3 , 'Tên khách hàng')">Tên khách hàng</a></li>
-                                    <li><a href="javascript:addtype(4 , 'Mã chi nhánh')">Mã chi nhánh</a></li>
-                                </ul>
-                            </div><!-- /btn-group -->
-                        </div>
-                    </div>
                 </div>
-                <div class="col-sm-6">
-                    <button type="submit" class="btn btn-primary">Xem thông tin</button>
+                <div class="col-sm-1">
+                    <button type="submit" class="btn btn-primary">Xem</button>
                 </div>
 
             </form>
@@ -78,7 +81,7 @@
 
                     @foreach (var item in Model)
                     {
-                        <tr>
+                        <tr class="@(item.CInfoCommon.IsClock == 1?"warning":"")">
                             <td>@item.FarmerName</td>
                             <td class="file-info valign-middle">
                                 <span><strong class="semibold">Mã khách hàng:</strong> @item.Code</span> <br />
@@ -135,11 +138,11 @@
         else if (ViewBag.FuncId == 2)
         {
              @:$('#cichoose').show();
-                                                            }
+                                                                    }
         else if (ViewBag.FuncId == 3)
         {
             @: $('#searchchoose').show();
-                                                            }
+                                                                    }
 
 
 

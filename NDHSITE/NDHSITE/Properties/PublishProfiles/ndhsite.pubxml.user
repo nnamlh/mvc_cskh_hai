@@ -61,7 +61,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/23/2016 14:14:47</publishTime>
     </File>
     <File Include="bin/NDHSITE.dll">
-      <publishTime>07/07/2017 09:39:25</publishTime>
+      <publishTime>07/09/2017 23:53:49</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>09/23/2016 14:14:47</publishTime>
@@ -328,10 +328,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/05/2016 17:24:38</publishTime>
     </File>
     <File Include="Views/Account/AddUser.cshtml">
-      <publishTime>07/03/2017 23:40:36</publishTime>
+      <publishTime>07/07/2017 14:25:11</publishTime>
     </File>
     <File Include="Views/Account/AdminManage.cshtml">
-      <publishTime>03/02/2017 13:53:50</publishTime>
+      <publishTime>07/07/2017 14:25:31</publishTime>
+    </File>
+    <File Include="Views/Account/ChangeUserName.cshtml">
+      <publishTime>07/07/2017 14:34:27</publishTime>
     </File>
     <File Include="Views/Account/DeleteUser.cshtml">
       <publishTime>01/18/2017 14:25:11</publishTime>
@@ -373,25 +376,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/31/2016 08:42:18</publishTime>
     </File>
     <File Include="Views/Agency/ManageCI.cshtml">
-      <publishTime>07/07/2017 09:43:53</publishTime>
+      <publishTime>07/07/2017 14:00:56</publishTime>
     </File>
     <File Include="Views/Agency/ManageCII.cshtml">
-      <publishTime>07/07/2017 09:43:21</publishTime>
+      <publishTime>07/07/2017 15:58:27</publishTime>
     </File>
     <File Include="Views/Agency/ManageFarmer.cshtml">
-      <publishTime>07/07/2017 09:44:04</publishTime>
+      <publishTime>07/07/2017 16:04:42</publishTime>
     </File>
     <File Include="Views/Agency/Modify.cshtml">
       <publishTime>10/31/2016 09:06:34</publishTime>
     </File>
     <File Include="Views/Agency/ModifyCI.cshtml">
-      <publishTime>07/07/2017 09:09:56</publishTime>
+      <publishTime>07/07/2017 15:18:14</publishTime>
     </File>
     <File Include="Views/Agency/ModifyCII.cshtml">
-      <publishTime>07/07/2017 09:09:56</publishTime>
+      <publishTime>07/07/2017 16:00:40</publishTime>
     </File>
     <File Include="Views/Agency/ModifyFarmer.cshtml">
-      <publishTime>07/07/2017 09:09:38</publishTime>
+      <publishTime>07/07/2017 16:07:35</publishTime>
     </File>
     <File Include="Views/EventManage/AwardManage.cshtml">
       <publishTime>11/22/2016 01:36:28</publishTime>
@@ -442,7 +445,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/19/2016 16:26:04</publishTime>
     </File>
     <File Include="Views/HaiStaff/CreateBrand.cshtml">
-      <publishTime>12/15/2016 15:54:10</publishTime>
+      <publishTime>07/07/2017 16:55:27</publishTime>
     </File>
     <File Include="Views/HaiStaff/CreateDepartment.cshtml">
       <publishTime>12/15/2016 20:22:58</publishTime>
@@ -520,16 +523,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/23/2016 01:32:45</publishTime>
     </File>
     <File Include="Views/Role/Manager.cshtml">
-      <publishTime>03/02/2017 15:12:44</publishTime>
+      <publishTime>07/07/2017 14:27:25</publishTime>
     </File>
     <File Include="Views/Role/MobileFunction.cshtml">
-      <publishTime>03/02/2017 13:58:05</publishTime>
+      <publishTime>07/07/2017 14:24:06</publishTime>
     </File>
     <File Include="Views/Role/Permission.cshtml">
-      <publishTime>03/02/2017 13:56:10</publishTime>
+      <publishTime>07/07/2017 14:24:22</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>09/23/2016 14:14:48</publishTime>
+    </File>
+    <File Include="Views/Shared/_AdminSlideMenu.cshtml">
+      <publishTime>07/07/2017 14:33:13</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
       <publishTime>12/05/2016 17:26:32</publishTime>
@@ -550,13 +556,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/12/2017 16:29:14</publishTime>
     </File>
     <File Include="Views/ShowInfo/ShowCheckIn.cshtml">
-      <publishTime>06/13/2017 10:12:15</publishTime>
+      <publishTime>07/09/2017 23:52:38</publishTime>
     </File>
     <File Include="Views/ShowInfo/ShowCI.cshtml">
-      <publishTime>06/23/2017 15:26:54</publishTime>
+      <publishTime>07/07/2017 16:30:14</publishTime>
     </File>
     <File Include="Views/ShowInfo/ShowCII.cshtml">
-      <publishTime>07/07/2017 09:09:50</publishTime>
+      <publishTime>07/07/2017 16:26:21</publishTime>
     </File>
     <File Include="Views/ShowInfo/ShowEvent.cshtml">
       <publishTime>12/21/2016 18:05:00</publishTime>
@@ -565,7 +571,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/21/2016 17:57:33</publishTime>
     </File>
     <File Include="Views/ShowInfo/ShowFarmer.cshtml">
-      <publishTime>12/15/2016 20:05:47</publishTime>
+      <publishTime>07/07/2017 16:30:21</publishTime>
     </File>
     <File Include="Views/ShowInfo/ShowMsg.cshtml">
       <publishTime>04/26/2017 13:44:23</publishTime>
@@ -587,6 +593,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Tracking/ProductTracking.cshtml">
       <publishTime>03/28/2017 17:02:52</publishTime>
+    </File>
+    <File Include="Views/Tracking/ShowBarcodeHistory.cshtml">
+      <publishTime>07/07/2017 17:36:17</publishTime>
     </File>
     <File Include="Views/Tree/Manage.cshtml">
       <publishTime>11/22/2016 01:00:02</publishTime>

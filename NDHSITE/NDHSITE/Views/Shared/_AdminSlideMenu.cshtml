@@ -1,0 +1,38 @@
+﻿@model string
+@{
+    Layout = null;
+}
+
+<ul id="myTab" class="nav nav-layout-sidebar nav-stacked">
+    <li class="@(Model == "rolemanager"?"active":"")">
+        <a href="/role/manager">
+            Phần quyền cho user
+        </a>
+    </li>
+    <li class="@(Model == "accountadminmanage"?"active":"")">
+        <a href="/account/adminmanage">
+            Đổi mật khẩu cho USER
+        </a>
+    </li>
+    <li class="@(Model == "rolepermission"?"active":"")">
+        <a href="/role/permission">
+            Phân quyền WEB
+        </a>
+    </li>
+    <li class="@(Model == "rolemobilefunction" ? "active" : "")">
+        <a href="/role/mobilefunction">
+            Phân quyền APP
+        </a>
+    </li>
+    <li class="@(Model == "accountadduser"?"active":"")">
+        <a href="/account/adduser">
+            Tạo tài khoản khách hàng
+        </a>
+    </li>
+    <li class="@(Model == "accountchangeusername" ? "active" : "")">
+        <a href="/account/changeusername">
+            Tạo tài khoản khách hàng
+        </a>
+    </li>
+</ul>
+

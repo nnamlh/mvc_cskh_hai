@@ -56,6 +56,7 @@ namespace NDHSITE.Models
         public string BusinessLicense { get; set; }
         public Nullable<double> Lat { get; set; }
         public Nullable<double> Lng { get; set; }
+        public Nullable<int> IsDelete { get; set; }
     
         public virtual ICollection<AgencySavePoint> AgencySavePoints { get; set; }
         public virtual ICollection<C1Info> C1Info { get; set; }

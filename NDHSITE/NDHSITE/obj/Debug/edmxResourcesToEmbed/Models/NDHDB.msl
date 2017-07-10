@@ -208,6 +208,7 @@
     <EntitySetMapping Name="CInfoCommons">
       <EntityTypeMapping TypeName="NDHDBModel.CInfoCommon">
         <MappingFragment StoreEntitySet="CInfoCommon">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CName" ColumnName="CName" />
           <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
@@ -417,6 +418,7 @@
     <EntitySetMapping Name="HaiStaffs">
       <EntityTypeMapping TypeName="NDHDBModel.HaiStaff">
         <MappingFragment StoreEntitySet="HaiStaff">
+          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FullName" ColumnName="FullName" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
