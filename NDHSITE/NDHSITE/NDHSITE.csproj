@@ -442,6 +442,7 @@
       <DependentUpon>NDHDB.edmx</DependentUpon>
       <LastGenOutput>NDHDB.cs</LastGenOutput>
     </Content>
+    <Content Include="haiupload\barcodereport.xlsx" />
     <None Include="Properties\PublishProfiles\home.pubxml" />
     <None Include="Properties\PublishProfiles\ndhsite.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

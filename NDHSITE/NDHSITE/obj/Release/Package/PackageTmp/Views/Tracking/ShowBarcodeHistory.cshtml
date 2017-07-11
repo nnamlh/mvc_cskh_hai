@@ -47,18 +47,17 @@
 
         </form>
         <br />
+        <a href="/tracking/excelbarcodehistory?search=@ViewBag.SearchText&ware=@ViewBag.Ware&DateFrom=@ViewBag.DateFrom&DateTo=@ViewBag.DateTo">Xuất Excel</a>
         <fieldset>
             <table class="table table-striped table-bordered thumbnail-table">
 
                 <thead>
                     <tr>
                         <th>Barcode</th>
-                        <th>Kho</th>
-                        <th>Trạng thái</th>
-                        <th>Thời gian</th>
-                        <th>User</th>
-                        <th>Sản phẩm</th>
-                        <th>Thông tin</th>
+                        <th>Thông tin quét</th>
+                        <th>Kho nhận</th>
+                        <th>Trừ kho</th>
+                        <th>Quét dùm</th>
                     </tr>
                 </thead>
 
@@ -67,15 +66,39 @@
                    {
                        <tr class="@(item.IsSuccess == 0? "danger":"")">
                            <td>@item.Barcode</td>
-                           <td>@item.WareHouse</td>
-                           <td>@item.PStatus</td>
-                           <td>@item.CreateTime</td>
-                           <td>@item.UserLogin</td>
-                           <td>@item.ProductName</td>
                            <td>
-                               <span><strong>Thông báo: </strong>@item.Messenge</span><br />
-                               <span><strong>Kho liên quan: </strong>@item.WareRelative</span><br />
-                               <span><strong>Nhân viên quét giúp:</strong>@item.StaffHelp</span>
+                               <span><strong>Tác vụ: </strong>@item.PStatus</span><br />
+                               <span><strong>Mã kho: </strong>@item.WareHouse</span><br />
+                               <span><strong>Tên kho: </strong>@item.WareHouseName</span><br />
+                               <span><strong>Người quét: </strong>@item.UserLogin</span><br />
+                               <span><strong>Sản phẩm: </strong>@item.ProductName</span><br />
+                               <span><strong>Thời gian: </strong>@item.CreateTime</span><br />
+                               <span><strong>Số lượng: </strong>@item.Quantity</span><br />
+                               <span><strong>Kết quả: </strong>@item.Messenge</span><br />
+                           </td>
+                           <td>
+                               @if (item.PStatus == "XK")
+                               {
+                                   @item.WareRelative<br />
+                                   @item.WareRelativeName
+                               }
+                           </td>
+                           <td>
+                               @if (item.PStatus == "NK")
+                               {
+                                   @item.WareRelative<br />
+                                   @item.WareRelativeName
+                               }
+                           </td>
+                           <td>
+                               @if (item.StaffHelpIssue == "locationout")
+                               {
+                                    <span><strong>Tình trạng:</strong>Ngoài vùng</span>
+                               }
+                               else if (item.StaffHelpIssue == "locationin")
+                               {
+                                    <span><strong>Tình trạng:</strong>Trong vùng</span>
+                               }
                            </td>
                        </tr>
                    }

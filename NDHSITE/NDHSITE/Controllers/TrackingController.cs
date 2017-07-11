@@ -264,5 +264,109 @@ namespace NDHSITE.Controllers
 
             return View(allBarcode);
         }
+        public ActionResult ExcelBarcodeHistory(string search, string ware, string DateFrom = null, string DateTo = null)
+        {
+
+            DateTime dFrom = DateTime.Now;
+            DateTime dTo = DateTime.Now;
+            if (DateFrom != null && DateTo != null)
+            {
+                dFrom = DateTime.ParseExact(DateFrom, "MM/dd/yyyy", null);
+                dTo = DateTime.ParseExact(DateTo, "MM/dd/yyyy", null);
+            }
+
+            ViewBag.Ware = ware;
+
+            ViewBag.DateFrom = dFrom.ToString("MM/dd/yyyy");
+            ViewBag.DateTo = dTo.ToString("MM/dd/yyyy");
+            ViewBag.SearchText = search;
+
+            var allBarcode = (from log in db.BarcodeHistories
+                              where DbFunctions.TruncateTime(log.CreateTime)
+                                                 >= DbFunctions.TruncateTime(dFrom) && DbFunctions.TruncateTime(log.CreateTime)
+                                                 <= DbFunctions.TruncateTime(dTo) && log.Barcode.Contains(search) && log.WareHouse.Contains(ware)
+                              select log).OrderByDescending(p => p.CreateTime).ToList();
+
+
+            string pathRoot = Server.MapPath("~/haiupload/barcodereport.xlsx");
+            string name = "report" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".xlsx";
+            string pathTo = Server.MapPath("~/temp/" + name);
+
+            System.IO.File.Copy(pathRoot, pathTo);
+
+
+
+            try
+            {
+                FileInfo newFile = new FileInfo(pathTo);
+
+                using (ExcelPackage package = new ExcelPackage(newFile))
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets["barcode"];
+
+                    for (int i = 0; i < allBarcode.Count; i++)
+                    {
+
+                        try
+                        {
+                            worksheet.Cells[i + 2, 1].Value = allBarcode[i].Barcode;
+                            worksheet.Cells[i + 2, 2].Value = allBarcode[i].WareHouse;
+                            worksheet.Cells[i + 2, 3].Value = allBarcode[i].WareHouseName;
+                            worksheet.Cells[i + 2, 4].Value = allBarcode[i].ProductCode;
+                            worksheet.Cells[i + 2, 5].Value = allBarcode[i].ProductName;
+
+                            worksheet.Cells[i + 2, 6].Value = allBarcode[i].PStatus;
+                            worksheet.Cells[i + 2, 7].Value = allBarcode[i].CreateTime;
+                            worksheet.Cells[i + 2, 8].Value = allBarcode[i].Quantity;
+                            worksheet.Cells[i + 2, 9].Value = allBarcode[i].UserLogin;
+                            if (allBarcode[i].PStatus == "XK")
+                            {
+                                worksheet.Cells[i + 2, 10].Value = allBarcode[i].WareRelative;
+                                worksheet.Cells[i + 2, 11].Value = allBarcode[i].WareRelativeName;
+                            }
+                            if (allBarcode[i].PStatus == "NK")
+                            {
+                                worksheet.Cells[i + 2, 12].Value = allBarcode[i].WareRelative;
+                                worksheet.Cells[i + 2, 13].Value = allBarcode[i].WareRelativeName;
+                            }
+
+                            if (allBarcode[i].IsSuccess == 1)
+                            {
+                                worksheet.Cells[i + 2, 14].Value = "đạt";
+                            }
+                            else
+                            {
+                                worksheet.Cells[i + 2, 14].Value = "không đạt";
+                            }
+                            worksheet.Cells[i + 2, 15].Value = allBarcode[i].Messenge;
+                            if (allBarcode[i].StaffHelpIssue == "locationin")
+                            {
+                                worksheet.Cells[i + 2, 16].Value = "Trong vùng";
+                            }
+                            else if (allBarcode[i].StaffHelpIssue == "locationout")
+                            {
+                                worksheet.Cells[i + 2, 16].Value = "Ngoài vùng";
+                            }
+                        }
+                        catch
+                        {
+                            return RedirectToAction("error", "home");
+                        }
+
+                    }
+
+                    package.Save();
+
+                }
+
+            }
+            catch
+            {
+                return RedirectToAction("error", "home");
+            }
+
+
+            return File(pathTo, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", string.Format("report-khuyen-mai-" + DateTime.Now.ToString("ddMMyyyyhhmmss") + ".{0}", "xlsx"));
+        }
     }
 }
