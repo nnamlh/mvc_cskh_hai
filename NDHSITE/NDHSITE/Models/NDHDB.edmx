@@ -1312,6 +1312,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="report_cii_product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DFrom" Type="nvarchar" Mode="In" />
+          <Parameter Name="DTo" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="report_event_agency" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CType" Type="nvarchar" Mode="In" />
           <Parameter Name="EventId" Type="nvarchar" Mode="In" />
@@ -3067,6 +3071,10 @@
             <Parameter Name="DFrom" Mode="In" Type="String" />
             <Parameter Name="DTo" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="report_cii_product" ReturnType="Collection(NDHDBModel.report_cii_product_Result)">
+            <Parameter Name="DFrom" Mode="In" Type="String" />
+            <Parameter Name="DTo" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="report_event_agency_Result">
           <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -3097,6 +3105,21 @@
           <Property Type="Decimal" Name="countXK" Nullable="true" Precision="38" Scale="2" />
           <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
           <Property Type="String" Name="ProductCode" Nullable="true" MaxLength="32" />
+        </ComplexType>
+        <ComplexType Name="report_cii_product_Result">
+          <Property Type="String" Name="PStatus" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="WareHouse" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="BoxPoint" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="Staff" Nullable="true" MaxLength="100" />
+          <Property Type="Decimal" Name="Quantity" Nullable="true" Precision="5" Scale="2" />
+          <Property Type="String" Name="WareHouseName" Nullable="true" />
+          <Property Type="String" Name="CaseCode" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="C1" Nullable="true" MaxLength="32" />
+          <Property Type="DateTime" Name="ctime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="branch" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="branchExport" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="staffhelp" Nullable="false" MaxLength="22" />
+          <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3924,6 +3947,25 @@
                 <ScalarProperty Name="countXK" ColumnName="countXK" />
                 <ScalarProperty Name="PName" ColumnName="PName" />
                 <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="report_cii_product" FunctionName="NDHDBModel.Store.report_cii_product">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NDHDBModel.report_cii_product_Result">
+                <ScalarProperty Name="PStatus" ColumnName="PStatus" />
+                <ScalarProperty Name="WareHouse" ColumnName="WareHouse" />
+                <ScalarProperty Name="BoxPoint" ColumnName="BoxPoint" />
+                <ScalarProperty Name="Staff" ColumnName="Staff" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="WareHouseName" ColumnName="WareHouseName" />
+                <ScalarProperty Name="CaseCode" ColumnName="CaseCode" />
+                <ScalarProperty Name="C1" ColumnName="C1" />
+                <ScalarProperty Name="ctime" ColumnName="ctime" />
+                <ScalarProperty Name="branch" ColumnName="branch" />
+                <ScalarProperty Name="branchExport" ColumnName="branchExport" />
+                <ScalarProperty Name="staffhelp" ColumnName="staffhelp" />
+                <ScalarProperty Name="PName" ColumnName="PName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

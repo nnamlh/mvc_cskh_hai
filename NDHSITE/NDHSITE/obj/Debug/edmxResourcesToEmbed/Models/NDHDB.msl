@@ -824,5 +824,24 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="report_cii_product" FunctionName="NDHDBModel.Store.report_cii_product">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NDHDBModel.report_cii_product_Result">
+          <ScalarProperty Name="PStatus" ColumnName="PStatus" />
+          <ScalarProperty Name="WareHouse" ColumnName="WareHouse" />
+          <ScalarProperty Name="BoxPoint" ColumnName="BoxPoint" />
+          <ScalarProperty Name="Staff" ColumnName="Staff" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="WareHouseName" ColumnName="WareHouseName" />
+          <ScalarProperty Name="CaseCode" ColumnName="CaseCode" />
+          <ScalarProperty Name="C1" ColumnName="C1" />
+          <ScalarProperty Name="ctime" ColumnName="ctime" />
+          <ScalarProperty Name="branch" ColumnName="branch" />
+          <ScalarProperty Name="branchExport" ColumnName="branchExport" />
+          <ScalarProperty Name="staffhelp" ColumnName="staffhelp" />
+          <ScalarProperty Name="PName" ColumnName="PName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

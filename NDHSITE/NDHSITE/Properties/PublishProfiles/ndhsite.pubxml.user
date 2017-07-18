@@ -61,7 +61,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/23/2016 14:14:47</publishTime>
     </File>
     <File Include="bin/NDHSITE.dll">
-      <publishTime>07/11/2017 14:51:44</publishTime>
+      <publishTime>07/17/2017 15:23:06</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>09/23/2016 14:14:47</publishTime>
@@ -158,6 +158,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="haiupload/barcodereport.xlsx">
       <publishTime>07/11/2017 14:26:38</publishTime>
+    </File>
+    <File Include="haiupload/barcodereportdeatail.xlsx">
+      <publishTime>07/12/2017 15:42:57</publishTime>
     </File>
     <File Include="haiupload/defaultevent.png">
       <publishTime>11/17/2016 22:37:25</publishTime>
@@ -441,6 +444,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/HaiReport/ProductRemain.cshtml">
       <publishTime>01/19/2017 14:09:43</publishTime>
     </File>
+    <File Include="Views/HaiReport/RemainProductDetail.cshtml">
+      <publishTime>07/17/2017 15:22:57</publishTime>
+    </File>
     <File Include="Views/HaiReport/WarehouseRemain.cshtml">
       <publishTime>01/18/2017 14:50:23</publishTime>
     </File>
@@ -619,7 +625,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/23/2016 14:14:41</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/07/2017 09:39:26</publishTime>
+      <publishTime>07/17/2017 14:36:45</publishTime>
     </File>
   </ItemGroup>
 </Project>

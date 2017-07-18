@@ -1307,6 +1307,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="report_cii_product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="DFrom" Type="nvarchar" Mode="In" />
+    <Parameter Name="DTo" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="report_event_agency" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="CType" Type="nvarchar" Mode="In" />
     <Parameter Name="EventId" Type="nvarchar" Mode="In" />

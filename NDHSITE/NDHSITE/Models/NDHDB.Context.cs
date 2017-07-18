@@ -130,5 +130,18 @@ namespace NDHSITE.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<report_remain_wcode_Result>("report_remain_wcode", wCodeParameter, dFromParameter, dToParameter);
         }
+    
+        public virtual ObjectResult<report_cii_product_Result> report_cii_product(string dFrom, string dTo)
+        {
+            var dFromParameter = dFrom != null ?
+                new ObjectParameter("DFrom", dFrom) :
+                new ObjectParameter("DFrom", typeof(string));
+    
+            var dToParameter = dTo != null ?
+                new ObjectParameter("DTo", dTo) :
+                new ObjectParameter("DTo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<report_cii_product_Result>("report_cii_product", dFromParameter, dToParameter);
+        }
     }
 }

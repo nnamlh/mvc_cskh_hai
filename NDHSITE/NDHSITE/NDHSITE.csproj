@@ -350,6 +350,9 @@
     <Compile Include="Models\RegFirebase.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\report_cii_product_Result.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\report_event_agency_Result.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -443,6 +446,7 @@
       <LastGenOutput>NDHDB.cs</LastGenOutput>
     </Content>
     <Content Include="haiupload\barcodereport.xlsx" />
+    <Content Include="haiupload\barcodereportdeatail.xlsx" />
     <None Include="Properties\PublishProfiles\home.pubxml" />
     <None Include="Properties\PublishProfiles\ndhsite.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -579,6 +583,7 @@
     <Content Include="Views\Shared\_AdminSlideMenu.cshtml" />
     <Content Include="Views\Account\ChangeUserName.cshtml" />
     <Content Include="Views\Tracking\ShowBarcodeHistory.cshtml" />
+    <Content Include="Views\HaiReport\RemainProductDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

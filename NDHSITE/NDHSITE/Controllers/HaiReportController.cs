@@ -381,5 +381,97 @@ namespace NDHSITE.Controllers
         }
 
 
+        public ActionResult RemainProductDetail(int? page ,string DateTo, string DateFrom)
+        {
+            if (!Utitl.CheckUser(db, User.Identity.Name, "RemainProductDetail", 0))
+                return RedirectToAction("relogin", "home");
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            DateTime dFrom = DateTime.Now.Date;
+            DateTime dTo = DateTime.Now.Date;
+
+            string strDateFrom;
+            string strDateTo;
+
+            if (!String.IsNullOrEmpty(DateTo) && !String.IsNullOrEmpty(DateTo))
+            {
+                dFrom = DateTime.ParseExact(DateFrom, "dd/MM/yyyy", null);
+                dTo = DateTime.ParseExact(DateTo, "dd/MM/yyyy", null);
+            }
+
+            strDateFrom = dFrom.ToString("yyyy-MM-dd");
+            strDateTo = dTo.ToString("yyyy-MM-dd");
+
+            ViewBag.DateFrom = dFrom;
+            ViewBag.DateTo = dTo;
+
+            var listRemain = db.report_cii_product(strDateFrom, strDateTo).ToList();
+
+
+            return View(listRemain.OrderBy(p=> p.ctime).ToPagedList(pageNumber, pageSize));
+        }
+
+        public ActionResult ExcelRemainProductDetail(string DateTo, string DateFrom)
+        {
+            if (!Utitl.CheckUser(db, User.Identity.Name, "RemainProductDetail", 0))
+                return RedirectToAction("relogin", "home");
+
+            var data = db.report_cii_product(DateFrom, DateTo).ToList();
+
+            string pathRoot = Server.MapPath("~/haiupload/barcodereportdeatail.xlsx");
+            string name = "report" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".xlsx";
+            string pathTo = Server.MapPath("~/temp/" + name);
+
+            System.IO.File.Copy(pathRoot, pathTo);
+
+            try
+            {
+                FileInfo newFile = new FileInfo(pathTo);
+
+                using (ExcelPackage package = new ExcelPackage(newFile))
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[1];
+
+                    for (int i = 0; i < data.Count; i++)
+                    {
+
+                        try
+                        {
+                            worksheet.Cells[i + 2, 1].Value = data[i].CaseCode;
+                            worksheet.Cells[i + 2, 2].Value = data[i].branchExport;
+                            worksheet.Cells[i + 2, 3].Value = data[i].C1;
+                            worksheet.Cells[i + 2, 4].Value = data[i].WareHouse;
+                            worksheet.Cells[i + 2, 5].Value = data[i].WareHouseName;
+                            worksheet.Cells[i + 2, 6].Value = data[i].branch;
+                            worksheet.Cells[i + 2, 8].Value = data[i].Staff;
+                            worksheet.Cells[i + 2,10].Value = data[i].PName;
+                            worksheet.Cells[i + 2, 11].Value = data[i].Quantity;
+                            worksheet.Cells[i + 2, 12].Value = data[i].BoxPoint;
+                            worksheet.Cells[i + 2, 13].Value = data[i].ctime;
+                            worksheet.Cells[i + 2, 14].Value = data[i].staffhelp;
+                        }
+                        catch
+                        {
+                            return RedirectToAction("error", "home");
+                        }
+
+                    }
+
+                    package.Save();
+
+                }
+
+            }
+            catch
+            {
+                return RedirectToAction("error", "home");
+            }
+
+
+            return File(pathTo, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", string.Format("report-ton-kho-" + DateTime.Now.ToString("ddMMyyyyhhmmss") + ".{0}", "xlsx"));
+
+        }
+
     }
 }

@@ -1486,6 +1486,10 @@
       <Parameter Name="DFrom" Mode="In" Type="String" />
       <Parameter Name="DTo" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="report_cii_product" ReturnType="Collection(NDHDBModel.report_cii_product_Result)">
+      <Parameter Name="DFrom" Mode="In" Type="String" />
+      <Parameter Name="DTo" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="report_event_agency_Result">
     <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -1516,5 +1520,20 @@
     <Property Type="Decimal" Name="countXK" Nullable="true" Precision="38" Scale="2" />
     <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
     <Property Type="String" Name="ProductCode" Nullable="true" MaxLength="32" />
+  </ComplexType>
+  <ComplexType Name="report_cii_product_Result">
+    <Property Type="String" Name="PStatus" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="WareHouse" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="BoxPoint" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="Staff" Nullable="true" MaxLength="100" />
+    <Property Type="Decimal" Name="Quantity" Nullable="true" Precision="5" Scale="2" />
+    <Property Type="String" Name="WareHouseName" Nullable="true" />
+    <Property Type="String" Name="CaseCode" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="C1" Nullable="true" MaxLength="32" />
+    <Property Type="DateTime" Name="ctime" Nullable="true" Precision="23" />
+    <Property Type="String" Name="branch" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="branchExport" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="staffhelp" Nullable="false" MaxLength="22" />
+    <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
   </ComplexType>
 </Schema>
