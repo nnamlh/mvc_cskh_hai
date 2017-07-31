@@ -61,7 +61,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/23/2016 14:14:47</publishTime>
     </File>
     <File Include="bin/NDHSITE.dll">
-      <publishTime>07/17/2017 15:23:06</publishTime>
+      <publishTime>07/25/2017 11:41:06</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>09/23/2016 14:14:47</publishTime>
@@ -204,6 +204,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="haiupload/productremain.xlsx">
       <publishTime>01/05/2017 12:52:09</publishTime>
     </File>
+    <File Include="haiupload/update-ds-khach-hang-c2-v2.xlsx">
+      <publishTime>07/25/2017 11:41:01</publishTime>
+    </File>
     <File Include="haiupload/warehouseremain.xlsx">
       <publishTime>01/05/2017 12:52:10</publishTime>
     </File>
@@ -340,7 +343,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/07/2017 14:25:31</publishTime>
     </File>
     <File Include="Views/Account/ChangeUserName.cshtml">
-      <publishTime>07/07/2017 14:34:27</publishTime>
+      <publishTime>07/19/2017 09:19:43</publishTime>
     </File>
     <File Include="Views/Account/DeleteUser.cshtml">
       <publishTime>01/18/2017 14:25:11</publishTime>
@@ -362,6 +365,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Account/RegisterStaff.cshtml">
       <publishTime>10/20/2016 10:09:35</publishTime>
+    </File>
+    <File Include="Views/Account/UpdateAgencyC2V2.cshtml">
+      <publishTime>07/25/2017 11:19:31</publishTime>
     </File>
     <File Include="Views/Account/UserInfo.cshtml">
       <publishTime>01/20/2017 17:07:28</publishTime>
@@ -397,10 +403,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/07/2017 15:18:14</publishTime>
     </File>
     <File Include="Views/Agency/ModifyCII.cshtml">
-      <publishTime>07/07/2017 16:00:40</publishTime>
+      <publishTime>07/24/2017 14:23:43</publishTime>
     </File>
     <File Include="Views/Agency/ModifyFarmer.cshtml">
       <publishTime>07/07/2017 16:07:35</publishTime>
+    </File>
+    <File Include="Views/Agency/UpdateAgencyC2V2.cshtml">
+      <publishTime>07/25/2017 11:03:37</publishTime>
     </File>
     <File Include="Views/EventManage/AwardManage.cshtml">
       <publishTime>11/22/2016 01:36:28</publishTime>
@@ -445,7 +454,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/19/2017 14:09:43</publishTime>
     </File>
     <File Include="Views/HaiReport/RemainProductDetail.cshtml">
-      <publishTime>07/17/2017 15:22:57</publishTime>
+      <publishTime>07/17/2017 15:27:20</publishTime>
     </File>
     <File Include="Views/HaiReport/WarehouseRemain.cshtml">
       <publishTime>01/18/2017 14:50:23</publishTime>
@@ -498,6 +507,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Home/Error.cshtml">
       <publishTime>10/30/2016 15:05:13</publishTime>
     </File>
+    <File Include="Views/Home/FindCode.cshtml">
+      <publishTime>07/25/2017 10:35:17</publishTime>
+    </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>05/13/2017 00:08:28</publishTime>
     </File>
@@ -544,7 +556,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/23/2016 14:14:48</publishTime>
     </File>
     <File Include="Views/Shared/_AdminSlideMenu.cshtml">
-      <publishTime>07/07/2017 14:33:13</publishTime>
+      <publishTime>07/19/2017 09:18:46</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
       <publishTime>12/05/2016 17:26:32</publishTime>

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<string>
+@{
+    ViewBag.Title = "UpdateAgencyC2V2";
+}
+
+<div class="portlet portlet-boxed">
+    <div class="portlet-header">
+        <h4 class="portlet-title">
+            Tạo khách hàng c2 và tài khoản
+        </h4>
+    </div> <!-- /.portlet-header -->
+    <div class="portlet-body">
+        <a href="/home/findcode">Xem danh sách mã tỉnh thành/chi nhánh</a>
+        <form method="post" enctype="multipart/form-data" onsubmit="if(!confirm('Thêm đại lý cấp 2?')){return false;}">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" class="form-control" name="files" />
+                        <a href="~/haiupload/update-ds-khach-hang-c2-v2.xlsx" class="form-control">Tải file mẫu</a>
+                    </div>
+
+                    <button class="btn-primary btn" type="submit">Cập nhật</button>
+                </div>
+            </div>
+        </form>
+
+        @if (Model != null)
+        {
+            <hr />
+            <p>Danh sách lỗi</p>
+            <ul>
+                @foreach (var item in Model)
+                {
+                    <li>@item</li>
+                }
+            </ul>
+        }
+    </div>
+</div>
+
+
+

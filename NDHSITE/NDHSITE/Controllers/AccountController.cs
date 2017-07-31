@@ -110,6 +110,8 @@ namespace NDHSITE.Controllers
             return View();
         }
 
+
+
         /*
         // GET: /Account/Register
         [Authorize(Roles = "Administrator")]
@@ -249,6 +251,169 @@ namespace NDHSITE.Controllers
             return RedirectToAction(returnAction, "agency", new { Id = AgencyId });
         }
 
+
+        #region tao khach hang c2 va tai khoan
+        /***
+         * 
+         * file excel update-ds-khach-hang-c2-v2.xlsx
+         * 
+         */
+         [Authorize(Roles = "Administrator")]
+        public ActionResult UpdateAgencyC2V2()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public async Task<ActionResult> UpdateAgencyC2V2(HttpPostedFileBase files)
+        {
+            List<string> listFail = new List<string>();
+            if (files != null && files.ContentLength > 0)
+            {
+                string extension = System.IO.Path.GetExtension(files.FileName);
+                if (extension.Equals(".xlsx"))
+                {
+
+                    string fileSave = "cii_" + DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
+                    string path = Server.MapPath("~/temp/" + fileSave);
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+
+                    files.SaveAs(path);
+                    FileInfo newFile = new FileInfo(path);
+                    var package = new ExcelPackage(newFile);
+                    ExcelWorksheet sheet = package.Workbook.Worksheets[1];
+
+                    int totalRows = sheet.Dimension.End.Row;
+                    int totalCols = sheet.Dimension.End.Column;
+
+                    for (int i = 2; i <= totalRows; i++)
+                    {
+                        string code = Convert.ToString(sheet.Cells[i, 1].Value);
+
+                        var check = db.C2Info.Where(p => p.Code == code).FirstOrDefault();
+
+                        if (check == null && !String.IsNullOrEmpty(code))
+                        {
+                            code = code.ToUpper();
+                            string branchCode = Convert.ToString(sheet.Cells[i, 9].Value).Trim();
+
+                            var branch = db.HaiBranches.Where(p => p.Code == branchCode).FirstOrDefault();
+
+                            if (branch != null)
+                            {
+
+                                string storeName = Convert.ToString(sheet.Cells[i, 2].Value);
+
+                                string deputy = Convert.ToString(sheet.Cells[i, 3].Value);
+
+                                string identityCard = Convert.ToString(sheet.Cells[i, 5].Value);
+                                string phone = Convert.ToString(sheet.Cells[i, 4].Value);
+
+                                string bussinessLicence = Convert.ToString(sheet.Cells[i, 6].Value);
+
+                                string addressInfo = Convert.ToString(sheet.Cells[i, 7].Value);
+
+                                string c1Code = Convert.ToString(sheet.Cells[i, 10].Value);
+
+                                var c1Check = db.C1Info.Where(p => p.Code == c1Code).FirstOrDefault();
+
+                                if (c1Check == null)
+                                    c1Check = db.C1Info.Where(p => p.Code == "0000000000").FirstOrDefault();
+
+
+
+                                var cInfo = new CInfoCommon()
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    CName = storeName,
+                                    IdentityCard = identityCard,
+                                    AddressInfo = addressInfo,
+                                    Phone = phone,
+                                    CreateTime = DateTime.Now,
+                                    CType = "CII",
+                                    AreaId = branch.AreaId,
+                                    BranchCode = branch.Code,
+                                    CCode = code,
+                                    WardId = "11111",
+                                    CDeputy = deputy
+                                };
+
+                                string ward = Convert.ToString(sheet.Cells[i, 8].Value);
+
+                                var wardInfo = db.Wards.Find(ward);
+
+                                if (wardInfo != null)
+                                {
+                                    cInfo.WardId = ward;
+                                }
+
+
+                                var c2 = new C2Info()
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    InfoId = cInfo.Id,
+                                    C1Id = c1Check.Id,
+                                    Code = code,
+                                    IsLock = 0,
+                                    IsActive = 1,
+                                    StoreName = storeName,
+                                    Deputy = deputy
+                                };
+
+                                db.CInfoCommons.Add(cInfo);
+                                db.SaveChanges();
+
+
+                                db.C2Info.Add(c2);
+                                db.SaveChanges();
+
+                                // tao tai khoan
+                                var user = new ApplicationUser()
+                                {
+                                    UserName = cInfo.CCode,
+                                    IsActivced = 1,
+                                    FullName = cInfo.CDeputy,
+                                    AccountType = "CII"
+                                };
+
+                                var result = await UserManager.CreateAsync(user, cInfo.Phone);
+                                if (result.Succeeded)
+                                {
+                                  
+                                    cInfo.UserLogin = user.UserName;
+                                    db.Entry(cInfo).State = System.Data.Entity.EntityState.Modified;
+                                    db.SaveChanges();
+
+                                    result = UserManager.AddToRole(user.Id, "Guest");
+                                }
+                                else
+                                {
+                                    listFail.Add(code + " ko tao dc tai khoan");
+                                }
+
+                            }
+                            else
+                            {
+                                listFail.Add(code + " sai ma chi nhanh");
+                            }
+                        }
+                        else
+                        {
+                            listFail.Add(code + " da tao");
+                        }
+
+                    }
+                }
+            }
+
+            return View(listFail);
+        }
+        #endregion
 
         private CInfoCommon checkAgency(string Id, string AgencyType)
         {
@@ -966,7 +1131,7 @@ namespace NDHSITE.Controllers
 
                 var checkNewUser = db.AspNetUsers.Where(p => p.UserName == newuser).FirstOrDefault();
 
-                if (checkUser != null)
+                if (checkUser == null)
                     throw new Exception("Tài khoản mới đã có ng dùng");
 
                 if (checkUser.AccountType == "STAFF")

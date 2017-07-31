@@ -70,7 +70,7 @@ namespace NDHSITE.Controllers
                     ViewBag.STypeName = "Mã chi nhánh";
                     return View(db.C1Info.Where(p => p.HaiBranch.Code.Contains(search) && p.CInfoCommon.IsDelete != 1).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
                 default:
-                    return View(db.C1Info.Where(p=> p.CInfoCommon.IsDelete != 1).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
+                    return View(db.C1Info.Where(p => p.CInfoCommon.IsDelete != 1).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
             }
         }
 
@@ -84,7 +84,7 @@ namespace NDHSITE.Controllers
 
         public ActionResult C1Json()
         {
-            var arr = db.C1Info.Where(p=> p.CInfoCommon.IsDelete != 1).Select(p => new { Code = p.Code, Name = p.StoreName }).ToList();
+            var arr = db.C1Info.Where(p => p.CInfoCommon.IsDelete != 1).Select(p => new { Code = p.Code, Name = p.StoreName }).ToList();
 
             return Json(arr, JsonRequestBehavior.AllowGet);
         }
@@ -460,7 +460,7 @@ namespace NDHSITE.Controllers
                     ViewBag.STypeName = "Mã chi nhánh";
                     return View(db.C2Info.Where(p => p.CInfoCommon.BranchCode.Contains(search) && p.CInfoCommon.IsDelete != 1).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
                 default:
-                    return View(db.C2Info.Where(p=> p.CInfoCommon.IsDelete != 1).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
+                    return View(db.C2Info.Where(p => p.CInfoCommon.IsDelete != 1).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
 
             }
         }
@@ -495,7 +495,7 @@ namespace NDHSITE.Controllers
             if (c1Check == null)
                 c1Check = db.C1Info.Where(p => p.Code == "0000000000").FirstOrDefault();
 
-         
+
             var branch = db.HaiBranches.Where(p => p.Code == info.BranchCode).FirstOrDefault();
             if (branch != null)
                 info.AreaId = branch.AreaId;
@@ -560,7 +560,7 @@ namespace NDHSITE.Controllers
                     for (int i = 2; i <= totalRows; i++)
                     {
                         string code = Convert.ToString(sheet.Cells[i, 1].Value);
-        
+
                         var checkCI = db.C1Info.Where(p => p.Code == code).FirstOrDefault();
 
                         if (checkCI == null && !String.IsNullOrEmpty(code))
@@ -748,7 +748,7 @@ namespace NDHSITE.Controllers
                                 db.SaveChanges();
                             }
                         }
-                    
+
                     }
                 }
             }
@@ -871,7 +871,7 @@ namespace NDHSITE.Controllers
 
             var agency = db.C2Info.Find(id);
             ViewBag.BranchAll = db.HaiBranches.ToList();
-            if (agency == null ||agency.CInfoCommon.IsDelete == 1)
+            if (agency == null || agency.CInfoCommon.IsDelete == 1)
             {
                 return RedirectToAction("error", "home");
             }
@@ -932,7 +932,13 @@ namespace NDHSITE.Controllers
             infoCommon.Phone = info.Phone;
             infoCommon.Email = info.Email;
             infoCommon.Notes = info.Notes;
+            infoCommon.BackName = info.BackName;
+            infoCommon.BranchCode = info.BranchCode;
+            infoCommon.BankAccountHolder = info.BankAccountHolder;
+            infoCommon.PlaceOfBirth = info.PlaceOfBirth;
+            infoCommon.AddressInfo = info.AddressInfo;
             infoCommon.CCode = agency.Code;
+            infoCommon.BranchCode = info.BranchCode;
             infoCommon.IdentityCard = info.IdentityCard;
 
             var wardInfo = db.Wards.Find(info.WardId);
@@ -1020,7 +1026,7 @@ namespace NDHSITE.Controllers
                     ViewBag.STypeName = "Mã chi nhánh";
                     return View(db.FarmerInfoes.Where(p => p.CInfoCommon.BranchCode.Contains(search) && p.CInfoCommon.IsDelete != 1).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
                 default:
-                    return View(db.FarmerInfoes.Where(p=> p.CInfoCommon.IsDelete != 1).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
+                    return View(db.FarmerInfoes.Where(p => p.CInfoCommon.IsDelete != 1).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
 
             }
         }
@@ -1080,7 +1086,7 @@ namespace NDHSITE.Controllers
             }
             ViewBag.BranchAll = db.HaiBranches.ToList();
             ViewBag.Provinces = db.Provinces.ToList();
-           // ViewBag.AllArea = db.HaiAreas.ToList();
+            // ViewBag.AllArea = db.HaiAreas.ToList();
             // danh sach quan
             var provinceId = agency.CInfoCommon.Ward.District.Provinceid;
             ViewBag.ProvinceId = provinceId;
@@ -1164,7 +1170,7 @@ namespace NDHSITE.Controllers
 
         public ActionResult LockUser(string Id, string Type, int Status, string Agency)
         {
-        
+
 
             if (!Utitl.CheckUser(db, User.Identity.Name, "ManageAgency", 1))
                 return RedirectToAction("relogin", "home");
@@ -1204,7 +1210,7 @@ namespace NDHSITE.Controllers
 
             if (Type == "CI")
             {
-                return RedirectToAction("modifyci", "agency", new { id = Agency});
+                return RedirectToAction("modifyci", "agency", new { id = Agency });
             }
             else if (Type == "CII")
             {
@@ -1220,6 +1226,141 @@ namespace NDHSITE.Controllers
             }
 
         }
+
+
+        #region tao khach hang c2 va tai khoan
+        /***
+         * 
+         * file excel update-ds-khach-hang-c2-v2.xlsx
+         * 
+         */
+
+        public ActionResult UpdateAgencyC2V2()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public ActionResult UpdateAgencyC2V2(HttpPostedFileBase files)
+        {
+            List<string> listFail = new List<string>();
+            if (files != null && files.ContentLength > 0)
+            {
+                string extension = System.IO.Path.GetExtension(files.FileName);
+                if (extension.Equals(".xlsx"))
+                {
+
+                    string fileSave = "cii_" + DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
+                    string path = Server.MapPath("~/temp/" + fileSave);
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+
+                    files.SaveAs(path);
+                    FileInfo newFile = new FileInfo(path);
+                    var package = new ExcelPackage(newFile);
+                    ExcelWorksheet sheet = package.Workbook.Worksheets[1];
+
+                    int totalRows = sheet.Dimension.End.Row;
+                    int totalCols = sheet.Dimension.End.Column;
+
+                    for (int i = 2; i <= totalRows; i++)
+                    {
+                        string code = Convert.ToString(sheet.Cells[i, 1].Value);
+
+                        var check = db.C2Info.Where(p => p.Code == code).FirstOrDefault();
+
+                        if (check == null && !String.IsNullOrEmpty(code))
+                        {
+                            string branchCode = Convert.ToString(sheet.Cells[i, 3].Value).Trim();
+
+                            var branch = db.HaiBranches.Where(p => p.Code == branchCode).FirstOrDefault();
+
+                            if (branch != null)
+                            {
+
+                                string storeName = Convert.ToString(sheet.Cells[i, 4].Value);
+
+                                string deputy = Convert.ToString(sheet.Cells[i, 5].Value);
+
+                                string identityCard = Convert.ToString(sheet.Cells[i, 7].Value);
+                                string phone = Convert.ToString(sheet.Cells[i, 6].Value);
+
+                                string bussinessLicence = Convert.ToString(sheet.Cells[i, 8]);
+
+                                string addressInfo = Convert.ToString(sheet.Cells[i, 9].Value);
+
+                                string c1Code = Convert.ToString(sheet.Cells[i, 2].Value);
+
+                                var c1Check = db.C1Info.Where(p => p.Code == c1Code).FirstOrDefault();
+
+                                if (c1Check == null)
+                                    c1Check = db.C1Info.Where(p => p.Code == "0000000000").FirstOrDefault();
+
+
+
+                                var cInfo = new CInfoCommon()
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    CName = storeName,
+                                    IdentityCard = identityCard,
+                                    AddressInfo = addressInfo,
+                                    Phone = phone,
+                                    CreateTime = DateTime.Now,
+                                    CType = "CII",
+                                    AreaId = branch.AreaId,
+                                    BranchCode = branch.Code,
+                                    CCode = code,
+                                    WardId = "11111",
+                                    CDeputy = deputy
+                                };
+
+                                string ward = Convert.ToString(sheet.Cells[i, 10].Value);
+
+                                var wardInfo = db.Wards.Find(ward);
+
+                                if (wardInfo != null)
+                                {
+                                    cInfo.WardId = ward;
+                                }
+
+
+                                var c2 = new C2Info()
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    InfoId = cInfo.Id,
+                                    C1Id = c1Check.Id,
+                                    Code = code,
+                                    IsLock = 0,
+                                    IsActive = 1,
+                                    StoreName = storeName,
+                                    Deputy = deputy
+                                };
+
+                                db.CInfoCommons.Add(cInfo);
+                                db.SaveChanges();
+
+
+                                db.C2Info.Add(c2);
+                                db.SaveChanges();
+
+
+                            }
+                        }
+                        else
+                        {
+                            listFail.Add(code);
+                        }
+
+                    }
+                }
+            }
+
+            return View(listFail);
+        }
+        #endregion
 
     }
 }

@@ -145,5 +145,14 @@ namespace NDHSITE.Controllers
         {
             return View();
         }
+
+        public ActionResult FindCode()
+        {
+            ViewBag.Branchs = db.HaiBranches.ToList();
+
+            return View(db.Provinces.ToList());
+        }
+
+
     }
 }

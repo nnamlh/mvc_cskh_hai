@@ -447,6 +447,7 @@
     </Content>
     <Content Include="haiupload\barcodereport.xlsx" />
     <Content Include="haiupload\barcodereportdeatail.xlsx" />
+    <Content Include="haiupload\update-ds-khach-hang-c2-v2.xlsx" />
     <None Include="Properties\PublishProfiles\home.pubxml" />
     <None Include="Properties\PublishProfiles\ndhsite.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -584,6 +585,9 @@
     <Content Include="Views\Account\ChangeUserName.cshtml" />
     <Content Include="Views\Tracking\ShowBarcodeHistory.cshtml" />
     <Content Include="Views\HaiReport\RemainProductDetail.cshtml" />
+    <Content Include="Views\Home\FindCode.cshtml" />
+    <Content Include="Views\Agency\UpdateAgencyC2V2.cshtml" />
+    <Content Include="Views\Account\UpdateAgencyC2V2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
