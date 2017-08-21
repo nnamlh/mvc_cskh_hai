@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ed4048ffe58342f49bbcb406094458d8" Name="Diagram1">
+      <Diagram DiagramId="ed4048ffe58342f49bbcb406094458d8" Name="Diagram1" ZoomLevel="93">
         <EntityTypeShape EntityType="NDHDBModel.AgencySavePoint" Width="1.5" PointX="5.25" PointY="22.375" IsExpanded="true" />
         <EntityTypeShape EntityType="NDHDBModel.AllStatu" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="NDHDBModel.APIAuthHistory" Width="1.5" PointX="3.75" PointY="1.875" IsExpanded="true" />
@@ -103,6 +103,7 @@
         <AssociationConnector Association="NDHDBModel.MobileRole" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.StaffWithC1" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.StaffWithC2" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="NDHDBModel.StoreStaffId" Width="1.5" PointX="12.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

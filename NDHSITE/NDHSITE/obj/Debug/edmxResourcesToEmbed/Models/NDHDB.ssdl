@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="NDHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="NDHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AgencySavePoint">
     <Key>
       <PropertyRef Name="EventId" />
@@ -175,16 +175,6 @@
     <Property Name="IsLock" Type="int" />
     <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
     <Property Name="HaiBrandId" Type="nvarchar" MaxLength="128" />
-    <Property Name="Position" Type="nvarchar" MaxLength="256" />
-    <Property Name="C1Position" Type="nvarchar" MaxLength="512" />
-    <Property Name="WeddingDate" Type="datetime" />
-    <Property Name="FoundingDate" Type="datetime" />
-    <Property Name="Decison1" Type="nvarchar" MaxLength="512" />
-    <Property Name="Decision1Birthday" Type="nvarchar" MaxLength="128" />
-    <Property Name="Decision1Phone" Type="nvarchar" MaxLength="32" />
-    <Property Name="Decison2" Type="nvarchar" MaxLength="512" />
-    <Property Name="Decision2Birthday" Type="nvarchar" MaxLength="128" />
-    <Property Name="Decision2Phone" Type="nvarchar" MaxLength="32" />
   </EntityType>
   <EntityType Name="C2Info">
     <Key>
@@ -212,7 +202,6 @@
     <Property Name="Phone" Type="nvarchar" MaxLength="128" />
     <Property Name="Fax" Type="nvarchar" MaxLength="128" />
     <Property Name="Email" Type="nvarchar" MaxLength="256" />
-    <Property Name="BirthDay" Type="date" />
     <Property Name="PlaceOfBirth" Type="nvarchar" MaxLength="255" />
     <Property Name="Notes" Type="nvarchar" MaxLength="255" />
     <Property Name="UserLogin" Type="nvarchar" MaxLength="255" />
@@ -236,6 +225,9 @@
     <Property Name="Lat" Type="float" />
     <Property Name="Lng" Type="float" />
     <Property Name="IsDelete" Type="int" />
+    <Property Name="BirthDay" Type="int" />
+    <Property Name="BirthMonth" Type="int" />
+    <Property Name="BirthYear" Type="int" />
   </EntityType>
   <EntityType Name="District">
     <Key>
@@ -699,6 +691,14 @@
     </Key>
     <Property Name="C2Id" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="StaffId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StoreStaffId">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="16" Nullable="false" />
+    <Property Name="IsUser" Type="int" />
+    <Property Name="CountNumber" Type="int" />
   </EntityType>
   <EntityType Name="TreeInfo">
     <Key>
@@ -1384,6 +1384,7 @@
     <EntitySet Name="StaffCheckIn" EntityType="Self.StaffCheckIn" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StaffWithC1" EntityType="Self.StaffWithC1" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StaffWithC2" EntityType="Self.StaffWithC2" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StoreStaffId" EntityType="Self.StoreStaffId" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TreeInfo" EntityType="Self.TreeInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ward" EntityType="Self.Ward" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />

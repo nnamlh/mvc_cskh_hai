@@ -209,38 +209,16 @@
                                             <select class="form-control" id="dsward" required name="WardId"></select>
 
                                         </div>
+
                                         <div class="form-group">
-                                            <label>TK ngân hàng</label>
-                                            <input type="text" name="BankAccount" class="form-control"  />
+                                            <label>Langitude</label>
+                                            <input type="number" name="Lat" class="form-control" />
                                         </div>
                                         <div class="form-group">
-                                            <label>Người hưởng thụ</label>
-                                            <input type="text" name="BankAccountHolder" class="form-control"  />
+                                            <label>Longitude</label>
+                                            <input type="number" name="Lng" class="form-control" />
                                         </div>
-                                        <div class="form-group">
-                                            <label>Ngân hàng</label>
-                                            <input type="text" name="BackName" class="form-control"  />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Mã số thuế</label>
-                                            <input type="text" name="TaxCode" class="form-control"  />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Giấy phép kinh doanh</label>
-                                            <input type="text" name="BusinessLicense" class="form-control"  />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Chức vụ</label>
-                                            <input type="text" name="C1Position" class="form-control"  />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Ngày thành lập</label>
-                                            <input type="text" name="FoundingDate" class="form-control" id="FoundingDate" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Ngày cưới</label>
-                                            <input type="text" name="WeddingDate" class="form-control" id="WeddingDate" />
-                                        </div>
+                                     
                                     </div>
 
                                     <div class="col-sm-6">
@@ -249,6 +227,7 @@
                                             <label>Ngày sinh</label>
                                             <input type="text" name="birthday" class="form-control" id="datetimecreate" />
                                         </div>
+
                                         <div class="form-group">
                                             <label>Nơi sinh</label>
                                             <input type="text" name="PlaceOfBirth" class="form-control" />
@@ -261,36 +240,31 @@
                                             <label>Email</label>
                                             <input type="text" name="Email" class="form-control" />
                                         </div>
-
+                                        <div class="form-group">
+                                            <label>TK ngân hàng</label>
+                                            <input type="text" name="BankAccount" class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Người hưởng thụ</label>
+                                            <input type="text" name="BankAccountHolder" class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Ngân hàng</label>
+                                            <input type="text" name="BackName" class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Mã số thuế</label>
+                                            <input type="text" name="TaxCode" class="form-control" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Giấy phép kinh doanh</label>
+                                            <input type="text" name="BusinessLicense" class="form-control" />
+                                        </div>
                                         <div class="form-group">
                                             <label>Ghi chú</label>
                                             <textarea name="Notes" class="form-control"></textarea>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Người quyết định 1</label>
-                                            <input type="text" name="Decison1" class="form-control"  />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Ngày tháng năm sinh</label>
-                                            <input type="text" name="Decision1Birthday" class="form-control" id="Decision1Birthday" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Số điện thoại</label>
-                                            <input type="text" name="Decision1Phone" class="form-control" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Người quyết định 2</label>
-                                            <input type="text" name="Decison2" class="form-control" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Ngày tháng năm sinh</label>
-                                            <input type="text" name="Decision2Birthday" class="form-control" id="Decision2Birthday" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Số điện thoại</label>
-                                            <input type="text" name="Decision2Phone" class="form-control" />
-                                        </div>
-
+                                      
                                     </div>
 
                                 </div>
@@ -341,6 +315,7 @@
     <script src="~/Scripts/moment.min.js"></script>
     <script src="~/scripts/moment-with-locales.min.js"></script>
     <script src="~/scripts/bootstrap-datetimepicker.min.js"></script>
+
     <script type="text/javascript">
 
         databranch();
@@ -367,34 +342,10 @@
             $('.branchname').show().html('<i>' + val + '</i>');
         }
 
+
         $('#datetimecreate').datetimepicker({
             locale: 'vi',
-            format: 'MM/DD/YYYY',
-            defaultDate: new Date()
-        });
-
-        $('#Decision1Birthday').datetimepicker({
-            locale: 'vi',
-            format: 'MM/DD/YYYY',
-            defaultDate: new Date()
-        });
-
-        $('#Decision2Birthday').datetimepicker({
-            locale: 'vi',
-            format: 'MM/DD/YYYY',
-            defaultDate: new Date()
-        });
-
-        $('#WeddingDate').datetimepicker({
-            locale: 'vi',
-            format: 'MM/DD/YYYY',
-            defaultDate: new Date()
-        });
-
-        $('#FoundingDate').datetimepicker({
-            locale: 'vi',
-            format: 'MM/DD/YYYY',
-            defaultDate: new Date()
+            format: 'MM/DD/YYYY'
         });
 
         function addtype(id, name) {

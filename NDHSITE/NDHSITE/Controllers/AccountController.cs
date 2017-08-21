@@ -28,6 +28,10 @@ namespace NDHSITE.Controllers
         public AccountController(UserManager<ApplicationUser> userManager)
         {
             UserManager = userManager;
+            UserManager.UserValidator = new UserValidator<ApplicationUser>(userManager) {
+                AllowOnlyAlphanumericUserNames = false
+               
+            };
         }
 
         public UserManager<ApplicationUser> UserManager { get; private set; }
@@ -1024,8 +1028,7 @@ namespace NDHSITE.Controllers
                 result.fullname = cInfo.CName;
                 result.phone = cInfo.Phone;
                 result.address = cInfo.AddressInfo;
-                if (cInfo.BirthDay != null)
-                    result.birthday = cInfo.BirthDay.Value.ToShortDateString();
+                result.birthday = "";
                 result.user = user;
                 result.area = cInfo.HaiArea.Name;
                 result.code = cInfo.CCode;

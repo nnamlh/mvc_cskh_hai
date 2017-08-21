@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -383,6 +384,9 @@
     <Compile Include="Models\StaffCheckIn.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StoreStaffId.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\TokenData.cs" />
     <Compile Include="Models\TreeInfo.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
@@ -448,6 +452,7 @@
     <Content Include="haiupload\barcodereport.xlsx" />
     <Content Include="haiupload\barcodereportdeatail.xlsx" />
     <Content Include="haiupload\update-ds-khach-hang-c2-v2.xlsx" />
+    <Content Include="haiupload\stafftandagency.xlsx" />
     <None Include="Properties\PublishProfiles\home.pubxml" />
     <None Include="Properties\PublishProfiles\ndhsite.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -588,6 +593,7 @@
     <Content Include="Views\Home\FindCode.cshtml" />
     <Content Include="Views\Agency\UpdateAgencyC2V2.cshtml" />
     <Content Include="Views\Account\UpdateAgencyC2V2.cshtml" />
+    <Content Include="Views\HaiStaff\AddAgency.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

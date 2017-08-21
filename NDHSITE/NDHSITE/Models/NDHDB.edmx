@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="NDHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="NDHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AgencySavePoint">
           <Key>
             <PropertyRef Name="EventId" />
@@ -180,16 +180,6 @@
           <Property Name="IsLock" Type="int" />
           <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
           <Property Name="HaiBrandId" Type="nvarchar" MaxLength="128" />
-          <Property Name="Position" Type="nvarchar" MaxLength="256" />
-          <Property Name="C1Position" Type="nvarchar" MaxLength="512" />
-          <Property Name="WeddingDate" Type="datetime" />
-          <Property Name="FoundingDate" Type="datetime" />
-          <Property Name="Decison1" Type="nvarchar" MaxLength="512" />
-          <Property Name="Decision1Birthday" Type="nvarchar" MaxLength="128" />
-          <Property Name="Decision1Phone" Type="nvarchar" MaxLength="32" />
-          <Property Name="Decison2" Type="nvarchar" MaxLength="512" />
-          <Property Name="Decision2Birthday" Type="nvarchar" MaxLength="128" />
-          <Property Name="Decision2Phone" Type="nvarchar" MaxLength="32" />
         </EntityType>
         <EntityType Name="C2Info">
           <Key>
@@ -217,7 +207,6 @@
           <Property Name="Phone" Type="nvarchar" MaxLength="128" />
           <Property Name="Fax" Type="nvarchar" MaxLength="128" />
           <Property Name="Email" Type="nvarchar" MaxLength="256" />
-          <Property Name="BirthDay" Type="date" />
           <Property Name="PlaceOfBirth" Type="nvarchar" MaxLength="255" />
           <Property Name="Notes" Type="nvarchar" MaxLength="255" />
           <Property Name="UserLogin" Type="nvarchar" MaxLength="255" />
@@ -241,6 +230,9 @@
           <Property Name="Lat" Type="float" />
           <Property Name="Lng" Type="float" />
           <Property Name="IsDelete" Type="int" />
+          <Property Name="BirthDay" Type="int" />
+          <Property Name="BirthMonth" Type="int" />
+          <Property Name="BirthYear" Type="int" />
         </EntityType>
         <EntityType Name="District">
           <Key>
@@ -704,6 +696,14 @@
           </Key>
           <Property Name="C2Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="StaffId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StoreStaffId">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="IsUser" Type="int" />
+          <Property Name="CountNumber" Type="int" />
         </EntityType>
         <EntityType Name="TreeInfo">
           <Key>
@@ -1389,6 +1389,7 @@
           <EntitySet Name="StaffCheckIn" EntityType="Self.StaffCheckIn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StaffWithC1" EntityType="Self.StaffWithC1" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StaffWithC2" EntityType="Self.StaffWithC2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreStaffId" EntityType="Self.StoreStaffId" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TreeInfo" EntityType="Self.TreeInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ward" EntityType="Self.Ward" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
@@ -1763,16 +1764,6 @@
           <Property Name="IsLock" Type="Int32" />
           <Property Name="InfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="HaiBrandId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Position" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="C1Position" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="WeddingDate" Type="DateTime" Precision="3" />
-          <Property Name="FoundingDate" Type="DateTime" Precision="3" />
-          <Property Name="Decison1" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="Decision1Birthday" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Decision1Phone" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="Decison2" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="Decision2Birthday" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Decision2Phone" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="HaiBranch" Relationship="Self.FK__C1Info__HaiBrand__72910220" FromRole="C1Info" ToRole="HaiBranch" />
           <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C1Info__InfoId__681373AD" FromRole="C1Info" ToRole="CInfoCommon" />
           <NavigationProperty Name="C2Info" Relationship="Self.FK__C2Info__C1Id__73852659" FromRole="C1Info" ToRole="C2Info" />
@@ -1807,7 +1798,7 @@
           <Property Name="Phone" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Fax" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="BirthDay" Type="DateTime" Precision="0" />
+          <Property Name="BirthDay" Type="Int32" />
           <Property Name="PlaceOfBirth" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="UserLogin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -1840,6 +1831,8 @@
           <NavigationProperty Name="FarmerInfoes" Relationship="Self.FK__FarmerInf__InfoI__7EF6D905" FromRole="CInfoCommon" ToRole="FarmerInfo" />
           <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="CInfoCommon" ToRole="MSGPoint" />
           <Property Name="IsDelete" Type="Int32" />
+          <Property Name="BirthMonth" Type="Int32" />
+          <Property Name="BirthYear" Type="Int32" />
         </EntityType>
         <EntityType Name="District">
           <Key>
@@ -3075,6 +3068,7 @@
             <Parameter Name="DFrom" Mode="In" Type="String" />
             <Parameter Name="DTo" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="StoreStaffIds" EntityType="NDHDBModel.StoreStaffId" />
         </EntityContainer>
         <ComplexType Name="report_event_agency_Result">
           <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -3121,6 +3115,14 @@
           <Property Type="String" Name="staffhelp" Nullable="false" MaxLength="22" />
           <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
         </ComplexType>
+        <EntityType Name="StoreStaffId">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="IsUser" Type="Int32" />
+          <Property Name="CountNumber" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3303,17 +3305,7 @@
                 <ScalarProperty Name="IsLock" ColumnName="IsLock" />
                 <ScalarProperty Name="InfoId" ColumnName="InfoId" />
                 <ScalarProperty Name="HaiBrandId" ColumnName="HaiBrandId" />
-                <ScalarProperty Name="Position" ColumnName="Position" />
-                <ScalarProperty Name="C1Position" ColumnName="C1Position" />
-                <ScalarProperty Name="WeddingDate" ColumnName="WeddingDate" />
-                <ScalarProperty Name="FoundingDate" ColumnName="FoundingDate" />
-                <ScalarProperty Name="Decison1" ColumnName="Decison1" />
-                <ScalarProperty Name="Decision1Birthday" ColumnName="Decision1Birthday" />
-                <ScalarProperty Name="Decision1Phone" ColumnName="Decision1Phone" />
-                <ScalarProperty Name="Decison2" ColumnName="Decison2" />
-                <ScalarProperty Name="Decision2Birthday" ColumnName="Decision2Birthday" />
-                <ScalarProperty Name="Decision2Phone" ColumnName="Decision2Phone" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="C2Info">
@@ -3334,6 +3326,8 @@
           <EntitySetMapping Name="CInfoCommons">
             <EntityTypeMapping TypeName="NDHDBModel.CInfoCommon">
               <MappingFragment StoreEntitySet="CInfoCommon">
+                <ScalarProperty Name="BirthYear" ColumnName="BirthYear" />
+                <ScalarProperty Name="BirthMonth" ColumnName="BirthMonth" />
                 <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CName" ColumnName="CName" />
@@ -3969,6 +3963,15 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="StoreStaffIds">
+            <EntityTypeMapping TypeName="NDHDBModel.StoreStaffId">
+              <MappingFragment StoreEntitySet="StoreStaffId">
+                <ScalarProperty Name="CountNumber" ColumnName="CountNumber" />
+                <ScalarProperty Name="IsUser" ColumnName="IsUser" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -33,7 +33,7 @@ namespace NDHSITE.Models
         public string Phone { get; set; }
         public string Fax { get; set; }
         public string Email { get; set; }
-        public Nullable<System.DateTime> BirthDay { get; set; }
+        public Nullable<int> BirthDay { get; set; }
         public string PlaceOfBirth { get; set; }
         public string Notes { get; set; }
         public string UserLogin { get; set; }
@@ -57,6 +57,8 @@ namespace NDHSITE.Models
         public Nullable<double> Lat { get; set; }
         public Nullable<double> Lng { get; set; }
         public Nullable<int> IsDelete { get; set; }
+        public Nullable<int> BirthMonth { get; set; }
+        public Nullable<int> BirthYear { get; set; }
     
         public virtual ICollection<AgencySavePoint> AgencySavePoints { get; set; }
         public virtual ICollection<C1Info> C1Info { get; set; }

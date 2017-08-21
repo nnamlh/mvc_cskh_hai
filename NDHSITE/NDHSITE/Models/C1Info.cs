@@ -28,16 +28,6 @@ namespace NDHSITE.Models
         public Nullable<int> IsLock { get; set; }
         public string InfoId { get; set; }
         public string HaiBrandId { get; set; }
-        public string Position { get; set; }
-        public string C1Position { get; set; }
-        public Nullable<System.DateTime> WeddingDate { get; set; }
-        public Nullable<System.DateTime> FoundingDate { get; set; }
-        public string Decison1 { get; set; }
-        public string Decision1Birthday { get; set; }
-        public string Decision1Phone { get; set; }
-        public string Decison2 { get; set; }
-        public string Decision2Birthday { get; set; }
-        public string Decision2Phone { get; set; }
     
         public virtual HaiBranch HaiBranch { get; set; }
         public virtual CInfoCommon CInfoCommon { get; set; }

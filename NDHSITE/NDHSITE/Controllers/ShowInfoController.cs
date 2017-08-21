@@ -815,8 +815,8 @@ namespace NDHSITE.Controllers
                 result.fullname = cInfo.CName;
                 result.phone = cInfo.Phone;
                 result.address = cInfo.AddressInfo;
-                if (cInfo.BirthDay != null)
-                    result.birthday = cInfo.BirthDay.Value.ToShortDateString();
+              //  if (cInfo.BirthDay != null)
+                    result.birthday = "";
                 result.user = user;
                 result.area = cInfo.HaiArea.Name;
                 result.code = cInfo.CCode;
@@ -895,31 +895,8 @@ namespace NDHSITE.Controllers
             if (!Utitl.CheckUser(db, User.Identity.Name, "HappyBirthday", 0))
                 return RedirectToAction("relogin", "home");
 
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
-
-            var dateNow = DateTime.Now;
-
-            var data = (from log in db.CInfoCommons
-                        where DbFunctions.TruncateTime(log.BirthDay) == DbFunctions.TruncateTime(dateNow)
-                        select log);
-
-            var hasSend = (from log in db.HappyBirthdays
-                           where DbFunctions.TruncateTime(log.CreateDate) == DbFunctions.TruncateTime(dateNow)
-                           select log);
-
-
-            var listNotSend = new List<CInfoCommon>();
-
-            foreach (var item in data)
-            {
-                var check = hasSend.Where(p => p.CInfoId == item.Id).FirstOrDefault();
-
-                if (check == null)
-                    listNotSend.Add(item);
-            }
-
-            return View(listNotSend.OrderBy(p => p.CType).ToPagedList(pageNumber, pageSize));
+           
+            return View();
         }
 
 

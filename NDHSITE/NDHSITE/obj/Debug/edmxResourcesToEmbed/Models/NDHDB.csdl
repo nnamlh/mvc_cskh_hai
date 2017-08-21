@@ -178,16 +178,6 @@
     <Property Name="IsLock" Type="Int32" />
     <Property Name="InfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="HaiBrandId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Position" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="C1Position" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="WeddingDate" Type="DateTime" Precision="3" />
-    <Property Name="FoundingDate" Type="DateTime" Precision="3" />
-    <Property Name="Decison1" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="Decision1Birthday" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Decision1Phone" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="Decison2" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="Decision2Birthday" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Decision2Phone" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="HaiBranch" Relationship="Self.FK__C1Info__HaiBrand__72910220" FromRole="C1Info" ToRole="HaiBranch" />
     <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C1Info__InfoId__681373AD" FromRole="C1Info" ToRole="CInfoCommon" />
     <NavigationProperty Name="C2Info" Relationship="Self.FK__C2Info__C1Id__73852659" FromRole="C1Info" ToRole="C2Info" />
@@ -222,7 +212,7 @@
     <Property Name="Phone" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Fax" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="BirthDay" Type="DateTime" Precision="0" />
+    <Property Name="BirthDay" Type="Int32" />
     <Property Name="PlaceOfBirth" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="UserLogin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -255,6 +245,8 @@
     <NavigationProperty Name="FarmerInfoes" Relationship="Self.FK__FarmerInf__InfoI__7EF6D905" FromRole="CInfoCommon" ToRole="FarmerInfo" />
     <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="CInfoCommon" ToRole="MSGPoint" />
     <Property Name="IsDelete" Type="Int32" />
+    <Property Name="BirthMonth" Type="Int32" />
+    <Property Name="BirthYear" Type="Int32" />
   </EntityType>
   <EntityType Name="District">
     <Key>
@@ -1490,6 +1482,7 @@
       <Parameter Name="DFrom" Mode="In" Type="String" />
       <Parameter Name="DTo" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="StoreStaffIds" EntityType="NDHDBModel.StoreStaffId" />
   </EntityContainer>
   <ComplexType Name="report_event_agency_Result">
     <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -1536,4 +1529,12 @@
     <Property Type="String" Name="staffhelp" Nullable="false" MaxLength="22" />
     <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
   </ComplexType>
+  <EntityType Name="StoreStaffId">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="IsUser" Type="Int32" />
+    <Property Name="CountNumber" Type="Int32" />
+  </EntityType>
 </Schema>

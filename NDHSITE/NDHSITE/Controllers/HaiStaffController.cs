@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using System.IO;
+using OfficeOpenXml;
 
 namespace NDHSITE.Controllers
 {
@@ -14,12 +15,11 @@ namespace NDHSITE.Controllers
     public class HaiStaffController : Controller
     {
 
-
         NDHDBEntities db = new NDHDBEntities();
 
         public ActionResult JsonStaff(string branch)
         {
-            var model = db.HaiStaffs.Where(p => p.BranchId == branch).Select(p => new { Id = p.Id, Name = p.FullName}).ToList();
+            var model = db.HaiStaffs.Where(p => p.BranchId == branch).Select(p => new { Id = p.Id, Name = p.FullName }).ToList();
 
             return Json(model, JsonRequestBehavior.AllowGet);
         }
@@ -48,13 +48,13 @@ namespace NDHSITE.Controllers
             ViewBag.DepartmentId = departmentId;
             ViewBag.PosId = posId;
 
-            ViewBag.MaxId = db.HaiStaffs.Max(p => p.Code); 
+            ViewBag.MaxId = db.HaiStaffs.Max(p => p.Code);
 
 
             switch (func)
             {
                 case 0:
-                    return View(db.HaiStaffs.Where(p=> p.IsLock != 1).OrderByDescending(p => p.DepartmentId).ToPagedList(pageNumber, pageSize));
+                    return View(db.HaiStaffs.Where(p => p.IsLock != 1).OrderByDescending(p => p.DepartmentId).ToPagedList(pageNumber, pageSize));
                 case 1:
                     return View(db.HaiStaffs.Where(p => p.HaiBranch.AreaId == areaId && p.IsLock != 1).OrderByDescending(p => p.CreateDate).ToPagedList(pageNumber, pageSize));
                 case 2:
@@ -136,12 +136,12 @@ namespace NDHSITE.Controllers
 
             }
 
-
             return RedirectToAction("createstaff", "haistaff", new { brand = staff.BranchId });
         }
 
         [HttpPost]
-        public ActionResult ActiveAccount(string id, int clock) {
+        public ActionResult ActiveAccount(string id, int clock)
+        {
 
 
             if (!Utitl.CheckUser(db, User.Identity.Name, "ManageStaff", 1))
@@ -158,7 +158,7 @@ namespace NDHSITE.Controllers
             db.Entry(staff).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
 
-            return RedirectToAction("modifystaff", "haistaff", new {id = id});
+            return RedirectToAction("modifystaff", "haistaff", new { id = id });
         }
 
         private string UploadImage(HttpPostedFileBase img, string path, string extension, string fileName)
@@ -233,7 +233,7 @@ namespace NDHSITE.Controllers
                 staffCheck.Notes = staff.Notes;
                 staffCheck.Phone = staff.Phone;
                 staffCheck.Email = staff.Email;
-               
+
                 staffCheck.PlaceOfBirth = staff.PlaceOfBirth;
 
                 if (avatar != null)
@@ -280,7 +280,7 @@ namespace NDHSITE.Controllers
 
             if (areaId == "-1")
             {
-                return View(db.HaiBranches.Where( p=> p.Name.Contains(search) || p.Code.Contains(search)).OrderByDescending(p => p.AreaId).ToPagedList(pageNumber, pageSize));
+                return View(db.HaiBranches.Where(p => p.Name.Contains(search) || p.Code.Contains(search)).OrderByDescending(p => p.AreaId).ToPagedList(pageNumber, pageSize));
             }
 
             return View(db.HaiBranches.Where(p => p.AreaId == areaId && (p.Name.Contains(search) || p.Code.Contains(search))).OrderByDescending(p => p.Name).ToPagedList(pageNumber, pageSize));
@@ -343,7 +343,7 @@ namespace NDHSITE.Controllers
             db.HaiAreas.Add(area);
             db.SaveChanges();
 
-            return RedirectToAction("createbrand", "haistaff", new { search = "", tab = 3});
+            return RedirectToAction("createbrand", "haistaff", new { search = "", tab = 3 });
         }
 
         public ActionResult ModifyArea(int id)
@@ -352,7 +352,7 @@ namespace NDHSITE.Controllers
                 return RedirectToAction("relogin", "home");
             var area = db.HaiAreas.Find(id);
 
-            if(area == null)
+            if (area == null)
                 return RedirectToAction("error", "home");
 
             return View(area);
@@ -407,7 +407,7 @@ namespace NDHSITE.Controllers
 
             ViewBag.SearchText = search;
 
-            return View(db.HaiDepartments.Where(p=> p.Name.Contains(search)).OrderByDescending(p=> p.Name).ToPagedList(pageNumber, pageSize));
+            return View(db.HaiDepartments.Where(p => p.Name.Contains(search)).OrderByDescending(p => p.Name).ToPagedList(pageNumber, pageSize));
         }
 
         [HttpPost]
@@ -560,6 +560,150 @@ namespace NDHSITE.Controllers
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-    
+
+        //them khach hang cho nhan vien
+        public ActionResult AddAgency(string id)
+        {
+
+            // id: staffid
+            if (!Utitl.CheckUser(db, User.Identity.Name, "ManageStaff", 1))
+                return RedirectToAction("relogin", "home");
+
+            var staffCheck = db.HaiStaffs.Find(id);
+            if (staffCheck == null)
+                return RedirectToAction("error", "home");
+
+            return View(staffCheck);
+        }
+
+
+        [HttpPost]
+        public ActionResult AddAgency(string id, string type, string AgencyId, HttpPostedFileBase files)
+        {
+
+            // id: staffid
+            if (!Utitl.CheckUser(db, User.Identity.Name, "ManageStaff", 1))
+                return RedirectToAction("relogin", "home");
+
+            var staffCheck = db.HaiStaffs.Find(id);
+            if (staffCheck == null)
+                return RedirectToAction("error", "home");
+
+
+            if (type == "c2")
+            {
+                AddAgencyC2(staffCheck, AgencyId, files);
+
+            }
+            else if (type == "c1")
+            {
+                AddAgencyC1(staffCheck, AgencyId, files);
+            }
+
+            return RedirectToAction("AddAgency", "HaiStaff", new { id = id });
+        }
+
+        private void AddAgencyC2(HaiStaff staff, string AgencyId, HttpPostedFileBase files)
+        {
+
+            if (files != null && files.ContentLength > 0)
+            {
+
+                string extension = System.IO.Path.GetExtension(files.FileName);
+                if (extension.Equals(".xlsx"))
+                {
+
+                    string fileSave = "staffcii_" + DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
+                    string path = Server.MapPath("~/temp/" + fileSave);
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+
+                    files.SaveAs(path);
+                    FileInfo newFile = new FileInfo(path);
+                    var package = new ExcelPackage(newFile);
+                    ExcelWorksheet sheet = package.Workbook.Worksheets[1];
+
+                    int totalRows = sheet.Dimension.End.Row;
+                    int totalCols = sheet.Dimension.End.Column;
+
+                    for (int i = 2; i <= totalRows; i++)
+                    {
+                        string code = Convert.ToString(sheet.Cells[i, 1].Value);
+                        var checkC2 = db.C2Info.Where(p => p.Code == code).FirstOrDefault();
+                        if (checkC2 != null)
+                        {
+                            staff.C2Info.Add(checkC2);
+                        }
+                    }
+                }
+
+            }
+            else
+            {
+                var checkC2 = db.C2Info.Where(p => p.Code == AgencyId).FirstOrDefault();
+                if (checkC2 != null)
+                {
+                    staff.C2Info.Add(checkC2);
+                }
+            }
+
+            db.Entry(staff).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+        }
+
+
+
+        private void AddAgencyC1(HaiStaff staff, string AgencyId, HttpPostedFileBase files)
+        {
+
+            if (files != null && files.ContentLength > 0)
+            {
+
+                string extension = System.IO.Path.GetExtension(files.FileName);
+                if (extension.Equals(".xlsx"))
+                {
+
+                    string fileSave = "staffci_" + DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
+                    string path = Server.MapPath("~/temp/" + fileSave);
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+
+                    files.SaveAs(path);
+                    FileInfo newFile = new FileInfo(path);
+                    var package = new ExcelPackage(newFile);
+                    ExcelWorksheet sheet = package.Workbook.Worksheets[1];
+
+                    int totalRows = sheet.Dimension.End.Row;
+                    int totalCols = sheet.Dimension.End.Column;
+
+                    for (int i = 2; i <= totalRows; i++)
+                    {
+                        string code = Convert.ToString(sheet.Cells[i, 1].Value);
+                        var checkC1 = db.C1Info.Where(p => p.Code == code).FirstOrDefault();
+                        if (checkC1 != null)
+                        {
+                            staff.C1Info.Add(checkC1);
+                        }
+                    }
+                }
+
+            }
+            else
+            {
+                var checkC1 = db.C1Info.Where(p => p.Code == AgencyId).FirstOrDefault();
+                if (checkC1 != null)
+                {
+                    staff.C1Info.Add(checkC1);
+                }
+            }
+
+            db.Entry(staff).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+        }
+
     }
 }

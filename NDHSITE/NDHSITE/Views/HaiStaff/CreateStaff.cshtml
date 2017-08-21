@@ -161,7 +161,6 @@
                                 <thead>
                                     <tr>
                                         <th>Tên nhân viên</th>
-                                        <th>Chi nhánh</th>
                                         <th>Thông tin</th>
                                         <th>#</th>
                                     </tr>
@@ -172,8 +171,8 @@
 
                                         <tr class="@(item.IsLock == 1?"warning":"")">
                                             <td>@item.FullName</td>
-                                            <td>@item.HaiBranch.Name</td>
                                             <td class="file-info">
+                                                <span><strong class="semibold">Chi nhánh:</strong> @item.HaiBranch.Name</span><br />
                                                 <span><strong class="semibold">Phòng ban:</strong> @item.HaiDepartment.Name</span><br />
                                                 <span><strong class="semibold">Chức vụ:</strong> @item.HaiPosition.Name</span><br />
                                                 <span><strong class="semibold">Mã nhân viên:</strong> @item.Code</span> <br />
@@ -184,7 +183,8 @@
                                                 <span><strong class="semibold">Tình trạng:</strong> @item.Notes</span>
                                             </td>
                                             <td class="text-center valign-middle">
-                                                <a href="/haistaff/modifystaff/@item.Id" target="_blank">Sửa</a>
+                                                <a href="/haistaff/modifystaff/@item.Id" target="_blank">Sửa</a> <br />
+                                                <a href="/haistaff/addagency/@item.Id" target="_blank">Khách hàng</a>
                                             </td>
                                         </tr>
                                     }

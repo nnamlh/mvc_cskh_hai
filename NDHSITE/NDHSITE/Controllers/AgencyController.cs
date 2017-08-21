@@ -127,9 +127,25 @@ namespace NDHSITE.Controllers
 
             info.CName = c1.StoreName;
 
-            info.CreateTime = DateTime.Now;
 
-            DateTime dt = DateTime.ParseExact(birthday, "MM/dd/yyyy HH:mm", null);
+            if (birthday != null)
+            {
+                var birthTemp = birthday.Split('/');
+                if (birthTemp.Length == 3)
+                {
+                    try
+                    {
+                        info.BirthDay = Convert.ToInt32(birthTemp[1]);
+                        info.BirthMonth = Convert.ToInt32(birthTemp[0]);
+                        info.BirthYear = Convert.ToInt32(birthTemp[2]);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            }
+
             info.CreateTime = DateTime.Now;
             info.Id = Guid.NewGuid().ToString();
             info.CType = "CI";
@@ -369,8 +385,23 @@ namespace NDHSITE.Controllers
             agency.HaiBrandId = branch.Id;
             agency.Code = c1.Code;
 
-            DateTime dt = DateTime.ParseExact(birthday, "MM/dd/yyyy HH:mm", null);
-            infoCommon.BirthDay = dt;
+            if (birthday != null)
+            {
+                var birthTemp = birthday.Split('/');
+                if (birthTemp.Length == 3)
+                {
+                    try
+                    {
+                        infoCommon.BirthDay = Convert.ToInt32(birthTemp[1]);
+                        infoCommon.BirthMonth = Convert.ToInt32(birthTemp[0]);
+                        infoCommon.BirthYear = Convert.ToInt32(birthTemp[2]);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            }
             infoCommon.CName = c1.StoreName;
             infoCommon.ModifyDate = DateTime.Now;
             infoCommon.WardId = info.WardId;
@@ -379,6 +410,8 @@ namespace NDHSITE.Controllers
             infoCommon.Email = info.Email;
             infoCommon.Notes = info.Notes;
             infoCommon.CCode = agency.Code;
+            infoCommon.Lat = info.Lat;
+            infoCommon.Lng = info.Lng;
             infoCommon.IdentityCard = info.IdentityCard;
 
 
@@ -441,7 +474,6 @@ namespace NDHSITE.Controllers
                 }
             }
 
-
             switch (type)
             {
                 case 1:
@@ -472,19 +504,32 @@ namespace NDHSITE.Controllers
             return Json(listCI, JsonRequestBehavior.AllowGet);
         }
 
-
-
         [HttpPost]
         public ActionResult ManageCII(CInfoCommon info, C2Info c2, string birthday, string C1Code)
         {
             if (!Utitl.CheckUser(db, User.Identity.Name, "ManageAgency", 1))
                 return RedirectToAction("relogin", "home");
 
-            info.CName = c2.StoreName;
+           info.CName = c2.StoreName;
 
-            info.CreateTime = DateTime.Now;
+           if (birthday != null)
+            {
+                var birthTemp = birthday.Split('/');
+                if (birthTemp.Length == 3)
+                {
+                    try
+                    {
+                        info.BirthDay = Convert.ToInt32(birthTemp[1]);
+                        info.BirthMonth = Convert.ToInt32(birthTemp[0]);
+                        info.BirthYear = Convert.ToInt32(birthTemp[2]);
+                    }
+                    catch
+                    {
 
-            DateTime dt = DateTime.ParseExact(birthday, "MM/dd/yyyy HH:mm", null);
+                    }
+                }
+            }
+
             info.CreateTime = DateTime.Now;
             info.Id = Guid.NewGuid().ToString();
             info.CType = "CII";
@@ -497,6 +542,7 @@ namespace NDHSITE.Controllers
 
 
             var branch = db.HaiBranches.Where(p => p.Code == info.BranchCode).FirstOrDefault();
+
             if (branch != null)
                 info.AreaId = branch.AreaId;
             else
@@ -528,6 +574,7 @@ namespace NDHSITE.Controllers
             return RedirectToAction("managecii", "agency");
         }
 
+        /*
         // excel dai ly ci
         public ActionResult excelAgencyci(HttpPostedFileBase files)
         {
@@ -618,7 +665,6 @@ namespace NDHSITE.Controllers
                                     Code = code,
                                     IsLock = 0,
                                     IsActive = 1,
-                                    Position = position,
                                     StoreName = storeName,
                                     Deputy = deputy
 
@@ -639,9 +685,10 @@ namespace NDHSITE.Controllers
 
             return RedirectToAction("manageci", "agency");
         }
-
-
+        */
+        
         // excel dai ly cii
+        /*
         public ActionResult excelAgency(HttpPostedFileBase files)
         {
 
@@ -755,7 +802,8 @@ namespace NDHSITE.Controllers
 
             return RedirectToAction("managecii", "agency");
         }
-
+        */
+        /*
         // excel nong dan
         public ActionResult excelfarmer(HttpPostedFileBase files)
         {
@@ -863,7 +911,7 @@ namespace NDHSITE.Controllers
 
             return RedirectToAction("managefarmer", "agency");
         }
-
+        */
         public ActionResult ModifyCII(string id)
         {
             if (!Utitl.CheckUser(db, User.Identity.Name, "ManageAgency", 1))
@@ -923,8 +971,24 @@ namespace NDHSITE.Controllers
             agency.C1Id = c2.C1Id;
             agency.Code = c2.Code;
 
-            DateTime dt = DateTime.ParseExact(birthday, "MM/dd/yyyy HH:mm", null);
-            infoCommon.BirthDay = dt;
+            if (birthday != null)
+            {
+                var birthTemp = birthday.Split('/');
+                if (birthTemp.Length == 3)
+                {
+                    try
+                    {
+                        infoCommon.BirthDay = Convert.ToInt32(birthTemp[1]);
+                        infoCommon.BirthMonth = Convert.ToInt32(birthTemp[0]);
+                        infoCommon.BirthYear = Convert.ToInt32(birthTemp[2]);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            }
+
             infoCommon.CName = c2.StoreName;
             infoCommon.ModifyDate = DateTime.Now;
             infoCommon.WardId = info.WardId;
@@ -937,6 +1001,8 @@ namespace NDHSITE.Controllers
             infoCommon.BankAccountHolder = info.BankAccountHolder;
             infoCommon.PlaceOfBirth = info.PlaceOfBirth;
             infoCommon.AddressInfo = info.AddressInfo;
+            infoCommon.Lat = info.Lat;
+            infoCommon.Lng = info.Lng;
             infoCommon.CCode = agency.Code;
             infoCommon.BranchCode = info.BranchCode;
             infoCommon.IdentityCard = info.IdentityCard;
@@ -1127,8 +1193,8 @@ namespace NDHSITE.Controllers
                 return RedirectToAction("error", "home");
 
 
-            DateTime dt = DateTime.ParseExact(birthday, "MM/dd/yyyy HH:mm", null);
-            infoCommon.BirthDay = dt;
+          //  DateTime dt = DateTime.ParseExact(birthday, "MM/dd/yyyy HH:mm", null);
+           // infoCommon.BirthDay = dt;
             infoCommon.CName = farmer.FarmerName;
             infoCommon.ModifyDate = DateTime.Now;
             infoCommon.WardId = info.WardId;

@@ -2,12 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using PagedList;
-using System.Data.Entity;
 
 namespace NDHSITE.Controllers
 {
@@ -20,36 +15,6 @@ namespace NDHSITE.Controllers
         [Authorize]
         public ActionResult Index(int? page)
         {
-
-
-            if (!Utitl.CheckUser(db, User.Identity.Name, "HappyBirthday", 0))
-            {
-                int pageSize = 10;
-                int pageNumber = (page ?? 1);
-
-                var dateNow = DateTime.Now;
-
-                var data = (from log in db.CInfoCommons
-                            where DbFunctions.TruncateTime(log.BirthDay) == DbFunctions.TruncateTime(dateNow)
-                            select log);
-
-                var hasSend = (from log in db.HappyBirthdays
-                               where DbFunctions.TruncateTime(log.CreateDate) == DbFunctions.TruncateTime(dateNow)
-                               select log);
-
-
-                var listNotSend = new List<CInfoCommon>();
-
-                foreach (var item in data)
-                {
-                    var check = hasSend.Where(p => p.CInfoId == item.Id).FirstOrDefault();
-
-                    if (check == null)
-                        listNotSend.Add(item);
-                }
-
-                return View(listNotSend.OrderBy(p => p.CType).ToPagedList(pageNumber, pageSize));
-            }
 
             return View();
         }

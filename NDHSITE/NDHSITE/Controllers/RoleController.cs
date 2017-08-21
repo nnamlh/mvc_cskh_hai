@@ -27,6 +27,11 @@ namespace NDHSITE.Controllers
         {
             RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(sdb));
             UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(sdb));
+            UserManager.UserValidator = new UserValidator<ApplicationUser>(UserManager)
+            {
+                AllowOnlyAlphanumericUserNames = false
+
+            };
         }
 
 
