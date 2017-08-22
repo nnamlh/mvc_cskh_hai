@@ -696,10 +696,8 @@ namespace NDHAPI.Controllers
                 var paser = jsonserializer.Deserialize<UpdateRegFirebase>(requestContent);
                 history.Content = new JavaScriptSerializer().Serialize(paser);
 
-
                 if (!checkLoginSession(paser.user, paser.token))
                     throw new Exception("Tài khoản bạn đã đăng nhập ở thiết bị khác.");
-
 
                 var checkUser = db.AspNetUsers.Where(p => p.UserName == paser.user).FirstOrDefault();
 
@@ -708,18 +706,15 @@ namespace NDHAPI.Controllers
 
                 var role = checkUser.AspNetRoles.FirstOrDefault();
 
-                var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
-
-                if (staff == null)
-                    throw new Exception("Chức năng này không cho phép bạn sử dụng");
-
                 // get topic
                 result.topics = getTopics(paser.user);
-                //  result.ecount = countEvent(paser.user);
+
                 result.function = getFunction(paser.user, "main");
 
-                if (paser.isUpdate == 1)
+                if (paser.isUpdate == 1 && role.GroupRole == "HAI")
                 {
+                    var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+
                     result.agencies = getListAgency(Convert.ToInt32(role.ShowInfoRole), staff);
 
                     result.recivers = getReceiver(getRoleType(role.Name, paser.user), paser.user);
@@ -1314,46 +1309,22 @@ namespace NDHAPI.Controllers
         private List<AgencyResult> getListAgency(int showRole, HaiStaff staff)
         {
             List<AgencyResult> agencyResult = new List<AgencyResult>();
-
-            List<C1Info> c1List = new List<C1Info>();
             List<C2Info> c2List = new List<C2Info>();
-
-            if (showRole == 1)
-            {
-                c1List = db.C1Info.ToList();
-                c2List = db.C2Info.ToList();
-            }
-            else if (showRole == 2)
-            {
-                c1List = db.C1Info.Where(p => p.HaiBrandId == staff.BranchId).ToList();
-                c2List = db.C2Info.Where(p => p.CInfoCommon.BranchCode == staff.HaiBranch.Code).ToList();
-            }
-            else
-            {
-                c1List = staff.C1Info.ToList();
-                c2List = staff.C2Info.ToList();
-            }
-
-
-            foreach (var item in c1List)
-            {
-                agencyResult.Add(new AgencyResult()
-                {
-                    code = item.Code,
-                    name = item.StoreName,
-                    type = "CI"
-                });
-            }
+            c2List = staff.C2Info.Where(p=> p.IsActive == 1).OrderByDescending(p=> p.CInfoCommon.CGroup).ToList();
             foreach (var item in c2List)
             {
                 agencyResult.Add(new AgencyResult()
                 {
                     code = item.Code,
                     name = item.StoreName,
-                    type = "CII"
+                    type = "CII",
+                    address = item.CInfoCommon.AddressInfo,
+                    lat = item.CInfoCommon.Lat == null? 0:item.CInfoCommon.Lat,
+                    lng = item.CInfoCommon.Lng == null ? 0 : item.CInfoCommon.Lng,
+                    phone = item.CInfoCommon.Phone,
+                    id = item.Id
                 });
             }
-
 
             return agencyResult;
 
@@ -1673,7 +1644,6 @@ namespace NDHAPI.Controllers
         }
 
         #endregion
-
 
         #region Staff import for agency
 
@@ -2757,8 +2727,8 @@ namespace NDHAPI.Controllers
                     result.fullname = cInfo.CName;
                     result.phone = cInfo.Phone;
                     result.address = cInfo.AddressInfo;
-                    if (cInfo.BirthDay != null)
-                        result.birthday = cInfo.BirthDay.Value.ToShortDateString();
+
+                    result.birthday = cInfo.BirthDay + "/" + cInfo.BirthMonth + "/" + cInfo.BirthYear;
                     result.user = paser.user;
                     result.area = cInfo.HaiArea.Name;
                 }

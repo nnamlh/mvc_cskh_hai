@@ -25,6 +25,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="#staff" data-toggle="tab">
+                            Nhân viên quản lý
+                        </a>
+                    </li>
+                    <li>
                         <a href="#addagency" data-toggle="tab">
                             Tài khoản
                         </a>
@@ -96,16 +101,12 @@
                                             <input type="text" name="BusinessLicense" class="form-control" value="@agency.CInfoCommon.BusinessLicense" />
                                         </div>
                                         <div class="form-group">
-                                            <label>Chức vụ</label>
-                                            <input type="text" name="C1Position" class="form-control" value="@agency.C1Position" />
+                                            <label>Langitude</label>
+                                            <input type="number" name="Lat" class="form-control" value="@agency.CInfoCommon.Lat" />
                                         </div>
                                         <div class="form-group">
-                                            <label>Ngày thành lập</label>
-                                            <input type="text" name="FoundingDate" class="form-control" id="FoundingDate" value="@agency.FoundingDate" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Ngày cưới</label>
-                                            <input type="text" name="WeddingDate" class="form-control" id="WeddingDate" value="@agency.WeddingDate" />
+                                            <label>Longitude</label>
+                                            <input type="number" name="Lng" class="form-control" value="@agency.CInfoCommon.Lng" />
                                         </div>
                                     </div>
 
@@ -183,30 +184,6 @@
                                             <label>Nơi sinh</label>
                                             <input type="text" name="PlaceOfBirth" class="form-control" value="@agency.CInfoCommon.PlaceOfBirth" />
                                         </div>
-                                        <div class="form-group">
-                                            <label>Người quyết định 1</label>
-                                            <input type="text" name="Decison1" class="form-control" value="@agency.Decison1" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Ngày tháng năm sinh</label>
-                                            <input type="text" name="Decision1Birthday" class="form-control" id="Decision1Birthday" value="@agency.Decision1Birthday" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Số điện thoại quyết đinh 1</label>
-                                            <input type="text" name="Decision1Phone" class="form-control" value="@agency.Decision1Phone" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Người quyết định 2</label>
-                                            <input type="text" name="Decison2" class="form-control" value="@agency.Decison2" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Ngày tháng năm sinh</label>
-                                            <input type="text" name="Decision2Birthday" class="form-control" id="Decision2Birthday" value="@agency.Decision2Birthday" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Số điện thoại</label>
-                                            <input type="text" name="Decision2Phone" class="form-control" value="@agency.Decision2Phone" />
-                                        </div>
                                     </div>
 
                                 </div>
@@ -217,56 +194,79 @@
 
                         </form>
                     </div>
+                    <div class="tab-pane fade" id="staff">
+                        <fieldset>
+                            <table class="table table-striped table-bordered thumbnail-table">
+                                <thead>
+                                    <tr>
+                                        <th>Mã nhân viên</th>
+                                        <th>Tên nhân viên</th>
+                                        <th>#</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in agency.HaiStaffs.ToList())
+                                    {
+                                        <tr>
+                                            <td>@item.Code</td>
+                                            <td>@item.FullName</td>
+                                            <td><a href="/haistaff/modifystaff/@item.Id" target="_blank">Chi tiết</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </fieldset>
+                    </div>
                     <div class="tab-pane fade" id="addagency">
                         @if (agency.CInfoCommon.UserLogin == null)
                         {
                             using (Html.BeginForm("RegisterAgency", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                             {
-                        <input type="hidden" name="AgencyType" value="CI" />
-                        <input type="hidden" name="AgencyId" value="@agency.Id" />
-                        @Html.AntiForgeryToken()
-                        @Html.ValidationSummary()
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                            </div>
-                        </div>
+                                <input type="hidden" name="AgencyType" value="CI" />
+                                    <input type="hidden" name="AgencyId" value="@agency.Id" />
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary()
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                        </div>
+                                    </div>
 
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-                            <div class="col-md-10">
-                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-2 control-label">Chọn quyền</label>
-                            <div class="col-md-10">
-                                <select name="role" class="form-control">
-                                    @foreach (var item in ViewBag.RoleList)
-                                            {
-                                            <option value="@item.Name">@item.Name</option>
-                                            }
-                                </select>
-                            </div>
-                        </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                                        <div class="col-md-10">
+                                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label">Chọn quyền</label>
+                                        <div class="col-md-10">
+                                            <select name="role" class="form-control">
+                                                @foreach (var item in ViewBag.RoleList)
+                                                {
+                                                    <option value="@item.Name">@item.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
 
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input type="submit" class="btn btn-primary" value="Register" />
-                            </div>
-                        </div>
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <input type="submit" class="btn btn-primary" value="Register" />
+                                        </div>
+                                    </div>
                             }
                         }
                         else
                         {
-                        <h4>Tài khoản hiện tại: @agency.CInfoCommon.UserLogin</h4>
+                            <h4>Tài khoản hiện tại: @agency.CInfoCommon.UserLogin</h4>
                         }
                     </div>
                     <div class="tab-pane fade" id="manageagency">
@@ -280,7 +280,7 @@
                                         @if (agency.CInfoCommon.IsClock == 1)
                                         {
                                             <option value="2">Mở tài khoản</option>
-                                            <option value="0">Xóa tài khoản</option>
+                                                <option value="0">Xóa tài khoản</option>
                                         }
                                         else
                                         {
@@ -345,31 +345,31 @@
 
         $('#Decision1Birthday').datetimepicker({
             locale: 'vi',
-            format: 'MM/DD/YYYY HH:mm',
+            format: 'MM/DD/YYYY',
             defaultDate: new Date()
         });
 
         $('#Decision2Birthday').datetimepicker({
             locale: 'vi',
-            format: 'MM/DD/YYYY HH:mm',
+            format: 'MM/DD/YYYY',
             defaultDate: new Date()
         });
 
         $('#WeddingDate').datetimepicker({
             locale: 'vi',
-            format: 'MM/DD/YYYY HH:mm',
+            format: 'MM/DD/YYYY',
             defaultDate: new Date()
         });
 
         $('#FoundingDate').datetimepicker({
             locale: 'vi',
-            format: 'MM/DD/YYYY HH:mm',
+            format: 'MM/DD/YYYY',
             defaultDate: new Date()
         });
 
         $('#datetimecreate').datetimepicker({
             locale: 'vi',
-            format: 'MM/DD/YYYY HH:mm',
+            format: 'MM/DD/YYYY',
             defaultDate: new Date()
         });
 

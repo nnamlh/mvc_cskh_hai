@@ -33,7 +33,7 @@ namespace NDHAPI.Models
         public string Phone { get; set; }
         public string Fax { get; set; }
         public string Email { get; set; }
-        public Nullable<System.DateTime> BirthDay { get; set; }
+        public Nullable<int> BirthDay { get; set; }
         public string PlaceOfBirth { get; set; }
         public string Notes { get; set; }
         public string UserLogin { get; set; }
@@ -56,6 +56,11 @@ namespace NDHAPI.Models
         public string BusinessLicense { get; set; }
         public Nullable<double> Lat { get; set; }
         public Nullable<double> Lng { get; set; }
+        public Nullable<int> IsDelete { get; set; }
+        public Nullable<int> BirthMonth { get; set; }
+        public Nullable<int> BirthYear { get; set; }
+        public string CRank { get; set; }
+        public Nullable<int> CGroup { get; set; }
     
         public virtual ICollection<AgencySavePoint> AgencySavePoints { get; set; }
         public virtual ICollection<C1Info> C1Info { get; set; }

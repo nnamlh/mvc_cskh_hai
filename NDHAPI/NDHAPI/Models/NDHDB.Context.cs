@@ -81,5 +81,7 @@ namespace NDHAPI.Models
         public virtual DbSet<TreeInfo> TreeInfoes { get; set; }
         public virtual DbSet<Ward> Wards { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
+        public virtual DbSet<StaffCalendarC2> StaffCalendarC2 { get; set; }
+        public virtual DbSet<StaffCalendarC2Approve> StaffCalendarC2Approve { get; set; }
     }
 }

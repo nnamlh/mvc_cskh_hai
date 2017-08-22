@@ -178,16 +178,6 @@
     <Property Name="IsLock" Type="Int32" />
     <Property Name="InfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="HaiBrandId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Position" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="C1Position" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="WeddingDate" Type="DateTime" Precision="3" />
-    <Property Name="FoundingDate" Type="DateTime" Precision="3" />
-    <Property Name="Decison1" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="Decision1Birthday" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Decision1Phone" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="Decison2" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="Decision2Birthday" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Decision2Phone" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="HaiBranch" Relationship="Self.FK__C1Info__HaiBrand__72910220" FromRole="C1Info" ToRole="HaiBranch" />
     <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C1Info__InfoId__681373AD" FromRole="C1Info" ToRole="CInfoCommon" />
     <NavigationProperty Name="C2Info" Relationship="Self.FK__C2Info__C1Id__73852659" FromRole="C1Info" ToRole="C2Info" />
@@ -209,6 +199,8 @@
     <NavigationProperty Name="C1Info" Relationship="Self.FK__C2Info__C1Id__73852659" FromRole="C2Info" ToRole="C1Info" />
     <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C2Info__InfoId__6CD828CA" FromRole="C2Info" ToRole="CInfoCommon" />
     <NavigationProperty Name="HaiStaffs" Relationship="Self.StaffWithC2" FromRole="C2Info" ToRole="HaiStaff" />
+    <NavigationProperty Name="StaffCalendarC2Approve" Relationship="NDHDBModel.FK__StaffCalend__CId__26EFBBC6" FromRole="C2Info" ToRole="StaffCalendarC2Approve" />
+    <NavigationProperty Name="StaffCalendarC2" Relationship="NDHDBModel.FK__StaffCalend__CId__2CA8951C" FromRole="C2Info" ToRole="StaffCalendarC2" />
   </EntityType>
   <EntityType Name="CInfoCommon">
     <Key>
@@ -222,7 +214,7 @@
     <Property Name="Phone" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Fax" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="BirthDay" Type="DateTime" Precision="0" />
+    <Property Name="BirthDay" Type="Int32" />
     <Property Name="PlaceOfBirth" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="UserLogin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -255,6 +247,10 @@
     <NavigationProperty Name="FarmerInfoes" Relationship="Self.FK__FarmerInf__InfoI__7EF6D905" FromRole="CInfoCommon" ToRole="FarmerInfo" />
     <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="CInfoCommon" ToRole="MSGPoint" />
     <Property Name="IsDelete" Type="Int32" />
+    <Property Name="BirthMonth" Type="Int32" />
+    <Property Name="BirthYear" Type="Int32" />
+    <Property Name="CRank" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="CGroup" Type="Int32" />
   </EntityType>
   <EntityType Name="District">
     <Key>
@@ -486,6 +482,8 @@
     <NavigationProperty Name="C1Info" Relationship="Self.StaffWithC1" FromRole="HaiStaff" ToRole="C1Info" />
     <NavigationProperty Name="C2Info" Relationship="Self.StaffWithC2" FromRole="HaiStaff" ToRole="C2Info" />
     <Property Name="IsDelete" Type="Int32" />
+    <NavigationProperty Name="StaffCalendarC2Approve" Relationship="NDHDBModel.FK__StaffCale__Staff__25FB978D" FromRole="HaiStaff" ToRole="StaffCalendarC2Approve" />
+    <NavigationProperty Name="StaffCalendarC2" Relationship="NDHDBModel.FK__StaffCale__Staff__2BB470E3" FromRole="HaiStaff" ToRole="StaffCalendarC2" />
   </EntityType>
   <EntityType Name="HappyBirthday">
     <Key>
@@ -1490,6 +1488,25 @@
       <Parameter Name="DFrom" Mode="In" Type="String" />
       <Parameter Name="DTo" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="StoreStaffIds" EntityType="NDHDBModel.StoreStaffId" />
+    <EntitySet Name="StaffCalendarC2" EntityType="NDHDBModel.StaffCalendarC2" />
+    <EntitySet Name="StaffCalendarC2Approve" EntityType="NDHDBModel.StaffCalendarC2Approve" />
+    <AssociationSet Name="FK__StaffCalend__CId__26EFBBC6" Association="NDHDBModel.FK__StaffCalend__CId__26EFBBC6">
+      <End Role="C2Info" EntitySet="C2Info" />
+      <End Role="StaffCalendarC2Approve" EntitySet="StaffCalendarC2Approve" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StaffCalend__CId__2CA8951C" Association="NDHDBModel.FK__StaffCalend__CId__2CA8951C">
+      <End Role="C2Info" EntitySet="C2Info" />
+      <End Role="StaffCalendarC2" EntitySet="StaffCalendarC2" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StaffCale__Staff__25FB978D" Association="NDHDBModel.FK__StaffCale__Staff__25FB978D">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="StaffCalendarC2Approve" EntitySet="StaffCalendarC2Approve" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StaffCale__Staff__2BB470E3" Association="NDHDBModel.FK__StaffCale__Staff__2BB470E3">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="StaffCalendarC2" EntitySet="StaffCalendarC2" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="report_event_agency_Result">
     <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -1536,4 +1553,90 @@
     <Property Type="String" Name="staffhelp" Nullable="false" MaxLength="22" />
     <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
   </ComplexType>
+  <EntityType Name="StoreStaffId">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="IsUser" Type="Int32" />
+    <Property Name="CountNumber" Type="Int32" />
+  </EntityType>
+  <EntityType Name="StaffCalendarC2">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CDay" Type="Int32" />
+    <Property Name="CMonth" Type="Int32" />
+    <Property Name="CYear" Type="Int32" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CheckPlan" Type="Int32" />
+    <Property Name="CheckIn" Type="Int32" />
+    <Property Name="CId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="C2Info" Relationship="NDHDBModel.FK__StaffCalend__CId__2CA8951C" FromRole="StaffCalendarC2" ToRole="C2Info" />
+    <NavigationProperty Name="HaiStaff" Relationship="NDHDBModel.FK__StaffCale__Staff__2BB470E3" FromRole="StaffCalendarC2" ToRole="HaiStaff" />
+  </EntityType>
+  <EntityType Name="StaffCalendarC2Approve">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CMonth" Type="Int32" />
+    <Property Name="CYear" Type="Int32" />
+    <Property Name="CStatus" Type="Int32" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="ModifyTime" Type="DateTime" Precision="3" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="C2Info" Relationship="NDHDBModel.FK__StaffCalend__CId__26EFBBC6" FromRole="StaffCalendarC2Approve" ToRole="C2Info" />
+    <NavigationProperty Name="HaiStaff" Relationship="NDHDBModel.FK__StaffCale__Staff__25FB978D" FromRole="StaffCalendarC2Approve" ToRole="HaiStaff" />
+  </EntityType>
+  <Association Name="FK__StaffCalend__CId__26EFBBC6">
+    <End Type="NDHDBModel.C2Info" Role="C2Info" Multiplicity="0..1" />
+    <End Type="NDHDBModel.StaffCalendarC2Approve" Role="StaffCalendarC2Approve" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C2Info">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaffCalendarC2Approve">
+        <PropertyRef Name="CId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StaffCalend__CId__2CA8951C">
+    <End Type="NDHDBModel.C2Info" Role="C2Info" Multiplicity="0..1" />
+    <End Type="NDHDBModel.StaffCalendarC2" Role="StaffCalendarC2" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C2Info">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaffCalendarC2">
+        <PropertyRef Name="CId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StaffCale__Staff__25FB978D">
+    <End Type="NDHDBModel.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
+    <End Type="NDHDBModel.StaffCalendarC2Approve" Role="StaffCalendarC2Approve" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaffCalendarC2Approve">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StaffCale__Staff__2BB470E3">
+    <End Type="NDHDBModel.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
+    <End Type="NDHDBModel.StaffCalendarC2" Role="StaffCalendarC2" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaffCalendarC2">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

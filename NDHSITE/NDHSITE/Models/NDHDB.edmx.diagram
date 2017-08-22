@@ -104,6 +104,12 @@
         <AssociationConnector Association="NDHDBModel.StaffWithC1" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.StaffWithC2" ManuallyRouted="false" />
         <EntityTypeShape EntityType="NDHDBModel.StoreStaffId" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NDHDBModel.StaffCalendarC2" Width="1.5" PointX="15" PointY="31.5" />
+        <EntityTypeShape EntityType="NDHDBModel.StaffCalendarC2Approve" Width="1.5" PointX="12" PointY="31.5" />
+        <AssociationConnector Association="NDHDBModel.FK__StaffCalend__CId__26EFBBC6" />
+        <AssociationConnector Association="NDHDBModel.FK__StaffCalend__CId__2CA8951C" />
+        <AssociationConnector Association="NDHDBModel.FK__StaffCale__Staff__25FB978D" />
+        <AssociationConnector Association="NDHDBModel.FK__StaffCale__Staff__2BB470E3" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

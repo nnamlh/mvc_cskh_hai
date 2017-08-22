@@ -381,6 +381,12 @@
     <Compile Include="Models\SMSHistory.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StaffCalendarC2.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StaffCalendarC2Approve.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StaffCheckIn.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>

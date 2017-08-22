@@ -183,6 +183,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\RestController.cs" />
+    <Compile Include="Controllers\RestV2Controller.cs" />
     <Compile Include="Controllers\SMSAPIController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -291,6 +292,7 @@
     <Compile Include="Models\HappyBirthday.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IdentityCheckIn.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IdentityRequest.cs" />
     <Compile Include="Models\ImeiUser.cs">
@@ -364,6 +366,12 @@
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SMSRequest.cs" />
+    <Compile Include="Models\StaffCalendarC2.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StaffCalendarC2Approve.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StaffCheckIn.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>

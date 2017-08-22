@@ -59,6 +59,8 @@ namespace NDHSITE.Models
         public Nullable<int> IsDelete { get; set; }
         public Nullable<int> BirthMonth { get; set; }
         public Nullable<int> BirthYear { get; set; }
+        public string CRank { get; set; }
+        public Nullable<int> CGroup { get; set; }
     
         public virtual ICollection<AgencySavePoint> AgencySavePoints { get; set; }
         public virtual ICollection<C1Info> C1Info { get; set; }

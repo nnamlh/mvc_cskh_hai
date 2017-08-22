@@ -359,6 +359,17 @@ namespace NDHAPI.Models
         public string code { get; set; }
 
         public string type { get; set; }
+
+        public string id { get; set; }
+
+        public double? lat { get; set; }
+
+        public double? lng { get; set; }
+
+        public string address { get; set; }
+
+        public string phone { get; set; }
+
     }
 
     public class ResultAgency : ResultInfo

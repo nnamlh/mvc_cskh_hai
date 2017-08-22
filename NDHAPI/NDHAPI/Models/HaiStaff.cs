@@ -19,6 +19,8 @@ namespace NDHAPI.Models
             this.StaffCheckIns = new HashSet<StaffCheckIn>();
             this.C1Info = new HashSet<C1Info>();
             this.C2Info = new HashSet<C2Info>();
+            this.StaffCalendarC2Approve = new HashSet<StaffCalendarC2Approve>();
+            this.StaffCalendarC2 = new HashSet<StaffCalendarC2>();
         }
     
         public string Id { get; set; }
@@ -43,6 +45,7 @@ namespace NDHAPI.Models
         public string DepartmentName { get; set; }
         public string AvatarUrl { get; set; }
         public string SignatureUrl { get; set; }
+        public Nullable<int> IsDelete { get; set; }
     
         public virtual HaiBranch HaiBranch { get; set; }
         public virtual HaiDepartment HaiDepartment { get; set; }
@@ -50,5 +53,7 @@ namespace NDHAPI.Models
         public virtual ICollection<StaffCheckIn> StaffCheckIns { get; set; }
         public virtual ICollection<C1Info> C1Info { get; set; }
         public virtual ICollection<C2Info> C2Info { get; set; }
+        public virtual ICollection<StaffCalendarC2Approve> StaffCalendarC2Approve { get; set; }
+        public virtual ICollection<StaffCalendarC2> StaffCalendarC2 { get; set; }
     }
 }

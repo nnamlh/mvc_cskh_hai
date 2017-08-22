@@ -177,16 +177,6 @@
           <ScalarProperty Name="IsLock" ColumnName="IsLock" />
           <ScalarProperty Name="InfoId" ColumnName="InfoId" />
           <ScalarProperty Name="HaiBrandId" ColumnName="HaiBrandId" />
-          <ScalarProperty Name="Position" ColumnName="Position" />
-          <ScalarProperty Name="C1Position" ColumnName="C1Position" />
-          <ScalarProperty Name="WeddingDate" ColumnName="WeddingDate" />
-          <ScalarProperty Name="FoundingDate" ColumnName="FoundingDate" />
-          <ScalarProperty Name="Decison1" ColumnName="Decison1" />
-          <ScalarProperty Name="Decision1Birthday" ColumnName="Decision1Birthday" />
-          <ScalarProperty Name="Decision1Phone" ColumnName="Decision1Phone" />
-          <ScalarProperty Name="Decison2" ColumnName="Decison2" />
-          <ScalarProperty Name="Decision2Birthday" ColumnName="Decision2Birthday" />
-          <ScalarProperty Name="Decision2Phone" ColumnName="Decision2Phone" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -208,6 +198,10 @@
     <EntitySetMapping Name="CInfoCommons">
       <EntityTypeMapping TypeName="NDHDBModel.CInfoCommon">
         <MappingFragment StoreEntitySet="CInfoCommon">
+          <ScalarProperty Name="CGroup" ColumnName="CGroup" />
+          <ScalarProperty Name="CRank" ColumnName="CRank" />
+          <ScalarProperty Name="BirthYear" ColumnName="BirthYear" />
+          <ScalarProperty Name="BirthMonth" ColumnName="BirthMonth" />
           <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CName" ColumnName="CName" />
@@ -843,5 +837,42 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="StoreStaffIds">
+      <EntityTypeMapping TypeName="NDHDBModel.StoreStaffId">
+        <MappingFragment StoreEntitySet="StoreStaffId">
+          <ScalarProperty Name="CountNumber" ColumnName="CountNumber" />
+          <ScalarProperty Name="IsUser" ColumnName="IsUser" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StaffCalendarC2">
+      <EntityTypeMapping TypeName="NDHDBModel.StaffCalendarC2">
+        <MappingFragment StoreEntitySet="StaffCalendarC2">
+          <ScalarProperty Name="CId" ColumnName="CId" />
+          <ScalarProperty Name="CheckIn" ColumnName="CheckIn" />
+          <ScalarProperty Name="CheckPlan" ColumnName="CheckPlan" />
+          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+          <ScalarProperty Name="CYear" ColumnName="CYear" />
+          <ScalarProperty Name="CMonth" ColumnName="CMonth" />
+          <ScalarProperty Name="CDay" ColumnName="CDay" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StaffCalendarC2Approve">
+      <EntityTypeMapping TypeName="NDHDBModel.StaffCalendarC2Approve">
+        <MappingFragment StoreEntitySet="StaffCalendarC2Approve">
+          <ScalarProperty Name="CId" ColumnName="CId" />
+          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+          <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="CStatus" ColumnName="CStatus" />
+          <ScalarProperty Name="CYear" ColumnName="CYear" />
+          <ScalarProperty Name="CMonth" ColumnName="CMonth" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
