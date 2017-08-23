@@ -11,7 +11,7 @@ using System.Web.Script.Serialization;
 
 namespace NDHAPI.Controllers
 {
-    public class RestV2Controller : ApiController
+    public class RestV2Controller : RestParentController
     {
         NDHDBEntities db = new NDHDBEntities();
 
@@ -64,10 +64,10 @@ namespace NDHAPI.Controllers
                 else
                 {
                     var allC1 = db.C1Info.Where(p => p.HaiBrandId == staff.BranchId && p.IsActive == 1).ToList();
-                    List<AgencyResult> agences = new List<AgencyResult>();
+                    List<AgencyInfo> agences = new List<AgencyInfo>();
                     foreach (var item in allC1)
                     {
-                        agences.Add(new AgencyResult()
+                        agences.Add(new AgencyInfo()
                         {
                             code = item.Code,
                             name = item.StoreName
@@ -94,7 +94,7 @@ namespace NDHAPI.Controllers
         /// <param name="user"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        public ResultAgency CreateAgencyC2()
+        public ResultInfo CreateAgencyC2()
         {
             var log = new APIHistory()
               {
@@ -104,7 +104,7 @@ namespace NDHAPI.Controllers
                   Sucess = 1
               };
 
-            var result = new ResultAgency()
+            var result = new ResultInfo()
             {
                 id = "1",
                 msg = "success"
@@ -142,7 +142,7 @@ namespace NDHAPI.Controllers
                     CGroup = paser.group,
                     CRank = paser.rank,
                     CDeputy = paser.deputy,
-                    CName = paser.store,
+                    CName = paser.name,
                     CreateTime = DateTime.Now,
                     ProvinceName = paser.province,
                     DistrictName = paser.district,
@@ -162,7 +162,7 @@ namespace NDHAPI.Controllers
                 {
                     Id = Guid.NewGuid().ToString(),
                     C1Id = checkC1.Id,
-                    StoreName = paser.store,
+                    StoreName = paser.name,
                     Deputy = paser.deputy,
                     IsActive = 0,
                     IsLock = 0,
@@ -174,8 +174,6 @@ namespace NDHAPI.Controllers
                 staff.C2Info.Add(c2);
                 db.Entry(staff).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
-
-                result.agences = getListAgency(staff);
 
 
             } catch (Exception e)
@@ -194,43 +192,6 @@ namespace NDHAPI.Controllers
 
         #endregion
 
-
-        public ResultAgency ModifyAgencyC2()
-        {
-
-        }
-
-        private List<AgencyResult> getListAgency(HaiStaff staff)
-        {
-            List<AgencyResult> agencyResult = new List<AgencyResult>();
-            List<C2Info> c2List = new List<C2Info>();
-            c2List = staff.C2Info.Where(p => p.IsActive == 1).OrderByDescending(p => p.CInfoCommon.CGroup).ToList();
-            foreach (var item in c2List)
-            {
-                agencyResult.Add(new AgencyResult()
-                {
-                    code = item.Code,
-                    name = item.StoreName,
-                    type = "CII",
-                    address = item.CInfoCommon.AddressInfo,
-                    lat = item.CInfoCommon.Lat == null ? 0 : item.CInfoCommon.Lat,
-                    lng = item.CInfoCommon.Lng == null ? 0 : item.CInfoCommon.Lng,
-                    phone = item.CInfoCommon.Phone,
-                    id = item.Id
-                });
-            }
-
-            return agencyResult;
-
-        }
-
-
-        private bool checkLoginSession(string user, string token)
-        {
-            var check = db.APIAuthHistories.Where(p => p.UserLogin == user && p.Token == token && p.IsExpired == 0).FirstOrDefault();
-
-            return check != null ? true : false;
-        }
-
+      
     }
 }

@@ -183,6 +183,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\RestController.cs" />
+    <Compile Include="Controllers\RestParentController.cs" />
     <Compile Include="Controllers\RestV2Controller.cs" />
     <Compile Include="Controllers\SMSAPIController.cs" />
     <Compile Include="Global.asax.cs">

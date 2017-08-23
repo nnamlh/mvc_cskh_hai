@@ -18,12 +18,10 @@ using SMSUtl;
 
 namespace NDHAPI.Controllers
 {
-    public class RestController : ApiController
+    public class RestController : RestParentController
     {
 
-        NDHDBEntities db = new NDHDBEntities();
-
-        UserManager<ApplicationUser> UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+      
 
         #region Login
         /// <summary>
@@ -715,17 +713,20 @@ namespace NDHAPI.Controllers
                 {
                     var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
 
-                    result.agencies = getListAgency(Convert.ToInt32(role.ShowInfoRole), staff);
+                    result.agencies = getListAgency(staff);
 
                     result.recivers = getReceiver(getRoleType(role.Name, paser.user), paser.user);
 
                     result.products = getProductCodeInfo();
+
+                    result.agencyc1 = getListAgencyC1(staff);
                 }
                 else
                 {
-                    result.agencies = new List<AgencyResult>();
+                    result.agencies = new List<AgencyInfoC2Result>();
                     result.recivers = new List<ReceiverInfo>();
                     result.products = new List<ProductCodeInfo>();
+                    result.agencyc1 = new List<AgencyInfo>();
                 }
 
                 var notiReg = db.RegFirebases.Where(p => p.UserLogin == paser.user).FirstOrDefault();
@@ -1061,12 +1062,6 @@ namespace NDHAPI.Controllers
 
         }
 
-        private bool checkLoginSession(string user, string token)
-        {
-            var check = db.APIAuthHistories.Where(p => p.UserLogin == user && p.Token == token && p.IsExpired == 0).FirstOrDefault();
-
-            return check != null ? true : false;
-        }
         #endregion
 
         #region CheckIn
@@ -1231,7 +1226,7 @@ namespace NDHAPI.Controllers
                 if (staff == null)
                     throw new Exception("Chức năng này không cho phép bạn sử dụng");
 
-                List<AgencyResult> agencyResult = new List<AgencyResult>();
+                List<AgencyInfo> agencyResult = new List<AgencyInfo>();
                 // type agency: 1: ci. 2: cii
                 if (paser.type == "1")
                 {
@@ -1252,7 +1247,7 @@ namespace NDHAPI.Controllers
 
                     foreach (var item in agences)
                     {
-                        agencyResult.Add(new AgencyResult()
+                        agencyResult.Add(new AgencyInfo()
                         {
                             code = item.Code,
                             name = item.StoreName
@@ -1278,7 +1273,7 @@ namespace NDHAPI.Controllers
 
                     foreach (var item in agences)
                     {
-                        agencyResult.Add(new AgencyResult()
+                        agencyResult.Add(new AgencyInfo()
                         {
                             code = item.Code,
                             name = item.StoreName
@@ -1303,31 +1298,6 @@ namespace NDHAPI.Controllers
             db.SaveChanges();
 
             return result;
-        }
-
-
-        private List<AgencyResult> getListAgency(int showRole, HaiStaff staff)
-        {
-            List<AgencyResult> agencyResult = new List<AgencyResult>();
-            List<C2Info> c2List = new List<C2Info>();
-            c2List = staff.C2Info.Where(p=> p.IsActive == 1).OrderByDescending(p=> p.CInfoCommon.CGroup).ToList();
-            foreach (var item in c2List)
-            {
-                agencyResult.Add(new AgencyResult()
-                {
-                    code = item.Code,
-                    name = item.StoreName,
-                    type = "CII",
-                    address = item.CInfoCommon.AddressInfo,
-                    lat = item.CInfoCommon.Lat == null? 0:item.CInfoCommon.Lat,
-                    lng = item.CInfoCommon.Lng == null ? 0 : item.CInfoCommon.Lng,
-                    phone = item.CInfoCommon.Phone,
-                    id = item.Id
-                });
-            }
-
-            return agencyResult;
-
         }
 
 

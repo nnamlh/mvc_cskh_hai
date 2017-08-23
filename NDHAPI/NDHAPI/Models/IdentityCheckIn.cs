@@ -13,7 +13,7 @@ namespace NDHAPI.Models
 
     public class AgencyCreate
     {
-        public string store { get; set; }
+        public string name { get; set; }
         public string deputy { get; set; }
         public string phone { get; set; }
         public string identityCard { get; set; }
@@ -21,6 +21,10 @@ namespace NDHAPI.Models
         public string address { get; set; }
         public string province { get; set; }
         public string district { get; set; }
+
+        public string country { get; set; }
+
+        public string ward { get; set; }
 
         public string user { get; set; }
 

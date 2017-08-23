@@ -221,11 +221,13 @@ namespace NDHAPI.Models
 
         public List<string> function { get; set; }
 
-        public List<AgencyResult> agencies { get; set; }
+        public List<AgencyInfoC2Result> agencies { get; set; }
 
         public List<ReceiverInfo> recivers { get; set; }
 
         public List<ProductCodeInfo> products { get; set; }
+
+        public List<AgencyInfo> agencyc1 { get; set; }
 
     }
 
@@ -353,15 +355,21 @@ namespace NDHAPI.Models
     }
 
 
-    public class AgencyResult
+    public class AgencyInfo
     {
         public string name { get; set; }
+        public string deputy { get; set; }
         public string code { get; set; }
 
         public string type { get; set; }
 
         public string id { get; set; }
 
+    }
+
+    public class AgencyInfoC2Result : AgencyInfo
+    {
+       
         public double? lat { get; set; }
 
         public double? lng { get; set; }
@@ -370,11 +378,29 @@ namespace NDHAPI.Models
 
         public string phone { get; set; }
 
+        public string c1Id { get; set; }
+
+        public string rank { get; set; }
+
+        public int group { get; set; }
+
+        public string taxCode { get; set; }
+        public string province { get; set; }
+        public string district { get; set; }
+        public string identityCard { get; set; }
+        public string businessLicense { get; set; }
+
     }
+
 
     public class ResultAgency : ResultInfo
     {
-        public List<AgencyResult> agences { get; set; }
+        public List<AgencyInfo> agences { get; set; }
+    }
+
+    public class ResultAgencyC2 : ResultInfo
+    {
+        public List<AgencyInfoC2Result> agences { get; set; }
     }
 
     /// <summary>
