@@ -825,6 +825,7 @@
     <EntitySetMapping Name="CheckInCalendars">
       <EntityTypeMapping TypeName="NDHDBModel.CheckInCalendar">
         <MappingFragment StoreEntitySet="CheckInCalendar">
+          <ScalarProperty Name="CDate" ColumnName="CDate" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="CheckInStatus" ColumnName="CheckInStatus" />
           <ScalarProperty Name="CType" ColumnName="CType" />

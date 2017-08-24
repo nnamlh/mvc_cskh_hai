@@ -206,6 +206,7 @@
     <Property Name="CType" Type="nvarchar" MaxLength="32" />
     <Property Name="CheckInStatus" Type="nvarchar" MaxLength="128" />
     <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="CDate" Type="int" />
   </EntityType>
   <EntityType Name="CheckInCalendarHistory">
     <Key>

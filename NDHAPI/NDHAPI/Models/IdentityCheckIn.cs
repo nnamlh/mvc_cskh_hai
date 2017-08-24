@@ -117,5 +117,26 @@ namespace NDHAPI.Models
         public List<string> month { get; set; }
     }
 
+    public class CalendarCreate : RequestInfo
+    {
+        public string notes { get; set; }
+
+        public int month { get; set; }
+
+        public int year { get; set; }
+
+        public List<CalendarCreateInfo> items { get; set; }
+
+    }
+
+    public class CalendarCreateInfo
+    {
+        public int day { get; set; }
+        public List<string> agencies { get; set; }
+        
+        public string status { get; set; }
+
+        public string notes { get; set; }
+    }
 
 }

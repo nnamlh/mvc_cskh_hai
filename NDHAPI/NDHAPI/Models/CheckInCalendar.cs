@@ -26,5 +26,6 @@ namespace NDHAPI.Models
         public string CType { get; set; }
         public string CheckInStatus { get; set; }
         public string Notes { get; set; }
+        public Nullable<int> CDate { get; set; }
     }
 }

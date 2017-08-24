@@ -211,6 +211,7 @@
           <Property Name="CType" Type="nvarchar" MaxLength="32" />
           <Property Name="CheckInStatus" Type="nvarchar" MaxLength="128" />
           <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="CDate" Type="int" />
         </EntityType>
         <EntityType Name="CheckInCalendarHistory">
           <Key>
@@ -3174,6 +3175,7 @@
           <Property Name="CType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="CheckInStatus" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CDate" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4005,6 +4007,7 @@
           <EntitySetMapping Name="CheckInCalendars">
             <EntityTypeMapping TypeName="NDHDBModel.CheckInCalendar">
               <MappingFragment StoreEntitySet="CheckInCalendar">
+                <ScalarProperty Name="CDate" ColumnName="CDate" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="CheckInStatus" ColumnName="CheckInStatus" />
                 <ScalarProperty Name="CType" ColumnName="CType" />

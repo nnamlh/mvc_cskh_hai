@@ -206,6 +206,7 @@ namespace NDHAPI.Controllers
         ///
         /// show calendar
         ///
+        [HttpPost]
         public CheckInCalendarShow ShowStaffCalendar()
         {
             var log = new APIHistory()
@@ -420,6 +421,130 @@ namespace NDHAPI.Controllers
             return items;
         }
 
+
+        [HttpPost]
+        private ResultInfo CheckInCalendarCreate()
+        {
+            var log = new APIHistory()
+            {
+                Id = Guid.NewGuid().ToString(),
+                APIUrl = "/api/rest/showstaffcalendar",
+                CreateTime = DateTime.Now,
+                Sucess = 1
+            };
+
+            var result = new ResultInfo()
+            {
+                id = "1",
+                msg = "success"
+            };
+
+            var requestContent = Request.Content.ReadAsStringAsync().Result;
+
+            try
+            {
+                var jsonserializer = new JavaScriptSerializer();
+                var paser = jsonserializer.Deserialize<CalendarCreate>(requestContent);
+                log.Content = new JavaScriptSerializer().Serialize(paser);
+
+                if (!checkLoginSession(paser.user, paser.token))
+                    throw new Exception("Wrong token and user login!");
+
+                var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+
+                if (staff == null)
+                    throw new Exception("Chỉ nhân viên công ty mới được quyền tạo");
+
+                var checkCalendar = db.CheckInCalendarHistories.Where(p => p.CMonth == paser.month && p.CYear == paser.year && p.StaffId == staff.Id).FirstOrDefault();
+
+                if (checkCalendar != null)
+                    throw new Exception("Kế hoạch này đã được tạo");
+
+                // lap lich
+                var checkInHistory = new CheckInCalendarHistory()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CMonth = paser.month,
+                    CYear = paser.year,
+                    Notes = paser.notes,
+                    CStatus = 0,
+                    CreateTime = DateTime.Now,
+                    StaffId = staff.Id
+                };
+                db.CheckInCalendarHistories.Add(checkInHistory);
+                db.SaveChanges();
+
+                foreach (var item in paser.items)
+                {
+                    if (item.status != "CSKH")
+                    {
+                        CheckInCalendar plan = new CheckInCalendar()
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            CDate = item.day,
+                            CMonth = paser.month,
+                            CYear = paser.year,
+                            CDay = item.day,
+                            InPlan = 1,
+                            Perform = 0,
+                            CheckInStatus = item.status,
+                            Notes = item.notes,
+                            StaffId = staff.Id
+                        };
+                        db.CheckInCalendars.Add(plan);
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+
+                        foreach (var cus in item.agencies)
+                        {
+                            var checkCus = db.CInfoCommons.Where(p => p.CCode == cus).FirstOrDefault();
+                            if (checkCus != null)
+                            {
+
+                                CheckInCalendar plan = new CheckInCalendar()
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    CDate = item.day,
+                                    CMonth = paser.month,
+                                    CYear = paser.year,
+                                    CDay = item.day,
+                                    InPlan = 1,
+                                    Perform = 0,
+                                    CheckInStatus = "CSKH",
+                                    Notes = "",
+                                    StaffId = staff.Id,
+                                    CCode = checkCus.CCode,
+                                    CType = checkCus.CType,
+                                    CInfoId = checkCus.Id
+                                };
+
+                                db.CheckInCalendars.Add(plan);
+                                db.SaveChanges();
+
+                            }
+                        }
+                    }
+                }
+
+
+
+            }
+            catch (Exception e)
+            {
+                result.id = "0";
+                result.msg = e.Message;
+                log.Sucess = 0;
+            }
+
+            log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+            db.APIHistories.Add(log);
+            db.SaveChanges();
+
+            return result;
+
+        }
 
     }
 }
