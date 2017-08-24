@@ -33,7 +33,7 @@ namespace NDHAPI.Controllers
             {
                 Id = Guid.NewGuid().ToString(),
                 CreateTime = DateTime.Now,
-                APIUrl = "/api/rest/getstaffc1",
+                APIUrl = "/api/restv2/getstaffc1",
                 Sucess = 1,
                 Content = "code : " + code + " ; user : " + user + " token : " + token
             };
@@ -97,7 +97,7 @@ namespace NDHAPI.Controllers
             var log = new APIHistory()
             {
                 Id = Guid.NewGuid().ToString(),
-                APIUrl = "/api/rest/createagencyc2",
+                APIUrl = "/api/restv2/createagencyc2",
                 CreateTime = DateTime.Now,
                 Sucess = 1
             };
@@ -212,7 +212,7 @@ namespace NDHAPI.Controllers
             var log = new APIHistory()
             {
                 Id = Guid.NewGuid().ToString(),
-                APIUrl = "/api/rest/showstaffcalendar",
+                APIUrl = "/api/restv2/showstaffcalendar",
                 CreateTime = DateTime.Now,
                 Sucess = 1
             };
@@ -272,7 +272,7 @@ namespace NDHAPI.Controllers
             var log = new APIHistory()
             {
                 Id = Guid.NewGuid().ToString(),
-                APIUrl = "/api/rest/calendarcheckcreate",
+                APIUrl = "/api/restv2/calendarcheckcreate",
                 CreateTime = DateTime.Now,
                 Sucess = 1
             };
@@ -423,12 +423,12 @@ namespace NDHAPI.Controllers
 
 
         [HttpPost]
-        private ResultInfo CheckInCalendarCreate()
+        public ResultInfo CheckInCalendarCreate()
         {
             var log = new APIHistory()
             {
                 Id = Guid.NewGuid().ToString(),
-                APIUrl = "/api/rest/showstaffcalendar",
+                APIUrl = "/api/restv2/CheckInCalendarCreate",
                 CreateTime = DateTime.Now,
                 Sucess = 1
             };
@@ -447,8 +447,8 @@ namespace NDHAPI.Controllers
                 var paser = jsonserializer.Deserialize<CalendarCreate>(requestContent);
                 log.Content = new JavaScriptSerializer().Serialize(paser);
 
-                if (!checkLoginSession(paser.user, paser.token))
-                    throw new Exception("Wrong token and user login!");
+               // if (!checkLoginSession(paser.user, paser.token))
+                //    throw new Exception("Wrong token and user login!");
 
                 var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
 
