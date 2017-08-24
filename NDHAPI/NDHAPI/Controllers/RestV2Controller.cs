@@ -308,20 +308,19 @@ namespace NDHAPI.Controllers
 
                 var checkCalendarNextMonth = db.CheckInCalendarHistories.Where(p => p.CMonth == nextMonth && p.CYear == nextYear && p.StaffId == staff.Id).FirstOrDefault();
 
-                if (checkCalendarNextMonth != null)
-                {
-                    throw new Exception("Lịch công tác tháng " + nextMonth + " đã được tạo");
-                } else
+                if (checkCalendarNextMonth == null)
                 {
                     result.month.Add(nextMonth + "/" + nextYear);
-
-                    var checkCurrentCalendar = db.CheckInCalendarHistories.Where(p => p.CMonth == currentMonth && p.CYear == currentYear && p.StaffId == staff.Id).FirstOrDefault();
-
-                    if (checkCurrentCalendar == null)
-                    {
-                        result.month.Add(currentMonth + "/" + currentYear);
-                    } 
                 }
+
+
+                var checkCurrentCalendar = db.CheckInCalendarHistories.Where(p => p.CMonth == currentMonth && p.CYear == currentYear && p.StaffId == staff.Id).FirstOrDefault();
+
+                if (checkCurrentCalendar == null)
+                {
+                    result.month.Add(currentMonth + "/" + currentYear);
+                }
+
 
 
                 result.status = GetListCheckInStatus();
@@ -347,7 +346,7 @@ namespace NDHAPI.Controllers
             List<CheckInStatus> listStatus = new List<CheckInStatus>();
             var data = db.CheckInCalendarStatus.ToList();
 
-            foreach(var item in data)
+            foreach (var item in data)
             {
                 listStatus.Add(new CheckInStatus()
                 {
