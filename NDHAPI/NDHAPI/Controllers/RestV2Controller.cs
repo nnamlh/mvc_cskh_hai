@@ -266,7 +266,7 @@ namespace NDHAPI.Controllers
 
         #region
         [HttpGet]
-        public CalendarCheckCreate CheckCalendarCreate()
+        public CalendarCheckCreate CheckCalendarCreate(string user)
         {
             var log = new APIHistory()
             {
@@ -279,21 +279,85 @@ namespace NDHAPI.Controllers
             var result = new CalendarCheckCreate()
             {
                 id = "1",
-                msg = "success"
+                msg = "success",
+                month = new List<string>()
             };
 
-            var currentYear = DateTime.Now.Year;
-            var currentMonth = DateTime.Now.Month;
-
-            var nextMonth = DateTime.Now;
-            nextMonth.AddMonths(currentMonth + 1);
 
 
+            try
+            {
+                var currentYear = DateTime.Now.Year;
+                var currentMonth = DateTime.Now.Month;
+
+                var nextMonth = currentMonth + 1;
+                var nextYear = currentYear;
+                if (currentMonth == 12)
+                {
+                    nextMonth = 1;
+                    nextYear = currentYear + 1;
+                }
 
 
+                var staff = db.HaiStaffs.Where(p => p.UserLogin == user).FirstOrDefault();
+
+
+
+                if (staff == null)
+                    throw new Exception("Chỉ nhân viên công ty mới được quyền tạo");
+
+                var checkCalendarNextMonth = db.CheckInCalendarHistories.Where(p => p.CMonth == nextMonth && p.CYear == nextYear && p.StaffId == staff.Id).FirstOrDefault();
+
+                if (checkCalendarNextMonth != null)
+                {
+                    throw new Exception("Lịch công tác tháng " + nextMonth + " đã được tạo");
+                } else
+                {
+                    result.month.Add(nextMonth + "/" + nextYear);
+
+                    var checkCurrentCalendar = db.CheckInCalendarHistories.Where(p => p.CMonth == currentMonth && p.CYear == currentYear && p.StaffId == staff.Id).FirstOrDefault();
+
+                    if (checkCurrentCalendar == null)
+                    {
+                        result.month.Add(currentMonth + "/" + currentYear);
+                    } 
+                }
+
+
+                result.status = GetListCheckInStatus();
+            }
+            catch (Exception e)
+            {
+                result.id = "0";
+                result.msg = e.Message;
+                log.Sucess = 0;
+            }
+
+            log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+            db.APIHistories.Add(log);
+            db.SaveChanges();
+
+            return result;
 
         }
         #endregion
+
+        private List<CheckInStatus> GetListCheckInStatus()
+        {
+            List<CheckInStatus> listStatus = new List<CheckInStatus>();
+            var data = db.CheckInCalendarStatus.ToList();
+
+            foreach(var item in data)
+            {
+                listStatus.Add(new CheckInStatus()
+                {
+                    code = item.Id,
+                    name = item.Name
+                });
+            }
+
+            return listStatus;
+        }
 
         private List<CheckInCalendarItemShow> GetListStaffCalendar(int month, int year, string staffId)
         {
@@ -330,12 +394,13 @@ namespace NDHAPI.Controllers
                             name = allItemInDay[0].CName,
                             inPlan = allItemInDay[0].InPlan,
                             perform = allItemInDay[0].Perform
-                
+
                         });
                     }
-                } else
+                }
+                else
                 {
-                    foreach(var agency in allItemInDay)
+                    foreach (var agency in allItemInDay)
                     {
                         itemDay.calendar.Add(new CheckInAgencyCalendar()
                         {

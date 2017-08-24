@@ -114,10 +114,7 @@ namespace NDHAPI.Models
     public class CalendarCheckCreate : ResultInfo
     {
         public List<CheckInStatus> status { get; set; }
-        public List<int> month { get; set; }
-        public int year { get; set; }
-
-        public int countDays { get; set; }
+        public List<string> month { get; set; }
     }
 
 
