@@ -10,20 +10,23 @@
 namespace NDHAPI.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class StaffCalendarC2
+    public partial class checkin_getcalendar_Result
     {
         public string Id { get; set; }
         public Nullable<int> CDay { get; set; }
         public Nullable<int> CMonth { get; set; }
         public Nullable<int> CYear { get; set; }
         public string StaffId { get; set; }
-        public Nullable<int> CheckPlan { get; set; }
-        public Nullable<int> CheckIn { get; set; }
-        public string CId { get; set; }
-    
-        public virtual C2Info C2Info { get; set; }
-        public virtual HaiStaff HaiStaff { get; set; }
+        public Nullable<int> InPlan { get; set; }
+        public Nullable<int> Perform { get; set; }
+        public string CCode { get; set; }
+        public string CInfoId { get; set; }
+        public string CType { get; set; }
+        public string CheckInStatus { get; set; }
+        public string Notes { get; set; }
+        public string CName { get; set; }
+        public string CDeputy { get; set; }
+        public string StatusName { get; set; }
     }
 }

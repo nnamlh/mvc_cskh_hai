@@ -17,8 +17,6 @@ namespace NDHAPI.Models
         public C2Info()
         {
             this.HaiStaffs = new HashSet<HaiStaff>();
-            this.StaffCalendarC2Approve = new HashSet<StaffCalendarC2Approve>();
-            this.StaffCalendarC2 = new HashSet<StaffCalendarC2>();
         }
     
         public string Id { get; set; }
@@ -34,7 +32,5 @@ namespace NDHAPI.Models
         public virtual C1Info C1Info { get; set; }
         public virtual CInfoCommon CInfoCommon { get; set; }
         public virtual ICollection<HaiStaff> HaiStaffs { get; set; }
-        public virtual ICollection<StaffCalendarC2Approve> StaffCalendarC2Approve { get; set; }
-        public virtual ICollection<StaffCalendarC2> StaffCalendarC2 { get; set; }
     }
 }

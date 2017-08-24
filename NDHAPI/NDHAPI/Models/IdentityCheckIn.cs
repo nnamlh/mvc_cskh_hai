@@ -40,8 +40,85 @@ namespace NDHAPI.Models
 
         public double? lng { get; set; }
 
-        public double? lat { get; set;  }
+        public double? lat { get; set; }
 
     }
-    
+
+
+    public class CheckInCalendarShowRequest : RequestInfo
+    {
+        public int day { get; set; }
+
+        public int month { get; set; }
+
+        public int year { get; set; }
+
+
+    }
+    public class CheckInCalendarShow : ResultInfo
+    {
+        public int? hasApprove { get; set; }
+
+        public string notes { get; set; }
+
+        public int? month { get; set; }
+        public int? year { get; set; }
+
+        public List<CheckInCalendarItemShow> items { get; set; }
+    }
+
+
+    public class CheckInCalendarItemShow
+    {
+
+        //
+        public int day { get; set; }
+
+        public int month { get; set; }
+
+        public int year { get; set; }
+
+        public string status { get; set; }
+
+        public string statusName { get; set; }
+
+        public string notes { get; set; }
+
+        public List<CheckInAgencyCalendar> calendar { get; set; }
+
+
+    }
+
+    public class CheckInAgencyCalendar
+    {
+        public string deputy { get; set; }
+        public string code { get; set; }
+
+        public string name { get; set; }
+
+        public string ctype { get; set; }
+
+        public int? inPlan { get; set; }
+
+        public int? perform { get; set; }
+    }
+
+    public class CheckInStatus
+    {
+        public string name { get; set; }
+
+        public string code { get; set; }
+
+    }
+
+    public class CalendarCheckCreate : ResultInfo
+    {
+        public List<CheckInStatus> status { get; set; }
+        public List<int> month { get; set; }
+        public int year { get; set; }
+
+        public int countDays { get; set; }
+    }
+
+
 }

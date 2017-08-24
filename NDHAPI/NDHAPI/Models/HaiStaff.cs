@@ -19,8 +19,7 @@ namespace NDHAPI.Models
             this.StaffCheckIns = new HashSet<StaffCheckIn>();
             this.C1Info = new HashSet<C1Info>();
             this.C2Info = new HashSet<C2Info>();
-            this.StaffCalendarC2Approve = new HashSet<StaffCalendarC2Approve>();
-            this.StaffCalendarC2 = new HashSet<StaffCalendarC2>();
+            this.CheckInCalendarHistories = new HashSet<CheckInCalendarHistory>();
         }
     
         public string Id { get; set; }
@@ -53,7 +52,6 @@ namespace NDHAPI.Models
         public virtual ICollection<StaffCheckIn> StaffCheckIns { get; set; }
         public virtual ICollection<C1Info> C1Info { get; set; }
         public virtual ICollection<C2Info> C2Info { get; set; }
-        public virtual ICollection<StaffCalendarC2Approve> StaffCalendarC2Approve { get; set; }
-        public virtual ICollection<StaffCalendarC2> StaffCalendarC2 { get; set; }
+        public virtual ICollection<CheckInCalendarHistory> CheckInCalendarHistories { get; set; }
     }
 }

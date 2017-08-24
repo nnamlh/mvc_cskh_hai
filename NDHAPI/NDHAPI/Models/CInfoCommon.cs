@@ -61,6 +61,8 @@ namespace NDHAPI.Models
         public Nullable<int> BirthYear { get; set; }
         public string CRank { get; set; }
         public Nullable<int> CGroup { get; set; }
+        public string WardName { get; set; }
+        public string Country { get; set; }
     
         public virtual ICollection<AgencySavePoint> AgencySavePoints { get; set; }
         public virtual ICollection<C1Info> C1Info { get; set; }

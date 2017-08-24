@@ -12,7 +12,7 @@ namespace NDHAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class StaffCalendarC2Approve
+    public partial class CheckInCalendarHistory
     {
         public string Id { get; set; }
         public Nullable<int> CMonth { get; set; }
@@ -21,9 +21,9 @@ namespace NDHAPI.Models
         public Nullable<System.DateTime> CreateTime { get; set; }
         public Nullable<System.DateTime> ModifyTime { get; set; }
         public string StaffId { get; set; }
-        public string CId { get; set; }
+        public string CType { get; set; }
+        public string Notes { get; set; }
     
-        public virtual C2Info C2Info { get; set; }
         public virtual HaiStaff HaiStaff { get; set; }
     }
 }
