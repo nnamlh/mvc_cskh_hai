@@ -211,6 +211,10 @@
           <Property Name="CheckInStatus" Type="nvarchar" MaxLength="128" />
           <Property Name="Notes" Type="nvarchar(max)" />
           <Property Name="CDate" Type="int" />
+          <Property Name="LatCheck" Type="float" />
+          <Property Name="LngCheck" Type="float" />
+          <Property Name="TimeCheck" Type="datetime" />
+          <Property Name="Distance" Type="float" />
         </EntityType>
         <EntityType Name="CheckInCalendarHistory">
           <Key>
@@ -3170,6 +3174,10 @@
           <Property Name="CheckInStatus" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CDate" Type="Int32" />
+          <Property Name="LatCheck" Type="Double" />
+          <Property Name="LngCheck" Type="Double" />
+          <Property Name="TimeCheck" Type="DateTime" Precision="3" />
+          <Property Name="Distance" Type="Double" />
         </EntityType>
         <ComplexType Name="checkin_getcalendar_Result1">
           <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
@@ -4013,6 +4021,10 @@
           <EntitySetMapping Name="CheckInCalendars">
             <EntityTypeMapping TypeName="NDHDBModel.CheckInCalendar">
               <MappingFragment StoreEntitySet="CheckInCalendar">
+                <ScalarProperty Name="Distance" ColumnName="Distance" />
+                <ScalarProperty Name="TimeCheck" ColumnName="TimeCheck" />
+                <ScalarProperty Name="LngCheck" ColumnName="LngCheck" />
+                <ScalarProperty Name="LatCheck" ColumnName="LatCheck" />
                 <ScalarProperty Name="CDate" ColumnName="CDate" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="CheckInStatus" ColumnName="CheckInStatus" />

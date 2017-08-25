@@ -139,4 +139,41 @@ namespace NDHAPI.Models
         public string notes { get; set; }
     }
 
+
+    public class CheckInGetPlanResult : ResultInfo
+    {
+        public List<string> inplan { get; set; }
+        public List<string> outplan { get; set; }
+    }
+
+    public class CheckInGetPlanRequest : RequestInfo
+    {
+        public int month { get; set; }
+
+        public int year { get; set; }
+
+        public int day { get; set; }
+
+    }
+
+    public class CheckInRequest : RequestInfo
+    {
+        public string code { get; set; }
+
+        public double lat { get; set; }
+
+        public double lng { get; set; }
+
+        public double distance { get; set; }
+
+        public int inPlan { get; set; }
+    }
+
+
+    public class CheckInResult : ResultInfo
+    {
+        public List<string> newplan { get; set; }
+    }
+ 
+
 }

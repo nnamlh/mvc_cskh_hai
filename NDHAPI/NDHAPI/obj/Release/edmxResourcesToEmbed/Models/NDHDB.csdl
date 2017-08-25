@@ -1547,6 +1547,10 @@
     <Property Name="CheckInStatus" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CDate" Type="Int32" />
+    <Property Name="LatCheck" Type="Double" />
+    <Property Name="LngCheck" Type="Double" />
+    <Property Name="TimeCheck" Type="DateTime" Precision="3" />
+    <Property Name="Distance" Type="Double" />
   </EntityType>
   <ComplexType Name="checkin_getcalendar_Result1">
     <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />

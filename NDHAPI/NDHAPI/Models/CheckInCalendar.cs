@@ -27,5 +27,9 @@ namespace NDHAPI.Models
         public string CheckInStatus { get; set; }
         public string Notes { get; set; }
         public Nullable<int> CDate { get; set; }
+        public Nullable<double> LatCheck { get; set; }
+        public Nullable<double> LngCheck { get; set; }
+        public Nullable<System.DateTime> TimeCheck { get; set; }
+        public Nullable<double> Distance { get; set; }
     }
 }

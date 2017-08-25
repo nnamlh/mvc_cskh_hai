@@ -92,6 +92,7 @@ namespace NDHAPI.Controllers
         /// <param name="user"></param>
         /// <param name="token"></param>
         /// <returns></returns>
+        [HttpPost]
         public ResultInfo CreateAgencyC2()
         {
             var log = new APIHistory()
@@ -192,7 +193,7 @@ namespace NDHAPI.Controllers
             return result;
         }
 
-
+        [HttpPost]
         public ResultInfo ModifyAgencyC2()
         {
             var log = new APIHistory()
@@ -226,10 +227,10 @@ namespace NDHAPI.Controllers
                     throw new Exception("Chỉ nhân viên công ty mới được quyền tạo");
 
                 var checkC2 = db.C2Info.Find(paser.id);
-                if(checkC2 ==  null)
+                if (checkC2 == null)
                 {
                     throw new Exception("Sai thông tin khách hàng");
-            
+
                 }
 
                 checkC2.StoreName = paser.name;
@@ -272,6 +273,78 @@ namespace NDHAPI.Controllers
 
             return result;
         }
+        [HttpPost]
+        public CheckInGetPlanResult CheckInGetPlan()
+        {
+            var log = new APIHistory()
+            {
+                Id = Guid.NewGuid().ToString(),
+                APIUrl = "/api/restv2/checkingetplan",
+                CreateTime = DateTime.Now,
+                Sucess = 1
+            };
+
+            var result = new CheckInGetPlanResult()
+            {
+                id = "1",
+                msg = "success"
+            };
+
+            var requestContent = Request.Content.ReadAsStringAsync().Result;
+
+            try
+            {
+                var jsonserializer = new JavaScriptSerializer();
+                var paser = jsonserializer.Deserialize<CheckInGetPlanRequest>(requestContent);
+                log.Content = new JavaScriptSerializer().Serialize(paser);
+
+                if (!checkLoginSession(paser.user, paser.token))
+                    throw new Exception("Wrong token and user login!");
+
+                var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+
+                if (staff == null)
+                    throw new Exception("Chỉ nhân viên công ty mới được quyền tạo");
+
+                var checkPlan = db.CheckInCalendarHistories.Where(p => p.CMonth == paser.month && p.CYear == paser.year && p.StaffId == staff.Id).FirstOrDefault();
+
+                if (checkPlan == null)
+                    throw new Exception("Không có kế hoạch");
+
+                if (checkPlan.CStatus != 1)
+                    throw new Exception("kế hoạch đang được duyệt");
+
+                result.inplan = new List<string>();
+                result.outplan = new List<string>();
+                var listPlan = db.CheckInCalendars.Where(p => p.CMonth == paser.month && p.CYear == paser.year && p.CDay == paser.day && p.StaffId == staff.Id && p.CheckInStatus == "CSKH").ToList();
+                foreach (var item in listPlan)
+                {
+                    if (item.Perform == 0)
+                    {
+                        result.inplan.Add(item.CCode);
+                    }
+
+                    result.outplan.Add(item.CCode);
+
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                result.id = "0";
+                result.msg = e.Message;
+                log.Sucess = 0;
+            }
+
+            log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+            db.APIHistories.Add(log);
+            db.SaveChanges();
+
+            return result;
+        }
+
+        //
 
 
         [HttpPost]
@@ -298,7 +371,7 @@ namespace NDHAPI.Controllers
             {
                 var jsonserializer = new JavaScriptSerializer();
                 var paser = jsonserializer.Deserialize<RequestInfo>(requestContent);
-              //  log.Content = new JavaScriptSerializer().Serialize(paser);
+                //  log.Content = new JavaScriptSerializer().Serialize(paser);
 
                 if (!checkLoginSession(paser.user, paser.token))
                     throw new Exception("Wrong token and user login!");
@@ -314,14 +387,14 @@ namespace NDHAPI.Controllers
             }
             catch
             {
-            //    result.id = "0";
-              //  result.msg = e.Message;
-              //  log.Sucess = 0;
+                //    result.id = "0";
+                //  result.msg = e.Message;
+                //  log.Sucess = 0;
             }
 
-         //   log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
-          //  db.APIHistories.Add(log);
-         //   db.SaveChanges();
+            //   log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+            //  db.APIHistories.Add(log);
+            //   db.SaveChanges();
 
             return new List<AgencyInfoC2Result>();
         }
@@ -544,7 +617,7 @@ namespace NDHAPI.Controllers
                             name = agency.CName,
                             inPlan = agency.InPlan,
                             perform = agency.Perform
-                            
+
 
                         });
                     }
@@ -558,6 +631,138 @@ namespace NDHAPI.Controllers
             return items;
         }
 
+
+        [HttpPost]
+        public CheckInResult CheckIn()
+        {
+            var log = new APIHistory()
+            {
+                Id = Guid.NewGuid().ToString(),
+                APIUrl = "/api/restv2/checkin",
+                CreateTime = DateTime.Now,
+                Sucess = 1
+            };
+
+            var result = new CheckInResult()
+            {
+                id = "1",
+                msg = "success"
+            };
+
+            var requestContent = Request.Content.ReadAsStringAsync().Result;
+
+            try
+            {
+                var jsonserializer = new JavaScriptSerializer();
+                var paser = jsonserializer.Deserialize<CheckInRequest>(requestContent);
+                log.Content = new JavaScriptSerializer().Serialize(paser);
+
+                if (!checkLoginSession(paser.user, paser.token))
+                    throw new Exception("Wrong token and user login!");
+
+                var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+
+                if (staff == null)
+                    throw new Exception("Chỉ nhân viên công ty mới được quyền tạo");
+
+                // check inplan hay new plan
+                var cinfo = db.CInfoCommons.Where(p => p.CCode == paser.code).FirstOrDefault();
+                if (cinfo == null)
+                    throw new Exception("Sai ma khach hang");
+
+                // check 
+                var day = DateTime.Now.Day;
+                var month = DateTime.Now.Month;
+                var year = DateTime.Now.Year;
+
+                var checkCalendar = db.CheckInCalendars.Where(p => p.CMonth == month && p.CYear == year && p.CDay == day && p.CheckInStatus == "CSKH" && p.StaffId == staff.Id && p.CInfoId == cinfo.Id).FirstOrDefault();
+
+
+                if (checkCalendar != null)
+                {
+                    // da ton tai
+                    if (checkCalendar.InPlan == 1)
+                    {
+                        // trong ke hoach
+                        if(checkCalendar.Perform == 0)
+                        {
+                            // chua check
+                            checkCalendar.Perform = 1;
+                            checkCalendar.LatCheck = paser.lat;
+                            checkCalendar.LngCheck = paser.lng;
+                            checkCalendar.TimeCheck = DateTime.Now;
+                            checkCalendar.Distance = paser.distance;
+                            db.Entry(checkCalendar).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
+                        } else
+                        {
+                            throw new Exception("Đã checkin");
+                        }
+                    } else
+                    {
+                        // ko trong ke hoach
+                        throw new Exception("Đã check in");
+                    }
+                } else
+                {
+                    // ngoai ke hoach va tao moi
+                    CheckInCalendar calendar = new CheckInCalendar()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        CCode = cinfo.CCode,
+                        CDate = day,
+                        CDay = day,
+                        CMonth = month,
+                        CYear = year,
+                        CInfoId = cinfo.Id,
+                        CheckInStatus = "CSKH",
+                        InPlan = 0,
+                        Perform = 1,
+                        StaffId = staff.Id,
+                        LatCheck = paser.lat,
+                        LngCheck = paser.lng,
+                        Distance = paser.distance,
+                        TimeCheck = DateTime.Now,
+                        CType = cinfo.CType 
+
+                    };
+
+                    db.CheckInCalendars.Add(calendar);
+                    db.SaveChanges();
+                }
+
+                // tra ve list
+                result.newplan = new List<string>();
+                var listPlan = db.CheckInCalendars.Where(p => p.CMonth == month && p.CYear == year && p.CDay == day && p.StaffId == staff.Id && p.CheckInStatus == "CSKH").ToList();
+                foreach (var item in listPlan)
+                {
+                    if (paser.inPlan == 1)
+                    {
+                        if(item.Perform == 0)
+                        {
+                            result.newplan.Add(item.CCode);
+                        }
+                    }else
+                    {
+                        result.newplan.Add(item.CCode);
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                result.id = "0";
+                result.msg = e.Message;
+                log.Sucess = 0;
+            }
+
+            log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+            db.APIHistories.Add(log);
+            db.SaveChanges();
+
+            return result;
+
+        }
 
         [HttpPost]
         public ResultInfo CheckInCalendarCreate()
