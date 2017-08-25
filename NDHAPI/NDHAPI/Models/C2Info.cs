@@ -24,7 +24,6 @@ namespace NDHAPI.Models
         public string StoreName { get; set; }
         public string Deputy { get; set; }
         public Nullable<int> IsActive { get; set; }
-        public Nullable<int> IsLock { get; set; }
         public string InfoId { get; set; }
         public string C1Id { get; set; }
         public string Decision { get; set; }

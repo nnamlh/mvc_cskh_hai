@@ -241,6 +241,15 @@
     <Compile Include="Models\C2Info.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CheckInCalendar.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CheckInCalendarHistory.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CheckInCalendarStatu.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CInfoCommon.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -379,12 +388,6 @@
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SMSHistory.cs">
-      <DependentUpon>NDHDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\StaffCalendarC2.cs">
-      <DependentUpon>NDHDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\StaffCalendarC2Approve.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StaffCheckIn.cs">

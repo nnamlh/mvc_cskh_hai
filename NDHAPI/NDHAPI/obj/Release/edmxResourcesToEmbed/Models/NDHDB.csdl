@@ -192,7 +192,6 @@
     <Property Name="StoreName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="Deputy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="IsActive" Type="Int32" />
-    <Property Name="IsLock" Type="Int32" />
     <Property Name="InfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="C1Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Decision" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
@@ -226,7 +225,6 @@
     <Property Name="CCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="CDeputy" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="Mobile" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="IsClock" Type="Int32" />
     <Property Name="BankAccount" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="BankAccountHolder" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="BackName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -244,7 +242,6 @@
     <NavigationProperty Name="EventCustomerFarmers" Relationship="Self.FK__EventCust__CInfo__3F6663D5" FromRole="CInfoCommon" ToRole="EventCustomerFarmer" />
     <NavigationProperty Name="FarmerInfoes" Relationship="Self.FK__FarmerInf__InfoI__7EF6D905" FromRole="CInfoCommon" ToRole="FarmerInfo" />
     <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="CInfoCommon" ToRole="MSGPoint" />
-    <Property Name="IsDelete" Type="Int32" />
     <Property Name="BirthMonth" Type="Int32" />
     <Property Name="BirthYear" Type="Int32" />
     <Property Name="CRank" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />

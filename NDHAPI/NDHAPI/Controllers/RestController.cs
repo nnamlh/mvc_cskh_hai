@@ -123,11 +123,7 @@ namespace NDHAPI.Controllers
                     var check = db.CInfoCommons.Where(p => p.UserLogin == user).FirstOrDefault();
                     if (check != null)
                     {
-                        if (check.IsClock == 1)
-                        {
-                            throw new Exception("Tài khoản đang tạm khóa");
-                        }
-
+              
                         result.id = "2";
                         result.name = check.CDeputy;
                         result.store = check.CName;
@@ -160,8 +156,17 @@ namespace NDHAPI.Controllers
                                     var agency = db.CInfoCommons.Where(p => p.UserLogin == user).FirstOrDefault();
                                     if (agency != null)
                                     {
-                                        if (agency.IsClock != 1)
-                                            isActive = true;
+                                        if (check.CType == "CII")
+                                        {
+                                            var checkC2 = check.C2Info.FirstOrDefault();
+                                            if (checkC2 != null)
+                                            {
+                                                if (checkC2.IsActive == 0)
+                                                {
+                                                    isActive = false;
+                                                }
+                                            }
+                                        }
                                     }
                                 }
 
@@ -486,8 +491,17 @@ namespace NDHAPI.Controllers
                     var agency = db.CInfoCommons.Where(p => p.UserLogin == user.UserName).FirstOrDefault();
                     if (agency != null)
                     {
-                        if (agency.IsClock != 1)
-                            isActive = true;
+                        if (agency.CType == "CII")
+                        {
+                            var checkC2 = agency.C2Info.FirstOrDefault();
+                            if (checkC2 != null)
+                            {
+                                if (checkC2.IsActive == 0)
+                                {
+                                    isActive = false;
+                                }
+                            }
+                        }
                     }
                 }
 

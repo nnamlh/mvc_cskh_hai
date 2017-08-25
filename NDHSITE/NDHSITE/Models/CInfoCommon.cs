@@ -47,7 +47,6 @@ namespace NDHSITE.Models
         public string CCode { get; set; }
         public string CDeputy { get; set; }
         public string Mobile { get; set; }
-        public Nullable<int> IsClock { get; set; }
         public string BankAccount { get; set; }
         public string BankAccountHolder { get; set; }
         public string BackName { get; set; }
@@ -56,11 +55,12 @@ namespace NDHSITE.Models
         public string BusinessLicense { get; set; }
         public Nullable<double> Lat { get; set; }
         public Nullable<double> Lng { get; set; }
-        public Nullable<int> IsDelete { get; set; }
         public Nullable<int> BirthMonth { get; set; }
         public Nullable<int> BirthYear { get; set; }
         public string CRank { get; set; }
         public Nullable<int> CGroup { get; set; }
+        public string WardName { get; set; }
+        public string Country { get; set; }
     
         public virtual ICollection<AgencySavePoint> AgencySavePoints { get; set; }
         public virtual ICollection<C1Info> C1Info { get; set; }

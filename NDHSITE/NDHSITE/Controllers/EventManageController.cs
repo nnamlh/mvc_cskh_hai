@@ -80,14 +80,14 @@ namespace NDHSITE.Controllers
 
         public ActionResult jsonChooseCII(string id)
         {
-            var listArea = db.C2Info.Where(p => p.CInfoCommon.AreaId == id && p.CInfoCommon.IsClock != 1).Select(p => new { Id = p.InfoId, Name = p.StoreName, Deputy = p.Deputy }).ToList();
-
+            var listArea = db.C2Info.Where(p => p.CInfoCommon.AreaId == id).Select(p => new { Id = p.InfoId, Name = p.StoreName, Deputy = p.Deputy }).ToList();
+       
             return Json(listArea, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult jsonChooseFarmer(string id)
         {
-            var listArea = db.FarmerInfoes.Where(p => p.CInfoCommon.AreaId == id && p.CInfoCommon.IsClock != 1).Select(p => new { Id = p.InfoId, Name = p.FarmerName }).ToList();
+            var listArea = db.FarmerInfoes.Where(p => p.CInfoCommon.AreaId == id).Select(p => new { Id = p.InfoId, Name = p.FarmerName }).ToList();
 
             return Json(listArea, JsonRequestBehavior.AllowGet);
         }
@@ -314,7 +314,7 @@ namespace NDHSITE.Controllers
                     {
                         string cCode = Convert.ToString(sheet.Cells[i, 1].Value);
 
-                        var checkCII = db.C2Info.Where(p => p.Code == cCode && p.CInfoCommon.IsClock != 1).FirstOrDefault();
+                        var checkCII = db.C2Info.Where(p => p.Code == cCode).FirstOrDefault();
                         if (checkCII != null)
                         {
                             // kiem tra khu vu cua dai ly nay da add chua, chua thi add
@@ -406,7 +406,7 @@ namespace NDHSITE.Controllers
                     {
                         string phone = Convert.ToString(sheet.Cells[i, 1].Value);
 
-                        var cInfo = db.CInfoCommons.Where(p => p.Phone == phone && p.CType == "FARMER" && p.IsClock != 1).FirstOrDefault();
+                        var cInfo = db.CInfoCommons.Where(p => p.Phone == phone && p.CType == "FARMER").FirstOrDefault();
                         if (cInfo != null)
                         {
 
@@ -1373,7 +1373,7 @@ namespace NDHSITE.Controllers
                     {
                         string phone = Convert.ToString(sheet.Cells[i, 1].Value);
 
-                        var checkFarmer = db.CInfoCommons.Where(p => p.Phone == phone && p.AreaId == areaId && p.CType == "FARMER" && p.IsClock != 1).FirstOrDefault();
+                        var checkFarmer = db.CInfoCommons.Where(p => p.Phone == phone && p.AreaId == areaId && p.CType == "FARMER").FirstOrDefault();
                         if (checkFarmer != null)
                         {
                             var cEvent = new EventCustomerFarmer()

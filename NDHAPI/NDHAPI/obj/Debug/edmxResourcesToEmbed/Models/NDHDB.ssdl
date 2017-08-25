@@ -185,7 +185,6 @@
     <Property Name="StoreName" Type="nvarchar" MaxLength="512" />
     <Property Name="Deputy" Type="nvarchar" MaxLength="255" />
     <Property Name="IsActive" Type="int" />
-    <Property Name="IsLock" Type="int" />
     <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
     <Property Name="C1Id" Type="nvarchar" MaxLength="128" />
     <Property Name="Decision" Type="nvarchar" MaxLength="512" />
@@ -254,7 +253,6 @@
     <Property Name="CCode" Type="nvarchar" MaxLength="32" />
     <Property Name="CDeputy" Type="nvarchar" MaxLength="512" />
     <Property Name="Mobile" Type="nvarchar" MaxLength="128" />
-    <Property Name="IsClock" Type="int" />
     <Property Name="BankAccount" Type="nvarchar" MaxLength="256" />
     <Property Name="BankAccountHolder" Type="nvarchar" MaxLength="512" />
     <Property Name="BackName" Type="nvarchar(max)" />
@@ -263,7 +261,6 @@
     <Property Name="BusinessLicense" Type="nvarchar" MaxLength="512" />
     <Property Name="Lat" Type="float" />
     <Property Name="Lng" Type="float" />
-    <Property Name="IsDelete" Type="int" />
     <Property Name="BirthDay" Type="int" />
     <Property Name="BirthMonth" Type="int" />
     <Property Name="BirthYear" Type="int" />

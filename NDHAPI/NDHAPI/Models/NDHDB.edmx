@@ -190,7 +190,6 @@
           <Property Name="StoreName" Type="nvarchar" MaxLength="512" />
           <Property Name="Deputy" Type="nvarchar" MaxLength="255" />
           <Property Name="IsActive" Type="int" />
-          <Property Name="IsLock" Type="int" />
           <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
           <Property Name="C1Id" Type="nvarchar" MaxLength="128" />
           <Property Name="Decision" Type="nvarchar" MaxLength="512" />
@@ -259,7 +258,6 @@
           <Property Name="CCode" Type="nvarchar" MaxLength="32" />
           <Property Name="CDeputy" Type="nvarchar" MaxLength="512" />
           <Property Name="Mobile" Type="nvarchar" MaxLength="128" />
-          <Property Name="IsClock" Type="int" />
           <Property Name="BankAccount" Type="nvarchar" MaxLength="256" />
           <Property Name="BankAccountHolder" Type="nvarchar" MaxLength="512" />
           <Property Name="BackName" Type="nvarchar(max)" />
@@ -268,7 +266,6 @@
           <Property Name="BusinessLicense" Type="nvarchar" MaxLength="512" />
           <Property Name="Lat" Type="float" />
           <Property Name="Lng" Type="float" />
-          <Property Name="IsDelete" Type="int" />
           <Property Name="BirthDay" Type="int" />
           <Property Name="BirthMonth" Type="int" />
           <Property Name="BirthYear" Type="int" />
@@ -1818,7 +1815,6 @@
           <Property Name="StoreName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Deputy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Int32" />
-          <Property Name="IsLock" Type="Int32" />
           <Property Name="InfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="C1Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Decision" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
@@ -1852,7 +1848,6 @@
           <Property Name="CCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="CDeputy" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Mobile" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="IsClock" Type="Int32" />
           <Property Name="BankAccount" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="BankAccountHolder" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="BackName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1870,7 +1865,6 @@
           <NavigationProperty Name="EventCustomerFarmers" Relationship="Self.FK__EventCust__CInfo__3F6663D5" FromRole="CInfoCommon" ToRole="EventCustomerFarmer" />
           <NavigationProperty Name="FarmerInfoes" Relationship="Self.FK__FarmerInf__InfoI__7EF6D905" FromRole="CInfoCommon" ToRole="FarmerInfo" />
           <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="CInfoCommon" ToRole="MSGPoint" />
-          <Property Name="IsDelete" Type="Int32" />
           <Property Name="BirthMonth" Type="Int32" />
           <Property Name="BirthYear" Type="Int32" />
           <Property Name="CRank" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
@@ -3406,7 +3400,6 @@
                 <ScalarProperty Name="StoreName" ColumnName="StoreName" />
                 <ScalarProperty Name="Deputy" ColumnName="Deputy" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="IsLock" ColumnName="IsLock" />
                 <ScalarProperty Name="InfoId" ColumnName="InfoId" />
                 <ScalarProperty Name="C1Id" ColumnName="C1Id" />
                 <ScalarProperty Name="Decision" ColumnName="Decision" />
@@ -3422,7 +3415,6 @@
                 <ScalarProperty Name="CRank" ColumnName="CRank" />
                 <ScalarProperty Name="BirthYear" ColumnName="BirthYear" />
                 <ScalarProperty Name="BirthMonth" ColumnName="BirthMonth" />
-                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CName" ColumnName="CName" />
                 <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
@@ -3445,7 +3437,6 @@
                 <ScalarProperty Name="CCode" ColumnName="CCode" />
                 <ScalarProperty Name="CDeputy" ColumnName="CDeputy" />
                 <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-                <ScalarProperty Name="IsClock" ColumnName="IsClock" />
                 <ScalarProperty Name="BankAccount" ColumnName="BankAccount" />
                 <ScalarProperty Name="BankAccountHolder" ColumnName="BankAccountHolder" />
                 <ScalarProperty Name="BackName" ColumnName="BackName" />

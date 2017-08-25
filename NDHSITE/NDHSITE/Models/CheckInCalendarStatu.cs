@@ -12,18 +12,9 @@ namespace NDHSITE.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class StaffCalendarC2
+    public partial class CheckInCalendarStatu
     {
         public string Id { get; set; }
-        public Nullable<int> CDay { get; set; }
-        public Nullable<int> CMonth { get; set; }
-        public Nullable<int> CYear { get; set; }
-        public string StaffId { get; set; }
-        public Nullable<int> CheckPlan { get; set; }
-        public Nullable<int> CheckIn { get; set; }
-        public string CId { get; set; }
-    
-        public virtual C2Info C2Info { get; set; }
-        public virtual HaiStaff HaiStaff { get; set; }
+        public string Name { get; set; }
     }
 }

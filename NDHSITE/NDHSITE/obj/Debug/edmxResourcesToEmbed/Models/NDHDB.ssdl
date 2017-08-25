@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="NDHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="NDHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AgencySavePoint">
     <Key>
       <PropertyRef Name="EventId" />
@@ -185,10 +185,48 @@
     <Property Name="StoreName" Type="nvarchar" MaxLength="512" />
     <Property Name="Deputy" Type="nvarchar" MaxLength="255" />
     <Property Name="IsActive" Type="int" />
-    <Property Name="IsLock" Type="int" />
     <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
     <Property Name="C1Id" Type="nvarchar" MaxLength="128" />
     <Property Name="Decision" Type="nvarchar" MaxLength="512" />
+  </EntityType>
+  <EntityType Name="CheckInCalendar">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CDay" Type="int" />
+    <Property Name="CMonth" Type="int" />
+    <Property Name="CYear" Type="int" />
+    <Property Name="StaffId" Type="nvarchar" MaxLength="128" />
+    <Property Name="InPlan" Type="int" />
+    <Property Name="Perform" Type="int" />
+    <Property Name="CCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="CInfoId" Type="nvarchar" MaxLength="128" />
+    <Property Name="CType" Type="nvarchar" MaxLength="32" />
+    <Property Name="CheckInStatus" Type="nvarchar" MaxLength="128" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="CDate" Type="int" />
+  </EntityType>
+  <EntityType Name="CheckInCalendarHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CMonth" Type="int" />
+    <Property Name="CYear" Type="int" />
+    <Property Name="CStatus" Type="int" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="ModifyTime" Type="datetime" />
+    <Property Name="StaffId" Type="nvarchar" MaxLength="128" />
+    <Property Name="CType" Type="nvarchar" MaxLength="128" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="CheckInCalendarStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="512" />
   </EntityType>
   <EntityType Name="CInfoCommon">
     <Key>
@@ -215,7 +253,6 @@
     <Property Name="CCode" Type="nvarchar" MaxLength="32" />
     <Property Name="CDeputy" Type="nvarchar" MaxLength="512" />
     <Property Name="Mobile" Type="nvarchar" MaxLength="128" />
-    <Property Name="IsClock" Type="int" />
     <Property Name="BankAccount" Type="nvarchar" MaxLength="256" />
     <Property Name="BankAccountHolder" Type="nvarchar" MaxLength="512" />
     <Property Name="BackName" Type="nvarchar(max)" />
@@ -224,12 +261,13 @@
     <Property Name="BusinessLicense" Type="nvarchar" MaxLength="512" />
     <Property Name="Lat" Type="float" />
     <Property Name="Lng" Type="float" />
-    <Property Name="IsDelete" Type="int" />
     <Property Name="BirthDay" Type="int" />
     <Property Name="BirthMonth" Type="int" />
     <Property Name="BirthYear" Type="int" />
     <Property Name="CRank" Type="nvarchar" MaxLength="16" />
     <Property Name="CGroup" Type="int" />
+    <Property Name="WardName" Type="nvarchar" MaxLength="512" />
+    <Property Name="Country" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="District">
     <Key>
@@ -659,32 +697,6 @@
     <Property Name="AgencyType" Type="nvarchar" MaxLength="256" />
     <Property Name="Success" Type="int" />
   </EntityType>
-  <EntityType Name="StaffCalendarC2">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="CDay" Type="int" />
-    <Property Name="CMonth" Type="int" />
-    <Property Name="CYear" Type="int" />
-    <Property Name="StaffId" Type="nvarchar" MaxLength="128" />
-    <Property Name="CheckPlan" Type="int" />
-    <Property Name="CheckIn" Type="int" />
-    <Property Name="CId" Type="nvarchar" MaxLength="128" />
-  </EntityType>
-  <EntityType Name="StaffCalendarC2Approve">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="CMonth" Type="int" />
-    <Property Name="CYear" Type="int" />
-    <Property Name="CStatus" Type="int" />
-    <Property Name="CreateTime" Type="datetime" />
-    <Property Name="ModifyTime" Type="datetime" />
-    <Property Name="StaffId" Type="nvarchar" MaxLength="128" />
-    <Property Name="CId" Type="nvarchar" MaxLength="128" />
-  </EntityType>
   <EntityType Name="StaffCheckIn">
     <Key>
       <PropertyRef Name="Id" />
@@ -832,6 +844,18 @@
       </Principal>
       <Dependent Role="C2Info">
         <PropertyRef Name="InfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CheckInCa__Staff__316D4A39">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
+    <End Role="CheckInCalendarHistory" Type="Self.CheckInCalendarHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CheckInCalendarHistory">
+        <PropertyRef Name="StaffId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1207,54 +1231,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__StaffCale__Staff__25FB978D">
-    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
-    <End Role="StaffCalendarC2Approve" Type="Self.StaffCalendarC2Approve" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiStaff">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="StaffCalendarC2Approve">
-        <PropertyRef Name="StaffId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__StaffCale__Staff__2BB470E3">
-    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
-    <End Role="StaffCalendarC2" Type="Self.StaffCalendarC2" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiStaff">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="StaffCalendarC2">
-        <PropertyRef Name="StaffId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__StaffCalend__CId__26EFBBC6">
-    <End Role="C2Info" Type="Self.C2Info" Multiplicity="0..1" />
-    <End Role="StaffCalendarC2Approve" Type="Self.StaffCalendarC2Approve" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="C2Info">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="StaffCalendarC2Approve">
-        <PropertyRef Name="CId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__StaffCalend__CId__2CA8951C">
-    <End Role="C2Info" Type="Self.C2Info" Multiplicity="0..1" />
-    <End Role="StaffCalendarC2" Type="Self.StaffCalendarC2" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="C2Info">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="StaffCalendarC2">
-        <PropertyRef Name="CId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__StaffChec__Staff__47DBAE45">
     <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
     <End Role="StaffCheckIn" Type="Self.StaffCheckIn" Multiplicity="*" />
@@ -1418,6 +1394,9 @@
     <EntitySet Name="BasicNotification" EntityType="Self.BasicNotification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="C1Info" EntityType="Self.C1Info" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="C2Info" EntityType="Self.C2Info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CheckInCalendar" EntityType="Self.CheckInCalendar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CheckInCalendarHistory" EntityType="Self.CheckInCalendarHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CheckInCalendarStatus" EntityType="Self.CheckInCalendarStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CInfoCommon" EntityType="Self.CInfoCommon" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ErrorInfo" EntityType="Self.ErrorInfo" Schema="dbo" store:Type="Tables" />
@@ -1457,8 +1436,6 @@
     <EntitySet Name="SmsAccount" EntityType="Self.SmsAccount" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SMSCode" EntityType="Self.SMSCode" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SMSHistory" EntityType="Self.SMSHistory" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="StaffCalendarC2" EntityType="Self.StaffCalendarC2" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="StaffCalendarC2Approve" EntityType="Self.StaffCalendarC2Approve" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StaffCheckIn" EntityType="Self.StaffCheckIn" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StaffWithC1" EntityType="Self.StaffWithC1" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StaffWithC2" EntityType="Self.StaffWithC2" Schema="dbo" store:Type="Tables" />
@@ -1489,6 +1466,10 @@
     <AssociationSet Name="FK__C2Info__InfoId__6CD828CA" Association="Self.FK__C2Info__InfoId__6CD828CA">
       <End Role="CInfoCommon" EntitySet="CInfoCommon" />
       <End Role="C2Info" EntitySet="C2Info" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CheckInCa__Staff__316D4A39" Association="Self.FK__CheckInCa__Staff__316D4A39">
+      <End Role="HaiStaff" EntitySet="HaiStaff" />
+      <End Role="CheckInCalendarHistory" EntitySet="CheckInCalendarHistory" />
     </AssociationSet>
     <AssociationSet Name="FK__CInfoComm__AreaI__52E34C9D" Association="Self.FK__CInfoComm__AreaI__52E34C9D">
       <End Role="HaiArea" EntitySet="HaiArea" />
@@ -1613,22 +1594,6 @@
     <AssociationSet Name="FK__PTracking__Produ__00FF1D08" Association="Self.FK__PTracking__Produ__00FF1D08">
       <End Role="ProductInfo" EntitySet="ProductInfo" />
       <End Role="PTracking" EntitySet="PTracking" />
-    </AssociationSet>
-    <AssociationSet Name="FK__StaffCale__Staff__25FB978D" Association="Self.FK__StaffCale__Staff__25FB978D">
-      <End Role="HaiStaff" EntitySet="HaiStaff" />
-      <End Role="StaffCalendarC2Approve" EntitySet="StaffCalendarC2Approve" />
-    </AssociationSet>
-    <AssociationSet Name="FK__StaffCale__Staff__2BB470E3" Association="Self.FK__StaffCale__Staff__2BB470E3">
-      <End Role="HaiStaff" EntitySet="HaiStaff" />
-      <End Role="StaffCalendarC2" EntitySet="StaffCalendarC2" />
-    </AssociationSet>
-    <AssociationSet Name="FK__StaffCalend__CId__26EFBBC6" Association="Self.FK__StaffCalend__CId__26EFBBC6">
-      <End Role="C2Info" EntitySet="C2Info" />
-      <End Role="StaffCalendarC2Approve" EntitySet="StaffCalendarC2Approve" />
-    </AssociationSet>
-    <AssociationSet Name="FK__StaffCalend__CId__2CA8951C" Association="Self.FK__StaffCalend__CId__2CA8951C">
-      <End Role="C2Info" EntitySet="C2Info" />
-      <End Role="StaffCalendarC2" EntitySet="StaffCalendarC2" />
     </AssociationSet>
     <AssociationSet Name="FK__StaffChec__Staff__47DBAE45" Association="Self.FK__StaffChec__Staff__47DBAE45">
       <End Role="HaiStaff" EntitySet="HaiStaff" />

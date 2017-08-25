@@ -151,6 +151,7 @@ namespace NDHAPI.Controllers
                     WardId = "11111",
                     Lat = paser.lat,
                     Lng = paser.lng,
+                    CCode = "new",
                     WardName = paser.ward,
                     Country = paser.country
                 };
@@ -165,7 +166,7 @@ namespace NDHAPI.Controllers
                     StoreName = paser.name,
                     Deputy = paser.deputy,
                     IsActive = 0,
-                    IsLock = 0,
+                    Code = "new",
                     InfoId = cInfo.Id
                 };
                 db.C2Info.Add(c2);
@@ -189,6 +190,58 @@ namespace NDHAPI.Controllers
             db.SaveChanges();
 
             return result;
+        }
+
+        [HttpPost]
+        public List<AgencyInfoC2Result> GetStaffAgencyC2()
+        {
+            /*
+            var log = new APIHistory()
+            {
+                Id = Guid.NewGuid().ToString(),
+                APIUrl = "/api/restv2/getstaffagencyc2",
+                CreateTime = DateTime.Now,
+                Sucess = 1
+            };
+
+            var result = new ResultInfo()
+            {
+                id = "1",
+                msg = "success"
+            };
+            */
+            var requestContent = Request.Content.ReadAsStringAsync().Result;
+
+            try
+            {
+                var jsonserializer = new JavaScriptSerializer();
+                var paser = jsonserializer.Deserialize<RequestInfo>(requestContent);
+              //  log.Content = new JavaScriptSerializer().Serialize(paser);
+
+                if (!checkLoginSession(paser.user, paser.token))
+                    throw new Exception("Wrong token and user login!");
+
+                var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+
+                if (staff == null)
+                    throw new Exception("Chỉ nhân viên công ty mới được quyền tạo");
+
+
+                return getListAgency(staff);
+
+            }
+            catch
+            {
+            //    result.id = "0";
+              //  result.msg = e.Message;
+              //  log.Sucess = 0;
+            }
+
+         //   log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+          //  db.APIHistories.Add(log);
+         //   db.SaveChanges();
+
+            return new List<AgencyInfoC2Result>();
         }
 
         #endregion
@@ -231,7 +284,7 @@ namespace NDHAPI.Controllers
                 var paser = jsonserializer.Deserialize<CheckInCalendarShowRequest>(requestContent);
                 log.Content = new JavaScriptSerializer().Serialize(paser);
 
-             //  if (!checkLoginSession(paser.user, paser.token))
+                //  if (!checkLoginSession(paser.user, paser.token))
                 //    throw new Exception("Wrong token and user login!");
 
                 var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
@@ -447,7 +500,7 @@ namespace NDHAPI.Controllers
                 var paser = jsonserializer.Deserialize<CalendarCreate>(requestContent);
                 log.Content = new JavaScriptSerializer().Serialize(paser);
 
-               if (!checkLoginSession(paser.user, paser.token))
+                if (!checkLoginSession(paser.user, paser.token))
                     throw new Exception("Wrong token and user login!");
 
                 var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
@@ -489,7 +542,8 @@ namespace NDHAPI.Controllers
                             Perform = 0,
                             CheckInStatus = item.status,
                             Notes = item.notes,
-                            StaffId = staff.Id
+                            StaffId = staff.Id,
+                            CInfoId = "none"
                         };
                         db.CheckInCalendars.Add(plan);
                         db.SaveChanges();

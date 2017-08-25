@@ -77,7 +77,6 @@ namespace NDHSITE.Controllers
                         var agency = db.CInfoCommons.Where(p => p.UserLogin == user.UserName).FirstOrDefault();
                         if (agency != null)
                         {
-                            if (agency.IsClock != 1)
                                 isActive = true;
                         }
                     }
@@ -363,7 +362,6 @@ namespace NDHSITE.Controllers
                                     InfoId = cInfo.Id,
                                     C1Id = c1Check.Id,
                                     Code = code,
-                                    IsLock = 0,
                                     IsActive = 1,
                                     StoreName = storeName,
                                     Deputy = deputy

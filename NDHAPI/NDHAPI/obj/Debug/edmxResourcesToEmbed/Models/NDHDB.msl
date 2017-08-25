@@ -188,7 +188,6 @@
           <ScalarProperty Name="StoreName" ColumnName="StoreName" />
           <ScalarProperty Name="Deputy" ColumnName="Deputy" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="IsLock" ColumnName="IsLock" />
           <ScalarProperty Name="InfoId" ColumnName="InfoId" />
           <ScalarProperty Name="C1Id" ColumnName="C1Id" />
           <ScalarProperty Name="Decision" ColumnName="Decision" />
@@ -204,7 +203,6 @@
           <ScalarProperty Name="CRank" ColumnName="CRank" />
           <ScalarProperty Name="BirthYear" ColumnName="BirthYear" />
           <ScalarProperty Name="BirthMonth" ColumnName="BirthMonth" />
-          <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CName" ColumnName="CName" />
           <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
@@ -227,7 +225,6 @@
           <ScalarProperty Name="CCode" ColumnName="CCode" />
           <ScalarProperty Name="CDeputy" ColumnName="CDeputy" />
           <ScalarProperty Name="Mobile" ColumnName="Mobile" />
-          <ScalarProperty Name="IsClock" ColumnName="IsClock" />
           <ScalarProperty Name="BankAccount" ColumnName="BankAccount" />
           <ScalarProperty Name="BankAccountHolder" ColumnName="BankAccountHolder" />
           <ScalarProperty Name="BackName" ColumnName="BackName" />
