@@ -45,12 +45,12 @@ namespace NDHSITE.Controllers
                         return View(db.C1Info.Where(p => p.HaiBranch.HaiArea.Id == areaId && p.CInfoCommon.Phone.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
                     case 3:
                         ViewBag.STypeName = "Tên cửa hàng";
-                        return View(db.C1Info.Where(p => p.HaiBranch.HaiArea.Id == areaId && p.StoreName.Contains(search) ).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
+                        return View(db.C1Info.Where(p => p.HaiBranch.HaiArea.Id == areaId && p.StoreName.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
                     case 4:
                         ViewBag.STypeName = "Mã chi nhánh";
                         return View(db.C1Info.Where(p => p.HaiBranch.HaiArea.Id == areaId && p.HaiBranch.Code.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
                     default:
-                        return View(db.C1Info.Where(p => p.HaiBranch.HaiArea.Id == areaId ).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
+                        return View(db.C1Info.Where(p => p.HaiBranch.HaiArea.Id == areaId).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
                 }
 
             }
@@ -1291,6 +1291,7 @@ namespace NDHSITE.Controllers
         }
         */
 
+        [HttpPost]
         public ActionResult ActiveUserC2(string Id, int Status)
         {
 
