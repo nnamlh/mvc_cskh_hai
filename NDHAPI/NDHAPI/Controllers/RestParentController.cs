@@ -41,7 +41,8 @@ namespace NDHAPI.Controllers
                     businessLicense = item.CInfoCommon.BusinessLicense,
                     province = item.CInfoCommon.ProvinceName,
                     district = item.CInfoCommon.DistrictName,
-                    taxCode = item.CInfoCommon.TaxCode
+                    taxCode = item.CInfoCommon.TaxCode,
+                    c1Id = item.C1Info.Code
                 });
             }
 

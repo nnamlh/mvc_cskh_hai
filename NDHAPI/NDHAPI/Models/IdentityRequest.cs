@@ -390,6 +390,9 @@ namespace NDHAPI.Models
         public string identityCard { get; set; }
         public string businessLicense { get; set; }
 
+        public string ward { get; set; }
+        public string country { get; set; }
+
     }
 
 

@@ -193,7 +193,86 @@ namespace NDHAPI.Controllers
         }
 
 
-        
+        public ResultInfo ModifyAgencyC2()
+        {
+            var log = new APIHistory()
+            {
+                Id = Guid.NewGuid().ToString(),
+                APIUrl = "/api/restv2/modifyagencyc2",
+                CreateTime = DateTime.Now,
+                Sucess = 1
+            };
+
+            var result = new ResultInfo()
+            {
+                id = "1",
+                msg = "success"
+            };
+
+            var requestContent = Request.Content.ReadAsStringAsync().Result;
+
+            try
+            {
+                var jsonserializer = new JavaScriptSerializer();
+                var paser = jsonserializer.Deserialize<AgencyModify>(requestContent);
+                log.Content = new JavaScriptSerializer().Serialize(paser);
+
+                if (!checkLoginSession(paser.user, paser.token))
+                    throw new Exception("Wrong token and user login!");
+
+                var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+
+                if (staff == null)
+                    throw new Exception("Chỉ nhân viên công ty mới được quyền tạo");
+
+                var checkC2 = db.C2Info.Find(paser.id);
+                if(checkC2 ==  null)
+                {
+                    throw new Exception("Sai thông tin khách hàng");
+            
+                }
+
+                checkC2.StoreName = paser.name;
+                checkC2.Deputy = paser.deputy;
+
+                CInfoCommon cinfo = checkC2.CInfoCommon;
+                cinfo.CDeputy = paser.deputy;
+                cinfo.CName = paser.name;
+
+                cinfo.Phone = paser.phone;
+                cinfo.Lat = paser.lat;
+                cinfo.Lng = paser.lng;
+                cinfo.IdentityCard = paser.identityCard;
+                cinfo.BusinessLicense = paser.businessLicense;
+                cinfo.TaxCode = paser.taxCode;
+                cinfo.Country = paser.country;
+                cinfo.CGroup = paser.group;
+                cinfo.ProvinceName = paser.province;
+                cinfo.DistrictName = paser.district;
+                cinfo.WardName = paser.ward;
+                cinfo.AddressInfo = paser.address;
+
+                db.Entry(checkC2).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+                db.Entry(cinfo).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+            }
+            catch (Exception e)
+            {
+                result.id = "0";
+                result.msg = e.Message;
+                log.Sucess = 0;
+            }
+
+            log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+            db.APIHistories.Add(log);
+            db.SaveChanges();
+
+            return result;
+        }
+
 
         [HttpPost]
         public List<AgencyInfoC2Result> GetStaffAgencyC2()

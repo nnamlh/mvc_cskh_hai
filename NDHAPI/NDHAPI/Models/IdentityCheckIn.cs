@@ -44,6 +44,12 @@ namespace NDHAPI.Models
 
     }
 
+    public class AgencyModify : AgencyCreate
+    {
+        public string id { get; set; }
+
+        public string code { get; set; }
+    }
 
     public class CheckInCalendarShowRequest : RequestInfo
     {
