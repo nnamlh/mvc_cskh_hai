@@ -382,7 +382,7 @@ namespace NDHAPI.Models
 
         public string rank { get; set; }
 
-        public int group { get; set; }
+        public int? group { get; set; }
 
         public string taxCode { get; set; }
         public string province { get; set; }

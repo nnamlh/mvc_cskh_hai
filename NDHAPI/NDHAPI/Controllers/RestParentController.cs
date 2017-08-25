@@ -34,7 +34,14 @@ namespace NDHAPI.Controllers
                     lat = item.CInfoCommon.Lat == null ? 0 : item.CInfoCommon.Lat,
                     lng = item.CInfoCommon.Lng == null ? 0 : item.CInfoCommon.Lng,
                     phone = item.CInfoCommon.Phone,
-                    id = item.Id
+                    id = item.Id,
+                    rank = item.CInfoCommon.CRank,
+                    group = item.CInfoCommon.CGroup,
+                    identityCard = item.CInfoCommon.IdentityCard,
+                    businessLicense = item.CInfoCommon.BusinessLicense,
+                    province = item.CInfoCommon.ProvinceName,
+                    district = item.CInfoCommon.DistrictName,
+                    taxCode = item.CInfoCommon.TaxCode
                 });
             }
 

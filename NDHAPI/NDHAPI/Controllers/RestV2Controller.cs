@@ -192,6 +192,9 @@ namespace NDHAPI.Controllers
             return result;
         }
 
+
+        
+
         [HttpPost]
         public List<AgencyInfoC2Result> GetStaffAgencyC2()
         {
@@ -315,7 +318,6 @@ namespace NDHAPI.Controllers
 
             return result;
         }
-
         #endregion
 
         #region
@@ -451,6 +453,8 @@ namespace NDHAPI.Controllers
                 }
                 else
                 {
+                    itemDay.status = "CSKH";
+                    itemDay.statusName = "Thăm khách hàng";
                     foreach (var agency in allItemInDay)
                     {
                         itemDay.calendar.Add(new CheckInAgencyCalendar()
@@ -461,6 +465,7 @@ namespace NDHAPI.Controllers
                             name = agency.CName,
                             inPlan = agency.InPlan,
                             perform = agency.Perform
+                            
 
                         });
                     }
