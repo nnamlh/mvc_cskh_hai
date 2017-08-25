@@ -231,8 +231,8 @@ namespace NDHAPI.Controllers
                 var paser = jsonserializer.Deserialize<CheckInCalendarShowRequest>(requestContent);
                 log.Content = new JavaScriptSerializer().Serialize(paser);
 
-                if (!checkLoginSession(paser.user, paser.token))
-                    throw new Exception("Wrong token and user login!");
+             //  if (!checkLoginSession(paser.user, paser.token))
+                //    throw new Exception("Wrong token and user login!");
 
                 var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
 
@@ -365,7 +365,7 @@ namespace NDHAPI.Controllers
 
             List<CheckInCalendarItemShow> items = new List<CheckInCalendarItemShow>();
 
-            var listCalendarInMonth = db.checkin_getcalendar(month, year, staffId);
+            var listCalendarInMonth = db.checkin_getcalendar(month, year, staffId).ToList();
 
 
             for (int i = 1; i <= days; i++)
@@ -374,8 +374,6 @@ namespace NDHAPI.Controllers
                 CheckInCalendarItemShow itemDay = new CheckInCalendarItemShow()
                 {
                     day = i,
-                    month = month,
-                    year = year,
                     calendar = new List<CheckInAgencyCalendar>()
                 };
 
@@ -415,6 +413,8 @@ namespace NDHAPI.Controllers
                     }
                 }
 
+                items.Add(itemDay);
+
             }
 
 
@@ -447,8 +447,8 @@ namespace NDHAPI.Controllers
                 var paser = jsonserializer.Deserialize<CalendarCreate>(requestContent);
                 log.Content = new JavaScriptSerializer().Serialize(paser);
 
-               // if (!checkLoginSession(paser.user, paser.token))
-                //    throw new Exception("Wrong token and user login!");
+               if (!checkLoginSession(paser.user, paser.token))
+                    throw new Exception("Wrong token and user login!");
 
                 var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
 

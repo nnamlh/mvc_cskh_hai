@@ -47,8 +47,6 @@ namespace NDHAPI.Models
 
     public class CheckInCalendarShowRequest : RequestInfo
     {
-        public int day { get; set; }
-
         public int month { get; set; }
 
         public int year { get; set; }
@@ -73,10 +71,6 @@ namespace NDHAPI.Models
 
         //
         public int day { get; set; }
-
-        public int month { get; set; }
-
-        public int year { get; set; }
 
         public string status { get; set; }
 

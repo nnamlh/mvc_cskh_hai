@@ -842,7 +842,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CheckInCa__Staff__4B2D1C3C">
+  <Association Name="FK__CheckInCa__Staff__316D4A39">
     <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
     <End Role="CheckInCalendarHistory" Type="Self.CheckInCalendarHistory" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1448,7 +1448,7 @@
       <End Role="CInfoCommon" EntitySet="CInfoCommon" />
       <End Role="C2Info" EntitySet="C2Info" />
     </AssociationSet>
-    <AssociationSet Name="FK__CheckInCa__Staff__4B2D1C3C" Association="Self.FK__CheckInCa__Staff__4B2D1C3C">
+    <AssociationSet Name="FK__CheckInCa__Staff__316D4A39" Association="Self.FK__CheckInCa__Staff__316D4A39">
       <End Role="HaiStaff" EntitySet="HaiStaff" />
       <End Role="CheckInCalendarHistory" EntitySet="CheckInCalendarHistory" />
     </AssociationSet>

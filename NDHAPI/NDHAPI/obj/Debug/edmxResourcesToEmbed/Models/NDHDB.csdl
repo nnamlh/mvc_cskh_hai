@@ -1470,17 +1470,17 @@
       <End Role="C2Info" EntitySet="C2Info" />
     </AssociationSet>
     <EntitySet Name="CheckInCalendarStatus" EntityType="NDHDBModel.CheckInCalendarStatu" />
-    <FunctionImport Name="checkin_getcalendar" ReturnType="Collection(NDHDBModel.checkin_getcalendar_Result)">
-      <Parameter Name="month" Mode="In" Type="Int32" />
-      <Parameter Name="year" Mode="In" Type="Int32" />
-      <Parameter Name="staffId" Mode="In" Type="String" />
-    </FunctionImport>
     <EntitySet Name="CheckInCalendarHistories" EntityType="NDHDBModel.CheckInCalendarHistory" />
     <AssociationSet Name="FK__CheckInCa__Staff__4B2D1C3C" Association="NDHDBModel.FK__CheckInCa__Staff__4B2D1C3C">
       <End Role="HaiStaff" EntitySet="HaiStaffs" />
       <End Role="CheckInCalendarHistory" EntitySet="CheckInCalendarHistories" />
     </AssociationSet>
     <EntitySet Name="CheckInCalendars" EntityType="NDHDBModel.CheckInCalendar" />
+    <FunctionImport Name="checkin_getcalendar" ReturnType="Collection(NDHDBModel.checkin_getcalendar_Result2)">
+      <Parameter Name="month" Mode="In" Type="Int32" />
+      <Parameter Name="year" Mode="In" Type="Int32" />
+      <Parameter Name="staffId" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="CheckInCalendarStatu">
     <Key>
@@ -1551,4 +1551,40 @@
     <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CDate" Type="Int32" />
   </EntityType>
+  <ComplexType Name="checkin_getcalendar_Result1">
+    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="CDay" Nullable="true" />
+    <Property Type="Int32" Name="CMonth" Nullable="true" />
+    <Property Type="Int32" Name="CYear" Nullable="true" />
+    <Property Type="String" Name="StaffId" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="InPlan" Nullable="true" />
+    <Property Type="Int32" Name="Perform" Nullable="true" />
+    <Property Type="String" Name="CCode" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="CInfoId" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="CType" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="CheckInStatus" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Notes" Nullable="true" />
+    <Property Type="Int32" Name="CDate" Nullable="true" />
+    <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="CDeputy" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="StatusName" Nullable="true" MaxLength="512" />
+  </ComplexType>
+  <ComplexType Name="checkin_getcalendar_Result2">
+    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="CDay" Nullable="true" />
+    <Property Type="Int32" Name="CMonth" Nullable="true" />
+    <Property Type="Int32" Name="CYear" Nullable="true" />
+    <Property Type="String" Name="StaffId" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="InPlan" Nullable="true" />
+    <Property Type="Int32" Name="Perform" Nullable="true" />
+    <Property Type="String" Name="CCode" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="CInfoId" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="CType" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="CheckInStatus" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Notes" Nullable="true" />
+    <Property Type="Int32" Name="CDate" Nullable="true" />
+    <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="CDeputy" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="StatusName" Nullable="true" MaxLength="512" />
+  </ComplexType>
 </Schema>

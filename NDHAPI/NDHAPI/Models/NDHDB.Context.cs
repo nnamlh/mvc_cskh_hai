@@ -87,7 +87,7 @@ namespace NDHAPI.Models
         public virtual DbSet<CheckInCalendarHistory> CheckInCalendarHistories { get; set; }
         public virtual DbSet<CheckInCalendar> CheckInCalendars { get; set; }
     
-        public virtual ObjectResult<checkin_getcalendar_Result> checkin_getcalendar(Nullable<int> month, Nullable<int> year, string staffId)
+        public virtual ObjectResult<checkin_getcalendar_Result2> checkin_getcalendar(Nullable<int> month, Nullable<int> year, string staffId)
         {
             var monthParameter = month.HasValue ?
                 new ObjectParameter("month", month) :
@@ -101,7 +101,7 @@ namespace NDHAPI.Models
                 new ObjectParameter("staffId", staffId) :
                 new ObjectParameter("staffId", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<checkin_getcalendar_Result>("checkin_getcalendar", monthParameter, yearParameter, staffIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<checkin_getcalendar_Result2>("checkin_getcalendar", monthParameter, yearParameter, staffIdParameter);
         }
     }
 }
