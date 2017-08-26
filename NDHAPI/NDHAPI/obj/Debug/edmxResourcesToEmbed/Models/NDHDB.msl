@@ -801,6 +801,10 @@
     <EntitySetMapping Name="CheckInCalendars">
       <EntityTypeMapping TypeName="NDHDBModel.CheckInCalendar">
         <MappingFragment StoreEntitySet="CheckInCalendar">
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="TimeCheck" ColumnName="TimeCheck" />
+          <ScalarProperty Name="LngCheck" ColumnName="LngCheck" />
+          <ScalarProperty Name="LatCheck" ColumnName="LatCheck" />
           <ScalarProperty Name="CDate" ColumnName="CDate" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="CheckInStatus" ColumnName="CheckInStatus" />

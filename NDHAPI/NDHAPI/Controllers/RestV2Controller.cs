@@ -241,8 +241,7 @@ namespace NDHAPI.Controllers
                 cinfo.CName = paser.name;
 
                 cinfo.Phone = paser.phone;
-                cinfo.Lat = paser.lat;
-                cinfo.Lng = paser.lng;
+           
                 cinfo.IdentityCard = paser.identityCard;
                 cinfo.BusinessLicense = paser.businessLicense;
                 cinfo.TaxCode = paser.taxCode;
@@ -252,6 +251,19 @@ namespace NDHAPI.Controllers
                 cinfo.DistrictName = paser.district;
                 cinfo.WardName = paser.ward;
                 cinfo.AddressInfo = paser.address;
+
+                if (paser.lat != 0 && paser.lng != 0)
+                {
+                    // cho cap nhat toa do voi dk toa do duoi server dc reset
+                    if (cinfo.Lat == 0 || cinfo.Lng == 0 || cinfo.Lat == null || cinfo.Lng == null)
+                    {
+                        cinfo.Lat = paser.lat;
+                        cinfo.Lng = paser.lng;
+                    } else
+                    {
+                        throw new Exception("Tọa độ đã được cập nhật trước, nếu bạn muốn cập nhật lại, liên hệ ban quản trị");
+                    }
+                }
 
                 db.Entry(checkC2).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
@@ -273,6 +285,9 @@ namespace NDHAPI.Controllers
 
             return result;
         }
+
+
+
         [HttpPost]
         public CheckInGetPlanResult CheckInGetPlan()
         {
@@ -298,8 +313,8 @@ namespace NDHAPI.Controllers
                 var paser = jsonserializer.Deserialize<CheckInGetPlanRequest>(requestContent);
                 log.Content = new JavaScriptSerializer().Serialize(paser);
 
-                if (!checkLoginSession(paser.user, paser.token))
-                    throw new Exception("Wrong token and user login!");
+               // if (!checkLoginSession(paser.user, paser.token))
+                   // throw new Exception("Wrong token and user login!");
 
                 var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
 

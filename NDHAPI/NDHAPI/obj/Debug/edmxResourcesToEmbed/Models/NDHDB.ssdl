@@ -206,6 +206,10 @@
     <Property Name="CheckInStatus" Type="nvarchar" MaxLength="128" />
     <Property Name="Notes" Type="nvarchar(max)" />
     <Property Name="CDate" Type="int" />
+    <Property Name="LatCheck" Type="float" />
+    <Property Name="LngCheck" Type="float" />
+    <Property Name="TimeCheck" Type="datetime" />
+    <Property Name="Distance" Type="float" />
   </EntityType>
   <EntityType Name="CheckInCalendarHistory">
     <Key>
