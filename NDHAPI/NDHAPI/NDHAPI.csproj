@@ -183,6 +183,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\RestCheckInController.cs" />
     <Compile Include="Controllers\RestController.cs" />
     <Compile Include="Controllers\RestParentController.cs" />
     <Compile Include="Controllers\RestV2Controller.cs" />
@@ -236,13 +237,16 @@
     <Compile Include="Models\C2Info.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CheckInCalendar.cs">
+    <Compile Include="Models\CalendarInfo.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CalendarType.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CalendarWork.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CheckInCalendarHistory.cs">
-      <DependentUpon>NDHDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CheckInCalendarStatu.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\checkin_getcalendar_Result.cs">
@@ -349,6 +353,12 @@
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PHistory.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProcessHistory.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProcessWork.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductInfo.cs">

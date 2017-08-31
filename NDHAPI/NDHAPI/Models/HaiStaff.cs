@@ -20,6 +20,7 @@ namespace NDHAPI.Models
             this.C1Info = new HashSet<C1Info>();
             this.C2Info = new HashSet<C2Info>();
             this.CheckInCalendarHistories = new HashSet<CheckInCalendarHistory>();
+            this.CalendarInfoes = new HashSet<CalendarInfo>();
         }
     
         public string Id { get; set; }
@@ -45,6 +46,7 @@ namespace NDHAPI.Models
         public string AvatarUrl { get; set; }
         public string SignatureUrl { get; set; }
         public Nullable<int> IsDelete { get; set; }
+        public Nullable<int> GPSDistance { get; set; }
     
         public virtual HaiBranch HaiBranch { get; set; }
         public virtual HaiDepartment HaiDepartment { get; set; }
@@ -53,5 +55,6 @@ namespace NDHAPI.Models
         public virtual ICollection<C1Info> C1Info { get; set; }
         public virtual ICollection<C2Info> C2Info { get; set; }
         public virtual ICollection<CheckInCalendarHistory> CheckInCalendarHistories { get; set; }
+        public virtual ICollection<CalendarInfo> CalendarInfoes { get; set; }
     }
 }

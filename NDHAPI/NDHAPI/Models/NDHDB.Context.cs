@@ -83,9 +83,12 @@ namespace NDHAPI.Models
         public virtual DbSet<TreeInfo> TreeInfoes { get; set; }
         public virtual DbSet<Ward> Wards { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
-        public virtual DbSet<CheckInCalendarStatu> CheckInCalendarStatus { get; set; }
+        public virtual DbSet<CalendarType> CalendarTypes { get; set; }
+        public virtual DbSet<CalendarWork> CalendarWorks { get; set; }
+        public virtual DbSet<ProcessHistory> ProcessHistories { get; set; }
+        public virtual DbSet<ProcessWork> ProcessWorks { get; set; }
         public virtual DbSet<CheckInCalendarHistory> CheckInCalendarHistories { get; set; }
-        public virtual DbSet<CheckInCalendar> CheckInCalendars { get; set; }
+        public virtual DbSet<CalendarInfo> CalendarInfoes { get; set; }
     
         public virtual ObjectResult<checkin_getcalendar_Result2> checkin_getcalendar(Nullable<int> month, Nullable<int> year, string staffId)
         {

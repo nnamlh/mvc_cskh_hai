@@ -321,7 +321,7 @@ namespace NDHAPI.Controllers
                 if (staff == null)
                     throw new Exception("Chỉ nhân viên công ty mới được quyền tạo");
 
-                var checkPlan = db.CheckInCalendarHistories.Where(p => p.CMonth == paser.month && p.CYear == paser.year && p.StaffId == staff.Id).FirstOrDefault();
+                var checkPlan = db.CalendarInfoes.Where(p => p.CMonth == paser.month && p.CYear == paser.year && p.StaffId == staff.Id).FirstOrDefault();
 
                 if (checkPlan == null)
                     throw new Exception("Không có kế hoạch");
@@ -331,15 +331,15 @@ namespace NDHAPI.Controllers
 
                 result.inplan = new List<string>();
                 result.outplan = new List<string>();
-                var listPlan = db.CheckInCalendars.Where(p => p.CMonth == paser.month && p.CYear == paser.year && p.CDay == paser.day && p.StaffId == staff.Id && p.CheckInStatus == "CSKH").ToList();
+                var listPlan = db.CalendarWorks.Where(p => p.CMonth == paser.month && p.CYear == paser.year && p.CDay == paser.day && p.StaffId == staff.Id && p.TypeId == "CSKH").ToList();
                 foreach (var item in listPlan)
                 {
-                    if (item.Perform == 0)
+                    if (item.COut == 0)
                     {
-                        result.inplan.Add(item.CCode);
+                        result.inplan.Add(item.AgencyCode);
                     }
 
-                    result.outplan.Add(item.CCode);
+                    result.outplan.Add(item.AgencyCode);
 
                 }
 
@@ -567,14 +567,14 @@ namespace NDHAPI.Controllers
         private List<CheckInStatus> GetListCheckInStatus()
         {
             List<CheckInStatus> listStatus = new List<CheckInStatus>();
-            var data = db.CheckInCalendarStatus.ToList();
+            var data = db.CalendarTypes.ToList();
 
             foreach (var item in data)
             {
                 listStatus.Add(new CheckInStatus()
                 {
                     code = item.Id,
-                    name = item.Name
+                    name = item.Notes
                 });
             }
 
@@ -690,7 +690,7 @@ namespace NDHAPI.Controllers
                 var month = DateTime.Now.Month;
                 var year = DateTime.Now.Year;
 
-                var checkCalendar = db.CheckInCalendars.Where(p => p.CMonth == month && p.CYear == year && p.CDay == day && p.CheckInStatus == "CSKH" && p.StaffId == staff.Id && p.CInfoId == cinfo.Id).FirstOrDefault();
+                var checkCalendar = db.CalendarWorks.Where(p => p.CMonth == month && p.CYear == year && p.CDay == day && p.TypeId == "CSKH" && p.StaffId == staff.Id && p.AgencyCode == cinfo.Id).FirstOrDefault();
 
 
                 if (checkCalendar != null)
@@ -699,10 +699,10 @@ namespace NDHAPI.Controllers
                     if (checkCalendar.InPlan == 1)
                     {
                         // trong ke hoach
-                        if(checkCalendar.Perform == 0)
+                        if(checkCalendar.COut == 0)
                         {
                             // chua check
-                            checkCalendar.Perform = 1;
+                       //     checkCalendar.Perform = 1;
                             checkCalendar.LatCheck = paser.lat;
                             checkCalendar.LngCheck = paser.lng;
                             checkCalendar.TimeCheck = DateTime.Now;
@@ -721,45 +721,45 @@ namespace NDHAPI.Controllers
                 } else
                 {
                     // ngoai ke hoach va tao moi
-                    CheckInCalendar calendar = new CheckInCalendar()
+                    CalendarWork calendar = new CalendarWork()
                     {
                         Id = Guid.NewGuid().ToString(),
-                        CCode = cinfo.CCode,
+                       // CCode = cinfo.CCode,
                         CDate = day,
                         CDay = day,
                         CMonth = month,
                         CYear = year,
-                        CInfoId = cinfo.Id,
-                        CheckInStatus = "CSKH",
+                      //  CInfoId = cinfo.Id,
+                      //  CheckInStatus = "CSKH",
                         InPlan = 0,
-                        Perform = 1,
+                      //  Perform = 1,
                         StaffId = staff.Id,
                         LatCheck = paser.lat,
                         LngCheck = paser.lng,
                         Distance = paser.distance,
                         TimeCheck = DateTime.Now,
-                        CType = cinfo.CType 
+                      //  CType = cinfo.CType 
 
                     };
 
-                    db.CheckInCalendars.Add(calendar);
+                    db.CalendarWorks.Add(calendar);
                     db.SaveChanges();
                 }
 
                 // tra ve list
                 result.newplan = new List<string>();
-                var listPlan = db.CheckInCalendars.Where(p => p.CMonth == month && p.CYear == year && p.CDay == day && p.StaffId == staff.Id && p.CheckInStatus == "CSKH").ToList();
+                var listPlan = db.CalendarWorks.Where(p => p.CMonth == month && p.CYear == year && p.CDay == day && p.StaffId == staff.Id && p.TypeId == "CSKH").ToList();
                 foreach (var item in listPlan)
                 {
                     if (paser.inPlan == 1)
                     {
-                        if(item.Perform == 0)
+                        if(item.COut == 0)
                         {
-                            result.newplan.Add(item.CCode);
+                            result.newplan.Add(item.AgencyCode);
                         }
                     }else
                     {
-                        result.newplan.Add(item.CCode);
+                        result.newplan.Add(item.AgencyCode);
                     }
 
                 }
@@ -835,7 +835,7 @@ namespace NDHAPI.Controllers
                 {
                     if (item.status != "CSKH")
                     {
-                        CheckInCalendar plan = new CheckInCalendar()
+                        CalendarWork plan = new CalendarWork()
                         {
                             Id = Guid.NewGuid().ToString(),
                             CDate = item.day,
@@ -843,13 +843,13 @@ namespace NDHAPI.Controllers
                             CYear = paser.year,
                             CDay = item.day,
                             InPlan = 1,
-                            Perform = 0,
-                            CheckInStatus = item.status,
+                           // Perform = 0,
+                         //   CheckInStatus = item.status,
                             Notes = item.notes,
                             StaffId = staff.Id,
-                            CInfoId = "none"
+                          //  CInfoId = "none"
                         };
-                        db.CheckInCalendars.Add(plan);
+                       // db.CheckInCalendars.Add(plan);
                         db.SaveChanges();
                     }
                     else
@@ -861,7 +861,7 @@ namespace NDHAPI.Controllers
                             if (checkCus != null)
                             {
 
-                                CheckInCalendar plan = new CheckInCalendar()
+                                CalendarWork plan = new CalendarWork()
                                 {
                                     Id = Guid.NewGuid().ToString(),
                                     CDate = item.day,
@@ -869,16 +869,16 @@ namespace NDHAPI.Controllers
                                     CYear = paser.year,
                                     CDay = item.day,
                                     InPlan = 1,
-                                    Perform = 0,
-                                    CheckInStatus = "CSKH",
+                                  //  Perform = 0,
+                                   // CheckInStatus = "CSKH",
                                     Notes = "",
                                     StaffId = staff.Id,
-                                    CCode = checkCus.CCode,
-                                    CType = checkCus.CType,
-                                    CInfoId = checkCus.Id
+                                  //  CCode = checkCus.CCode,
+                                  //  CType = checkCus.CType,
+                                  //  CInfoId = checkCus.Id
                                 };
 
-                                db.CheckInCalendars.Add(plan);
+                             //   db.CheckInCalendars.Add(plan);
                                 db.SaveChanges();
 
                             }

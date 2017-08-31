@@ -103,10 +103,15 @@
         <AssociationConnector Association="NDHDBModel.MobileRole" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.StaffWithC1" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.StaffWithC2" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="NDHDBModel.CheckInCalendarStatu" Width="1.5" PointX="21.375" PointY="16.875" />
-        <EntityTypeShape EntityType="NDHDBModel.CheckInCalendarHistory" Width="1.5" PointX="7.5" PointY="29.25" />
-        <AssociationConnector Association="NDHDBModel.FK__CheckInCa__Staff__4B2D1C3C" />
-        <EntityTypeShape EntityType="NDHDBModel.CheckInCalendar" Width="1.5" PointX="17.375" PointY="21.75" />
+        <EntityTypeShape EntityType="NDHDBModel.CalendarType" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NDHDBModel.CalendarWork" Width="1.5" PointX="22.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NDHDBModel.ProcessHistory" Width="1.5" PointX="22.375" PointY="6.75" />
+        <EntityTypeShape EntityType="NDHDBModel.ProcessWork" Width="1.5" PointX="21.375" PointY="19.875" />
+        <AssociationConnector Association="NDHDBModel.ProcessWithRole" />
+        <EntityTypeShape EntityType="NDHDBModel.CheckInCalendarHistory" Width="1.5" PointX="7.5" PointY="38.25" />
+        <AssociationConnector Association="NDHDBModel.FK__CheckInCa__Staff__597B3B93" />
+        <EntityTypeShape EntityType="NDHDBModel.CalendarInfo" Width="1.5" PointX="7.5" PointY="29.375" />
+        <AssociationConnector Association="NDHDBModel.FK__CalendarI__Staff__5E3FF0B0" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
