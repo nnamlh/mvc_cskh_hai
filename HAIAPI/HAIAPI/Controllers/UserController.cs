@@ -320,6 +320,46 @@ namespace HAIAPI.Controllers
 
         #endregion
 
+        #region LoginSession
+        /// <summary>
+        /// --------------------------------
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ResultInfo LoginSession(string user, string token)
+        {
+
+            // check sesion for login
+            // /api/rest/loginsession
+            var history = new MongoHistoryAPI()
+            {
+                CreateTime = DateTime.Now,
+                APIUrl = "/api/user/loginsession",
+                Content = user + "|" + token,
+                Sucess = 1
+            };
+
+            var result = new ResultInfo()
+            {
+                id = "1"
+            };
+
+            if (!mongoHelper.checkLoginSession(user, token))
+            {
+                result.id = "0";
+                result.msg = "Tài khoản bạn đã đăng nhập ở thiết bị khác.";
+                history.Sucess = 0;
+            }
+
+            history.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+
+            mongoHelper.createHistoryAPI(history);
+
+            return result;
+
+        }
+        #endregion
+
         #region Logout
         /// <summary>
         /// --------------------------------// logout

@@ -212,8 +212,8 @@
     <EntitySetMapping Name="CalendarTypes">
       <EntityTypeMapping TypeName="NDHDBModel.CalendarType">
         <MappingFragment StoreEntitySet="CalendarType">
-          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Compel" ColumnName="Compel" />
           <ScalarProperty Name="Number" ColumnName="Number" />
           <ScalarProperty Name="TGroup" ColumnName="TGroup" />

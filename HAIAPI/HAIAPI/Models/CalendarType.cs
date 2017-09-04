@@ -15,10 +15,10 @@ namespace HAIAPI.Models
     public partial class CalendarType
     {
         public string Id { get; set; }
-        public string Notes { get; set; }
         public Nullable<int> Compel { get; set; }
         public Nullable<int> Number { get; set; }
         public Nullable<int> TGroup { get; set; }
         public string Name { get; set; }
+        public string Notes { get; set; }
     }
 }

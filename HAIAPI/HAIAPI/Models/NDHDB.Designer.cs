@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'c:\users\hai\documents\visual studio 2013\Projects\HAIAPI\HAIAPI\Models\NDHDB.edmx'. 
+﻿// T4 code generation is enabled for model 'N:\csharp\mvc_cskh_hai\HAIAPI\HAIAPI\Models\NDHDB.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
