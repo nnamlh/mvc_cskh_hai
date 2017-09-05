@@ -253,6 +253,7 @@ namespace HAIAPI.Controllers
                     throw new Exception("Chưa có kế hoạch cho tháng này");
 
                 result.hasApprove = checkCalendar.CStatus;
+                result.notes = checkCalendar.Notes;
                 result.month = checkCalendar.CMonth;
                 result.year = checkCalendar.CYear;
 
