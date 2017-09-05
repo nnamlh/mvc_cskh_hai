@@ -224,6 +224,7 @@
     <EntitySetMapping Name="CalendarWorks">
       <EntityTypeMapping TypeName="NDHDBModel.CalendarWork">
         <MappingFragment StoreEntitySet="CalendarWork">
+          <ScalarProperty Name="Perform" ColumnName="Perform" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CDay" ColumnName="CDay" />
           <ScalarProperty Name="CMonth" ColumnName="CMonth" />
@@ -847,5 +848,44 @@
         <ScalarProperty Name="Id" ColumnName="C1Id" />
       </EndProperty>
     </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="checkin_calendartype_group" FunctionName="NDHDBModel.Store.checkin_calendartype_group">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NDHDBModel.checkin_calendartype_group_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="countday" ColumnName="countday" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="checkin_getcalendar" FunctionName="NDHDBModel.Store.checkin_getcalendar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NDHDBModel.checkin_getcalendar_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CDay" ColumnName="CDay" />
+          <ScalarProperty Name="CMonth" ColumnName="CMonth" />
+          <ScalarProperty Name="CYear" ColumnName="CYear" />
+          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+          <ScalarProperty Name="InPlan" ColumnName="InPlan" />
+          <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+          <ScalarProperty Name="AgencyType" ColumnName="AgencyType" />
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CIn" ColumnName="CIn" />
+          <ScalarProperty Name="COut" ColumnName="COut" />
+          <ScalarProperty Name="CInTime" ColumnName="CInTime" />
+          <ScalarProperty Name="COutTime" ColumnName="COutTime" />
+          <ScalarProperty Name="AllTime" ColumnName="AllTime" />
+          <ScalarProperty Name="CDate" ColumnName="CDate" />
+          <ScalarProperty Name="LatCheck" ColumnName="LatCheck" />
+          <ScalarProperty Name="LngCheck" ColumnName="LngCheck" />
+          <ScalarProperty Name="TimeCheck" ColumnName="TimeCheck" />
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="Perform" ColumnName="Perform" />
+          <ScalarProperty Name="CName" ColumnName="CName" />
+          <ScalarProperty Name="CDeputy" ColumnName="CDeputy" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

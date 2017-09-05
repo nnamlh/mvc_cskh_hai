@@ -255,6 +255,12 @@
     <Compile Include="Models\CalendarWork.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\checkin_calendartype_group_Result.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\checkin_getcalendar_Result.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CInfoCommon.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>

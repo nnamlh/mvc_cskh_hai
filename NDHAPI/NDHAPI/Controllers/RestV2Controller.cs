@@ -506,8 +506,6 @@ namespace NDHAPI.Controllers
                 month = new List<string>()
             };
 
-
-
             try
             {
                 var currentYear = DateTime.Now.Year;

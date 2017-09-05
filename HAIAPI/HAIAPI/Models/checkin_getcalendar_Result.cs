@@ -10,9 +10,8 @@
 namespace HAIAPI.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class CalendarWork
+    public partial class checkin_getcalendar_Result
     {
         public string Id { get; set; }
         public Nullable<int> CDay { get; set; }
@@ -35,5 +34,8 @@ namespace HAIAPI.Models
         public Nullable<System.DateTime> TimeCheck { get; set; }
         public Nullable<double> Distance { get; set; }
         public Nullable<int> Perform { get; set; }
+        public string CName { get; set; }
+        public string CDeputy { get; set; }
+        public string TypeName { get; set; }
     }
 }

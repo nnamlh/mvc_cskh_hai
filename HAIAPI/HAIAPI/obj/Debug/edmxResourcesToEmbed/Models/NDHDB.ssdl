@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="NDHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="NDHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AgencySavePoint">
     <Key>
       <PropertyRef Name="EventId" />
@@ -238,6 +238,7 @@
     <Property Name="LngCheck" Type="float" />
     <Property Name="TimeCheck" Type="datetime" />
     <Property Name="Distance" Type="float" />
+    <Property Name="Perform" Type="int" />
   </EntityType>
   <EntityType Name="CInfoCommon">
     <Key>
@@ -272,13 +273,13 @@
     <Property Name="BusinessLicense" Type="nvarchar" MaxLength="512" />
     <Property Name="Lat" Type="float" />
     <Property Name="Lng" Type="float" />
-    <Property Name="BirthDay" Type="int" />
     <Property Name="BirthMonth" Type="int" />
     <Property Name="BirthYear" Type="int" />
     <Property Name="CRank" Type="nvarchar" MaxLength="16" />
     <Property Name="CGroup" Type="int" />
     <Property Name="WardName" Type="nvarchar" MaxLength="512" />
     <Property Name="Country" Type="nvarchar" MaxLength="128" />
+    <Property Name="BirthDay" Type="int" />
   </EntityType>
   <EntityType Name="District">
     <Key>
@@ -868,7 +869,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CalendarI__Staff__5E3FF0B0">
+  <Association Name="FK__CalendarI__Staff__4297D63B">
     <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
     <End Role="CalendarInfo" Type="Self.CalendarInfo" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1228,7 +1229,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProcessWi__Proce__4FF1D159">
+  <Association Name="FK__ProcessWi__Proce__52CE3E04">
     <End Role="ProcessWork" Type="Self.ProcessWork" Multiplicity="1" />
     <End Role="ProcessWithRole" Type="Self.ProcessWithRole" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1240,7 +1241,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProcessWi__RoleI__50E5F592">
+  <Association Name="FK__ProcessWi__RoleI__53C2623D">
     <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
     <End Role="ProcessWithRole" Type="Self.ProcessWithRole" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1404,6 +1405,16 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="checkin_calendartype_group" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="month" Type="int" Mode="In" />
+    <Parameter Name="year" Type="int" Mode="In" />
+    <Parameter Name="staffId" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="checkin_getcalendar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="month" Type="int" Mode="In" />
+    <Parameter Name="year" Type="int" Mode="In" />
+    <Parameter Name="staffId" Type="nvarchar" Mode="In" />
+  </Function>
   <EntityContainer Name="NDHDBModelStoreContainer">
     <EntitySet Name="AgencySavePoint" EntityType="Self.AgencySavePoint" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AllStatus" EntityType="Self.AllStatus" Schema="dbo" store:Type="Tables" />
@@ -1495,7 +1506,7 @@
       <End Role="CInfoCommon" EntitySet="CInfoCommon" />
       <End Role="C2Info" EntitySet="C2Info" />
     </AssociationSet>
-    <AssociationSet Name="FK__CalendarI__Staff__5E3FF0B0" Association="Self.FK__CalendarI__Staff__5E3FF0B0">
+    <AssociationSet Name="FK__CalendarI__Staff__4297D63B" Association="Self.FK__CalendarI__Staff__4297D63B">
       <End Role="HaiStaff" EntitySet="HaiStaff" />
       <End Role="CalendarInfo" EntitySet="CalendarInfo" />
     </AssociationSet>
@@ -1615,11 +1626,11 @@
       <End Role="MSGPoint" EntitySet="MSGPoint" />
       <End Role="MSGPointEvent" EntitySet="MSGPointEvent" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProcessWi__Proce__4FF1D159" Association="Self.FK__ProcessWi__Proce__4FF1D159">
+    <AssociationSet Name="FK__ProcessWi__Proce__52CE3E04" Association="Self.FK__ProcessWi__Proce__52CE3E04">
       <End Role="ProcessWork" EntitySet="ProcessWork" />
       <End Role="ProcessWithRole" EntitySet="ProcessWithRole" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProcessWi__RoleI__50E5F592" Association="Self.FK__ProcessWi__RoleI__50E5F592">
+    <AssociationSet Name="FK__ProcessWi__RoleI__53C2623D" Association="Self.FK__ProcessWi__RoleI__53C2623D">
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />
       <End Role="ProcessWithRole" EntitySet="ProcessWithRole" />
     </AssociationSet>

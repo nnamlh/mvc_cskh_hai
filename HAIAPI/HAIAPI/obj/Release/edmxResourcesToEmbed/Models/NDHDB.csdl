@@ -250,6 +250,7 @@
     <Property Name="LngCheck" Type="Double" />
     <Property Name="TimeCheck" Type="DateTime" Precision="3" />
     <Property Name="Distance" Type="Double" />
+    <Property Name="Perform" Type="Int32" />
   </EntityType>
   <EntityType Name="CInfoCommon">
     <Key>
@@ -1592,5 +1593,46 @@
       <End Role="HaiStaff" EntitySet="HaiStaffs" />
       <End Role="C1Info" EntitySet="C1Info" />
     </AssociationSet>
+    <FunctionImport Name="checkin_calendartype_group" ReturnType="Collection(NDHDBModel.checkin_calendartype_group_Result)">
+      <Parameter Name="month" Mode="In" Type="Int32" />
+      <Parameter Name="year" Mode="In" Type="Int32" />
+      <Parameter Name="staffId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="checkin_getcalendar" ReturnType="Collection(NDHDBModel.checkin_getcalendar_Result)">
+      <Parameter Name="month" Mode="In" Type="Int32" />
+      <Parameter Name="year" Mode="In" Type="Int32" />
+      <Parameter Name="staffId" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
+  <ComplexType Name="checkin_calendartype_group_Result">
+    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="512" />
+    <Property Type="Int32" Name="countday" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="checkin_getcalendar_Result">
+    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="CDay" Nullable="true" />
+    <Property Type="Int32" Name="CMonth" Nullable="true" />
+    <Property Type="Int32" Name="CYear" Nullable="true" />
+    <Property Type="String" Name="StaffId" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="InPlan" Nullable="true" />
+    <Property Type="String" Name="AgencyCode" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="AgencyType" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Notes" Nullable="true" />
+    <Property Type="Int32" Name="CIn" Nullable="true" />
+    <Property Type="Int32" Name="COut" Nullable="true" />
+    <Property Type="Time" Name="CInTime" Nullable="true" />
+    <Property Type="Time" Name="COutTime" Nullable="true" />
+    <Property Type="Int32" Name="AllTime" Nullable="true" />
+    <Property Type="Int32" Name="CDate" Nullable="true" />
+    <Property Type="Double" Name="LatCheck" Nullable="true" />
+    <Property Type="Double" Name="LngCheck" Nullable="true" />
+    <Property Type="DateTime" Name="TimeCheck" Nullable="true" Precision="23" />
+    <Property Type="Double" Name="Distance" Nullable="true" />
+    <Property Type="Int32" Name="Perform" Nullable="true" />
+    <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="CDeputy" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="TypeName" Nullable="true" MaxLength="512" />
+  </ComplexType>
 </Schema>
