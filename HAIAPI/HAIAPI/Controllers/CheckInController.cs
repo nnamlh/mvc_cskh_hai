@@ -598,5 +598,114 @@ namespace HAIAPI.Controllers
 
         #endregion
 
+        #region
+        [HttpPost]
+        public ResultInfo CheckIn()
+        {
+            var log = new MongoHistoryAPI()
+            {
+                APIUrl = "/api/checkin/checkin",
+                CreateTime = DateTime.Now,
+                Sucess = 1
+            };
+
+            var result = new ResultInfo()
+            {
+                id = "1",
+                msg = "success"
+            };
+
+            var requestContent = Request.Content.ReadAsStringAsync().Result;
+            try
+            {
+                var jsonserializer = new JavaScriptSerializer();
+                var paser = jsonserializer.Deserialize<CheckInRequest>(requestContent);
+                log.Content = new JavaScriptSerializer().Serialize(paser);
+
+                if (!mongoHelper.checkLoginSession(paser.user, paser.token))
+                    throw new Exception("Wrong token and user login!");
+
+                var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+
+                if (staff == null)
+                    throw new Exception("Chỉ nhân viên công ty mới được sử dụng");
+
+                // check inplan hay new plan
+                var cinfo = db.CInfoCommons.Where(p => p.CCode == paser.agency).FirstOrDefault();
+                if (cinfo == null)
+                    throw new Exception("Sai mã khách hàng");
+
+                // check 
+                var day = DateTime.Now.Day;
+                var month = DateTime.Now.Month;
+                var year = DateTime.Now.Year;
+                int timeRequireCheckIn = 0;
+                var checkUser = db.AspNetUsers.Where(p => p.UserName == paser.user).FirstOrDefault();
+
+                if (checkUser == null)
+                    throw new Exception("Lỗi");
+
+                var role = checkUser.AspNetRoles.FirstOrDefault();
+                var processCheckIn = role.ProcessWorks.ToList();
+                foreach (var item in processCheckIn)
+                {
+                    timeRequireCheckIn += Convert.ToInt32(item.TimeRequire);
+                }
+                var checkCalendar = db.CalendarWorks.Where(p => p.CMonth == month && p.CYear == year && p.CDay == day && p.StaffId == staff.Id && p.AgencyCode == paser.agency).FirstOrDefault();
+
+                if (checkCalendar != null)
+                {
+                    // kiem tra da thuc hien xong chua
+                    if (checkCalendar.Perform == 1)
+                        throw new Exception("Đã hoàn thành ghé thăm");
+                    TimeSpan span = DateTime.Now.TimeOfDay.Subtract(checkCalendar.CInTime.Value);
+                    int minuteDistance = span.Hours * 60 + span.Minutes;
+                    if (minuteDistance >= timeRequireCheckIn)
+                        minuteDistance = 0;
+                    else
+                        minuteDistance = timeRequireCheckIn - minuteDistance;
+
+                    if (minuteDistance > 0)
+                        throw new Exception("Còn " + minuteDistance + " phút để có thể checkin");
+
+                    checkCalendar.COut = 1;
+                    checkCalendar.Perform = 1;
+                    checkCalendar.TimeCheck = DateTime.Now;
+                    checkCalendar.Distance = paser.distance;
+                    checkCalendar.LatCheck = paser.lat;
+                    checkCalendar.LngCheck = paser.lng;
+                    checkCalendar.AllTime = span.Hours * 60 + span.Minutes;
+
+                    db.Entry(checkCalendar).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+
+                    // add quy trinh
+                    var historyProcess = new ProcessHistory()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        CalendarId = checkCalendar.Id,
+                        ProcessId = "checkintask",
+                        CreateTime = DateTime.Now 
+                    };
+                    db.ProcessHistories.Add(historyProcess);
+                    db.SaveChanges();
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                result.id = "0";
+                result.msg = e.Message;
+                log.Sucess = 0;
+            }
+
+            log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+            mongoHelper.createHistoryAPI(log);
+
+            return result;
+        }
+        #endregion
+
     }
 }

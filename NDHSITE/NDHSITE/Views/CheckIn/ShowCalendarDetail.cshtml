@@ -1,0 +1,144 @@
+﻿@model IEnumerable<NDHSITE.Models.checkin_getcalendar_Result>
+@{
+    ViewBag.Title = "Check in calendar result";
+
+    var calendar = ViewBag.Calendar as NDHSITE.Models.CalendarInfo;
+    var groupDetail = ViewBag.GroupType as IEnumerable<NDHSITE.Models.checkin_calendartype_group_Result>;
+}
+
+<div class="portlet portlet-boxed">
+    <div class="portlet-header">
+        <h4 class="portlet-title">
+            Danh sách lịch công tác
+        </h4>
+    </div> <!-- /.portlet-header -->
+    <div class="portlet-body">
+
+        <fieldset>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Tháng-Năm</label>
+                        <input type="text" disabled value="@calendar.CMonth-@calendar.CYear" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Nhân viên</label>
+                        <input type="text" disabled value="@calendar.HaiStaff.Code-@calendar.HaiStaff.FullName" class="form-control" />
+                    </div>
+
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Chi nhánh</label>
+                        <input type="text" disabled value="@calendar.HaiStaff.HaiBranch.Code" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày gửi</label>
+                        <input type="text" disabled value="@calendar.CreateTime" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <table class="table table-striped table-bordered thumbnail-table">
+                        <tbody>
+                            @foreach (var item in groupDetail)
+                            {
+                                <tr>
+                                    <td>@item.Name</td>
+                                    <td>@item.countday</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-6">
+                    @if (calendar.CStatus == 0)
+                    {
+                        <form method="post" action="/checkin/approvecalendar" onsubmit="if(!confirm('Xác nhận lịch?')){return false;}">
+                            <input type="hidden" name="id" value="@calendar.Id"/>
+                            <div class="form-group">
+                                <label>Ghi chú</label>
+                                <textarea type="text" name="notes" class="form-control"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Xác nhận</button>
+
+                        </form>
+
+                    }
+                    else
+                    {
+                        <h4>Đã xác nhận</h4>
+                        <textarea type="text" name="search" class="form-control" disabled>@calendar.Notes</textarea>
+                    }
+                </div>
+            </div>
+        </fieldset>
+
+
+        <br />
+        <fieldset>
+            <table class="table table-striped table-bordered thumbnail-table">
+
+                <thead>
+                    <tr>
+                        <th>Ngày</th>
+                        <th>Khách hàng</th>
+                        <th>Loại lịch</th>
+                        <th>Ghi chú</th>
+                        <th>Thực hiện</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @{ 
+                        int? day = 0;
+                    }
+                    @foreach (var item in Model)
+                    {
+                      
+
+                        <tr>
+                            <td>
+                                @if (day != item.CDay) {
+                                    day = item.CDay;
+                                    <span>@day</span>
+                                }
+                            </td>
+                            <td>
+                                @item.AgencyCode<br />
+                                @item.CDeputy<br />
+                                @item.CName
+                            </td>
+                            <td>
+                                @item.TypeName
+                            </td>
+                            <td>
+                                @if (item.InPlan == 0)
+                                {
+                                    <span>Ngoài kế hoạch</span>
+                                }
+                                else
+                                {
+                                    <span>Trong kế hoạch</span>
+                                }
+                            </td>
+                            <td>
+                                @if (item.Perform == 0)
+                                {
+                                    <span>Chưa thực hiện</span>
+                                }
+                                else
+                                {
+                                    <span>Đã thực hiện</span><br />
+                                    <span>Giờ đến: @item.CInTime</span><br />
+                                    <span>Giờ ra: @item.COutTime</span><br />
+                                    <span>Tổng tgian: @item.AllTime</span>
+                                }
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+</div>

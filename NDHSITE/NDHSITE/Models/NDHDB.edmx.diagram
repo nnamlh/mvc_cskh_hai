@@ -57,7 +57,6 @@
         <EntityTypeShape EntityType="NDHDBModel.SmsAccount" Width="1.5" PointX="19.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="NDHDBModel.SMSCode" Width="1.5" PointX="19.75" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="NDHDBModel.SMSHistory" Width="1.5" PointX="19.75" PointY="8.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.StaffCheckIn" Width="1.5" PointX="7.5" PointY="33.5" IsExpanded="true" />
         <EntityTypeShape EntityType="NDHDBModel.TreeInfo" Width="1.5" PointX="14.75" PointY="20.875" IsExpanded="true" />
         <EntityTypeShape EntityType="NDHDBModel.Ward" Width="1.5" PointX="0.75" PointY="15.375" IsExpanded="true" />
         <EntityTypeShape EntityType="NDHDBModel.Warehouse" Width="1.5" PointX="20.75" PointY="12.875" IsExpanded="true" />
@@ -93,7 +92,6 @@
         <AssociationConnector Association="NDHDBModel.FK__HaiStaff__Branch__24927208" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.FK__HaiStaff__Depart__25869641" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.FK__HaiStaff__Positi__239E4DCF" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__StaffChec__Staff__47DBAE45" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.FK__MSGPoint__Produc__5708E33C" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.FK__MSGPointE__MSGPo__5CC1BC92" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.FK__ProductSe__Produ__10416098" ManuallyRouted="false" />
@@ -104,10 +102,15 @@
         <AssociationConnector Association="NDHDBModel.StaffWithC1" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.StaffWithC2" ManuallyRouted="false" />
         <EntityTypeShape EntityType="NDHDBModel.StoreStaffId" Width="1.5" PointX="12.375" PointY="0.75" />
-        <EntityTypeShape EntityType="NDHDBModel.CheckInCalendar" Width="1.5" PointX="21.375" PointY="16.75" />
-        <EntityTypeShape EntityType="NDHDBModel.CheckInCalendarHistory" Width="1.5" PointX="7.5" PointY="38.375" />
-        <EntityTypeShape EntityType="NDHDBModel.CheckInCalendarStatu" Width="1.5" PointX="17.375" PointY="21.75" />
-        <AssociationConnector Association="NDHDBModel.FK__CheckInCa__Staff__316D4A39" />
+        <EntityTypeShape EntityType="NDHDBModel.CalendarInfo" Width="2" PointX="7.5" PointY="29.375" />
+        <EntityTypeShape EntityType="NDHDBModel.CalendarType" Width="1.5" PointX="21.375" PointY="21.75" />
+        <EntityTypeShape EntityType="NDHDBModel.CalendarWork" Width="1.5" PointX="22.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NDHDBModel.ProcessHistory" Width="1.5" PointX="22.375" PointY="6.75" />
+        <EntityTypeShape EntityType="NDHDBModel.ProcessWork" Width="1.5" PointX="19.375" PointY="21.875" />
+        <AssociationConnector Association="NDHDBModel.FK__CalendarI__Staff__5E3FF0B0" />
+        <AssociationConnector Association="NDHDBModel.ProcessWithRole" />
+        <EntityTypeShape EntityType="NDHDBModel.StaffCheckIn" Width="1.5" PointX="7.5" PointY="33.75" />
+        <AssociationConnector Association="NDHDBModel.FK__StaffChec__Staff__47DBAE45" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

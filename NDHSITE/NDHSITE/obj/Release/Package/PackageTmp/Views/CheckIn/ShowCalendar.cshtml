@@ -1,0 +1,79 @@
+﻿@model PagedList.IPagedList<NDHSITE.Models.CalendarInfo>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Lịch công tác";
+}
+
+<div class="portlet portlet-boxed">
+    <div class="portlet-header">
+        <h4 class="portlet-title">
+            Danh sách lịch công tác
+        </h4>
+    </div> <!-- /.portlet-header -->
+    <div class="portlet-body">
+
+        <form method="get">
+
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Tháng</label>
+                        <input type="number" name="month" value="@ViewBag.Month" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Năm</label>
+                        <input type="number" name="year" value="@ViewBag.Year" class="form-control" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Xem</button>
+                </div>
+            </div>
+
+        </form>
+        <br />
+        <fieldset>
+            <table class="table table-striped table-bordered thumbnail-table">
+
+                <thead>
+                    <tr>
+                        <th>Tên nhân viên</th>
+                        <th>Chi nhánh</th>
+                        <th>Tháng-Năm</th>
+                        <th>Ngày gửi</th>
+                        <th>Trạng thái</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.HaiStaff.Code<br />@item.HaiStaff.FullName</td>
+                            <td>@item.HaiStaff.HaiBranch.Code</td>
+                            <td>@item.CMonth-@item.CYear</td>
+                            <td>@item.CreateTime</td>
+                            <td>
+                                @if(item.CStatus == 0)
+                                {
+                                    <span>Chưa xác nhận</span>
+                                } else
+                                {
+                                    <span>Đã xác nhận</span>
+                                }
+                            </td>
+                            <td>
+                                <a href="/checkin/showcalendardetail/@item.Id" target="_blank">Xem</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <br />
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("showcalendar",
+                                                         new { page, search = ViewBag.SearchText }))
+        </fieldset>
+    </div>
+</div>
+

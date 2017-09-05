@@ -140,5 +140,15 @@ namespace HAIAPI.Models
         public int time { get; set; }
     }
 
+    public class CheckInRequest : RequestInfo
+    {
+        public string agency { get; set; }
+        public double? lat { get; set; }
+        public double? lng { get; set; }
+
+        public double? distance { get; set; }
+
+    }
+
 
 }

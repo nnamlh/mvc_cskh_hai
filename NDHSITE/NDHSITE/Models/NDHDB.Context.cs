@@ -79,14 +79,16 @@ namespace NDHSITE.Models
         public virtual DbSet<SmsAccount> SmsAccounts { get; set; }
         public virtual DbSet<SMSCode> SMSCodes { get; set; }
         public virtual DbSet<SMSHistory> SMSHistories { get; set; }
-        public virtual DbSet<StaffCheckIn> StaffCheckIns { get; set; }
         public virtual DbSet<TreeInfo> TreeInfoes { get; set; }
         public virtual DbSet<Ward> Wards { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<StoreStaffId> StoreStaffIds { get; set; }
-        public virtual DbSet<CheckInCalendar> CheckInCalendars { get; set; }
-        public virtual DbSet<CheckInCalendarHistory> CheckInCalendarHistories { get; set; }
-        public virtual DbSet<CheckInCalendarStatu> CheckInCalendarStatus { get; set; }
+        public virtual DbSet<CalendarInfo> CalendarInfoes { get; set; }
+        public virtual DbSet<CalendarType> CalendarTypes { get; set; }
+        public virtual DbSet<CalendarWork> CalendarWorks { get; set; }
+        public virtual DbSet<ProcessHistory> ProcessHistories { get; set; }
+        public virtual DbSet<ProcessWork> ProcessWorks { get; set; }
+        public virtual DbSet<StaffCheckIn> StaffCheckIns { get; set; }
     
         public virtual ObjectResult<report_event_agency_Result> report_event_agency(string cType, string eventId)
         {
@@ -146,6 +148,40 @@ namespace NDHSITE.Models
                 new ObjectParameter("DTo", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<report_cii_product_Result>("report_cii_product", dFromParameter, dToParameter);
+        }
+    
+        public virtual ObjectResult<checkin_getcalendar_Result> checkin_getcalendar(Nullable<int> month, Nullable<int> year, string staffId)
+        {
+            var monthParameter = month.HasValue ?
+                new ObjectParameter("month", month) :
+                new ObjectParameter("month", typeof(int));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("year", year) :
+                new ObjectParameter("year", typeof(int));
+    
+            var staffIdParameter = staffId != null ?
+                new ObjectParameter("staffId", staffId) :
+                new ObjectParameter("staffId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<checkin_getcalendar_Result>("checkin_getcalendar", monthParameter, yearParameter, staffIdParameter);
+        }
+    
+        public virtual ObjectResult<checkin_calendartype_group_Result> checkin_calendartype_group(Nullable<int> month, Nullable<int> year, string staffId)
+        {
+            var monthParameter = month.HasValue ?
+                new ObjectParameter("month", month) :
+                new ObjectParameter("month", typeof(int));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("year", year) :
+                new ObjectParameter("year", typeof(int));
+    
+            var staffIdParameter = staffId != null ?
+                new ObjectParameter("staffId", staffId) :
+                new ObjectParameter("staffId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<checkin_calendartype_group_Result>("checkin_calendartype_group", monthParameter, yearParameter, staffIdParameter);
         }
     }
 }

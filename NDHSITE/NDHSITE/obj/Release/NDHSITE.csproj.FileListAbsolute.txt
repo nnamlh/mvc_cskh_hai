@@ -422,3 +422,5 @@ N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.MicrosoftAcco
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\obj\Release\NDHSITE.csprojResolveAssemblyReference.cache
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\obj\Release\NDHSITE.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\obj\Release\NDHSITE.pdb
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Dapper.dll
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Dapper.xml

@@ -77,6 +77,7 @@
     <NavigationProperty Name="FuncRoles" Relationship="Self.FK__FuncRole__RoleId__7ABC33CD" FromRole="AspNetRoles" ToRole="FuncRole" />
     <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
     <NavigationProperty Name="MobileFunctions" Relationship="Self.MobileRole" FromRole="AspNetRoles" ToRole="MobileFunction" />
+    <NavigationProperty Name="ProcessWorks" Relationship="NDHDBModel.ProcessWithRole" FromRole="AspNetRole" ToRole="ProcessWork" />
   </EntityType>
   <EntityType Name="AspNetUserClaim">
     <Key>
@@ -475,11 +476,12 @@
     <NavigationProperty Name="HaiBranch" Relationship="Self.FK__HaiStaff__Branch__24927208" FromRole="HaiStaff" ToRole="HaiBranch" />
     <NavigationProperty Name="HaiDepartment" Relationship="Self.FK__HaiStaff__Depart__25869641" FromRole="HaiStaff" ToRole="HaiDepartment" />
     <NavigationProperty Name="HaiPosition" Relationship="Self.FK__HaiStaff__Positi__239E4DCF" FromRole="HaiStaff" ToRole="HaiPosition" />
-    <NavigationProperty Name="StaffCheckIns" Relationship="Self.FK__StaffChec__Staff__47DBAE45" FromRole="HaiStaff" ToRole="StaffCheckIn" />
     <NavigationProperty Name="C1Info" Relationship="Self.StaffWithC1" FromRole="HaiStaff" ToRole="C1Info" />
     <NavigationProperty Name="C2Info" Relationship="Self.StaffWithC2" FromRole="HaiStaff" ToRole="C2Info" />
     <Property Name="IsDelete" Type="Int32" />
-    <NavigationProperty Name="CheckInCalendarHistories" Relationship="NDHDBModel.FK__CheckInCa__Staff__316D4A39" FromRole="HaiStaff" ToRole="CheckInCalendarHistory" />
+    <Property Name="GPSDistance" Type="Int32" />
+    <NavigationProperty Name="CalendarInfoes" Relationship="NDHDBModel.FK__CalendarI__Staff__5E3FF0B0" FromRole="HaiStaff" ToRole="CalendarInfo" />
+    <NavigationProperty Name="StaffCheckIns" Relationship="NDHDBModel.FK__StaffChec__Staff__47DBAE45" FromRole="HaiStaff" ToRole="StaffCheckIn" />
   </EntityType>
   <EntityType Name="HappyBirthday">
     <Key>
@@ -715,26 +717,6 @@
     <Property Name="CreateTime" Type="DateTime" Precision="3" />
     <Property Name="AgencyType" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="Success" Type="Int32" />
-  </EntityType>
-  <EntityType Name="StaffCheckIn">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="StaffUser" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="AcceptTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="Longitude" Type="Double" />
-    <Property Name="Latitude" Type="Double" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="Agency" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="AgencyName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="AgencyAddress" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="AgencyType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="AgencyTypeName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="HaiStaff" Relationship="Self.FK__StaffChec__Staff__47DBAE45" FromRole="StaffCheckIn" ToRole="HaiStaff" />
   </EntityType>
   <EntityType Name="TreeInfo">
     <Key>
@@ -1161,18 +1143,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__StaffChec__Staff__47DBAE45">
-    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
-    <End Role="StaffCheckIn" Type="Self.StaffCheckIn" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiStaff">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="StaffCheckIn">
-        <PropertyRef Name="StaffId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__MSGPoint__Produc__5708E33C">
     <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
     <End Role="MSGPoint" Type="Self.MSGPoint" Multiplicity="*" />
@@ -1294,7 +1264,6 @@
     <EntitySet Name="SmsAccounts" EntityType="Self.SmsAccount" />
     <EntitySet Name="SMSCodes" EntityType="Self.SMSCode" />
     <EntitySet Name="SMSHistories" EntityType="Self.SMSHistory" />
-    <EntitySet Name="StaffCheckIns" EntityType="Self.StaffCheckIn" />
     <EntitySet Name="TreeInfoes" EntityType="Self.TreeInfo" />
     <EntitySet Name="Wards" EntityType="Self.Ward" />
     <EntitySet Name="Warehouses" EntityType="Self.Warehouse" />
@@ -1426,10 +1395,6 @@
       <End Role="HaiPosition" EntitySet="HaiPositions" />
       <End Role="HaiStaff" EntitySet="HaiStaffs" />
     </AssociationSet>
-    <AssociationSet Name="FK__StaffChec__Staff__47DBAE45" Association="Self.FK__StaffChec__Staff__47DBAE45">
-      <End Role="HaiStaff" EntitySet="HaiStaffs" />
-      <End Role="StaffCheckIn" EntitySet="StaffCheckIns" />
-    </AssociationSet>
     <AssociationSet Name="FK__MSGPoint__Produc__5708E33C" Association="Self.FK__MSGPoint__Produc__5708E33C">
       <End Role="ProductInfo" EntitySet="ProductInfoes" />
       <End Role="MSGPoint" EntitySet="MSGPoints" />
@@ -1485,13 +1450,34 @@
       <Parameter Name="DTo" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="StoreStaffIds" EntityType="NDHDBModel.StoreStaffId" />
-    <EntitySet Name="CheckInCalendars" EntityType="NDHDBModel.CheckInCalendar" />
-    <EntitySet Name="CheckInCalendarHistories" EntityType="NDHDBModel.CheckInCalendarHistory" />
-    <EntitySet Name="CheckInCalendarStatus" EntityType="NDHDBModel.CheckInCalendarStatu" />
-    <AssociationSet Name="FK__CheckInCa__Staff__316D4A39" Association="NDHDBModel.FK__CheckInCa__Staff__316D4A39">
+    <EntitySet Name="CalendarInfoes" EntityType="NDHDBModel.CalendarInfo" />
+    <EntitySet Name="CalendarTypes" EntityType="NDHDBModel.CalendarType" />
+    <EntitySet Name="CalendarWorks" EntityType="NDHDBModel.CalendarWork" />
+    <EntitySet Name="ProcessHistories" EntityType="NDHDBModel.ProcessHistory" />
+    <EntitySet Name="ProcessWorks" EntityType="NDHDBModel.ProcessWork" />
+    <AssociationSet Name="FK__CalendarI__Staff__5E3FF0B0" Association="NDHDBModel.FK__CalendarI__Staff__5E3FF0B0">
       <End Role="HaiStaff" EntitySet="HaiStaffs" />
-      <End Role="CheckInCalendarHistory" EntitySet="CheckInCalendarHistories" />
+      <End Role="CalendarInfo" EntitySet="CalendarInfoes" />
     </AssociationSet>
+    <AssociationSet Name="ProcessWithRole" Association="NDHDBModel.ProcessWithRole">
+      <End Role="ProcessWork" EntitySet="ProcessWorks" />
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+    </AssociationSet>
+    <FunctionImport Name="checkin_getcalendar" ReturnType="Collection(NDHDBModel.checkin_getcalendar_Result)">
+      <Parameter Name="month" Mode="In" Type="Int32" />
+      <Parameter Name="year" Mode="In" Type="Int32" />
+      <Parameter Name="staffId" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="StaffCheckIns" EntityType="NDHDBModel.StaffCheckIn" />
+    <AssociationSet Name="FK__StaffChec__Staff__47DBAE45" Association="NDHDBModel.FK__StaffChec__Staff__47DBAE45">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="StaffCheckIn" EntitySet="StaffCheckIns" />
+    </AssociationSet>
+    <FunctionImport Name="checkin_calendartype_group" ReturnType="Collection(NDHDBModel.checkin_calendartype_group_Result)">
+      <Parameter Name="month" Mode="In" Type="Int32" />
+      <Parameter Name="year" Mode="In" Type="Int32" />
+      <Parameter Name="staffId" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="report_event_agency_Result">
     <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -1546,25 +1532,7 @@
     <Property Name="IsUser" Type="Int32" />
     <Property Name="CountNumber" Type="Int32" />
   </EntityType>
-  <EntityType Name="CheckInCalendar">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CDay" Type="Int32" />
-    <Property Name="CMonth" Type="Int32" />
-    <Property Name="CYear" Type="Int32" />
-    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="InPlan" Type="Int32" />
-    <Property Name="Perform" Type="Int32" />
-    <Property Name="CCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CInfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="CheckInStatus" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CDate" Type="Int32" />
-  </EntityType>
-  <EntityType Name="CheckInCalendarHistory">
+  <EntityType Name="CalendarInfo">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -1577,25 +1545,142 @@
     <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="CType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="HaiStaff" Relationship="NDHDBModel.FK__CheckInCa__Staff__316D4A39" FromRole="CheckInCalendarHistory" ToRole="HaiStaff" />
+    <NavigationProperty Name="HaiStaff" Relationship="NDHDBModel.FK__CalendarI__Staff__5E3FF0B0" FromRole="CalendarInfo" ToRole="HaiStaff" />
   </EntityType>
-  <EntityType Name="CheckInCalendarStatu">
+  <EntityType Name="CalendarType">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Compel" Type="Int32" />
+    <Property Name="Number" Type="Int32" />
+    <Property Name="TGroup" Type="Int32" />
     <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
-  <Association Name="FK__CheckInCa__Staff__316D4A39">
+  <EntityType Name="CalendarWork">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CDay" Type="Int32" />
+    <Property Name="CMonth" Type="Int32" />
+    <Property Name="CYear" Type="Int32" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="InPlan" Type="Int32" />
+    <Property Name="AgencyCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="AgencyType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="TypeId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CIn" Type="Int32" />
+    <Property Name="COut" Type="Int32" />
+    <Property Name="CInTime" Type="Time" Precision="7" />
+    <Property Name="COutTime" Type="Time" Precision="7" />
+    <Property Name="AllTime" Type="Int32" />
+    <Property Name="CDate" Type="Int32" />
+    <Property Name="LatCheck" Type="Double" />
+    <Property Name="LngCheck" Type="Double" />
+    <Property Name="TimeCheck" Type="DateTime" Precision="3" />
+    <Property Name="Distance" Type="Double" />
+    <Property Name="Perform" Type="Int32" />
+  </EntityType>
+  <EntityType Name="ProcessHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProcessId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CalendarId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="ProcessWork">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProcessName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProcessType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="TimeRequire" Type="Int32" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetRoles" Relationship="NDHDBModel.ProcessWithRole" FromRole="ProcessWork" ToRole="AspNetRole" />
+  </EntityType>
+  <Association Name="FK__CalendarI__Staff__5E3FF0B0">
     <End Type="NDHDBModel.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
-    <End Type="NDHDBModel.CheckInCalendarHistory" Role="CheckInCalendarHistory" Multiplicity="*" />
+    <End Type="NDHDBModel.CalendarInfo" Role="CalendarInfo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="HaiStaff">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="CheckInCalendarHistory">
+      <Dependent Role="CalendarInfo">
         <PropertyRef Name="StaffId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="ProcessWithRole">
+    <End Type="NDHDBModel.ProcessWork" Role="ProcessWork" Multiplicity="*" />
+    <End Type="NDHDBModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+  </Association>
+  <EntityType Name="StaffCheckIn">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="StaffUser" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="AcceptTime" Type="DateTime" Precision="3" />
+    <Property Name="ImageUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Longitude" Type="Double" />
+    <Property Name="Latitude" Type="Double" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="Agency" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="AgencyName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="AgencyAddress" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="AgencyType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="AgencyTypeName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiStaff" Relationship="NDHDBModel.FK__StaffChec__Staff__47DBAE45" FromRole="StaffCheckIn" ToRole="HaiStaff" />
+  </EntityType>
+  <Association Name="FK__StaffChec__Staff__47DBAE45">
+    <End Type="NDHDBModel.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
+    <End Type="NDHDBModel.StaffCheckIn" Role="StaffCheckIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaffCheckIn">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="checkin_getcalendar_Result">
+    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="CDay" Nullable="true" />
+    <Property Type="Int32" Name="CMonth" Nullable="true" />
+    <Property Type="Int32" Name="CYear" Nullable="true" />
+    <Property Type="String" Name="StaffId" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="InPlan" Nullable="true" />
+    <Property Type="String" Name="AgencyCode" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="AgencyType" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Notes" Nullable="true" />
+    <Property Type="Int32" Name="CIn" Nullable="true" />
+    <Property Type="Int32" Name="COut" Nullable="true" />
+    <Property Type="Time" Name="CInTime" Nullable="true" />
+    <Property Type="Time" Name="COutTime" Nullable="true" />
+    <Property Type="Int32" Name="AllTime" Nullable="true" />
+    <Property Type="Int32" Name="CDate" Nullable="true" />
+    <Property Type="Double" Name="LatCheck" Nullable="true" />
+    <Property Type="Double" Name="LngCheck" Nullable="true" />
+    <Property Type="DateTime" Name="TimeCheck" Nullable="true" Precision="23" />
+    <Property Type="Double" Name="Distance" Nullable="true" />
+    <Property Type="Int32" Name="Perform" Nullable="true" />
+    <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="CDeputy" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="TypeName" Nullable="true" MaxLength="512" />
+  </ComplexType>
+  <ComplexType Name="checkin_calendartype_group_Result">
+    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="512" />
+    <Property Type="Int32" Name="countday" Nullable="true" />
+  </ComplexType>
 </Schema>

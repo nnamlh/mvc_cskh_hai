@@ -12,20 +12,19 @@ namespace NDHSITE.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CheckInCalendar
+    public partial class ProcessWork
     {
+        public ProcessWork()
+        {
+            this.AspNetRoles = new HashSet<AspNetRole>();
+        }
+    
         public string Id { get; set; }
-        public Nullable<int> CDay { get; set; }
-        public Nullable<int> CMonth { get; set; }
-        public Nullable<int> CYear { get; set; }
-        public string StaffId { get; set; }
-        public Nullable<int> InPlan { get; set; }
-        public Nullable<int> Perform { get; set; }
-        public string CCode { get; set; }
-        public string CInfoId { get; set; }
-        public string CType { get; set; }
-        public string CheckInStatus { get; set; }
+        public string ProcessName { get; set; }
+        public string ProcessType { get; set; }
+        public Nullable<int> TimeRequire { get; set; }
         public string Notes { get; set; }
-        public Nullable<int> CDate { get; set; }
+    
+        public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
     }
 }
