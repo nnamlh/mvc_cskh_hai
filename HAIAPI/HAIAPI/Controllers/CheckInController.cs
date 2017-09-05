@@ -342,5 +342,261 @@ namespace HAIAPI.Controllers
 
         #endregion
 
+
+        #region
+        [HttpPost]
+        public CheckInGetPlanResult CheckInGetPlan()
+        {
+            var log = new APIHistory()
+            {
+                Id = Guid.NewGuid().ToString(),
+                APIUrl = "/api/checkin/checkingetplan",
+                CreateTime = DateTime.Now,
+                Sucess = 1
+            };
+
+            var result = new CheckInGetPlanResult()
+            {
+                id = "1",
+                msg = "success"
+            };
+
+            var requestContent = Request.Content.ReadAsStringAsync().Result;
+
+            try
+            {
+                var jsonserializer = new JavaScriptSerializer();
+                var paser = jsonserializer.Deserialize<CheckInGetPlanRequest>(requestContent);
+                log.Content = new JavaScriptSerializer().Serialize(paser);
+
+                 if (!mongoHelper.checkLoginSession(paser.user, paser.token))
+                  throw new Exception("Wrong token and user login!");
+
+                var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+
+                if (staff == null)
+                    throw new Exception("Chỉ nhân viên công ty mới được quyền tạo");
+
+                var checkPlan = db.CalendarInfoes.Where(p => p.CMonth == paser.month && p.CYear == paser.year && p.StaffId == staff.Id).FirstOrDefault();
+
+                if (checkPlan == null)
+                    throw new Exception("Không có kế hoạch");
+
+                if (checkPlan.CStatus != 1)
+                    throw new Exception("kế hoạch đang được duyệt");
+
+                // kiem tra dung ngay 
+                if(!compareDateCurrent(paser.day, paser.month, paser.year))
+                    throw new Exception("Sai thông tin ngày tháng");
+
+                result.inplan = new List<string>();
+                result.outplan = new List<string>();
+
+                var listPlan = db.CalendarWorks.Where(p => p.CMonth == paser.month && p.CYear == paser.year && p.CDay == paser.day && p.StaffId == staff.Id).ToList();
+                foreach (var item in listPlan)
+                {
+                    if (item.InPlan == 1)
+                    {
+                       if (item.Perform == 0 )
+                        {
+                            result.inplan.Add(item.AgencyCode);
+                        }
+                    } 
+
+                    // tat ca ma ko co ke hoach va da thuc hien + ma trong ke hoach
+                    if(item.InPlan == 0)
+                    {
+                        if(item.Perform == 1)
+                        {
+                            result.outplan.Add(item.AgencyCode);
+                        }
+                    } else
+                    {
+                        result.outplan.Add(item.AgencyCode);
+                    }
+ 
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                result.id = "0";
+                result.msg = e.Message;
+                log.Sucess = 0;
+            }
+
+            log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+            db.APIHistories.Add(log);
+            db.SaveChanges();
+
+            return result;
+        }
+
+        private bool compareDateCurrent(int day, int month, int year)
+        {
+            var currentYear = DateTime.Now.Year;
+            var currentMonth = DateTime.Now.Month;
+            var currentDay = DateTime.Now.Day;
+
+            if (day != currentDay || month != currentMonth || year != currentYear)
+            {
+                return false;
+            }
+
+            return true;
+
+        }
+
+        #endregion
+
+        #region
+        [HttpPost]
+        public CheckInTaskResult CheckInTask()
+        {
+            var log = new MongoHistoryAPI()
+            {
+                APIUrl = "/api/checkin/checkintask",
+                CreateTime = DateTime.Now,
+                Sucess = 1
+            };
+
+            var result = new CheckInTaskResult()
+            {
+                id = "1",
+                msg = "success"
+            };
+
+            var requestContent = Request.Content.ReadAsStringAsync().Result;
+
+            try
+            {
+                var jsonserializer = new JavaScriptSerializer();
+                var paser = jsonserializer.Deserialize<CheckInTaskRequest>(requestContent);
+                log.Content = new JavaScriptSerializer().Serialize(paser);
+
+                if (!mongoHelper.checkLoginSession(paser.user, paser.token))
+                    throw new Exception("Wrong token and user login!");
+
+                var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+
+                if (staff == null)
+                    throw new Exception("Chỉ nhân viên công ty mới được sử dụng");
+
+                var checkUser = db.AspNetUsers.Where(p => p.UserName == paser.user).FirstOrDefault();
+
+                if (checkUser == null)
+                    throw new Exception("Lỗi");
+
+                var role = checkUser.AspNetRoles.FirstOrDefault();
+
+                // check inplan hay new plan
+                var cinfo = db.CInfoCommons.Where(p => p.CCode == paser.code).FirstOrDefault();
+                if (cinfo == null)
+                    throw new Exception("Sai mã khách hàng");
+
+                // check 
+                var day = DateTime.Now.Day;
+                var month = DateTime.Now.Month;
+                var year = DateTime.Now.Year;
+
+                int timeRequireCheckIn = 0;
+                var processCheckIn = role.ProcessWorks.ToList();
+                List<TaskInfo> taskInfo = new List<TaskInfo>();
+                foreach(var item in processCheckIn)
+                {
+                    taskInfo.Add(new TaskInfo()
+                    {
+                        code = item.Id,
+                        name = item.ProcessName,
+                        time = Convert.ToInt32(item.TimeRequire)
+                    });
+                    timeRequireCheckIn += Convert.ToInt32(item.TimeRequire);
+                }
+
+                result.tasks = taskInfo;
+                result.agencyCode = cinfo.CCode;
+                result.agencyDeputy = cinfo.CDeputy;
+                result.agencyName = cinfo.CName;
+
+                // kiem tra lich
+                var checkCalendar = db.CalendarWorks.Where(p => p.CMonth == month && p.CYear == year && p.CDay == day && p.StaffId == staff.Id && p.AgencyCode == paser.code).FirstOrDefault();
+
+                if (checkCalendar != null)
+                {
+                    // kiem tra da thuc hien xong chua
+                    if (checkCalendar.Perform == 1)
+                        throw new Exception("Đã hoàn thành ghé thăm");
+
+                    result.inPlan = Convert.ToInt32(checkCalendar.InPlan);
+
+                    if (checkCalendar.CIn == 1)
+                    {
+                        // da check in
+                        // kiem tra thoi gian
+                        TimeSpan span = DateTime.Now.TimeOfDay.Subtract(checkCalendar.CInTime.Value);
+                        int minuteDistance = span.Hours * 60 + span.Minutes;
+                        if (minuteDistance >= timeRequireCheckIn)
+                            minuteDistance = 0;
+                        else
+                            minuteDistance = timeRequireCheckIn - minuteDistance;
+                        result.timeRemain = minuteDistance;
+                    } else
+                    {
+                        checkCalendar.CIn = 1;
+                        checkCalendar.CInTime = DateTime.Now.TimeOfDay;
+                        db.Entry(checkCalendar).State = System.Data.Entity.EntityState.Modified;
+                        db.SaveChanges();
+                        result.timeRemain = timeRequireCheckIn;
+                    }
+ 
+                }
+                else
+                {
+                    // ngoai ke hoach va tao moi
+                    CalendarWork calendar = new CalendarWork()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        AgencyCode = cinfo.CCode,
+                        AgencyType = cinfo.CType,
+                        CDate = day,
+                        CDay = day,
+                        CMonth = month,
+                        CYear = year,
+                        TypeId = "CSKH",
+                        InPlan = 0,
+                        Perform = 0,
+                        CIn = 1,
+                        CInTime = DateTime.Now.TimeOfDay,
+                        COut = 0,
+                        AllTime = 0,
+                        Distance = 0,
+                        StaffId = staff.Id,
+                        TimeCheck = DateTime.Now,
+                        Notes = "Tham ngoai ke hoach"
+                    };
+                    db.CalendarWorks.Add(calendar);
+                    db.SaveChanges();
+                    result.timeRemain = timeRequireCheckIn;
+                    result.inPlan = 0;
+                }
+
+            }
+            catch (Exception e)
+            {
+                result.id = "0";
+                result.msg = e.Message;
+                log.Sucess = 0;
+            }
+
+            log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+            mongoHelper.createHistoryAPI(log);
+
+            return result;
+
+        }
+
+        #endregion
+
     }
 }

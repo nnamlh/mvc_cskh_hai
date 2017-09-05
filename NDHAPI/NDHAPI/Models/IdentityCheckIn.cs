@@ -119,7 +119,6 @@ namespace NDHAPI.Models
 
     public class CalendarCreate : RequestInfo
     {
-        public string notes { get; set; }
 
         public int month { get; set; }
 

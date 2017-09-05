@@ -94,8 +94,51 @@ namespace HAIAPI.Models
         public int month { get; set; }
 
         public int year { get; set; }
+    }
 
+    //
+    public class CheckInGetPlanResult : ResultInfo
+    {
+        public List<string> inplan { get; set; }
+        public List<string> outplan { get; set; }
+    }
+    public class CheckInGetPlanRequest : RequestInfo
+    {
+        public int month { get; set; }
+
+        public int year { get; set; }
+
+        public int day { get; set; }
 
     }
+
+    ///
+    public class CheckInTaskRequest : RequestInfo
+    {
+        public string code { get; set; }
+    }
+
+    public class CheckInTaskResult : ResultInfo
+    {
+        public int timeRemain { get; set; }
+
+        public List<TaskInfo> tasks { get; set; }
+
+        public string agencyCode { get; set; }
+
+        public string agencyName { get; set; }
+
+        public string agencyDeputy { get; set; }
+
+        public int inPlan { get; set; }
+    }
+
+    public class TaskInfo
+    {
+        public string code { get; set; }
+        public string name { get; set; }
+        public int time { get; set; }
+    }
+
 
 }
