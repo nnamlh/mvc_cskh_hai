@@ -405,6 +405,9 @@
     <Compile Include="Models\StaffWithC2.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StoreAgencyId.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Ward.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>

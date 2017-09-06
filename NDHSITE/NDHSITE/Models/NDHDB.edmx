@@ -1929,7 +1929,7 @@
           <Property Name="Decision" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="C1Info" Relationship="Self.FK__C2Info__C1Id__73852659" FromRole="C2Info" ToRole="C1Info" />
           <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C2Info__InfoId__6CD828CA" FromRole="C2Info" ToRole="CInfoCommon" />
-          <NavigationProperty Name="HaiStaffs" Relationship="Self.StaffWithC2" FromRole="C2Info" ToRole="HaiStaff" />
+          <NavigationProperty Name="StaffWithC2" Relationship="NDHDBModel.FK__StaffWithC__C2Id__4B622666" FromRole="C2Info" ToRole="StaffWithC2" />
         </EntityType>
         <EntityType Name="CInfoCommon">
           <Key>
@@ -2208,11 +2208,11 @@
           <NavigationProperty Name="HaiDepartment" Relationship="Self.FK__HaiStaff__Depart__25869641" FromRole="HaiStaff" ToRole="HaiDepartment" />
           <NavigationProperty Name="HaiPosition" Relationship="Self.FK__HaiStaff__Positi__239E4DCF" FromRole="HaiStaff" ToRole="HaiPosition" />
           <NavigationProperty Name="C1Info" Relationship="Self.StaffWithC1" FromRole="HaiStaff" ToRole="C1Info" />
-          <NavigationProperty Name="C2Info" Relationship="Self.StaffWithC2" FromRole="HaiStaff" ToRole="C2Info" />
           <Property Name="IsDelete" Type="Int32" />
           <Property Name="GPSDistance" Type="Int32" />
           <NavigationProperty Name="CalendarInfoes" Relationship="NDHDBModel.FK__CalendarI__Staff__5E3FF0B0" FromRole="HaiStaff" ToRole="CalendarInfo" />
           <NavigationProperty Name="StaffCheckIns" Relationship="NDHDBModel.FK__StaffChec__Staff__47DBAE45" FromRole="HaiStaff" ToRole="StaffCheckIn" />
+          <NavigationProperty Name="StaffWithC2" Relationship="NDHDBModel.FK__StaffWith__Staff__4C564A9F" FromRole="HaiStaff" ToRole="StaffWithC2" />
         </EntityType>
         <EntityType Name="HappyBirthday">
           <Key>
@@ -2938,10 +2938,6 @@
           <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="*" />
           <End Role="C1Info" Type="Self.C1Info" Multiplicity="*" />
         </Association>
-        <Association Name="StaffWithC2">
-          <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="*" />
-          <End Role="C2Info" Type="Self.C2Info" Multiplicity="*" />
-        </Association>
         <EntityContainer Name="NDHDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AgencySavePoints" EntityType="Self.AgencySavePoint" />
           <EntitySet Name="AllStatus" EntityType="Self.AllStatu" />
@@ -3158,10 +3154,6 @@
             <End Role="HaiStaff" EntitySet="HaiStaffs" />
             <End Role="C1Info" EntitySet="C1Info" />
           </AssociationSet>
-          <AssociationSet Name="StaffWithC2" Association="Self.StaffWithC2">
-            <End Role="HaiStaff" EntitySet="HaiStaffs" />
-            <End Role="C2Info" EntitySet="C2Info" />
-          </AssociationSet>
           <FunctionImport Name="report_event_agency" ReturnType="Collection(NDHDBModel.report_event_agency_Result)">
             <Parameter Name="CType" Mode="In" Type="String" />
             <Parameter Name="EventId" Mode="In" Type="String" />
@@ -3209,6 +3201,15 @@
             <Parameter Name="year" Mode="In" Type="Int32" />
             <Parameter Name="staffId" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="StaffWithC2" EntityType="NDHDBModel.StaffWithC2" />
+          <AssociationSet Name="FK__StaffWithC__C2Id__4B622666" Association="NDHDBModel.FK__StaffWithC__C2Id__4B622666">
+            <End Role="C2Info" EntitySet="C2Info" />
+            <End Role="StaffWithC2" EntitySet="StaffWithC2" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StaffWith__Staff__4C564A9F" Association="NDHDBModel.FK__StaffWith__Staff__4C564A9F">
+            <End Role="HaiStaff" EntitySet="HaiStaffs" />
+            <End Role="StaffWithC2" EntitySet="StaffWithC2" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="report_event_agency_Result">
           <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -3414,6 +3415,41 @@
           <Property Type="String" Name="Name" Nullable="true" MaxLength="512" />
           <Property Type="Int32" Name="countday" Nullable="true" />
         </ComplexType>
+        <EntityType Name="StaffWithC2">
+          <Key>
+            <PropertyRef Name="C2Id" />
+            <PropertyRef Name="StaffId" />
+          </Key>
+          <Property Name="C2Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StaffId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="GroupChoose" Type="Int32" />
+          <NavigationProperty Name="C2Info" Relationship="NDHDBModel.FK__StaffWithC__C2Id__4B622666" FromRole="StaffWithC2" ToRole="C2Info" />
+          <NavigationProperty Name="HaiStaff" Relationship="NDHDBModel.FK__StaffWith__Staff__4C564A9F" FromRole="StaffWithC2" ToRole="HaiStaff" />
+        </EntityType>
+        <Association Name="FK__StaffWithC__C2Id__4B622666">
+          <End Type="NDHDBModel.C2Info" Role="C2Info" Multiplicity="1" />
+          <End Type="NDHDBModel.StaffWithC2" Role="StaffWithC2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C2Info">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StaffWithC2">
+              <PropertyRef Name="C2Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StaffWith__Staff__4C564A9F">
+          <End Type="NDHDBModel.HaiStaff" Role="HaiStaff" Multiplicity="1" />
+          <End Type="NDHDBModel.StaffWithC2" Role="StaffWithC2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HaiStaff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StaffWithC2">
+              <PropertyRef Name="StaffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4167,14 +4203,6 @@
               <ScalarProperty Name="Id" ColumnName="C1Id" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="StaffWithC2" TypeName="NDHDBModel.StaffWithC2" StoreEntitySet="StaffWithC2">
-            <EndProperty Name="HaiStaff">
-              <ScalarProperty Name="Id" ColumnName="StaffId" />
-            </EndProperty>
-            <EndProperty Name="C2Info">
-              <ScalarProperty Name="Id" ColumnName="C2Id" />
-            </EndProperty>
-          </AssociationSetMapping>
           <FunctionImportMapping FunctionImportName="report_event_agency" FunctionName="NDHDBModel.Store.report_event_agency">
             <ResultMapping>
               <ComplexTypeMapping TypeName="NDHDBModel.report_event_agency_Result">
@@ -4387,6 +4415,15 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="StaffWithC2">
+            <EntityTypeMapping TypeName="NDHDBModel.StaffWithC2">
+              <MappingFragment StoreEntitySet="StaffWithC2">
+                <ScalarProperty Name="GroupChoose" ColumnName="GroupChoose" />
+                <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+                <ScalarProperty Name="C2Id" ColumnName="C2Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

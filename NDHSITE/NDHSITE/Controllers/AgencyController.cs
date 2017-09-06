@@ -1303,5 +1303,38 @@ namespace NDHSITE.Controllers
         }
         #endregion
 
+        ///
+        /// remove c2
+        ///
+
+        public ActionResult RemoveC2(string Id)
+        {
+            if (!Utitl.CheckUser(db, User.Identity.Name, "ManageAgency", 1))
+                return RedirectToAction("relogin", "home");
+
+            var check = db.C2Info.Find(Id);
+
+            if (check == null)
+            {
+                return RedirectToAction("error", "home");
+            }
+
+
+            var staffc2 = check.StaffWithC2.ToList();
+            staffc2.Clear();
+            db.SaveChanges();
+
+            CInfoCommon cinfo = check.CInfoCommon;
+            db.C2Info.Remove(check);
+
+            db.SaveChanges();
+
+            db.CInfoCommons.Remove(cinfo);
+            db.SaveChanges();
+
+            return RedirectToAction("managecii", "agency");
+
+        }
+
     }
 }

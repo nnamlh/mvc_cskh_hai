@@ -16,7 +16,7 @@ namespace NDHSITE.Models
     {
         public C2Info()
         {
-            this.HaiStaffs = new HashSet<HaiStaff>();
+            this.StaffWithC2 = new HashSet<StaffWithC2>();
         }
     
         public string Id { get; set; }
@@ -30,6 +30,6 @@ namespace NDHSITE.Models
     
         public virtual C1Info C1Info { get; set; }
         public virtual CInfoCommon CInfoCommon { get; set; }
-        public virtual ICollection<HaiStaff> HaiStaffs { get; set; }
+        public virtual ICollection<StaffWithC2> StaffWithC2 { get; set; }
     }
 }

@@ -410,6 +410,9 @@
     <Compile Include="Models\StaffCheckIn.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StaffWithC2.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StoreStaffId.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>

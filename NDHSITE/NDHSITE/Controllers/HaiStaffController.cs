@@ -634,7 +634,15 @@ namespace NDHSITE.Controllers
                         var checkC2 = db.C2Info.Where(p => p.Code == code).FirstOrDefault();
                         if (checkC2 != null)
                         {
-                            staff.C2Info.Add(checkC2);
+                            // staff.C2Info.Add(checkC2);
+                            var staffC2 = new StaffWithC2()
+                            {
+                                C2Id = checkC2.Id,
+                                StaffId = staff.Id,
+                                GroupChoose = 0
+                            };
+                            db.StaffWithC2.Add(staffC2);
+                            db.SaveChanges();
                         }
                     }
                 }
@@ -645,12 +653,19 @@ namespace NDHSITE.Controllers
                 var checkC2 = db.C2Info.Where(p => p.Code == AgencyId).FirstOrDefault();
                 if (checkC2 != null)
                 {
-                    staff.C2Info.Add(checkC2);
+                    var staffC2 = new StaffWithC2()
+                    {
+                        C2Id = checkC2.Id,
+                        StaffId = staff.Id,
+                        GroupChoose = 0
+                    };
+                    db.StaffWithC2.Add(staffC2);
+                    db.SaveChanges();
                 }
             }
 
-            db.Entry(staff).State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
+           // db.Entry(staff).State = System.Data.Entity.EntityState.Modified;
+          //  db.SaveChanges();
         }
 
 

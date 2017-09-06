@@ -1603,6 +1603,7 @@
       <Parameter Name="year" Mode="In" Type="Int32" />
       <Parameter Name="staffId" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="StoreAgencyIds" EntityType="NDHDBModel.StoreAgencyId" />
   </EntityContainer>
   <ComplexType Name="checkin_calendartype_group_Result">
     <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
@@ -1635,4 +1636,13 @@
     <Property Type="String" Name="CDeputy" Nullable="true" MaxLength="512" />
     <Property Type="String" Name="TypeName" Nullable="true" MaxLength="512" />
   </ComplexType>
+  <EntityType Name="StoreAgencyId">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IsUse" Type="Int32" />
+    <Property Name="CountNumber" Type="Int32" />
+    <Property Name="TypeStore" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

@@ -748,14 +748,6 @@
         <ScalarProperty Name="Id" ColumnName="C1Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="StaffWithC2" TypeName="NDHDBModel.StaffWithC2" StoreEntitySet="StaffWithC2">
-      <EndProperty Name="HaiStaff">
-        <ScalarProperty Name="Id" ColumnName="StaffId" />
-      </EndProperty>
-      <EndProperty Name="C2Info">
-        <ScalarProperty Name="Id" ColumnName="C2Id" />
-      </EndProperty>
-    </AssociationSetMapping>
     <FunctionImportMapping FunctionImportName="report_event_agency" FunctionName="NDHDBModel.Store.report_event_agency">
       <ResultMapping>
         <ComplexTypeMapping TypeName="NDHDBModel.report_event_agency_Result">
@@ -968,5 +960,14 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="StaffWithC2">
+      <EntityTypeMapping TypeName="NDHDBModel.StaffWithC2">
+        <MappingFragment StoreEntitySet="StaffWithC2">
+          <ScalarProperty Name="GroupChoose" ColumnName="GroupChoose" />
+          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+          <ScalarProperty Name="C2Id" ColumnName="C2Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

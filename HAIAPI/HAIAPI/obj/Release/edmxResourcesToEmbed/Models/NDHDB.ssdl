@@ -773,6 +773,15 @@
     <Property Name="StaffId" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="GroupChoose" Type="int" />
   </EntityType>
+  <EntityType Name="StoreAgencyId">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="IsUse" Type="int" />
+    <Property Name="CountNumber" Type="int" />
+    <Property Name="TypeStore" Type="nvarchar" MaxLength="128" />
+  </EntityType>
   <EntityType Name="Ward">
     <Key>
       <PropertyRef Name="Id" />
@@ -1480,6 +1489,7 @@
     <EntitySet Name="StaffCheckIn" EntityType="Self.StaffCheckIn" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StaffWithC1" EntityType="Self.StaffWithC1" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StaffWithC2" EntityType="Self.StaffWithC2" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StoreAgencyId" EntityType="Self.StoreAgencyId" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ward" EntityType="Self.Ward" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__AgencySav__CInfo__6497E884" Association="Self.FK__AgencySav__CInfo__6497E884">

@@ -887,5 +887,15 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="StoreAgencyIds">
+      <EntityTypeMapping TypeName="NDHDBModel.StoreAgencyId">
+        <MappingFragment StoreEntitySet="StoreAgencyId">
+          <ScalarProperty Name="TypeStore" ColumnName="TypeStore" />
+          <ScalarProperty Name="CountNumber" ColumnName="CountNumber" />
+          <ScalarProperty Name="IsUse" ColumnName="IsUse" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

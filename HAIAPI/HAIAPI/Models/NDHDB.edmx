@@ -778,6 +778,15 @@
           <Property Name="StaffId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="GroupChoose" Type="int" />
         </EntityType>
+        <EntityType Name="StoreAgencyId">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="IsUse" Type="int" />
+          <Property Name="CountNumber" Type="int" />
+          <Property Name="TypeStore" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <EntityType Name="Ward">
           <Key>
             <PropertyRef Name="Id" />
@@ -1485,6 +1494,7 @@
           <EntitySet Name="StaffCheckIn" EntityType="Self.StaffCheckIn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StaffWithC1" EntityType="Self.StaffWithC1" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StaffWithC2" EntityType="Self.StaffWithC2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StoreAgencyId" EntityType="Self.StoreAgencyId" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ward" EntityType="Self.Ward" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__AgencySav__CInfo__6497E884" Association="Self.FK__AgencySav__CInfo__6497E884">
@@ -3295,6 +3305,7 @@
             <Parameter Name="year" Mode="In" Type="Int32" />
             <Parameter Name="staffId" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="StoreAgencyIds" EntityType="NDHDBModel.StoreAgencyId" />
         </EntityContainer>
         <ComplexType Name="checkin_calendartype_group_Result">
           <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
@@ -3327,6 +3338,15 @@
           <Property Type="String" Name="CDeputy" Nullable="true" MaxLength="512" />
           <Property Type="String" Name="TypeName" Nullable="true" MaxLength="512" />
         </ComplexType>
+        <EntityType Name="StoreAgencyId">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IsUse" Type="Int32" />
+          <Property Name="CountNumber" Type="Int32" />
+          <Property Name="TypeStore" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4219,6 +4239,16 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="StoreAgencyIds">
+            <EntityTypeMapping TypeName="NDHDBModel.StoreAgencyId">
+              <MappingFragment StoreEntitySet="StoreAgencyId">
+                <ScalarProperty Name="TypeStore" ColumnName="TypeStore" />
+                <ScalarProperty Name="CountNumber" ColumnName="CountNumber" />
+                <ScalarProperty Name="IsUse" ColumnName="IsUse" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

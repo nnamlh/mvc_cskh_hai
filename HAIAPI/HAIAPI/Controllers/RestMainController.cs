@@ -128,9 +128,14 @@ namespace HAIAPI.Controllers
             List<C2Info> c2List = new List<C2Info>();
 
             c2List = staff.StaffWithC2.Where(p => p.C2Info.IsActive == 1).OrderByDescending(p => p.GroupChoose).Select(p => p.C2Info).ToList();
-
+            
             foreach (var item in c2List)
             {
+                var staffC2 = staff.StaffWithC2.Where(p => p.C2Id == item.Id).FirstOrDefault();
+                int? group = 0;
+                if (staffC2 != null)
+                    group = staffC2.GroupChoose;
+
                 agencyResult.Add(new AgencyInfoC2()
                 {
                     code = item.Code,
@@ -143,7 +148,7 @@ namespace HAIAPI.Controllers
                     phone = item.CInfoCommon.Phone,
                     id = item.Id,
                     rank = item.CInfoCommon.CRank,
-                    group = item.CInfoCommon.CGroup,
+                    group = group,
                     identityCard = item.CInfoCommon.IdentityCard,
                     businessLicense = item.CInfoCommon.BusinessLicense,
                     province = item.CInfoCommon.ProvinceName,
@@ -245,5 +250,8 @@ namespace HAIAPI.Controllers
             return new List<string>();
         }
 
+       
+       
+        
     }
 }

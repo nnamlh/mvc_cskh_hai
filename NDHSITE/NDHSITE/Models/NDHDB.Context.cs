@@ -89,6 +89,7 @@ namespace NDHSITE.Models
         public virtual DbSet<ProcessHistory> ProcessHistories { get; set; }
         public virtual DbSet<ProcessWork> ProcessWorks { get; set; }
         public virtual DbSet<StaffCheckIn> StaffCheckIns { get; set; }
+        public virtual DbSet<StaffWithC2> StaffWithC2 { get; set; }
     
         public virtual ObjectResult<report_event_agency_Result> report_event_agency(string cType, string eventId)
         {

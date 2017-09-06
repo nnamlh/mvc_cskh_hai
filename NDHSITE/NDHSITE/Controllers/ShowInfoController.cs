@@ -441,16 +441,16 @@ namespace NDHSITE.Controllers
                 {
                     case 1:
                         ViewBag.STypeName = "Mã đại lý";
-                        return View(staff.C2Info.Where(p => p.Code.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
+                        return View(staff.StaffWithC2.Select(p => p.C2Info).Where(p => p.Code.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
                     case 2:
                         ViewBag.STypeName = "Số điện thoại";
-                        return View(staff.C2Info.Where(p => p.CInfoCommon.Phone.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
+                        return View(staff.StaffWithC2.Select(p => p.C2Info).Where(p => p.CInfoCommon.Phone.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
                     case 3:
                         ViewBag.STypeName = "Tên cửa hàng";
-                        return View(staff.C2Info.Where(p => p.StoreName.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
+                        return View(staff.StaffWithC2.Select(p => p.C2Info).Where(p => p.StoreName.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
                     case 4:
                         ViewBag.STypeName = "Mã cấp 1";
-                        return View(staff.C2Info.Where(p => p.C1Info.Code.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
+                        return View(staff.StaffWithC2.Select(p => p.C2Info).Where(p => p.C1Info.Code.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
                     default:
                         return RedirectToAction("error", "home");
                 }

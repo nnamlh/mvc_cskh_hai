@@ -17,9 +17,9 @@ namespace NDHSITE.Models
         public HaiStaff()
         {
             this.C1Info = new HashSet<C1Info>();
-            this.C2Info = new HashSet<C2Info>();
             this.CalendarInfoes = new HashSet<CalendarInfo>();
             this.StaffCheckIns = new HashSet<StaffCheckIn>();
+            this.StaffWithC2 = new HashSet<StaffWithC2>();
         }
     
         public string Id { get; set; }
@@ -51,8 +51,8 @@ namespace NDHSITE.Models
         public virtual HaiDepartment HaiDepartment { get; set; }
         public virtual HaiPosition HaiPosition { get; set; }
         public virtual ICollection<C1Info> C1Info { get; set; }
-        public virtual ICollection<C2Info> C2Info { get; set; }
         public virtual ICollection<CalendarInfo> CalendarInfoes { get; set; }
         public virtual ICollection<StaffCheckIn> StaffCheckIns { get; set; }
+        public virtual ICollection<StaffWithC2> StaffWithC2 { get; set; }
     }
 }

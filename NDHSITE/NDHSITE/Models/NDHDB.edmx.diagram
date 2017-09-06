@@ -100,7 +100,6 @@
         <AssociationConnector Association="NDHDBModel.EventAward" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.MobileRole" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.StaffWithC1" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.StaffWithC2" ManuallyRouted="false" />
         <EntityTypeShape EntityType="NDHDBModel.StoreStaffId" Width="1.5" PointX="12.375" PointY="0.75" />
         <EntityTypeShape EntityType="NDHDBModel.CalendarInfo" Width="2" PointX="7.5" PointY="29.375" />
         <EntityTypeShape EntityType="NDHDBModel.CalendarType" Width="1.5" PointX="21.375" PointY="21.75" />
@@ -111,6 +110,9 @@
         <AssociationConnector Association="NDHDBModel.ProcessWithRole" />
         <EntityTypeShape EntityType="NDHDBModel.StaffCheckIn" Width="1.5" PointX="7.5" PointY="33.75" />
         <AssociationConnector Association="NDHDBModel.FK__StaffChec__Staff__47DBAE45" />
+        <EntityTypeShape EntityType="NDHDBModel.StaffWithC2" Width="1.5" PointX="12" PointY="32" />
+        <AssociationConnector Association="NDHDBModel.FK__StaffWithC__C2Id__4B622666" />
+        <AssociationConnector Association="NDHDBModel.FK__StaffWith__Staff__4C564A9F" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

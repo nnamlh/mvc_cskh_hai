@@ -235,12 +235,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var item in agency.HaiStaffs.ToList())
+                                    @foreach (var item in agency.StaffWithC2.ToList())
                                     {
                                         <tr>
-                                            <td>@item.Code</td>
-                                            <td>@item.FullName</td>
-                                            <td><a href="/haistaff/modifystaff/@item.Id" target="_blank">Chi tiết</a></td>
+                                            <td>@item.HaiStaff.Code</td>
+                                            <td>@item.HaiStaff.FullName</td>
+                                            <td><a href="/haistaff/modifystaff/@item.StaffId" target="_blank">Chi tiết</a></td>
                                         </tr>
                                     }
                                 </tbody>
@@ -319,6 +319,16 @@
                                 </div>
                             </div>
                         </form>
+
+                        <br />
+                       
+                        @if (agency.CInfoCommon.UserLogin == null && agency.IsActive == 0)
+                        {
+                            <form method="post" onsubmit="if(!confirm('Xóa khách hàng?')){return false;}" action="/agency/removec2">
+                                <input type="hidden" value="@agency.Id" name="Id" />
+                                <button type="submit" class="btn btn-primary">Xóa khách hàng</button>
+                            </form>
+                        }
                     </div>
                 </div>
             </div>

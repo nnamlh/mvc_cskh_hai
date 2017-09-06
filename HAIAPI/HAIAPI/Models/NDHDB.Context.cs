@@ -88,6 +88,7 @@ namespace HAIAPI.Models
         public virtual DbSet<StaffWithC2> StaffWithC2 { get; set; }
         public virtual DbSet<Ward> Wards { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
+        public virtual DbSet<StoreAgencyId> StoreAgencyIds { get; set; }
     
         public virtual ObjectResult<checkin_calendartype_group_Result> checkin_calendartype_group(Nullable<int> month, Nullable<int> year, string staffId)
         {
