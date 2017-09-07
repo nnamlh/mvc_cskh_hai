@@ -139,3 +139,4 @@ N:\csharp\mvc_cskh_hai\HAIAPI\HAIAPI\bin\Microsoft.Owin.Security.Twitter.xml
 N:\csharp\mvc_cskh_hai\HAIAPI\HAIAPI\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 N:\csharp\mvc_cskh_hai\HAIAPI\HAIAPI\obj\Debug\HAIAPI.dll
 N:\csharp\mvc_cskh_hai\HAIAPI\HAIAPI\obj\Debug\HAIAPI.pdb
+N:\csharp\mvc_cskh_hai\HAIAPI\HAIAPI\obj\Debug\HAIAPI.csprojResolveAssemblyReference.cache

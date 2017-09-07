@@ -75,6 +75,8 @@ namespace HAIAPI.Controllers
                     result.c2 = GetListC2(staff);
 
                     result.c1 = GetListC1(staff);
+
+                    result.products = GetProductCodeInfo();
                 }
                 else
                 {
@@ -120,7 +122,21 @@ namespace HAIAPI.Controllers
             return result;
         }
 
+        protected List<ProductCodeInfo> GetProductCodeInfo()
+        {
+            var product = db.ProductInfoes.ToList();
+            List<ProductCodeInfo> productCodes = new List<ProductCodeInfo>();
+            foreach (var item in product)
+            {
+                productCodes.Add(new ProductCodeInfo()
+                {
+                    code = item.Barcode,
+                    name = item.PName
+                });
+            }
 
+            return productCodes;
+        }
         protected List<AgencyInfoC2> GetListC2(HaiStaff staff)
         {
             List<AgencyInfoC2> agencyResult = new List<AgencyInfoC2>();
@@ -169,7 +185,20 @@ namespace HAIAPI.Controllers
             List<AgencyInfo> agencyResult = new List<AgencyInfo>();
 
             List<C1Info> c1List = new List<C1Info>();
-            c1List = db.C1Info.Where(p => p.IsActive == 1 && p.HaiBrandId == staff.BranchId).OrderByDescending(p => p.CInfoCommon.CGroup).ToList();
+
+            var roleCheck = CheckRoleShowInfo(staff.UserLogin);
+            
+            if (roleCheck == 1)
+            {
+                c1List = db.C1Info.Where(p => p.IsActive == 1).OrderByDescending(p => p.CInfoCommon.CGroup).ToList();
+
+            } else
+            {
+                c1List = db.C1Info.Where(p => p.IsActive == 1 && p.HaiBrandId == staff.BranchId).OrderByDescending(p => p.CInfoCommon.CGroup).ToList();
+
+            }
+
+
             foreach (var item in c1List)
             {
                 agencyResult.Add(new AgencyInfo()
@@ -250,8 +279,24 @@ namespace HAIAPI.Controllers
             return new List<string>();
         }
 
-       
-       
-        
+        protected int CheckRoleShowInfo(string userName)
+        {
+            // 1: xem toan bo
+            // 2: xem theo chi nhanh
+            // 0: xem tung ca nhan
+
+            var user = db.AspNetUsers.Where(p => p.UserName == userName).FirstOrDefault();
+
+            if (user == null)
+                return 0;
+
+            var role = user.AspNetRoles.First();
+            if (role == null)
+                return 0;
+
+            return Convert.ToInt32(role.ShowInfoRole);
+        }
+
+
     }
 }

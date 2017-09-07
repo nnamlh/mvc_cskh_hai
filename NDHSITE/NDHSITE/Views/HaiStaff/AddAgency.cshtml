@@ -70,12 +70,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach(var item in Model.C2Info.ToList())
+                                    @foreach(var item in Model.StaffWithC2.ToList())
                                     {
                                         <tr>
-                                            <td>@item.Code</td>
-                                            <td>@item.StoreName - @item.Deputy</td>
-                                            <td><a href="/agency/modifycii/@item.Id" target="_blank">Chi tiết</a></td>
+                                            <td>@item.C2Info.Code</td>
+                                            <td>@item.C2Info.StoreName - @item.C2Info.Deputy</td>
+                                            <td><a href="/agency/modifycii/@item.C2Info.Id" target="_blank">Chi tiết</a></td>
                                         </tr>
                                     }
                                 </tbody>

@@ -64,7 +64,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/23/2016 14:14:47</publishTime>
     </File>
     <File Include="bin/NDHSITE.dll">
-      <publishTime>09/06/2017 15:15:43</publishTime>
+      <publishTime>09/07/2017 14:44:01</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>09/23/2016 14:14:47</publishTime>
@@ -472,7 +472,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/18/2017 14:50:23</publishTime>
     </File>
     <File Include="Views/HaiStaff/AddAgency.cshtml">
-      <publishTime>08/21/2017 16:00:11</publishTime>
+      <publishTime>09/07/2017 14:43:18</publishTime>
     </File>
     <File Include="Views/HaiStaff/CreateBranch.cshtml">
       <publishTime>10/19/2016 16:26:04</publishTime>

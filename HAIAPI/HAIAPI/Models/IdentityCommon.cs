@@ -40,6 +40,8 @@ namespace HAIAPI.Models
 
         public List<AgencyInfo> c1 { get; set; }
 
+        public List<ProductCodeInfo> products { get; set; }
+
     }
 
    
@@ -52,5 +54,12 @@ namespace HAIAPI.Models
         // 1: yes
         // 0: no
     }
+
+    public class ProductCodeInfo
+    {
+        public string code { get; set; }
+        public string name { get; set; }
+    }
+
 
 }

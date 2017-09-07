@@ -327,5 +327,38 @@ namespace HAIAPI.Controllers
         #endregion
 
 
+        #region
+        ///
+        /// Danh sach C1
+        ///
+        ///
+        [HttpGet]
+        public List<AgencyInfo> GetAgencyC1(string user, string token)
+        {
+            var log = new MongoHistoryAPI()
+            {
+                APIUrl = "/api/agency/getagencyc1",
+                CreateTime = DateTime.Now,
+                Sucess = 1
+            };
+            if (!mongoHelper.checkLoginSession(user, token))
+                throw new Exception("Wrong token and user login!");
+            var result = new List<AgencyInfo>();
+            var staff = db.HaiStaffs.Where(p => p.UserLogin == user).FirstOrDefault();
+
+            if (staff == null)
+                throw new Exception("Chỉ nhân viên công ty mới được quyền truy cập");
+
+            result = GetListC1(staff);
+
+            log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+            mongoHelper.createHistoryAPI(log);
+
+            return result;
+
+        }
+
+        #endregion
+
     }
 }
