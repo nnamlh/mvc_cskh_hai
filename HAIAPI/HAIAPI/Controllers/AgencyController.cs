@@ -341,13 +341,14 @@ namespace HAIAPI.Controllers
                 CreateTime = DateTime.Now,
                 Sucess = 1
             };
-            if (!mongoHelper.checkLoginSession(user, token))
-                throw new Exception("Wrong token and user login!");
             var result = new List<AgencyInfo>();
+            if (!mongoHelper.checkLoginSession(user, token))
+                return result;
+
             var staff = db.HaiStaffs.Where(p => p.UserLogin == user).FirstOrDefault();
 
             if (staff == null)
-                throw new Exception("Chỉ nhân viên công ty mới được quyền truy cập");
+                return result;
 
             result = GetListC1(staff);
 
