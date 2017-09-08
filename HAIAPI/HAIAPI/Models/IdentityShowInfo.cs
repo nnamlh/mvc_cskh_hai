@@ -19,17 +19,17 @@ namespace HAIAPI.Models
 
     public class ProductInfoResult
     {
-        public string Id { get; set; }
-        public string Code { get; set; }
-        public string Barcode { get; set; }
-        public string Name { get; set; }
-        public string Producer { get; set; }
-        public string CommerceName { get; set; }
-        public string Activce { get; set; }
-        public Nullable<int> New { get; set; }
-        public Nullable<int> Forcus { get; set; }
-        public string GroupId { get; set; }
-        public string GroupName { get; set; }
-        public string Image { get; set; }
+        public string id { get; set; }
+        public string code { get; set; }
+        public string barcode { get; set; }
+        public string name { get; set; }
+        public string producer { get; set; }
+        public string commerceName { get; set; }
+        public string activce { get; set; }
+        public Nullable<int> isNew { get; set; }
+        public Nullable<int> isForcus { get; set; }
+        public string groupId { get; set; }
+        public string groupName { get; set; }
+        public string image { get; set; }
     }
 }

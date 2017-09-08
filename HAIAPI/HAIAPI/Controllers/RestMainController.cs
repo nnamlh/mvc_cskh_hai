@@ -77,6 +77,8 @@ namespace HAIAPI.Controllers
                     result.c1 = GetListC1(staff);
 
                     result.products = GetProductCodeInfo();
+
+                    result.productGroups = GetGroupProduct();
                 }
                 else
                 {
@@ -130,22 +132,40 @@ namespace HAIAPI.Controllers
             {
                 productCodes.Add(new ProductInfoResult()
                 {
-                    Id = item.Id,
-                    Code = item.PCode,
-                    Name = item.PName,
-                    Activce = item.Activce,
-                    Barcode = item.Barcode,
-                    CommerceName = item.CommerceName,
-                    Forcus = item.Forcus,
-                    GroupId = item.GroupId,
-                    GroupName = item.GroupName,
-                    Image = HaiUtil.HostName + item.Thumbnail,
-                    New = item.New,
-                    Producer = item.Producer
+                    id = item.Id,
+                    code = item.PCode,
+                    name = item.PName,
+                    activce = item.Activce,
+                    barcode = item.Barcode,
+                    commerceName = item.CommerceName,
+                    isForcus = item.Forcus,
+                    groupId = item.GroupId,
+                    groupName = item.GroupName,
+                    image = HaiUtil.HostName + item.Thumbnail,
+                    isNew = item.New,
+                    producer = item.Producer
                 });
             }
 
             return productCodes;
+        }
+
+        protected List<GroupInfo> GetGroupProduct()
+        {
+            List<GroupInfo> groups = new List<GroupInfo>();
+            var data = db.ProductGroups.Where(p => p.HasChild == 0).OrderByDescending(p => p.Parent).ToList();
+
+            foreach (var item in data)
+            {
+                groups.Add(new GroupInfo()
+                {
+                    id = item.Id,
+                    name = item.Name,
+                    childs = new List<GroupInfo>()
+                });
+            }
+
+            return groups;
         }
 
         protected List<AgencyInfoC2> GetListC2(HaiStaff staff)

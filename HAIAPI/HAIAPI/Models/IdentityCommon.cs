@@ -40,6 +40,8 @@ namespace HAIAPI.Models
 
         public List<AgencyInfo> c1 { get; set; }
 
+        public List<GroupInfo> productGroups { get; set; }
+
         public List<ProductInfoResult> products { get; set; }
 
     }
