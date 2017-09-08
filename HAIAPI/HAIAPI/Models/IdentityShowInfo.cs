@@ -32,4 +32,22 @@ namespace HAIAPI.Models
         public string groupName { get; set; }
         public string image { get; set; }
     }
+
+    public class ProductDetailResult : ProductInfoResult
+    {
+        public string unit { get; set; }
+        public string describe { get; set; }
+
+        public string uses { get; set; }
+
+        public string introduce { get; set; }
+
+        public string register { get; set; }
+
+        public string notes { get; set; }
+
+        public string other { get; set; }
+
+        public List<string> images { get; set; }
+    }
 }

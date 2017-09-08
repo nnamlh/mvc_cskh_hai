@@ -193,7 +193,7 @@ namespace NDHSITE.Controllers
 
             if (Thumbnail != null)
             {
-                product.Thumbnail = UploadImage(Thumbnail, "/haiupload/product", ".png");
+                productCheck.Thumbnail = UploadImage(Thumbnail, "/haiupload/product", ".png");
             }
 
             if (Forcus != null)

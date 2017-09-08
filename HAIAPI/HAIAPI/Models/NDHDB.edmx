@@ -286,6 +286,30 @@
           <Property Name="Country" Type="nvarchar" MaxLength="128" />
           <Property Name="BirthDay" Type="int" />
         </EntityType>
+        <EntityType Name="DecorGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="512" />
+        </EntityType>
+        <EntityType Name="DecorImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="DaySend" Type="int" />
+          <Property Name="MonthSend" Type="int" />
+          <Property Name="YearSend" Type="int" />
+          <Property Name="AgencyCode" Type="nvarchar" MaxLength="128" />
+          <Property Name="AgencyType" Type="nvarchar" MaxLength="128" />
+          <Property Name="ImageUrl" Type="nvarchar(max)" />
+          <Property Name="CreateTime" Type="time" Precision="7" />
+          <Property Name="Lat" Type="float" />
+          <Property Name="Lng" Type="float" />
+          <Property Name="DecorGroup" Type="nvarchar" MaxLength="128" />
+          <Property Name="StaffId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <EntityType Name="District">
           <Key>
             <PropertyRef Name="Id" />
@@ -946,6 +970,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__DecorImag__Staff__742F31CF">
+          <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
+          <End Role="DecorImage" Type="Self.DecorImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HaiStaff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DecorImage">
+              <PropertyRef Name="StaffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__District__Provin__07C12930">
           <End Role="Province" Type="Self.Province" Multiplicity="0..1" />
           <End Role="District" Type="Self.District" Multiplicity="*" />
@@ -1468,6 +1504,9 @@
           <Parameter Name="year" Type="int" Mode="In" />
           <Parameter Name="staffId" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="procduct_item_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="product_list" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="NDHDBModelStoreContainer">
           <EntitySet Name="AgencySavePoint" EntityType="Self.AgencySavePoint" Schema="dbo" store:Type="Tables" />
@@ -1490,6 +1529,8 @@
           <EntitySet Name="CalendarType" EntityType="Self.CalendarType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CalendarWork" EntityType="Self.CalendarWork" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CInfoCommon" EntityType="Self.CInfoCommon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DecorGroup" EntityType="Self.DecorGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DecorImage" EntityType="Self.DecorImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ErrorInfo" EntityType="Self.ErrorInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EventArea" EntityType="Self.EventArea" Schema="dbo" store:Type="Tables" />
@@ -1574,6 +1615,10 @@
           <AssociationSet Name="FK__CInfoComm__WardI__634EBE90" Association="Self.FK__CInfoComm__WardI__634EBE90">
             <End Role="Ward" EntitySet="Ward" />
             <End Role="CInfoCommon" EntitySet="CInfoCommon" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DecorImag__Staff__742F31CF" Association="Self.FK__DecorImag__Staff__742F31CF">
+            <End Role="HaiStaff" EntitySet="HaiStaff" />
+            <End Role="DecorImage" EntitySet="DecorImage" />
           </AssociationSet>
           <AssociationSet Name="FK__District__Provin__07C12930" Association="Self.FK__District__Provin__07C12930">
             <End Role="Province" EntitySet="Province" />
@@ -2282,6 +2327,7 @@
           <NavigationProperty Name="StaffCheckIns" Relationship="Self.FK__StaffChec__Staff__47DBAE45" FromRole="HaiStaff" ToRole="StaffCheckIn" />
           <NavigationProperty Name="StaffWithC2" Relationship="Self.FK__StaffWith__Staff__4C564A9F" FromRole="HaiStaff" ToRole="StaffWithC2" />
           <NavigationProperty Name="C1Info" Relationship="Self.StaffWithC1" FromRole="HaiStaff" ToRole="C1Info" />
+          <NavigationProperty Name="DecorImages" Relationship="NDHDBModel.FK__DecorImag__Staff__742F31CF" FromRole="HaiStaff" ToRole="DecorImage" />
         </EntityType>
         <EntityType Name="HappyBirthday">
           <Key>
@@ -3370,6 +3416,15 @@
             <End Role="ProductImage" EntitySet="ProductImages" />
           </AssociationSet>
           <FunctionImport Name="product_list" ReturnType="Collection(NDHDBModel.product_list_Result)" />
+          <FunctionImport Name="procduct_item_detail" ReturnType="Collection(NDHDBModel.procduct_item_detail_Result)">
+          <Parameter Name="id" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="DecorGroups" EntityType="NDHDBModel.DecorGroup" />
+          <EntitySet Name="DecorImages" EntityType="NDHDBModel.DecorImage" />
+          <AssociationSet Name="FK__DecorImag__Staff__742F31CF" Association="NDHDBModel.FK__DecorImag__Staff__742F31CF">
+            <End Role="HaiStaff" EntitySet="HaiStaffs" />
+            <End Role="DecorImage" EntitySet="DecorImages" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="checkin_calendartype_group_Result">
           <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
@@ -3455,6 +3510,73 @@
           <Property Type="String" Name="GroupName" Nullable="true" MaxLength="512" />
           <Property Type="String" Name="Thumbnail" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="procduct_item_detail_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="PCode" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Material" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="Unit" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Producer" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="CardPoint" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="BoxPoint" Nullable="true" MaxLength="32" />
+          <Property Type="Int32" Name="IsLock" Nullable="true" />
+          <Property Type="String" Name="Barcode" Nullable="true" MaxLength="32" />
+          <Property Type="Int32" Name="QuantityBox" Nullable="true" />
+          <Property Type="Int32" Name="IsBox" Nullable="true" />
+          <Property Type="String" Name="Register" Nullable="true" />
+          <Property Type="String" Name="CommerceName" Nullable="true" />
+          <Property Type="String" Name="Activce" Nullable="true" />
+          <Property Type="String" Name="Poision" Nullable="true" />
+          <Property Type="String" Name="Describe" Nullable="true" />
+          <Property Type="String" Name="Uses" Nullable="true" />
+          <Property Type="String" Name="Introduce" Nullable="true" />
+          <Property Type="String" Name="Notes" Nullable="true" />
+          <Property Type="String" Name="Other" Nullable="true" />
+          <Property Type="String" Name="Thumbnail" Nullable="true" />
+          <Property Type="String" Name="PGroup" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="Forcus" Nullable="true" />
+          <Property Type="Int32" Name="New" Nullable="true" />
+          <Property Type="DateTime" Name="CreateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="GroupId" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="GroupName" Nullable="true" MaxLength="512" />
+        </ComplexType>
+        <EntityType Name="DecorGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DecorImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DaySend" Type="Int32" />
+          <Property Name="MonthSend" Type="Int32" />
+          <Property Name="YearSend" Type="Int32" />
+          <Property Name="AgencyCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="AgencyType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="Time" Precision="7" />
+          <Property Name="Lat" Type="Double" />
+          <Property Name="Lng" Type="Double" />
+          <Property Name="DecorGroup" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HaiStaff" Relationship="NDHDBModel.FK__DecorImag__Staff__742F31CF" FromRole="DecorImage" ToRole="HaiStaff" />
+        </EntityType>
+        <Association Name="FK__DecorImag__Staff__742F31CF">
+          <End Type="NDHDBModel.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
+          <End Type="NDHDBModel.DecorImage" Role="DecorImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HaiStaff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DecorImage">
+              <PropertyRef Name="StaffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4404,6 +4526,66 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="procduct_item_detail" FunctionName="NDHDBModel.Store.procduct_item_detail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NDHDBModel.procduct_item_detail_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PName" ColumnName="PName" />
+                <ScalarProperty Name="PCode" ColumnName="PCode" />
+                <ScalarProperty Name="Material" ColumnName="Material" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Producer" ColumnName="Producer" />
+                <ScalarProperty Name="CardPoint" ColumnName="CardPoint" />
+                <ScalarProperty Name="BoxPoint" ColumnName="BoxPoint" />
+                <ScalarProperty Name="IsLock" ColumnName="IsLock" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="QuantityBox" ColumnName="QuantityBox" />
+                <ScalarProperty Name="IsBox" ColumnName="IsBox" />
+                <ScalarProperty Name="Register" ColumnName="Register" />
+                <ScalarProperty Name="CommerceName" ColumnName="CommerceName" />
+                <ScalarProperty Name="Activce" ColumnName="Activce" />
+                <ScalarProperty Name="Poision" ColumnName="Poision" />
+                <ScalarProperty Name="Describe" ColumnName="Describe" />
+                <ScalarProperty Name="Uses" ColumnName="Uses" />
+                <ScalarProperty Name="Introduce" ColumnName="Introduce" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Other" ColumnName="Other" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="PGroup" ColumnName="PGroup" />
+                <ScalarProperty Name="Forcus" ColumnName="Forcus" />
+                <ScalarProperty Name="New" ColumnName="New" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="DecorGroups">
+            <EntityTypeMapping TypeName="NDHDBModel.DecorGroup">
+              <MappingFragment StoreEntitySet="DecorGroup">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DecorImages">
+            <EntityTypeMapping TypeName="NDHDBModel.DecorImage">
+              <MappingFragment StoreEntitySet="DecorImage">
+                <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+                <ScalarProperty Name="DecorGroup" ColumnName="DecorGroup" />
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="AgencyType" ColumnName="AgencyType" />
+                <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+                <ScalarProperty Name="YearSend" ColumnName="YearSend" />
+                <ScalarProperty Name="MonthSend" ColumnName="MonthSend" />
+                <ScalarProperty Name="DaySend" ColumnName="DaySend" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

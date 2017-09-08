@@ -93,6 +93,8 @@ namespace NDHSITE.Models
         public virtual DbSet<StoreAgencyId> StoreAgencyIds { get; set; }
         public virtual DbSet<ProductGroup> ProductGroups { get; set; }
         public virtual DbSet<ProductInfo> ProductInfoes { get; set; }
+        public virtual DbSet<DecorGroup> DecorGroups { get; set; }
+        public virtual DbSet<DecorImage> DecorImages { get; set; }
     
         public virtual ObjectResult<report_event_agency_Result> report_event_agency(string cType, string eventId)
         {

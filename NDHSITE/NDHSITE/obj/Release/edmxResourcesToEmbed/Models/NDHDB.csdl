@@ -482,6 +482,7 @@
     <NavigationProperty Name="CalendarInfoes" Relationship="NDHDBModel.FK__CalendarI__Staff__5E3FF0B0" FromRole="HaiStaff" ToRole="CalendarInfo" />
     <NavigationProperty Name="StaffCheckIns" Relationship="NDHDBModel.FK__StaffChec__Staff__47DBAE45" FromRole="HaiStaff" ToRole="StaffCheckIn" />
     <NavigationProperty Name="StaffWithC2" Relationship="NDHDBModel.FK__StaffWith__Staff__4C564A9F" FromRole="HaiStaff" ToRole="StaffWithC2" />
+    <NavigationProperty Name="DecorImages" Relationship="NDHDBModel.FK__DecorImag__Staff__742F31CF" FromRole="HaiStaff" ToRole="DecorImage" />
   </EntityType>
   <EntityType Name="HappyBirthday">
     <Key>
@@ -1413,6 +1414,12 @@
       <End Role="ProductInfo" EntitySet="ProductInfoes" />
       <End Role="PTracking" EntitySet="PTrackings" />
     </AssociationSet>
+    <EntitySet Name="DecorGroups" EntityType="NDHDBModel.DecorGroup" />
+    <EntitySet Name="DecorImages" EntityType="NDHDBModel.DecorImage" />
+    <AssociationSet Name="FK__DecorImag__Staff__742F31CF" Association="NDHDBModel.FK__DecorImag__Staff__742F31CF">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="DecorImage" EntitySet="DecorImages" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="report_event_agency_Result">
     <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -1773,6 +1780,43 @@
       </Principal>
       <Dependent Role="PTracking">
         <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="DecorGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DecorImage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DaySend" Type="Int32" />
+    <Property Name="MonthSend" Type="Int32" />
+    <Property Name="YearSend" Type="Int32" />
+    <Property Name="AgencyCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="AgencyType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="Time" Precision="7" />
+    <Property Name="Lat" Type="Double" />
+    <Property Name="Lng" Type="Double" />
+    <Property Name="DecorGroup" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiStaff" Relationship="NDHDBModel.FK__DecorImag__Staff__742F31CF" FromRole="DecorImage" ToRole="HaiStaff" />
+  </EntityType>
+  <Association Name="FK__DecorImag__Staff__742F31CF">
+    <End Type="NDHDBModel.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
+    <End Type="NDHDBModel.DecorImage" Role="DecorImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DecorImage">
+        <PropertyRef Name="StaffId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

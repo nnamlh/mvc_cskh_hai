@@ -20,6 +20,7 @@ namespace HAIAPI.Models
             this.StaffCheckIns = new HashSet<StaffCheckIn>();
             this.StaffWithC2 = new HashSet<StaffWithC2>();
             this.C1Info = new HashSet<C1Info>();
+            this.DecorImages = new HashSet<DecorImage>();
         }
     
         public string Id { get; set; }
@@ -54,5 +55,6 @@ namespace HAIAPI.Models
         public virtual ICollection<StaffCheckIn> StaffCheckIns { get; set; }
         public virtual ICollection<StaffWithC2> StaffWithC2 { get; set; }
         public virtual ICollection<C1Info> C1Info { get; set; }
+        public virtual ICollection<DecorImage> DecorImages { get; set; }
     }
 }

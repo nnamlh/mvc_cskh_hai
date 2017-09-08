@@ -91,6 +91,8 @@ namespace HAIAPI.Models
         public virtual DbSet<StoreAgencyId> StoreAgencyIds { get; set; }
         public virtual DbSet<ProductGroup> ProductGroups { get; set; }
         public virtual DbSet<ProductImage> ProductImages { get; set; }
+        public virtual DbSet<DecorGroup> DecorGroups { get; set; }
+        public virtual DbSet<DecorImage> DecorImages { get; set; }
     
         public virtual ObjectResult<checkin_calendartype_group_Result> checkin_calendartype_group(Nullable<int> month, Nullable<int> year, string staffId)
         {
@@ -129,6 +131,15 @@ namespace HAIAPI.Models
         public virtual ObjectResult<product_list_Result> product_list()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<product_list_Result>("product_list");
+        }
+    
+        public virtual ObjectResult<procduct_item_detail_Result> procduct_item_detail(string id)
+        {
+            var idParameter = id != null ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<procduct_item_detail_Result>("procduct_item_detail", idParameter);
         }
     }
 }

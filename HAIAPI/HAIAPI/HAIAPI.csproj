@@ -195,6 +195,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AgencyController.cs" />
     <Compile Include="Controllers\CheckInController.cs" />
+    <Compile Include="Controllers\DecorController.cs" />
     <Compile Include="Controllers\RestMainController.cs" />
     <Compile Include="Controllers\ShowInfoController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -265,6 +266,12 @@
     <Compile Include="Models\CInfoCommon.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DecorGroup.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DecorImage.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\District.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -322,6 +329,7 @@
     <Compile Include="Models\IdentityAgency.cs" />
     <Compile Include="Models\IdentityCheckIn.cs" />
     <Compile Include="Models\IdentityCommon.cs" />
+    <Compile Include="Models\IdentityDecor.cs" />
     <Compile Include="Models\IdentityLogin.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IdentityShowInfo.cs" />
@@ -360,6 +368,9 @@
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PHistory.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\procduct_item_detail_Result.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProcessHistory.cs">

@@ -534,6 +534,7 @@
     <NavigationProperty Name="StaffCheckIns" Relationship="Self.FK__StaffChec__Staff__47DBAE45" FromRole="HaiStaff" ToRole="StaffCheckIn" />
     <NavigationProperty Name="StaffWithC2" Relationship="Self.FK__StaffWith__Staff__4C564A9F" FromRole="HaiStaff" ToRole="StaffWithC2" />
     <NavigationProperty Name="C1Info" Relationship="Self.StaffWithC1" FromRole="HaiStaff" ToRole="C1Info" />
+    <NavigationProperty Name="DecorImages" Relationship="NDHDBModel.FK__DecorImag__Staff__742F31CF" FromRole="HaiStaff" ToRole="DecorImage" />
   </EntityType>
   <EntityType Name="HappyBirthday">
     <Key>
@@ -1622,6 +1623,15 @@
       <End Role="ProductImage" EntitySet="ProductImages" />
     </AssociationSet>
     <FunctionImport Name="product_list" ReturnType="Collection(NDHDBModel.product_list_Result)" />
+    <FunctionImport Name="procduct_item_detail" ReturnType="Collection(NDHDBModel.procduct_item_detail_Result)">
+      <Parameter Name="id" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="DecorGroups" EntityType="NDHDBModel.DecorGroup" />
+    <EntitySet Name="DecorImages" EntityType="NDHDBModel.DecorImage" />
+    <AssociationSet Name="FK__DecorImag__Staff__742F31CF" Association="NDHDBModel.FK__DecorImag__Staff__742F31CF">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="DecorImage" EntitySet="DecorImages" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="checkin_calendartype_group_Result">
     <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
@@ -1707,4 +1717,71 @@
     <Property Type="String" Name="GroupName" Nullable="true" MaxLength="512" />
     <Property Type="String" Name="Thumbnail" Nullable="true" />
   </ComplexType>
+  <ComplexType Name="procduct_item_detail_Result">
+    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="PCode" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Material" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="Unit" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Producer" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="CardPoint" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="BoxPoint" Nullable="true" MaxLength="32" />
+    <Property Type="Int32" Name="IsLock" Nullable="true" />
+    <Property Type="String" Name="Barcode" Nullable="true" MaxLength="32" />
+    <Property Type="Int32" Name="QuantityBox" Nullable="true" />
+    <Property Type="Int32" Name="IsBox" Nullable="true" />
+    <Property Type="String" Name="Register" Nullable="true" />
+    <Property Type="String" Name="CommerceName" Nullable="true" />
+    <Property Type="String" Name="Activce" Nullable="true" />
+    <Property Type="String" Name="Poision" Nullable="true" />
+    <Property Type="String" Name="Describe" Nullable="true" />
+    <Property Type="String" Name="Uses" Nullable="true" />
+    <Property Type="String" Name="Introduce" Nullable="true" />
+    <Property Type="String" Name="Notes" Nullable="true" />
+    <Property Type="String" Name="Other" Nullable="true" />
+    <Property Type="String" Name="Thumbnail" Nullable="true" />
+    <Property Type="String" Name="PGroup" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="Forcus" Nullable="true" />
+    <Property Type="Int32" Name="New" Nullable="true" />
+    <Property Type="DateTime" Name="CreateTime" Nullable="true" Precision="23" />
+    <Property Type="String" Name="GroupId" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="GroupName" Nullable="true" MaxLength="512" />
+  </ComplexType>
+  <EntityType Name="DecorGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DecorImage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DaySend" Type="Int32" />
+    <Property Name="MonthSend" Type="Int32" />
+    <Property Name="YearSend" Type="Int32" />
+    <Property Name="AgencyCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="AgencyType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="Time" Precision="7" />
+    <Property Name="Lat" Type="Double" />
+    <Property Name="Lng" Type="Double" />
+    <Property Name="DecorGroup" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiStaff" Relationship="NDHDBModel.FK__DecorImag__Staff__742F31CF" FromRole="DecorImage" ToRole="HaiStaff" />
+  </EntityType>
+  <Association Name="FK__DecorImag__Staff__742F31CF">
+    <End Type="NDHDBModel.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
+    <End Type="NDHDBModel.DecorImage" Role="DecorImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DecorImage">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

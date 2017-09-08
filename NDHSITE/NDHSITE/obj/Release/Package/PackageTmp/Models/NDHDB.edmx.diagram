@@ -117,6 +117,9 @@
         <AssociationConnector Association="NDHDBModel.FK__ProductIm__Produ__611C5D5B" />
         <AssociationConnector Association="NDHDBModel.FK__ProductSe__Produ__10416098" />
         <AssociationConnector Association="NDHDBModel.FK__PTracking__Produ__00FF1D08" />
+        <EntityTypeShape EntityType="NDHDBModel.DecorGroup" Width="1.5" PointX="23.375" PointY="12.75" />
+        <EntityTypeShape EntityType="NDHDBModel.DecorImage" Width="1.5" PointX="23.375" PointY="15.75" />
+        <AssociationConnector Association="NDHDBModel.FK__DecorImag__Staff__742F31CF" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

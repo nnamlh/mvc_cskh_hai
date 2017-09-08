@@ -944,5 +944,65 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="procduct_item_detail" FunctionName="NDHDBModel.Store.procduct_item_detail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NDHDBModel.procduct_item_detail_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PName" ColumnName="PName" />
+          <ScalarProperty Name="PCode" ColumnName="PCode" />
+          <ScalarProperty Name="Material" ColumnName="Material" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Producer" ColumnName="Producer" />
+          <ScalarProperty Name="CardPoint" ColumnName="CardPoint" />
+          <ScalarProperty Name="BoxPoint" ColumnName="BoxPoint" />
+          <ScalarProperty Name="IsLock" ColumnName="IsLock" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="QuantityBox" ColumnName="QuantityBox" />
+          <ScalarProperty Name="IsBox" ColumnName="IsBox" />
+          <ScalarProperty Name="Register" ColumnName="Register" />
+          <ScalarProperty Name="CommerceName" ColumnName="CommerceName" />
+          <ScalarProperty Name="Activce" ColumnName="Activce" />
+          <ScalarProperty Name="Poision" ColumnName="Poision" />
+          <ScalarProperty Name="Describe" ColumnName="Describe" />
+          <ScalarProperty Name="Uses" ColumnName="Uses" />
+          <ScalarProperty Name="Introduce" ColumnName="Introduce" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Other" ColumnName="Other" />
+          <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+          <ScalarProperty Name="PGroup" ColumnName="PGroup" />
+          <ScalarProperty Name="Forcus" ColumnName="Forcus" />
+          <ScalarProperty Name="New" ColumnName="New" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="DecorGroups">
+      <EntityTypeMapping TypeName="NDHDBModel.DecorGroup">
+        <MappingFragment StoreEntitySet="DecorGroup">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DecorImages">
+      <EntityTypeMapping TypeName="NDHDBModel.DecorImage">
+        <MappingFragment StoreEntitySet="DecorImage">
+          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+          <ScalarProperty Name="DecorGroup" ColumnName="DecorGroup" />
+          <ScalarProperty Name="Lng" ColumnName="Lng" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="AgencyType" ColumnName="AgencyType" />
+          <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+          <ScalarProperty Name="YearSend" ColumnName="YearSend" />
+          <ScalarProperty Name="MonthSend" ColumnName="MonthSend" />
+          <ScalarProperty Name="DaySend" ColumnName="DaySend" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

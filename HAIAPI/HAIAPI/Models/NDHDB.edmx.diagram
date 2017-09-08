@@ -115,6 +115,9 @@
         <EntityTypeShape EntityType="NDHDBModel.ProductGroup" Width="1.5" PointX="21.375" PointY="21.75" />
         <EntityTypeShape EntityType="NDHDBModel.ProductImage" Width="1.5" PointX="10.25" PointY="34.375" />
         <AssociationConnector Association="NDHDBModel.FK__ProductIm__Produ__611C5D5B" />
+        <EntityTypeShape EntityType="NDHDBModel.DecorGroup" Width="1.5" PointX="22.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NDHDBModel.DecorImage" Width="1.5" PointX="22.375" PointY="3.75" />
+        <AssociationConnector Association="NDHDBModel.FK__DecorImag__Staff__742F31CF" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

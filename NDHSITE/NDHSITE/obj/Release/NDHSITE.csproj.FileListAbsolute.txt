@@ -424,3 +424,12 @@ N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\obj\Release\NDHSITE.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\obj\Release\NDHSITE.pdb
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Dapper.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Dapper.xml
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\MongoDB.Bson.dll
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\MongoDB.Driver.Core.dll
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\MongoDB.Driver.dll
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\MongoDB.Driver.Legacy.dll
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\System.Runtime.InteropServices.RuntimeInformation.dll
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\MongoDB.Bson.xml
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\MongoDB.Driver.xml
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\MongoDB.Driver.Core.xml
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\MongoDB.Driver.Legacy.xml
