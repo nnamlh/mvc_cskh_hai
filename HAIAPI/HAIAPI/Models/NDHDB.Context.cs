@@ -89,6 +89,8 @@ namespace HAIAPI.Models
         public virtual DbSet<Ward> Wards { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<StoreAgencyId> StoreAgencyIds { get; set; }
+        public virtual DbSet<ProductGroup> ProductGroups { get; set; }
+        public virtual DbSet<ProductImage> ProductImages { get; set; }
     
         public virtual ObjectResult<checkin_calendartype_group_Result> checkin_calendartype_group(Nullable<int> month, Nullable<int> year, string staffId)
         {
@@ -122,6 +124,11 @@ namespace HAIAPI.Models
                 new ObjectParameter("staffId", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<checkin_getcalendar_Result>("checkin_getcalendar", monthParameter, yearParameter, staffIdParameter);
+        }
+    
+        public virtual ObjectResult<product_list_Result> product_list()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<product_list_Result>("product_list");
         }
     }
 }

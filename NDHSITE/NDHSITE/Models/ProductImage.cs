@@ -12,23 +12,12 @@ namespace NDHSITE.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class MSGPoint
+    public partial class ProductImage
     {
-        public MSGPoint()
-        {
-            this.MSGPointEvents = new HashSet<MSGPointEvent>();
-        }
-    
         public string Id { get; set; }
-        public string CInfoId { get; set; }
-        public string UserLogin { get; set; }
-        public Nullable<System.DateTime> AcceptTime { get; set; }
-        public string Barcode { get; set; }
+        public string ImageUrl { get; set; }
         public string ProductId { get; set; }
-        public string MSGType { get; set; }
     
-        public virtual CInfoCommon CInfoCommon { get; set; }
-        public virtual ICollection<MSGPointEvent> MSGPointEvents { get; set; }
         public virtual ProductInfo ProductInfo { get; set; }
     }
 }

@@ -606,6 +606,23 @@
     <Property Name="TimeRequire" Type="int" />
     <Property Name="Notes" Type="nvarchar(max)" />
   </EntityType>
+  <EntityType Name="ProductGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Parent" Type="nvarchar" MaxLength="128" />
+    <Property Name="Name" Type="nvarchar" MaxLength="512" />
+    <Property Name="HasChild" Type="int" />
+  </EntityType>
+  <EntityType Name="ProductImage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ImageUrl" Type="nvarchar(max)" />
+    <Property Name="ProductId" Type="nvarchar" MaxLength="128" />
+  </EntityType>
   <EntityType Name="ProductInfo">
     <Key>
       <PropertyRef Name="Id" />
@@ -614,18 +631,28 @@
     <Property Name="PName" Type="nvarchar" MaxLength="256" />
     <Property Name="PCode" Type="nvarchar" MaxLength="128" />
     <Property Name="Material" Type="nvarchar" MaxLength="512" />
-    <Property Name="Utility" Type="nvarchar" MaxLength="512" />
     <Property Name="Unit" Type="nvarchar" MaxLength="128" />
     <Property Name="Producer" Type="nvarchar" MaxLength="256" />
-    <Property Name="PGroup" Type="nvarchar" MaxLength="256" />
-    <Property Name="PMajor" Type="nvarchar" MaxLength="256" />
-    <Property Name="Acronym" Type="nvarchar" MaxLength="128" />
     <Property Name="CardPoint" Type="nvarchar" MaxLength="32" />
     <Property Name="BoxPoint" Type="nvarchar" MaxLength="32" />
     <Property Name="IsLock" Type="int" />
     <Property Name="Barcode" Type="nvarchar" MaxLength="32" />
     <Property Name="QuantityBox" Type="int" />
     <Property Name="IsBox" Type="int" />
+    <Property Name="Register" Type="nvarchar(max)" />
+    <Property Name="CommerceName" Type="nvarchar(max)" />
+    <Property Name="Activce" Type="nvarchar(max)" />
+    <Property Name="Poision" Type="nvarchar(max)" />
+    <Property Name="Describe" Type="nvarchar(max)" />
+    <Property Name="Uses" Type="nvarchar(max)" />
+    <Property Name="Introduce" Type="nvarchar(max)" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="Other" Type="nvarchar(max)" />
+    <Property Name="Thumbnail" Type="nvarchar(max)" />
+    <Property Name="PGroup" Type="nvarchar" MaxLength="128" />
+    <Property Name="Forcus" Type="int" />
+    <Property Name="New" Type="int" />
+    <Property Name="CreateTime" Type="datetime" />
   </EntityType>
   <EntityType Name="ProductSeri">
     <Key>
@@ -1262,6 +1289,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__ProductIm__Produ__611C5D5B">
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
+    <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductImage">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__ProductSe__Produ__10416098">
     <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
     <End Role="ProductSeri" Type="Self.ProductSeri" Multiplicity="*" />
@@ -1424,6 +1463,7 @@
     <Parameter Name="year" Type="int" Mode="In" />
     <Parameter Name="staffId" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="product_list" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <EntityContainer Name="NDHDBModelStoreContainer">
     <EntitySet Name="AgencySavePoint" EntityType="Self.AgencySavePoint" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AllStatus" EntityType="Self.AllStatus" Schema="dbo" store:Type="Tables" />
@@ -1475,6 +1515,8 @@
     <EntitySet Name="ProcessHistory" EntityType="Self.ProcessHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProcessWithRole" EntityType="Self.ProcessWithRole" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProcessWork" EntityType="Self.ProcessWork" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductGroup" EntityType="Self.ProductGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductInfo" EntityType="Self.ProductInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductSeri" EntityType="Self.ProductSeri" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Province" EntityType="Self.Province" Schema="dbo" store:Type="Tables" />
@@ -1643,6 +1685,10 @@
     <AssociationSet Name="FK__ProcessWi__RoleI__53C2623D" Association="Self.FK__ProcessWi__RoleI__53C2623D">
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />
       <End Role="ProcessWithRole" EntitySet="ProcessWithRole" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductIm__Produ__611C5D5B" Association="Self.FK__ProductIm__Produ__611C5D5B">
+      <End Role="ProductInfo" EntitySet="ProductInfo" />
+      <End Role="ProductImage" EntitySet="ProductImage" />
     </AssociationSet>
     <AssociationSet Name="FK__ProductSe__Produ__10416098" Association="Self.FK__ProductSe__Produ__10416098">
       <End Role="ProductInfo" EntitySet="ProductInfo" />

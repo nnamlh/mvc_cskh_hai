@@ -38,27 +38,29 @@ namespace NDHSITE.Controllers
             int pageNumber = (page ?? 1);
             ViewBag.SType = type;
 
+            ViewBag.PGroup = db.ProductGroups.Where(p => p.HasChild == 0).ToList();
+            /*
             switch (type)
             {
                 case 2:
                     ViewBag.STypeName = "Nhà sản xuất";
-                    return View(db.ProductInfoes.Where(p => p.Producer.Contains(search)).OrderBy(p => p.PName).ToPagedList(pageNumber, pageSize));
+                    return View(db.ProductInfoes.Where(p => p.Producer.Contains(search)).OrderBy(p => p.CreateTime).ToPagedList(pageNumber, pageSize));
                 case 1:
                     ViewBag.STypeName = "Tên sản phẩm";
-                    return View(db.ProductInfoes.Where(p => p.PName.Contains(search)).OrderBy(p => p.PName).ToPagedList(pageNumber, pageSize));
+                    return View(db.ProductInfoes.Where(p => p.PName.Contains(search)).OrderBy(p => p.CreateTime).ToPagedList(pageNumber, pageSize));
                 case 3:
                     ViewBag.STypeName = "Nhóm sản phẩm";
-                    return View(db.ProductInfoes.Where(p => p.PGroup.Contains(search)).OrderBy(p => p.PName).ToPagedList(pageNumber, pageSize));
+                    return View(db.ProductInfoes.Where(p => p.PGroup.Contains(search)).OrderBy(p => p.CreateTime).ToPagedList(pageNumber, pageSize));
                 case 4:
                     ViewBag.STypeName = "Mã sản phẩm";
-                    return View(db.ProductInfoes.Where(p => p.PCode.Contains(search)).OrderBy(p => p.PName).ToPagedList(pageNumber, pageSize));
-            }
+                    return View(db.ProductInfoes.Where(p => p.PCode.Contains(search)).OrderBy(p => p.CreateTime).ToPagedList(pageNumber, pageSize));
+            }*/
 
-            return View(db.ProductInfoes.Where(p => p.PName.Contains(search)).OrderBy(p => p.PName).ToPagedList(pageNumber, pageSize));
+            return View(db.ProductInfoes.Where(p => p.Barcode.Contains(search) || p.PName.Contains(search) || p.PCode.Contains(search)).OrderBy(p => p.CreateTime).ToPagedList(pageNumber, pageSize));
         }
 
         [HttpPost]
-        public ActionResult AddProduct(ProductInfo product, string IsBox)
+        public ActionResult AddProduct(ProductInfo product, string IsBox, string Forcus, string New, HttpPostedFileBase Thumbnail, List<HttpPostedFileBase> files)
         {
             if (!Utitl.CheckUser(db, User.Identity.Name, "ManageProduct", 1))
                 return RedirectToAction("relogin", "home");
@@ -72,16 +74,70 @@ namespace NDHSITE.Controllers
                     return RedirectToAction("manage", "product");
             }
 
-
             if (IsBox != null)
                 product.IsBox = 1;
             else
                 product.IsBox = 0;
 
+            if (Forcus != null)
+                product.Forcus = 1;
+            else
+                product.Forcus = 0;
+
+            if (New != null)
+                product.New = 1;
+            else
+                product.New = 0;
+
+            product.CreateTime = DateTime.Now;
+
+            product.Thumbnail = UploadImage(Thumbnail, "/haiupload/product", ".png");
             db.ProductInfoes.Add(product);
             db.SaveChanges();
 
+            if (files != null)
+            {
+                foreach(var item in files)
+                {
+                    var imageProduct = new ProductImage()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        ProductId = product.Id,
+                        ImageUrl = UploadImage(item, "/haiupload/product", ".png")
+                    };
+                    db.ProductImages.Add(imageProduct);
+                    db.SaveChanges();
+                }
+            }
+
             return RedirectToAction("manage", "product");
+        }
+
+        private string UploadImage(HttpPostedFileBase img, string path, string extension)
+        {
+            if (img != null)
+            {
+
+                MemoryStream target = new MemoryStream();
+                img.InputStream.CopyTo(target);
+                byte[] data = target.ToArray();
+
+                ImageUpload imageUpload = new ImageUpload
+                {
+                    Width = 500,
+                    isSacle = false,
+                    UploadPath = "~" + path
+                };
+
+                ImageResult imageResult = imageUpload.RenameUpload(data, extension, 0);
+
+                if (imageResult.Success)
+                {
+                    return path + "/" + imageResult.ImageName;
+                }
+
+            }
+            return "";
         }
 
         public ActionResult ModifyProduct(string id)
@@ -90,7 +146,7 @@ namespace NDHSITE.Controllers
                 return RedirectToAction("relogin", "home");
 
             var product = db.ProductInfoes.Find(id);
-
+            ViewBag.PGroup = db.ProductGroups.Where(p => p.HasChild == 0).ToList();
             if (product == null)
             {
                 return RedirectToAction("error", "home");
@@ -101,7 +157,7 @@ namespace NDHSITE.Controllers
         }
 
         [HttpPost]
-        public ActionResult ModifyProduct(ProductInfo product, string IsBox)
+        public ActionResult ModifyProduct(ProductInfo product, string IsBox, string Forcus, string New, HttpPostedFileBase Thumbnail, List<HttpPostedFileBase> files)
         {
 
             if (!Utitl.CheckUser(db, User.Identity.Name, "ManageProduct", 1))
@@ -115,25 +171,60 @@ namespace NDHSITE.Controllers
             }
 
             var checkDb = db.ProductInfoes.Where(p => p.PCode == product.PCode).FirstOrDefault();
+
             if (checkDb == null)
                 productCheck.PCode = product.PCode;
 
             productCheck.PName = product.PName;
-
-            productCheck.Material = product.Material;
             productCheck.Producer = product.Producer;
-            productCheck.PMajor = product.PMajor;
             productCheck.PGroup = product.PGroup;
             productCheck.Unit = product.Unit;
-            productCheck.Utility = product.Utility;
-            productCheck.Acronym = product.Acronym;
             productCheck.QuantityBox = product.QuantityBox;
+            productCheck.PGroup = product.PGroup;
+            productCheck.Register = product.Register;
+            productCheck.Describe = product.Describe;
+            productCheck.Notes = product.Notes;
+            productCheck.Uses = product.Uses;
+            productCheck.Activce = product.Activce;
+            productCheck.CommerceName = product.CommerceName;
+            productCheck.Introduce = product.Introduce;
+            productCheck.Other = product.Other;
+            productCheck.Poision = product.Poision;
+
+            if (Thumbnail != null)
+            {
+                product.Thumbnail = UploadImage(Thumbnail, "/haiupload/product", ".png");
+            }
+
+            if (Forcus != null)
+                productCheck.Forcus = 1;
+            else
+                productCheck.Forcus = 0;
+
+            if (New != null)
+                productCheck.New = 1;
+            else
+                productCheck.New = 0;
 
             if (IsBox != null)
                 productCheck.IsBox = 1;
             else
                 productCheck.IsBox = 0;
 
+            if (files != null)
+            {
+                foreach (var item in files)
+                {
+                    var imageProduct = new ProductImage()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        ProductId = productCheck.Id,
+                        ImageUrl = UploadImage(item, "/haiupload/product", ".png")
+                    };
+                    db.ProductImages.Add(imageProduct);
+                    db.SaveChanges();
+                }
+            }
 
             db.Entry(productCheck).State = System.Data.Entity.EntityState.Modified;
 
@@ -143,7 +234,7 @@ namespace NDHSITE.Controllers
             return RedirectToAction("modifyproduct", "product", new { id = productCheck.Id });
         }
 
-
+        /*
         [HttpPost]
         public ActionResult excelProduct(HttpPostedFileBase files)
         {
@@ -208,14 +299,11 @@ namespace NDHSITE.Controllers
                                     PCode = pCode,
                                     PName = pName,
                                     Material = Material,
-                                    Utility = Utility,
                                     Unit = Unit,
                                     Producer = Producer,
                                     PGroup = PGroup,
-                                    Acronym = Acronym,
                                     CardPoint = CardPoint,
                                     BoxPoint = BoxPoint,
-                                    PMajor = PMajor,
                                     Barcode = Barcode
                                 };
 
@@ -225,14 +313,11 @@ namespace NDHSITE.Controllers
                             {
                                 checkDb.PName = pName;
                                 checkDb.Material = Material;
-                                checkDb.Utility = Utility;
                                 checkDb.Unit = Unit;
                                 checkDb.Producer = Producer;
                                 checkDb.PGroup = PGroup;
-                                checkDb.Acronym = Acronym;
                                 checkDb.CardPoint = CardPoint;
                                 checkDb.BoxPoint = BoxPoint;
-                                checkDb.PMajor = PMajor;
                                 checkDb.Barcode = Barcode;
                                 db.Entry(checkDb).State = System.Data.Entity.EntityState.Modified;
                                 db.SaveChanges();
@@ -250,6 +335,7 @@ namespace NDHSITE.Controllers
             }
             return RedirectToAction("manage", "product");
         }
+        */
         public ActionResult delete(string Id)
         {
             if (!Utitl.CheckUser(db, User.Identity.Name, "ManageProduct", 1))
@@ -261,12 +347,33 @@ namespace NDHSITE.Controllers
                 return RedirectToAction("error", "home");
             }
 
+            product.ProductImages.Clear();
+            db.SaveChanges();
+
+
             db.ProductInfoes.Remove(product);
             db.SaveChanges();
 
             return RedirectToAction("manage", "product");
         }
 
+        public ActionResult deleteProductImage(string id)
+        {
+            if (!Utitl.CheckUser(db, User.Identity.Name, "ManageProduct", 1))
+                return RedirectToAction("relogin", "home");
+
+            var image = db.ProductImages.Find(id);
+            if (image == null)
+            {
+                return RedirectToAction("error", "home");
+            }
+
+            var productId = image.ProductId;
+            db.ProductImages.Remove(image);
+            db.SaveChanges();
+
+            return RedirectToAction("ModifyProduct", "Product", new { id = productId });
+        }
 
         // tao seri
         public ActionResult ProductSeri(int? page, string productId, int? isUse, int? SeriType)

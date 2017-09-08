@@ -122,21 +122,32 @@ namespace HAIAPI.Controllers
             return result;
         }
 
-        protected List<ProductCodeInfo> GetProductCodeInfo()
+        protected List<ProductInfoResult> GetProductCodeInfo()
         {
-            var product = db.ProductInfoes.ToList();
-            List<ProductCodeInfo> productCodes = new List<ProductCodeInfo>();
+            var product = db.product_list().ToList();
+            List<ProductInfoResult> productCodes = new List<ProductInfoResult>();
             foreach (var item in product)
             {
-                productCodes.Add(new ProductCodeInfo()
+                productCodes.Add(new ProductInfoResult()
                 {
-                    code = item.Barcode,
-                    name = item.PName
+                    Id = item.Id,
+                    Code = item.PCode,
+                    Name = item.PName,
+                    Activce = item.Activce,
+                    Barcode = item.Barcode,
+                    CommerceName = item.CommerceName,
+                    Forcus = item.Forcus,
+                    GroupId = item.GroupId,
+                    GroupName = item.GroupName,
+                    Image = HaiUtil.HostName + item.Thumbnail,
+                    New = item.New,
+                    Producer = item.Producer
                 });
             }
 
             return productCodes;
         }
+
         protected List<AgencyInfoC2> GetListC2(HaiStaff staff)
         {
             List<AgencyInfoC2> agencyResult = new List<AgencyInfoC2>();

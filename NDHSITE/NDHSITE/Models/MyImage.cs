@@ -49,6 +49,26 @@ namespace NDHSITE.Models
             return UploadFile(image, finalFileName, extension);
         }
 
+        public ImageResult RenameUpload(byte[] image, string extension, Int32 counter = 0)
+        {
+            var fileName =  DateTime.Now.ToString("ddMMyyyyhhmmss");
+
+            string finalFileName = fileName + extension; 
+
+            if (counter != 0)
+            {
+                finalFileName = fileName + "_" + ((counter).ToString()) + extension;
+            }
+            if (System.IO.File.Exists
+                (HttpContext.Current.Request.MapPath(UploadPath + "/" + finalFileName)))
+            {
+                //file exists => add country try again
+                return RenameUpload(image, extension, ++counter);
+            }
+            //file doesn't exist, upload item but validate first
+            return UploadFile(image, finalFileName, extension);
+        }
+
 
         public ImageResult RenameUploadAvatar(byte[] image, string extension, string fileName)
         {

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cd5dac904d3c436daee07938083570c7" Name="Diagram1">
+      <Diagram DiagramId="cd5dac904d3c436daee07938083570c7" Name="Diagram1" ZoomLevel="98">
         <EntityTypeShape EntityType="NDHDBModel.AgencySavePoint" Width="1.5" PointX="5.25" PointY="21.75" IsExpanded="true" />
         <EntityTypeShape EntityType="NDHDBModel.AllStatu" Width="1.5" PointX="3.75" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="NDHDBModel.APIAuthHistory" Width="1.5" PointX="3.75" PointY="4.625" IsExpanded="true" />
@@ -112,6 +112,9 @@
         <AssociationConnector Association="NDHDBModel.ProcessWithRole" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.StaffWithC1" ManuallyRouted="false" />
         <EntityTypeShape EntityType="NDHDBModel.StoreAgencyId" Width="1.5" PointX="7.375" PointY="21.75" />
+        <EntityTypeShape EntityType="NDHDBModel.ProductGroup" Width="1.5" PointX="21.375" PointY="21.75" />
+        <EntityTypeShape EntityType="NDHDBModel.ProductImage" Width="1.5" PointX="10.25" PointY="34.375" />
+        <AssociationConnector Association="NDHDBModel.FK__ProductIm__Produ__611C5D5B" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

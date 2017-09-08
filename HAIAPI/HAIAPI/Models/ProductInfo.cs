@@ -20,28 +20,40 @@ namespace HAIAPI.Models
             this.MSGPoints = new HashSet<MSGPoint>();
             this.ProductSeris = new HashSet<ProductSeri>();
             this.PTrackings = new HashSet<PTracking>();
+            this.ProductImages = new HashSet<ProductImage>();
         }
     
         public string Id { get; set; }
         public string PName { get; set; }
         public string PCode { get; set; }
         public string Material { get; set; }
-        public string Utility { get; set; }
         public string Unit { get; set; }
         public string Producer { get; set; }
         public string PGroup { get; set; }
-        public string PMajor { get; set; }
-        public string Acronym { get; set; }
         public string CardPoint { get; set; }
         public string BoxPoint { get; set; }
         public Nullable<int> IsLock { get; set; }
         public string Barcode { get; set; }
         public Nullable<int> QuantityBox { get; set; }
         public Nullable<int> IsBox { get; set; }
+        public string Register { get; set; }
+        public string CommerceName { get; set; }
+        public string Activce { get; set; }
+        public string Poision { get; set; }
+        public string Describe { get; set; }
+        public string Uses { get; set; }
+        public string Introduce { get; set; }
+        public string Notes { get; set; }
+        public string Other { get; set; }
+        public string Thumbnail { get; set; }
+        public Nullable<int> Forcus { get; set; }
+        public Nullable<int> New { get; set; }
+        public Nullable<System.DateTime> CreateTime { get; set; }
     
         public virtual ICollection<EventProduct> EventProducts { get; set; }
         public virtual ICollection<MSGPoint> MSGPoints { get; set; }
         public virtual ICollection<ProductSeri> ProductSeris { get; set; }
         public virtual ICollection<PTracking> PTrackings { get; set; }
+        public virtual ICollection<ProductImage> ProductImages { get; set; }
     }
 }

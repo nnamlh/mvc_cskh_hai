@@ -46,7 +46,6 @@
         <EntityTypeShape EntityType="NDHDBModel.MSGPointEvent" Width="1.5" PointX="12.5" PointY="23.5" IsExpanded="true" />
         <EntityTypeShape EntityType="NDHDBModel.NotificationTopic" Width="1.5" PointX="16.75" PointY="17.875" IsExpanded="true" />
         <EntityTypeShape EntityType="NDHDBModel.PHistory" Width="1.5" PointX="12.75" PointY="18.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.ProductInfo" Width="1.5" PointX="8" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="NDHDBModel.ProductSeri" Width="1.5" PointX="10.25" PointY="12" IsExpanded="true" />
         <EntityTypeShape EntityType="NDHDBModel.Province" Width="1.5" PointX="1.5" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="NDHDBModel.PTracking" Width="1.5" PointX="10.25" PointY="0.75" IsExpanded="true" />
@@ -85,17 +84,13 @@
         <AssociationConnector Association="NDHDBModel.FK__EventCust__Event__3E723F9C" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.FK__EventProd__Event__4DE98D56" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.FK__MSGPointE__Event__5BCD9859" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__EventProd__Produ__4EDDB18F" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.FK__FuncInfo__GroupI__6E565CE8" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.FK__FuncRole__FuncId__79C80F94" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.FK__HaiBranch__AreaI__145C0A3F" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.FK__HaiStaff__Branch__24927208" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.FK__HaiStaff__Depart__25869641" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.FK__HaiStaff__Positi__239E4DCF" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__MSGPoint__Produc__5708E33C" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.FK__MSGPointE__MSGPo__5CC1BC92" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__ProductSe__Produ__10416098" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__PTracking__Produ__00FF1D08" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.AspNetUserRoles" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.EventAward" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.MobileRole" ManuallyRouted="false" />
@@ -113,6 +108,15 @@
         <EntityTypeShape EntityType="NDHDBModel.StaffWithC2" Width="1.5" PointX="12" PointY="32" />
         <AssociationConnector Association="NDHDBModel.FK__StaffWithC__C2Id__4B622666" />
         <AssociationConnector Association="NDHDBModel.FK__StaffWith__Staff__4C564A9F" />
+        <EntityTypeShape EntityType="NDHDBModel.ProductImage" Width="1.5" PointX="10.25" PointY="35.75" />
+        <EntityTypeShape EntityType="NDHDBModel.StoreAgencyId" Width="1.5" PointX="21.375" PointY="16.75" />
+        <EntityTypeShape EntityType="NDHDBModel.ProductGroup" Width="1.5" PointX="22.375" PointY="9.75" />
+        <EntityTypeShape EntityType="NDHDBModel.ProductInfo" Width="1.5" PointX="8" PointY="9" />
+        <AssociationConnector Association="NDHDBModel.FK__EventProd__Produ__4EDDB18F" />
+        <AssociationConnector Association="NDHDBModel.FK__MSGPoint__Produc__5708E33C" />
+        <AssociationConnector Association="NDHDBModel.FK__ProductIm__Produ__611C5D5B" />
+        <AssociationConnector Association="NDHDBModel.FK__ProductSe__Produ__10416098" />
+        <AssociationConnector Association="NDHDBModel.FK__PTracking__Produ__00FF1D08" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

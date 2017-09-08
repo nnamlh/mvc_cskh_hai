@@ -614,16 +614,26 @@
     <EntitySetMapping Name="ProductInfoes">
       <EntityTypeMapping TypeName="NDHDBModel.ProductInfo">
         <MappingFragment StoreEntitySet="ProductInfo">
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="New" ColumnName="New" />
+          <ScalarProperty Name="Forcus" ColumnName="Forcus" />
+          <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+          <ScalarProperty Name="Other" ColumnName="Other" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Introduce" ColumnName="Introduce" />
+          <ScalarProperty Name="Uses" ColumnName="Uses" />
+          <ScalarProperty Name="Describe" ColumnName="Describe" />
+          <ScalarProperty Name="Poision" ColumnName="Poision" />
+          <ScalarProperty Name="Activce" ColumnName="Activce" />
+          <ScalarProperty Name="CommerceName" ColumnName="CommerceName" />
+          <ScalarProperty Name="Register" ColumnName="Register" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="PName" ColumnName="PName" />
           <ScalarProperty Name="PCode" ColumnName="PCode" />
           <ScalarProperty Name="Material" ColumnName="Material" />
-          <ScalarProperty Name="Utility" ColumnName="Utility" />
           <ScalarProperty Name="Unit" ColumnName="Unit" />
           <ScalarProperty Name="Producer" ColumnName="Producer" />
           <ScalarProperty Name="PGroup" ColumnName="PGroup" />
-          <ScalarProperty Name="PMajor" ColumnName="PMajor" />
-          <ScalarProperty Name="Acronym" ColumnName="Acronym" />
           <ScalarProperty Name="CardPoint" ColumnName="CardPoint" />
           <ScalarProperty Name="BoxPoint" ColumnName="BoxPoint" />
           <ScalarProperty Name="IsLock" ColumnName="IsLock" />
@@ -897,5 +907,42 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="ProductGroups">
+      <EntityTypeMapping TypeName="NDHDBModel.ProductGroup">
+        <MappingFragment StoreEntitySet="ProductGroup">
+          <ScalarProperty Name="HasChild" ColumnName="HasChild" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductImages">
+      <EntityTypeMapping TypeName="NDHDBModel.ProductImage">
+        <MappingFragment StoreEntitySet="ProductImage">
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="product_list" FunctionName="NDHDBModel.Store.product_list">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NDHDBModel.product_list_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="PCode" ColumnName="PCode" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="PName" ColumnName="PName" />
+          <ScalarProperty Name="Producer" ColumnName="Producer" />
+          <ScalarProperty Name="CommerceName" ColumnName="CommerceName" />
+          <ScalarProperty Name="Activce" ColumnName="Activce" />
+          <ScalarProperty Name="New" ColumnName="New" />
+          <ScalarProperty Name="Forcus" ColumnName="Forcus" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

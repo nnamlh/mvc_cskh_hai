@@ -362,6 +362,12 @@
     <Compile Include="Models\ProcessWork.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductGroup.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductImage.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ProductInfo.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -411,6 +417,9 @@
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StaffWithC2.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StoreAgencyId.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StoreStaffId.cs">
@@ -631,6 +640,7 @@
     <Folder Include="haiupload\award\" />
     <Folder Include="haiupload\event\" />
     <Folder Include="haiupload\notification\" />
+    <Folder Include="haiupload\product\" />
     <Folder Include="staff\" />
     <Folder Include="temp\" />
     <Folder Include="uploadfolder\" />

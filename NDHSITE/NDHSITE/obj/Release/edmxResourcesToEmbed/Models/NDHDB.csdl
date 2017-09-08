@@ -347,7 +347,7 @@
     <Property Name="Point" Type="Int32" />
     <Property Name="ProductName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="EventInfo" Relationship="Self.FK__EventProd__Event__4DE98D56" FromRole="EventProduct" ToRole="EventInfo" />
-    <NavigationProperty Name="ProductInfo" Relationship="Self.FK__EventProd__Produ__4EDDB18F" FromRole="EventProduct" ToRole="ProductInfo" />
+    <NavigationProperty Name="ProductInfo" Relationship="NDHDBModel.FK__EventProd__Produ__4EDDB18F" FromRole="EventProduct" ToRole="ProductInfo" />
   </EntityType>
   <EntityType Name="FarmerInfo">
     <Key>
@@ -539,8 +539,8 @@
     <Property Name="ProductId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="MSGType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="MSGPoint" ToRole="CInfoCommon" />
-    <NavigationProperty Name="ProductInfo" Relationship="Self.FK__MSGPoint__Produc__5708E33C" FromRole="MSGPoint" ToRole="ProductInfo" />
     <NavigationProperty Name="MSGPointEvents" Relationship="Self.FK__MSGPointE__MSGPo__5CC1BC92" FromRole="MSGPoint" ToRole="MSGPointEvent" />
+    <NavigationProperty Name="ProductInfo" Relationship="NDHDBModel.FK__MSGPoint__Produc__5708E33C" FromRole="MSGPoint" ToRole="ProductInfo" />
   </EntityType>
   <EntityType Name="MSGPointEvent">
     <Key>
@@ -580,31 +580,6 @@
     <Property Name="ProductCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="Quantity" Type="Decimal" Precision="5" Scale="2" />
   </EntityType>
-  <EntityType Name="ProductInfo">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="PName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="PCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Material" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="Utility" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="Unit" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Producer" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="PGroup" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="PMajor" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="Acronym" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CardPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="BoxPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="IsLock" Type="Int32" />
-    <Property Name="Barcode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="QuantityBox" Type="Int32" />
-    <Property Name="IsBox" Type="Int32" />
-    <NavigationProperty Name="EventProducts" Relationship="Self.FK__EventProd__Produ__4EDDB18F" FromRole="ProductInfo" ToRole="EventProduct" />
-    <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__Produc__5708E33C" FromRole="ProductInfo" ToRole="MSGPoint" />
-    <NavigationProperty Name="ProductSeris" Relationship="Self.FK__ProductSe__Produ__10416098" FromRole="ProductInfo" ToRole="ProductSeri" />
-    <NavigationProperty Name="PTrackings" Relationship="Self.FK__PTracking__Produ__00FF1D08" FromRole="ProductInfo" ToRole="PTracking" />
-  </EntityType>
   <EntityType Name="ProductSeri">
     <Key>
       <PropertyRef Name="Id" />
@@ -618,7 +593,7 @@
     <Property Name="Seri" Type="Int32" />
     <Property Name="SeriType" Type="Int32" />
     <Property Name="ModifyTime" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="ProductInfo" Relationship="Self.FK__ProductSe__Produ__10416098" FromRole="ProductSeri" ToRole="ProductInfo" />
+    <NavigationProperty Name="ProductInfo" Relationship="NDHDBModel.FK__ProductSe__Produ__10416098" FromRole="ProductSeri" ToRole="ProductInfo" />
   </EntityType>
   <EntityType Name="Province">
     <Key>
@@ -643,7 +618,7 @@
     <Property Name="ProductId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="CaseCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="Quantity" Type="Decimal" Precision="5" Scale="2" />
-    <NavigationProperty Name="ProductInfo" Relationship="Self.FK__PTracking__Produ__00FF1D08" FromRole="PTracking" ToRole="ProductInfo" />
+    <NavigationProperty Name="ProductInfo" Relationship="NDHDBModel.FK__PTracking__Produ__00FF1D08" FromRole="PTracking" ToRole="ProductInfo" />
   </EntityType>
   <EntityType Name="RegFirebase">
     <Key>
@@ -1059,18 +1034,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__EventProd__Produ__4EDDB18F">
-    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="1" />
-    <End Role="EventProduct" Type="Self.EventProduct" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProductInfo">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="EventProduct">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__FuncInfo__GroupI__6E565CE8">
     <End Role="FuncGroup" Type="Self.FuncGroup" Multiplicity="0..1" />
     <End Role="FuncInfo" Type="Self.FuncInfo" Multiplicity="*" />
@@ -1143,18 +1106,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__MSGPoint__Produc__5708E33C">
-    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
-    <End Role="MSGPoint" Type="Self.MSGPoint" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProductInfo">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="MSGPoint">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__MSGPointE__MSGPo__5CC1BC92">
     <End Role="MSGPoint" Type="Self.MSGPoint" Multiplicity="1" />
     <End Role="MSGPointEvent" Type="Self.MSGPointEvent" Multiplicity="*" />
@@ -1164,30 +1115,6 @@
       </Principal>
       <Dependent Role="MSGPointEvent">
         <PropertyRef Name="MSGPointId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__ProductSe__Produ__10416098">
-    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
-    <End Role="ProductSeri" Type="Self.ProductSeri" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProductInfo">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ProductSeri">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__PTracking__Produ__00FF1D08">
-    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
-    <End Role="PTracking" Type="Self.PTracking" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProductInfo">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PTracking">
-        <PropertyRef Name="ProductId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1249,7 +1176,6 @@
     <EntitySet Name="MSGPointEvents" EntityType="Self.MSGPointEvent" />
     <EntitySet Name="NotificationTopics" EntityType="Self.NotificationTopic" />
     <EntitySet Name="PHistories" EntityType="Self.PHistory" />
-    <EntitySet Name="ProductInfoes" EntityType="Self.ProductInfo" />
     <EntitySet Name="ProductSeris" EntityType="Self.ProductSeri" />
     <EntitySet Name="Provinces" EntityType="Self.Province" />
     <EntitySet Name="PTrackings" EntityType="Self.PTracking" />
@@ -1363,10 +1289,6 @@
       <End Role="EventInfo" EntitySet="EventInfoes" />
       <End Role="MSGPointEvent" EntitySet="MSGPointEvents" />
     </AssociationSet>
-    <AssociationSet Name="FK__EventProd__Produ__4EDDB18F" Association="Self.FK__EventProd__Produ__4EDDB18F">
-      <End Role="ProductInfo" EntitySet="ProductInfoes" />
-      <End Role="EventProduct" EntitySet="EventProducts" />
-    </AssociationSet>
     <AssociationSet Name="FK__FuncInfo__GroupI__6E565CE8" Association="Self.FK__FuncInfo__GroupI__6E565CE8">
       <End Role="FuncGroup" EntitySet="FuncGroups" />
       <End Role="FuncInfo" EntitySet="FuncInfoes" />
@@ -1391,21 +1313,9 @@
       <End Role="HaiPosition" EntitySet="HaiPositions" />
       <End Role="HaiStaff" EntitySet="HaiStaffs" />
     </AssociationSet>
-    <AssociationSet Name="FK__MSGPoint__Produc__5708E33C" Association="Self.FK__MSGPoint__Produc__5708E33C">
-      <End Role="ProductInfo" EntitySet="ProductInfoes" />
-      <End Role="MSGPoint" EntitySet="MSGPoints" />
-    </AssociationSet>
     <AssociationSet Name="FK__MSGPointE__MSGPo__5CC1BC92" Association="Self.FK__MSGPointE__MSGPo__5CC1BC92">
       <End Role="MSGPoint" EntitySet="MSGPoints" />
       <End Role="MSGPointEvent" EntitySet="MSGPointEvents" />
-    </AssociationSet>
-    <AssociationSet Name="FK__ProductSe__Produ__10416098" Association="Self.FK__ProductSe__Produ__10416098">
-      <End Role="ProductInfo" EntitySet="ProductInfoes" />
-      <End Role="ProductSeri" EntitySet="ProductSeris" />
-    </AssociationSet>
-    <AssociationSet Name="FK__PTracking__Produ__00FF1D08" Association="Self.FK__PTracking__Produ__00FF1D08">
-      <End Role="ProductInfo" EntitySet="ProductInfoes" />
-      <End Role="PTracking" EntitySet="PTrackings" />
     </AssociationSet>
     <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -1478,6 +1388,30 @@
     <AssociationSet Name="FK__StaffWith__Staff__4C564A9F" Association="NDHDBModel.FK__StaffWith__Staff__4C564A9F">
       <End Role="HaiStaff" EntitySet="HaiStaffs" />
       <End Role="StaffWithC2" EntitySet="StaffWithC2" />
+    </AssociationSet>
+    <EntitySet Name="ProductImages" EntityType="NDHDBModel.ProductImage" />
+    <EntitySet Name="StoreAgencyIds" EntityType="NDHDBModel.StoreAgencyId" />
+    <EntitySet Name="ProductGroups" EntityType="NDHDBModel.ProductGroup" />
+    <EntitySet Name="ProductInfoes" EntityType="NDHDBModel.ProductInfo" />
+    <AssociationSet Name="FK__EventProd__Produ__4EDDB18F" Association="NDHDBModel.FK__EventProd__Produ__4EDDB18F">
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+      <End Role="EventProduct" EntitySet="EventProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MSGPoint__Produc__5708E33C" Association="NDHDBModel.FK__MSGPoint__Produc__5708E33C">
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+      <End Role="MSGPoint" EntitySet="MSGPoints" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductIm__Produ__611C5D5B" Association="NDHDBModel.FK__ProductIm__Produ__611C5D5B">
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+      <End Role="ProductImage" EntitySet="ProductImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductSe__Produ__10416098" Association="NDHDBModel.FK__ProductSe__Produ__10416098">
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+      <End Role="ProductSeri" EntitySet="ProductSeris" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PTracking__Produ__00FF1D08" Association="NDHDBModel.FK__PTracking__Produ__00FF1D08">
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+      <End Role="PTracking" EntitySet="PTrackings" />
     </AssociationSet>
   </EntityContainer>
   <ComplexType Name="report_event_agency_Result">
@@ -1716,6 +1650,129 @@
       </Principal>
       <Dependent Role="StaffWithC2">
         <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ProductImage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProductId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ProductInfo" Relationship="NDHDBModel.FK__ProductIm__Produ__611C5D5B" FromRole="ProductImage" ToRole="ProductInfo" />
+  </EntityType>
+  <EntityType Name="StoreAgencyId">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IsUse" Type="Int32" />
+    <Property Name="CountNumber" Type="Int32" />
+    <Property Name="TypeStore" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ProductGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Parent" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="HasChild" Type="Int32" />
+  </EntityType>
+  <EntityType Name="ProductInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="PCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Material" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Unit" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Producer" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CardPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="BoxPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="IsLock" Type="Int32" />
+    <Property Name="Barcode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="QuantityBox" Type="Int32" />
+    <Property Name="IsBox" Type="Int32" />
+    <Property Name="Register" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CommerceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Activce" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Poision" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Uses" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Introduce" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Thumbnail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="EventProducts" Relationship="NDHDBModel.FK__EventProd__Produ__4EDDB18F" FromRole="ProductInfo" ToRole="EventProduct" />
+    <NavigationProperty Name="MSGPoints" Relationship="NDHDBModel.FK__MSGPoint__Produc__5708E33C" FromRole="ProductInfo" ToRole="MSGPoint" />
+    <NavigationProperty Name="ProductImages" Relationship="NDHDBModel.FK__ProductIm__Produ__611C5D5B" FromRole="ProductInfo" ToRole="ProductImage" />
+    <NavigationProperty Name="ProductSeris" Relationship="NDHDBModel.FK__ProductSe__Produ__10416098" FromRole="ProductInfo" ToRole="ProductSeri" />
+    <NavigationProperty Name="PTrackings" Relationship="NDHDBModel.FK__PTracking__Produ__00FF1D08" FromRole="ProductInfo" ToRole="PTracking" />
+    <Property Name="PGroup" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Forcus" Type="Int32" />
+    <Property Name="New" Type="Int32" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <Association Name="FK__EventProd__Produ__4EDDB18F">
+    <End Type="NDHDBModel.ProductInfo" Role="ProductInfo" Multiplicity="1" />
+    <End Type="NDHDBModel.EventProduct" Role="EventProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventProduct">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MSGPoint__Produc__5708E33C">
+    <End Type="NDHDBModel.ProductInfo" Role="ProductInfo" Multiplicity="0..1" />
+    <End Type="NDHDBModel.MSGPoint" Role="MSGPoint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MSGPoint">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductIm__Produ__611C5D5B">
+    <End Type="NDHDBModel.ProductInfo" Role="ProductInfo" Multiplicity="0..1" />
+    <End Type="NDHDBModel.ProductImage" Role="ProductImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductImage">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductSe__Produ__10416098">
+    <End Type="NDHDBModel.ProductInfo" Role="ProductInfo" Multiplicity="0..1" />
+    <End Type="NDHDBModel.ProductSeri" Role="ProductSeri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductSeri">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PTracking__Produ__00FF1D08">
+    <End Type="NDHDBModel.ProductInfo" Role="ProductInfo" Multiplicity="0..1" />
+    <End Type="NDHDBModel.PTracking" Role="PTracking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PTracking">
+        <PropertyRef Name="ProductId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

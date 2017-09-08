@@ -21,7 +21,7 @@
         </h4>
     </div> <!-- /.portlet-header -->
     <div class="portlet-body">
-        <form method="post" onsubmit="if(!confirm('Chỉnh sửa sản phẩm ?')){return false;}">
+        <form method="post" onsubmit="if(!confirm('Chỉnh sửa sản phẩm ?')){return false;}" enctype="multipart/form-data">
             <fieldset>
                 <div class="row">
                     <input type="hidden" name="Id" value="@Model.Id" />
@@ -30,83 +30,161 @@
                             <label>Tên sản phẩm</label>
                             <input type="text" name="PName" class="form-control" value="@Model.PName" />
                         </div>
-                    </div>
-
-                    <div class="col-sm-6">
                         <div class="form-group">
                             <label>Mã sản phẩm</label>
                             <input type="text" name="PCode" class="form-control" value="@Model.PCode" />
                         </div>
-                    </div>
-
-                    <div class="col-sm-6">
                         <div class="form-group">
                             <label>Barcode</label>
                             <input type="text" name="Barcode" class="form-control" value="@Model.Barcode" />
                         </div>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Đơn vị tính</label>
-                            <input type="text" name="Unit" class="form-control" value="@Model.Unit"/>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Nhà sản xuất</label>
-                            <input type="text" name="Producer" class="form-control" value="@Model.Producer" />
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
                         <div class="form-group">
                             <label>Nhóm sản phẩm</label>
-                            <input type="text" name="PGroup" class="form-control" value="@Model.PGroup" />
+                            <select name="PGroup" class="form-control">
+                                @foreach (var item in ViewBag.PGroup)
+                                {
+                                    if (item.Id == Model.PGroup)
+                                    {
+                                        <option value="@item.Id" selected>@item.Name</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                }
+                            </select>
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Nhóm nghành</label>
-                            <input type="text" name="PMajor" class="form-control" value="@Model.PMajor" />
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Tên viết tắt</label>
-                            <input type="text" name="Acronym" class="form-control" value="@Model.Acronym" />
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Công dụng</label>
-                            <textarea name="Utility" class="form-control">@Model.Utility</textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Hoặt tính</label>
-                            <textarea name="Material" class="form-control">@Model.Material</textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
                         <div class="form-group">
                             <label>Số lượng hộp</label>
                             <input type="number" name="QuantityBox" class="form-control" value="@Model.QuantityBox" />
                         </div>
 
+                    </div>
+                    <div class="col-sm-6">
                         <div class="form-group">
-                            <label>Yêu cầu CII quét hộp</label>
-                            <input type="checkbox" name="IsBox" @(Model.IsBox == 1?"checked":"")  />
+                            <label>Tên thương mại</label>
+                            <input type="text" name="CommerceName" class="form-control" value="@Model.CommerceName" />
+                        </div>
+                        <div class="form-group">
+                            <label>Nhà sản xuất</label>
+                            <input type="text" name="Producer" class="form-control" value="@Model.Producer" />
+                        </div>
+                        <div class="form-group">
+                            <label>Nhà phân phối</label>
+                            <input type="text" name="Register" class="form-control" value="@Model.Register" />
+                        </div>
+                        <div class="form-group">
+                            <label>Đơn vị tính</label>
+                            <input type="text" name="Unit" class="form-control" value="@Model.Unit" />
+                        </div>
+                        <div class="form-group">
+                            <label>Độ độc</label>
+                            <input type="text" name="Poision" class="form-control" value="@Model.Poision" />
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Mô tả</label>
+                            <textarea name="Describe" class="form-control">@Model.Describe</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Hướng dẫn</label>
+                            <textarea name="Introduce" class="form-control">@Model.Introduce</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Công dụng</label>
+                            <textarea name="Uses" class="form-control">@Model.Uses</textarea>
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Chủ ý</label>
+                            <textarea name="Notes" class="form-control">@Model.Notes</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Lưu ý khác</label>
+                            <textarea name="Other" class="form-control">@Model.Other</textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Hoặt tính</label>
+                            <textarea name="Activce" class="form-control">@Model.Activce</textarea>
+                        </div>
+
+
+                    </div>
+                    <div class="col-sm-6">
+
+                        <div class="form-group">
+                            <label>Yêu cầu CII quét hộp</label>
+                            <input type="checkbox" name="IsBox" @(Model.IsBox == 1 ? "checked" : "") />
+                        </div>
+                        <div class="form-group">
+                            <label>Sản phẩm trọng tâm</label>
+                            <input type="checkbox" name="Forcus" @(Model.Forcus == 1 ? "checked" : "") />
+                        </div>
+                        <div class="form-group">
+                            <label>Sản phẩm mới</label>
+                            <input type="checkbox" name="New" @(Model.New == 1 ? "checked" : "") />
+                        </div>
+                        <div class="form-group">
+                            <label>Đổi ảnh hiển thị</label>
+                            <input type="file" name="Thumbnail" class="form-control" pattern="([^\s]+(\.(?i)(png))$)" />
+                            <img class="img-responsive" alt="img" height="100" width="100" src="@Model.Thumbnail" />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+
+                        <div class="form-group">
+                            <label>Điểm thẻ</label>
+                            <input type="text" name="CardPoint" class="form-control" value="@Model.CardPoint" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Điểm thùng</label>
+                            <input type="text" name="BoxPoint" class="form-control" value="@Model.BoxPoint" />
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Thêm hình ảnh</label>
+                            <input type="file" name="files" class="form-control" multiple pattern="([^\s]+(\.(?i)(png))$)" />
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-primary" type="submit">Sửa sản phẩm</button>
+                        </div>
+                    </div>
+
+
                 </div>
-                <div class="form-group">
-                    <button class="btn btn-primary" type="submit">Sửa sản phẩm</button>
-                </div>
+
             </fieldset>
         </form>
+
+
+        <br />
+        <br />
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Hình ảnh</th>
+                    <th>#</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ProductImages.ToList())
+                {
+                    <tr>
+                        <td><img class="img-responsive" alt="img" height="100" width="100" src="@item.ImageUrl" /></td>
+                        <td><a href="/product/deleteProductImage/@item.Id">Xóa</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
 
     </div>
 </div>
 
-      

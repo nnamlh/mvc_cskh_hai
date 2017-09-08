@@ -611,6 +611,23 @@
           <Property Name="TimeRequire" Type="int" />
           <Property Name="Notes" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="ProductGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Parent" Type="nvarchar" MaxLength="128" />
+          <Property Name="Name" Type="nvarchar" MaxLength="512" />
+          <Property Name="HasChild" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ImageUrl" Type="nvarchar(max)" />
+          <Property Name="ProductId" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <EntityType Name="ProductInfo">
           <Key>
             <PropertyRef Name="Id" />
@@ -619,18 +636,28 @@
           <Property Name="PName" Type="nvarchar" MaxLength="256" />
           <Property Name="PCode" Type="nvarchar" MaxLength="128" />
           <Property Name="Material" Type="nvarchar" MaxLength="512" />
-          <Property Name="Utility" Type="nvarchar" MaxLength="512" />
           <Property Name="Unit" Type="nvarchar" MaxLength="128" />
           <Property Name="Producer" Type="nvarchar" MaxLength="256" />
-          <Property Name="PGroup" Type="nvarchar" MaxLength="256" />
-          <Property Name="PMajor" Type="nvarchar" MaxLength="256" />
-          <Property Name="Acronym" Type="nvarchar" MaxLength="128" />
           <Property Name="CardPoint" Type="nvarchar" MaxLength="32" />
           <Property Name="BoxPoint" Type="nvarchar" MaxLength="32" />
           <Property Name="IsLock" Type="int" />
           <Property Name="Barcode" Type="nvarchar" MaxLength="32" />
           <Property Name="QuantityBox" Type="int" />
           <Property Name="IsBox" Type="int" />
+          <Property Name="Register" Type="nvarchar(max)" />
+          <Property Name="CommerceName" Type="nvarchar(max)" />
+          <Property Name="Activce" Type="nvarchar(max)" />
+          <Property Name="Poision" Type="nvarchar(max)" />
+          <Property Name="Describe" Type="nvarchar(max)" />
+          <Property Name="Uses" Type="nvarchar(max)" />
+          <Property Name="Introduce" Type="nvarchar(max)" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="Other" Type="nvarchar(max)" />
+          <Property Name="Thumbnail" Type="nvarchar(max)" />
+          <Property Name="PGroup" Type="nvarchar" MaxLength="128" />
+          <Property Name="Forcus" Type="int" />
+          <Property Name="New" Type="int" />
+          <Property Name="CreateTime" Type="datetime" />
         </EntityType>
         <EntityType Name="ProductSeri">
           <Key>
@@ -1267,6 +1294,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ProductIm__Produ__611C5D5B">
+          <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
+          <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductImage">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__ProductSe__Produ__10416098">
           <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
           <End Role="ProductSeri" Type="Self.ProductSeri" Multiplicity="*" />
@@ -1429,6 +1468,7 @@
           <Parameter Name="year" Type="int" Mode="In" />
           <Parameter Name="staffId" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="product_list" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="NDHDBModelStoreContainer">
           <EntitySet Name="AgencySavePoint" EntityType="Self.AgencySavePoint" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AllStatus" EntityType="Self.AllStatus" Schema="dbo" store:Type="Tables" />
@@ -1480,6 +1520,8 @@
           <EntitySet Name="ProcessHistory" EntityType="Self.ProcessHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProcessWithRole" EntityType="Self.ProcessWithRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProcessWork" EntityType="Self.ProcessWork" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductGroup" EntityType="Self.ProductGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductImage" EntityType="Self.ProductImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductInfo" EntityType="Self.ProductInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductSeri" EntityType="Self.ProductSeri" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Province" EntityType="Self.Province" Schema="dbo" store:Type="Tables" />
@@ -1648,6 +1690,10 @@
           <AssociationSet Name="FK__ProcessWi__RoleI__53C2623D" Association="Self.FK__ProcessWi__RoleI__53C2623D">
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="ProcessWithRole" EntitySet="ProcessWithRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductIm__Produ__611C5D5B" Association="Self.FK__ProductIm__Produ__611C5D5B">
+            <End Role="ProductInfo" EntitySet="ProductInfo" />
+            <End Role="ProductImage" EntitySet="ProductImage" />
           </AssociationSet>
           <AssociationSet Name="FK__ProductSe__Produ__10416098" Association="Self.FK__ProductSe__Produ__10416098">
             <End Role="ProductInfo" EntitySet="ProductInfo" />
@@ -2362,12 +2408,9 @@
           <Property Name="PName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="PCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Material" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="Utility" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Unit" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Producer" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="PGroup" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="PMajor" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Acronym" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PGroup" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="CardPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="BoxPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="IsLock" Type="Int32" />
@@ -2378,6 +2421,20 @@
           <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__Produc__5708E33C" FromRole="ProductInfo" ToRole="MSGPoint" />
           <NavigationProperty Name="ProductSeris" Relationship="Self.FK__ProductSe__Produ__10416098" FromRole="ProductInfo" ToRole="ProductSeri" />
           <NavigationProperty Name="PTrackings" Relationship="Self.FK__PTracking__Produ__00FF1D08" FromRole="ProductInfo" ToRole="PTracking" />
+          <Property Name="Register" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CommerceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Activce" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Poision" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Uses" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Introduce" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Thumbnail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Forcus" Type="Int32" />
+          <Property Name="New" Type="Int32" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ProductImages" Relationship="NDHDBModel.FK__ProductIm__Produ__611C5D5B" FromRole="ProductInfo" ToRole="ProductImage" />
         </EntityType>
         <EntityType Name="ProductSeri">
           <Key>
@@ -3306,6 +3363,13 @@
             <Parameter Name="staffId" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="StoreAgencyIds" EntityType="NDHDBModel.StoreAgencyId" />
+          <EntitySet Name="ProductGroups" EntityType="NDHDBModel.ProductGroup" />
+          <EntitySet Name="ProductImages" EntityType="NDHDBModel.ProductImage" />
+          <AssociationSet Name="FK__ProductIm__Produ__611C5D5B" Association="NDHDBModel.FK__ProductIm__Produ__611C5D5B">
+            <End Role="ProductInfo" EntitySet="ProductInfoes" />
+            <End Role="ProductImage" EntitySet="ProductImages" />
+          </AssociationSet>
+          <FunctionImport Name="product_list" ReturnType="Collection(NDHDBModel.product_list_Result)" />
         </EntityContainer>
         <ComplexType Name="checkin_calendartype_group_Result">
           <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
@@ -3347,6 +3411,50 @@
           <Property Name="CountNumber" Type="Int32" />
           <Property Name="TypeStore" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="ProductGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Parent" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="HasChild" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ProductImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProductInfo" Relationship="NDHDBModel.FK__ProductIm__Produ__611C5D5B" FromRole="ProductImage" ToRole="ProductInfo" />
+        </EntityType>
+        <Association Name="FK__ProductIm__Produ__611C5D5B">
+          <End Type="NDHDBModel.ProductInfo" Role="ProductInfo" Multiplicity="0..1" />
+          <End Type="NDHDBModel.ProductImage" Role="ProductImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductImage">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="product_list_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="PCode" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Barcode" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="Producer" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="CommerceName" Nullable="true" />
+          <Property Type="String" Name="Activce" Nullable="true" />
+          <Property Type="Int32" Name="New" Nullable="true" />
+          <Property Type="Int32" Name="Forcus" Nullable="true" />
+          <Property Type="String" Name="GroupId" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="GroupName" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="Thumbnail" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3966,16 +4074,26 @@
           <EntitySetMapping Name="ProductInfoes">
             <EntityTypeMapping TypeName="NDHDBModel.ProductInfo">
               <MappingFragment StoreEntitySet="ProductInfo">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="New" ColumnName="New" />
+                <ScalarProperty Name="Forcus" ColumnName="Forcus" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="Other" ColumnName="Other" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Introduce" ColumnName="Introduce" />
+                <ScalarProperty Name="Uses" ColumnName="Uses" />
+                <ScalarProperty Name="Describe" ColumnName="Describe" />
+                <ScalarProperty Name="Poision" ColumnName="Poision" />
+                <ScalarProperty Name="Activce" ColumnName="Activce" />
+                <ScalarProperty Name="CommerceName" ColumnName="CommerceName" />
+                <ScalarProperty Name="Register" ColumnName="Register" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PName" ColumnName="PName" />
                 <ScalarProperty Name="PCode" ColumnName="PCode" />
                 <ScalarProperty Name="Material" ColumnName="Material" />
-                <ScalarProperty Name="Utility" ColumnName="Utility" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
                 <ScalarProperty Name="Producer" ColumnName="Producer" />
                 <ScalarProperty Name="PGroup" ColumnName="PGroup" />
-                <ScalarProperty Name="PMajor" ColumnName="PMajor" />
-                <ScalarProperty Name="Acronym" ColumnName="Acronym" />
                 <ScalarProperty Name="CardPoint" ColumnName="CardPoint" />
                 <ScalarProperty Name="BoxPoint" ColumnName="BoxPoint" />
                 <ScalarProperty Name="IsLock" ColumnName="IsLock" />
@@ -4249,6 +4367,43 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ProductGroups">
+            <EntityTypeMapping TypeName="NDHDBModel.ProductGroup">
+              <MappingFragment StoreEntitySet="ProductGroup">
+                <ScalarProperty Name="HasChild" ColumnName="HasChild" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductImages">
+            <EntityTypeMapping TypeName="NDHDBModel.ProductImage">
+              <MappingFragment StoreEntitySet="ProductImage">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="product_list" FunctionName="NDHDBModel.Store.product_list">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NDHDBModel.product_list_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PCode" ColumnName="PCode" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="PName" ColumnName="PName" />
+                <ScalarProperty Name="Producer" ColumnName="Producer" />
+                <ScalarProperty Name="CommerceName" ColumnName="CommerceName" />
+                <ScalarProperty Name="Activce" ColumnName="Activce" />
+                <ScalarProperty Name="New" ColumnName="New" />
+                <ScalarProperty Name="Forcus" ColumnName="Forcus" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

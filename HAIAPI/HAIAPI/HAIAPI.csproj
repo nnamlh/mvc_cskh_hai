@@ -324,6 +324,7 @@
     <Compile Include="Models\IdentityCommon.cs" />
     <Compile Include="Models\IdentityLogin.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IdentityShowInfo.cs" />
     <Compile Include="Models\ImeiUser.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -367,10 +368,19 @@
     <Compile Include="Models\ProcessWork.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductGroup.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductImage.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ProductInfo.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductSeri.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\product_list_Result.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Province.cs">

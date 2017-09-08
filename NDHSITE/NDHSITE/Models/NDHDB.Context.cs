@@ -68,7 +68,6 @@ namespace NDHSITE.Models
         public virtual DbSet<MSGPointEvent> MSGPointEvents { get; set; }
         public virtual DbSet<NotificationTopic> NotificationTopics { get; set; }
         public virtual DbSet<PHistory> PHistories { get; set; }
-        public virtual DbSet<ProductInfo> ProductInfoes { get; set; }
         public virtual DbSet<ProductSeri> ProductSeris { get; set; }
         public virtual DbSet<Province> Provinces { get; set; }
         public virtual DbSet<PTracking> PTrackings { get; set; }
@@ -90,6 +89,10 @@ namespace NDHSITE.Models
         public virtual DbSet<ProcessWork> ProcessWorks { get; set; }
         public virtual DbSet<StaffCheckIn> StaffCheckIns { get; set; }
         public virtual DbSet<StaffWithC2> StaffWithC2 { get; set; }
+        public virtual DbSet<ProductImage> ProductImages { get; set; }
+        public virtual DbSet<StoreAgencyId> StoreAgencyIds { get; set; }
+        public virtual DbSet<ProductGroup> ProductGroups { get; set; }
+        public virtual DbSet<ProductInfo> ProductInfoes { get; set; }
     
         public virtual ObjectResult<report_event_agency_Result> report_event_agency(string cType, string eventId)
         {

@@ -12,7 +12,7 @@ namespace HAIAPI.Models
 
     public class HaiUtil
     {
-        public static string HostName = "http://cskh.nongduochai.vn/";
+        public static string HostName = "http://192.168.2.170:801/";
     }
 
     public class ResultInfo
@@ -40,7 +40,7 @@ namespace HAIAPI.Models
 
         public List<AgencyInfo> c1 { get; set; }
 
-        public List<ProductCodeInfo> products { get; set; }
+        public List<ProductInfoResult> products { get; set; }
 
     }
 
