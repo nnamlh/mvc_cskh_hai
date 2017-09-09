@@ -76,16 +76,14 @@ namespace HAIAPI.Controllers
 
                     result.c1 = GetListC1(staff);
 
-                    result.products = GetProductCodeInfo();
-
-                    result.productGroups = GetGroupProduct();
                 }
                 else
                 {
                     result.c2 = new List<AgencyInfoC2>();
                     result.c1 = new List<AgencyInfo>();
                 }
-
+                result.products = GetProductCodeInfo();
+                result.productGroups = GetGroupProduct();
                 var notiReg = db.RegFirebases.Where(p => p.UserLogin == paser.user).FirstOrDefault();
 
                 if (notiReg == null)
@@ -244,7 +242,25 @@ namespace HAIAPI.Controllers
             return agencyResult;
 
         }
+        protected void saveHistoryProcess(string task, string calendarId)
+        {
 
+            var check = db.ProcessHistories.Where(p => p.ProcessId == task && p.CalendarId == calendarId).FirstOrDefault();
+
+            if (check == null)
+            {
+                // add quy trinh
+                var historyProcess = new ProcessHistory()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CalendarId = calendarId,
+                    ProcessId = task,
+                    CreateTime = DateTime.Now
+                };
+                db.ProcessHistories.Add(historyProcess);
+                db.SaveChanges();
+            }
+        }
         private List<string> GetUserTopics(string user)
         {
             var cInfo = db.CInfoCommons.Where(p => p.UserLogin == user).FirstOrDefault();

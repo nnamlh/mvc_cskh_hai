@@ -603,6 +603,7 @@
     <EntitySetMapping Name="ProcessWorks">
       <EntityTypeMapping TypeName="NDHDBModel.ProcessWork">
         <MappingFragment StoreEntitySet="ProcessWork">
+          <ScalarProperty Name="SortIndex" ColumnName="SortIndex" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ProcessName" ColumnName="ProcessName" />
           <ScalarProperty Name="ProcessType" ColumnName="ProcessType" />

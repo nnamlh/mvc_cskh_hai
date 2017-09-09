@@ -634,6 +634,7 @@
           <Property Name="ProcessType" Type="nvarchar" MaxLength="128" />
           <Property Name="TimeRequire" Type="int" />
           <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="SortIndex" Type="int" />
         </EntityType>
         <EntityType Name="ProductGroup">
           <Key>
@@ -2445,6 +2446,7 @@
           <Property Name="TimeRequire" Type="Int32" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.ProcessWithRole" FromRole="ProcessWork" ToRole="AspNetRoles" />
+          <Property Name="SortIndex" Type="Int32" />
         </EntityType>
         <EntityType Name="ProductInfo">
           <Key>
@@ -4185,6 +4187,7 @@
           <EntitySetMapping Name="ProcessWorks">
             <EntityTypeMapping TypeName="NDHDBModel.ProcessWork">
               <MappingFragment StoreEntitySet="ProcessWork">
+                <ScalarProperty Name="SortIndex" ColumnName="SortIndex" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="ProcessName" ColumnName="ProcessName" />
                 <ScalarProperty Name="ProcessType" ColumnName="ProcessType" />

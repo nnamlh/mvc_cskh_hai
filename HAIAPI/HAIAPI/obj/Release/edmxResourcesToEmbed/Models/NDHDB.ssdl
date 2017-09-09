@@ -629,6 +629,7 @@
     <Property Name="ProcessType" Type="nvarchar" MaxLength="128" />
     <Property Name="TimeRequire" Type="int" />
     <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="SortIndex" Type="int" />
   </EntityType>
   <EntityType Name="ProductGroup">
     <Key>

@@ -501,7 +501,7 @@ namespace HAIAPI.Controllers
                 var year = DateTime.Now.Year;
 
                 int timeRequireCheckIn = 0;
-                var processCheckIn = role.ProcessWorks.ToList();
+                var processCheckIn = role.ProcessWorks.OrderBy(p=> p.SortIndex).ToList();
                 List<TaskInfo> taskInfo = new List<TaskInfo>();
                 foreach(var item in processCheckIn)
                 {
@@ -549,7 +549,9 @@ namespace HAIAPI.Controllers
                         db.SaveChanges();
                         result.timeRemain = timeRequireCheckIn;
                     }
- 
+
+                    saveHistoryProcess("begintask", checkCalendar.Id);
+
                 }
                 else
                 {
@@ -577,6 +579,9 @@ namespace HAIAPI.Controllers
                     };
                     db.CalendarWorks.Add(calendar);
                     db.SaveChanges();
+
+                    saveHistoryProcess("begintask", calendar.Id);
+
                     result.timeRemain = timeRequireCheckIn;
                     result.inPlan = 0;
                 }
@@ -679,16 +684,7 @@ namespace HAIAPI.Controllers
                     db.Entry(checkCalendar).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
 
-                    // add quy trinh
-                    var historyProcess = new ProcessHistory()
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        CalendarId = checkCalendar.Id,
-                        ProcessId = "checkintask",
-                        CreateTime = DateTime.Now 
-                    };
-                    db.ProcessHistories.Add(historyProcess);
-                    db.SaveChanges();
+                    saveHistoryProcess("endtask", checkCalendar.Id);
 
                 }
 
@@ -706,6 +702,8 @@ namespace HAIAPI.Controllers
             return result;
         }
         #endregion
+
+      
 
     }
 }
