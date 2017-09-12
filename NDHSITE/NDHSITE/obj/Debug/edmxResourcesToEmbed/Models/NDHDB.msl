@@ -831,7 +831,6 @@
           <ScalarProperty Name="TimeCheck" ColumnName="TimeCheck" />
           <ScalarProperty Name="LngCheck" ColumnName="LngCheck" />
           <ScalarProperty Name="LatCheck" ColumnName="LatCheck" />
-          <ScalarProperty Name="CDate" ColumnName="CDate" />
           <ScalarProperty Name="AllTime" ColumnName="AllTime" />
           <ScalarProperty Name="COutTime" ColumnName="COutTime" />
           <ScalarProperty Name="CInTime" ColumnName="CInTime" />
@@ -863,6 +862,7 @@
     <EntitySetMapping Name="ProcessWorks">
       <EntityTypeMapping TypeName="NDHDBModel.ProcessWork">
         <MappingFragment StoreEntitySet="ProcessWork">
+          <ScalarProperty Name="SortIndex" ColumnName="SortIndex" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="TimeRequire" ColumnName="TimeRequire" />
           <ScalarProperty Name="ProcessType" ColumnName="ProcessType" />
@@ -903,9 +903,9 @@
           <ScalarProperty Name="TimeCheck" ColumnName="TimeCheck" />
           <ScalarProperty Name="Distance" ColumnName="Distance" />
           <ScalarProperty Name="Perform" ColumnName="Perform" />
-          <ScalarProperty Name="CName" ColumnName="CName" />
-          <ScalarProperty Name="CDeputy" ColumnName="CDeputy" />
           <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+          <ScalarProperty Name="Deputy" ColumnName="Deputy" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -1008,5 +1008,32 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DecorGroups">
+      <EntityTypeMapping TypeName="NDHDBModel.DecorGroup">
+        <MappingFragment StoreEntitySet="DecorGroup">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DecorImages">
+      <EntityTypeMapping TypeName="NDHDBModel.DecorImage">
+        <MappingFragment StoreEntitySet="DecorImage">
+          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+          <ScalarProperty Name="DecorGroup" ColumnName="DecorGroup" />
+          <ScalarProperty Name="Lng" ColumnName="Lng" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="AgencyType" ColumnName="AgencyType" />
+          <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+          <ScalarProperty Name="YearSend" ColumnName="YearSend" />
+          <ScalarProperty Name="MonthSend" ColumnName="MonthSend" />
+          <ScalarProperty Name="DaySend" ColumnName="DaySend" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="checkin_report_plan" FunctionName="NDHDBModel.Store.checkin_report_plan" />
   </EntityContainerMapping>
 </Mapping>

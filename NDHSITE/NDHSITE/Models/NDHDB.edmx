@@ -238,7 +238,7 @@
           <Property Name="CInTime" Type="time" Precision="7" />
           <Property Name="COutTime" Type="time" Precision="7" />
           <Property Name="AllTime" Type="int" />
-          <Property Name="CDate" Type="int" />
+          <Property Name="CDate" Type="varchar" MaxLength="5" />
           <Property Name="LatCheck" Type="float" />
           <Property Name="LngCheck" Type="float" />
           <Property Name="TimeCheck" Type="datetime" />
@@ -634,6 +634,7 @@
           <Property Name="ProcessType" Type="nvarchar" MaxLength="128" />
           <Property Name="TimeRequire" Type="int" />
           <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="SortIndex" Type="int" />
         </EntityType>
         <EntityType Name="ProductGroup">
           <Key>
@@ -1523,6 +1524,12 @@
           <Parameter Name="year" Type="int" Mode="In" />
           <Parameter Name="staffId" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="checkin_report_plan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="maxday" Type="int" Mode="In" />
+          <Parameter Name="month" Type="varchar" Mode="In" />
+          <Parameter Name="year" Type="varchar" Mode="In" />
+          <Parameter Name="staffId" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="report_cii_product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DFrom" Type="nvarchar" Mode="In" />
           <Parameter Name="DTo" Type="nvarchar" Mode="In" />
@@ -1827,7 +1834,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="NDHDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="NDHDBModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityType Name="AgencySavePoint">
           <Key>
             <PropertyRef Name="EventId" />
@@ -1845,7 +1852,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="SName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="SType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="SCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
@@ -1866,7 +1873,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="BaseUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Describe" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Method" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
@@ -1911,7 +1918,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
@@ -2196,7 +2203,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Number" Type="Int32" />
           <NavigationProperty Name="FuncInfoes" Relationship="Self.FK__FuncInfo__GroupI__6E565CE8" FromRole="FuncGroup" ToRole="FuncInfo" />
@@ -2205,7 +2212,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Position" Type="Int32" />
           <Property Name="Number" Type="Int32" />
@@ -2386,7 +2393,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="Topic" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="TopicType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
@@ -2464,7 +2471,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -2483,7 +2490,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="Content" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
@@ -2492,7 +2499,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="AddressSend" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="PortSend" Type="Int32" />
           <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
@@ -2963,7 +2970,7 @@
           <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="*" />
           <End Role="C1Info" Type="Self.C1Info" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="NDHDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="NDHDBEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
           <EntitySet Name="AgencySavePoints" EntityType="Self.AgencySavePoint" />
           <EntitySet Name="AllStatus" EntityType="Self.AllStatu" />
           <EntitySet Name="APIAuthHistories" EntityType="Self.APIAuthHistory" />
@@ -3248,6 +3255,12 @@
             <End Role="HaiStaff" EntitySet="HaiStaffs" />
             <End Role="DecorImage" EntitySet="DecorImages" />
           </AssociationSet>
+          <FunctionImport Name="checkin_report_plan">
+            <Parameter Name="maxday" Mode="In" Type="Int32" />
+            <Parameter Name="month" Mode="In" Type="String" />
+            <Parameter Name="year" Mode="In" Type="String" />
+            <Parameter Name="staffId" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="report_event_agency_Result">
           <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -3347,7 +3360,6 @@
           <Property Name="CInTime" Type="Time" Precision="7" />
           <Property Name="COutTime" Type="Time" Precision="7" />
           <Property Name="AllTime" Type="Int32" />
-          <Property Name="CDate" Type="Int32" />
           <Property Name="LatCheck" Type="Double" />
           <Property Name="LngCheck" Type="Double" />
           <Property Name="TimeCheck" Type="DateTime" Precision="3" />
@@ -3373,6 +3385,7 @@
           <Property Name="TimeRequire" Type="Int32" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AspNetRoles" Relationship="NDHDBModel.ProcessWithRole" FromRole="ProcessWork" ToRole="AspNetRole" />
+          <Property Name="SortIndex" Type="Int32" />
         </EntityType>
         <Association Name="FK__CalendarI__Staff__5E3FF0B0">
           <End Type="NDHDBModel.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
@@ -3438,15 +3451,15 @@
           <Property Type="Time" Name="CInTime" Nullable="true" />
           <Property Type="Time" Name="COutTime" Nullable="true" />
           <Property Type="Int32" Name="AllTime" Nullable="true" />
-          <Property Type="Int32" Name="CDate" Nullable="true" />
+          <Property Type="String" Name="CDate" Nullable="true" MaxLength="5" />
           <Property Type="Double" Name="LatCheck" Nullable="true" />
           <Property Type="Double" Name="LngCheck" Nullable="true" />
           <Property Type="DateTime" Name="TimeCheck" Nullable="true" Precision="23" />
           <Property Type="Double" Name="Distance" Nullable="true" />
           <Property Type="Int32" Name="Perform" Nullable="true" />
-          <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
-          <Property Type="String" Name="CDeputy" Nullable="true" MaxLength="512" />
           <Property Type="String" Name="TypeName" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="StoreName" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="Deputy" Nullable="true" MaxLength="255" />
         </ComplexType>
         <ComplexType Name="checkin_calendartype_group_Result">
           <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
@@ -4484,7 +4497,6 @@
                 <ScalarProperty Name="TimeCheck" ColumnName="TimeCheck" />
                 <ScalarProperty Name="LngCheck" ColumnName="LngCheck" />
                 <ScalarProperty Name="LatCheck" ColumnName="LatCheck" />
-                <ScalarProperty Name="CDate" ColumnName="CDate" />
                 <ScalarProperty Name="AllTime" ColumnName="AllTime" />
                 <ScalarProperty Name="COutTime" ColumnName="COutTime" />
                 <ScalarProperty Name="CInTime" ColumnName="CInTime" />
@@ -4516,6 +4528,7 @@
           <EntitySetMapping Name="ProcessWorks">
             <EntityTypeMapping TypeName="NDHDBModel.ProcessWork">
               <MappingFragment StoreEntitySet="ProcessWork">
+                <ScalarProperty Name="SortIndex" ColumnName="SortIndex" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="TimeRequire" ColumnName="TimeRequire" />
                 <ScalarProperty Name="ProcessType" ColumnName="ProcessType" />
@@ -4532,7 +4545,7 @@
               <ScalarProperty Name="Id" ColumnName="ProcessId" />
             </EndProperty>
           </AssociationSetMapping>
-          <FunctionImportMapping FunctionImportName="checkin_getcalendar" FunctionName="NDHDBModel.Store.checkin_getcalendar" >
+          <FunctionImportMapping FunctionImportName="checkin_getcalendar" FunctionName="NDHDBModel.Store.checkin_getcalendar">
             <ResultMapping>
               <ComplexTypeMapping TypeName="NDHDBModel.checkin_getcalendar_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -4556,9 +4569,9 @@
                 <ScalarProperty Name="TimeCheck" ColumnName="TimeCheck" />
                 <ScalarProperty Name="Distance" ColumnName="Distance" />
                 <ScalarProperty Name="Perform" ColumnName="Perform" />
-                <ScalarProperty Name="CName" ColumnName="CName" />
-                <ScalarProperty Name="CDeputy" ColumnName="CDeputy" />
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="Deputy" ColumnName="Deputy" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -4687,27 +4700,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="checkin_report_plan" FunctionName="NDHDBModel.Store.checkin_report_plan" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
-    <Connection>
-      <DesignerInfoPropertySet>
-        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
-      </DesignerInfoPropertySet>
-    </Connection>
-    <Options>
-      <DesignerInfoPropertySet>
-        <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
-      </DesignerInfoPropertySet>
-    </Options>
+  <edmx:Designer>
+    <edmx:Connection>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <edmx:DesignerProperty Name="EnablePluralization" Value="true" />
+        <edmx:DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <edmx:DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <edmx:DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
-  </Designer>
+    <edmx:Diagrams />
+  </edmx:Designer>
 </edmx:Edmx>

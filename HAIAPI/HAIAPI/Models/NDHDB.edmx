@@ -238,7 +238,7 @@
           <Property Name="CInTime" Type="time" Precision="7" />
           <Property Name="COutTime" Type="time" Precision="7" />
           <Property Name="AllTime" Type="int" />
-          <Property Name="CDate" Type="int" />
+          <Property Name="CDate" Type="varchar" MaxLength="5" />
           <Property Name="LatCheck" Type="float" />
           <Property Name="LngCheck" Type="float" />
           <Property Name="TimeCheck" Type="datetime" />
@@ -1793,7 +1793,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="NDHDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="NDHDBModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityType Name="AgencySavePoint">
           <Key>
             <PropertyRef Name="EventId" />
@@ -1811,7 +1811,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="SName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="SType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="SCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
@@ -1832,7 +1832,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="BaseUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Describe" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Method" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
@@ -1877,7 +1877,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
@@ -2039,7 +2039,6 @@
           <Property Name="CInTime" Type="Time" Precision="7" />
           <Property Name="COutTime" Type="Time" Precision="7" />
           <Property Name="AllTime" Type="Int32" />
-          <Property Name="CDate" Type="Int32" />
           <Property Name="LatCheck" Type="Double" />
           <Property Name="LngCheck" Type="Double" />
           <Property Name="TimeCheck" Type="DateTime" Precision="3" />
@@ -2214,7 +2213,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Number" Type="Int32" />
           <NavigationProperty Name="FuncInfoes" Relationship="Self.FK__FuncInfo__GroupI__6E565CE8" FromRole="FuncGroup" ToRole="FuncInfo" />
@@ -2223,7 +2222,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Position" Type="Int32" />
           <Property Name="Number" Type="Int32" />
@@ -2404,7 +2403,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="Topic" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="TopicType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
@@ -2539,7 +2538,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -2558,7 +2557,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="Content" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
@@ -2567,7 +2566,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="AddressSend" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="PortSend" Type="Int32" />
           <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
@@ -3158,7 +3157,7 @@
           <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="*" />
           <End Role="C1Info" Type="Self.C1Info" Multiplicity="*" />
         </Association>
-        <EntityContainer Name="NDHDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="NDHDBEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
           <EntitySet Name="AgencySavePoints" EntityType="Self.AgencySavePoint" />
           <EntitySet Name="AllStatus" EntityType="Self.AllStatu" />
           <EntitySet Name="APIAuthHistories" EntityType="Self.APIAuthHistory" />
@@ -3824,7 +3823,6 @@
                 <ScalarProperty Name="CInTime" ColumnName="CInTime" />
                 <ScalarProperty Name="COutTime" ColumnName="COutTime" />
                 <ScalarProperty Name="AllTime" ColumnName="AllTime" />
-                <ScalarProperty Name="CDate" ColumnName="CDate" />
                 <ScalarProperty Name="LatCheck" ColumnName="LatCheck" />
                 <ScalarProperty Name="LngCheck" ColumnName="LngCheck" />
                 <ScalarProperty Name="TimeCheck" ColumnName="TimeCheck" />
@@ -4594,22 +4592,22 @@
     </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
-    <Connection>
-      <DesignerInfoPropertySet>
-        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
-      </DesignerInfoPropertySet>
-    </Connection>
-    <Options>
-      <DesignerInfoPropertySet>
-        <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="true" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
-        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
-      </DesignerInfoPropertySet>
-    </Options>
+  <edmx:Designer>
+    <edmx:Connection>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <edmx:DesignerProperty Name="EnablePluralization" Value="true" />
+        <edmx:DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <edmx:DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <edmx:DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
-  </Designer>
+    <edmx:Diagrams />
+  </edmx:Designer>
 </edmx:Edmx>

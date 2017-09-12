@@ -38,6 +38,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
+                    <a href="/checkin/ExcelPlanReport?month=@calendar.CMonth&year=@calendar.CYear&staffId=@calendar.StaffId">Xuất Excel</a>
                     <table class="table table-striped table-bordered thumbnail-table">
                         <tbody>
                             @foreach (var item in groupDetail)
@@ -105,8 +106,8 @@
                             </td>
                             <td>
                                 @item.AgencyCode<br />
-                                @item.CDeputy<br />
-                                @item.CName
+                                @item.Deputy<br />
+                                @item.Deputy
                             </td>
                             <td>
                                 @item.TypeName

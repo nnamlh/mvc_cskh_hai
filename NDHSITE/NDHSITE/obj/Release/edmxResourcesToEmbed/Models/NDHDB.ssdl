@@ -233,7 +233,7 @@
     <Property Name="CInTime" Type="time" Precision="7" />
     <Property Name="COutTime" Type="time" Precision="7" />
     <Property Name="AllTime" Type="int" />
-    <Property Name="CDate" Type="int" />
+    <Property Name="CDate" Type="varchar" MaxLength="5" />
     <Property Name="LatCheck" Type="float" />
     <Property Name="LngCheck" Type="float" />
     <Property Name="TimeCheck" Type="datetime" />
@@ -629,6 +629,7 @@
     <Property Name="ProcessType" Type="nvarchar" MaxLength="128" />
     <Property Name="TimeRequire" Type="int" />
     <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="SortIndex" Type="int" />
   </EntityType>
   <EntityType Name="ProductGroup">
     <Key>
@@ -1516,6 +1517,12 @@
   <Function Name="checkin_getcalendar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="month" Type="int" Mode="In" />
     <Parameter Name="year" Type="int" Mode="In" />
+    <Parameter Name="staffId" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="checkin_report_plan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="maxday" Type="int" Mode="In" />
+    <Parameter Name="month" Type="varchar" Mode="In" />
+    <Parameter Name="year" Type="varchar" Mode="In" />
     <Parameter Name="staffId" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="report_cii_product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">

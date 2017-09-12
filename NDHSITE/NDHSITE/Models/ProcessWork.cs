@@ -24,6 +24,7 @@ namespace NDHSITE.Models
         public string ProcessType { get; set; }
         public Nullable<int> TimeRequire { get; set; }
         public string Notes { get; set; }
+        public Nullable<int> SortIndex { get; set; }
     
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
     }

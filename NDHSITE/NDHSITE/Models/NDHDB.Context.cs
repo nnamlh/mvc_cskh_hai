@@ -189,5 +189,26 @@ namespace NDHSITE.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<checkin_calendartype_group_Result>("checkin_calendartype_group", monthParameter, yearParameter, staffIdParameter);
         }
+    
+        public virtual int checkin_report_plan(Nullable<int> maxday, string month, string year, string staffId)
+        {
+            var maxdayParameter = maxday.HasValue ?
+                new ObjectParameter("maxday", maxday) :
+                new ObjectParameter("maxday", typeof(int));
+    
+            var monthParameter = month != null ?
+                new ObjectParameter("month", month) :
+                new ObjectParameter("month", typeof(string));
+    
+            var yearParameter = year != null ?
+                new ObjectParameter("year", year) :
+                new ObjectParameter("year", typeof(string));
+    
+            var staffIdParameter = staffId != null ?
+                new ObjectParameter("staffId", staffId) :
+                new ObjectParameter("staffId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("checkin_report_plan", maxdayParameter, monthParameter, yearParameter, staffIdParameter);
+        }
     }
 }

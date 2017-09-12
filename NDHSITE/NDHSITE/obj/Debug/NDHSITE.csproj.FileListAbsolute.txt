@@ -365,6 +365,7 @@ N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\NDHSITE.dll.config
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\NDHSITE.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\NDHSITE.pdb
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Antlr3.Runtime.dll
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Dapper.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\EntityFramework.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\EntityFramework.SqlServer.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\EPPlus.dll
@@ -381,11 +382,16 @@ N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.MicrosoftAcco
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.OAuth.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Twitter.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Microsoft.Web.Infrastructure.dll
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\MongoDB.Bson.dll
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\MongoDB.Driver.Core.dll
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\MongoDB.Driver.dll
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\MongoDB.Driver.Legacy.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Newtonsoft.Json.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Owin.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\PagedList.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\PagedList.Mvc.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\SMSUtl.dll
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\System.Runtime.InteropServices.RuntimeInformation.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\System.Web.Helpers.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\System.Web.Mvc.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\System.Web.Optimization.dll
@@ -394,6 +400,11 @@ N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\System.Web.WebPages.Deployment.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\System.Web.WebPages.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\System.Web.WebPages.Razor.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\WebGrease.dll
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Dapper.xml
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\MongoDB.Bson.xml
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\MongoDB.Driver.xml
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\MongoDB.Driver.Core.xml
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\MongoDB.Driver.Legacy.xml
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\PagedList.xml
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\PagedList.Mvc.xml
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\System.Web.Helpers.xml
@@ -419,8 +430,6 @@ N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.OAuth.xml
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Google.xml
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.Twitter.xml
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\obj\Debug\NDHSITE.csprojResolveAssemblyReference.cache
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\obj\Debug\NDHSITE.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\obj\Debug\NDHSITE.pdb
-N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Dapper.dll
-N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Dapper.xml
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\obj\Debug\NDHSITE.csprojResolveAssemblyReference.cache

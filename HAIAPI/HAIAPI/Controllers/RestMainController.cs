@@ -75,14 +75,14 @@ namespace HAIAPI.Controllers
                     result.c2 = GetListC2(staff);
 
                     result.c1 = GetListC1(staff);
-
+                    result.products = GetProductCodeInfo();
                 }
                 else
                 {
                     result.c2 = new List<AgencyInfoC2>();
                     result.c1 = new List<AgencyInfo>();
                 }
-                result.products = GetProductCodeInfo();
+               
                 result.productGroups = GetGroupProduct();
                 var notiReg = db.RegFirebases.Where(p => p.UserLogin == paser.user).FirstOrDefault();
 
@@ -305,7 +305,7 @@ namespace HAIAPI.Controllers
 
         }
 
-        private List<string> GetUserFunction(string user, string screen)
+        protected List<string> GetUserFunction(string user, string screen)
         {
             var checkUser = db.AspNetUsers.Where(p => p.UserName == user).FirstOrDefault();
 
@@ -322,7 +322,6 @@ namespace HAIAPI.Controllers
                 }
 
             }
-
             return new List<string>();
         }
 
