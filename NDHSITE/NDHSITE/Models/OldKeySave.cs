@@ -12,12 +12,12 @@ namespace NDHSITE.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class APIDetail
+    public partial class OldKeySave
     {
-        public int Id { get; set; }
-        public string BaseUrl { get; set; }
-        public string Describe { get; set; }
-        public string Method { get; set; }
-        public string Name { get; set; }
+        public string Id { get; set; }
+        public string OldCode { get; set; }
+        public string NewCode { get; set; }
+        public string CodeType { get; set; }
+        public Nullable<System.DateTime> CreateTime { get; set; }
     }
 }

@@ -37,16 +37,6 @@
           <Property Name="IsExpired" Type="int" />
           <Property Name="Token" Type="nvarchar" MaxLength="255" />
         </EntityType>
-        <EntityType Name="APIDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="BaseUrl" Type="nvarchar" MaxLength="500" />
-          <Property Name="Describe" Type="nvarchar" MaxLength="500" />
-          <Property Name="Method" Type="nvarchar" MaxLength="55" />
-          <Property Name="Name" Type="nvarchar" MaxLength="100" />
-        </EntityType>
         <EntityType Name="APIHistory">
           <Key>
             <PropertyRef Name="Id" />
@@ -285,6 +275,7 @@
           <Property Name="WardName" Type="nvarchar" MaxLength="512" />
           <Property Name="Country" Type="nvarchar" MaxLength="128" />
           <Property Name="BirthDay" Type="int" />
+          <Property Name="ProvinceCode" Type="nvarchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="DecorGroup">
           <Key>
@@ -591,6 +582,16 @@
           <Property Name="TopicType" Type="nvarchar" MaxLength="32" />
           <Property Name="Notes" Type="nvarchar" MaxLength="256" />
         </EntityType>
+        <EntityType Name="OldKeySave">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="OldCode" Type="nvarchar" MaxLength="128" />
+          <Property Name="NewCode" Type="nvarchar" MaxLength="128" />
+          <Property Name="CodeType" Type="nvarchar" MaxLength="32" />
+          <Property Name="CreateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="PHistory">
           <Key>
             <PropertyRef Name="Id" />
@@ -669,6 +670,7 @@
           <Property Name="Barcode" Type="nvarchar" MaxLength="32" />
           <Property Name="QuantityBox" Type="int" />
           <Property Name="IsBox" Type="int" />
+          <Property Name="PGroup" Type="nvarchar" MaxLength="128" />
           <Property Name="Register" Type="nvarchar(max)" />
           <Property Name="CommerceName" Type="nvarchar(max)" />
           <Property Name="Activce" Type="nvarchar(max)" />
@@ -679,7 +681,6 @@
           <Property Name="Notes" Type="nvarchar(max)" />
           <Property Name="Other" Type="nvarchar(max)" />
           <Property Name="Thumbnail" Type="nvarchar(max)" />
-          <Property Name="PGroup" Type="nvarchar" MaxLength="128" />
           <Property Name="Forcus" Type="int" />
           <Property Name="New" Type="int" />
           <Property Name="CreateTime" Type="datetime" />
@@ -990,7 +991,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DecorImag__Staff__742F31CF">
+        <Association Name="FK__DecorImag__Staff__6F6A7CB2">
           <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
           <End Role="DecorImage" Type="Self.DecorImage" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1350,7 +1351,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ProductIm__Produ__611C5D5B">
+        <Association Name="FK__ProductIm__Produ__64ECEE3F">
           <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
           <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1552,7 +1553,6 @@
           <EntitySet Name="AgencySavePoint" EntityType="Self.AgencySavePoint" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AllStatus" EntityType="Self.AllStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="APIAuthHistory" EntityType="Self.APIAuthHistory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="APIDetail" EntityType="Self.APIDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="APIHistory" EntityType="Self.APIHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="APILogoutHistory" EntityType="Self.APILogoutHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -1597,6 +1597,7 @@
           <EntitySet Name="MSGPoint" EntityType="Self.MSGPoint" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MSGPointEvent" EntityType="Self.MSGPointEvent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NotificationTopic" EntityType="Self.NotificationTopic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OldKeySave" EntityType="Self.OldKeySave" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PHistory" EntityType="Self.PHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProcessHistory" EntityType="Self.ProcessHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProcessWithRole" EntityType="Self.ProcessWithRole" Schema="dbo" store:Type="Tables" />
@@ -1658,7 +1659,7 @@
             <End Role="Ward" EntitySet="Ward" />
             <End Role="CInfoCommon" EntitySet="CInfoCommon" />
           </AssociationSet>
-          <AssociationSet Name="FK__DecorImag__Staff__742F31CF" Association="Self.FK__DecorImag__Staff__742F31CF">
+          <AssociationSet Name="FK__DecorImag__Staff__6F6A7CB2" Association="Self.FK__DecorImag__Staff__6F6A7CB2">
             <End Role="HaiStaff" EntitySet="HaiStaff" />
             <End Role="DecorImage" EntitySet="DecorImage" />
           </AssociationSet>
@@ -1778,7 +1779,7 @@
             <End Role="AspNetRoles" EntitySet="AspNetRoles" />
             <End Role="ProcessWithRole" EntitySet="ProcessWithRole" />
           </AssociationSet>
-          <AssociationSet Name="FK__ProductIm__Produ__611C5D5B" Association="Self.FK__ProductIm__Produ__611C5D5B">
+          <AssociationSet Name="FK__ProductIm__Produ__64ECEE3F" Association="Self.FK__ProductIm__Produ__64ECEE3F">
             <End Role="ProductInfo" EntitySet="ProductInfo" />
             <End Role="ProductImage" EntitySet="ProductImage" />
           </AssociationSet>
@@ -1868,16 +1869,6 @@
           <Property Name="LoginTime" Type="DateTime" Precision="3" />
           <Property Name="IsExpired" Type="Int32" />
           <Property Name="Token" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="APIDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-          <Property Name="BaseUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Describe" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Method" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="APIHistory">
           <Key>
@@ -2084,6 +2075,7 @@
           <Property Name="CGroup" Type="Int32" />
           <Property Name="WardName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Country" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProvinceCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="District">
           <Key>
@@ -2974,7 +2966,6 @@
           <EntitySet Name="AgencySavePoints" EntityType="Self.AgencySavePoint" />
           <EntitySet Name="AllStatus" EntityType="Self.AllStatu" />
           <EntitySet Name="APIAuthHistories" EntityType="Self.APIAuthHistory" />
-          <EntitySet Name="APIDetails" EntityType="Self.APIDetail" />
           <EntitySet Name="APIHistories" EntityType="Self.APIHistory" />
           <EntitySet Name="APILogoutHistories" EntityType="Self.APILogoutHistory" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
@@ -3261,6 +3252,7 @@
             <Parameter Name="year" Mode="In" Type="String" />
             <Parameter Name="staffId" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="OldKeySaves" EntityType="NDHDBModel.OldKeySave" />
         </EntityContainer>
         <ComplexType Name="report_event_agency_Result">
           <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -3661,6 +3653,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="OldKeySave">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="OldCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="NewCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CodeType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3698,17 +3700,6 @@
                 <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
                 <ScalarProperty Name="IsExpired" ColumnName="IsExpired" />
                 <ScalarProperty Name="Token" ColumnName="Token" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="APIDetails">
-            <EntityTypeMapping TypeName="NDHDBModel.APIDetail">
-              <MappingFragment StoreEntitySet="APIDetail">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="BaseUrl" ColumnName="BaseUrl" />
-                <ScalarProperty Name="Describe" ColumnName="Describe" />
-                <ScalarProperty Name="Method" ColumnName="Method" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3863,6 +3854,7 @@
           <EntitySetMapping Name="CInfoCommons">
             <EntityTypeMapping TypeName="NDHDBModel.CInfoCommon">
               <MappingFragment StoreEntitySet="CInfoCommon">
+                <ScalarProperty Name="ProvinceCode" ColumnName="ProvinceCode" />
                 <ScalarProperty Name="Country" ColumnName="Country" />
                 <ScalarProperty Name="WardName" ColumnName="WardName" />
                 <ScalarProperty Name="CGroup" ColumnName="CGroup" />
@@ -4701,6 +4693,17 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="checkin_report_plan" FunctionName="NDHDBModel.Store.checkin_report_plan" />
+          <EntitySetMapping Name="OldKeySaves">
+            <EntityTypeMapping TypeName="NDHDBModel.OldKeySave">
+              <MappingFragment StoreEntitySet="OldKeySave">
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="CodeType" ColumnName="CodeType" />
+                <ScalarProperty Name="NewCode" ColumnName="NewCode" />
+                <ScalarProperty Name="OldCode" ColumnName="OldCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

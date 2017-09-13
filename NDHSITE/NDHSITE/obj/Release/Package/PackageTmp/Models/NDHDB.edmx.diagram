@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="NDHDBModel.AgencySavePoint" Width="1.5" PointX="5.25" PointY="22.375" IsExpanded="true" />
         <EntityTypeShape EntityType="NDHDBModel.AllStatu" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="NDHDBModel.APIAuthHistory" Width="1.5" PointX="3.75" PointY="1.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.APIDetail" Width="1.5" PointX="3.75" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="NDHDBModel.APIHistory" Width="1.5" PointX="5.75" PointY="1.875" IsExpanded="true" />
         <EntityTypeShape EntityType="NDHDBModel.APILogoutHistory" Width="1.5" PointX="5.75" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="NDHDBModel.AspNetRole" Width="1.5" PointX="13" PointY="4.75" IsExpanded="true" />
@@ -120,6 +119,7 @@
         <EntityTypeShape EntityType="NDHDBModel.DecorGroup" Width="1.5" PointX="23.375" PointY="12.75" />
         <EntityTypeShape EntityType="NDHDBModel.DecorImage" Width="1.5" PointX="23.375" PointY="15.75" />
         <AssociationConnector Association="NDHDBModel.FK__DecorImag__Staff__742F31CF" />
+        <EntityTypeShape EntityType="NDHDBModel.OldKeySave" Width="1.5" PointX="23.375" PointY="20.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

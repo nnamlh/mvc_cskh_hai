@@ -246,9 +246,6 @@
     <Compile Include="Models\APIAuthHistory.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\APIDetail.cs">
-      <DependentUpon>NDHDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\APIHistory.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -360,6 +357,7 @@
     <Compile Include="Models\HappyBirthday.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IdentityCommon.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IdentityStore.cs" />
     <Compile Include="Models\ImeiUser.cs">
@@ -395,6 +393,9 @@
       <DependentUpon>NDHDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\NotificationTopic.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OldKeySave.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PHistory.cs">

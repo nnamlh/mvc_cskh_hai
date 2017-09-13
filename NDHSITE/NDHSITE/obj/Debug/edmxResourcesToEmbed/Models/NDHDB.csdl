@@ -34,16 +34,6 @@
     <Property Name="IsExpired" Type="Int32" />
     <Property Name="Token" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="APIDetail">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
-    <Property Name="BaseUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="Describe" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="Method" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
-    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-  </EntityType>
   <EntityType Name="APIHistory">
     <Key>
       <PropertyRef Name="Id" />
@@ -249,6 +239,7 @@
     <Property Name="CGroup" Type="Int32" />
     <Property Name="WardName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="Country" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProvinceCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="District">
     <Key>
@@ -1139,7 +1130,6 @@
     <EntitySet Name="AgencySavePoints" EntityType="Self.AgencySavePoint" />
     <EntitySet Name="AllStatus" EntityType="Self.AllStatu" />
     <EntitySet Name="APIAuthHistories" EntityType="Self.APIAuthHistory" />
-    <EntitySet Name="APIDetails" EntityType="Self.APIDetail" />
     <EntitySet Name="APIHistories" EntityType="Self.APIHistory" />
     <EntitySet Name="APILogoutHistories" EntityType="Self.APILogoutHistory" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
@@ -1426,6 +1416,7 @@
       <Parameter Name="year" Mode="In" Type="String" />
       <Parameter Name="staffId" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="OldKeySaves" EntityType="NDHDBModel.OldKeySave" />
   </EntityContainer>
   <ComplexType Name="report_event_agency_Result">
     <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -1826,4 +1817,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="OldKeySave">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="OldCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="NewCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CodeType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+  </EntityType>
 </Schema>

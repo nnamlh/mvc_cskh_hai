@@ -35,17 +35,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="APIDetails">
-      <EntityTypeMapping TypeName="NDHDBModel.APIDetail">
-        <MappingFragment StoreEntitySet="APIDetail">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="BaseUrl" ColumnName="BaseUrl" />
-          <ScalarProperty Name="Describe" ColumnName="Describe" />
-          <ScalarProperty Name="Method" ColumnName="Method" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="APIHistories">
       <EntityTypeMapping TypeName="NDHDBModel.APIHistory">
         <MappingFragment StoreEntitySet="APIHistory">
@@ -197,6 +186,7 @@
     <EntitySetMapping Name="CInfoCommons">
       <EntityTypeMapping TypeName="NDHDBModel.CInfoCommon">
         <MappingFragment StoreEntitySet="CInfoCommon">
+          <ScalarProperty Name="ProvinceCode" ColumnName="ProvinceCode" />
           <ScalarProperty Name="Country" ColumnName="Country" />
           <ScalarProperty Name="WardName" ColumnName="WardName" />
           <ScalarProperty Name="CGroup" ColumnName="CGroup" />
@@ -1035,5 +1025,16 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="checkin_report_plan" FunctionName="NDHDBModel.Store.checkin_report_plan" />
+    <EntitySetMapping Name="OldKeySaves">
+      <EntityTypeMapping TypeName="NDHDBModel.OldKeySave">
+        <MappingFragment StoreEntitySet="OldKeySave">
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="CodeType" ColumnName="CodeType" />
+          <ScalarProperty Name="NewCode" ColumnName="NewCode" />
+          <ScalarProperty Name="OldCode" ColumnName="OldCode" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

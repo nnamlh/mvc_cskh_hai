@@ -7,6 +7,7 @@ using NDHSITE.Models;
 using PagedList;
 using System.IO;
 using OfficeOpenXml;
+using System.Text.RegularExpressions;
 
 namespace NDHSITE.Controllers
 {
@@ -527,7 +528,7 @@ namespace NDHSITE.Controllers
         */
 
 
-        public ActionResult excelAgency(HttpPostedFileBase files)
+        public ActionResult excelAgencyC2(HttpPostedFileBase files)
         {
 
             if (!Utitl.CheckUser(db, User.Identity.Name, "ManageAgency", 1))
@@ -538,7 +539,6 @@ namespace NDHSITE.Controllers
                 string extension = System.IO.Path.GetExtension(files.FileName);
                 if (extension.Equals(".xlsx") || extension.Equals(".xls"))
                 {
-
                     string fileSave = "cii_" + DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
                     string path = Server.MapPath("~/temp/" + fileSave);
                     if (System.IO.File.Exists(path))
@@ -549,98 +549,254 @@ namespace NDHSITE.Controllers
                     files.SaveAs(path);
                     FileInfo newFile = new FileInfo(path);
                     var package = new ExcelPackage(newFile);
+
                     ExcelWorksheet sheet = package.Workbook.Worksheets[1];
 
                     int totalRows = sheet.Dimension.End.Row;
                     int totalCols = sheet.Dimension.End.Column;
-
+                    List<ImportC2Result> listError = new List<ImportC2Result>();
                     for (int i = 2; i <= totalRows; i++)
                     {
                         string code = Convert.ToString(sheet.Cells[i, 2].Value);
+                        string provinceCode = Convert.ToString(sheet.Cells[i, 11].Value);
+                        string branch = Convert.ToString(sheet.Cells[i, 3].Value);
+                      
+                        string staffCode = Convert.ToString(sheet.Cells[i, 6].Value);
 
-                        var check = db.C2Info.Where(p => p.Code == code).FirstOrDefault();
+                        string phone = Convert.ToString(sheet.Cells[i, 13].Value);
 
-                        if (check == null && !String.IsNullOrEmpty(code))
+                        // create code for c2 and save 
+                        var branchInfo = db.HaiBranches.Where(p => p.Code == branch).FirstOrDefault();
+
+                        string storeName = Convert.ToString(sheet.Cells[i, 4].Value);
+
+                        string deputy = Convert.ToString(sheet.Cells[i, 5].Value);
+
+                        string identityCard = Convert.ToString(sheet.Cells[i, 7].Value);
+                        string bussiness = Convert.ToString(sheet.Cells[i, 8].Value);
+
+                        string addressInfo = Convert.ToString(sheet.Cells[i, 9].Value);
+
+                        string province = Convert.ToString(sheet.Cells[i, 12].Value);
+                        string district = Convert.ToString(sheet.Cells[i, 10].Value);
+                        string rank = Convert.ToString(sheet.Cells[i, 15].Value);
+                        string group = Convert.ToString(sheet.Cells[i, 1].Value);
+                        string c1Code = Convert.ToString(sheet.Cells[i, 14].Value).Trim();
+
+                        var c1Check = db.C1Info.Where(p => p.Code == c1Code).FirstOrDefault();
+
+                        if (c1Check == null)
+                            c1Check = db.C1Info.Where(p => p.Code == "0000000000").FirstOrDefault();
+
+                        var cInfo = new CInfoCommon()
                         {
-                            string branchCode = Convert.ToString(sheet.Cells[i, 1].Value).Trim();
+                            Id = Guid.NewGuid().ToString(),
+                            CName = storeName,
+                            IdentityCard = identityCard,
+                            AddressInfo = addressInfo,
+                            ProvinceName = province,
+                            ProvinceCode = provinceCode,
+                            DistrictName = district,
+                            Phone = phone,
+                            CreateTime = DateTime.Now,
+                            CType = "CII",
+                            WardId = "11111",
+                            BranchCode = branch,
+                            CDeputy = deputy,
+                            Country = "vn",
+                            AreaId = branchInfo.AreaId,
+                            CRank = rank,
+                            BusinessLicense = bussiness
+                        };
 
-                            var branch = db.HaiBranches.Where(p => p.Code == branchCode).FirstOrDefault();
 
-                            if (branch != null)
+                        var c2 = new C2Info()
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            InfoId = cInfo.Id,
+                            C1Id = c1Check.Id,
+                            StoreName = storeName,
+                            Deputy = deputy
+                        };
+
+                        string newCode = "";
+
+                        if (!String.IsNullOrEmpty(code))
+                        {
+                            // subString code
+                            string codeTemp = code.Substring(1);
+                            newCode = provinceCode + codeTemp;
+
+                            // save wwithc coced
+                            var saveOldKey = new OldKeySave()
                             {
+                                CodeType = "C2",
+                                CreateTime = DateTime.Now,
+                                Id = Guid.NewGuid().ToString(),
+                                OldCode = code,
+                                NewCode = newCode
+                            };
+                            db.OldKeySaves.Add(saveOldKey);
+                            db.SaveChanges();
 
-                                string storeName = Convert.ToString(sheet.Cells[i, 3].Value);
+                            c2.IsActive = 1;
+                        }
+                        else
+                        {
+                            newCode = GetAgencyCodeTemp(branch, "C2Temp");
+                            c2.IsActive = 0;
+                        }
 
-                                string deputy = Convert.ToString(sheet.Cells[i, 4].Value);
+                        c2.Code = newCode;
+                        cInfo.CCode = newCode;
 
-                                string identityCard = Convert.ToString(sheet.Cells[i, 5].Value);
+                        var check = db.C2Info.Where(p => p.Code == newCode).FirstOrDefault();
 
-                                string addressInfo = Convert.ToString(sheet.Cells[i, 7].Value);
+                        var staffInfo = db.HaiStaffs.Where(p => p.Code == staffCode.Trim()).FirstOrDefault();
 
-                                string province = Convert.ToString(sheet.Cells[i, 9].Value);
-                                string district = Convert.ToString(sheet.Cells[i, 8].Value);
-                                string phone = Convert.ToString(sheet.Cells[i, 11].Value);
+                        if (check == null && staffInfo != null && !String.IsNullOrEmpty(phone))
+                        {
+                            db.CInfoCommons.Add(cInfo);
+                            db.SaveChanges();
 
-                                string fax = Convert.ToString(sheet.Cells[i, 12].Value);
+                            db.C2Info.Add(c2);
+                            db.SaveChanges();
 
-                                string email = Convert.ToString(sheet.Cells[i, 13].Value);
-                                string c1Code = Convert.ToString(sheet.Cells[i, 26].Value).Trim();
-
-                                var c1Check = db.C1Info.Where(p => p.Code == c1Code).FirstOrDefault();
-
-                                if (c1Check == null)
-                                    c1Check = db.C1Info.Where(p => p.Code == "0000000000").FirstOrDefault();
-
-                                var cInfo = new CInfoCommon()
-                                {
-                                    Id = Guid.NewGuid().ToString(),
-                                    CName = storeName,
-                                    IdentityCard = identityCard,
-                                    AddressInfo = addressInfo,
-                                    ProvinceName = province,
-                                    DistrictName = district,
-                                    Phone = phone,
-                                    Fax = fax,
-                                    Email = email,
-                                    CreateTime = DateTime.Now,
-                                    CType = "CII",
-                                    AreaId = branch.AreaId,
-                                    WardId = "11111",
-                                    BranchCode = branch.Code,
-                                    CCode = code,
-                                    CDeputy = deputy
-
-                                };
-
-
-                                var c2 = new C2Info()
-                                {
-                                    Id = Guid.NewGuid().ToString(),
-                                    InfoId = cInfo.Id,
-                                    C1Id = c1Check.Id,
-                                    Code = code,
-                                    IsLock = 0,
-                                    IsActive = 1,
-                                    StoreName = storeName,
-                                    Deputy = deputy
-                                };
-
-                                db.CInfoCommons.Add(cInfo);
-                                db.SaveChanges();
-
-
-                                db.C2Info.Add(c2);
-                                db.SaveChanges();
+                            int groupChoose = 0;
+                            try
+                            {
+                                groupChoose = Convert.ToInt32(group);
                             }
+                            catch { }
+
+
+                            var staffC2 = new StaffWithC2()
+                            {
+                                C2Id = c2.Id,
+                                StaffId = staffInfo.Id,
+                                GroupChoose = groupChoose
+                            };
+                            db.StaffWithC2.Add(staffC2);
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            listError.Add(new ImportC2Result()
+                            {
+                                old = code,
+                                newCode = newCode,
+                                phone = phone,
+                                staff = staffCode,
+                                name = storeName,
+                                deputy = deputy
+                            });
+                        }
+
+
+                    }
+
+
+                    // return list
+                    string name = "report" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".xlsx";
+                    string pathTo = Server.MapPath("~/temp/" + name);
+                    FileInfo fileExport = new FileInfo(pathTo);
+                    if (fileExport.Exists)
+                    {
+                        fileExport.Delete(); // ensures we create a new workbook
+                        fileExport = new FileInfo(pathTo);
+                    }
+                    try
+                    {
+                     
+                        using (ExcelPackage pakageExport = new ExcelPackage(fileExport))
+                        {
+                            ExcelWorksheet worksheet = pakageExport.Workbook.Worksheets.Add("abc");
+                            worksheet.Cells[1, 1].Value = "Mã khách hàng";
+                            worksheet.Cells[1, 2].Value = "Mã mới";
+                            worksheet.Cells[1, 3].Value = "Tên cửa hàng";
+                            worksheet.Cells[1, 4].Value = "Tên khách hàng";
+                            worksheet.Cells[1, 5].Value = "Nhân viên";
+                            worksheet.Cells[1, 6].Value = "Số điện thoại";
+
+                            for(int i=0; i< listError.Count;i++)
+                            {
+                                worksheet.Cells[i + 2, 1].Value = listError[i].old;
+                                worksheet.Cells[i + 2, 2].Value = listError[i].newCode;
+                                worksheet.Cells[i + 2, 3].Value = listError[i].name;
+                                worksheet.Cells[i + 2, 4].Value = listError[i].deputy;
+                                worksheet.Cells[i + 2, 5].Value = listError[i].staff;
+                                worksheet.Cells[i + 2, 6].Value = listError[i].phone;
+                            }
+
+                            pakageExport.Save();
                         }
 
                     }
+                    catch (Exception e)
+                    {
+                        return RedirectToAction("error", "home");
+                    }
+                    return File(pathTo, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", string.Format("report-" + DateTime.Now.ToString("ddMMyyyyhhmmss") + ".{0}", "xlsx"));
+
+
                 }
+
+
             }
 
             return RedirectToAction("managecii", "agency");
         }
+        public bool IsPhoneNumber(string number)
+        {
+            if (number.Length < 10 || number.Length > 11)
+                return false;
 
+            string pattern = @"^-*[0-9,\.?\-?\(?\)?\ ]+$";
+            return Regex.IsMatch(number, pattern);
+        }
+        private string GetAgencyCodeTemp(string branch, string type)
+        {
+            //"C2Temp"
+            int? number = db.StoreAgencyIds.Where(p => p.TypeStore == type).Max(p => p.CountNumber);
+
+            if (number == null)
+                number = 0;
+
+            number++;
+
+            var count = Convert.ToString(number).Count();
+            var temp = "";
+            if (count == 1)
+                temp = "000" + number;
+            else if (count == 2)
+                temp = "00" + number;
+            else if (count == 3)
+                temp = "0" + number;
+            else
+                temp = number + "";
+
+            string code = "T" + branch + temp;
+
+            var store = new StoreAgencyId()
+            {
+                Id = code,
+                IsUse = 1,
+                CountNumber = number,
+                TypeStore = "C2Temp"
+            };
+
+            try
+            {
+                db.StoreAgencyIds.Add(store);
+                db.SaveChanges();
+            }
+            catch
+            {
+                code = GetAgencyCodeTemp(branch, type);
+            }
+
+            return code;
+        }
 
         // excel dai ly cii
         /*

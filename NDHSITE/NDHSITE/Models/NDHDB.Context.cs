@@ -30,7 +30,6 @@ namespace NDHSITE.Models
         public virtual DbSet<AgencySavePoint> AgencySavePoints { get; set; }
         public virtual DbSet<AllStatu> AllStatus { get; set; }
         public virtual DbSet<APIAuthHistory> APIAuthHistories { get; set; }
-        public virtual DbSet<APIDetail> APIDetails { get; set; }
         public virtual DbSet<APIHistory> APIHistories { get; set; }
         public virtual DbSet<APILogoutHistory> APILogoutHistories { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
@@ -95,6 +94,7 @@ namespace NDHSITE.Models
         public virtual DbSet<ProductInfo> ProductInfoes { get; set; }
         public virtual DbSet<DecorGroup> DecorGroups { get; set; }
         public virtual DbSet<DecorImage> DecorImages { get; set; }
+        public virtual DbSet<OldKeySave> OldKeySaves { get; set; }
     
         public virtual ObjectResult<report_event_agency_Result> report_event_agency(string cType, string eventId)
         {
