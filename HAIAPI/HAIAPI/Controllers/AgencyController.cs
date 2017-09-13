@@ -283,8 +283,8 @@ namespace HAIAPI.Controllers
         }
 
 
-        [HttpPost]
-        public List<AgencyInfoC2> GetAgencyC2()
+        [HttpGet]
+        public List<AgencyInfoC2> GetAgencyC2(string user, string token)
         {
 
             var log = new MongoHistoryAPI()
@@ -294,17 +294,17 @@ namespace HAIAPI.Controllers
                 Sucess = 1
             };
             var result = new List<AgencyInfoC2>();
-            var requestContent = Request.Content.ReadAsStringAsync().Result;
+         //   var requestContent = Request.Content.ReadAsStringAsync().Result;
 
             try
             {
-                var jsonserializer = new JavaScriptSerializer();
-                var paser = jsonserializer.Deserialize<RequestInfo>(requestContent);
+             //   var jsonserializer = new JavaScriptSerializer();
+               // var paser = jsonserializer.Deserialize<RequestInfo>(requestContent);
 
-                if (!mongoHelper.checkLoginSession(paser.user, paser.token))
+                if (!mongoHelper.checkLoginSession(user, token))
                     throw new Exception("Wrong token and user login!");
 
-                var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+                var staff = db.HaiStaffs.Where(p => p.UserLogin == user).FirstOrDefault();
 
                 if (staff == null)
                     throw new Exception("Chỉ nhân viên công ty mới được quyền tạo");

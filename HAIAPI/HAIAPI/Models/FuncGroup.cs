@@ -14,6 +14,7 @@ namespace HAIAPI.Models
     
     public partial class FuncGroup
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FuncGroup()
         {
             this.FuncInfoes = new HashSet<FuncInfo>();
@@ -23,6 +24,7 @@ namespace HAIAPI.Models
         public string Name { get; set; }
         public Nullable<int> Number { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FuncInfo> FuncInfoes { get; set; }
     }
 }

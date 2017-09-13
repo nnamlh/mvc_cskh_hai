@@ -25,6 +25,7 @@ namespace HAIAPI.Models
         public string Barcode { get; set; }
         public Nullable<int> QuantityBox { get; set; }
         public Nullable<int> IsBox { get; set; }
+        public string PGroup { get; set; }
         public string Register { get; set; }
         public string CommerceName { get; set; }
         public string Activce { get; set; }
@@ -35,7 +36,6 @@ namespace HAIAPI.Models
         public string Notes { get; set; }
         public string Other { get; set; }
         public string Thumbnail { get; set; }
-        public string PGroup { get; set; }
         public Nullable<int> Forcus { get; set; }
         public Nullable<int> New { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }

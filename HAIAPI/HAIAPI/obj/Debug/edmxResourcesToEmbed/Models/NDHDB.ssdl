@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="NDHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="NDHDB1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AgencySavePoint">
     <Key>
       <PropertyRef Name="EventId" />
@@ -20,49 +20,6 @@
     <Property Name="SType" Type="nvarchar" MaxLength="32" />
     <Property Name="SCode" Type="nvarchar" MaxLength="32" />
     <Property Name="SNotes" Type="nvarchar" MaxLength="256" />
-  </EntityType>
-  <EntityType Name="APIAuthHistory">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="UserLogin" Type="nvarchar" MaxLength="100" />
-    <Property Name="UserRole" Type="nvarchar" MaxLength="100" />
-    <Property Name="LoginTime" Type="datetime" />
-    <Property Name="IsExpired" Type="int" />
-    <Property Name="Token" Type="nvarchar" MaxLength="255" />
-  </EntityType>
-  <EntityType Name="APIDetail">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="BaseUrl" Type="nvarchar" MaxLength="500" />
-    <Property Name="Describe" Type="nvarchar" MaxLength="500" />
-    <Property Name="Method" Type="nvarchar" MaxLength="55" />
-    <Property Name="Name" Type="nvarchar" MaxLength="100" />
-  </EntityType>
-  <EntityType Name="APIHistory">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="APIUrl" Type="nvarchar" MaxLength="500" />
-    <Property Name="Content" Type="nvarchar(max)" />
-    <Property Name="CreateTime" Type="datetime" />
-    <Property Name="Sucess" Type="int" />
-    <Property Name="Error" Type="nvarchar" MaxLength="500" />
-    <Property Name="ReturnInfo" Type="nvarchar(max)" />
-  </EntityType>
-  <EntityType Name="APILogoutHistory">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="UserLogin" Type="nvarchar" MaxLength="100" />
-    <Property Name="UserRole" Type="nvarchar" MaxLength="100" />
-    <Property Name="LogoutTime" Type="datetime" />
-    <Property Name="Token" Type="nvarchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="AspNetRoles">
     <Key>
@@ -233,7 +190,7 @@
     <Property Name="CInTime" Type="time" Precision="7" />
     <Property Name="COutTime" Type="time" Precision="7" />
     <Property Name="AllTime" Type="int" />
-    <Property Name="CDate" Type="int" />
+    <Property Name="CDate" Type="varchar" MaxLength="5" />
     <Property Name="LatCheck" Type="float" />
     <Property Name="LngCheck" Type="float" />
     <Property Name="TimeCheck" Type="datetime" />
@@ -664,6 +621,7 @@
     <Property Name="Barcode" Type="nvarchar" MaxLength="32" />
     <Property Name="QuantityBox" Type="int" />
     <Property Name="IsBox" Type="int" />
+    <Property Name="PGroup" Type="nvarchar" MaxLength="128" />
     <Property Name="Register" Type="nvarchar(max)" />
     <Property Name="CommerceName" Type="nvarchar(max)" />
     <Property Name="Activce" Type="nvarchar(max)" />
@@ -674,7 +632,6 @@
     <Property Name="Notes" Type="nvarchar(max)" />
     <Property Name="Other" Type="nvarchar(max)" />
     <Property Name="Thumbnail" Type="nvarchar(max)" />
-    <Property Name="PGroup" Type="nvarchar" MaxLength="128" />
     <Property Name="Forcus" Type="int" />
     <Property Name="New" Type="int" />
     <Property Name="CreateTime" Type="datetime" />
@@ -834,6 +791,17 @@
     <Property Name="CountNumber" Type="int" />
     <Property Name="TypeStore" Type="nvarchar" MaxLength="128" />
   </EntityType>
+  <EntityType Name="TreeInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" />
+    <Property Name="TreeType" Type="nvarchar" MaxLength="128" />
+    <Property Name="Acreage" Type="nvarchar" MaxLength="32" />
+    <Property Name="STT" Type="nvarchar" MaxLength="128" />
+    <Property Name="CreateDate" Type="datetime" />
+  </EntityType>
   <EntityType Name="Ward">
     <Key>
       <PropertyRef Name="Id" />
@@ -966,7 +934,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__DecorImag__Staff__742F31CF">
+  <Association Name="FK__DecorImag__Staff__6F6A7CB2">
     <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
     <End Role="DecorImage" Type="Self.DecorImage" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1326,7 +1294,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProductIm__Produ__611C5D5B">
+  <Association Name="FK__ProductIm__Produ__64ECEE3F">
     <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
     <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1504,13 +1472,9 @@
     <Parameter Name="id" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="product_list" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <EntityContainer Name="NDHDBModelStoreContainer">
+  <EntityContainer Name="NDHDB1ModelStoreContainer">
     <EntitySet Name="AgencySavePoint" EntityType="Self.AgencySavePoint" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AllStatus" EntityType="Self.AllStatus" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="APIAuthHistory" EntityType="Self.APIAuthHistory" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="APIDetail" EntityType="Self.APIDetail" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="APIHistory" EntityType="Self.APIHistory" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="APILogoutHistory" EntityType="Self.APILogoutHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
@@ -1574,6 +1538,7 @@
     <EntitySet Name="StaffWithC1" EntityType="Self.StaffWithC1" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StaffWithC2" EntityType="Self.StaffWithC2" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StoreAgencyId" EntityType="Self.StoreAgencyId" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TreeInfo" EntityType="Self.TreeInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ward" EntityType="Self.Ward" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__AgencySav__CInfo__6497E884" Association="Self.FK__AgencySav__CInfo__6497E884">
@@ -1612,7 +1577,7 @@
       <End Role="Ward" EntitySet="Ward" />
       <End Role="CInfoCommon" EntitySet="CInfoCommon" />
     </AssociationSet>
-    <AssociationSet Name="FK__DecorImag__Staff__742F31CF" Association="Self.FK__DecorImag__Staff__742F31CF">
+    <AssociationSet Name="FK__DecorImag__Staff__6F6A7CB2" Association="Self.FK__DecorImag__Staff__6F6A7CB2">
       <End Role="HaiStaff" EntitySet="HaiStaff" />
       <End Role="DecorImage" EntitySet="DecorImage" />
     </AssociationSet>
@@ -1732,7 +1697,7 @@
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />
       <End Role="ProcessWithRole" EntitySet="ProcessWithRole" />
     </AssociationSet>
-    <AssociationSet Name="FK__ProductIm__Produ__611C5D5B" Association="Self.FK__ProductIm__Produ__611C5D5B">
+    <AssociationSet Name="FK__ProductIm__Produ__64ECEE3F" Association="Self.FK__ProductIm__Produ__64ECEE3F">
       <End Role="ProductInfo" EntitySet="ProductInfo" />
       <End Role="ProductImage" EntitySet="ProductImage" />
     </AssociationSet>

@@ -68,17 +68,45 @@ namespace HAIAPI.Controllers
 
                 result.function = GetUserFunction(paser.user, "main");
 
-                if (paser.isUpdate == 1 && role.GroupRole == "HAI")
+                if (paser.isUpdate == 1)
+                {
+                    result.products = GetProductCodeInfo();
+                }
+
+                if (role.GroupRole == "HAI")
                 {
                     var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+                    if (staff == null)
+                        throw new Exception("Không lấy được thông tin");
 
-                    result.c2 = GetListC2(staff);
-
-                    result.c1 = GetListC1(staff);
-                    result.products = GetProductCodeInfo();
+                    result.code = staff.Code;
+                    result.name = staff.FullName;
+                    result.type = "Công ty HAI";
+                       
+                    if (paser.isUpdate == 1)
+                    {
+                        result.c2 = GetListC2(staff);
+                        result.c1 = GetListC1(staff);
+                    }
+                   
                 }
                 else
                 {
+                    var cinfo = db.CInfoCommons.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+
+                    if (cinfo == null)
+                        throw new Exception("Không lấy được thông tin");
+
+
+                    result.code = cinfo.CCode;
+                    result.name = cinfo.CDeputy;
+                    if (cinfo.CType == "CII")
+                        result.type = "Đại lý cấp 2";
+                    else if (cinfo.CType == "CI")
+                        result.type = "Đại lý cấp 1";
+                    else
+                        result.type = "Chưa xác nhận";
+
                     result.c2 = new List<AgencyInfoC2>();
                     result.c1 = new List<AgencyInfo>();
                 }

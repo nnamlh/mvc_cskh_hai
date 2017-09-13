@@ -14,6 +14,7 @@ namespace HAIAPI.Models
     
     public partial class Ward
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Ward()
         {
             this.CInfoCommons = new HashSet<CInfoCommon>();
@@ -25,6 +26,7 @@ namespace HAIAPI.Models
         public string Location { get; set; }
         public string Districtid { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CInfoCommon> CInfoCommons { get; set; }
         public virtual District District { get; set; }
     }

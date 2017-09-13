@@ -228,18 +228,6 @@
     <Compile Include="Models\AllStatu.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\APIAuthHistory.cs">
-      <DependentUpon>NDHDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\APIDetail.cs">
-      <DependentUpon>NDHDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\APIHistory.cs">
-      <DependentUpon>NDHDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\APILogoutHistory.cs">
-      <DependentUpon>NDHDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\AspNetRole.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -450,6 +438,9 @@
     <Compile Include="Models\StoreAgencyId.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TreeInfo.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Ward.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -464,6 +455,14 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <EntityDeploy Include="Models\NDHDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NDHDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\NDHDB.edmx.diagram">
+      <DependentUpon>NDHDB.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\NDHDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>NDHDB.edmx</DependentUpon>
@@ -474,7 +473,6 @@
       <DependentUpon>NDHDB.edmx</DependentUpon>
       <LastGenOutput>NDHDB.cs</LastGenOutput>
     </Content>
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -497,13 +495,6 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Models\NDHDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>NDHDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\NDHDB.edmx.diagram">
-      <DependentUpon>NDHDB.edmx</DependentUpon>
-    </Content>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <None Include="Properties\PublishProfiles\aaa.pubxml" />

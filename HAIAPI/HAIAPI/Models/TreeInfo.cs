@@ -12,13 +12,13 @@ namespace HAIAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class APIAuthHistory
+    public partial class TreeInfo
     {
         public string Id { get; set; }
-        public string UserLogin { get; set; }
-        public string UserRole { get; set; }
-        public Nullable<System.DateTime> LoginTime { get; set; }
-        public Nullable<int> IsExpired { get; set; }
-        public string Token { get; set; }
+        public string Name { get; set; }
+        public string TreeType { get; set; }
+        public string Acreage { get; set; }
+        public string STT { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
     }
 }

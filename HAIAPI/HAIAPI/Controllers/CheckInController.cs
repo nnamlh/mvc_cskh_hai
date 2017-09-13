@@ -143,7 +143,7 @@ namespace HAIAPI.Controllers
                         CalendarWork plan = new CalendarWork()
                         {
                             Id = Guid.NewGuid().ToString(),
-                            CDate = item.day,
+                            CDate = item.day + "",
                             CMonth = paser.month,
                             CYear = paser.year,
                             CDay = item.day,
@@ -171,7 +171,7 @@ namespace HAIAPI.Controllers
                                 CalendarWork plan = new CalendarWork()
                                 {
                                     Id = Guid.NewGuid().ToString(),
-                                    CDate = item.day,
+                                    CDate = item.day + "",
                                     CMonth = paser.month,
                                     CYear = paser.year,
                                     CDay = item.day,
@@ -306,8 +306,8 @@ namespace HAIAPI.Controllers
                             {
                                 code = agency.AgencyCode,
                                 ctype = agency.AgencyType,
-                                deputy = agency.CDeputy,
-                                name = agency.CName,
+                                deputy = agency.Deputy,
+                                name = agency.StoreName,
                                 inPlan = agency.InPlan,
                                 perform = agency.Perform
                             });
@@ -347,9 +347,8 @@ namespace HAIAPI.Controllers
         [HttpPost]
         public CheckInGetPlanResult CheckInGetPlan()
         {
-            var log = new APIHistory()
+            var log = new MongoHistoryAPI()
             {
-                Id = Guid.NewGuid().ToString(),
                 APIUrl = "/api/checkin/checkingetplan",
                 CreateTime = DateTime.Now,
                 Sucess = 1
@@ -427,8 +426,7 @@ namespace HAIAPI.Controllers
             }
 
             log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
-            db.APIHistories.Add(log);
-            db.SaveChanges();
+            mongoHelper.createHistoryAPI(log);
 
             return result;
         }
@@ -561,7 +559,7 @@ namespace HAIAPI.Controllers
                         Id = Guid.NewGuid().ToString(),
                         AgencyCode = cinfo.CCode,
                         AgencyType = cinfo.CType,
-                        CDate = day,
+                        CDate = day + "",
                         CDay = day,
                         CMonth = month,
                         CYear = year,

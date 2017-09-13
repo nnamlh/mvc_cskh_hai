@@ -14,6 +14,7 @@ namespace HAIAPI.Models
     
     public partial class MobileFunction
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MobileFunction()
         {
             this.AspNetRoles = new HashSet<AspNetRole>();
@@ -25,6 +26,7 @@ namespace HAIAPI.Models
         public string ScreenType { get; set; }
         public Nullable<int> Lvl { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
     }
 }

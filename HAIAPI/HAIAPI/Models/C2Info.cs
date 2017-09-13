@@ -14,6 +14,7 @@ namespace HAIAPI.Models
     
     public partial class C2Info
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public C2Info()
         {
             this.StaffWithC2 = new HashSet<StaffWithC2>();
@@ -30,6 +31,7 @@ namespace HAIAPI.Models
     
         public virtual C1Info C1Info { get; set; }
         public virtual CInfoCommon CInfoCommon { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StaffWithC2> StaffWithC2 { get; set; }
     }
 }

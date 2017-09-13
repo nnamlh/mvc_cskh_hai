@@ -20,10 +20,10 @@ namespace HAIAPI.Models
         public string Producer { get; set; }
         public string CommerceName { get; set; }
         public string Activce { get; set; }
+        public string Thumbnail { get; set; }
         public Nullable<int> New { get; set; }
         public Nullable<int> Forcus { get; set; }
         public string GroupId { get; set; }
         public string GroupName { get; set; }
-        public string Thumbnail { get; set; }
     }
 }

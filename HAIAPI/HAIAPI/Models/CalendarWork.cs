@@ -29,6 +29,7 @@ namespace HAIAPI.Models
         public Nullable<System.TimeSpan> CInTime { get; set; }
         public Nullable<System.TimeSpan> COutTime { get; set; }
         public Nullable<int> AllTime { get; set; }
+        public string CDate { get; set; }
         public Nullable<double> LatCheck { get; set; }
         public Nullable<double> LngCheck { get; set; }
         public Nullable<System.DateTime> TimeCheck { get; set; }

@@ -29,10 +29,6 @@ namespace HAIAPI.Models
     
         public virtual DbSet<AgencySavePoint> AgencySavePoints { get; set; }
         public virtual DbSet<AllStatu> AllStatus { get; set; }
-        public virtual DbSet<APIAuthHistory> APIAuthHistories { get; set; }
-        public virtual DbSet<APIDetail> APIDetails { get; set; }
-        public virtual DbSet<APIHistory> APIHistories { get; set; }
-        public virtual DbSet<APILogoutHistory> APILogoutHistories { get; set; }
         public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
@@ -46,6 +42,8 @@ namespace HAIAPI.Models
         public virtual DbSet<CalendarType> CalendarTypes { get; set; }
         public virtual DbSet<CalendarWork> CalendarWorks { get; set; }
         public virtual DbSet<CInfoCommon> CInfoCommons { get; set; }
+        public virtual DbSet<DecorGroup> DecorGroups { get; set; }
+        public virtual DbSet<DecorImage> DecorImages { get; set; }
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<ErrorInfo> ErrorInfoes { get; set; }
         public virtual DbSet<EventArea> EventAreas { get; set; }
@@ -73,6 +71,8 @@ namespace HAIAPI.Models
         public virtual DbSet<PHistory> PHistories { get; set; }
         public virtual DbSet<ProcessHistory> ProcessHistories { get; set; }
         public virtual DbSet<ProcessWork> ProcessWorks { get; set; }
+        public virtual DbSet<ProductGroup> ProductGroups { get; set; }
+        public virtual DbSet<ProductImage> ProductImages { get; set; }
         public virtual DbSet<ProductInfo> ProductInfoes { get; set; }
         public virtual DbSet<ProductSeri> ProductSeris { get; set; }
         public virtual DbSet<Province> Provinces { get; set; }
@@ -86,13 +86,10 @@ namespace HAIAPI.Models
         public virtual DbSet<SMSHistory> SMSHistories { get; set; }
         public virtual DbSet<StaffCheckIn> StaffCheckIns { get; set; }
         public virtual DbSet<StaffWithC2> StaffWithC2 { get; set; }
+        public virtual DbSet<StoreAgencyId> StoreAgencyIds { get; set; }
+        public virtual DbSet<TreeInfo> TreeInfoes { get; set; }
         public virtual DbSet<Ward> Wards { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
-        public virtual DbSet<StoreAgencyId> StoreAgencyIds { get; set; }
-        public virtual DbSet<ProductGroup> ProductGroups { get; set; }
-        public virtual DbSet<ProductImage> ProductImages { get; set; }
-        public virtual DbSet<DecorGroup> DecorGroups { get; set; }
-        public virtual DbSet<DecorImage> DecorImages { get; set; }
     
         public virtual ObjectResult<checkin_calendartype_group_Result> checkin_calendartype_group(Nullable<int> month, Nullable<int> year, string staffId)
         {
@@ -128,11 +125,6 @@ namespace HAIAPI.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<checkin_getcalendar_Result>("checkin_getcalendar", monthParameter, yearParameter, staffIdParameter);
         }
     
-        public virtual ObjectResult<product_list_Result> product_list()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<product_list_Result>("product_list");
-        }
-    
         public virtual ObjectResult<procduct_item_detail_Result> procduct_item_detail(string id)
         {
             var idParameter = id != null ?
@@ -140,6 +132,11 @@ namespace HAIAPI.Models
                 new ObjectParameter("id", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<procduct_item_detail_Result>("procduct_item_detail", idParameter);
+        }
+    
+        public virtual ObjectResult<product_list_Result> product_list()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<product_list_Result>("product_list");
         }
     }
 }

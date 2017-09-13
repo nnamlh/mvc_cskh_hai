@@ -14,6 +14,7 @@ namespace HAIAPI.Models
     
     public partial class HaiPosition
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public HaiPosition()
         {
             this.HaiStaffs = new HashSet<HaiStaff>();
@@ -24,6 +25,7 @@ namespace HAIAPI.Models
         public string Notes { get; set; }
         public string Code { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HaiStaff> HaiStaffs { get; set; }
     }
 }

@@ -18,10 +18,26 @@ namespace HAIAPI.Models
 
         public string Role { get; set; }
 
-        public string store { get; set; }
+     //   public string store { get; set; }
+
+         public string type { get; set; }
+        //STAFF
+        // CI
+        // CII
+
+    }
+
+    public class UserLoginInfo
+    {
+        public string token { get; set; }
+
+        public string user { get; set; }
+
+        public string Role { get; set; }
+
+        //   public string store { get; set; }
 
         public string type { get; set; }
-
     }
 
     public class CheckUserLoginResult : ResultInfo
@@ -47,5 +63,7 @@ namespace HAIAPI.Models
         public string role { get; set; }
 
         public string user { get; set; }
+
+        public string type { get; set; }
     }
 }

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="NDHDBModelStoreContainer" CdmEntityContainer="NDHDBEntities">
+  <EntityContainerMapping StorageEntityContainer="NDHDB1ModelStoreContainer" CdmEntityContainer="NDHDBEntities">
     <EntitySetMapping Name="AgencySavePoints">
-      <EntityTypeMapping TypeName="NDHDBModel.AgencySavePoint">
+      <EntityTypeMapping TypeName="NDHDB1Model.AgencySavePoint">
         <MappingFragment StoreEntitySet="AgencySavePoint">
           <ScalarProperty Name="EventId" ColumnName="EventId" />
           <ScalarProperty Name="CInfoId" ColumnName="CInfoId" />
@@ -13,7 +13,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AllStatus">
-      <EntityTypeMapping TypeName="NDHDBModel.AllStatu">
+      <EntityTypeMapping TypeName="NDHDB1Model.AllStatu">
         <MappingFragment StoreEntitySet="AllStatus">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="SName" ColumnName="SName" />
@@ -23,55 +23,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="APIAuthHistories">
-      <EntityTypeMapping TypeName="NDHDBModel.APIAuthHistory">
-        <MappingFragment StoreEntitySet="APIAuthHistory">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
-          <ScalarProperty Name="UserRole" ColumnName="UserRole" />
-          <ScalarProperty Name="LoginTime" ColumnName="LoginTime" />
-          <ScalarProperty Name="IsExpired" ColumnName="IsExpired" />
-          <ScalarProperty Name="Token" ColumnName="Token" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="APIDetails">
-      <EntityTypeMapping TypeName="NDHDBModel.APIDetail">
-        <MappingFragment StoreEntitySet="APIDetail">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="BaseUrl" ColumnName="BaseUrl" />
-          <ScalarProperty Name="Describe" ColumnName="Describe" />
-          <ScalarProperty Name="Method" ColumnName="Method" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="APIHistories">
-      <EntityTypeMapping TypeName="NDHDBModel.APIHistory">
-        <MappingFragment StoreEntitySet="APIHistory">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="APIUrl" ColumnName="APIUrl" />
-          <ScalarProperty Name="Content" ColumnName="Content" />
-          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-          <ScalarProperty Name="Sucess" ColumnName="Sucess" />
-          <ScalarProperty Name="Error" ColumnName="Error" />
-          <ScalarProperty Name="ReturnInfo" ColumnName="ReturnInfo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="APILogoutHistories">
-      <EntityTypeMapping TypeName="NDHDBModel.APILogoutHistory">
-        <MappingFragment StoreEntitySet="APILogoutHistory">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
-          <ScalarProperty Name="UserRole" ColumnName="UserRole" />
-          <ScalarProperty Name="LogoutTime" ColumnName="LogoutTime" />
-          <ScalarProperty Name="Token" ColumnName="Token" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="AspNetRoles">
-      <EntityTypeMapping TypeName="NDHDBModel.AspNetRole">
+      <EntityTypeMapping TypeName="NDHDB1Model.AspNetRole">
         <MappingFragment StoreEntitySet="AspNetRoles">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -81,7 +34,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetUserClaims">
-      <EntityTypeMapping TypeName="NDHDBModel.AspNetUserClaim">
+      <EntityTypeMapping TypeName="NDHDB1Model.AspNetUserClaim">
         <MappingFragment StoreEntitySet="AspNetUserClaims">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
@@ -91,7 +44,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetUserLogins">
-      <EntityTypeMapping TypeName="NDHDBModel.AspNetUserLogin">
+      <EntityTypeMapping TypeName="NDHDB1Model.AspNetUserLogin">
         <MappingFragment StoreEntitySet="AspNetUserLogins">
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
@@ -100,7 +53,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AspNetUsers">
-      <EntityTypeMapping TypeName="NDHDBModel.AspNetUser">
+      <EntityTypeMapping TypeName="NDHDB1Model.AspNetUser">
         <MappingFragment StoreEntitySet="AspNetUsers">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -115,7 +68,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="AwardInfoes">
-      <EntityTypeMapping TypeName="NDHDBModel.AwardInfo">
+      <EntityTypeMapping TypeName="NDHDB1Model.AwardInfo">
         <MappingFragment StoreEntitySet="AwardInfo">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -126,7 +79,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="BarcodeHistories">
-      <EntityTypeMapping TypeName="NDHDBModel.BarcodeHistory">
+      <EntityTypeMapping TypeName="NDHDB1Model.BarcodeHistory">
         <MappingFragment StoreEntitySet="BarcodeHistory">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Barcode" ColumnName="Barcode" />
@@ -152,7 +105,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="BasicNotifications">
-      <EntityTypeMapping TypeName="NDHDBModel.BasicNotification">
+      <EntityTypeMapping TypeName="NDHDB1Model.BasicNotification">
         <MappingFragment StoreEntitySet="BasicNotification">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -167,7 +120,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="C1Info">
-      <EntityTypeMapping TypeName="NDHDBModel.C1Info">
+      <EntityTypeMapping TypeName="NDHDB1Model.C1Info">
         <MappingFragment StoreEntitySet="C1Info">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Code" ColumnName="Code" />
@@ -181,7 +134,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="C2Info">
-      <EntityTypeMapping TypeName="NDHDBModel.C2Info">
+      <EntityTypeMapping TypeName="NDHDB1Model.C2Info">
         <MappingFragment StoreEntitySet="C2Info">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Code" ColumnName="Code" />
@@ -195,7 +148,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CalendarInfoes">
-      <EntityTypeMapping TypeName="NDHDBModel.CalendarInfo">
+      <EntityTypeMapping TypeName="NDHDB1Model.CalendarInfo">
         <MappingFragment StoreEntitySet="CalendarInfo">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CMonth" ColumnName="CMonth" />
@@ -210,10 +163,10 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CalendarTypes">
-      <EntityTypeMapping TypeName="NDHDBModel.CalendarType">
+      <EntityTypeMapping TypeName="NDHDB1Model.CalendarType">
         <MappingFragment StoreEntitySet="CalendarType">
-          <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="Compel" ColumnName="Compel" />
           <ScalarProperty Name="Number" ColumnName="Number" />
           <ScalarProperty Name="TGroup" ColumnName="TGroup" />
@@ -222,9 +175,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CalendarWorks">
-      <EntityTypeMapping TypeName="NDHDBModel.CalendarWork">
+      <EntityTypeMapping TypeName="NDHDB1Model.CalendarWork">
         <MappingFragment StoreEntitySet="CalendarWork">
-          <ScalarProperty Name="Perform" ColumnName="Perform" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CDay" ColumnName="CDay" />
           <ScalarProperty Name="CMonth" ColumnName="CMonth" />
@@ -245,11 +197,12 @@
           <ScalarProperty Name="LngCheck" ColumnName="LngCheck" />
           <ScalarProperty Name="TimeCheck" ColumnName="TimeCheck" />
           <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="Perform" ColumnName="Perform" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CInfoCommons">
-      <EntityTypeMapping TypeName="NDHDBModel.CInfoCommon">
+      <EntityTypeMapping TypeName="NDHDB1Model.CInfoCommon">
         <MappingFragment StoreEntitySet="CInfoCommon">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CName" ColumnName="CName" />
@@ -280,18 +233,44 @@
           <ScalarProperty Name="BusinessLicense" ColumnName="BusinessLicense" />
           <ScalarProperty Name="Lat" ColumnName="Lat" />
           <ScalarProperty Name="Lng" ColumnName="Lng" />
-          <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
           <ScalarProperty Name="BirthMonth" ColumnName="BirthMonth" />
           <ScalarProperty Name="BirthYear" ColumnName="BirthYear" />
           <ScalarProperty Name="CRank" ColumnName="CRank" />
           <ScalarProperty Name="CGroup" ColumnName="CGroup" />
           <ScalarProperty Name="WardName" ColumnName="WardName" />
           <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DecorGroups">
+      <EntityTypeMapping TypeName="NDHDB1Model.DecorGroup">
+        <MappingFragment StoreEntitySet="DecorGroup">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DecorImages">
+      <EntityTypeMapping TypeName="NDHDB1Model.DecorImage">
+        <MappingFragment StoreEntitySet="DecorImage">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="DaySend" ColumnName="DaySend" />
+          <ScalarProperty Name="MonthSend" ColumnName="MonthSend" />
+          <ScalarProperty Name="YearSend" ColumnName="YearSend" />
+          <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+          <ScalarProperty Name="AgencyType" ColumnName="AgencyType" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="Lng" ColumnName="Lng" />
+          <ScalarProperty Name="DecorGroup" ColumnName="DecorGroup" />
+          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Districts">
-      <EntityTypeMapping TypeName="NDHDBModel.District">
+      <EntityTypeMapping TypeName="NDHDB1Model.District">
         <MappingFragment StoreEntitySet="District">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -302,7 +281,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ErrorInfoes">
-      <EntityTypeMapping TypeName="NDHDBModel.ErrorInfo">
+      <EntityTypeMapping TypeName="NDHDB1Model.ErrorInfo">
         <MappingFragment StoreEntitySet="ErrorInfo">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Code" ColumnName="Code" />
@@ -311,7 +290,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="EventAreas">
-      <EntityTypeMapping TypeName="NDHDBModel.EventArea">
+      <EntityTypeMapping TypeName="NDHDB1Model.EventArea">
         <MappingFragment StoreEntitySet="EventArea">
           <ScalarProperty Name="EventId" ColumnName="EventId" />
           <ScalarProperty Name="AreaId" ColumnName="AreaId" />
@@ -320,7 +299,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="EventAreaFarmers">
-      <EntityTypeMapping TypeName="NDHDBModel.EventAreaFarmer">
+      <EntityTypeMapping TypeName="NDHDB1Model.EventAreaFarmer">
         <MappingFragment StoreEntitySet="EventAreaFarmer">
           <ScalarProperty Name="EventId" ColumnName="EventId" />
           <ScalarProperty Name="AreaId" ColumnName="AreaId" />
@@ -329,7 +308,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="EventCustomers">
-      <EntityTypeMapping TypeName="NDHDBModel.EventCustomer">
+      <EntityTypeMapping TypeName="NDHDB1Model.EventCustomer">
         <MappingFragment StoreEntitySet="EventCustomer">
           <ScalarProperty Name="EventId" ColumnName="EventId" />
           <ScalarProperty Name="CInfoId" ColumnName="CInfoId" />
@@ -338,7 +317,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="EventCustomerFarmers">
-      <EntityTypeMapping TypeName="NDHDBModel.EventCustomerFarmer">
+      <EntityTypeMapping TypeName="NDHDB1Model.EventCustomerFarmer">
         <MappingFragment StoreEntitySet="EventCustomerFarmer">
           <ScalarProperty Name="EventId" ColumnName="EventId" />
           <ScalarProperty Name="CInfoId" ColumnName="CInfoId" />
@@ -347,7 +326,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="EventInfoes">
-      <EntityTypeMapping TypeName="NDHDBModel.EventInfo">
+      <EntityTypeMapping TypeName="NDHDB1Model.EventInfo">
         <MappingFragment StoreEntitySet="EventInfo">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -363,7 +342,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="EventProducts">
-      <EntityTypeMapping TypeName="NDHDBModel.EventProduct">
+      <EntityTypeMapping TypeName="NDHDB1Model.EventProduct">
         <MappingFragment StoreEntitySet="EventProduct">
           <ScalarProperty Name="EventId" ColumnName="EventId" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
@@ -373,7 +352,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="FarmerInfoes">
-      <EntityTypeMapping TypeName="NDHDBModel.FarmerInfo">
+      <EntityTypeMapping TypeName="NDHDB1Model.FarmerInfo">
         <MappingFragment StoreEntitySet="FarmerInfo">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Code" ColumnName="Code" />
@@ -388,7 +367,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="FuncGroups">
-      <EntityTypeMapping TypeName="NDHDBModel.FuncGroup">
+      <EntityTypeMapping TypeName="NDHDB1Model.FuncGroup">
         <MappingFragment StoreEntitySet="FuncGroup">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -397,7 +376,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="FuncInfoes">
-      <EntityTypeMapping TypeName="NDHDBModel.FuncInfo">
+      <EntityTypeMapping TypeName="NDHDB1Model.FuncInfo">
         <MappingFragment StoreEntitySet="FuncInfo">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -411,7 +390,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="FuncRoles">
-      <EntityTypeMapping TypeName="NDHDBModel.FuncRole">
+      <EntityTypeMapping TypeName="NDHDB1Model.FuncRole">
         <MappingFragment StoreEntitySet="FuncRole">
           <ScalarProperty Name="FuncId" ColumnName="FuncId" />
           <ScalarProperty Name="RoleId" ColumnName="RoleId" />
@@ -420,7 +399,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="HaiAreas">
-      <EntityTypeMapping TypeName="NDHDBModel.HaiArea">
+      <EntityTypeMapping TypeName="NDHDB1Model.HaiArea">
         <MappingFragment StoreEntitySet="HaiArea">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -430,7 +409,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="HaiBranches">
-      <EntityTypeMapping TypeName="NDHDBModel.HaiBranch">
+      <EntityTypeMapping TypeName="NDHDB1Model.HaiBranch">
         <MappingFragment StoreEntitySet="HaiBranch">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -443,7 +422,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="HaiDepartments">
-      <EntityTypeMapping TypeName="NDHDBModel.HaiDepartment">
+      <EntityTypeMapping TypeName="NDHDB1Model.HaiDepartment">
         <MappingFragment StoreEntitySet="HaiDepartment">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -453,7 +432,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="HaiPositions">
-      <EntityTypeMapping TypeName="NDHDBModel.HaiPosition">
+      <EntityTypeMapping TypeName="NDHDB1Model.HaiPosition">
         <MappingFragment StoreEntitySet="HaiPosition">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -463,7 +442,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="HaiStaffs">
-      <EntityTypeMapping TypeName="NDHDBModel.HaiStaff">
+      <EntityTypeMapping TypeName="NDHDB1Model.HaiStaff">
         <MappingFragment StoreEntitySet="HaiStaff">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FullName" ColumnName="FullName" />
@@ -493,7 +472,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="HappyBirthdays">
-      <EntityTypeMapping TypeName="NDHDBModel.HappyBirthday">
+      <EntityTypeMapping TypeName="NDHDB1Model.HappyBirthday">
         <MappingFragment StoreEntitySet="HappyBirthday">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CInfoId" ColumnName="CInfoId" />
@@ -503,7 +482,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ImeiUsers">
-      <EntityTypeMapping TypeName="NDHDBModel.ImeiUser">
+      <EntityTypeMapping TypeName="NDHDB1Model.ImeiUser">
         <MappingFragment StoreEntitySet="ImeiUser">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -516,7 +495,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="MessegeToHais">
-      <EntityTypeMapping TypeName="NDHDBModel.MessegeToHai">
+      <EntityTypeMapping TypeName="NDHDB1Model.MessegeToHai">
         <MappingFragment StoreEntitySet="MessegeToHai">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Messenge" ColumnName="Messenge" />
@@ -529,7 +508,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="MobileFunctions">
-      <EntityTypeMapping TypeName="NDHDBModel.MobileFunction">
+      <EntityTypeMapping TypeName="NDHDB1Model.MobileFunction">
         <MappingFragment StoreEntitySet="MobileFunction">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Code" ColumnName="Code" />
@@ -540,7 +519,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="MSGPoints">
-      <EntityTypeMapping TypeName="NDHDBModel.MSGPoint">
+      <EntityTypeMapping TypeName="NDHDB1Model.MSGPoint">
         <MappingFragment StoreEntitySet="MSGPoint">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CInfoId" ColumnName="CInfoId" />
@@ -553,7 +532,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="MSGPointEvents">
-      <EntityTypeMapping TypeName="NDHDBModel.MSGPointEvent">
+      <EntityTypeMapping TypeName="NDHDB1Model.MSGPointEvent">
         <MappingFragment StoreEntitySet="MSGPointEvent">
           <ScalarProperty Name="EventId" ColumnName="EventId" />
           <ScalarProperty Name="MSGPointId" ColumnName="MSGPointId" />
@@ -562,7 +541,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="NotificationTopics">
-      <EntityTypeMapping TypeName="NDHDBModel.NotificationTopic">
+      <EntityTypeMapping TypeName="NDHDB1Model.NotificationTopic">
         <MappingFragment StoreEntitySet="NotificationTopic">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Topic" ColumnName="Topic" />
@@ -573,7 +552,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PHistories">
-      <EntityTypeMapping TypeName="NDHDBModel.PHistory">
+      <EntityTypeMapping TypeName="NDHDB1Model.PHistory">
         <MappingFragment StoreEntitySet="PHistory">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Barcode" ColumnName="Barcode" />
@@ -591,7 +570,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ProcessHistories">
-      <EntityTypeMapping TypeName="NDHDBModel.ProcessHistory">
+      <EntityTypeMapping TypeName="NDHDB1Model.ProcessHistory">
         <MappingFragment StoreEntitySet="ProcessHistory">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ProcessId" ColumnName="ProcessId" />
@@ -601,51 +580,70 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ProcessWorks">
-      <EntityTypeMapping TypeName="NDHDBModel.ProcessWork">
+      <EntityTypeMapping TypeName="NDHDB1Model.ProcessWork">
         <MappingFragment StoreEntitySet="ProcessWork">
-          <ScalarProperty Name="SortIndex" ColumnName="SortIndex" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ProcessName" ColumnName="ProcessName" />
           <ScalarProperty Name="ProcessType" ColumnName="ProcessType" />
           <ScalarProperty Name="TimeRequire" ColumnName="TimeRequire" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="SortIndex" ColumnName="SortIndex" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductGroups">
+      <EntityTypeMapping TypeName="NDHDB1Model.ProductGroup">
+        <MappingFragment StoreEntitySet="ProductGroup">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="HasChild" ColumnName="HasChild" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductImages">
+      <EntityTypeMapping TypeName="NDHDB1Model.ProductImage">
+        <MappingFragment StoreEntitySet="ProductImage">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ProductInfoes">
-      <EntityTypeMapping TypeName="NDHDBModel.ProductInfo">
+      <EntityTypeMapping TypeName="NDHDB1Model.ProductInfo">
         <MappingFragment StoreEntitySet="ProductInfo">
-          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-          <ScalarProperty Name="New" ColumnName="New" />
-          <ScalarProperty Name="Forcus" ColumnName="Forcus" />
-          <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
-          <ScalarProperty Name="Other" ColumnName="Other" />
-          <ScalarProperty Name="Notes" ColumnName="Notes" />
-          <ScalarProperty Name="Introduce" ColumnName="Introduce" />
-          <ScalarProperty Name="Uses" ColumnName="Uses" />
-          <ScalarProperty Name="Describe" ColumnName="Describe" />
-          <ScalarProperty Name="Poision" ColumnName="Poision" />
-          <ScalarProperty Name="Activce" ColumnName="Activce" />
-          <ScalarProperty Name="CommerceName" ColumnName="CommerceName" />
-          <ScalarProperty Name="Register" ColumnName="Register" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="PName" ColumnName="PName" />
           <ScalarProperty Name="PCode" ColumnName="PCode" />
           <ScalarProperty Name="Material" ColumnName="Material" />
           <ScalarProperty Name="Unit" ColumnName="Unit" />
           <ScalarProperty Name="Producer" ColumnName="Producer" />
-          <ScalarProperty Name="PGroup" ColumnName="PGroup" />
           <ScalarProperty Name="CardPoint" ColumnName="CardPoint" />
           <ScalarProperty Name="BoxPoint" ColumnName="BoxPoint" />
           <ScalarProperty Name="IsLock" ColumnName="IsLock" />
           <ScalarProperty Name="Barcode" ColumnName="Barcode" />
           <ScalarProperty Name="QuantityBox" ColumnName="QuantityBox" />
           <ScalarProperty Name="IsBox" ColumnName="IsBox" />
+          <ScalarProperty Name="PGroup" ColumnName="PGroup" />
+          <ScalarProperty Name="Register" ColumnName="Register" />
+          <ScalarProperty Name="CommerceName" ColumnName="CommerceName" />
+          <ScalarProperty Name="Activce" ColumnName="Activce" />
+          <ScalarProperty Name="Poision" ColumnName="Poision" />
+          <ScalarProperty Name="Describe" ColumnName="Describe" />
+          <ScalarProperty Name="Uses" ColumnName="Uses" />
+          <ScalarProperty Name="Introduce" ColumnName="Introduce" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Other" ColumnName="Other" />
+          <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+          <ScalarProperty Name="Forcus" ColumnName="Forcus" />
+          <ScalarProperty Name="New" ColumnName="New" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ProductSeris">
-      <EntityTypeMapping TypeName="NDHDBModel.ProductSeri">
+      <EntityTypeMapping TypeName="NDHDB1Model.ProductSeri">
         <MappingFragment StoreEntitySet="ProductSeri">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Code" ColumnName="Code" />
@@ -660,7 +658,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Provinces">
-      <EntityTypeMapping TypeName="NDHDBModel.Province">
+      <EntityTypeMapping TypeName="NDHDB1Model.Province">
         <MappingFragment StoreEntitySet="Province">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -669,7 +667,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PTrackings">
-      <EntityTypeMapping TypeName="NDHDBModel.PTracking">
+      <EntityTypeMapping TypeName="NDHDB1Model.PTracking">
         <MappingFragment StoreEntitySet="PTracking">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="PStatus" ColumnName="PStatus" />
@@ -685,7 +683,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="RegFirebases">
-      <EntityTypeMapping TypeName="NDHDBModel.RegFirebase">
+      <EntityTypeMapping TypeName="NDHDB1Model.RegFirebase">
         <MappingFragment StoreEntitySet="RegFirebase">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
@@ -697,7 +695,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="RoleCheckImeis">
-      <EntityTypeMapping TypeName="NDHDBModel.RoleCheckImei">
+      <EntityTypeMapping TypeName="NDHDB1Model.RoleCheckImei">
         <MappingFragment StoreEntitySet="RoleCheckImei">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="RoleName" ColumnName="RoleName" />
@@ -706,7 +704,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="SendSmsHistories">
-      <EntityTypeMapping TypeName="NDHDBModel.SendSmsHistory">
+      <EntityTypeMapping TypeName="NDHDB1Model.SendSmsHistory">
         <MappingFragment StoreEntitySet="SendSmsHistory">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Messenge" ColumnName="Messenge" />
@@ -718,7 +716,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ServerInfoes">
-      <EntityTypeMapping TypeName="NDHDBModel.ServerInfo">
+      <EntityTypeMapping TypeName="NDHDB1Model.ServerInfo">
         <MappingFragment StoreEntitySet="ServerInfo">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -728,7 +726,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="SmsAccounts">
-      <EntityTypeMapping TypeName="NDHDBModel.SmsAccount">
+      <EntityTypeMapping TypeName="NDHDB1Model.SmsAccount">
         <MappingFragment StoreEntitySet="SmsAccount">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="AddressSend" ColumnName="AddressSend" />
@@ -741,7 +739,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="SMSCodes">
-      <EntityTypeMapping TypeName="NDHDBModel.SMSCode">
+      <EntityTypeMapping TypeName="NDHDB1Model.SMSCode">
         <MappingFragment StoreEntitySet="SMSCode">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
@@ -752,7 +750,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="SMSHistories">
-      <EntityTypeMapping TypeName="NDHDBModel.SMSHistory">
+      <EntityTypeMapping TypeName="NDHDB1Model.SMSHistory">
         <MappingFragment StoreEntitySet="SMSHistory">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
@@ -765,7 +763,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="StaffCheckIns">
-      <EntityTypeMapping TypeName="NDHDBModel.StaffCheckIn">
+      <EntityTypeMapping TypeName="NDHDB1Model.StaffCheckIn">
         <MappingFragment StoreEntitySet="StaffCheckIn">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="StaffUser" ColumnName="StaffUser" />
@@ -785,7 +783,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="StaffWithC2">
-      <EntityTypeMapping TypeName="NDHDBModel.StaffWithC2">
+      <EntityTypeMapping TypeName="NDHDB1Model.StaffWithC2">
         <MappingFragment StoreEntitySet="StaffWithC2">
           <ScalarProperty Name="C2Id" ColumnName="C2Id" />
           <ScalarProperty Name="StaffId" ColumnName="StaffId" />
@@ -793,8 +791,30 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="StoreAgencyIds">
+      <EntityTypeMapping TypeName="NDHDB1Model.StoreAgencyId">
+        <MappingFragment StoreEntitySet="StoreAgencyId">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IsUse" ColumnName="IsUse" />
+          <ScalarProperty Name="CountNumber" ColumnName="CountNumber" />
+          <ScalarProperty Name="TypeStore" ColumnName="TypeStore" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TreeInfoes">
+      <EntityTypeMapping TypeName="NDHDB1Model.TreeInfo">
+        <MappingFragment StoreEntitySet="TreeInfo">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TreeType" ColumnName="TreeType" />
+          <ScalarProperty Name="Acreage" ColumnName="Acreage" />
+          <ScalarProperty Name="STT" ColumnName="STT" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Wards">
-      <EntityTypeMapping TypeName="NDHDBModel.Ward">
+      <EntityTypeMapping TypeName="NDHDB1Model.Ward">
         <MappingFragment StoreEntitySet="Ward">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -805,7 +825,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Warehouses">
-      <EntityTypeMapping TypeName="NDHDBModel.Warehouse">
+      <EntityTypeMapping TypeName="NDHDB1Model.Warehouse">
         <MappingFragment StoreEntitySet="Warehouse">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -819,7 +839,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="AspNetUserRoles" TypeName="NDHDBModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="NDHDB1Model.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
       <EndProperty Name="AspNetRoles">
         <ScalarProperty Name="Id" ColumnName="RoleId" />
       </EndProperty>
@@ -827,7 +847,7 @@
         <ScalarProperty Name="Id" ColumnName="UserId" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="EventAward" TypeName="NDHDBModel.EventAward" StoreEntitySet="EventAward">
+    <AssociationSetMapping Name="EventAward" TypeName="NDHDB1Model.EventAward" StoreEntitySet="EventAward">
       <EndProperty Name="AwardInfo">
         <ScalarProperty Name="Id" ColumnName="AwardId" />
       </EndProperty>
@@ -835,7 +855,7 @@
         <ScalarProperty Name="Id" ColumnName="EventId" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="MobileRole" TypeName="NDHDBModel.MobileRole" StoreEntitySet="MobileRole">
+    <AssociationSetMapping Name="MobileRole" TypeName="NDHDB1Model.MobileRole" StoreEntitySet="MobileRole">
       <EndProperty Name="MobileFunction">
         <ScalarProperty Name="Id" ColumnName="MobileId" />
       </EndProperty>
@@ -843,7 +863,7 @@
         <ScalarProperty Name="Id" ColumnName="RoleId" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="ProcessWithRole" TypeName="NDHDBModel.ProcessWithRole" StoreEntitySet="ProcessWithRole">
+    <AssociationSetMapping Name="ProcessWithRole" TypeName="NDHDB1Model.ProcessWithRole" StoreEntitySet="ProcessWithRole">
       <EndProperty Name="ProcessWork">
         <ScalarProperty Name="Id" ColumnName="ProcessId" />
       </EndProperty>
@@ -851,7 +871,7 @@
         <ScalarProperty Name="Id" ColumnName="RoleId" />
       </EndProperty>
     </AssociationSetMapping>
-    <AssociationSetMapping Name="StaffWithC1" TypeName="NDHDBModel.StaffWithC1" StoreEntitySet="StaffWithC1">
+    <AssociationSetMapping Name="StaffWithC1" TypeName="NDHDB1Model.StaffWithC1" StoreEntitySet="StaffWithC1">
       <EndProperty Name="HaiStaff">
         <ScalarProperty Name="Id" ColumnName="StaffId" />
       </EndProperty>
@@ -859,18 +879,18 @@
         <ScalarProperty Name="Id" ColumnName="C1Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <FunctionImportMapping FunctionImportName="checkin_calendartype_group" FunctionName="NDHDBModel.Store.checkin_calendartype_group">
+    <FunctionImportMapping FunctionImportName="checkin_calendartype_group" FunctionName="NDHDB1Model.Store.checkin_calendartype_group">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="NDHDBModel.checkin_calendartype_group_Result">
+        <ComplexTypeMapping TypeName="NDHDB1Model.checkin_calendartype_group_Result">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="countday" ColumnName="countday" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="checkin_getcalendar" FunctionName="NDHDBModel.Store.checkin_getcalendar">
+    <FunctionImportMapping FunctionImportName="checkin_getcalendar" FunctionName="NDHDB1Model.Store.checkin_getcalendar">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="NDHDBModel.checkin_getcalendar_Result">
+        <ComplexTypeMapping TypeName="NDHDB1Model.checkin_getcalendar_Result">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CDay" ColumnName="CDay" />
           <ScalarProperty Name="CMonth" ColumnName="CMonth" />
@@ -892,62 +912,15 @@
           <ScalarProperty Name="TimeCheck" ColumnName="TimeCheck" />
           <ScalarProperty Name="Distance" ColumnName="Distance" />
           <ScalarProperty Name="Perform" ColumnName="Perform" />
-          <ScalarProperty Name="CName" ColumnName="CName" />
-          <ScalarProperty Name="CDeputy" ColumnName="CDeputy" />
+          <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+          <ScalarProperty Name="Deputy" ColumnName="Deputy" />
           <ScalarProperty Name="TypeName" ColumnName="TypeName" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <EntitySetMapping Name="StoreAgencyIds">
-      <EntityTypeMapping TypeName="NDHDBModel.StoreAgencyId">
-        <MappingFragment StoreEntitySet="StoreAgencyId">
-          <ScalarProperty Name="TypeStore" ColumnName="TypeStore" />
-          <ScalarProperty Name="CountNumber" ColumnName="CountNumber" />
-          <ScalarProperty Name="IsUse" ColumnName="IsUse" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ProductGroups">
-      <EntityTypeMapping TypeName="NDHDBModel.ProductGroup">
-        <MappingFragment StoreEntitySet="ProductGroup">
-          <ScalarProperty Name="HasChild" ColumnName="HasChild" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Parent" ColumnName="Parent" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ProductImages">
-      <EntityTypeMapping TypeName="NDHDBModel.ProductImage">
-        <MappingFragment StoreEntitySet="ProductImage">
-          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="product_list" FunctionName="NDHDBModel.Store.product_list">
+    <FunctionImportMapping FunctionImportName="procduct_item_detail" FunctionName="NDHDB1Model.Store.procduct_item_detail">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="NDHDBModel.product_list_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="PCode" ColumnName="PCode" />
-          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
-          <ScalarProperty Name="PName" ColumnName="PName" />
-          <ScalarProperty Name="Producer" ColumnName="Producer" />
-          <ScalarProperty Name="CommerceName" ColumnName="CommerceName" />
-          <ScalarProperty Name="Activce" ColumnName="Activce" />
-          <ScalarProperty Name="New" ColumnName="New" />
-          <ScalarProperty Name="Forcus" ColumnName="Forcus" />
-          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
-          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
-          <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="procduct_item_detail" FunctionName="NDHDBModel.Store.procduct_item_detail">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="NDHDBModel.procduct_item_detail_Result">
+        <ComplexTypeMapping TypeName="NDHDB1Model.procduct_item_detail_Result">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="PName" ColumnName="PName" />
           <ScalarProperty Name="PCode" ColumnName="PCode" />
@@ -960,6 +933,7 @@
           <ScalarProperty Name="Barcode" ColumnName="Barcode" />
           <ScalarProperty Name="QuantityBox" ColumnName="QuantityBox" />
           <ScalarProperty Name="IsBox" ColumnName="IsBox" />
+          <ScalarProperty Name="PGroup" ColumnName="PGroup" />
           <ScalarProperty Name="Register" ColumnName="Register" />
           <ScalarProperty Name="CommerceName" ColumnName="CommerceName" />
           <ScalarProperty Name="Activce" ColumnName="Activce" />
@@ -970,7 +944,6 @@
           <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="Other" ColumnName="Other" />
           <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
-          <ScalarProperty Name="PGroup" ColumnName="PGroup" />
           <ScalarProperty Name="Forcus" ColumnName="Forcus" />
           <ScalarProperty Name="New" ColumnName="New" />
           <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
@@ -979,31 +952,23 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <EntitySetMapping Name="DecorGroups">
-      <EntityTypeMapping TypeName="NDHDBModel.DecorGroup">
-        <MappingFragment StoreEntitySet="DecorGroup">
-          <ScalarProperty Name="Name" ColumnName="Name" />
+    <FunctionImportMapping FunctionImportName="product_list" FunctionName="NDHDB1Model.Store.product_list">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NDHDB1Model.product_list_Result">
           <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="DecorImages">
-      <EntityTypeMapping TypeName="NDHDBModel.DecorImage">
-        <MappingFragment StoreEntitySet="DecorImage">
-          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
-          <ScalarProperty Name="DecorGroup" ColumnName="DecorGroup" />
-          <ScalarProperty Name="Lng" ColumnName="Lng" />
-          <ScalarProperty Name="Lat" ColumnName="Lat" />
-          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
-          <ScalarProperty Name="AgencyType" ColumnName="AgencyType" />
-          <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
-          <ScalarProperty Name="YearSend" ColumnName="YearSend" />
-          <ScalarProperty Name="MonthSend" ColumnName="MonthSend" />
-          <ScalarProperty Name="DaySend" ColumnName="DaySend" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+          <ScalarProperty Name="PCode" ColumnName="PCode" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="PName" ColumnName="PName" />
+          <ScalarProperty Name="Producer" ColumnName="Producer" />
+          <ScalarProperty Name="CommerceName" ColumnName="CommerceName" />
+          <ScalarProperty Name="Activce" ColumnName="Activce" />
+          <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+          <ScalarProperty Name="New" ColumnName="New" />
+          <ScalarProperty Name="Forcus" ColumnName="Forcus" />
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

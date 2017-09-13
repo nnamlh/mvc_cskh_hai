@@ -14,6 +14,7 @@ namespace HAIAPI.Models
     
     public partial class FuncInfo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FuncInfo()
         {
             this.FuncRoles = new HashSet<FuncRole>();
@@ -29,6 +30,7 @@ namespace HAIAPI.Models
         public string IconInfo { get; set; }
     
         public virtual FuncGroup FuncGroup { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FuncRole> FuncRoles { get; set; }
     }
 }

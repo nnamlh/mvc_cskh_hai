@@ -32,6 +32,12 @@ namespace HAIAPI.Models
     public class MainInfoResult : ResultInfo
     {
 
+        public string name { get; set; }
+
+        public string code { get; set; }
+
+        public string type { get; set; }
+
         public List<string> topics { get; set; }
 
         public List<string> function { get; set; }

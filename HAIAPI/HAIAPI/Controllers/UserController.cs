@@ -163,16 +163,11 @@ namespace HAIAPI.Controllers
                                 if (!isActive)
                                     throw new Exception("Tài khoản bị khóa");
 
-                                var userData = db.AspNetUsers.Where(p => p.UserName == user).FirstOrDefault();
-                                var userRole = userData.AspNetRoles.FirstOrDefault();
+                                var info = updateAuth(user);
 
-                                var authToke = Guid.NewGuid().ToString();
-
-                                mongoHelper.checkAndCreateAutHistory(user, authToke, userRole.Name, "", "", "");
-
-                                result.role = userRole.Name;
-                                result.token = authToke;
-
+                                result.role = info.Role;
+                                result.token = info.token;
+                                result.type = info.type;
                             }
                             else
                             {
@@ -297,15 +292,11 @@ namespace HAIAPI.Controllers
                 db.SaveChanges();
 
 
-                var userData = db.AspNetUsers.Where(p => p.UserName == user).FirstOrDefault();
-                var userRole = userData.AspNetRoles.FirstOrDefault();
+                var info = updateAuth(user);
 
-                var authToke = Guid.NewGuid().ToString();
-
-                mongoHelper.checkAndCreateAutHistory(user, authToke, userRole.Name, "", "", "");
-
-                result.Role = userRole.Name;
-                result.token = authToke;
+                result.Role = info.Role;
+                result.token = info.token;
+                result.type = info.type;
 
             }
             catch (Exception e)
@@ -317,6 +308,25 @@ namespace HAIAPI.Controllers
             return result;
         }
 
+
+        private UserLoginInfo updateAuth(string user)
+        {
+            var userData = db.AspNetUsers.Where(p => p.UserName == user).FirstOrDefault();
+
+            var userRole = userData.AspNetRoles.FirstOrDefault();
+
+            var authToke = Guid.NewGuid().ToString();
+
+            mongoHelper.checkAndCreateAutHistory(user, authToke, userRole.Name, "", "", "");
+
+            return new UserLoginInfo()
+            {
+                Role = userRole.Name,
+                token = authToke,
+                user = user,
+                type = userData.AccountType
+            };
+        }
 
         #endregion
 
@@ -405,8 +415,11 @@ namespace HAIAPI.Controllers
                 mongoHelper.saveLogout(paser.user, paser.token);
 
             }
-            catch
+            catch (Exception e)
             {
+                result.id = "0";
+                result.msg = e.Message;
+                log.Error = e.Message;
 
             }
 
@@ -448,98 +461,59 @@ namespace HAIAPI.Controllers
 
             var user = await UserManager.FindAsync(UserName, PassWord);
 
-            if (user != null)
+            if (user == null)
             {
+                return new LoginResult { id = "0", msg = "User or Password not correct", user = UserName };
+            }
 
-                bool isActive = false;
+            var userData = db.AspNetUsers.Find(user.Id);
+            bool isActive = false;
 
+            if (userData.AccountType == "STAFF")
+            {
                 var staff = db.HaiStaffs.Where(p => p.UserLogin == user.UserName).FirstOrDefault();
-                if (staff != null)
-                {
-                    if (staff.IsLock != 1)
-                        isActive = true;
-                }
-                else
-                {
-                    var agency = db.CInfoCommons.Where(p => p.UserLogin == user.UserName).FirstOrDefault();
-                    if (agency != null)
-                    {
-                        if (agency.CType == "CII")
-                        {
-                            var checkC2 = agency.C2Info.FirstOrDefault();
-                            if (checkC2 != null)
-                            {
-                                if (checkC2.IsActive == 0)
-                                {
-                                    isActive = false;
-                                }
-                            }
-                        }
-                    }
-                }
-
-
-                if (!isActive)
-                    return new LoginResult { id = "0", msg = "Tài khoản bị khóa.", user = UserName };
-
-
-                var userData = db.AspNetUsers.Find(user.Id);
-                var userRole = userData.AspNetRoles.FirstOrDefault();
-
-                if (userRole != null)
-                {
-                    // check imei
-
-                    var roleCheckImei = db.RoleCheckImeis.Where(p => p.RoleName == userRole.Name).FirstOrDefault();
-                    if (roleCheckImei != null)
-                    {
-                        // phai check imei
-                        var userImei = db.ImeiUsers.Where(p => p.UserName == UserName).FirstOrDefault();
-                        if (userImei == null)
-                        {
-                            // dc phep
-                            userImei = new ImeiUser()
-                            {
-                                Id = Guid.NewGuid().ToString(),
-                                CreateDate = DateTime.Now,
-                                IsUpdate = 0,
-                                UserName = UserName,
-                                Imei = imei
-                            };
-
-                            db.ImeiUsers.Add(userImei);
-                            db.SaveChanges();
-                        }
-                        else if (userImei.IsUpdate == 1)
-                        {
-                            // xet lai cho tai khoan duoc phep dang nhap lai
-                            userImei.Imei = imei;
-                            userImei.ModifyDate = DateTime.Now;
-                            userImei.IsUpdate = 0;
-                            db.Entry(userImei).State = System.Data.Entity.EntityState.Modified;
-                            db.SaveChanges();
-                        }
-                        else
-                        {
-                            // kiem tra imei
-                            if (userImei.Imei != imei)
-                                return new LoginResult { id = "0", msg = "Ứng dụng đã sử dụng trên thiết bị khác, liên hệ HAI nếu bạn muốn đăng nhập lại", user = UserName };
-                        }
-                    }
-
-                    var authToke = Guid.NewGuid().ToString();
-
-                    mongoHelper.checkAndCreateAutHistory(user.UserName, authToke, userRole.Name, "", "", "");
-
-                    return new LoginResult { id = "1", msg = "login success", token = authToke, user = UserName, Role = userRole.Name };
-                }
-                return new LoginResult { id = "0", msg = "User is not permission.", user = UserName };
-
-
+                if (staff.IsLock != 1)
+                    isActive = true;
             }
             else
-                return new LoginResult { id = "0", msg = "User or Password not correct", user = UserName };
+            {
+                if (userData.AccountType == "CII")
+                {
+                    var checkC2 = db.C2Info.Where(p => p.CInfoCommon.UserLogin == user.UserName).FirstOrDefault();
+                    if (checkC2 != null)
+                    {
+                        if (checkC2.IsActive == 0)
+                        {
+                            isActive = false;
+                        }
+                    }
+                }
+                else if (userData.AccountType == "CI")
+                {
+                    var checkC1 = db.C1Info.Where(p => p.CInfoCommon.UserLogin == user.UserName).FirstOrDefault();
+                    if (checkC1 != null)
+                    {
+                        if (checkC1.IsActive == 0)
+                        {
+                            isActive = false;
+                        }
+                    }
+                }
+            }
+            if (!isActive)
+                return new LoginResult { id = "0", msg = "Tài khoản bị khóa.", user = UserName };
 
+            var userRole = userData.AspNetRoles.FirstOrDefault();
+
+            if (userRole == null)
+            {
+                return new LoginResult { id = "0", msg = "User is not permission.", user = UserName };
+            }
+            var authToke = Guid.NewGuid().ToString();
+
+            mongoHelper.checkAndCreateAutHistory(user.UserName, authToke, userRole.Name, "", "", "");
+
+            return new LoginResult { id = "1", msg = "login success", token = authToke, user = UserName, Role = userRole.Name, type = userData.AccountType };
         }
         #endregion
     }

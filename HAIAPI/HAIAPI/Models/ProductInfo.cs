@@ -14,13 +14,14 @@ namespace HAIAPI.Models
     
     public partial class ProductInfo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ProductInfo()
         {
             this.EventProducts = new HashSet<EventProduct>();
             this.MSGPoints = new HashSet<MSGPoint>();
+            this.ProductImages = new HashSet<ProductImage>();
             this.ProductSeris = new HashSet<ProductSeri>();
             this.PTrackings = new HashSet<PTracking>();
-            this.ProductImages = new HashSet<ProductImage>();
         }
     
         public string Id { get; set; }
@@ -29,13 +30,13 @@ namespace HAIAPI.Models
         public string Material { get; set; }
         public string Unit { get; set; }
         public string Producer { get; set; }
-        public string PGroup { get; set; }
         public string CardPoint { get; set; }
         public string BoxPoint { get; set; }
         public Nullable<int> IsLock { get; set; }
         public string Barcode { get; set; }
         public Nullable<int> QuantityBox { get; set; }
         public Nullable<int> IsBox { get; set; }
+        public string PGroup { get; set; }
         public string Register { get; set; }
         public string CommerceName { get; set; }
         public string Activce { get; set; }
@@ -50,10 +51,15 @@ namespace HAIAPI.Models
         public Nullable<int> New { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EventProduct> EventProducts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MSGPoint> MSGPoints { get; set; }
-        public virtual ICollection<ProductSeri> ProductSeris { get; set; }
-        public virtual ICollection<PTracking> PTrackings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductImage> ProductImages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductSeri> ProductSeris { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PTracking> PTrackings { get; set; }
     }
 }

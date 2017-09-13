@@ -4,120 +4,117 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="cd5dac904d3c436daee07938083570c7" Name="Diagram1" ZoomLevel="98">
-        <EntityTypeShape EntityType="NDHDBModel.AgencySavePoint" Width="1.5" PointX="5.25" PointY="21.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.AllStatu" Width="1.5" PointX="3.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.APIAuthHistory" Width="1.5" PointX="3.75" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.APIDetail" Width="1.5" PointX="5.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.APIHistory" Width="1.5" PointX="5.75" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.APILogoutHistory" Width="1.5" PointX="7.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.AspNetRole" Width="1.5" PointX="13" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.AspNetUserClaim" Width="1.5" PointX="17.5" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.AspNetUserLogin" Width="1.5" PointX="17.5" PointY="6.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.AspNetUser" Width="1.5" PointX="15.25" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.AwardInfo" Width="1.5" PointX="1.5" PointY="10.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.BarcodeHistory" Width="1.5" PointX="12.75" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.BasicNotification" Width="1.5" PointX="7.75" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.C1Info" Width="1.5" PointX="7.5" PointY="25.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.C2Info" Width="1.5" PointX="10.75" PointY="18.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.CalendarInfo" Width="1.5" PointX="7.5" PointY="32" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.CalendarType" Width="1.5" PointX="14.75" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.CalendarWork" Width="1.5" PointX="14.75" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.CInfoCommon" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.District" Width="1.5" PointX="1.5" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.ErrorInfo" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.EventArea" Width="1.5" PointX="6" PointY="19" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.EventAreaFarmer" Width="1.5" PointX="6" PointY="16" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.EventCustomer" Width="1.5" PointX="8.25" PointY="19" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.EventCustomerFarmer" Width="1.5" PointX="8.25" PointY="16" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.EventInfo" Width="1.5" PointX="3.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.EventProduct" Width="1.5" PointX="10.25" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.FarmerInfo" Width="1.5" PointX="5.25" PointY="28.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.FuncGroup" Width="1.5" PointX="10.75" PointY="9" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.FuncInfo" Width="1.5" PointX="13" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.FuncRole" Width="1.5" PointX="15.25" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.HaiArea" Width="1.5" PointX="0.75" PointY="18.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.HaiBranch" Width="1.5" PointX="3" PointY="34.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.HaiDepartment" Width="1.5" PointX="3" PointY="31.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.HaiPosition" Width="1.5" PointX="3" PointY="38.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.HaiStaff" Width="1.5" PointX="5.25" PointY="32.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.HappyBirthday" Width="1.5" PointX="15.75" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.ImeiUser" Width="1.5" PointX="16.75" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.MessegeToHai" Width="1.5" PointX="16.75" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.MobileFunction" Width="1.5" PointX="10.75" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.MSGPoint" Width="1.5" PointX="10.25" PointY="22.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.MSGPointEvent" Width="1.5" PointX="12.5" PointY="23" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.NotificationTopic" Width="1.5" PointX="17.75" PointY="9.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.PHistory" Width="1.5" PointX="18.75" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.ProcessHistory" Width="1.5" PointX="18.75" PointY="17.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.ProcessWork" Width="1.5" PointX="10.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.ProductInfo" Width="1.5" PointX="8" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.ProductSeri" Width="1.5" PointX="10.25" PointY="26.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.Province" Width="1.5" PointX="1.5" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.PTracking" Width="1.5" PointX="10.25" PointY="30.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.RegFirebase" Width="1.5" PointX="19.75" PointY="1.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.RoleCheckImei" Width="1.5" PointX="19.75" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.SendSmsHistory" Width="1.5" PointX="19.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.ServerInfo" Width="1.5" PointX="16.75" PointY="20.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.SmsAccount" Width="1.5" PointX="18.75" PointY="20.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.SMSCode" Width="1.5" PointX="20.75" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.SMSHistory" Width="1.5" PointX="20.75" PointY="13.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.StaffCheckIn" Width="1.5" PointX="7.5" PointY="35.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.StaffWithC2" Width="1.5" PointX="13" PointY="27.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.Ward" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="NDHDBModel.Warehouse" Width="1.5" PointX="20.75" PointY="17.625" IsExpanded="true" />
-        <AssociationConnector Association="NDHDBModel.FK__AgencySav__CInfo__6497E884" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__AgencySav__Event__63A3C44B" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__FuncRole__RoleId__7ABC33CD" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__C1Info__HaiBrand__72910220" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__C1Info__InfoId__681373AD" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__C2Info__C1Id__73852659" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__C2Info__InfoId__6CD828CA" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__StaffWithC__C2Id__4B622666" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__CalendarI__Staff__5E3FF0B0" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__CInfoComm__AreaI__52E34C9D" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__CInfoComm__WardI__634EBE90" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__EventCust__CInfo__1387E197" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__EventCust__CInfo__3F6663D5" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__FarmerInf__InfoI__7EF6D905" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__MSGPoint__CInfoI__5614BF03" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__District__Provin__07C12930" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__Ward__Districtid__0C85DE4D" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__EventArea__AreaI__54968AE5" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__EventArea__Event__53A266AC" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__EventArea__AreaI__39AD8A7F" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__EventArea__Event__38B96646" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__EventCust__Event__1293BD5E" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__EventCust__Event__3E723F9C" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__EventProd__Event__4DE98D56" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__MSGPointE__Event__5BCD9859" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__EventProd__Produ__4EDDB18F" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__FuncInfo__GroupI__6E565CE8" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__FuncRole__FuncId__79C80F94" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__HaiBranch__AreaI__145C0A3F" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__HaiStaff__Branch__24927208" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__HaiStaff__Depart__25869641" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__HaiStaff__Positi__239E4DCF" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__StaffChec__Staff__47DBAE45" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__StaffWith__Staff__4C564A9F" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__MSGPoint__Produc__5708E33C" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__MSGPointE__MSGPo__5CC1BC92" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__ProductSe__Produ__10416098" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.FK__PTracking__Produ__00FF1D08" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.AspNetUserRoles" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.EventAward" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.MobileRole" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.ProcessWithRole" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDBModel.StaffWithC1" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="NDHDBModel.StoreAgencyId" Width="1.5" PointX="7.375" PointY="21.75" />
-        <EntityTypeShape EntityType="NDHDBModel.ProductGroup" Width="1.5" PointX="21.375" PointY="21.75" />
-        <EntityTypeShape EntityType="NDHDBModel.ProductImage" Width="1.5" PointX="10.25" PointY="34.375" />
-        <AssociationConnector Association="NDHDBModel.FK__ProductIm__Produ__611C5D5B" />
-        <EntityTypeShape EntityType="NDHDBModel.DecorGroup" Width="1.5" PointX="22.375" PointY="0.75" />
-        <EntityTypeShape EntityType="NDHDBModel.DecorImage" Width="1.5" PointX="22.375" PointY="3.75" />
-        <AssociationConnector Association="NDHDBModel.FK__DecorImag__Staff__742F31CF" />
+      <Diagram DiagramId="aabcf18a724d468d8df322cd09ec9aaa" Name="Diagram1">
+        <EntityTypeShape EntityType="NDHDB1Model.AgencySavePoint" Width="1.5" PointX="5.25" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.AllStatu" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.AspNetRole" Width="1.5" PointX="13" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.AspNetUserClaim" Width="1.5" PointX="17.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.AspNetUserLogin" Width="1.5" PointX="17.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.AspNetUser" Width="1.5" PointX="15.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.AwardInfo" Width="1.5" PointX="1.5" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.BarcodeHistory" Width="1.5" PointX="3.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.BasicNotification" Width="1.5" PointX="5.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.C1Info" Width="1.5" PointX="7.5" PointY="28.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.C2Info" Width="1.5" PointX="10.75" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.CalendarInfo" Width="1.5" PointX="7.5" PointY="32.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.CalendarType" Width="1.5" PointX="5.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.CalendarWork" Width="1.5" PointX="7.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.CInfoCommon" Width="1.5" PointX="3" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.DecorGroup" Width="1.5" PointX="3.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.DecorImage" Width="1.5" PointX="7.5" PointY="36.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.District" Width="1.5" PointX="1.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.ErrorInfo" Width="1.5" PointX="12.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.EventArea" Width="1.5" PointX="6" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.EventAreaFarmer" Width="1.5" PointX="6" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.EventCustomer" Width="1.5" PointX="8.25" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.EventCustomerFarmer" Width="1.5" PointX="8.25" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.EventInfo" Width="1.5" PointX="3.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.EventProduct" Width="1.5" PointX="10.25" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.FarmerInfo" Width="1.5" PointX="5.25" PointY="30.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.FuncGroup" Width="1.5" PointX="10.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.FuncInfo" Width="1.5" PointX="13" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.FuncRole" Width="1.5" PointX="15.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.HaiArea" Width="1.5" PointX="0.75" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.HaiBranch" Width="1.5" PointX="3" PointY="36.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.HaiDepartment" Width="1.5" PointX="3" PointY="34" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.HaiPosition" Width="1.5" PointX="3" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.HaiStaff" Width="1.5" PointX="5.25" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.HappyBirthday" Width="1.5" PointX="14.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.ImeiUser" Width="1.5" PointX="12.75" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.MessegeToHai" Width="1.5" PointX="14.75" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.MobileFunction" Width="1.5" PointX="10.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.MSGPoint" Width="1.5" PointX="10.25" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.MSGPointEvent" Width="1.5" PointX="12.5" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.NotificationTopic" Width="1.5" PointX="15.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.PHistory" Width="1.5" PointX="16.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.ProcessHistory" Width="1.5" PointX="16.75" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.ProcessWork" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.ProductGroup" Width="1.5" PointX="17.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.ProductImage" Width="1.5" PointX="10.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.ProductInfo" Width="1.5" PointX="8" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.ProductSeri" Width="1.5" PointX="10.25" PointY="29.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.Province" Width="1.5" PointX="1.5" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.PTracking" Width="1.5" PointX="10.25" PointY="33" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.RegFirebase" Width="1.5" PointX="18.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.RoleCheckImei" Width="1.5" PointX="12.75" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.SendSmsHistory" Width="1.5" PointX="18.75" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.ServerInfo" Width="1.5" PointX="18.75" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.SmsAccount" Width="1.5" PointX="19.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.SMSCode" Width="1.5" PointX="19.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.SMSHistory" Width="1.5" PointX="19.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.StaffCheckIn" Width="1.5" PointX="7.5" PointY="40.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.StaffWithC2" Width="1.5" PointX="13" PointY="30.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.StoreAgencyId" Width="1.5" PointX="14.75" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.TreeInfo" Width="1.5" PointX="20.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.Ward" Width="1.5" PointX="0.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="NDHDB1Model.Warehouse" Width="1.5" PointX="20.75" PointY="15.875" IsExpanded="true" />
+        <AssociationConnector Association="NDHDB1Model.FK__AgencySav__CInfo__6497E884" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__AgencySav__Event__63A3C44B" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__FuncRole__RoleId__7ABC33CD" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__C1Info__HaiBrand__72910220" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__C1Info__InfoId__681373AD" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__C2Info__C1Id__73852659" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__C2Info__InfoId__6CD828CA" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__StaffWithC__C2Id__4B622666" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__CalendarI__Staff__4297D63B" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__CInfoComm__AreaI__52E34C9D" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__CInfoComm__WardI__634EBE90" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__EventCust__CInfo__1387E197" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__EventCust__CInfo__3F6663D5" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__FarmerInf__InfoI__7EF6D905" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__MSGPoint__CInfoI__5614BF03" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__DecorImag__Staff__6F6A7CB2" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__District__Provin__07C12930" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__Ward__Districtid__0C85DE4D" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__EventArea__AreaI__54968AE5" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__EventArea__Event__53A266AC" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__EventArea__AreaI__39AD8A7F" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__EventArea__Event__38B96646" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__EventCust__Event__1293BD5E" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__EventCust__Event__3E723F9C" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__EventProd__Event__4DE98D56" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__MSGPointE__Event__5BCD9859" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__EventProd__Produ__4EDDB18F" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__FuncInfo__GroupI__6E565CE8" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__FuncRole__FuncId__79C80F94" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__HaiBranch__AreaI__145C0A3F" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__HaiStaff__Branch__24927208" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__HaiStaff__Depart__25869641" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__HaiStaff__Positi__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__StaffChec__Staff__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__StaffWith__Staff__4C564A9F" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__MSGPoint__Produc__5708E33C" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__MSGPointE__MSGPo__5CC1BC92" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__ProductIm__Produ__64ECEE3F" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__ProductSe__Produ__10416098" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.FK__PTracking__Produ__00FF1D08" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.EventAward" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.MobileRole" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.ProcessWithRole" ManuallyRouted="false" />
+        <AssociationConnector Association="NDHDB1Model.StaffWithC1" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

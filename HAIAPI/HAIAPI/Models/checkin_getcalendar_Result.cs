@@ -28,14 +28,14 @@ namespace HAIAPI.Models
         public Nullable<System.TimeSpan> CInTime { get; set; }
         public Nullable<System.TimeSpan> COutTime { get; set; }
         public Nullable<int> AllTime { get; set; }
-        public Nullable<int> CDate { get; set; }
+        public string CDate { get; set; }
         public Nullable<double> LatCheck { get; set; }
         public Nullable<double> LngCheck { get; set; }
         public Nullable<System.DateTime> TimeCheck { get; set; }
         public Nullable<double> Distance { get; set; }
         public Nullable<int> Perform { get; set; }
-        public string CName { get; set; }
-        public string CDeputy { get; set; }
+        public string StoreName { get; set; }
+        public string Deputy { get; set; }
         public string TypeName { get; set; }
     }
 }
