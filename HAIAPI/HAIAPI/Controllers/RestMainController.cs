@@ -293,38 +293,21 @@ namespace HAIAPI.Controllers
         {
             var cInfo = db.CInfoCommons.Where(p => p.UserLogin == user).FirstOrDefault();
 
-
             List<string> topics = new List<string>();
             if (cInfo != null)
             {
-                string cusall = "cus";
-                topics.Add(cusall);
-
-                // loai khach hàng
-                string cus = "cus" + cInfo.CType.ToLower();
-                topics.Add(cus);
-
-                // khu vu
-                topics.Add(cus + cInfo.HaiArea.Code);
-
-                topics.Add(cusall + cInfo.HaiArea.Code);
-
-
+                topics.Add(cInfo.CType + "ALL");
+                topics.Add(cInfo.CType + cInfo.BranchCode);
+                topics.Add(cInfo.CType + cInfo.HaiArea.Code);
             }
             else
             {
                 var staff = db.HaiStaffs.Where(p => p.UserLogin == user).FirstOrDefault();
                 if (staff != null)
                 {
-                    // nhan vien
-                    var staffTopic = "staff";
-                    topics.Add(staffTopic);
-
-                    // theo chi nhanh
-                    topics.Add(staffTopic + staff.HaiBranch.Code);
-                    // khu vu
-                    topics.Add(staffTopic + staff.HaiBranch.HaiArea.Code);
-
+                    topics.Add("HAIALL");
+                    topics.Add("HAI" + staff.HaiBranch.Code);
+                    topics.Add("HAI" + staff.HaiBranch.HaiArea.Code);
                 }
 
             }
