@@ -8,6 +8,7 @@ using System.Net;
 using PagedList;
 using System.IO;
 using SMSUtl;
+using NDHSITE.Util;
 
 namespace NDHSITE.Controllers
 {
@@ -16,6 +17,7 @@ namespace NDHSITE.Controllers
     {
 
         NDHDBEntities db = new NDHDBEntities();
+        MongoHelper mongoHelp = new MongoHelper();
         //
         // GET: /Notification/
 
@@ -26,159 +28,82 @@ namespace NDHSITE.Controllers
 
             ViewBag.MSG = msg;
 
-          //  ViewBag.CTopic = db.NotificationTopics.Where(p => p.TopicType == "CUS").ToList();
-           // ViewBag.STopic = db.NotificationTopics.Where(p => p.TopicType == "STAFF").ToList();
-
             ViewBag.Areas = db.HaiAreas.ToList();
             ViewBag.Branches = db.HaiBranches.ToList();
 
             return View();
         }
 
-        
         [HttpPost]
-        public ActionResult SendArea(HttpPostedFileBase files, string title, string messenge, string type, string area)
+        [ValidateInput(false)]
+        public ActionResult Send(string title, string messenge, string content, string user, string type, string area, string branch, string group)
         {
             if (!Utitl.CheckUser(db, User.Identity.Name, "ManageNotification", 1))
                 return RedirectToAction("relogin", "home");
 
-            //string json = "{\"notification\": {\"title\": \"Portugal vs. Denmark\",\"body\": \"5 to 1\"},\"to\": \"ftWtDYSoDhE:APA91bFXZfod7cSDMTuUWuRn6aC63WL_-WBIgshPvC2E0jTXEq7E4BNcid14CC2Kx2a1Ih2T4xR0RtY4j71pcd089eM_PH32va3As4JJzuNreZcxoy5-pkeRLyZ2b6jFAWwoTzbJcx2Z\"}";
+            string sendTo = "";
+            string NType = "";
+            string NCode = "";
+            string Id = Guid.NewGuid().ToString();
 
-            //string json = "{\"data\": {\"title\": \"'Portugal vs. Denmark'\", \"message\": \"'This is a Firebase Cloud Messaging Topic Message!'\"},\"to\": \"/topics/global\"}";
-
-            var topic = type + area;
-
-            var msgSend = messenge;
-
-            if (messenge.Length > 100)
+            if (type == "ID")
             {
-                msgSend = messenge.Substring(0, 100) + "...";
+                NCode = user;
+                NType = "ID";
+                var firebaseInfo = db.RegFirebases.Where(p => p.UserLogin == user).FirstOrDefault();
+
+                if (firebaseInfo == null)
+                    return RedirectToAction("send", "notification", new { msg = "Nhân viên chưa sử dụng APP." });
+
+                sendTo = firebaseInfo.RegId;
             }
-
-            var titleSend = title.ToUpper();
-
-            string json = "{ \"notification\": {\"click_action\": \"OPEN_ACTIVITY_1\" ,\"title\": \"" + titleSend + "\",\"body\": \"" + msgSend + "\"},\"data\": {\"title\": \"'" + title + "'\",\"message\": \"'" + messenge + "'\"},\"to\": \"/topics/" + topic + "\"}";
+            else
+            {
+                NType = "TOPIC";
+                sendTo = "/topics/";
+                if (group == "2")
+                {
+                    // theo khu vuc
+                    sendTo += type + area;
+                    NCode = type + area;
+                }
+                else if (group == "3")
+                {
+                    // theo chi nhanh
+                    sendTo += type + branch;
+                    NCode = type + branch;
+                }
+                else
+                {
+                    sendTo += type + "ALL";
+                    NCode = type + "ALL";
+                }
+            }
+            title = title.ToUpper();
+            string json = "{ \"notification\": {\"click_action\": \"OPEN_ACTIVITY_1\" ,\"title\": \"" + title + "\",\"body\": \"" + messenge + "\"},\"data\": {\"title\": \"'" + title + "'\",\"message\": \"'" + messenge + "'\"},\"to\": \"" + sendTo + "\"}";
 
             var responseString = sendRequestFirebase(json);
 
-            BasicNotification notification = new BasicNotification()
+            MongoNotificationHistory notification = new MongoNotificationHistory()
             {
-                Id = Guid.NewGuid().ToString(),
-                Title = titleSend,
+                GuiId = Id,
+                Title = title,
                 Messenge = messenge,
-                UserSend = User.Identity.Name,
-                CreateDate = DateTime.Now,
+                NType = NType,
+                CreateTime = DateTime.Now,
                 MessengeResult = responseString,
-                TocpicCode = topic,
-                ImageAttach = updateAttach(files)
+                Content = content,
+                Success = 1,
+                NCode = new List<string>(),
+                UserRead = new List<string>()
             };
 
-            db.BasicNotifications.Add(notification);
-            db.SaveChanges();
- 
-            return RedirectToAction("send", "notification", new { msg = "Đã gửi" });
+            notification.NCode.Add(NCode);
+            mongoHelp.saveNotificationHistory(ref notification);
+
+            return RedirectToAction("send", "notification", new { msg = "Đã gửi " + notification.GuiId });
         }
-        
-
-        private string updateAttach(HttpPostedFileBase files)
-        {
-            string urlThumbnail = "";
-            if (files != null)
-            {
-                try
-                {
-                    string dfolder = DateTime.Now.Date.ToString("d-M-yyyy");
-                    string fsave = "~/haiupload/notification/" + dfolder;
-
-                    bool exists = System.IO.Directory.Exists(Server.MapPath(fsave));
-
-                    if (!exists)
-                        System.IO.Directory.CreateDirectory(Server.MapPath(fsave));
-
-                    MemoryStream target = new MemoryStream();
-                    files.InputStream.CopyTo(target);
-                    byte[] data = target.ToArray();
-
-                    ImageUpload imageUpload = new ImageUpload
-                    {
-                        Height = 160,
-                        isSacle = false,
-                        UploadPath = fsave
-                    };
-
-                    ImageResult imageResult = imageUpload.RenameUploadFile(data, ".png");
-
-                    if (imageResult.Success)
-                    {
-                        urlThumbnail = "/haiupload/notification/" + dfolder + "/" + imageResult.ImageName;
-                    }
-
-                }
-                catch
-                {
-                }
-            }
-
-            return urlThumbnail;
-        }
-
-
-        [HttpPost]
-        public ActionResult SendStaffArea(HttpPostedFileBase files, string title, string messenge, string type, string area, string branch)
-        {
-            if (!Utitl.CheckUser(db, User.Identity.Name, "ManageNotification", 1))
-                return RedirectToAction("relogin", "home");
-
-
-            string topic = "staff";
-            if (type == "2")
-            {
-                // theo khu vuc
-                topic += area;
-            }
-            else if (type == "3")
-            {
-                // theo chi nhanh
-                topic += branch;
-            }
-
-            var msgSend = messenge;
-
-            if (messenge.Length > 100)
-            {
-                msgSend = messenge.Substring(0, 100) + "...";
-            }
-
-            var titleSend = title.ToUpper();
-
-
-            //string json = "{\"notification\": {\"title\": \"Portugal vs. Denmark\",\"body\": \"5 to 1\"},\"to\": \"ftWtDYSoDhE:APA91bFXZfod7cSDMTuUWuRn6aC63WL_-WBIgshPvC2E0jTXEq7E4BNcid14CC2Kx2a1Ih2T4xR0RtY4j71pcd089eM_PH32va3As4JJzuNreZcxoy5-pkeRLyZ2b6jFAWwoTzbJcx2Z\"}";
-
-            //string json = "{\"data\": {\"title\": \"'Portugal vs. Denmark'\", \"message\": \"'This is a Firebase Cloud Messaging Topic Message!'\"},\"to\": \"/topics/global\"}";
-
-            string json = "{ \"notification\": {\"click_action\": \"OPEN_ACTIVITY_1\" ,\"title\": \"" + titleSend + "\",\"body\": \"" + msgSend + "\"}, \"data\": {\"title\": \"'" + title + "'\",\"message\": \"'" + messenge + "'\"},\"to\": \"/topics/" + topic + "\"}";
-
-            var responseString = sendRequestFirebase(json);
-
-            BasicNotification notification = new BasicNotification()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Title = titleSend,
-                Messenge = messenge,
-                UserSend = User.Identity.Name,
-                CreateDate = DateTime.Now,
-                MessengeResult = responseString,
-                TocpicCode = topic,
-                ImageAttach = updateAttach(files)
-            };
-
-            db.BasicNotifications.Add(notification);
-            db.SaveChanges();
-
-            return RedirectToAction("send", "notification", new { msg = "Đã gửi" });
-        }
-
-
+      
         private string sendRequestFirebase(string json)
         {
             string url = @"https://fcm.googleapis.com/fcm/send";
@@ -186,7 +111,7 @@ namespace NDHSITE.Controllers
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
 
             request.Method = "POST";
-            request.Headers["Authorization"] = "key=AAAAEo0n4Rw:APA91bHJi7Sz884_5yuDyUw2Sf2mPyXG1GK06q4jWmhnLl7gLeJUCPn_SD9q0R0gfUWUWbyujsYn_Wb6LLjtY33LWO1BYVryjeo2RPflMko7NqJaUecn8a1WB8Ng_9OvNDxHoE1wJ7wH6BRWr5ayinritsNlM2ntjQ";
+            request.Headers["Authorization"] = "key=AAAAIr_-D4Q:APA91bHvZRkw_Y0UHBoPa3-HUq1iN41Y5Bhtta0MuSxMBEazsvxLPZM4kIgufKkmvp-3yWMKy6QK9l4wTJd-eymKdJtOFjVQEwJmswqp4YseGq-ylFPvkwOsE3NzpbV6kJEQubWBBUeP";
 
             System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
             Byte[] byteArray = encoding.GetBytes(json);
@@ -220,6 +145,7 @@ namespace NDHSITE.Controllers
 
         }
 
+        /*
         [HttpPost]
         public ActionResult SendAgency(HttpPostedFileBase files ,string title, string messenge, string userlogin)
         {
@@ -325,7 +251,7 @@ namespace NDHSITE.Controllers
             db.SaveChanges();
             return RedirectToAction("send", "notification", new { msg = "Đã gửi" });
         }
-
+        */
 
         public ActionResult SendSMS(int? page, string search)
         {

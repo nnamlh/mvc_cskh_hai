@@ -23,4 +23,29 @@ namespace NDHSITE.Models
 
     }
 
+    public class MongoNotificationHistory
+    {
+
+        public ObjectId Id { get; set; }
+
+        public string GuiId { get; set; }
+
+        public string Content { get; set; }
+        public string Title { get; set; }
+        public string Messenge { get; set; }
+        public Nullable<System.DateTime> CreateTime { get; set; }
+        public int Success { get; set; }
+
+        public string MessengeResult { get; set; }
+
+        public string NType { get; set; }
+
+        public List<string> NCode { get; set; }
+    
+        public List<string> UserRead { get; set; }
+
+    }
+
+
+
 }

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<NDHSITE.Models.ImageViewModel>
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+
+    @foreach (var image in Model)
+    {
+        <a href="#" class="returnImage" data-url="@Request.Url.GetLeftPart(UriPartial.Authority)@image.Url">
+            <img src="@image.Url" alt="Hejsan" id="#image" data-source="@image.Url" width="200" height="200" />
+        </a>
+    }
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".returnImage").click("click", function (e) {
+                var funcNum = getUrlParam('CKEditorFuncNum');
+                var fileUrl = $(this).attr("data-url");;
+                window.opener.CKEDITOR.tools.callFunction(funcNum, fileUrl);
+                window.close();
+            });
+        });
+
+        function getUrlParam(paramName) {
+            var reParam = new RegExp('(?:[\?&]|&)' + paramName + '=([^&]+)', 'i');
+            var match = window.location.search.match(reParam);
+
+            return (match && match.length > 1) ? match[1] : null;
+        }
+
+    </script>
+</body>
+</html>

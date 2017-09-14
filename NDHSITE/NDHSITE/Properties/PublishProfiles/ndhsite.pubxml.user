@@ -76,7 +76,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/08/2017 14:46:02</publishTime>
     </File>
     <File Include="bin/NDHSITE.dll">
-      <publishTime>09/13/2017 17:14:10</publishTime>
+      <publishTime>09/14/2017 17:16:26</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>09/23/2016 14:14:47</publishTime>
@@ -373,7 +373,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/19/2016 15:08:37</publishTime>
     </File>
     <File Include="Scripts/myscript.js">
-      <publishTime>12/05/2016 17:24:39</publishTime>
+      <publishTime>09/14/2017 15:51:43</publishTime>
     </File>
     <File Include="Scripts/respond.js">
       <publishTime>09/11/2017 23:34:02</publishTime>
@@ -464,6 +464,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/CheckIn/ShowCalendarDetail.cshtml">
       <publishTime>09/12/2017 01:02:59</publishTime>
+    </File>
+    <File Include="Views/Editor/uploadPartial.cshtml">
+      <publishTime>09/14/2017 15:44:56</publishTime>
     </File>
     <File Include="Views/EventManage/AwardManage.cshtml">
       <publishTime>11/22/2016 01:36:28</publishTime>
@@ -577,7 +580,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/20/2016 16:15:38</publishTime>
     </File>
     <File Include="Views/Notification/Send.cshtml">
-      <publishTime>03/20/2017 15:46:09</publishTime>
+      <publishTime>09/14/2017 16:46:34</publishTime>
     </File>
     <File Include="Views/Notification/SendSMS.cshtml">
       <publishTime>01/03/2017 14:57:01</publishTime>
@@ -616,7 +619,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/19/2017 09:18:46</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>12/05/2016 17:26:32</publishTime>
+      <publishTime>09/14/2017 15:55:12</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>03/02/2017 14:00:46</publishTime>
@@ -694,7 +697,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/23/2016 14:14:41</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/13/2017 16:36:37</publishTime>
+      <publishTime>09/14/2017 17:16:28</publishTime>
     </File>
   </ItemGroup>
 </Project>

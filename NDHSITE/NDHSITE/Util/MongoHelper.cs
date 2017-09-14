@@ -35,5 +35,13 @@ namespace NDHSITE.Util
 
             return data == null ? false : true;
         }
+
+        // logout
+        public void saveNotificationHistory(ref MongoNotificationHistory history)
+        {
+            var collection = db.GetCollection<MongoNotificationHistory>("NotificationHistory");
+
+             collection.InsertOneAsync(history);
+        }
     }
 }

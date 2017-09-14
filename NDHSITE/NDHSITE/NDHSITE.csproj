@@ -221,6 +221,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AgencyController.cs" />
     <Compile Include="Controllers\CheckInController.cs" />
+    <Compile Include="Controllers\EditorController.cs" />
     <Compile Include="Controllers\EventManageController.cs" />
     <Compile Include="Controllers\HaiReportController.cs" />
     <Compile Include="Controllers\HaiStaffController.cs" />
@@ -360,6 +361,7 @@
     <Compile Include="Models\IdentityCommon.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IdentityStore.cs" />
+    <Compile Include="Models\ImageViewModel.cs" />
     <Compile Include="Models\ImeiUser.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -694,6 +696,7 @@
     <Content Include="Views\CheckIn\ShowCalendar.cshtml" />
     <Content Include="Views\CheckIn\ShowCalendarDetail.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Editor\uploadPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -701,6 +704,7 @@
     <Folder Include="haiupload\event\" />
     <Folder Include="haiupload\notification\" />
     <Folder Include="haiupload\product\" />
+    <Folder Include="images\media\" />
     <Folder Include="staff\" />
     <Folder Include="temp\" />
     <Folder Include="uploadfolder\" />

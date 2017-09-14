@@ -3,15 +3,11 @@
 }
 
 <div class="page-header">
-    <h3 class="page-title">Notification</h3>
-
     <ol class="breadcrumb">
         <li><a href="/home">Trang chủ</a></li>
         <li><a href="#">Notification</a></li>
     </ol>
 </div> <!-- /.page-header -->
-
-<p class="">Gửi thông báo: mừng sinh nhật, khuyến mãi... đển khách hàng.</p>
 
 @if (ViewBag.MSG != null)
 {
@@ -21,209 +17,89 @@
 
     <div class="portlet-body">
         <div class="layout layout-main-right layout-stack-sm">
-            <div class="col-md-2 col-sm-3 layout-sidebar">
-
-                <ul id="myTab" class="nav nav-layout-sidebar nav-stacked">
-                    <li class="active">
-                        <a href="#sendarea" data-toggle="tab">
-                            Khách hàng
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#sendstaff" data-toggle="tab">
-                            Nhân viên
-                        </a>
-                    </li>
-                </ul>
-
-            </div> <!-- /.col -->
-
-            <div class="col-md-10 col-sm-9 layout-main">
+            <div class="col-md-12 col-sm-12 layout-main">
                 <div id="settings-content" class="tab-content stacked-content">
                     <div class="tab-pane fade in active" id="sendarea">
-                        <form method="post" action="/notification/sendarea" onsubmit="if(!confirm('Gửi thông báo ?')){return false;}" enctype="multipart/form-data">
-                            <div class="heading-block">
-                                <h3>
-                                    Gửi nhiều khách hàng
-                                </h3>
-                            </div> <!-- /.heading-block -->
+                        <form method="post" onsubmit="if(!confirm('Gửi thông báo ?')){return false;}" enctype="multipart/form-data">
 
                             <div class="row">
                                 <div class="col-sm-6">
 
                                     <div class="form-group">
-                                        <label>Khách hàng</label>
-                                        <select class="form-control" name="type">
-                                            <option value="cus">Tất cả</option>
-                                            <option value="cusci">Đại lý cấp 1</option>
-                                            <option value="cuscii">Đại lý cấp 2</option>
-                                            <option value="cusfarmer">Nông dân</option>
+                                        <label>Gửi cho</label>
+                                        <select class="form-control" name="type" id="type">
+                                            <option value="HAI">Công ty HAI</option>
+                                            <option value="CI">Đại lý cấp 1</option>
+                                            <option value="CII">Đại lý cấp 2</option>
+                                            <option value="FARMER">Nông dân</option>
+                                            <option value="ID">Cá nhân</option>
                                         </select>
                                     </div>
+                                    <div id="groupchoose">
 
-                                    <div class="form-group">
-                                        <label>Khu vực</label>
-                                        <select class="form-control" name="area">
-                                            <option value="">Tất cả khu vực</option>
-                                            @foreach (var item in ViewBag.Areas)
-                                            {
-                                                <option value="@item.Code">@item.Name</option>
-                                            }
-                                        </select>
+                                        <div class="form-group">
+                                            <label>Chọn gửi</label>
+                                            <select class="form-control" name="group" id="group">
+                                                <option value="1">Tất cả</option>
+                                                <option value="2">Theo khu vực</option>
+                                                <option value="3">Theo chi nhánh</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group" id="area">
+                                            <label>Khu vực</label>
+                                            <select class="form-control" name="area">
+                                                @foreach (var item in ViewBag.Areas)
+                                                {
+                                                    <option value="@item.Code">@item.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                        <div class="form-group" id="branch">
+                                            <label>Chi nhánh</label>
+                                            <select class="form-control" name="branch">
+                                                @foreach (var item in ViewBag.Branches)
+                                                {
+                                                    <option value="@item.Code">@item.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+
                                     </div>
+                                    <div class="form-group" id="user">
+                                        <label>Tên user</label>
+                                        <input type="text" class="form-control" name="user" />
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Tiêu đề</label>
                                         <input type="text" name="title" class="form-control" required />
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Nội dung</label>
+                                        <label>Tin nhắn</label>
                                         <textarea name="messenge" class="form-control" required></textarea>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Hình ảnh</label>
-                                        <input type="file" class="form-control" accept="image/*" name="files" />
-                                    </div>
 
                                     <div class="form-group">
                                         <button class="btn btn-primary" type="submit">Gửi</button>
                                     </div>
+                                   
                                 </div>
 
-                            </div>
-                        </form>
-
-                        <form method="post" action="/notification/SendAgency" onsubmit="if(!confirm('Gửi thông báo ?')){return false;}" enctype="multipart/form-data">
-                            <div class="heading-block">
-                                <h3>
-                                    Gửi từng khách hàng
-                                </h3>
-                            </div> <!-- /.heading-block -->
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Tên user</label>
-                                        <input type="text" class="form-control" name="userlogin" required />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Tiêu đề</label>
-                                        <input type="text" name="title" class="form-control" required />
-                                    </div>
-
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Nội dung</label>
-                                        <textarea name="messenge" class="form-control"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Hình ảnh</label>
-                                        <input type="file" class="form-control" accept="image/*" name="files" />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <button class="btn btn-primary" type="submit">Gửi</button>
+                                        <textarea class="form-control" placeholder="Place some text here"
+                                                  name="content" required></textarea>
                                     </div>
                                 </div>
 
                             </div>
                         </form>
-
-
-                    </div>
-                    <div class="tab-pane fade" id="sendstaff">
-                        <form method="post" action="/notification/SendStaffArea" onsubmit="if(!confirm('Gửi thông báo ?')){return false;}" enctype="multipart/form-data">
-                            <div class="heading-block">
-                                <h3>
-                                    Gửi nhiều nhân viên
-                                </h3>
-                            </div> <!-- /.heading-block -->
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                 
-                                    <div class="form-group">
-                                        <label>Chọn gửi</label>
-                                        <select class="form-control" name="type" id="stafftype">
-                                            <option value="1">Tất cả nhân viên</option>
-                                            <option value="2">Theo khu vực</option>
-                                            <option value="3">Theo chi nhánh</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group" id="staffarea">
-                                        <label>Khu vực</label>
-                                        <select class="form-control" name="area">
-                                            @foreach (var item in ViewBag.Areas)
-                                            {
-                                                <option value="@item.Code">@item.Name</option>
-                                            }
-                                        </select>
-                                    </div>
-                                    <div class="form-group" id="staffbranch">
-                                        <label>Chi nhánh</label>
-                                        <select class="form-control" name="branch">
-                                            @foreach (var item in ViewBag.Branches)
-                                            {
-                                                <option value="@item.Code">@item.Name</option>
-                                            }
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Tiêu đề</label>
-                                        <input type="text" name="title" class="form-control" />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Nội dung</label>
-                                        <textarea name="messenge" class="form-control"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Hình ảnh</label>
-                                        <input type="file" class="form-control" accept="image/*" name="files" />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <button class="btn btn-primary" type="submit">Gửi</button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </form>
-
-                        <form method="post" action="/notification/SendStaff" onsubmit="if(!confirm('Gửi thông báo ?')){return false;}" enctype="multipart/form-data">
-                            <div class="heading-block">
-                                <h3>
-                                    Gửi từng nhân viên
-                                </h3>
-                            </div> <!-- /.heading-block -->
-
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Tên user</label>
-                                        <input type="text" class="form-control" name="userlogin" />
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Tiêu đề</label>
-                                        <input type="text" name="title" class="form-control" />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Nội dung</label>
-                                        <textarea name="messenge" class="form-control"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Hình ảnh</label>
-                                        <input type="file" class="form-control" accept="image/*" name="files" />
-                                    </div>
-
-                                    <div class="form-group">
-                                        <button class="btn btn-primary" type="submit">Gửi</button>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </form>
-
                     </div>
                 </div>
             </div>
@@ -233,27 +109,49 @@
 
 
 @section scripts {
-
+    <script src="//cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
     <script type="text/javascript">
-        $('#staffarea').hide();
-        $('#staffbranch').hide();
-        $('#stafftype').on('change', function (e) {
+
+        CKEDITOR.replace('content', {
+            language: 'en',
+            filebrowserImageUploadUrl: '/editor/UploadImage'
+        });
+        $('#user').hide();
+        $('#area').hide();
+        $('#branch').hide();
+        $('#group').on('change', function (e) {
+
             var optionSelected = $("option:selected", this);
+
             var valueSelected = this.value;
 
             if (valueSelected === "1") {
-                $('#staffarea').hide();
-                $('#staffbranch').hide();
+                $('#area').hide();
+                $('#branch').hide();
             } else if (valueSelected === "2") {
-                $('#staffarea').show();
-                $('#staffbranch').hide();
+                $('#area').show();
+                $('#branch').hide();
             } else if (valueSelected == "3") {
-                $('#staffarea').hide();
-                $('#staffbranch').show();
+                $('#area').hide();
+                $('#branch').show();
             }
 
         });
+        $('#type').on('change', function (e) {
 
+            var optionSelected = $("option:selected", this);
+
+            var valueSelected = this.value;
+
+            if (valueSelected === "ID") {
+                $('#groupchoose').hide();
+                $('#user').show();
+            } else {
+                $('#groupchoose').show();
+                $('#user').hide();
+            }
+
+        });
 
     </script>
 
