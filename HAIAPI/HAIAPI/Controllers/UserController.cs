@@ -3,6 +3,7 @@ using HAIAPI.Util;
 using SMSUtl;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -336,7 +337,7 @@ namespace HAIAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ResultInfo LoginSession(string user, string token)
+        public ResultInfo LoginSession(string user, string token, string version)
         {
 
             // check sesion for login
@@ -354,7 +355,15 @@ namespace HAIAPI.Controllers
                 id = "1"
             };
 
-            if (!mongoHelper.checkLoginSession(user, token))
+            string versionCurrent = ConfigurationManager.AppSettings["VersionApp"];
+
+            if(version != versionCurrent)
+            {
+                result.id = "2";
+                result.msg = "Cập nhật phiên bản mới";
+                history.Sucess = 0;
+            }
+           else if (!mongoHelper.checkLoginSession(user, token))
             {
                 result.id = "0";
                 result.msg = "Tài khoản bạn đã đăng nhập ở thiết bị khác.";
