@@ -12,7 +12,7 @@ using NDHSITE.Util;
 
 namespace NDHSITE.Controllers
 {
-    [Authorize]
+    
     public class NotificationController : Controller
     {
 
@@ -20,7 +20,7 @@ namespace NDHSITE.Controllers
         MongoHelper mongoHelp = new MongoHelper();
         //
         // GET: /Notification/
-
+        [Authorize]
         public ActionResult Send(string msg = null)
         {
             if (!Utitl.CheckUser(db, User.Identity.Name, "ManageNotification", 0))
@@ -103,7 +103,7 @@ namespace NDHSITE.Controllers
 
             return RedirectToAction("send", "notification", new { msg = "Đã gửi " + notification.GuiId });
         }
-      
+        [Authorize]
         private string sendRequestFirebase(string json)
         {
             string url = @"https://fcm.googleapis.com/fcm/send";
@@ -143,6 +143,12 @@ namespace NDHSITE.Controllers
                 return null;
             }
 
+        }
+
+        [HttpGet]
+        public ActionResult Show(string id)
+        {
+            return View(mongoHelp.getNotification(id));
         }
 
         /*

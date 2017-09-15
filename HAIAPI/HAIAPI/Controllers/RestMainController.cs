@@ -289,7 +289,7 @@ namespace HAIAPI.Controllers
                 db.SaveChanges();
             }
         }
-        private List<string> GetUserTopics(string user)
+        protected List<string> GetUserTopics(string user)
         {
             var cInfo = db.CInfoCommons.Where(p => p.UserLogin == user).FirstOrDefault();
 

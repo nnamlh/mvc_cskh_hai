@@ -19,7 +19,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/31/2017 15:54:45</publishTime>
     </File>
     <File Include="bin/HAIAPI.dll">
-      <publishTime>09/14/2017 17:36:22</publishTime>
+      <publishTime>09/15/2017 16:05:36</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
       <publishTime>08/31/2017 15:54:47</publishTime>
@@ -78,6 +78,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Owin.dll">
       <publishTime>08/31/2017 15:54:47</publishTime>
     </File>
+    <File Include="bin/PagedList.dll">
+      <publishTime>09/30/2013 17:36:38</publishTime>
+    </File>
+    <File Include="bin/PagedList.Mvc.dll">
+      <publishTime>09/30/2013 18:15:20</publishTime>
+    </File>
     <File Include="bin/SMSUtl.dll">
       <publishTime>07/14/2017 00:55:58</publishTime>
     </File>
@@ -117,6 +123,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/WebGrease.dll">
       <publishTime>08/31/2017 15:54:44</publishTime>
     </File>
+    <File Include="Content/PagedList.css">
+      <publishTime>09/15/2017 09:35:34</publishTime>
+    </File>
     <File Include="favicon.ico">
       <publishTime>08/31/2017 15:54:39</publishTime>
     </File>
@@ -127,7 +136,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/12/2017 14:03:59</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>09/12/2017 00:07:03</publishTime>
+      <publishTime>09/15/2017 09:35:34</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.js">
       <publishTime>09/12/2017 00:06:31</publishTime>
@@ -160,7 +169,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/12/2017 00:06:57</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/12/2017 14:08:14</publishTime>
+      <publishTime>09/15/2017 10:36:33</publishTime>
     </File>
   </ItemGroup>
 </Project>

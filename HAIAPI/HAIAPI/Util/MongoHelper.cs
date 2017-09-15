@@ -2,6 +2,7 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 
 namespace HAIAPI.Util
@@ -52,10 +53,10 @@ namespace HAIAPI.Util
         {
             var collection = db.GetCollection<MongoAPIAuthHistory>("APIAuthHistory");
             var builder = Builders<MongoAPIAuthHistory>.Filter;
-          //  var filter = builder.Eq("UserLogin", user) & builder.Eq("IsExpired", 0);
-            var data = collection.Find<MongoAPIAuthHistory>(builder.Eq("UserLogin", user) & builder.Eq("IsExpired", 0)).ToList(); 
+            //  var filter = builder.Eq("UserLogin", user) & builder.Eq("IsExpired", 0);
+            var data = collection.Find<MongoAPIAuthHistory>(builder.Eq("UserLogin", user) & builder.Eq("IsExpired", 0)).ToList();
 
-            foreach(var item in data)
+            foreach (var item in data)
             {
                 var update = Builders<MongoAPIAuthHistory>.Update.Set("IsExpired", 1);
                 var result = collection.UpdateOneAsync(Builders<MongoAPIAuthHistory>.Filter.Eq("Id", item.Id), update);
@@ -90,6 +91,44 @@ namespace HAIAPI.Util
 
             collection.InsertOneAsync(data);
         }
-    }
 
+        public void saveNotificationHistory(MongoNotificationHistory history)
+        {
+            var collection = db.GetCollection<MongoNotificationHistory>("NotificationHistory");
+
+            collection.InsertOneAsync(history);
+        }
+
+        public List<MongoNotificationHistory> getListNotification(string time)
+        {
+            var collection = db.GetCollection<MongoNotificationHistory>("NotificationHistory");
+            // var builder = Builders<BsonDocument>.Filter;
+            // var filter = new BsonDocument();
+            var filter = Builders<MongoNotificationHistory>.Filter.Gt("CreateTime", time);
+            var sort = Builders<MongoNotificationHistory>.Sort.Descending("CreateTime");
+
+            return collection.Find(filter).Sort(sort).ToList();
+        }
+
+        public void updateNotificationRead(string user, string id)
+        {
+            var collection = db.GetCollection<MongoNotificationHistory>("NotificationHistory");
+            // var builder = Builders<BsonDocument>.Filter;
+            // var filter = new BsonDocument();
+            var filter = Builders<MongoNotificationHistory>.Filter.Gt("GuiId", id);
+
+            var info = collection.Find(filter).FirstOrDefault();
+
+            if (info != null)
+            {
+                var listRead = info.UserRead;
+                if (listRead == null)
+                    listRead = new List<string>();
+                listRead.Add(user);
+                var update = Builders<MongoNotificationHistory>.Update.Set("UserRead", listRead);
+
+                var result = collection.UpdateOneAsync(Builders<MongoNotificationHistory>.Filter.Eq("GuiId", id), update);
+            }
+        }
+    }
 }

@@ -43,5 +43,16 @@ namespace NDHSITE.Util
 
              collection.InsertOneAsync(history);
         }
+
+        public MongoNotificationHistory getNotification(string id)
+        {
+            var collection = db.GetCollection<MongoNotificationHistory>("NotificationHistory");
+
+            var filter = Builders<MongoNotificationHistory>.Filter.Gt("GuiId", id);
+
+            var info = collection.Find(filter).FirstOrDefault();
+
+            return info;
+        }
     }
 }

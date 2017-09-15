@@ -12,7 +12,7 @@ namespace HAIAPI.Models
 
     public class HaiUtil
     {
-        public static string HostName = "http://192.168.2.170:801/";
+        public static string HostName = "http://dms.nongduochai.vn/";
     }
 
     public class ResultInfo

@@ -140,3 +140,7 @@ N:\csharp\mvc_cskh_hai\HAIAPI\HAIAPI\bin\Microsoft.Owin.Security.MicrosoftAccoun
 N:\csharp\mvc_cskh_hai\HAIAPI\HAIAPI\obj\Release\HAIAPI.csprojResolveAssemblyReference.cache
 N:\csharp\mvc_cskh_hai\HAIAPI\HAIAPI\obj\Release\HAIAPI.dll
 N:\csharp\mvc_cskh_hai\HAIAPI\HAIAPI\obj\Release\HAIAPI.pdb
+N:\csharp\mvc_cskh_hai\HAIAPI\HAIAPI\bin\PagedList.dll
+N:\csharp\mvc_cskh_hai\HAIAPI\HAIAPI\bin\PagedList.Mvc.dll
+N:\csharp\mvc_cskh_hai\HAIAPI\HAIAPI\bin\PagedList.xml
+N:\csharp\mvc_cskh_hai\HAIAPI\HAIAPI\bin\PagedList.Mvc.xml
