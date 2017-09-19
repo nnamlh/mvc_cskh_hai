@@ -76,6 +76,20 @@ namespace HAIAPI.Util
 
             collection.InsertOneAsync(authHistory);
         }
+        public void updateStateAuthToken(string user)
+        {
+            var collection = db.GetCollection<MongoAPIAuthHistory>("APIAuthHistory");
+            var builder = Builders<MongoAPIAuthHistory>.Filter;
+            //  var filter = builder.Eq("UserLogin", user) & builder.Eq("IsExpired", 0);
+            var data = collection.Find<MongoAPIAuthHistory>(builder.Eq("UserLogin", user) & builder.Eq("IsExpired", 0)).ToList();
+
+            foreach (var item in data)
+            {
+                var update = Builders<MongoAPIAuthHistory>.Update.Set("IsExpired", 1);
+                var result = collection.UpdateOneAsync(Builders<MongoAPIAuthHistory>.Filter.Eq("Id", item.Id), update);
+            }
+        }
+
 
         // logout
         public void saveLogout(string user, string token)

@@ -330,6 +330,98 @@ namespace HAIAPI.Controllers
         }
 
         #endregion
+        #region Logout
+        /// <summary>
+        /// --------------------------------// logout
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ResultInfo Logout()
+        {
+            // logout
+            // /api/rest/logout
+            // method: post
+            var log = new MongoHistoryAPI()
+            {
+                APIUrl = "/api/rest/logout",
+                CreateTime = DateTime.Now,
+                Sucess = 1
+            };
+
+            var result = new ResultInfo()
+            {
+                id = "1",
+                msg = "success"
+            };
+
+            var requestContent = Request.Content.ReadAsStringAsync().Result;
+            log.Content = requestContent;
+
+            try
+            {
+                HttpRequestHeaders headers = Request.Headers;
+                if (!headers.Contains("Authorization"))
+                {
+                    throw new Exception("Nead authorization info");
+                }
+
+                string content;
+
+                try
+                {
+                    string base64Auth = headers.GetValues("Authorization").First().Replace("Basic", "").Trim();
+                    content = XString.FromBase64(base64Auth);
+                }
+                catch
+                {
+                    throw new Exception("Wrong authorization info");
+                }
+
+                var arrtok = content.Split(':');
+
+                if (arrtok.Length != 2)
+                    throw new Exception("Wrong authorization format");
+
+                string user = arrtok[0];
+                string token = arrtok[1];
+
+                // check user
+                var checkUser = db.AspNetUsers.Where(p => p.UserName == user).FirstOrDefault();
+
+                if (checkUser == null)
+                    throw new Exception("Không thể đăng xuất");
+
+                //
+                if(!mongoHelper.checkLoginSession(user, token))
+                    throw new Exception("Tài khoản đang đăng nhập trên thiết bị khác");
+
+                // xoa firebase id
+                var regFirebase = db.RegFirebases.Where(p => p.UserLogin == user).FirstOrDefault();
+
+                if (regFirebase != null)
+                {
+                    regFirebase.RegId = "";
+                    regFirebase.ModifyDate = DateTime.Now;
+                    db.Entry(regFirebase).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+                mongoHelper.updateStateAuthToken(user);
+
+                mongoHelper.saveLogout(user, token);
+
+            }
+            catch
+            {
+
+            }
+
+            log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+            mongoHelper.createHistoryAPI(log);
+
+            return result;
+        }
+        #endregion
 
         #region LoginSession
         /// <summary>
@@ -379,66 +471,7 @@ namespace HAIAPI.Controllers
         }
         #endregion
 
-        #region Logout
-        /// <summary>
-        /// --------------------------------// logout
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost]
-        public ResultInfo Logout()
-        {
-            // logout
-            // /api/rest/logout
-            // method: post
-            var log = new MongoHistoryAPI()
-            {
-                APIUrl = "/api/user/logout",
-                CreateTime = DateTime.Now,
-                Sucess = 1
-            };
-
-            var result = new ResultInfo()
-            {
-                id = "1",
-                msg = "success"
-            };
-
-            var requestContent = Request.Content.ReadAsStringAsync().Result;
-            log.Content = requestContent;
-            try
-            {
-                var jsonserializer = new JavaScriptSerializer();
-                var paser = jsonserializer.Deserialize<RequestInfo>(requestContent);
-
-                // xoa firebase id
-                var regFirebase = db.RegFirebases.Where(p => p.UserLogin == paser.user).FirstOrDefault();
-
-                if (regFirebase != null)
-                {
-                    regFirebase.RegId = "";
-                    regFirebase.ModifyDate = DateTime.Now;
-                    db.Entry(regFirebase).State = System.Data.Entity.EntityState.Modified;
-                    db.SaveChanges();
-                }
-
-                mongoHelper.saveLogout(paser.user, paser.token);
-
-            }
-            catch (Exception e)
-            {
-                result.id = "0";
-                result.msg = e.Message;
-                log.Error = e.Message;
-
-            }
-
-            log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
-            mongoHelper.createHistoryAPI(log);
-
-            return result;
-        }
-        #endregion
-
+    
         #region Auth
         private async Task<LoginResult> Auth(HttpRequestHeaders headers, string imei)
         {
