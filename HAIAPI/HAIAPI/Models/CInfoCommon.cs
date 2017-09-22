@@ -62,6 +62,7 @@ namespace HAIAPI.Models
         public string WardName { get; set; }
         public string Country { get; set; }
         public Nullable<int> BirthDay { get; set; }
+        public string ProvinceCode { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AgencySavePoint> AgencySavePoints { get; set; }

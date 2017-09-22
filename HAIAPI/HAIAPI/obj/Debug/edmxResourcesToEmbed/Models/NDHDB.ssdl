@@ -237,6 +237,7 @@
     <Property Name="WardName" Type="nvarchar" MaxLength="512" />
     <Property Name="Country" Type="nvarchar" MaxLength="128" />
     <Property Name="BirthDay" Type="int" />
+    <Property Name="ProvinceCode" Type="nvarchar" MaxLength="5" />
   </EntityType>
   <EntityType Name="DecorGroup">
     <Key>

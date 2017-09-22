@@ -242,6 +242,7 @@
           <Property Name="WardName" Type="nvarchar" MaxLength="512" />
           <Property Name="Country" Type="nvarchar" MaxLength="128" />
           <Property Name="BirthDay" Type="int" />
+          <Property Name="ProvinceCode" Type="nvarchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="DecorGroup">
           <Key>
@@ -2017,6 +2018,7 @@
           <NavigationProperty Name="EventCustomerFarmers" Relationship="Self.FK__EventCust__CInfo__3F6663D5" FromRole="CInfoCommon" ToRole="EventCustomerFarmer" />
           <NavigationProperty Name="FarmerInfoes" Relationship="Self.FK__FarmerInf__InfoI__7EF6D905" FromRole="CInfoCommon" ToRole="FarmerInfo" />
           <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="CInfoCommon" ToRole="MSGPoint" />
+          <Property Name="ProvinceCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DecorGroup">
           <Key>
@@ -3430,14 +3432,14 @@
             <Parameter Name="staffId" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="procduct_item_detail" ReturnType="Collection(NDHDB1Model.procduct_item_detail_Result)">
-            <Parameter Name="id" Mode="In" Type="String" />
+          <Parameter Name="id" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="product_list" ReturnType="Collection(NDHDB1Model.product_list_Result)" />
         </EntityContainer>
         <ComplexType Name="checkin_calendartype_group_Result">
-          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
           <Property Type="String" Name="Name" Nullable="true" MaxLength="512" />
           <Property Type="Int32" Name="countday" Nullable="true" />
+          <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
         </ComplexType>
         <ComplexType Name="checkin_getcalendar_Result">
           <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
@@ -3718,6 +3720,7 @@
           <EntitySetMapping Name="CInfoCommons">
             <EntityTypeMapping TypeName="NDHDB1Model.CInfoCommon">
               <MappingFragment StoreEntitySet="CInfoCommon">
+                <ScalarProperty Name="ProvinceCode" ColumnName="ProvinceCode" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CName" ColumnName="CName" />
                 <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
@@ -4396,9 +4399,9 @@
           <FunctionImportMapping FunctionImportName="checkin_calendartype_group" FunctionName="NDHDB1Model.Store.checkin_calendartype_group">
             <ResultMapping>
               <ComplexTypeMapping TypeName="NDHDB1Model.checkin_calendartype_group_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="countday" ColumnName="countday" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -644,7 +644,7 @@ namespace NDHSITE.Controllers
                         else
                         {
                             newCode = GetAgencyCodeTemp(branch, "C2Temp");
-                            c2.IsActive = 0;
+                            c2.IsActive = 1;
                         }
 
                         c2.Code = newCode;
@@ -654,7 +654,8 @@ namespace NDHSITE.Controllers
 
                         var staffInfo = db.HaiStaffs.Where(p => p.Code == staffCode.Trim()).FirstOrDefault();
 
-                        if (check == null && staffInfo != null && !String.IsNullOrEmpty(phone))
+                        // if (check == null && staffInfo != null && !String.IsNullOrEmpty(phone))
+                        if (check == null && staffInfo != null)
                         {
                             db.CInfoCommons.Add(cInfo);
                             db.SaveChanges();

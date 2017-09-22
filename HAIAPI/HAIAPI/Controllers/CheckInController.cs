@@ -294,6 +294,7 @@ namespace HAIAPI.Controllers
 
                 if (allItemInDay.Count > 0)
                 {
+
                     itemDay.type = allItemInDay[0].TypeId;
                     itemDay.notes = allItemInDay[0].Notes;
                     itemDay.typeName = allItemInDay[0].TypeName;
@@ -331,7 +332,7 @@ namespace HAIAPI.Controllers
             {
                 calendarShowTypeDetails.Add(new CalendarShowTypeDetail()
                 {
-                    typeId = item.Id,
+                    typeId = item.TypeId,
                     typeName = item.Name,
                     number = Convert.ToInt32(item.countday)
                 });

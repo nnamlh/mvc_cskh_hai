@@ -204,6 +204,7 @@
     <EntitySetMapping Name="CInfoCommons">
       <EntityTypeMapping TypeName="NDHDB1Model.CInfoCommon">
         <MappingFragment StoreEntitySet="CInfoCommon">
+          <ScalarProperty Name="ProvinceCode" ColumnName="ProvinceCode" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CName" ColumnName="CName" />
           <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
@@ -882,9 +883,9 @@
     <FunctionImportMapping FunctionImportName="checkin_calendartype_group" FunctionName="NDHDB1Model.Store.checkin_calendartype_group">
       <ResultMapping>
         <ComplexTypeMapping TypeName="NDHDB1Model.checkin_calendartype_group_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="countday" ColumnName="countday" />
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

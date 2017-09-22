@@ -922,9 +922,9 @@
     <FunctionImportMapping FunctionImportName="checkin_calendartype_group" FunctionName="NDHDBModel.Store.checkin_calendartype_group">
       <ResultMapping>
         <ComplexTypeMapping TypeName="NDHDBModel.checkin_calendartype_group_Result">
-          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="countday" ColumnName="countday" />
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

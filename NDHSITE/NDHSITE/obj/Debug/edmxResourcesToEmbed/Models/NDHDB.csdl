@@ -1618,9 +1618,9 @@
     <Property Type="String" Name="Deputy" Nullable="true" MaxLength="255" />
   </ComplexType>
   <ComplexType Name="checkin_calendartype_group_Result">
-    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
     <Property Type="String" Name="Name" Nullable="true" MaxLength="512" />
     <Property Type="Int32" Name="countday" Nullable="true" />
+    <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
   </ComplexType>
   <EntityType Name="StaffWithC2">
     <Key>

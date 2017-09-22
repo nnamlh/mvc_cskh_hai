@@ -258,6 +258,7 @@
     <NavigationProperty Name="EventCustomerFarmers" Relationship="Self.FK__EventCust__CInfo__3F6663D5" FromRole="CInfoCommon" ToRole="EventCustomerFarmer" />
     <NavigationProperty Name="FarmerInfoes" Relationship="Self.FK__FarmerInf__InfoI__7EF6D905" FromRole="CInfoCommon" ToRole="FarmerInfo" />
     <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="CInfoCommon" ToRole="MSGPoint" />
+    <Property Name="ProvinceCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="DecorGroup">
     <Key>
@@ -1676,9 +1677,9 @@
     <FunctionImport Name="product_list" ReturnType="Collection(NDHDB1Model.product_list_Result)" />
   </EntityContainer>
   <ComplexType Name="checkin_calendartype_group_Result">
-    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
     <Property Type="String" Name="Name" Nullable="true" MaxLength="512" />
     <Property Type="Int32" Name="countday" Nullable="true" />
+    <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
   </ComplexType>
   <ComplexType Name="checkin_getcalendar_Result">
     <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
