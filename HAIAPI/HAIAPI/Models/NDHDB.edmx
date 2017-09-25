@@ -641,6 +641,9 @@
           <Property Name="Forcus" Type="int" />
           <Property Name="New" Type="int" />
           <Property Name="CreateTime" Type="datetime" />
+          <Property Name="Price" Type="float" />
+          <Property Name="PVat" Type="float" />
+          <Property Name="ShortDescibe" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ProductSeri">
           <Key>
@@ -2450,6 +2453,9 @@
           <NavigationProperty Name="ProductImages" Relationship="Self.FK__ProductIm__Produ__64ECEE3F" FromRole="ProductInfo" ToRole="ProductImage" />
           <NavigationProperty Name="ProductSeris" Relationship="Self.FK__ProductSe__Produ__10416098" FromRole="ProductInfo" ToRole="ProductSeri" />
           <NavigationProperty Name="PTrackings" Relationship="Self.FK__PTracking__Produ__00FF1D08" FromRole="ProductInfo" ToRole="PTracking" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="PVat" Type="Double" />
+          <Property Name="ShortDescibe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ProductSeri">
           <Key>
@@ -3502,14 +3508,16 @@
           <Property Type="String" Name="PCode" Nullable="true" MaxLength="128" />
           <Property Type="String" Name="Barcode" Nullable="true" MaxLength="32" />
           <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
-          <Property Type="String" Name="Producer" Nullable="true" MaxLength="256" />
-          <Property Type="String" Name="CommerceName" Nullable="true" />
-          <Property Type="String" Name="Activce" Nullable="true" />
           <Property Type="String" Name="Thumbnail" Nullable="true" />
           <Property Type="Int32" Name="New" Nullable="true" />
           <Property Type="Int32" Name="Forcus" Nullable="true" />
           <Property Type="String" Name="GroupId" Nullable="true" MaxLength="128" />
           <Property Type="String" Name="GroupName" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="ShortDescibe" Nullable="true" />
+          <Property Type="Double" Name="Price" Nullable="true" />
+          <Property Type="Double" Name="PVat" Nullable="true" />
+          <Property Type="String" Name="Unit" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="QuantityBox" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4130,6 +4138,9 @@
           <EntitySetMapping Name="ProductInfoes">
             <EntityTypeMapping TypeName="NDHDB1Model.ProductInfo">
               <MappingFragment StoreEntitySet="ProductInfo">
+                <ScalarProperty Name="ShortDescibe" ColumnName="ShortDescibe" />
+                <ScalarProperty Name="PVat" ColumnName="PVat" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PName" ColumnName="PName" />
                 <ScalarProperty Name="PCode" ColumnName="PCode" />
@@ -4476,14 +4487,16 @@
                 <ScalarProperty Name="PCode" ColumnName="PCode" />
                 <ScalarProperty Name="Barcode" ColumnName="Barcode" />
                 <ScalarProperty Name="PName" ColumnName="PName" />
-                <ScalarProperty Name="Producer" ColumnName="Producer" />
-                <ScalarProperty Name="CommerceName" ColumnName="CommerceName" />
-                <ScalarProperty Name="Activce" ColumnName="Activce" />
                 <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
                 <ScalarProperty Name="New" ColumnName="New" />
                 <ScalarProperty Name="Forcus" ColumnName="Forcus" />
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="ShortDescibe" ColumnName="ShortDescibe" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PVat" ColumnName="PVat" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="QuantityBox" ColumnName="QuantityBox" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

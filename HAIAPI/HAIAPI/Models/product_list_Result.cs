@@ -17,13 +17,15 @@ namespace HAIAPI.Models
         public string PCode { get; set; }
         public string Barcode { get; set; }
         public string PName { get; set; }
-        public string Producer { get; set; }
-        public string CommerceName { get; set; }
-        public string Activce { get; set; }
         public string Thumbnail { get; set; }
         public Nullable<int> New { get; set; }
         public Nullable<int> Forcus { get; set; }
         public string GroupId { get; set; }
         public string GroupName { get; set; }
+        public string ShortDescibe { get; set; }
+        public Nullable<double> Price { get; set; }
+        public Nullable<double> PVat { get; set; }
+        public string Unit { get; set; }
+        public Nullable<int> QuantityBox { get; set; }
     }
 }

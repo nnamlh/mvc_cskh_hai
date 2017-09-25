@@ -636,6 +636,9 @@
     <Property Name="Forcus" Type="int" />
     <Property Name="New" Type="int" />
     <Property Name="CreateTime" Type="datetime" />
+    <Property Name="Price" Type="float" />
+    <Property Name="PVat" Type="float" />
+    <Property Name="ShortDescibe" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="ProductSeri">
     <Key>

@@ -23,9 +23,11 @@ namespace HAIAPI.Models
         public string code { get; set; }
         public string barcode { get; set; }
         public string name { get; set; }
-        public string producer { get; set; }
-        public string commerceName { get; set; }
-        public string activce { get; set; }
+        public string short_describe { get; set; }
+        public double? price;
+        public string unit { get; set; }
+        public int? quantity_box { get; set; }
+        public double? vat { get; set; }
         public Nullable<int> isNew { get; set; }
         public Nullable<int> isForcus { get; set; }
         public string groupId { get; set; }
@@ -35,7 +37,10 @@ namespace HAIAPI.Models
 
     public class ProductDetailResult : ProductInfoResult
     {
-        public string unit { get; set; }
+        public string producer { get; set; }
+        public string commerceName { get; set; }
+        public string activce { get; set; }
+        
         public string describe { get; set; }
 
         public string uses { get; set; }

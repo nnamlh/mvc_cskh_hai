@@ -161,15 +161,17 @@ namespace HAIAPI.Controllers
                     id = item.Id,
                     code = item.PCode,
                     name = item.PName,
-                    activce = item.Activce,
                     barcode = item.Barcode,
-                    commerceName = item.CommerceName,
                     isForcus = item.Forcus,
                     groupId = item.GroupId,
                     groupName = item.GroupName,
                     image = HaiUtil.HostName + item.Thumbnail,
                     isNew = item.New,
-                    producer = item.Producer
+                    price = item.Price == null? 0:item.Price,
+                    quantity_box = item.QuantityBox == null ? 0:item.QuantityBox,
+                    short_describe = item.ShortDescibe,
+                    unit = item.Unit,
+                    vat = item.PVat == null ? 0:item.PVat
                 });
             }
 

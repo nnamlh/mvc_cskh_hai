@@ -614,6 +614,9 @@
     <EntitySetMapping Name="ProductInfoes">
       <EntityTypeMapping TypeName="NDHDB1Model.ProductInfo">
         <MappingFragment StoreEntitySet="ProductInfo">
+          <ScalarProperty Name="ShortDescibe" ColumnName="ShortDescibe" />
+          <ScalarProperty Name="PVat" ColumnName="PVat" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="PName" ColumnName="PName" />
           <ScalarProperty Name="PCode" ColumnName="PCode" />
@@ -960,14 +963,16 @@
           <ScalarProperty Name="PCode" ColumnName="PCode" />
           <ScalarProperty Name="Barcode" ColumnName="Barcode" />
           <ScalarProperty Name="PName" ColumnName="PName" />
-          <ScalarProperty Name="Producer" ColumnName="Producer" />
-          <ScalarProperty Name="CommerceName" ColumnName="CommerceName" />
-          <ScalarProperty Name="Activce" ColumnName="Activce" />
           <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
           <ScalarProperty Name="New" ColumnName="New" />
           <ScalarProperty Name="Forcus" ColumnName="Forcus" />
           <ScalarProperty Name="GroupId" ColumnName="GroupId" />
           <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="ShortDescibe" ColumnName="ShortDescibe" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="PVat" ColumnName="PVat" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="QuantityBox" ColumnName="QuantityBox" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
