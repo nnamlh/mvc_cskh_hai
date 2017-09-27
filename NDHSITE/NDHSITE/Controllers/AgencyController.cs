@@ -558,7 +558,7 @@ namespace NDHSITE.Controllers
                     for (int i = 2; i <= totalRows; i++)
                     {
                         string code = Convert.ToString(sheet.Cells[i, 2].Value);
-                        string provinceCode = Convert.ToString(sheet.Cells[i, 11].Value);
+                       
                         string branch = Convert.ToString(sheet.Cells[i, 3].Value);
                       
                         string staffCode = Convert.ToString(sheet.Cells[i, 6].Value);
@@ -577,16 +577,17 @@ namespace NDHSITE.Controllers
 
                         string addressInfo = Convert.ToString(sheet.Cells[i, 9].Value);
 
-                        string province = Convert.ToString(sheet.Cells[i, 12].Value);
+                        string province = Convert.ToString(sheet.Cells[i, 11].Value);
+                        string provinceCode = Convert.ToString(sheet.Cells[i, 12].Value);
+
                         string district = Convert.ToString(sheet.Cells[i, 10].Value);
-                        string rank = Convert.ToString(sheet.Cells[i, 15].Value);
+                        string rank = Convert.ToString(sheet.Cells[i, 17].Value);
                         string group = Convert.ToString(sheet.Cells[i, 1].Value);
-                        string c1Code = Convert.ToString(sheet.Cells[i, 14].Value).Trim();
+                        string c1Code1 = Convert.ToString(sheet.Cells[i, 14].Value).Trim();
+                        string c1Code2 = Convert.ToString(sheet.Cells[i, 15].Value).Trim();
+                        string c1Code3 = Convert.ToString(sheet.Cells[i, 16].Value).Trim();
 
-                        var c1Check = db.C1Info.Where(p => p.Code == c1Code).FirstOrDefault();
-
-                        if (c1Check == null)
-                            c1Check = db.C1Info.Where(p => p.Code == "0000000000").FirstOrDefault();
+                        var c1No = db.C1Info.Where(p => p.Code == "0000000000").FirstOrDefault();
 
                         var cInfo = new CInfoCommon()
                         {
@@ -614,13 +615,25 @@ namespace NDHSITE.Controllers
                         {
                             Id = Guid.NewGuid().ToString(),
                             InfoId = cInfo.Id,
-                            C1Id = c1Check.Id,
+                            C1Id = c1No.Id,
                             StoreName = storeName,
-                            Deputy = deputy
+                            Deputy = deputy,
+                            IsActive = 1
                         };
 
-                        string newCode = "";
+                        string newCode = GetAgencyCodeTemp(provinceCode);
+                        var saveOldKey = new OldKeySave()
+                        {
+                            CodeType = "C2",
+                            CreateTime = DateTime.Now,
+                            Id = Guid.NewGuid().ToString(),
+                            OldCode = code,
+                            NewCode = newCode
+                        };
+                        db.OldKeySaves.Add(saveOldKey);
+                        db.SaveChanges();
 
+                        /*
                         if (!String.IsNullOrEmpty(code))
                         {
                             // subString code
@@ -645,18 +658,21 @@ namespace NDHSITE.Controllers
                         {
                             newCode = GetAgencyCodeTemp(branch, "C2Temp");
                             c2.IsActive = 1;
-                        }
+                        }*/
 
                         c2.Code = newCode;
                         cInfo.CCode = newCode;
 
                         var check = db.C2Info.Where(p => p.Code == newCode).FirstOrDefault();
 
-                        var staffInfo = db.HaiStaffs.Where(p => p.Code == staffCode.Trim()).FirstOrDefault();
+                      
 
                         // if (check == null && staffInfo != null && !String.IsNullOrEmpty(phone))
-                        if (check == null && staffInfo != null)
+                        if (!String.IsNullOrEmpty(staffCode))
                         {
+
+                            var staffInfo = db.HaiStaffs.Where(p => p.Code.Contains(staffCode.Trim())).FirstOrDefault();
+
                             db.CInfoCommons.Add(cInfo);
                             db.SaveChanges();
 
@@ -679,6 +695,53 @@ namespace NDHSITE.Controllers
                             };
                             db.StaffWithC2.Add(staffC2);
                             db.SaveChanges();
+
+                            // input c1
+                            var checkC11 = db.C1Info.Where(p => p.Code == c1Code1).FirstOrDefault();
+                            if (checkC11 != null)
+                            {
+                                var c2c1 = new C2C1()
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    C1Code = checkC11.Code,
+                                    C2Code = newCode,
+                                    ModifyDate = DateTime.Now,
+                                    Priority = 1
+                                };
+                                db.C2C1.Add(c2c1);
+                                db.SaveChanges();
+                            }
+
+                            var checkC12 = db.C1Info.Where(p => p.Code == c1Code2).FirstOrDefault();
+                            if (checkC12 != null)
+                            {
+                                var c2c1 = new C2C1()
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    C1Code = checkC12.Code,
+                                    C2Code = newCode,
+                                    ModifyDate = DateTime.Now,
+                                    Priority = 0
+                                };
+                                db.C2C1.Add(c2c1);
+                                db.SaveChanges();
+                            }
+
+                            var checkC13 = db.C1Info.Where(p => p.Code == c1Code3).FirstOrDefault();
+                            if (checkC13 != null)
+                            {
+                                var c2c1 = new C2C1()
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    C1Code = checkC13.Code,
+                                    C2Code = newCode,
+                                    ModifyDate = DateTime.Now,
+                                    Priority = 0
+                                };
+                                db.C2C1.Add(c2c1);
+                                db.SaveChanges();
+                            }
+
                         }
                         else
                         {
@@ -755,9 +818,10 @@ namespace NDHSITE.Controllers
             string pattern = @"^-*[0-9,\.?\-?\(?\)?\ ]+$";
             return Regex.IsMatch(number, pattern);
         }
-        private string GetAgencyCodeTemp(string branch, string type)
+        private string GetAgencyCodeTemp(string province)
         {
-            //"C2Temp"
+            string type = "C2" + province;
+
             int? number = db.StoreAgencyIds.Where(p => p.TypeStore == type).Max(p => p.CountNumber);
 
             if (number == null)
@@ -776,14 +840,14 @@ namespace NDHSITE.Controllers
             else
                 temp = number + "";
 
-            string code = "T" + branch + temp;
+            string code =  province + temp;
 
             var store = new StoreAgencyId()
             {
                 Id = code,
                 IsUse = 1,
                 CountNumber = number,
-                TypeStore = "C2Temp"
+                TypeStore = type
             };
 
             try
@@ -793,7 +857,7 @@ namespace NDHSITE.Controllers
             }
             catch
             {
-                code = GetAgencyCodeTemp(branch, type);
+                code = GetAgencyCodeTemp(province);
             }
 
             return code;

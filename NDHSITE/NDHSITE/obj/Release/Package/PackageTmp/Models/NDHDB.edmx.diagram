@@ -120,6 +120,7 @@
         <EntityTypeShape EntityType="NDHDBModel.DecorImage" Width="1.5" PointX="23.375" PointY="15.75" />
         <AssociationConnector Association="NDHDBModel.FK__DecorImag__Staff__742F31CF" />
         <EntityTypeShape EntityType="NDHDBModel.OldKeySave" Width="1.5" PointX="23.375" PointY="20.75" />
+        <EntityTypeShape EntityType="NDHDBModel.C2C1" Width="1.5" PointX="23.375" PointY="23.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

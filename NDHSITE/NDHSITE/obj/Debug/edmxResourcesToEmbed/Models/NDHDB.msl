@@ -969,6 +969,9 @@
     <EntitySetMapping Name="ProductInfoes">
       <EntityTypeMapping TypeName="NDHDBModel.ProductInfo">
         <MappingFragment StoreEntitySet="ProductInfo">
+          <ScalarProperty Name="ShortDescibe" ColumnName="ShortDescibe" />
+          <ScalarProperty Name="PVat" ColumnName="PVat" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
           <ScalarProperty Name="New" ColumnName="New" />
           <ScalarProperty Name="Forcus" ColumnName="Forcus" />
@@ -1032,6 +1035,17 @@
           <ScalarProperty Name="CodeType" ColumnName="CodeType" />
           <ScalarProperty Name="NewCode" ColumnName="NewCode" />
           <ScalarProperty Name="OldCode" ColumnName="OldCode" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="C2C1">
+      <EntityTypeMapping TypeName="NDHDBModel.C2C1">
+        <MappingFragment StoreEntitySet="C2C1">
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="C1Code" ColumnName="C1Code" />
+          <ScalarProperty Name="C2Code" ColumnName="C2Code" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

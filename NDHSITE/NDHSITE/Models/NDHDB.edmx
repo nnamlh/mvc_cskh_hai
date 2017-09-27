@@ -171,6 +171,16 @@
           <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
           <Property Name="HaiBrandId" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="C2C1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="C2Code" Type="nvarchar" MaxLength="128" />
+          <Property Name="C1Code" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifyDate" Type="datetime" />
+          <Property Name="Priority" Type="int" />
+        </EntityType>
         <EntityType Name="C2Info">
           <Key>
             <PropertyRef Name="Id" />
@@ -684,6 +694,9 @@
           <Property Name="Forcus" Type="int" />
           <Property Name="New" Type="int" />
           <Property Name="CreateTime" Type="datetime" />
+          <Property Name="Price" Type="float" />
+          <Property Name="PVat" Type="float" />
+          <Property Name="ShortDescibe" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="ProductSeri">
           <Key>
@@ -1564,6 +1577,7 @@
           <EntitySet Name="BarcodeHistory" EntityType="Self.BarcodeHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BasicNotification" EntityType="Self.BasicNotification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="C1Info" EntityType="Self.C1Info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="C2C1" EntityType="Self.C2C1" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="C2Info" EntityType="Self.C2Info" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CalendarInfo" EntityType="Self.CalendarInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CalendarType" EntityType="Self.CalendarType" Schema="dbo" store:Type="Tables" />
@@ -3253,6 +3267,7 @@
             <Parameter Name="staffId" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="OldKeySaves" EntityType="NDHDBModel.OldKeySave" />
+          <EntitySet Name="C2C1" EntityType="NDHDBModel.C2C1" />
         </EntityContainer>
         <ComplexType Name="report_event_agency_Result">
           <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -3555,6 +3570,9 @@
           <Property Name="Forcus" Type="Int32" />
           <Property Name="New" Type="Int32" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="PVat" Type="Double" />
+          <Property Name="ShortDescibe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK__EventProd__Produ__4EDDB18F">
           <End Type="NDHDBModel.ProductInfo" Role="ProductInfo" Multiplicity="1" />
@@ -3662,6 +3680,16 @@
           <Property Name="NewCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="CodeType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="C2C1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="C2Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="C1Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <Property Name="Priority" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4637,6 +4665,9 @@
           <EntitySetMapping Name="ProductInfoes">
             <EntityTypeMapping TypeName="NDHDBModel.ProductInfo">
               <MappingFragment StoreEntitySet="ProductInfo">
+                <ScalarProperty Name="ShortDescibe" ColumnName="ShortDescibe" />
+                <ScalarProperty Name="PVat" ColumnName="PVat" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="New" ColumnName="New" />
                 <ScalarProperty Name="Forcus" ColumnName="Forcus" />
@@ -4700,6 +4731,17 @@
                 <ScalarProperty Name="CodeType" ColumnName="CodeType" />
                 <ScalarProperty Name="NewCode" ColumnName="NewCode" />
                 <ScalarProperty Name="OldCode" ColumnName="OldCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C2C1">
+            <EntityTypeMapping TypeName="NDHDBModel.C2C1">
+              <MappingFragment StoreEntitySet="C2C1">
+                <ScalarProperty Name="Priority" ColumnName="Priority" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="C1Code" ColumnName="C1Code" />
+                <ScalarProperty Name="C2Code" ColumnName="C2Code" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

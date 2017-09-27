@@ -49,6 +49,9 @@ namespace NDHSITE.Models
         public Nullable<int> Forcus { get; set; }
         public Nullable<int> New { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
+        public Nullable<double> Price { get; set; }
+        public Nullable<double> PVat { get; set; }
+        public string ShortDescibe { get; set; }
     
         public virtual ICollection<EventProduct> EventProducts { get; set; }
         public virtual ICollection<MSGPoint> MSGPoints { get; set; }

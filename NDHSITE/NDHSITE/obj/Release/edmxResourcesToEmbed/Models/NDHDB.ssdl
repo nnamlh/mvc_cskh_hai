@@ -166,6 +166,16 @@
     <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
     <Property Name="HaiBrandId" Type="nvarchar" MaxLength="128" />
   </EntityType>
+  <EntityType Name="C2C1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="C2Code" Type="nvarchar" MaxLength="128" />
+    <Property Name="C1Code" Type="nvarchar" MaxLength="128" />
+    <Property Name="ModifyDate" Type="datetime" />
+    <Property Name="Priority" Type="int" />
+  </EntityType>
   <EntityType Name="C2Info">
     <Key>
       <PropertyRef Name="Id" />
@@ -679,6 +689,9 @@
     <Property Name="Forcus" Type="int" />
     <Property Name="New" Type="int" />
     <Property Name="CreateTime" Type="datetime" />
+    <Property Name="Price" Type="float" />
+    <Property Name="PVat" Type="float" />
+    <Property Name="ShortDescibe" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="ProductSeri">
     <Key>
@@ -1559,6 +1572,7 @@
     <EntitySet Name="BarcodeHistory" EntityType="Self.BarcodeHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BasicNotification" EntityType="Self.BasicNotification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="C1Info" EntityType="Self.C1Info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="C2C1" EntityType="Self.C2C1" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="C2Info" EntityType="Self.C2Info" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CalendarInfo" EntityType="Self.CalendarInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CalendarType" EntityType="Self.CalendarType" Schema="dbo" store:Type="Tables" />
