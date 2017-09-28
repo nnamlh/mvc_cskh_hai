@@ -261,6 +261,9 @@
     <Compile Include="Models\C1Info.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\C2C1.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\C2Info.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -383,6 +386,9 @@
       <DependentUpon>NDHDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\NotificationTopic.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OldKeySave.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PHistory.cs">

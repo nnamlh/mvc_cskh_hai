@@ -614,6 +614,9 @@
     <EntitySetMapping Name="ProductInfoes">
       <EntityTypeMapping TypeName="NDHDB1Model.ProductInfo">
         <MappingFragment StoreEntitySet="ProductInfo">
+          <ScalarProperty Name="ShortDescibe" ColumnName="ShortDescibe" />
+          <ScalarProperty Name="PVat" ColumnName="PVat" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="PName" ColumnName="PName" />
           <ScalarProperty Name="PCode" ColumnName="PCode" />
@@ -960,16 +963,40 @@
           <ScalarProperty Name="PCode" ColumnName="PCode" />
           <ScalarProperty Name="Barcode" ColumnName="Barcode" />
           <ScalarProperty Name="PName" ColumnName="PName" />
-          <ScalarProperty Name="Producer" ColumnName="Producer" />
-          <ScalarProperty Name="CommerceName" ColumnName="CommerceName" />
-          <ScalarProperty Name="Activce" ColumnName="Activce" />
           <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
           <ScalarProperty Name="New" ColumnName="New" />
           <ScalarProperty Name="Forcus" ColumnName="Forcus" />
           <ScalarProperty Name="GroupId" ColumnName="GroupId" />
           <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="ShortDescibe" ColumnName="ShortDescibe" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="PVat" ColumnName="PVat" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="QuantityBox" ColumnName="QuantityBox" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="C2C1">
+      <EntityTypeMapping TypeName="NDHDB1Model.C2C1">
+        <MappingFragment StoreEntitySet="C2C1">
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+          <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+          <ScalarProperty Name="C1Code" ColumnName="C1Code" />
+          <ScalarProperty Name="C2Code" ColumnName="C2Code" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OldKeySaves">
+      <EntityTypeMapping TypeName="NDHDB1Model.OldKeySave">
+        <MappingFragment StoreEntitySet="OldKeySave">
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="CodeType" ColumnName="CodeType" />
+          <ScalarProperty Name="NewCode" ColumnName="NewCode" />
+          <ScalarProperty Name="OldCode" ColumnName="OldCode" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

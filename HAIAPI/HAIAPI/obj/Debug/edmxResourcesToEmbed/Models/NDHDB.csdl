@@ -690,6 +690,9 @@
     <NavigationProperty Name="ProductImages" Relationship="Self.FK__ProductIm__Produ__64ECEE3F" FromRole="ProductInfo" ToRole="ProductImage" />
     <NavigationProperty Name="ProductSeris" Relationship="Self.FK__ProductSe__Produ__10416098" FromRole="ProductInfo" ToRole="ProductSeri" />
     <NavigationProperty Name="PTrackings" Relationship="Self.FK__PTracking__Produ__00FF1D08" FromRole="ProductInfo" ToRole="PTracking" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="PVat" Type="Double" />
+    <Property Name="ShortDescibe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="ProductSeri">
     <Key>
@@ -1675,6 +1678,8 @@
       <Parameter Name="id" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="product_list" ReturnType="Collection(NDHDB1Model.product_list_Result)" />
+    <EntitySet Name="C2C1" EntityType="NDHDB1Model.C2C1" />
+    <EntitySet Name="OldKeySaves" EntityType="NDHDB1Model.OldKeySave" />
   </EntityContainer>
   <ComplexType Name="checkin_calendartype_group_Result">
     <Property Type="String" Name="Name" Nullable="true" MaxLength="512" />
@@ -1742,13 +1747,35 @@
     <Property Type="String" Name="PCode" Nullable="true" MaxLength="128" />
     <Property Type="String" Name="Barcode" Nullable="true" MaxLength="32" />
     <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
-    <Property Type="String" Name="Producer" Nullable="true" MaxLength="256" />
-    <Property Type="String" Name="CommerceName" Nullable="true" />
-    <Property Type="String" Name="Activce" Nullable="true" />
     <Property Type="String" Name="Thumbnail" Nullable="true" />
     <Property Type="Int32" Name="New" Nullable="true" />
     <Property Type="Int32" Name="Forcus" Nullable="true" />
     <Property Type="String" Name="GroupId" Nullable="true" MaxLength="128" />
     <Property Type="String" Name="GroupName" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="ShortDescibe" Nullable="true" />
+    <Property Type="Double" Name="Price" Nullable="true" />
+    <Property Type="Double" Name="PVat" Nullable="true" />
+    <Property Type="String" Name="Unit" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="QuantityBox" Nullable="true" />
   </ComplexType>
+  <EntityType Name="C2C1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="C2Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="C1Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+    <Property Name="Priority" Type="Int32" />
+  </EntityType>
+  <EntityType Name="OldKeySave">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="OldCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="NewCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CodeType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+  </EntityType>
 </Schema>

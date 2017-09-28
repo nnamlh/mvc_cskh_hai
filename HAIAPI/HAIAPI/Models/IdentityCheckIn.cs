@@ -17,6 +17,24 @@ namespace HAIAPI.Models
         public List<string> month { get; set; }
     }
 
+    public class CheckCalendarUpdateResult : ResultInfo
+    {
+        public List<CalendarType> status { get; set; }
+
+    }
+
+
+    public class CalendarUpdateRequest : RequestInfo
+    {
+        public int month { get; set; }
+
+        public int year { get; set; }
+
+        public CalendarCreateInfo item { get; set; }
+
+
+    }
+
     public class CalendarCreateRequest : RequestInfo
     {
 
@@ -49,7 +67,7 @@ namespace HAIAPI.Models
 
         public List<CalendarShowTypeDetail> typeDetail { get; set; }
 
-        public List<CalendarShowItem> items { get; set; } 
+        public List<CalendarShowItem> items { get; set; }
     }
 
     public class CalendarShowTypeDetail

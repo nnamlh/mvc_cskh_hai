@@ -115,6 +115,8 @@
         <AssociationConnector Association="NDHDB1Model.MobileRole" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDB1Model.ProcessWithRole" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDB1Model.StaffWithC1" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="NDHDB1Model.C2C1" Width="1.5" PointX="17.375" PointY="21.75" />
+        <EntityTypeShape EntityType="NDHDB1Model.OldKeySave" Width="1.5" PointX="21.375" PointY="19.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
