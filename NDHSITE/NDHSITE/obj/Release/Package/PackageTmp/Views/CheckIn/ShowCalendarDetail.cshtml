@@ -75,6 +75,16 @@
                     else if (calendar.CStatus == 2)
                     {
                         <h4>Đang chỉnh sửa</h4>
+                        <form method="post" action="/checkin/approvecalendar" onsubmit="if(!confirm('Xác nhận lịch?')){return false;}">
+                            <input type="hidden" name="id" value="@calendar.Id" />
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Xác nhận</button>
+                            </div>
+                            <div class="form-group">
+                                <label>Ghi chú</label>
+                                <textarea type="text" name="notes" class="form-control"></textarea>
+                            </div>
+                        </form>
                     }
                 </div>
             </div>

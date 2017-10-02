@@ -68,9 +68,10 @@ namespace HAIAPI.Controllers
 
                 result.function = GetUserFunction(paser.user, "main");
 
-                if (paser.isUpdate == 1)
+                if(paser.isUpdate == 1)
                 {
                     result.products = GetProductCodeInfo();
+                    result.productGroups = GetGroupProduct();
                 }
 
                 if (role.GroupRole == "HAI")
@@ -111,7 +112,7 @@ namespace HAIAPI.Controllers
                     result.c1 = new List<AgencyInfo>();
                 }
                
-                result.productGroups = GetGroupProduct();
+               
                 var notiReg = db.RegFirebases.Where(p => p.UserLogin == paser.user).FirstOrDefault();
 
                 if (notiReg == null)
