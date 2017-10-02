@@ -1418,6 +1418,11 @@
     </FunctionImport>
     <EntitySet Name="OldKeySaves" EntityType="NDHDBModel.OldKeySave" />
     <EntitySet Name="C2C1" EntityType="NDHDBModel.C2C1" />
+    <FunctionImport Name="checkin_count_day_agency" ReturnType="Collection(NDHDBModel.checkin_count_day_agency_Result)">
+      <Parameter Name="month" Mode="In" Type="Int32" />
+      <Parameter Name="year" Mode="In" Type="Int32" />
+      <Parameter Name="staffId" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="report_event_agency_Result">
     <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -1841,4 +1846,11 @@
     <Property Name="ModifyDate" Type="DateTime" Precision="3" />
     <Property Name="Priority" Type="Int32" />
   </EntityType>
+  <ComplexType Name="checkin_count_day_agency_Result">
+    <Property Type="String" Name="AgencyName" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="AgencyDeputy" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="AgencyCode" Nullable="true" MaxLength="32" />
+    <Property Type="Int32" Name="InPlan" Nullable="true" />
+    <Property Type="Int32" Name="CountDay" Nullable="true" />
+  </ComplexType>
 </Schema>

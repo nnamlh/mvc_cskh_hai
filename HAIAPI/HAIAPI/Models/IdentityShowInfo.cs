@@ -55,4 +55,13 @@ namespace HAIAPI.Models
 
         public List<string> images { get; set; }
     }
+
+    public class CheckStaffResult : ResultInfo
+    {
+        public string avatar { get; set; }
+
+        public string signature { get; set; }
+
+        public string status { get; set; }
+    }
 }

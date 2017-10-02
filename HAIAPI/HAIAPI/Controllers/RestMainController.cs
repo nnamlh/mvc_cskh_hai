@@ -355,7 +355,30 @@ namespace HAIAPI.Controllers
 
             return Convert.ToInt32(role.ShowInfoRole);
         }
+        protected ProductInfo GetProduct(string barcode)
+        {
 
+            if (String.IsNullOrEmpty(barcode))
+                return null;
+
+            if (barcode.Length < 17)
+                return null;
+
+            string countryCode = barcode.Substring(0, 3);
+            if (countryCode != "893")
+                return null;
+
+            string companyCode = barcode.Substring(3, 5);
+            if (companyCode != "52433")
+                return null;
+
+            string productCode = barcode.Substring(8, 2);
+
+            var product = db.ProductInfoes.Where(p => p.Barcode == productCode).FirstOrDefault();
+
+            return product;
+
+        }
 
     }
 }

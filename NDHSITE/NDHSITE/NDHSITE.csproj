@@ -295,6 +295,9 @@
     <Compile Include="Models\checkin_calendartype_group_Result.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\checkin_count_day_agency_Result.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\checkin_getcalendar_Result.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>

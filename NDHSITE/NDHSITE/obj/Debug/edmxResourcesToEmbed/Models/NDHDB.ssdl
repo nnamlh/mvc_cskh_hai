@@ -1528,6 +1528,11 @@
     <Parameter Name="year" Type="int" Mode="In" />
     <Parameter Name="staffId" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="checkin_count_day_agency" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="month" Type="int" Mode="In" />
+    <Parameter Name="year" Type="int" Mode="In" />
+    <Parameter Name="staffId" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="checkin_getcalendar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="month" Type="int" Mode="In" />
     <Parameter Name="year" Type="int" Mode="In" />

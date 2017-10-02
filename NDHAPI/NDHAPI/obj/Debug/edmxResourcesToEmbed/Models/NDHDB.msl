@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+<Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
   <EntityContainerMapping StorageEntityContainer="NDHDBModelStoreContainer" CdmEntityContainer="NDHDBEntities">
     <EntitySetMapping Name="AgencySavePoints">
       <EntityTypeMapping TypeName="NDHDBModel.AgencySavePoint">
@@ -411,6 +411,7 @@
     <EntitySetMapping Name="HaiStaffs">
       <EntityTypeMapping TypeName="NDHDBModel.HaiStaff">
         <MappingFragment StoreEntitySet="HaiStaff">
+          <ScalarProperty Name="GPSDistance" ColumnName="GPSDistance" />
           <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FullName" ColumnName="FullName" />
@@ -775,52 +776,6 @@
         <ScalarProperty Name="Id" ColumnName="C2Id" />
       </EndProperty>
     </AssociationSetMapping>
-    <EntitySetMapping Name="CheckInCalendarStatus">
-      <EntityTypeMapping TypeName="NDHDBModel.CheckInCalendarStatu">
-        <MappingFragment StoreEntitySet="CheckInCalendarStatus">
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CheckInCalendarHistories">
-      <EntityTypeMapping TypeName="NDHDBModel.CheckInCalendarHistory">
-        <MappingFragment StoreEntitySet="CheckInCalendarHistory">
-          <ScalarProperty Name="Notes" ColumnName="Notes" />
-          <ScalarProperty Name="CType" ColumnName="CType" />
-          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
-          <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
-          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-          <ScalarProperty Name="CStatus" ColumnName="CStatus" />
-          <ScalarProperty Name="CYear" ColumnName="CYear" />
-          <ScalarProperty Name="CMonth" ColumnName="CMonth" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CheckInCalendars">
-      <EntityTypeMapping TypeName="NDHDBModel.CheckInCalendar">
-        <MappingFragment StoreEntitySet="CheckInCalendar">
-          <ScalarProperty Name="Distance" ColumnName="Distance" />
-          <ScalarProperty Name="TimeCheck" ColumnName="TimeCheck" />
-          <ScalarProperty Name="LngCheck" ColumnName="LngCheck" />
-          <ScalarProperty Name="LatCheck" ColumnName="LatCheck" />
-          <ScalarProperty Name="CDate" ColumnName="CDate" />
-          <ScalarProperty Name="Notes" ColumnName="Notes" />
-          <ScalarProperty Name="CheckInStatus" ColumnName="CheckInStatus" />
-          <ScalarProperty Name="CType" ColumnName="CType" />
-          <ScalarProperty Name="CInfoId" ColumnName="CInfoId" />
-          <ScalarProperty Name="CCode" ColumnName="CCode" />
-          <ScalarProperty Name="Perform" ColumnName="Perform" />
-          <ScalarProperty Name="InPlan" ColumnName="InPlan" />
-          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
-          <ScalarProperty Name="CYear" ColumnName="CYear" />
-          <ScalarProperty Name="CMonth" ColumnName="CMonth" />
-          <ScalarProperty Name="CDay" ColumnName="CDay" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="checkin_getcalendar" FunctionName="NDHDBModel.Store.checkin_getcalendar">
       <ResultMapping>
         <ComplexTypeMapping TypeName="NDHDBModel.checkin_getcalendar_Result2">
@@ -843,5 +798,87 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="CalendarTypes">
+      <EntityTypeMapping TypeName="NDHDBModel.CalendarType">
+        <MappingFragment StoreEntitySet="CalendarType">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TGroup" ColumnName="TGroup" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Compel" ColumnName="Compel" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CalendarWorks">
+      <EntityTypeMapping TypeName="NDHDBModel.CalendarWork">
+        <MappingFragment StoreEntitySet="CalendarWork">
+          <ScalarProperty Name="Distance" ColumnName="Distance" />
+          <ScalarProperty Name="TimeCheck" ColumnName="TimeCheck" />
+          <ScalarProperty Name="LngCheck" ColumnName="LngCheck" />
+          <ScalarProperty Name="LatCheck" ColumnName="LatCheck" />
+          <ScalarProperty Name="CDate" ColumnName="CDate" />
+          <ScalarProperty Name="AllTime" ColumnName="AllTime" />
+          <ScalarProperty Name="COutTime" ColumnName="COutTime" />
+          <ScalarProperty Name="CInTime" ColumnName="CInTime" />
+          <ScalarProperty Name="COut" ColumnName="COut" />
+          <ScalarProperty Name="CIn" ColumnName="CIn" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="AgencyType" ColumnName="AgencyType" />
+          <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+          <ScalarProperty Name="InPlan" ColumnName="InPlan" />
+          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+          <ScalarProperty Name="CYear" ColumnName="CYear" />
+          <ScalarProperty Name="CMonth" ColumnName="CMonth" />
+          <ScalarProperty Name="CDay" ColumnName="CDay" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProcessHistories">
+      <EntityTypeMapping TypeName="NDHDBModel.ProcessHistory">
+        <MappingFragment StoreEntitySet="ProcessHistory">
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="CalendarId" ColumnName="CalendarId" />
+          <ScalarProperty Name="ProcessId" ColumnName="ProcessId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProcessWorks">
+      <EntityTypeMapping TypeName="NDHDBModel.ProcessWork">
+        <MappingFragment StoreEntitySet="ProcessWork">
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="TimeRequire" ColumnName="TimeRequire" />
+          <ScalarProperty Name="ProcessType" ColumnName="ProcessType" />
+          <ScalarProperty Name="ProcessName" ColumnName="ProcessName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ProcessWithRole" TypeName="NDHDBModel.ProcessWithRole" StoreEntitySet="ProcessWithRole">
+      <EndProperty Name="AspNetRole">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+      <EndProperty Name="ProcessWork">
+        <ScalarProperty Name="Id" ColumnName="ProcessId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="CalendarInfoes">
+      <EntityTypeMapping TypeName="NDHDBModel.CalendarInfo">
+        <MappingFragment StoreEntitySet="CalendarInfo">
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CType" ColumnName="CType" />
+          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+          <ScalarProperty Name="ModifyTime" ColumnName="ModifyTime" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="CStatus" ColumnName="CStatus" />
+          <ScalarProperty Name="CYear" ColumnName="CYear" />
+          <ScalarProperty Name="CMonth" ColumnName="CMonth" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

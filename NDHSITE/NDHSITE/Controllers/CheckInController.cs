@@ -16,7 +16,7 @@ namespace NDHSITE.Controllers
     {
         NDHDBEntities db = new NDHDBEntities();
 
-        public ActionResult ShowCalendar(int? page, int? month, int? year)
+        public ActionResult ShowCalendar(int? page, int? month, int? year, int status = -1, string code = "")
         {
             if (!Utitl.CheckUser(db, User.Identity.Name, "CheckIn", 0))
                 return RedirectToAction("relogin", "home");
@@ -33,8 +33,19 @@ namespace NDHSITE.Controllers
 
             ViewBag.Month = month;
             ViewBag.Year = year;
+            ViewBag.Status = status;
+            ViewBag.Code = code;
 
-            var listCalendar = db.CalendarInfoes.Where(p => p.CMonth == month && p.CYear == year).ToList();
+            var listCalendar = new List<CalendarInfo>();
+
+            if (status == -1)
+            {
+                listCalendar = db.CalendarInfoes.Where(p => p.CMonth == month && p.CYear == year && (p.HaiStaff.Code.Contains(code) || p.HaiStaff.HaiBranch.Code.Contains(code))).ToList();
+            } else
+            {
+                listCalendar = db.CalendarInfoes.Where(p => p.CMonth == month && p.CYear == year && p.CStatus == status && (p.HaiStaff.Code.Contains(code) || p.HaiStaff.HaiBranch.Code.Contains(code))).ToList();
+
+            }
 
             return View(listCalendar.OrderBy(p => p.CStatus).ToPagedList(pageNumber, pageSize));
         }
@@ -48,6 +59,9 @@ namespace NDHSITE.Controllers
             var detail = db.checkin_getcalendar(calendar.CMonth, calendar.CYear, calendar.StaffId).OrderBy(p => p.CDay).ToList();
             ViewBag.GroupType = db.checkin_calendartype_group(calendar.CMonth, calendar.CYear, calendar.StaffId).ToList();
             ViewBag.Calendar = calendar;
+
+            ViewBag.AgencyReport = db.checkin_count_day_agency(calendar.CMonth, calendar.CYear, calendar.StaffId).OrderBy(p => p.AgencyCode).ToList();
+
             return View(detail);
 
         }

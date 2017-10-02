@@ -144,3 +144,5 @@ N:\csharp\mvc_cskh_hai\HAIAPI\HAIAPI\bin\PagedList.dll
 N:\csharp\mvc_cskh_hai\HAIAPI\HAIAPI\bin\PagedList.Mvc.dll
 N:\csharp\mvc_cskh_hai\HAIAPI\HAIAPI\bin\PagedList.xml
 N:\csharp\mvc_cskh_hai\HAIAPI\HAIAPI\bin\PagedList.Mvc.xml
+N:\csharp\mvc_cskh_hai\HAIAPI\HAIAPI\obj\Release\Interop.LocationApiLib.dll
+N:\csharp\mvc_cskh_hai\HAIAPI\HAIAPI\obj\Release\HAIAPI.csproj.ResolveComReference.cache

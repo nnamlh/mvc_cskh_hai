@@ -211,5 +211,22 @@ namespace NDHSITE.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("checkin_report_plan", maxdayParameter, monthParameter, yearParameter, staffIdParameter);
         }
+    
+        public virtual ObjectResult<checkin_count_day_agency_Result> checkin_count_day_agency(Nullable<int> month, Nullable<int> year, string staffId)
+        {
+            var monthParameter = month.HasValue ?
+                new ObjectParameter("month", month) :
+                new ObjectParameter("month", typeof(int));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("year", year) :
+                new ObjectParameter("year", typeof(int));
+    
+            var staffIdParameter = staffId != null ?
+                new ObjectParameter("staffId", staffId) :
+                new ObjectParameter("staffId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<checkin_count_day_agency_Result>("checkin_count_day_agency", monthParameter, yearParameter, staffIdParameter);
+        }
     }
 }

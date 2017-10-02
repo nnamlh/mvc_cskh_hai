@@ -1050,5 +1050,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="checkin_count_day_agency" FunctionName="NDHDBModel.Store.checkin_count_day_agency">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NDHDBModel.checkin_count_day_agency_Result">
+          <ScalarProperty Name="AgencyName" ColumnName="AgencyName" />
+          <ScalarProperty Name="AgencyDeputy" ColumnName="AgencyDeputy" />
+          <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+          <ScalarProperty Name="InPlan" ColumnName="InPlan" />
+          <ScalarProperty Name="CountDay" ColumnName="CountDay" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>
