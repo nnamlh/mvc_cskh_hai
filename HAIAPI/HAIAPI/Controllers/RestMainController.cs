@@ -68,7 +68,7 @@ namespace HAIAPI.Controllers
 
                 result.function = GetUserFunction(paser.user, "main");
 
-                if(paser.isUpdate == 1)
+                if (paser.isUpdate == 1)
                 {
                     result.products = GetProductCodeInfo();
                     result.productGroups = GetGroupProduct();
@@ -83,13 +83,13 @@ namespace HAIAPI.Controllers
                     result.code = staff.Code;
                     result.name = staff.FullName;
                     result.type = "Công ty HAI";
-                       
+
                     if (paser.isUpdate == 1)
                     {
                         result.c2 = GetListC2(staff);
                         result.c1 = GetListC1(staff);
                     }
-                   
+
                 }
                 else
                 {
@@ -111,8 +111,8 @@ namespace HAIAPI.Controllers
                     result.c2 = new List<AgencyInfoC2>();
                     result.c1 = new List<AgencyInfo>();
                 }
-               
-               
+
+
                 var notiReg = db.RegFirebases.Where(p => p.UserLogin == paser.user).FirstOrDefault();
 
                 if (notiReg == null)
@@ -151,6 +151,108 @@ namespace HAIAPI.Controllers
             return result;
         }
 
+        [HttpPost]
+        public MainAgencyInfoResult MainAgencyInfo()
+        {
+            // update regid firebase
+            // /api/rest/getmaininfo
+            var history = new MongoHistoryAPI()
+            {
+                CreateTime = DateTime.Now,
+                APIUrl = "/api/restmain/mainagencyinfo",
+                Sucess = 1
+            };
+
+            var result = new MainAgencyInfoResult()
+            {
+                id = "1"
+            };
+
+            var requestContent = Request.Content.ReadAsStringAsync().Result;
+
+            history.Content = requestContent;
+
+            try
+            {
+                var jsonserializer = new JavaScriptSerializer();
+                var paser = jsonserializer.Deserialize<MainInfoRequest>(requestContent);
+                history.Content = new JavaScriptSerializer().Serialize(paser);
+
+                if (!mongoHelper.checkLoginSession(paser.user, paser.token))
+                    throw new Exception("Tài khoản bạn đã đăng nhập ở thiết bị khác.");
+
+                var checkUser = db.AspNetUsers.Where(p => p.UserName == paser.user).FirstOrDefault();
+
+                if (checkUser == null)
+                    throw new Exception("Lỗi");
+
+                var role = checkUser.AspNetRoles.FirstOrDefault();
+
+                // get topic
+                result.topics = GetUserTopics(paser.user);
+
+                result.function = GetUserFunction(paser.user, "main");
+
+                if (paser.isUpdate == 1)
+                {
+                    result.products = GetProductCodeInfo();
+                    result.productGroups = GetGroupProduct();
+                }
+
+                var cinfo = db.CInfoCommons.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+
+                if (cinfo == null)
+                    throw new Exception("Không lấy được thông tin");
+
+                result.code = cinfo.CCode;
+                result.name = cinfo.CDeputy;
+                if (cinfo.CType == "CII")
+                    result.type = "Đại lý cấp 2";
+                else if (cinfo.CType == "CI")
+                    result.type = "Đại lý cấp 1";
+                else
+                    result.type = "Chưa xác nhận";
+
+
+                var notiReg = db.RegFirebases.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+
+                if (notiReg == null)
+                {
+                    notiReg = new RegFirebase()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        UserLogin = paser.user,
+                        RegId = paser.regId,
+                        CreateDate = DateTime.Now
+                    };
+
+                    db.RegFirebases.Add(notiReg);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    notiReg.RegId = paser.regId;
+                    notiReg.ModifyDate = DateTime.Now;
+                    db.Entry(notiReg).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+            }
+            catch (Exception e)
+            {
+                result.id = "0";
+                result.msg = e.Message;
+                history.Sucess = 0;
+            }
+
+            history.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+
+            mongoHelper.createHistoryAPI(history);
+
+            return result;
+        }
+
+
         protected List<ProductInfoResult> GetProductCodeInfo()
         {
             var product = db.product_list().ToList();
@@ -168,11 +270,11 @@ namespace HAIAPI.Controllers
                     groupName = item.GroupName,
                     image = HaiUtil.HostName + item.Thumbnail,
                     isNew = item.New,
-                    price = item.Price == null? 0:item.Price,
-                    quantity_box = item.QuantityBox == null ? 0:item.QuantityBox,
+                    price = item.Price == null ? 0 : item.Price,
+                    quantity_box = item.QuantityBox == null ? 0 : item.QuantityBox,
                     short_describe = item.ShortDescibe,
                     unit = item.Unit,
-                    vat = item.PVat == null ? 0:item.PVat
+                    vat = item.PVat == null ? 0 : item.PVat
                 });
             }
 
@@ -204,7 +306,7 @@ namespace HAIAPI.Controllers
             List<C2Info> c2List = new List<C2Info>();
 
             c2List = staff.StaffWithC2.Where(p => p.C2Info.IsActive == 1).OrderByDescending(p => p.GroupChoose).Select(p => p.C2Info).ToList();
-            
+
             foreach (var item in c2List)
             {
                 var staffC2 = staff.StaffWithC2.Where(p => p.C2Id == item.Id).FirstOrDefault();
@@ -247,12 +349,13 @@ namespace HAIAPI.Controllers
             List<C1Info> c1List = new List<C1Info>();
 
             var roleCheck = CheckRoleShowInfo(staff.UserLogin);
-            
+
             if (roleCheck == 1)
             {
                 c1List = db.C1Info.Where(p => p.IsActive == 1).OrderByDescending(p => p.CInfoCommon.CGroup).ToList();
 
-            } else
+            }
+            else
             {
                 c1List = db.C1Info.Where(p => p.IsActive == 1 && p.HaiBrandId == staff.BranchId).OrderByDescending(p => p.CInfoCommon.CGroup).ToList();
 

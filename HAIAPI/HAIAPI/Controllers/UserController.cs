@@ -98,23 +98,32 @@ namespace HAIAPI.Controllers
 
             try
             {
-                var checkUser = db.HaiStaffs.Where(p => p.UserLogin == user).FirstOrDefault();
+                var checkUser = db.AspNetUsers.Where(p => p.UserName == user).FirstOrDefault();
 
-                if (checkUser != null)
+                if (checkUser == null)
+                    throw new Exception("Tài khoản không hợp lệ");
+
+                if (checkUser.AccountType == "STAFF")
                 {
-                    if (checkUser.IsLock == 1)
-                    {
-                        throw new Exception("Tài khoản đang tạm khóa");
-                    }
+                    var haiStaff = db.HaiStaffs.Where(p => p.UserLogin == user).FirstOrDefault();
 
-                    result.id = "1";
+                    if (haiStaff != null)
+                    {
+                        if (haiStaff.IsLock == 1)
+                        {
+                            throw new Exception("Tài khoản đang tạm khóa");
+                        }
+
+                        result.id = "1";
+                    }
+                    else
+                        throw new Exception("Tài khoản không hợp lệ");
                 }
                 else
                 {
                     var check = db.CInfoCommons.Where(p => p.UserLogin == user).FirstOrDefault();
                     if (check != null)
                     {
-
                         result.id = "2";
                         result.name = check.CDeputy;
                         result.store = check.CName;
@@ -392,7 +401,7 @@ namespace HAIAPI.Controllers
                     throw new Exception("Không thể đăng xuất");
 
                 //
-                if(!mongoHelper.checkLoginSession(user, token))
+                if (!mongoHelper.checkLoginSession(user, token))
                     throw new Exception("Tài khoản đang đăng nhập trên thiết bị khác");
 
                 // xoa firebase id
@@ -449,13 +458,13 @@ namespace HAIAPI.Controllers
 
             string versionCurrent = ConfigurationManager.AppSettings["VersionApp"];
 
-            if(version != versionCurrent)
+            if (version != versionCurrent)
             {
                 result.id = "2";
                 result.msg = "Cập nhật phiên bản mới";
                 history.Sucess = 0;
             }
-           else if (!mongoHelper.checkLoginSession(user, token))
+            else if (!mongoHelper.checkLoginSession(user, token))
             {
                 result.id = "0";
                 result.msg = "Tài khoản bạn đã đăng nhập ở thiết bị khác.";
@@ -471,7 +480,7 @@ namespace HAIAPI.Controllers
         }
         #endregion
 
-    
+
         #region Auth
         private async Task<LoginResult> Auth(HttpRequestHeaders headers, string imei)
         {

@@ -52,7 +52,26 @@ namespace HAIAPI.Models
 
     }
 
-   
+    public class MainAgencyInfoResult : ResultInfo
+    {
+
+        public string name { get; set; }
+
+        public string code { get; set; }
+
+        public string type { get; set; }
+
+        public List<string> topics { get; set; }
+
+        public List<string> function { get; set; }
+
+        public List<GroupInfo> productGroups { get; set; }
+
+        public List<ProductInfoResult> products { get; set; }
+
+    }
+
+
     public class MainInfoRequest : RequestInfo
     {
 
