@@ -27,6 +27,8 @@ namespace NDHSITE.Models
         public string AreaId { get; set; }
         public string Phone { get; set; }
         public string Code { get; set; }
+        public Nullable<double> LatCheck { get; set; }
+        public Nullable<double> LngCheck { get; set; }
     
         public virtual ICollection<C1Info> C1Info { get; set; }
         public virtual HaiArea HaiArea { get; set; }

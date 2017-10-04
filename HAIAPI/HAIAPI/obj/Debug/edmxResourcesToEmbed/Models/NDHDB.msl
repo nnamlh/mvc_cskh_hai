@@ -412,6 +412,8 @@
     <EntitySetMapping Name="HaiBranches">
       <EntityTypeMapping TypeName="NDHDB1Model.HaiBranch">
         <MappingFragment StoreEntitySet="HaiBranch">
+          <ScalarProperty Name="LngCheck" ColumnName="LngCheck" />
+          <ScalarProperty Name="LatCheck" ColumnName="LatCheck" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="AddressInfo" ColumnName="AddressInfo" />
@@ -664,6 +666,7 @@
     <EntitySetMapping Name="Provinces">
       <EntityTypeMapping TypeName="NDHDB1Model.Province">
         <MappingFragment StoreEntitySet="Province">
+          <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="PType" ColumnName="PType" />

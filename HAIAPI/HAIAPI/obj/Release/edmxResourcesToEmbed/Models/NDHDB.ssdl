@@ -155,6 +155,7 @@
     <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
     <Property Name="C1Id" Type="nvarchar" MaxLength="128" />
     <Property Name="Decision" Type="nvarchar" MaxLength="512" />
+    <Property Name="CStatus" Type="int" />
   </EntityType>
   <EntityType Name="CalendarInfo">
     <Key>
@@ -424,6 +425,8 @@
     <Property Name="AreaId" Type="nvarchar" MaxLength="128" />
     <Property Name="Phone" Type="nvarchar" MaxLength="255" />
     <Property Name="Code" Type="nvarchar" MaxLength="20" />
+    <Property Name="LatCheck" Type="float" />
+    <Property Name="LngCheck" Type="float" />
   </EntityType>
   <EntityType Name="HaiDepartment">
     <Key>
@@ -681,6 +684,7 @@
     <Property Name="Id" Type="nvarchar" MaxLength="32" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="PType" Type="nvarchar" MaxLength="64" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="32" />
   </EntityType>
   <EntityType Name="PTracking">
     <Key>

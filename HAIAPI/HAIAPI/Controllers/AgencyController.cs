@@ -95,7 +95,8 @@ namespace HAIAPI.Controllers
                     Deputy = paser.deputy,
                     IsActive = 0,
                     Code = agencyCode,
-                    InfoId = cInfo.Id
+                    InfoId = cInfo.Id,
+                    CStatus = 1
                 };
                 db.C2Info.Add(c2);
                 db.SaveChanges();

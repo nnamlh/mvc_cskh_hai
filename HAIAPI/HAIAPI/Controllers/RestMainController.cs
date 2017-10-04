@@ -281,6 +281,28 @@ namespace HAIAPI.Controllers
             return productCodes;
         }
 
+        [HttpGet]
+        public List<BranchInfo> GetListBranch()
+        {
+            List<BranchInfo> branchs = new List<BranchInfo>();
+            var data = db.HaiBranches.ToList();
+
+            foreach (var item in data)
+            {
+                branchs.Add(new BranchInfo()
+                {
+                    code = item.Code,
+                    address = item.AddressInfo,
+                    lat = item.LatCheck,
+                    lng = item.LngCheck,
+                    name = item.Name,
+                    phone = item.Phone
+                });
+            }
+
+            return branchs;
+        }
+
         protected List<GroupInfo> GetGroupProduct()
         {
             List<GroupInfo> groups = new List<GroupInfo>();

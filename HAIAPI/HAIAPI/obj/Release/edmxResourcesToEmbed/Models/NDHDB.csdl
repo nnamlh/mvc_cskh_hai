@@ -156,6 +156,7 @@
     <NavigationProperty Name="C1Info" Relationship="Self.FK__C2Info__C1Id__73852659" FromRole="C2Info" ToRole="C1Info" />
     <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C2Info__InfoId__6CD828CA" FromRole="C2Info" ToRole="CInfoCommon" />
     <NavigationProperty Name="StaffWithC2" Relationship="Self.FK__StaffWithC__C2Id__4B622666" FromRole="C2Info" ToRole="StaffWithC2" />
+    <Property Name="CStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="CalendarInfo">
     <Key>
@@ -461,6 +462,8 @@
     <NavigationProperty Name="C1Info" Relationship="Self.FK__C1Info__HaiBrand__72910220" FromRole="HaiBranch" ToRole="C1Info" />
     <NavigationProperty Name="HaiArea" Relationship="Self.FK__HaiBranch__AreaI__145C0A3F" FromRole="HaiBranch" ToRole="HaiArea" />
     <NavigationProperty Name="HaiStaffs" Relationship="Self.FK__HaiStaff__Branch__24927208" FromRole="HaiBranch" ToRole="HaiStaff" />
+    <Property Name="LatCheck" Type="Double" />
+    <Property Name="LngCheck" Type="Double" />
   </EntityType>
   <EntityType Name="HaiDepartment">
     <Key>
@@ -717,6 +720,7 @@
     <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="PType" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="Districts" Relationship="Self.FK__District__Provin__07C12930" FromRole="Province" ToRole="District" />
+    <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="PTracking">
     <Key>

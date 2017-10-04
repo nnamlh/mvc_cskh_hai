@@ -23,6 +23,7 @@ namespace HAIAPI.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public string PType { get; set; }
+        public string Code { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<District> Districts { get; set; }

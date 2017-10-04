@@ -28,6 +28,8 @@ namespace HAIAPI.Models
         public string AreaId { get; set; }
         public string Phone { get; set; }
         public string Code { get; set; }
+        public Nullable<double> LatCheck { get; set; }
+        public Nullable<double> LngCheck { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<C1Info> C1Info { get; set; }

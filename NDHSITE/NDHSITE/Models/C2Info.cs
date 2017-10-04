@@ -27,6 +27,7 @@ namespace NDHSITE.Models
         public string InfoId { get; set; }
         public string C1Id { get; set; }
         public string Decision { get; set; }
+        public Nullable<int> CStatus { get; set; }
     
         public virtual C1Info C1Info { get; set; }
         public virtual CInfoCommon CInfoCommon { get; set; }

@@ -621,7 +621,15 @@ namespace NDHSITE.Controllers
                             IsActive = 1
                         };
 
-                        string newCode = GetAgencyCodeTemp(provinceCode);
+                        string newCode = code;
+                        if (String.IsNullOrEmpty(newCode))
+                        {
+                            newCode = GetAgencyCodeTemp(branch);
+                            c2.CStatus = 0;
+                        }
+
+          
+                        /*
                         var saveOldKey = new OldKeySave()
                         {
                             CodeType = "C2",
@@ -632,46 +640,23 @@ namespace NDHSITE.Controllers
                         };
                         db.OldKeySaves.Add(saveOldKey);
                         db.SaveChanges();
-
-                        /*
-                        if (!String.IsNullOrEmpty(code))
-                        {
-                            // subString code
-                            string codeTemp = code.Substring(1);
-                            newCode = provinceCode + codeTemp;
-
-                            // save wwithc coced
-                            var saveOldKey = new OldKeySave()
-                            {
-                                CodeType = "C2",
-                                CreateTime = DateTime.Now,
-                                Id = Guid.NewGuid().ToString(),
-                                OldCode = code,
-                                NewCode = newCode
-                            };
-                            db.OldKeySaves.Add(saveOldKey);
-                            db.SaveChanges();
-
-                            c2.IsActive = 1;
-                        }
-                        else
-                        {
-                            newCode = GetAgencyCodeTemp(branch, "C2Temp");
-                            c2.IsActive = 1;
-                        }*/
+                        */
 
                         c2.Code = newCode;
                         cInfo.CCode = newCode;
 
                         var check = db.C2Info.Where(p => p.Code == newCode).FirstOrDefault();
 
-                      
-
                         // if (check == null && staffInfo != null && !String.IsNullOrEmpty(phone))
-                        if (!String.IsNullOrEmpty(staffCode))
-                        {
 
-                            var staffInfo = db.HaiStaffs.Where(p => p.Code.Contains(staffCode.Trim())).FirstOrDefault();
+                        HaiStaff staffInfo = null;
+                        if(!String.IsNullOrEmpty(staffCode))
+                        {
+                            staffInfo = db.HaiStaffs.Where(p => p.Code.Contains(staffCode.Trim())).FirstOrDefault();
+                        }
+
+                        if (staffInfo != null && check == null)
+                        {
 
                             db.CInfoCommons.Add(cInfo);
                             db.SaveChanges();
@@ -818,7 +803,7 @@ namespace NDHSITE.Controllers
             string pattern = @"^-*[0-9,\.?\-?\(?\)?\ ]+$";
             return Regex.IsMatch(number, pattern);
         }
-        private string GetAgencyCodeTemp(string province)
+        private string GetAgencyCode(string province)
         {
             string type = "C2" + province;
 
@@ -857,11 +842,57 @@ namespace NDHSITE.Controllers
             }
             catch
             {
+                code = GetAgencyCode(province);
+            }
+
+            return code;
+        }
+
+        private string GetAgencyCodeTemp(string province)
+        {
+            string type = "C2Temp";
+
+            int? number = db.StoreAgencyIds.Where(p => p.TypeStore == type).Max(p => p.CountNumber);
+
+            if (number == null)
+                number = 0;
+
+            number++;
+
+            var count = Convert.ToString(number).Count();
+            var temp = "";
+            if (count == 1)
+                temp = "000" + number;
+            else if (count == 2)
+                temp = "00" + number;
+            else if (count == 3)
+                temp = "0" + number;
+            else
+                temp = number + "";
+
+            string code = "T" + province + temp;
+
+            var store = new StoreAgencyId()
+            {
+                Id = code,
+                IsUse = 1,
+                CountNumber = number,
+                TypeStore = type
+            };
+
+            try
+            {
+                db.StoreAgencyIds.Add(store);
+                db.SaveChanges();
+            }
+            catch
+            {
                 code = GetAgencyCodeTemp(province);
             }
 
             return code;
         }
+
 
         // excel dai ly cii
         /*

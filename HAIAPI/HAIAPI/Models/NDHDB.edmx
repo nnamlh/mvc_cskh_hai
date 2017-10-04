@@ -160,6 +160,7 @@
           <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
           <Property Name="C1Id" Type="nvarchar" MaxLength="128" />
           <Property Name="Decision" Type="nvarchar" MaxLength="512" />
+          <Property Name="CStatus" Type="int" />
         </EntityType>
         <EntityType Name="CalendarInfo">
           <Key>
@@ -429,6 +430,8 @@
           <Property Name="AreaId" Type="nvarchar" MaxLength="128" />
           <Property Name="Phone" Type="nvarchar" MaxLength="255" />
           <Property Name="Code" Type="nvarchar" MaxLength="20" />
+          <Property Name="LatCheck" Type="float" />
+          <Property Name="LngCheck" Type="float" />
         </EntityType>
         <EntityType Name="HaiDepartment">
           <Key>
@@ -686,6 +689,7 @@
           <Property Name="Id" Type="nvarchar" MaxLength="32" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="PType" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="32" />
         </EntityType>
         <EntityType Name="PTracking">
           <Key>
@@ -1941,6 +1945,7 @@
           <NavigationProperty Name="C1Info" Relationship="Self.FK__C2Info__C1Id__73852659" FromRole="C2Info" ToRole="C1Info" />
           <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C2Info__InfoId__6CD828CA" FromRole="C2Info" ToRole="CInfoCommon" />
           <NavigationProperty Name="StaffWithC2" Relationship="Self.FK__StaffWithC__C2Id__4B622666" FromRole="C2Info" ToRole="StaffWithC2" />
+          <Property Name="CStatus" Type="Int32" />
         </EntityType>
         <EntityType Name="CalendarInfo">
           <Key>
@@ -2246,6 +2251,8 @@
           <NavigationProperty Name="C1Info" Relationship="Self.FK__C1Info__HaiBrand__72910220" FromRole="HaiBranch" ToRole="C1Info" />
           <NavigationProperty Name="HaiArea" Relationship="Self.FK__HaiBranch__AreaI__145C0A3F" FromRole="HaiBranch" ToRole="HaiArea" />
           <NavigationProperty Name="HaiStaffs" Relationship="Self.FK__HaiStaff__Branch__24927208" FromRole="HaiBranch" ToRole="HaiStaff" />
+          <Property Name="LatCheck" Type="Double" />
+          <Property Name="LngCheck" Type="Double" />
         </EntityType>
         <EntityType Name="HaiDepartment">
           <Key>
@@ -2502,6 +2509,7 @@
           <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PType" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Districts" Relationship="Self.FK__District__Provin__07C12930" FromRole="Province" ToRole="District" />
+          <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="PTracking">
           <Key>
@@ -3704,6 +3712,7 @@
           <EntitySetMapping Name="C2Info">
             <EntityTypeMapping TypeName="NDHDB1Model.C2Info">
               <MappingFragment StoreEntitySet="C2Info">
+                <ScalarProperty Name="CStatus" ColumnName="CStatus" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="StoreName" ColumnName="StoreName" />
@@ -3980,6 +3989,8 @@
           <EntitySetMapping Name="HaiBranches">
             <EntityTypeMapping TypeName="NDHDB1Model.HaiBranch">
               <MappingFragment StoreEntitySet="HaiBranch">
+                <ScalarProperty Name="LngCheck" ColumnName="LngCheck" />
+                <ScalarProperty Name="LatCheck" ColumnName="LatCheck" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="AddressInfo" ColumnName="AddressInfo" />
@@ -4232,6 +4243,7 @@
           <EntitySetMapping Name="Provinces">
             <EntityTypeMapping TypeName="NDHDB1Model.Province">
               <MappingFragment StoreEntitySet="Province">
+                <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="PType" ColumnName="PType" />

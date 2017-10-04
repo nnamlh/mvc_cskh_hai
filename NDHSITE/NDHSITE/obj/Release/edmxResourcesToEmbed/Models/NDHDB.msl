@@ -172,6 +172,7 @@
     <EntitySetMapping Name="C2Info">
       <EntityTypeMapping TypeName="NDHDBModel.C2Info">
         <MappingFragment StoreEntitySet="C2Info">
+          <ScalarProperty Name="CStatus" ColumnName="CStatus" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="StoreName" ColumnName="StoreName" />
@@ -368,6 +369,8 @@
     <EntitySetMapping Name="HaiBranches">
       <EntityTypeMapping TypeName="NDHDBModel.HaiBranch">
         <MappingFragment StoreEntitySet="HaiBranch">
+          <ScalarProperty Name="LngCheck" ColumnName="LngCheck" />
+          <ScalarProperty Name="LatCheck" ColumnName="LatCheck" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="AddressInfo" ColumnName="AddressInfo" />
@@ -544,6 +547,7 @@
     <EntitySetMapping Name="Provinces">
       <EntityTypeMapping TypeName="NDHDBModel.Province">
         <MappingFragment StoreEntitySet="Province">
+          <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="PType" ColumnName="PType" />

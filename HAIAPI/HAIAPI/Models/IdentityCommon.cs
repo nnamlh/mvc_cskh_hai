@@ -52,6 +52,19 @@ namespace HAIAPI.Models
 
     }
 
+
+    public class BranchInfo
+    {
+        public string code { get; set; }
+        public string phone { get; set; }
+
+        public string name { get; set; }
+
+        public double? lat { get; set; }
+        public double? lng { get; set; }
+
+        public string address { get; set; }
+    }
     public class MainAgencyInfoResult : ResultInfo
     {
 
