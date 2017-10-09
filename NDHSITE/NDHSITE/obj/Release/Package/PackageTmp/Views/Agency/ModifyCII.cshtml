@@ -143,63 +143,19 @@
                                         <div class="form-group">
                                             <label>Thành phố/tỉnh</label>
 
-                                            <select class="form-control selectpicker" data-live-search="true" id="dsprovince">
-                                                <option value="-1">--Chọn--</option>
-                                                @foreach (var item in ViewBag.Provinces)
-                                                {
-                                                    if (ViewBag.ProvinceId == item.Id)
-                                                    {
-                                                        <option data-tokens="@item.Name" value="@item.Id" selected>@item.Name</option>
-                                                    }
-                                                    else
-                                                    {
-                                                        <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
-                                                    }
-                                                }
-                                            </select>
+                                            <input type="text" class="form-control" name="ProvinceName" value="@agency.CInfoCommon.ProvinceName"/>
 
                                         </div>
                                         <div class="form-group">
                                             <label>Quận/huyện</label>
 
-                                            <select class="form-control" id="dsdistrict">
-                                                @if (ViewBag.District != null)
-                                                {
-                                                    foreach (var item in ViewBag.District)
-                                                    {
-                                                        if (ViewBag.DistrictId == item.Id)
-                                                        {
-                                                            <option data-tokens="@item.Name" value="@item.Id" selected>@item.Name</option>
-                                                        }
-                                                        else
-                                                        {
-                                                            <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
-                                                        }
-                                                    }
-                                                }
-
-                                            </select>
+                                            <input type="text" class="form-control" name="DistrictName" value="@agency.CInfoCommon.DistrictName" />
 
                                         </div>
                                         <div class="form-group">
                                             <label>Phường/xã</label>
 
-                                            <select class="form-control" id="dsward" name="WardId">
-                                                @if (ViewBag.Ward != null)
-                                                {
-                                                    foreach (var item in ViewBag.Ward)
-                                                    {
-                                                        if (agency.CInfoCommon.WardId == item.Id)
-                                                        {
-                                                            <option data-tokens="@item.Name" value="@item.Id" selected>@item.Name</option>
-                                                        }
-                                                        else
-                                                        {
-                                                            <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
-                                                        }
-                                                    }
-                                                }
-                                            </select>
+                                            <input type="text" class="form-control" name="WardName" value="@agency.CInfoCommon.WardName" />
 
                                         </div>
                                         <div class="form-group">
@@ -385,46 +341,7 @@
             $('.c1name').show().html('<i>' + val + '</i>');
         }
 
-        $("#dsprovince").change(function () {
-            var id = $("#dsprovince").val();
-
-            if (id == -1) {
-                $("#dsdistrict").html("");
-            } else {
-                $.ajax({
-                    url: "/Agency/JsonDistict",
-                    data: { Provinceid: id },
-                    success: function (response) {
-                        $("#dsdistrict").html("");
-                        $("<option value='-1'></option>").html("--chọn--").appendTo("#dsdistrict");
-                        $(response).each(function (i, e) {
-                            $("<option value='" + e.Id + "'></option>").html(e.Name).appendTo("#dsdistrict");
-                        });
-                    }
-                });
-            }
-        });
-
-        $("#dsdistrict").change(function () {
-            var id = $("#dsdistrict").val();
-
-            if (id == -1) {
-                $("#dsward").html("");
-            } else {
-                $.ajax({
-                    url: "/Agency/JsonWard",
-                    data: { Id: id },
-                    success: function (response) {
-                        $("#dsward").html("");
-                        $(response).each(function (i, e) {
-
-                            $("<option value='" + e.Id + "'></option>").html(e.Name).appendTo("#dsward");
-                        });
-                    }
-                });
-            }
-        });
-
+        
 
     </script>
 }

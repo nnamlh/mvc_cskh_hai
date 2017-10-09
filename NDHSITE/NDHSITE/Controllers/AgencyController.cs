@@ -399,6 +399,8 @@ namespace NDHSITE.Controllers
             {
                 info.ProvinceName = wardInfo.District.Province.Name;
                 info.DistrictName = wardInfo.District.Name;
+                info.WardName = wardInfo.Name;
+                info.Country = "VN";
             }
             info.CCode = c2.Code;
             db.CInfoCommons.Add(info);
@@ -1199,7 +1201,7 @@ namespace NDHSITE.Controllers
 
             infoCommon.CName = c2.StoreName;
             infoCommon.ModifyDate = DateTime.Now;
-            infoCommon.WardId = info.WardId;
+          
             infoCommon.Notes = info.Notes;
             infoCommon.Phone = info.Phone;
             infoCommon.Email = info.Email;
@@ -1214,13 +1216,18 @@ namespace NDHSITE.Controllers
             infoCommon.CCode = agency.Code;
             infoCommon.BranchCode = info.BranchCode;
             infoCommon.IdentityCard = info.IdentityCard;
+            infoCommon.ProvinceName = info.ProvinceName;
+            infoCommon.DistrictName = info.DistrictName;
+            infoCommon.WardName = info.WardName;
 
+            /*
             var wardInfo = db.Wards.Find(info.WardId);
             if (wardInfo != null)
             {
                 infoCommon.ProvinceName = wardInfo.District.Province.Name;
                 infoCommon.DistrictName = wardInfo.District.Name;
             }
+            */
 
             // get area
             var c1Check = db.C1Info.Where(p => p.Code == C1Code).FirstOrDefault();
@@ -1695,6 +1702,14 @@ namespace NDHSITE.Controllers
 
             CInfoCommon cinfo = check.CInfoCommon;
             db.C2Info.Remove(check);
+            db.SaveChanges();
+
+            var imageAgency = db.SaveAgencyShopImages.Where(p => p.Cinfo == cinfo.Id).ToList();
+
+            foreach(var item in imageAgency)
+            {
+                db.SaveAgencyShopImages.Remove(item);
+            }
 
             db.SaveChanges();
 
