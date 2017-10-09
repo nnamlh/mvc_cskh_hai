@@ -55,7 +55,8 @@ namespace HAIAPI.Controllers
                 var checkC1 = db.C1Info.Where(p => p.Code == paser.c1Id).FirstOrDefault();
 
                 if (checkC1 == null)
-                    throw new Exception("Sai thông tin cấp 1");
+                    checkC1 = db.C1Info.Where(p => p.Code == "0000000000").FirstOrDefault();
+
                 var agencyCode = GetAgencyCodeTemp(staff.HaiBranch.Code);
 
                 CInfoCommon cInfo = new CInfoCommon()
@@ -101,8 +102,8 @@ namespace HAIAPI.Controllers
                 db.C2Info.Add(c2);
                 db.SaveChanges();
 
-                db.Entry(staff).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
+             //   db.Entry(staff).State = System.Data.Entity.EntityState.Modified;
+               // db.SaveChanges();
 
                 var staffC2 = new StaffWithC2()
                 {
@@ -113,6 +114,25 @@ namespace HAIAPI.Controllers
 
                 db.StaffWithC2.Add(staffC2);
                 db.SaveChanges();
+
+                // save info
+                var agencyImage = new SaveAgencyShopImage()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    AddressFull = paser.address,
+                    Cinfo = cInfo.Id,
+                    Country = paser.country,
+                    District = paser.district,
+                    Lat = paser.lat,
+                    Province = paser.province,
+                    CreateTime = DateTime.Now,
+                    StaffId = staff.Id,
+                    Lng = paser.lng,
+                    Ward = paser.ward,
+                    ImagePath = paser.image
+                };
+
+                db.SaveAgencyShopImages.Add(agencyImage);
 
             }
             catch (Exception e)
@@ -283,6 +303,94 @@ namespace HAIAPI.Controllers
             return result;
         }
 
+
+        /// <summary>
+        /// 
+        ///  update location c2
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        /// 
+        [HttpPost]
+        public ResultInfo UpdateLocation()
+        {
+            var log = new MongoHistoryAPI()
+            {
+                APIUrl = "/api/agency/updatelocation",
+                CreateTime = DateTime.Now,
+                Sucess = 1
+            };
+
+            var result = new ResultInfo()
+            {
+                id = "1",
+                msg = "success"
+            };
+
+            var requestContent = Request.Content.ReadAsStringAsync().Result;
+
+            try
+            {
+                var jsonserializer = new JavaScriptSerializer();
+                var paser = jsonserializer.Deserialize<AgencyUpdateLocationRequest>(requestContent);
+                log.Content = new JavaScriptSerializer().Serialize(paser);
+
+                if (!mongoHelper.checkLoginSession(paser.user, paser.token))
+                    throw new Exception("Wrong token and user login!");
+
+                var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+
+                if (staff == null)
+                    throw new Exception("Chỉ nhân viên công ty mới được quyền tạo");
+
+                var checkC2 = db.C2Info.Find(paser.id);
+                if (checkC2 == null)
+                {
+                    throw new Exception("Sai thông tin khách hàng");
+                }
+
+                CInfoCommon cinfo = checkC2.CInfoCommon;
+                cinfo.Lat = paser.lat;
+                cinfo.Lng = paser.lng;
+                db.Entry(cinfo).State = System.Data.Entity.EntityState.Modified;
+               
+
+                // save info
+                var agencyImage = new SaveAgencyShopImage()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    AddressFull = paser.address,
+                    Cinfo = checkC2.InfoId,
+                    Country = paser.country,
+                    District = paser.district,
+                    Lat = paser.lat,
+                    Province = paser.province,
+                    CreateTime =DateTime.Now,
+                    StaffId = staff.Id,
+                    Lng = paser.lng,
+                    Ward = paser.ward,
+                    ImagePath = paser.image
+                };
+
+                db.SaveAgencyShopImages.Add(agencyImage);
+
+                db.SaveChanges();
+                
+
+            }
+            catch (Exception e)
+            {
+                result.id = "0";
+                result.msg = e.Message;
+                log.Sucess = 0;
+            }
+
+            log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+            mongoHelper.createHistoryAPI(log);
+
+            return result;
+        }
 
         [HttpGet]
         public List<AgencyInfoC2> GetAgencyC2(string user, string token)

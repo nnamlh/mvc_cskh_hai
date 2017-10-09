@@ -433,6 +433,9 @@
     <Compile Include="Models\RoleCheckImei.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SaveAgencyShopImage.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\SendSmsHistory.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>

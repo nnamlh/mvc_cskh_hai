@@ -274,7 +274,7 @@ namespace NDHSITE.Controllers
             return RedirectToAction("modifyci", "agency", new { id = agency.Id });
         }
 
-        public ActionResult ManageCII(int? page, string areaId = "-1", string search = "", int? type = 1)
+        public ActionResult ManageCII(int? page, int status = -1, string search = "", int? type = 1)
         {
             if (!Utitl.CheckUser(db, User.Identity.Name, "ManageAgency", 0))
                 return RedirectToAction("relogin", "home");
@@ -282,39 +282,40 @@ namespace NDHSITE.Controllers
             ViewBag.Provinces = db.Provinces.ToList();
             int pageSize = 10;
             int pageNumber = (page ?? 1);
-
-            ViewBag.AreaId = areaId;
-            ViewBag.AllArea = db.HaiAreas.ToList();
+            ViewBag.Status = status;
+            //ViewBag.AreaId = areaId;
+          //  ViewBag.AllArea = db.HaiAreas.ToList();
 
             ViewBag.SearchText = search;
             ViewBag.SType = type;
 
             ViewBag.BranchAll = db.HaiBranches.ToList();
 
-            if (areaId != "-1")
+            if (status != -1)
             {
                 switch (type)
                 {
                     case 1:
                         ViewBag.STypeName = "Mã đại lý";
-                        return View(db.C2Info.Where(p => p.CInfoCommon.AreaId == areaId && p.Code.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
+                        return View(db.C2Info.Where(p => p.IsActive == status && p.Code.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
                     case 2:
                         ViewBag.STypeName = "Số điện thoại";
-                        return View(db.C2Info.Where(p => p.CInfoCommon.AreaId == areaId && p.CInfoCommon.Phone.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
+                        return View(db.C2Info.Where(p => p.IsActive == status && p.CInfoCommon.Phone.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
                     case 3:
                         ViewBag.STypeName = "Tên cửa hàng";
-                        return View(db.C2Info.Where(p => p.CInfoCommon.AreaId == areaId && p.StoreName.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
+                        return View(db.C2Info.Where(p => p.IsActive == status && p.StoreName.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
                     case 4:
                         ViewBag.STypeName = "Mã cấp 1";
-                        return View(db.C2Info.Where(p => p.CInfoCommon.AreaId == areaId && p.C1Info.Code.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
+                        return View(db.C2Info.Where(p => p.IsActive == status && p.C1Info.Code.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
                     case 5:
                         ViewBag.STypeName = "Mã chi nhánh";
-                        return View(db.C2Info.Where(p => p.CInfoCommon.AreaId == areaId && p.CInfoCommon.BranchCode.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
+                        return View(db.C2Info.Where(p => p.IsActive == status && p.CInfoCommon.BranchCode.Contains(search)).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
                     default:
-                        return View(db.C2Info.Where(p => p.CInfoCommon.AreaId == areaId).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
+                        return View(db.C2Info.Where(p => p.IsActive == status).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
 
                 }
             }
+
 
             switch (type)
             {

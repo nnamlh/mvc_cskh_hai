@@ -155,6 +155,7 @@
     <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
     <Property Name="C1Id" Type="nvarchar" MaxLength="128" />
     <Property Name="Decision" Type="nvarchar" MaxLength="512" />
+    <Property Name="CStatus" Type="int" />
   </EntityType>
   <EntityType Name="CalendarInfo">
     <Key>

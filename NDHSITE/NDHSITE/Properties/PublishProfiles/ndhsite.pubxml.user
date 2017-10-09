@@ -76,7 +76,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/08/2017 14:46:02</publishTime>
     </File>
     <File Include="bin/NDHSITE.dll">
-      <publishTime>10/04/2017 11:13:17</publishTime>
+      <publishTime>10/09/2017 14:28:22</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>09/23/2016 14:14:47</publishTime>
@@ -439,7 +439,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/21/2017 14:07:53</publishTime>
     </File>
     <File Include="Views/Agency/ManageCII.cshtml">
-      <publishTime>09/13/2017 15:24:08</publishTime>
+      <publishTime>10/06/2017 13:55:38</publishTime>
     </File>
     <File Include="Views/Agency/ManageFarmer.cshtml">
       <publishTime>07/07/2017 16:04:42</publishTime>
@@ -517,7 +517,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/18/2017 14:50:23</publishTime>
     </File>
     <File Include="Views/HaiStaff/AddAgency.cshtml">
-      <publishTime>09/07/2017 14:43:18</publishTime>
+      <publishTime>10/06/2017 14:01:53</publishTime>
     </File>
     <File Include="Views/HaiStaff/CreateBranch.cshtml">
       <publishTime>10/19/2016 16:26:04</publishTime>

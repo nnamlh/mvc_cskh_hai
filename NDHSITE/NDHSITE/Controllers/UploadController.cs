@@ -149,11 +149,77 @@ namespace NDHSITE.Controllers
         }
 
 
+
+
         private bool checkLoginSession(string user, string token)
         {
             var check = db.APIAuthHistories.Where(p => p.UserLogin == user && p.Token == token && p.IsExpired == 0).FirstOrDefault();
 
             return check != null ? true : false;
         }
+
+        private string FolderSave(int id)
+        {
+            switch (id)
+            {
+                case 1:
+                    return "agencyshop";
+                default:
+                    return "temp";
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UploadImage(HttpPostedFileBase image, string extension, string user, string token, int folder)
+        {
+
+            if (mongoHelp.checkLoginSession(user, token))
+            {
+                string folderSave = FolderSave(folder);
+
+                string fsave = "~/uploadfolder/" + folderSave;
+
+                bool exists = System.IO.Directory.Exists(Server.MapPath(fsave));
+
+                if (!exists)
+                    System.IO.Directory.CreateDirectory(Server.MapPath(fsave));
+
+
+                string urlThumbnail = "";
+                try
+                {
+                    MemoryStream target = new MemoryStream();
+                    image.InputStream.CopyTo(target);
+                    byte[] data = target.ToArray();
+
+                    ImageUpload imageUpload = new ImageUpload
+                    {
+                        Width = 3000,
+                        isSacle = false,
+                        UploadPath = fsave,
+                        user = user
+                    };
+
+                    ImageResult imageResult = imageUpload.RenameUploadFile(data, extension);
+
+                    if (imageResult.Success)
+                    {
+                        urlThumbnail = "/uploadfolder/" + folderSave+ "/" + imageResult.ImageName;
+                    }
+
+                }
+                catch
+                {
+                    return Json(new { id = "0", msg = "Image upload to fail" }, JsonRequestBehavior.AllowGet);
+                }
+
+                return Json(new { id = "1", msg = urlThumbnail }, JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new { id = "0", msg = "Faile token user" }, JsonRequestBehavior.AllowGet);
+        }
+
+
+
     }
 }

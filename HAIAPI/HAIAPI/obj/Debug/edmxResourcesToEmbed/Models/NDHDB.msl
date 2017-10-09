@@ -136,6 +136,7 @@
     <EntitySetMapping Name="C2Info">
       <EntityTypeMapping TypeName="NDHDB1Model.C2Info">
         <MappingFragment StoreEntitySet="C2Info">
+          <ScalarProperty Name="CStatus" ColumnName="CStatus" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="StoreName" ColumnName="StoreName" />

@@ -260,6 +260,7 @@
     <NavigationProperty Name="FarmerInfoes" Relationship="Self.FK__FarmerInf__InfoI__7EF6D905" FromRole="CInfoCommon" ToRole="FarmerInfo" />
     <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="CInfoCommon" ToRole="MSGPoint" />
     <Property Name="ProvinceCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SaveAgencyShopImages" Relationship="NDHDB1Model.FK__SaveAgenc__Cinfo__7FA0E47B" FromRole="CInfoCommon" ToRole="SaveAgencyShopImage" />
   </EntityType>
   <EntityType Name="DecorGroup">
     <Key>
@@ -521,6 +522,7 @@
     <NavigationProperty Name="StaffCheckIns" Relationship="Self.FK__StaffChec__Staff__47DBAE45" FromRole="HaiStaff" ToRole="StaffCheckIn" />
     <NavigationProperty Name="StaffWithC2" Relationship="Self.FK__StaffWith__Staff__4C564A9F" FromRole="HaiStaff" ToRole="StaffWithC2" />
     <NavigationProperty Name="C1Info" Relationship="Self.StaffWithC1" FromRole="HaiStaff" ToRole="C1Info" />
+    <NavigationProperty Name="SaveAgencyShopImages" Relationship="NDHDB1Model.FK__SaveAgenc__Staff__009508B4" FromRole="HaiStaff" ToRole="SaveAgencyShopImage" />
   </EntityType>
   <EntityType Name="HappyBirthday">
     <Key>
@@ -1684,6 +1686,15 @@
     <FunctionImport Name="product_list" ReturnType="Collection(NDHDB1Model.product_list_Result)" />
     <EntitySet Name="C2C1" EntityType="NDHDB1Model.C2C1" />
     <EntitySet Name="OldKeySaves" EntityType="NDHDB1Model.OldKeySave" />
+    <EntitySet Name="SaveAgencyShopImages" EntityType="NDHDB1Model.SaveAgencyShopImage" />
+    <AssociationSet Name="FK__SaveAgenc__Cinfo__7FA0E47B" Association="NDHDB1Model.FK__SaveAgenc__Cinfo__7FA0E47B">
+      <End Role="CInfoCommon" EntitySet="CInfoCommons" />
+      <End Role="SaveAgencyShopImage" EntitySet="SaveAgencyShopImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SaveAgenc__Staff__009508B4" Association="NDHDB1Model.FK__SaveAgenc__Staff__009508B4">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="SaveAgencyShopImage" EntitySet="SaveAgencyShopImages" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="checkin_calendartype_group_Result">
     <Property Type="String" Name="Name" Nullable="true" MaxLength="512" />
@@ -1782,4 +1793,47 @@
     <Property Name="CodeType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="CreateTime" Type="DateTime" Precision="3" />
   </EntityType>
+  <EntityType Name="SaveAgencyShopImage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Cinfo" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Ward" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="District" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Province" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AddressFull" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Lat" Type="Double" />
+    <Property Name="Lng" Type="Double" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CInfoCommon" Relationship="NDHDB1Model.FK__SaveAgenc__Cinfo__7FA0E47B" FromRole="SaveAgencyShopImage" ToRole="CInfoCommon" />
+    <NavigationProperty Name="HaiStaff" Relationship="NDHDB1Model.FK__SaveAgenc__Staff__009508B4" FromRole="SaveAgencyShopImage" ToRole="HaiStaff" />
+    <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK__SaveAgenc__Cinfo__7FA0E47B">
+    <End Type="NDHDB1Model.CInfoCommon" Role="CInfoCommon" Multiplicity="0..1" />
+    <End Type="NDHDB1Model.SaveAgencyShopImage" Role="SaveAgencyShopImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CInfoCommon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SaveAgencyShopImage">
+        <PropertyRef Name="Cinfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SaveAgenc__Staff__009508B4">
+    <End Type="NDHDB1Model.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
+    <End Type="NDHDB1Model.SaveAgencyShopImage" Role="SaveAgencyShopImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SaveAgencyShopImage">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

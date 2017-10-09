@@ -720,6 +720,23 @@
     <Property Name="RoleName" Type="nvarchar" MaxLength="256" />
     <Property Name="Notes" Type="nvarchar" MaxLength="512" />
   </EntityType>
+  <EntityType Name="SaveAgencyShopImage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Cinfo" Type="nvarchar" MaxLength="128" />
+    <Property Name="Ward" Type="nvarchar(max)" />
+    <Property Name="District" Type="nvarchar(max)" />
+    <Property Name="Province" Type="nvarchar(max)" />
+    <Property Name="Country" Type="nvarchar(max)" />
+    <Property Name="AddressFull" Type="nvarchar(max)" />
+    <Property Name="Lat" Type="float" />
+    <Property Name="Lng" Type="float" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="StaffId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ImagePath" Type="nvarchar(max)" />
+  </EntityType>
   <EntityType Name="SendSmsHistory">
     <Key>
       <PropertyRef Name="Id" />
@@ -1358,6 +1375,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__SaveAgenc__Cinfo__7FA0E47B">
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="0..1" />
+    <End Role="SaveAgencyShopImage" Type="Self.SaveAgencyShopImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CInfoCommon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SaveAgencyShopImage">
+        <PropertyRef Name="Cinfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SaveAgenc__Staff__009508B4">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
+    <End Role="SaveAgencyShopImage" Type="Self.SaveAgencyShopImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SaveAgencyShopImage">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__StaffChec__Staff__47DBAE45">
     <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
     <End Role="StaffCheckIn" Type="Self.StaffCheckIn" Multiplicity="*" />
@@ -1559,6 +1600,7 @@
     <EntitySet Name="PTracking" EntityType="Self.PTracking" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RegFirebase" EntityType="Self.RegFirebase" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RoleCheckImei" EntityType="Self.RoleCheckImei" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SaveAgencyShopImage" EntityType="Self.SaveAgencyShopImage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SendSmsHistory" EntityType="Self.SendSmsHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ServerInfo" EntityType="Self.ServerInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SmsAccount" EntityType="Self.SmsAccount" Schema="dbo" store:Type="Tables" />
@@ -1738,6 +1780,14 @@
     <AssociationSet Name="FK__PTracking__Produ__00FF1D08" Association="Self.FK__PTracking__Produ__00FF1D08">
       <End Role="ProductInfo" EntitySet="ProductInfo" />
       <End Role="PTracking" EntitySet="PTracking" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SaveAgenc__Cinfo__7FA0E47B" Association="Self.FK__SaveAgenc__Cinfo__7FA0E47B">
+      <End Role="CInfoCommon" EntitySet="CInfoCommon" />
+      <End Role="SaveAgencyShopImage" EntitySet="SaveAgencyShopImage" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SaveAgenc__Staff__009508B4" Association="Self.FK__SaveAgenc__Staff__009508B4">
+      <End Role="HaiStaff" EntitySet="HaiStaff" />
+      <End Role="SaveAgencyShopImage" EntitySet="SaveAgencyShopImage" />
     </AssociationSet>
     <AssociationSet Name="FK__StaffChec__Staff__47DBAE45" Association="Self.FK__StaffChec__Staff__47DBAE45">
       <End Role="HaiStaff" EntitySet="HaiStaff" />

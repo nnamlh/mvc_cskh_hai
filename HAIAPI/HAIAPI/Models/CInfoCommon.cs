@@ -24,6 +24,7 @@ namespace HAIAPI.Models
             this.EventCustomerFarmers = new HashSet<EventCustomerFarmer>();
             this.FarmerInfoes = new HashSet<FarmerInfo>();
             this.MSGPoints = new HashSet<MSGPoint>();
+            this.SaveAgencyShopImages = new HashSet<SaveAgencyShopImage>();
         }
     
         public string Id { get; set; }
@@ -80,5 +81,7 @@ namespace HAIAPI.Models
         public virtual ICollection<FarmerInfo> FarmerInfoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MSGPoint> MSGPoints { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SaveAgencyShopImage> SaveAgencyShopImages { get; set; }
     }
 }

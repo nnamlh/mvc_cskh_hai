@@ -32,6 +32,8 @@ namespace HAIAPI.Models
 
         public double? lat { get; set; }
 
+        public string image { get; set; }
+
     }
 
     public class AgencyModifyRequest : AgencyCreateRequest
@@ -43,6 +45,7 @@ namespace HAIAPI.Models
 
     public class AgencyInfo
     {
+
         public string name { get; set; }
 
         public string deputy { get; set; }
@@ -92,6 +95,29 @@ namespace HAIAPI.Models
     public class ResultAgency : ResultInfo
     {
         public List<AgencyInfo> agences { get; set; }
+    }
+
+
+    public class AgencyUpdateLocationRequest : RequestInfo
+    {
+        public double? lat { get; set; }
+
+        public double? lng { get; set; }
+
+        public string address { get; set; }
+
+        public string province { get; set; }
+
+        public string district { get; set; }
+
+        public string ward { get; set; }
+
+        public string country { get; set; }
+
+        public string id { get; set; }
+
+        public string image { get; set; }
+
     }
 
 }

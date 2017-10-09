@@ -73,26 +73,10 @@
 
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <select class="form-control" name="areaId">
-                                            @if (ViewBag.AreaId == "-1")
-                                            {
-                                                <option value="-1" selected>Tất cả</option>
-                                            }
-                                            else
-                                            {
-                                                <option value="-1">Tất cả</option>
-                                            }
-                                            @foreach (var item in ViewBag.AllArea)
-                                            {
-                                                if (ViewBag.AreaId == item.Id)
-                                                {
-                                                    <option value="@item.Id" selected>@item.Name</option>
-                                                }
-                                                else
-                                                {
-                                                    <option value="@item.Id">@item.Name</option>
-                                                }
-                                            }
+                                        <select class="form-control" name="status">
+                                            <option value="-1"  @(ViewBag.Status == -1?"selected":"")>Tất cả</option>
+                                            <option value="1"  @(ViewBag.Status == 1?"selected":"") >Đang hoặt động</option>
+                                            <option value="0"  @(ViewBag.Status == 0?"selected":"")>Chưa kích hoặt</option>
                                         </select>
                                     </div>
                                 </div>
@@ -151,7 +135,7 @@
                             </table>
                             Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
                             @Html.PagedListPager(Model, page => Url.Action("ManageCII",
-                                                   new { page, areaId = ViewBag.AreaId, search = ViewBag.SearchText, type = ViewBag.SType }))
+                                                   new { page, status = ViewBag.Status, search = ViewBag.SearchText, type = ViewBag.SType }))
 
                         </fieldset>
 

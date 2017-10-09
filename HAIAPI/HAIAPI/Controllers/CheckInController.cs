@@ -148,7 +148,7 @@ namespace HAIAPI.Controllers
                     CalendarWork plan = new CalendarWork()
                     {
                         Id = Guid.NewGuid().ToString(),
-                        CDate = paser.item.day + "",
+                        CDate = "D" + paser.item.day + "",
                         CMonth = paser.month,
                         CYear = paser.year,
                         CDay = paser.item.day,
@@ -176,7 +176,7 @@ namespace HAIAPI.Controllers
                             CalendarWork plan = new CalendarWork()
                             {
                                 Id = Guid.NewGuid().ToString(),
-                                CDate = paser.item.day + "",
+                                CDate = "D" + paser.item.day + "",
                                 CMonth = paser.month,
                                 CYear = paser.year,
                                 CDay = paser.item.day,
@@ -338,7 +338,7 @@ namespace HAIAPI.Controllers
                         CalendarWork plan = new CalendarWork()
                         {
                             Id = Guid.NewGuid().ToString(),
-                            CDate = item.day + "",
+                            CDate = "D" + item.day + "",
                             CMonth = paser.month,
                             CYear = paser.year,
                             CDay = item.day,
@@ -366,7 +366,7 @@ namespace HAIAPI.Controllers
                                 CalendarWork plan = new CalendarWork()
                                 {
                                     Id = Guid.NewGuid().ToString(),
-                                    CDate = item.day + "",
+                                    CDate = "D" + item.day + "",
                                     CMonth = paser.month,
                                     CYear = paser.year,
                                     CDay = item.day,
