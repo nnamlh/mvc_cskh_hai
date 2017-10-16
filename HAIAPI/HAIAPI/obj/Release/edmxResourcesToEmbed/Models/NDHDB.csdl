@@ -140,6 +140,7 @@
     <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C1Info__InfoId__681373AD" FromRole="C1Info" ToRole="CInfoCommon" />
     <NavigationProperty Name="C2Info" Relationship="Self.FK__C2Info__C1Id__73852659" FromRole="C1Info" ToRole="C2Info" />
     <NavigationProperty Name="HaiStaffs" Relationship="Self.StaffWithC1" FromRole="C1Info" ToRole="HaiStaff" />
+    <NavigationProperty Name="OrderProducts" Relationship="NDHDB1Model.FK__OrderProdu__C1Id__29971E47" FromRole="C1Info" ToRole="OrderProduct" />
   </EntityType>
   <EntityType Name="C2Info">
     <Key>
@@ -209,6 +210,7 @@
     <Property Name="TimeCheck" Type="DateTime" Precision="3" />
     <Property Name="Distance" Type="Double" />
     <Property Name="Perform" Type="Int32" />
+    <Property Name="DayInWeek" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="CInfoCommon">
     <Key>
@@ -261,6 +263,7 @@
     <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="CInfoCommon" ToRole="MSGPoint" />
     <Property Name="ProvinceCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="SaveAgencyShopImages" Relationship="NDHDB1Model.FK__SaveAgenc__Cinfo__7FA0E47B" FromRole="CInfoCommon" ToRole="SaveAgencyShopImage" />
+    <NavigationProperty Name="HaiOrders" Relationship="NDHDB1Model.FK__HaiOrder__Agency__17786E0C" FromRole="CInfoCommon" ToRole="HaiOrder" />
   </EntityType>
   <EntityType Name="DecorGroup">
     <Key>
@@ -523,6 +526,7 @@
     <NavigationProperty Name="StaffWithC2" Relationship="Self.FK__StaffWith__Staff__4C564A9F" FromRole="HaiStaff" ToRole="StaffWithC2" />
     <NavigationProperty Name="C1Info" Relationship="Self.StaffWithC1" FromRole="HaiStaff" ToRole="C1Info" />
     <NavigationProperty Name="SaveAgencyShopImages" Relationship="NDHDB1Model.FK__SaveAgenc__Staff__009508B4" FromRole="HaiStaff" ToRole="SaveAgencyShopImage" />
+    <NavigationProperty Name="OrderStaffs" Relationship="NDHDB1Model.FK__OrderStaf__Staff__21F5FC7F" FromRole="HaiStaff" ToRole="OrderStaff" />
   </EntityType>
   <EntityType Name="HappyBirthday">
     <Key>
@@ -698,6 +702,7 @@
     <Property Name="Price" Type="Double" />
     <Property Name="PVat" Type="Double" />
     <Property Name="ShortDescibe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="OrderProducts" Relationship="NDHDB1Model.FK__OrderProd__Produ__28A2FA0E" FromRole="ProductInfo" ToRole="OrderProduct" />
   </EntityType>
   <EntityType Name="ProductSeri">
     <Key>
@@ -1695,6 +1700,58 @@
       <End Role="HaiStaff" EntitySet="HaiStaffs" />
       <End Role="SaveAgencyShopImage" EntitySet="SaveAgencyShopImages" />
     </AssociationSet>
+    <EntitySet Name="HaiOrders" EntityType="NDHDB1Model.HaiOrder" />
+    <EntitySet Name="OrderProducts" EntityType="NDHDB1Model.OrderProduct" />
+    <EntitySet Name="OrderStaffs" EntityType="NDHDB1Model.OrderStaff" />
+    <EntitySet Name="OrderStaffProcesses" EntityType="NDHDB1Model.OrderStaffProcess" />
+    <EntitySet Name="OrderStatus" EntityType="NDHDB1Model.OrderStatu" />
+    <EntitySet Name="OrderTypes" EntityType="NDHDB1Model.OrderType" />
+    <EntitySet Name="PayTypes" EntityType="NDHDB1Model.PayType" />
+    <EntitySet Name="ShipTypes" EntityType="NDHDB1Model.ShipType" />
+    <AssociationSet Name="FK__OrderProdu__C1Id__29971E47" Association="NDHDB1Model.FK__OrderProdu__C1Id__29971E47">
+      <End Role="C1Info" EntitySet="C1Info" />
+      <End Role="OrderProduct" EntitySet="OrderProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiOrder__Agency__17786E0C" Association="NDHDB1Model.FK__HaiOrder__Agency__17786E0C">
+      <End Role="CInfoCommon" EntitySet="CInfoCommons" />
+      <End Role="HaiOrder" EntitySet="HaiOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiOrder__OrderS__186C9245" Association="NDHDB1Model.FK__HaiOrder__OrderS__186C9245">
+      <End Role="OrderStatu" EntitySet="OrderStatus" />
+      <End Role="HaiOrder" EntitySet="HaiOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiOrder__OrderT__149C0161" Association="NDHDB1Model.FK__HaiOrder__OrderT__149C0161">
+      <End Role="OrderType" EntitySet="OrderTypes" />
+      <End Role="HaiOrder" EntitySet="HaiOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiOrder__PayTyp__1590259A" Association="NDHDB1Model.FK__HaiOrder__PayTyp__1590259A">
+      <End Role="PayType" EntitySet="PayTypes" />
+      <End Role="HaiOrder" EntitySet="HaiOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiOrder__ShipTy__168449D3" Association="NDHDB1Model.FK__HaiOrder__ShipTy__168449D3">
+      <End Role="ShipType" EntitySet="ShipTypes" />
+      <End Role="HaiOrder" EntitySet="HaiOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderProd__Order__27AED5D5" Association="NDHDB1Model.FK__OrderProd__Order__27AED5D5">
+      <End Role="HaiOrder" EntitySet="HaiOrders" />
+      <End Role="OrderProduct" EntitySet="OrderProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderStaf__Order__2101D846" Association="NDHDB1Model.FK__OrderStaf__Order__2101D846">
+      <End Role="HaiOrder" EntitySet="HaiOrders" />
+      <End Role="OrderStaff" EntitySet="OrderStaffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderStaf__Staff__21F5FC7F" Association="NDHDB1Model.FK__OrderStaf__Staff__21F5FC7F">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="OrderStaff" EntitySet="OrderStaffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderProd__Produ__28A2FA0E" Association="NDHDB1Model.FK__OrderProd__Produ__28A2FA0E">
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+      <End Role="OrderProduct" EntitySet="OrderProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderStaf__Proce__22EA20B8" Association="NDHDB1Model.FK__OrderStaf__Proce__22EA20B8">
+      <End Role="OrderStaffProcess" EntitySet="OrderStaffProcesses" />
+      <End Role="OrderStaff" EntitySet="OrderStaffs" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="checkin_calendartype_group_Result">
     <Property Type="String" Name="Name" Nullable="true" MaxLength="512" />
@@ -1833,6 +1890,241 @@
       </Principal>
       <Dependent Role="SaveAgencyShopImage">
         <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="HaiOrder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="OrderType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PayType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ShipType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Agency" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ReceiveAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ReceivePhone1" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="ReceivePhone2" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="ExpectDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="OrderStatus" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PriceTotal" Type="Double" />
+    <Property Name="BrachCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CInfoCommon" Relationship="NDHDB1Model.FK__HaiOrder__Agency__17786E0C" FromRole="HaiOrder" ToRole="CInfoCommon" />
+    <NavigationProperty Name="OrderStatu" Relationship="NDHDB1Model.FK__HaiOrder__OrderS__186C9245" FromRole="HaiOrder" ToRole="OrderStatu" />
+    <NavigationProperty Name="OrderType1" Relationship="NDHDB1Model.FK__HaiOrder__OrderT__149C0161" FromRole="HaiOrder" ToRole="OrderType" />
+    <NavigationProperty Name="PayType1" Relationship="NDHDB1Model.FK__HaiOrder__PayTyp__1590259A" FromRole="HaiOrder" ToRole="PayType" />
+    <NavigationProperty Name="ShipType1" Relationship="NDHDB1Model.FK__HaiOrder__ShipTy__168449D3" FromRole="HaiOrder" ToRole="ShipType" />
+    <NavigationProperty Name="OrderProducts" Relationship="NDHDB1Model.FK__OrderProd__Order__27AED5D5" FromRole="HaiOrder" ToRole="OrderProduct" />
+    <NavigationProperty Name="OrderStaffs" Relationship="NDHDB1Model.FK__OrderStaf__Order__2101D846" FromRole="HaiOrder" ToRole="OrderStaff" />
+  </EntityType>
+  <EntityType Name="OrderProduct">
+    <Key>
+      <PropertyRef Name="OrderId" />
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="OrderId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProductId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="PriceTotal" Type="Double" />
+    <Property Name="PerPrice" Type="Double" />
+    <Property Name="C1Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="QuantityFinish" Type="Int32" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="C1Info" Relationship="NDHDB1Model.FK__OrderProdu__C1Id__29971E47" FromRole="OrderProduct" ToRole="C1Info" />
+    <NavigationProperty Name="HaiOrder" Relationship="NDHDB1Model.FK__OrderProd__Order__27AED5D5" FromRole="OrderProduct" ToRole="HaiOrder" />
+    <NavigationProperty Name="ProductInfo" Relationship="NDHDB1Model.FK__OrderProd__Produ__28A2FA0E" FromRole="OrderProduct" ToRole="ProductInfo" />
+  </EntityType>
+  <EntityType Name="OrderStaff">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="OrderId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="ProcessId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiOrder" Relationship="NDHDB1Model.FK__OrderStaf__Order__2101D846" FromRole="OrderStaff" ToRole="HaiOrder" />
+    <NavigationProperty Name="HaiStaff" Relationship="NDHDB1Model.FK__OrderStaf__Staff__21F5FC7F" FromRole="OrderStaff" ToRole="HaiStaff" />
+    <NavigationProperty Name="OrderStaffProcess" Relationship="NDHDB1Model.FK__OrderStaf__Proce__22EA20B8" FromRole="OrderStaff" ToRole="OrderStaffProcess" />
+  </EntityType>
+  <EntityType Name="OrderStaffProcess">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="OrderStaffs" Relationship="NDHDB1Model.FK__OrderStaf__Proce__22EA20B8" FromRole="OrderStaffProcess" ToRole="OrderStaff" />
+  </EntityType>
+  <EntityType Name="OrderStatu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiOrders" Relationship="NDHDB1Model.FK__HaiOrder__OrderS__186C9245" FromRole="OrderStatu" ToRole="HaiOrder" />
+  </EntityType>
+  <EntityType Name="OrderType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiOrders" Relationship="NDHDB1Model.FK__HaiOrder__OrderT__149C0161" FromRole="OrderType" ToRole="HaiOrder" />
+  </EntityType>
+  <EntityType Name="PayType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiOrders" Relationship="NDHDB1Model.FK__HaiOrder__PayTyp__1590259A" FromRole="PayType" ToRole="HaiOrder" />
+  </EntityType>
+  <EntityType Name="ShipType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiOrders" Relationship="NDHDB1Model.FK__HaiOrder__ShipTy__168449D3" FromRole="ShipType" ToRole="HaiOrder" />
+  </EntityType>
+  <Association Name="FK__OrderProdu__C1Id__29971E47">
+    <End Type="NDHDB1Model.C1Info" Role="C1Info" Multiplicity="0..1" />
+    <End Type="NDHDB1Model.OrderProduct" Role="OrderProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C1Info">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderProduct">
+        <PropertyRef Name="C1Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiOrder__Agency__17786E0C">
+    <End Type="NDHDB1Model.CInfoCommon" Role="CInfoCommon" Multiplicity="0..1" />
+    <End Type="NDHDB1Model.HaiOrder" Role="HaiOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CInfoCommon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiOrder">
+        <PropertyRef Name="Agency" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiOrder__OrderS__186C9245">
+    <End Type="NDHDB1Model.OrderStatu" Role="OrderStatu" Multiplicity="0..1" />
+    <End Type="NDHDB1Model.HaiOrder" Role="HaiOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderStatu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiOrder">
+        <PropertyRef Name="OrderStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiOrder__OrderT__149C0161">
+    <End Type="NDHDB1Model.OrderType" Role="OrderType" Multiplicity="0..1" />
+    <End Type="NDHDB1Model.HaiOrder" Role="HaiOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiOrder">
+        <PropertyRef Name="OrderType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiOrder__PayTyp__1590259A">
+    <End Type="NDHDB1Model.PayType" Role="PayType" Multiplicity="0..1" />
+    <End Type="NDHDB1Model.HaiOrder" Role="HaiOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PayType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiOrder">
+        <PropertyRef Name="PayType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiOrder__ShipTy__168449D3">
+    <End Type="NDHDB1Model.ShipType" Role="ShipType" Multiplicity="0..1" />
+    <End Type="NDHDB1Model.HaiOrder" Role="HaiOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShipType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiOrder">
+        <PropertyRef Name="ShipType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderProd__Order__27AED5D5">
+    <End Type="NDHDB1Model.HaiOrder" Role="HaiOrder" Multiplicity="1" />
+    <End Type="NDHDB1Model.OrderProduct" Role="OrderProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderProduct">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderStaf__Order__2101D846">
+    <End Type="NDHDB1Model.HaiOrder" Role="HaiOrder" Multiplicity="0..1" />
+    <End Type="NDHDB1Model.OrderStaff" Role="OrderStaff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderStaff">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderStaf__Staff__21F5FC7F">
+    <End Type="NDHDB1Model.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
+    <End Type="NDHDB1Model.OrderStaff" Role="OrderStaff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderStaff">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderProd__Produ__28A2FA0E">
+    <End Type="NDHDB1Model.ProductInfo" Role="ProductInfo" Multiplicity="1" />
+    <End Type="NDHDB1Model.OrderProduct" Role="OrderProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderProduct">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderStaf__Proce__22EA20B8">
+    <End Type="NDHDB1Model.OrderStaffProcess" Role="OrderStaffProcess" Multiplicity="0..1" />
+    <End Type="NDHDB1Model.OrderStaff" Role="OrderStaff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderStaffProcess">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderStaff">
+        <PropertyRef Name="ProcessId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

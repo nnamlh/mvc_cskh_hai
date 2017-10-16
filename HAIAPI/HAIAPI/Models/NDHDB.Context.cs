@@ -93,6 +93,14 @@ namespace HAIAPI.Models
         public virtual DbSet<C2C1> C2C1 { get; set; }
         public virtual DbSet<OldKeySave> OldKeySaves { get; set; }
         public virtual DbSet<SaveAgencyShopImage> SaveAgencyShopImages { get; set; }
+        public virtual DbSet<HaiOrder> HaiOrders { get; set; }
+        public virtual DbSet<OrderProduct> OrderProducts { get; set; }
+        public virtual DbSet<OrderStaff> OrderStaffs { get; set; }
+        public virtual DbSet<OrderStaffProcess> OrderStaffProcesses { get; set; }
+        public virtual DbSet<OrderStatu> OrderStatus { get; set; }
+        public virtual DbSet<OrderType> OrderTypes { get; set; }
+        public virtual DbSet<PayType> PayTypes { get; set; }
+        public virtual DbSet<ShipType> ShipTypes { get; set; }
     
         public virtual ObjectResult<checkin_calendartype_group_Result> checkin_calendartype_group(Nullable<int> month, Nullable<int> year, string staffId)
         {

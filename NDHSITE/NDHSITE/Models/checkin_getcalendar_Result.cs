@@ -37,5 +37,6 @@ namespace NDHSITE.Models
         public string TypeName { get; set; }
         public string StoreName { get; set; }
         public string Deputy { get; set; }
+        public string DayInWeek { get; set; }
     }
 }

@@ -82,6 +82,15 @@ namespace HAIAPI.Models
 
     }
 
+    public class AgencyC2C1
+    {
+        public string code { get; set; }
+        public string name { get; set; }
+        public string store { get; set; }
+
+        public int? priority { get; set; }
+    }
+
     public class AgencyInfoC2 : AgencyInfo
     {
         public string c1Id { get; set; }
@@ -89,6 +98,8 @@ namespace HAIAPI.Models
         public string rank { get; set; }
 
         public int? group { get; set; }
+
+        public List<AgencyC2C1> c1 { get; set; }
     }
 
 
@@ -117,7 +128,6 @@ namespace HAIAPI.Models
         public string id { get; set; }
 
         public string image { get; set; }
-
     }
 
 }

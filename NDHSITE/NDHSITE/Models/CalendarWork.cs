@@ -34,5 +34,6 @@ namespace NDHSITE.Models
         public Nullable<System.DateTime> TimeCheck { get; set; }
         public Nullable<double> Distance { get; set; }
         public Nullable<int> Perform { get; set; }
+        public string DayInWeek { get; set; }
     }
 }

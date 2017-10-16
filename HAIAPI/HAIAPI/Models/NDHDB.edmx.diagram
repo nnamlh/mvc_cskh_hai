@@ -120,6 +120,25 @@
         <EntityTypeShape EntityType="NDHDB1Model.SaveAgencyShopImage" Width="1.5" PointX="12.5" PointY="34.125" />
         <AssociationConnector Association="NDHDB1Model.FK__SaveAgenc__Cinfo__7FA0E47B" />
         <AssociationConnector Association="NDHDB1Model.FK__SaveAgenc__Staff__009508B4" />
+        <EntityTypeShape EntityType="NDHDB1Model.HaiOrder" Width="1.5" PointX="15.25" PointY="25.125" />
+        <EntityTypeShape EntityType="NDHDB1Model.OrderProduct" Width="1.5" PointX="20.5" PointY="23.25" />
+        <EntityTypeShape EntityType="NDHDB1Model.OrderStaff" Width="1.5" PointX="17.5" PointY="32.375" />
+        <EntityTypeShape EntityType="NDHDB1Model.OrderStaffProcess" Width="1.5" PointX="15.25" PointY="32.875" />
+        <EntityTypeShape EntityType="NDHDB1Model.OrderStatu" Width="1.5" PointX="13" PointY="44.125" />
+        <EntityTypeShape EntityType="NDHDB1Model.OrderType" Width="1.5" PointX="13" PointY="41.625" />
+        <EntityTypeShape EntityType="NDHDB1Model.PayType" Width="1.5" PointX="13" PointY="46.625" />
+        <EntityTypeShape EntityType="NDHDB1Model.ShipType" Width="1.5" PointX="13" PointY="39" />
+        <AssociationConnector Association="NDHDB1Model.FK__OrderProdu__C1Id__29971E47" />
+        <AssociationConnector Association="NDHDB1Model.FK__HaiOrder__Agency__17786E0C" />
+        <AssociationConnector Association="NDHDB1Model.FK__HaiOrder__OrderS__186C9245" />
+        <AssociationConnector Association="NDHDB1Model.FK__HaiOrder__OrderT__149C0161" />
+        <AssociationConnector Association="NDHDB1Model.FK__HaiOrder__PayTyp__1590259A" />
+        <AssociationConnector Association="NDHDB1Model.FK__HaiOrder__ShipTy__168449D3" />
+        <AssociationConnector Association="NDHDB1Model.FK__OrderProd__Order__27AED5D5" />
+        <AssociationConnector Association="NDHDB1Model.FK__OrderStaf__Order__2101D846" />
+        <AssociationConnector Association="NDHDB1Model.FK__OrderStaf__Staff__21F5FC7F" />
+        <AssociationConnector Association="NDHDB1Model.FK__OrderProd__Produ__28A2FA0E" />
+        <AssociationConnector Association="NDHDB1Model.FK__OrderStaf__Proce__22EA20B8" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

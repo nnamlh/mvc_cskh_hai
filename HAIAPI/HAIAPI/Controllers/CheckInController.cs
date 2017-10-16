@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Script.Serialization;
 
@@ -160,7 +158,8 @@ namespace HAIAPI.Controllers
                         Distance = 0,
                         TypeId = paser.item.status,
                         Notes = paser.item.notes,
-                        StaffId = staff.Id
+                        StaffId = staff.Id,
+                        DayInWeek = GetDayOfWeek(paser.item.day, paser.month, paser.year)
                     };
 
                     db.CalendarWorks.Add(plan);
@@ -190,7 +189,8 @@ namespace HAIAPI.Controllers
                                 AgencyType = checkCus.CType,
                                 TypeId = paser.item.status,
                                 Notes = paser.item.notes,
-                                StaffId = staff.Id
+                                StaffId = staff.Id,
+                                DayInWeek = GetDayOfWeek(paser.item.day, paser.month, paser.year)
                             };
 
                             db.CalendarWorks.Add(plan);
@@ -350,7 +350,8 @@ namespace HAIAPI.Controllers
                             Distance = 0,
                             TypeId = item.status,
                             Notes = item.notes,
-                            StaffId = staff.Id
+                            StaffId = staff.Id,
+                            DayInWeek = GetDayOfWeek(item.day,paser.month, paser.year)
                         };
 
                         db.CalendarWorks.Add(plan);
@@ -380,7 +381,8 @@ namespace HAIAPI.Controllers
                                     AgencyType = checkCus.CType,
                                     TypeId = item.status,
                                     Notes = item.notes,
-                                    StaffId = staff.Id
+                                    StaffId = staff.Id,
+                                    DayInWeek = GetDayOfWeek(item.day, paser.month, paser.year)
                                 };
 
                                 db.CalendarWorks.Add(plan);

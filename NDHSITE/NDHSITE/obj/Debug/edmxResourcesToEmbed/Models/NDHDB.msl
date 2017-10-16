@@ -820,6 +820,7 @@
     <EntitySetMapping Name="CalendarWorks">
       <EntityTypeMapping TypeName="NDHDBModel.CalendarWork">
         <MappingFragment StoreEntitySet="CalendarWork">
+          <ScalarProperty Name="DayInWeek" ColumnName="DayInWeek" />
           <ScalarProperty Name="Perform" ColumnName="Perform" />
           <ScalarProperty Name="Distance" ColumnName="Distance" />
           <ScalarProperty Name="TimeCheck" ColumnName="TimeCheck" />
@@ -900,6 +901,7 @@
           <ScalarProperty Name="TypeName" ColumnName="TypeName" />
           <ScalarProperty Name="StoreName" ColumnName="StoreName" />
           <ScalarProperty Name="Deputy" ColumnName="Deputy" />
+          <ScalarProperty Name="DayInWeek" ColumnName="DayInWeek" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

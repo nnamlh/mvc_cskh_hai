@@ -1542,6 +1542,7 @@
     <Property Name="TimeCheck" Type="DateTime" Precision="3" />
     <Property Name="Distance" Type="Double" />
     <Property Name="Perform" Type="Int32" />
+    <Property Name="DayInWeek" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="ProcessHistory">
     <Key>
@@ -1637,6 +1638,7 @@
     <Property Type="String" Name="TypeName" Nullable="true" MaxLength="512" />
     <Property Type="String" Name="StoreName" Nullable="true" MaxLength="512" />
     <Property Type="String" Name="Deputy" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="DayInWeek" Nullable="true" MaxLength="32" />
   </ComplexType>
   <ComplexType Name="checkin_calendartype_group_Result">
     <Property Type="String" Name="Name" Nullable="true" MaxLength="512" />

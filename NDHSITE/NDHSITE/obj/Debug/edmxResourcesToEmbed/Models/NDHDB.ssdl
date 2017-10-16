@@ -240,6 +240,7 @@
     <Property Name="TimeCheck" Type="datetime" />
     <Property Name="Distance" Type="float" />
     <Property Name="Perform" Type="int" />
+    <Property Name="DayInWeek" Type="nvarchar" MaxLength="32" />
   </EntityType>
   <EntityType Name="CInfoCommon">
     <Key>

@@ -245,6 +245,7 @@
           <Property Name="TimeCheck" Type="datetime" />
           <Property Name="Distance" Type="float" />
           <Property Name="Perform" Type="int" />
+          <Property Name="DayInWeek" Type="nvarchar" MaxLength="32" />
         </EntityType>
         <EntityType Name="CInfoCommon">
           <Key>
@@ -3451,6 +3452,7 @@
           <Property Name="TimeCheck" Type="DateTime" Precision="3" />
           <Property Name="Distance" Type="Double" />
           <Property Name="Perform" Type="Int32" />
+          <Property Name="DayInWeek" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ProcessHistory">
           <Key>
@@ -3546,6 +3548,7 @@
           <Property Type="String" Name="TypeName" Nullable="true" MaxLength="512" />
           <Property Type="String" Name="StoreName" Nullable="true" MaxLength="512" />
           <Property Type="String" Name="Deputy" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="DayInWeek" Nullable="true" MaxLength="32" />
         </ComplexType>
         <ComplexType Name="checkin_calendartype_group_Result">
           <Property Type="String" Name="Name" Nullable="true" MaxLength="512" />
@@ -4645,6 +4648,7 @@
           <EntitySetMapping Name="CalendarWorks">
             <EntityTypeMapping TypeName="NDHDBModel.CalendarWork">
               <MappingFragment StoreEntitySet="CalendarWork">
+                <ScalarProperty Name="DayInWeek" ColumnName="DayInWeek" />
                 <ScalarProperty Name="Perform" ColumnName="Perform" />
                 <ScalarProperty Name="Distance" ColumnName="Distance" />
                 <ScalarProperty Name="TimeCheck" ColumnName="TimeCheck" />
@@ -4725,6 +4729,7 @@
                 <ScalarProperty Name="TypeName" ColumnName="TypeName" />
                 <ScalarProperty Name="StoreName" ColumnName="StoreName" />
                 <ScalarProperty Name="Deputy" ColumnName="Deputy" />
+                <ScalarProperty Name="DayInWeek" ColumnName="DayInWeek" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

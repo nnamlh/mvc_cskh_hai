@@ -14,10 +14,22 @@ namespace HAIAPI.Controllers
     {
         protected NDHDBEntities db;
         protected MongoHelper mongoHelper;
+
+        private Dictionary<DayOfWeek, string> mapDayOfWeeks;
         public RestMainController()
         {
             db = new NDHDBEntities();
             mongoHelper = new MongoHelper();
+            mapDayOfWeeks = new Dictionary<DayOfWeek, string>();
+
+            mapDayOfWeeks[DayOfWeek.Monday] = "T2";
+            mapDayOfWeeks[DayOfWeek.Tuesday] = "T3";
+            mapDayOfWeeks[DayOfWeek.Wednesday] = "T4";
+            mapDayOfWeeks[DayOfWeek.Thursday] = "T5";
+            mapDayOfWeeks[DayOfWeek.Friday] = "T6";
+            mapDayOfWeeks[DayOfWeek.Saturday] = "T7";
+            mapDayOfWeeks[DayOfWeek.Sunday] = "CN";
+
 
         }
 
@@ -85,8 +97,10 @@ namespace HAIAPI.Controllers
                     if (paser.isUpdate == 1)
                     {
                         result.c2 = GetListC2(staff);
-                        result.c1 = GetListC1(staff);
+                       
                     }
+
+                    result.c1 = GetListC1(staff);
 
                 }
                 else
@@ -334,6 +348,26 @@ namespace HAIAPI.Controllers
                 if (staffC2 != null)
                     group = staffC2.GroupChoose;
 
+                // danh sach c1
+                var c2c1 = db.C2C1.Where(p => p.C2Code == item.Code).ToList();
+                List<AgencyC2C1> agencyC2C1 = new List<AgencyC2C1>();
+
+                foreach(var item2 in c2c1)
+                {
+                    var checkC1 = db.C1Info.Where(p => p.Code == item2.C1Code).FirstOrDefault();
+                    if (checkC1 != null)
+                    {
+                        agencyC2C1.Add(new AgencyC2C1()
+                        {
+                            code = checkC1.Code,
+                            name = checkC1.Deputy,
+                            store = checkC1.StoreName,
+                            priority = item2.Priority
+                        });
+                    }
+                }
+
+
                 agencyResult.Add(new AgencyInfoC2()
                 {
                     code = item.Code,
@@ -353,7 +387,8 @@ namespace HAIAPI.Controllers
                     district = item.CInfoCommon.DistrictName,
                     taxCode = item.CInfoCommon.TaxCode,
                     c1Id = item.C1Info.Code,
-                    haibranch = item.CInfoCommon.BranchCode
+                    haibranch = item.CInfoCommon.BranchCode,
+                    c1 = agencyC2C1
                 });
             }
 
@@ -502,6 +537,13 @@ namespace HAIAPI.Controllers
 
             return product;
 
+        }
+
+
+        protected string GetDayOfWeek(int day, int month, int year)
+        {
+            DateTime dt = new DateTime(year, month, day);
+            return mapDayOfWeeks[dt.DayOfWeek];
         }
 
     }

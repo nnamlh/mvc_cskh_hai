@@ -225,6 +225,7 @@
     <Compile Include="Controllers\DecorController.cs" />
     <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\RestMainController.cs" />
     <Compile Include="Controllers\ShowInfoController.cs" />
@@ -338,6 +339,9 @@
     <Compile Include="Models\HaiDepartment.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\HaiOrder.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HaiPosition.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -355,6 +359,7 @@
     <Compile Include="Models\IdentityLogin.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\IdentityNotification.cs" />
+    <Compile Include="Models\IdentityOrder.cs" />
     <Compile Include="Models\IdentityProduct.cs" />
     <Compile Include="Models\IdentityShowInfo.cs" />
     <Compile Include="Models\ImeiUser.cs">
@@ -392,6 +397,24 @@
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OldKeySave.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderProduct.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderStaff.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderStaffProcess.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderStatu.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrderType.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PayType.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PHistory.cs">
@@ -440,6 +463,9 @@
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ServerInfo.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ShipType.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SmsAccount.cs">
