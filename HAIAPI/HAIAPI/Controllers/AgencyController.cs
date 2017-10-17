@@ -470,5 +470,46 @@ namespace HAIAPI.Controllers
 
         #endregion
 
+        ///
+        /// c1 of c2
+        ///
+        [HttpGet]
+        public List<AgencyC2C1> GetC1C2(string code)
+        {
+
+            var log = new MongoHistoryAPI()
+            {
+                APIUrl = "/api/agency/getc1c2",
+                CreateTime = DateTime.Now,
+                Sucess = 1,
+                Content = code
+            };
+
+            var c2c1 = db.C2C1.Where(p => p.C2Code == code).ToList();
+
+            List<AgencyC2C1> agencyC2C1 = new List<AgencyC2C1>();
+
+            foreach (var item in c2c1)
+            {
+                var checkC1 = db.C1Info.Where(p => p.Code == item.C1Code).FirstOrDefault();
+                if (checkC1 != null)
+                {
+                    agencyC2C1.Add(new AgencyC2C1()
+                    {
+                        code = checkC1.Code,
+                        name = checkC1.Deputy,
+                        store = checkC1.StoreName,
+                        priority = item.Priority
+                    });
+                }
+            }
+
+            log.ReturnInfo = new JavaScriptSerializer().Serialize(agencyC2C1);
+            mongoHelper.createHistoryAPI(log);
+
+            return agencyC2C1;
+        }
+
+
     }
 }
