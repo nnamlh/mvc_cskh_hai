@@ -1085,5 +1085,39 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="report_checkin_detail_by_branch" FunctionName="NDHDBModel.Store.report_checkin_detail_by_branch">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NDHDBModel.report_checkin_detail_by_branch_Result">
+          <ScalarProperty Name="Branch" ColumnName="Branch" />
+          <ScalarProperty Name="StaffCode" ColumnName="StaffCode" />
+          <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+          <ScalarProperty Name="CalendarType" ColumnName="CalendarType" />
+          <ScalarProperty Name="CalendarDay" ColumnName="CalendarDay" />
+          <ScalarProperty Name="CalendarMonth" ColumnName="CalendarMonth" />
+          <ScalarProperty Name="CalendarYear" ColumnName="CalendarYear" />
+          <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+          <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+          <ScalarProperty Name="InPlan" ColumnName="InPlan" />
+          <ScalarProperty Name="Perform" ColumnName="Perform" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="report_checkin_detail_by_staff" FunctionName="NDHDBModel.Store.report_checkin_detail_by_staff">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NDHDBModel.report_checkin_detail_by_staff_Result">
+          <ScalarProperty Name="Branch" ColumnName="Branch" />
+          <ScalarProperty Name="StaffCode" ColumnName="StaffCode" />
+          <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+          <ScalarProperty Name="CalendarType" ColumnName="CalendarType" />
+          <ScalarProperty Name="CalendarDay" ColumnName="CalendarDay" />
+          <ScalarProperty Name="CalendarMonth" ColumnName="CalendarMonth" />
+          <ScalarProperty Name="CalendarYear" ColumnName="CalendarYear" />
+          <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+          <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+          <ScalarProperty Name="InPlan" ColumnName="InPlan" />
+          <ScalarProperty Name="Perform" ColumnName="Perform" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

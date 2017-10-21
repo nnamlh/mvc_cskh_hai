@@ -1438,6 +1438,16 @@
       <End Role="HaiStaff" EntitySet="HaiStaffs" />
       <End Role="SaveAgencyShopImage" EntitySet="SaveAgencyShopImages" />
     </AssociationSet>
+    <FunctionImport Name="report_checkin_detail_by_branch" ReturnType="Collection(NDHDBModel.report_checkin_detail_by_branch_Result)">
+      <Parameter Name="month" Mode="In" Type="Int32" />
+      <Parameter Name="year" Mode="In" Type="Int32" />
+      <Parameter Name="branch" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="report_checkin_detail_by_staff" ReturnType="Collection(NDHDBModel.report_checkin_detail_by_staff_Result)">
+      <Parameter Name="month" Mode="In" Type="Int32" />
+      <Parameter Name="year" Mode="In" Type="Int32" />
+      <Parameter Name="staffId" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="report_event_agency_Result">
     <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -1913,4 +1923,43 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="report_checkin_detail_all_branch_Result">
+    <Property Type="String" Name="Branch" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="StaffCode" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="StaffName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="CalendarType" Nullable="true" MaxLength="512" />
+    <Property Type="Int32" Name="CalendarDay" Nullable="true" />
+    <Property Type="Int32" Name="CalendarMonth" Nullable="true" />
+    <Property Type="Int32" Name="CalendarYear" Nullable="true" />
+    <Property Type="String" Name="AgencyCode" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="StoreName" Nullable="true" MaxLength="512" />
+    <Property Type="Int32" Name="InPlan" Nullable="true" />
+    <Property Type="Int32" Name="Perform" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="report_checkin_detail_by_branch_Result">
+    <Property Type="String" Name="Branch" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="StaffCode" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="StaffName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="CalendarType" Nullable="true" MaxLength="512" />
+    <Property Type="Int32" Name="CalendarDay" Nullable="true" />
+    <Property Type="Int32" Name="CalendarMonth" Nullable="true" />
+    <Property Type="Int32" Name="CalendarYear" Nullable="true" />
+    <Property Type="String" Name="AgencyCode" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="StoreName" Nullable="true" MaxLength="512" />
+    <Property Type="Int32" Name="InPlan" Nullable="true" />
+    <Property Type="Int32" Name="Perform" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="report_checkin_detail_by_staff_Result">
+    <Property Type="String" Name="Branch" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="StaffCode" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="StaffName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="CalendarType" Nullable="true" MaxLength="512" />
+    <Property Type="Int32" Name="CalendarDay" Nullable="true" />
+    <Property Type="Int32" Name="CalendarMonth" Nullable="true" />
+    <Property Type="Int32" Name="CalendarYear" Nullable="true" />
+    <Property Type="String" Name="AgencyCode" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="StoreName" Nullable="true" MaxLength="512" />
+    <Property Type="Int32" Name="InPlan" Nullable="true" />
+    <Property Type="Int32" Name="Perform" Nullable="true" />
+  </ComplexType>
 </Schema>

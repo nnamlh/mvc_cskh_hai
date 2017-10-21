@@ -6,12 +6,18 @@ using System.Web;
 namespace HAIAPI.Models
 {
 
+    public class OrderInitializeRequest : RequestInfo
+    {
+        public string agency { get; set; }
+        public List<OrderProductInfo> product { get; set; }
+
+    }
 
     public class OrderProductInfo
     {
-        public string productId { get; set; }
+        public string code { get; set; }
 
-        
+        public int quantity { get; set; }
     }
 
 

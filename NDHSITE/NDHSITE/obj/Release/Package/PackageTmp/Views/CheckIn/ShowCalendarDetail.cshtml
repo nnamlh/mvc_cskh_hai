@@ -130,7 +130,7 @@
                                     @if (day != item.CDay)
                                     {
                                         day = item.CDay;
-                                        <span><strong>@day</strong></span>
+                                        <span><strong>@item.DayInWeek-@day</strong></span>
                                     }
                                 </td>
                                 <td>
@@ -218,7 +218,7 @@
                 </table>
             </div>
             <div class="tab-pane fade" id="profile-3">
-                <a href="/checkin/ExcelPlanReport?month=@calendar.CMonth&year=@calendar.CYear&staffId=@calendar.StaffId">Lịch chi tiết</a>
+                <a href="/checkin/ExcelCheckInDetail?month=@calendar.CMonth&year=@calendar.CYear&staff=@calendar.StaffId">Lịch chi tiết</a>
             </div>
         </div>
 

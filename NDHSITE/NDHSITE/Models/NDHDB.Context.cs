@@ -229,5 +229,39 @@ namespace NDHSITE.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<checkin_count_day_agency_Result>("checkin_count_day_agency", monthParameter, yearParameter, staffIdParameter);
         }
+    
+        public virtual ObjectResult<report_checkin_detail_by_branch_Result> report_checkin_detail_by_branch(Nullable<int> month, Nullable<int> year, string branch)
+        {
+            var monthParameter = month.HasValue ?
+                new ObjectParameter("month", month) :
+                new ObjectParameter("month", typeof(int));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("year", year) :
+                new ObjectParameter("year", typeof(int));
+    
+            var branchParameter = branch != null ?
+                new ObjectParameter("branch", branch) :
+                new ObjectParameter("branch", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<report_checkin_detail_by_branch_Result>("report_checkin_detail_by_branch", monthParameter, yearParameter, branchParameter);
+        }
+    
+        public virtual ObjectResult<report_checkin_detail_by_staff_Result> report_checkin_detail_by_staff(Nullable<int> month, Nullable<int> year, string staffId)
+        {
+            var monthParameter = month.HasValue ?
+                new ObjectParameter("month", month) :
+                new ObjectParameter("month", typeof(int));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("year", year) :
+                new ObjectParameter("year", typeof(int));
+    
+            var staffIdParameter = staffId != null ?
+                new ObjectParameter("staffId", staffId) :
+                new ObjectParameter("staffId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<report_checkin_detail_by_staff_Result>("report_checkin_detail_by_staff", monthParameter, yearParameter, staffIdParameter);
+        }
     }
 }

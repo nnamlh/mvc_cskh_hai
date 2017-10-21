@@ -76,7 +76,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/08/2017 14:46:02</publishTime>
     </File>
     <File Include="bin/NDHSITE.dll">
-      <publishTime>10/09/2017 17:28:47</publishTime>
+      <publishTime>10/21/2017 11:31:18</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>09/23/2016 14:14:47</publishTime>
@@ -233,6 +233,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="haiupload/productremain.xlsx">
       <publishTime>01/05/2017 12:52:09</publishTime>
+    </File>
+    <File Include="haiupload/report-check-in-detail.xlsx">
+      <publishTime>10/21/2017 11:14:58</publishTime>
     </File>
     <File Include="haiupload/stafftandagency.xlsx">
       <publishTime>08/21/2017 15:01:22</publishTime>
@@ -460,10 +463,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/25/2017 11:03:37</publishTime>
     </File>
     <File Include="Views/CheckIn/ShowCalendar.cshtml">
-      <publishTime>09/29/2017 15:45:00</publishTime>
+      <publishTime>10/21/2017 11:21:27</publishTime>
     </File>
     <File Include="Views/CheckIn/ShowCalendarDetail.cshtml">
-      <publishTime>10/02/2017 23:45:03</publishTime>
+      <publishTime>10/21/2017 11:23:41</publishTime>
     </File>
     <File Include="Views/Editor/uploadPartial.cshtml">
       <publishTime>09/14/2017 15:44:56</publishTime>
@@ -700,7 +703,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/23/2016 14:14:41</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/09/2017 17:28:49</publishTime>
+      <publishTime>10/21/2017 11:24:47</publishTime>
     </File>
   </ItemGroup>
 </Project>

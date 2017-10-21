@@ -16,7 +16,7 @@ namespace NDHSITE.Controllers
     {
         NDHDBEntities db = new NDHDBEntities();
 
-        public ActionResult ShowCalendar(int? page, int? month, int? year, int status = -1, string code = "")
+        public ActionResult ShowCalendar(int? page, int? month, int? year, int status = -1, string branch = "", string staff = "")
         {
             if (!Utitl.CheckUser(db, User.Identity.Name, "CheckIn", 0))
                 return RedirectToAction("relogin", "home");
@@ -34,17 +34,38 @@ namespace NDHSITE.Controllers
             ViewBag.Month = month;
             ViewBag.Year = year;
             ViewBag.Status = status;
-            ViewBag.Code = code;
 
             var listCalendar = new List<CalendarInfo>();
 
-            if (status == -1)
+            if (!Utitl.CheckRoleAdmin(db, User.Identity.Name))
             {
-                listCalendar = db.CalendarInfoes.Where(p => p.CMonth == month && p.CYear == year && (p.HaiStaff.Code.Contains(code) || p.HaiStaff.HaiBranch.Code.Contains(code))).ToList();
+                ViewBag.IsDisable = 1;
+                var checkStaff = db.HaiStaffs.Where(p => p.UserLogin == User.Identity.Name).FirstOrDefault();
+
+                if (checkStaff != null)
+                {
+                    branch = checkStaff.HaiBranch.Code;
+                }
+                else
+                {
+                    return RedirectToAction("error", "home");
+                }
+
+                ViewBag.ShowRole = 0;
             } else
             {
-                listCalendar = db.CalendarInfoes.Where(p => p.CMonth == month && p.CYear == year && p.CStatus == status && (p.HaiStaff.Code.Contains(code) || p.HaiStaff.HaiBranch.Code.Contains(code))).ToList();
+                ViewBag.ShowRole = 1;
+            }
 
+            ViewBag.Branch = branch;
+            ViewBag.Staff = staff;
+
+            if (status == -1)
+            {
+                listCalendar = db.CalendarInfoes.Where(p => p.CMonth == month && p.CYear == year && p.HaiStaff.Code.Contains(staff) && p.HaiStaff.HaiBranch.Code.Contains(branch)).ToList();
+            } else
+            {
+                listCalendar = db.CalendarInfoes.Where(p => p.CMonth == month && p.CYear == year && p.CStatus == status && p.HaiStaff.Code.Contains(staff) && p.HaiStaff.HaiBranch.Code.Contains(branch)).ToList();
             }
 
             return View(listCalendar.OrderBy(p => p.CStatus).ToPagedList(pageNumber, pageSize));
@@ -82,6 +103,185 @@ namespace NDHSITE.Controllers
 
             return RedirectToAction("showcalendardetail", "checkin", new { id = id });
         }
+
+
+        public ActionResult ExcelCheckInDetail(int month, int year, string brand = "", string staff = "")
+        {
+            if (!Utitl.CheckUser(db, User.Identity.Name, "CheckIn", 0))
+                return RedirectToAction("relogin", "home");
+
+            if (!String.IsNullOrEmpty(staff))
+            {
+                var checkStaff = db.HaiStaffs.Where(p => p.Code == staff).FirstOrDefault();
+                if (checkStaff != null)
+                {
+                    return ExcelCheckInStaffDetail(month, year, checkStaff.Id);
+                }
+            }
+
+            string pathRoot = Server.MapPath("~/haiupload/report-check-in-detail.xlsx");
+            string name = "report" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".xlsx";
+            string pathTo = Server.MapPath("~/temp/" + name);
+
+            System.IO.File.Copy(pathRoot, pathTo);
+            try
+            {
+                FileInfo newFile = new FileInfo(pathTo);
+                brand = "%" + brand + "%";
+                var data = db.report_checkin_detail_by_branch(month, year, brand).ToList();
+
+
+                using (ExcelPackage package = new ExcelPackage(newFile))
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets["hai"];
+
+                    for (int i = 0; i < data.Count; i++)
+                    {
+
+                        try
+                        {
+                            worksheet.Cells[i + 6, 1].Value = data[i].Branch;
+                            worksheet.Cells[i + 6, 2].Value = data[i].StaffCode;
+                            worksheet.Cells[i + 6, 3].Value = data[i].StaffName;
+                            worksheet.Cells[i + 6, 4].Value = data[i].CalendarType;
+                            string date = data[i].CalendarDay + "/" + data[i].CalendarMonth + "/" + data[i].CalendarYear;
+                            worksheet.Cells[i + 6, 5].Value = date;
+
+                            worksheet.Cells[i + 6, 6].Value = data[i].AgencyCode;
+                            worksheet.Cells[i + 6, 7].Value = data[i].StoreName;
+                            if(data[i].InPlan == 1)
+                                worksheet.Cells[i + 6, 8].Value = "X";
+
+                            if(data[i].Perform == 1)
+                                worksheet.Cells[i + 6, 9].Value = "X";
+
+                            if (data[i].InPlan == 1 && data[i].Perform == 1)
+                            {
+                                worksheet.Cells[i + 6, 10].Value = "ĐÚNG KẾ HOẠCH";
+                            }
+
+                            if (data[i].InPlan == 1 && data[i].Perform == 0)
+                            {
+                                if (!String.IsNullOrEmpty(data[i].AgencyCode))
+                                    worksheet.Cells[i + 6, 10].Value = "RỚT";
+                                else
+                                    worksheet.Cells[i + 6, 10].Value = "NGÀY NGHỈ";
+                            }
+
+                            if(data[i].InPlan == 0 && data[i].Perform == 1)
+                            {
+                                worksheet.Cells[i + 6, 10].Value = "NGOÀI KẾ HOẠCH";
+                            }
+
+                            if (data[i].InPlan == 0 && data[i].Perform == 0)
+                            {
+                                worksheet.Cells[i + 6, 10].Value = "NGOÀI KẾ HOẠCH (RỚT)";
+                            }
+
+                        }
+                        catch
+                        {
+                            return RedirectToAction("error", "home");
+                        }
+
+                    }
+
+                    package.Save();
+
+                }
+
+            } catch
+            {
+                return RedirectToAction("error", "home");
+            }
+
+            return File(pathTo, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", string.Format("report-checkin-" + DateTime.Now.ToString("ddMMyyyyhhmmss") + ".{0}", "xlsx"));
+
+        }
+
+        public ActionResult ExcelCheckInStaffDetail(int month, int year, string staff = "")
+        {
+            if (!Utitl.CheckUser(db, User.Identity.Name, "CheckIn", 0))
+                return RedirectToAction("relogin", "home");
+
+            string pathRoot = Server.MapPath("~/haiupload/report-check-in-detail.xlsx");
+            string name = "report" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".xlsx";
+            string pathTo = Server.MapPath("~/temp/" + name);
+
+            System.IO.File.Copy(pathRoot, pathTo);
+            try
+            {
+                FileInfo newFile = new FileInfo(pathTo);
+
+                var data = db.report_checkin_detail_by_staff(month, year, staff).ToList();
+
+
+                using (ExcelPackage package = new ExcelPackage(newFile))
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets["hai"];
+
+                    for (int i = 0; i < data.Count; i++)
+                    {
+
+                        try
+                        {
+                            worksheet.Cells[i + 6, 1].Value = data[i].Branch;
+                            worksheet.Cells[i + 6, 2].Value = data[i].StaffCode;
+                            worksheet.Cells[i + 6, 3].Value = data[i].StaffName;
+                            worksheet.Cells[i + 6, 4].Value = data[i].CalendarType;
+                            string date = data[i].CalendarDay + "/" + data[i].CalendarMonth + "/" + data[i].CalendarYear;
+                            worksheet.Cells[i + 6, 5].Value = date;
+
+                            worksheet.Cells[i + 6, 6].Value = data[i].AgencyCode;
+                            worksheet.Cells[i + 6, 7].Value = data[i].StoreName;
+                            if (data[i].InPlan == 1)
+                                worksheet.Cells[i + 6, 8].Value = "X";
+
+                            if (data[i].Perform == 1)
+                                worksheet.Cells[i + 6, 9].Value = "X";
+
+                            if (data[i].InPlan == 1 && data[i].Perform == 1)
+                            {
+                                worksheet.Cells[i + 6, 10].Value = "ĐÚNG KẾ HOẠCH";
+                            }
+
+                            if (data[i].InPlan == 1 && data[i].Perform == 0)
+                            {
+                                worksheet.Cells[i + 6, 10].Value = "RỚT";
+                            }
+
+                            if (data[i].InPlan == 0 && data[i].Perform == 1)
+                            {
+                                worksheet.Cells[i + 6, 10].Value = "NGOÀI KẾ HOẠCH";
+                            }
+
+                            if (data[i].InPlan == 0 && data[i].Perform == 0)
+                            {
+                                worksheet.Cells[i + 6, 10].Value = "NGOÀI KẾ HOẠCH (RỚT)";
+                            }
+
+                        }
+                        catch
+                        {
+                            return RedirectToAction("error", "home");
+                        }
+
+                    }
+
+                    package.Save();
+
+                }
+
+            }
+            catch
+            {
+                return RedirectToAction("error", "home");
+            }
+
+            return File(pathTo, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", string.Format("report-checkin-" + DateTime.Now.ToString("ddMMyyyyhhmmss") + ".{0}", "xlsx"));
+
+        }
+
 
         public ActionResult ExcelPlanReport(int month, int year, string staffId)
         {

@@ -436,6 +436,15 @@
     <Compile Include="Models\RegFirebase.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\report_checkin_detail_all_branch_Result.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\report_checkin_detail_by_branch_Result.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\report_checkin_detail_by_staff_Result.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\report_cii_product_Result.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -556,6 +565,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="haiupload\report-check-in-detail.xlsx" />
     <None Include="Properties\PublishProfiles\home.pubxml" />
     <None Include="Properties\PublishProfiles\ndhsite.pubxml" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
