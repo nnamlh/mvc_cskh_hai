@@ -1,0 +1,111 @@
+﻿@model PagedList.IPagedList<NDHSITE.Models.PHistory>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Lịch sử tracking";
+}
+
+<div class="portlet portlet-boxed">
+    <div class="portlet-header">
+        <h4 class="portlet-title">
+            Xem lịch sử hành trình sản phẩm
+        </h4>
+    </div> <!-- /.portlet-header -->
+    <div class="portlet-body">
+        <form>
+            <div class="row">
+                <div class="col-sm-6">
+
+
+                    <div class="form-group">
+                        <label>Mã: </label>
+                        <input type="text" value="@ViewBag.Code" name="code" class="form-control" />
+                    </div>
+                    <button class="btn btn-primary" type="submit">Xem</button>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Chọn tìm theo : </label>
+                        <select class="form-control" name="type">
+                            <option value="1" @(ViewBag.Type == 1 ? "selected" : "")>Theo mã sản phẩm(2 kí tự bacode)</option>
+                            <option value="2" @(ViewBag.Type == 2 ? "selected" : "")>Theo mã kho(kho, chi nhánh, đại lý)</option>
+                            <option value="3" @(ViewBag.Type == 3 ? "selected" : "")>Mã thùng</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+        <br />
+        <fieldset>
+            <a href="/tracking/ExcelHistory?type=@ViewBag.Type&code=@ViewBag.Code">Xuất Excel</a>
+            <table class="table table-striped table-bordered thumbnail-table">
+
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã thùng</th>
+                        <th>Kho</th>
+                        <th>Mã</th>
+                        <th>Loại</th>
+                        <th>Mã sản phẩm</th>
+                        <th>Trạng thái</th>
+                        <th>Số lượng</th>
+                        <th>Ngày giờ</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model != null)
+                    {
+                        var idx = 1;
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@idx</td>
+                                <td>@item.CaseCode</td>
+                                <td>@item.WName</td>
+                                <th>@item.WCode</th>
+                                <th>
+
+                                    @if (item.WType == "CI")
+                                    {
+                                        <p>CẤP 1</p>
+                                    }
+
+                                    else if (item.WType == "CII")
+                                    {
+                                        <p>CẤP 2</p>
+                                    }
+
+                                    else if (item.WType == "BRANCH")
+                                    {
+                                        <p>CHI NHÁNH</p>
+                                    }
+                                    else if (item.WType == "FARMER")
+                                    {
+                                        <p>NÔNG DÂN</p>
+                                    }
+                                    else if (item.WType == "WAREHOURSE")
+                                    {
+                                        <p>TỔNG KHO</p>
+                                    }
+                                </th>
+                                <th>@item.ProductCode</th>
+                                <th>@item.PStatus</th>
+                                <th>@item.Quantity</th>
+                                <td>@item.CreateDate.Value.ToString("dd/MM/yyyy HH:mm")</td>
+                            </tr>
+                                    idx++;
+                        }
+                    }
+                </tbody>
+            </table>
+            <br />
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("historytracking",
+                                                         new { page, type = ViewBag.Type, code = ViewBag.Code }))
+        </fieldset>
+    </div>
+</div>
+

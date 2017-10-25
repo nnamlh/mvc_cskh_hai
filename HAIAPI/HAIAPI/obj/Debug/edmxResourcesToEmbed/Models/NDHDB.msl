@@ -618,6 +618,7 @@
     <EntitySetMapping Name="ProductInfoes">
       <EntityTypeMapping TypeName="NDHDB1Model.ProductInfo">
         <MappingFragment StoreEntitySet="ProductInfo">
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="ShortDescibe" ColumnName="ShortDescibe" />
           <ScalarProperty Name="PVat" ColumnName="PVat" />
           <ScalarProperty Name="Price" ColumnName="Price" />
@@ -978,6 +979,7 @@
           <ScalarProperty Name="PVat" ColumnName="PVat" />
           <ScalarProperty Name="Unit" ColumnName="Unit" />
           <ScalarProperty Name="QuantityBox" ColumnName="QuantityBox" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

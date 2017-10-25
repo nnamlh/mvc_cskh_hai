@@ -33,6 +33,8 @@ namespace HAIAPI.Models
         public string groupId { get; set; }
         public string groupName { get; set; }
         public string image { get; set; }
+
+        public int? quantity { get; set; }
     }
 
     public class ProductDetailResult : ProductInfoResult

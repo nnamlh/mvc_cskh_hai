@@ -283,7 +283,8 @@ namespace HAIAPI.Controllers
                     image = HaiUtil.HostName + item.Thumbnail,
                     isNew = item.New,
                     price = item.Price == null ? 0 : item.Price,
-                    quantity_box = item.QuantityBox == null ? 0 : item.QuantityBox,
+                    //quantity_box = item.QuantityBox == null ? 0 : item.QuantityBox,
+                    quantity_box = item.Quantity == null ? 0 : item.Quantity,
                     short_describe = item.ShortDescibe,
                     unit = item.Unit,
                     vat = item.PVat == null ? 0 : item.PVat

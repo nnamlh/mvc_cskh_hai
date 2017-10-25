@@ -1,0 +1,408 @@
+﻿@model PagedList.IPagedList<NDHSITE.Models.HaiStaff>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "CreateStaff";
+}
+
+<div class="page-header">
+    <h3 class="page-title">Quản lý nhân viên</h3>
+
+    <ol class="breadcrumb">
+        <li><a href="/home">Trang chủ</a></li>
+        <li><a href="#">Quản lý nhân viên</a></li>
+    </ol>
+</div> <!-- /.page-header -->
+
+<p class="">Trang quản lý tất cả các nhân viên của công ty cổ phần Nông Dược Hai, đây là trang chỉ cấp quyền cho Admin.</p>
+
+<div class="portlet portlet-boxed">
+
+    <div class="portlet-body">
+        <div class="layout layout-main-right layout-stack-sm">
+            <div class="col-md-2 col-sm-3 layout-sidebar">
+
+                <ul id="myTab" class="nav nav-layout-sidebar nav-stacked">
+                    <li class="active">
+                        <a href="#allstaff" data-toggle="tab">
+                            Danh sách nhân viên
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#addstaff_tab" data-toggle="tab">
+                            Thêm nhân viên
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/HaiStaff/CreateBrand">
+                            Danh mục chi nhánh
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/HaiStaff/CreatePosition">
+                            Danh mục chức vụ
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/HaiStaff/CreateDepartment">
+                            Danh mục phòng ban
+                        </a>
+                    </li>
+                </ul>
+
+            </div> <!-- /.col -->
+
+            <div class="col-md-10 col-sm-9 layout-main">
+                <div id="settings-content" class="tab-content stacked-content">
+                    <div class="tab-pane fade in active" id="allstaff">
+
+                        <div class="row">
+                            <form method="get">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <select class="form-control" name="func" id="choosefunc">
+                                            @foreach (var item in ViewBag.FuncShow)
+                                            {
+                                                if (item.Value == ViewBag.FuncId)
+                                                {
+                                                    <option value="@item.Value" selected>@item.Name</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="@item.Value">@item.Name</option>
+                                                }
+
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group" id="arearchoose">
+                                        <label>Chọn khu vực</label>
+                                        <select class="form-control selectpicker" name="areaId" data-live-search="true">
+                                            @foreach (var item in ViewBag.AllArea)
+                                            {
+                                                if (item.Id == ViewBag.AreaId)
+                                                {
+                                                    <option data-tokens="@item.Name" value="@item.Id" selected>@item.Name</option>
+                                                }
+                                                else
+                                                {
+                                                    <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
+                                                }
+
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group" id="branchchoose">
+                                        <label>Chọn chi nhánh</label>
+                                        <select class="form-control selectpicker" name="branchId" data-live-search="true">
+                                            @foreach (var item in ViewBag.AllBranch)
+                                            {
+                                                if (item.Id == ViewBag.BranchId)
+                                                {
+                                                    <option data-tokens="@item.Name" value="@item.Id" selected>@item.Name</option>
+                                                }
+                                                else
+                                                {
+                                                    <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
+                                                }
+
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group" id="depchoose">
+                                        <label>Chọn phòng ban</label>
+                                        <select class="form-control selectpicker" name="departmentId" data-live-search="true">
+                                            @foreach (var item in ViewBag.AllDepartment)
+                                            {
+                                                if (item.Id == ViewBag.DepartmentId)
+                                                {
+                                                    <option data-tokens="@item.Name" value="@item.Id" selected>@item.Name</option>
+                                                }
+                                                else
+                                                {
+                                                    <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
+                                                }
+
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="poschoose">
+                                        <label>Chọn chức vụ</label>
+                                        <select class="form-control selectpicker" name="posId" data-live-search="true">
+                                            @foreach (var item in ViewBag.AllPosition)
+                                            {
+                                                if (item.Id == ViewBag.PosId)
+                                                {
+                                                    <option data-tokens="@item.Name" value="@item.Id" selected>@item.Name</option>
+                                                }
+                                                else
+                                                {
+                                                    <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
+                                                }
+
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="searchchoose">
+                                        <label>Gõ tên nhân viên</label>
+                                        <input type="text" class="form-control" name="search" value="@ViewBag.SearchText" />
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <button type="submit" class="btn btn-primary">Xem thông tin</button>
+                                </div>
+
+                            </form>
+                        </div>
+                        <fieldset>
+                            <table class="table table-striped table-bordered thumbnail-table">
+                                <thead>
+                                    <tr>
+                                        <th>Tên nhân viên</th>
+                                        <th>Chi nhánh</th>
+                                        <th>Thông tin</th>
+                                        <th>#</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                        <tr class="@(item.IsLock == 1?"warning":"")">
+                                            <td>@item.FullName</td>
+                                            <td>@item.HaiBranch.Name</td>
+                                            <td class="file-info">
+                                                <span><strong class="semibold">Phòng ban:</strong> @item.HaiDepartment.Name</span><br />
+                                                <span><strong class="semibold">Chức vụ:</strong> @item.HaiPosition.Name</span><br />
+                                                <span><strong class="semibold">Mã nhân viên:</strong> @item.Code</span> <br />
+                                                <span><strong class="semibold">Khu vực:</strong> @item.HaiBranch.HaiArea.Name</span><br />
+                                                <span><strong class="semibold">Số điện thoái:</strong> @item.Phone</span> <br />
+                                                <span><strong class="semibold">Email:</strong> @item.Email</span> <br />
+                                                <span><strong class="semibold">Tài khoản:</strong> @item.UserLogin</span><br />
+                                                <span><strong class="semibold">Tình trạng:</strong> @item.Notes</span>
+                                            </td>
+                                            <td class="text-center valign-middle">
+                                                <a href="/haistaff/modifystaff/@item.Id" target="_blank">Sửa</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                            @Html.PagedListPager(Model, page => Url.Action("CreateStaff",
+                              new { page, func = ViewBag.FuncId, branchId = ViewBag.BranchId, areaId = ViewBag.AreaId, departmentId = ViewBag.DepartmentId, posId = ViewBag.PosId, search = ViewBag.SearchText }))
+                        </fieldset>
+
+
+                    </div>
+                    <div class="tab-pane fade" id="addstaff_tab">
+
+                        <form method="post" onsubmit="if(!confirm('Thêm nhân viên mới?')){return false;}" enctype="multipart/form-data">
+
+                            <fieldset>
+                                <div class="row">
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Tên đầy đủ</label>
+                                            <input type="text" name="FullName" class="form-control" required />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Mã nhân viên</label>
+                                            <input type="text" name="Code" class="form-control" required value="@ViewBag.MaxId" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label> Chọn chi nhánh</label>
+
+                                            <select class="form-control selectpicker" data-live-search="true" name="BranchId" required>
+                                                @foreach (var item in ViewBag.AllBranch)
+                                                {
+                                                    <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
+                                                }
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Phòng ban</label>
+                                            <select class="form-control selectpicker" name="DepartmentId" data-live-search="true" required>
+                                                @foreach (var item in ViewBag.AllDepartment)
+                                                {
+                                                    <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Chức vụ</label>
+                                            <select class="form-control selectpicker" name="PositionId" data-live-search="true" required>
+                                                @foreach (var item in ViewBag.AllPosition)
+                                                {
+                                                    <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Tình trạng</label>
+                                            <input type="text" name="Notes" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Ngày sinh</label>
+                                            <input type="text" name="birthday" class="form-control" id="datetimecreate" />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Nơi sinh</label>
+                                            <input type="text" name="PlaceOfBirth" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            <input type="email" name="Email" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Điện thoại liên hệ</label>
+                                            <input type="text" name="Phone" class="form-control" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Ảnh thẻ</label>
+                                            <input type="file" name="avatar" class="form-control" accept="image/*" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Chử ký</label>
+                                            <input type="file" name="signature" class="form-control" accept="image/*" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <button class="btn btn-primary" type="submit">Thêm nhân viên</button>
+                                </div>
+
+
+                            </fieldset>
+
+                        </form>
+
+                    </div>
+
+
+
+                    <div class="tab-pane fade" id="addstaffexcel_tab">
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div> <!-- /.portlet-body -->
+
+</div> <!-- /.portlet -->
+@section styles {
+
+    <!-- bootstrap select-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/css/bootstrap-select.min.css">
+    <link href="~/content/bootstrap-datetimepicker.min.css" rel="stylesheet">
+}
+
+@section scripts {
+    <!-- bootstrap select js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/js/bootstrap-select.min.js"></script>
+    <!-- date bootstrap -->
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/scripts/moment-with-locales.min.js"></script>
+    <script src="~/scripts/bootstrap-datetimepicker.min.js"></script>
+
+    <script type="text/javascript">
+        $('#datetimecreate').datetimepicker({
+            locale: 'vi',
+            format: 'MM/DD/YYYY HH:mm',
+            defaultDate: new Date()
+        });
+
+
+        $('#arearchoose').hide();
+        $('#branchchoose').hide();
+        $('#depchoose').hide();
+        $('#poschoose').hide();
+        $('#searchchoose').hide();
+
+        @if (ViewBag.FuncId == 1)
+        {
+
+            @:$('#arearchoose').show();
+
+        }
+        else if (ViewBag.FuncId == 2)
+        {
+            @:$('#branchchoose').show();
+                                }
+        else if (ViewBag.FuncId == 3)
+        {
+            @: $('#depchoose').show();
+                                }
+        else if (ViewBag.FuncId == 4)
+        {
+            @:$('#poschoose').show();
+                                }
+        else if (ViewBag.FuncId == 5)
+        {
+            @:$('#searchchoose').show();
+                                }
+
+
+
+        $('#choosefunc').on('change', function (e) {
+
+            var optionSelected = $("option:selected", this);
+
+            var valueSelected = this.value;
+
+            $('#arearchoose').hide();
+            $('#branchchoose').hide();
+            $('#depchoose').hide();
+            $('#poschoose').hide();
+            $('#searchchoose').hide();
+
+            if (valueSelected === '1') {
+                $('#arearchoose').show();
+            } else if (valueSelected === '2') {
+                $('#branchchoose').show();
+            } else if (valueSelected === '3') {
+                $('#depchoose').show();
+            } else if (valueSelected === '4') {
+                $('#poschoose').show();
+            } else if (valueSelected === '5') {
+                $('#searchchoose').show();
+            }
+
+        });
+
+    </script>
+}

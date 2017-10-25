@@ -6,11 +6,37 @@ using System.Web;
 namespace HAIAPI.Models
 {
 
-    public class OrderInitializeRequest : RequestInfo
+    public class OrderConfirmRequest : RequestInfo
     {
         public string agency { get; set; }
         public List<OrderProductInfo> product { get; set; }
 
+    }
+
+    public class OrderInfoRequest : RequestInfo
+    {
+        public string code { get; set; }
+
+        public string shipType { get; set; }
+
+        public string payType { get; set; }
+
+        public string phone { get; set; }
+
+        public string address { get; set; }
+
+        public List<OrderProductInfo> product { get; set; }
+
+        public string timeSuggest { get; set; }
+
+        public string notes { get; set; }
+
+        public string orderType { get; set; }
+
+
+        public int inCheckIn { get; set; }
+        // 1 : dat hang trong checkin
+        // 0: dat hang ngoai
     }
 
     public class OrderProductInfo
@@ -18,10 +44,12 @@ namespace HAIAPI.Models
         public string code { get; set; }
 
         public int quantity { get; set; }
+
+        public string c1 { get; set; }
     }
 
 
-    public class OrderInitialize : ResultInfo
+    public class OrderConfirm : ResultInfo
     {
         public List<EventOrderInfo> events { get; set; }
 

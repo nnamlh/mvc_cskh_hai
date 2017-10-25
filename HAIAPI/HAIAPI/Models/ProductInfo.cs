@@ -54,6 +54,7 @@ namespace HAIAPI.Models
         public Nullable<double> Price { get; set; }
         public Nullable<double> PVat { get; set; }
         public string ShortDescibe { get; set; }
+        public Nullable<int> Quantity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EventProduct> EventProducts { get; set; }

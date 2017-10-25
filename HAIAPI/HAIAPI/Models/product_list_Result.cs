@@ -27,5 +27,6 @@ namespace HAIAPI.Models
         public Nullable<double> PVat { get; set; }
         public string Unit { get; set; }
         public Nullable<int> QuantityBox { get; set; }
+        public Nullable<int> Quantity { get; set; }
     }
 }

@@ -745,6 +745,7 @@
           <Property Name="Price" Type="float" />
           <Property Name="PVat" Type="float" />
           <Property Name="ShortDescibe" Type="nvarchar(max)" />
+          <Property Name="Quantity" Type="int" />
         </EntityType>
         <EntityType Name="ProductSeri">
           <Key>
@@ -2812,6 +2813,7 @@
           <Property Name="PVat" Type="Double" />
           <Property Name="ShortDescibe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="OrderProducts" Relationship="NDHDB1Model.FK__OrderProd__Produ__28A2FA0E" FromRole="ProductInfo" ToRole="OrderProduct" />
+          <Property Name="Quantity" Type="Int32" />
         </EntityType>
         <EntityType Name="ProductSeri">
           <Key>
@@ -3938,6 +3940,7 @@
           <Property Type="Double" Name="PVat" Nullable="true" />
           <Property Type="String" Name="Unit" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="QuantityBox" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
         </ComplexType>
         <EntityType Name="C2C1">
           <Key>
@@ -4022,10 +4025,10 @@
           <Property Name="PriceTotal" Type="Double" />
           <Property Name="BrachCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CInfoCommon" Relationship="NDHDB1Model.FK__HaiOrder__Agency__17786E0C" FromRole="HaiOrder" ToRole="CInfoCommon" />
-          <NavigationProperty Name="OrderStatu" Relationship="NDHDB1Model.FK__HaiOrder__OrderS__186C9245" FromRole="HaiOrder" ToRole="OrderStatu" />
-          <NavigationProperty Name="OrderType1" Relationship="NDHDB1Model.FK__HaiOrder__OrderT__149C0161" FromRole="HaiOrder" ToRole="OrderType" />
-          <NavigationProperty Name="PayType1" Relationship="NDHDB1Model.FK__HaiOrder__PayTyp__1590259A" FromRole="HaiOrder" ToRole="PayType" />
-          <NavigationProperty Name="ShipType1" Relationship="NDHDB1Model.FK__HaiOrder__ShipTy__168449D3" FromRole="HaiOrder" ToRole="ShipType" />
+          <NavigationProperty Name="OrderStt" Relationship="NDHDB1Model.FK__HaiOrder__OrderS__186C9245" FromRole="HaiOrder" ToRole="OrderStatu" />
+          <NavigationProperty Name="OType" Relationship="NDHDB1Model.FK__HaiOrder__OrderT__149C0161" FromRole="HaiOrder" ToRole="OrderType" />
+          <NavigationProperty Name="PType" Relationship="NDHDB1Model.FK__HaiOrder__PayTyp__1590259A" FromRole="HaiOrder" ToRole="PayType" />
+          <NavigationProperty Name="SType" Relationship="NDHDB1Model.FK__HaiOrder__ShipTy__168449D3" FromRole="HaiOrder" ToRole="ShipType" />
           <NavigationProperty Name="OrderProducts" Relationship="NDHDB1Model.FK__OrderProd__Order__27AED5D5" FromRole="HaiOrder" ToRole="OrderProduct" />
           <NavigationProperty Name="OrderStaffs" Relationship="NDHDB1Model.FK__OrderStaf__Order__2101D846" FromRole="HaiOrder" ToRole="OrderStaff" />
         </EntityType>
@@ -4860,6 +4863,7 @@
           <EntitySetMapping Name="ProductInfoes">
             <EntityTypeMapping TypeName="NDHDB1Model.ProductInfo">
               <MappingFragment StoreEntitySet="ProductInfo">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="ShortDescibe" ColumnName="ShortDescibe" />
                 <ScalarProperty Name="PVat" ColumnName="PVat" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
@@ -5220,6 +5224,7 @@
                 <ScalarProperty Name="PVat" ColumnName="PVat" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
                 <ScalarProperty Name="QuantityBox" ColumnName="QuantityBox" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

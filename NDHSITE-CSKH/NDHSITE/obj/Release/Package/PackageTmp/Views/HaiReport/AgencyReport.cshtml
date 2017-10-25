@@ -1,0 +1,107 @@
+﻿@model PagedList.IPagedList<NDHSITE.Models.report_event_agency_Result>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Report khuyến mãi";
+}
+
+<div class="page-header">
+    <h3 class="page-title">Report khuyến mãi</h3>
+
+    <ol class="breadcrumb">
+        <li><a href="/home">Trang chủ</a></li>
+        <li><a href="#">Report khuyến mãi</a></li>
+    </ol>
+</div> <!-- /.page-header -->
+<div class="portlet portlet-boxed">
+    <div class="portlet-header">
+        <h4 class="portlet-title">
+            Report: <strong>@ViewBag.EventInfo.Name</strong>
+        </h4>
+    </div> <!-- /.portlet-header -->
+    <div class="portlet-body">
+        <form method="get">
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <input type="hidden" value="@ViewBag.EventInfo.Id" name="EventId" />
+                    <div class="form-group">
+                        <select class="form-control" name="CType">
+                            @if (ViewBag.CType == "CII")
+                            {
+                                <option value="CII" selected>Cấp 2</option>
+                                <option value="FARMER">Nông dân</option>
+                            }
+                            else
+                            {
+                                <option value="CII">Cấp 2</option>
+                                <option value="FARMER" selected>Nông dân</option>
+                            }
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <button type="submit" class="btn btn-primary">Xem</button>
+                </div>
+
+
+            </div>
+        </form>
+
+        <fieldset>
+            <a href="/haireport/exportagencyreport?CType=@ViewBag.CType&EventId=@ViewBag.EventInfo.Id" class="btn btn-info">Xuất Excel</a>
+            <table class="table table-striped table-bordered ">
+                <thead>
+                    <tr>
+                        <th>
+                            @if (ViewBag.CType == "CII")
+                            {
+                                <span>MÃ CII</span>
+                            }
+                            else
+                            {
+                                <span>MA</span>
+                            }
+                        </th>
+                        <th>TÊN CH</th>
+                        <th>NGƯỜI ĐD GPKD</th>
+                        <th>CMND</th>
+                        <th>HUYỆN</th>
+                        <th>TỈNH</th>
+                        <th>CN</th>
+                        <th>ĐIỆN THOẠI</th>
+                        <th>SẢN PHẨM</th>
+                        <th>SỐ THẺ</th>
+                        <th>ĐIỂM/THẺ</th>
+                        <th>ĐIỂM x SL</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.CCode</td>
+                            <td>@item.CName</td>
+                            <td>@item.CDeputy</td>
+                            <td>@item.IdentityCard</td>
+                            <td>@item.DistrictName</td>
+                            <td>@item.ProvinceName</td>
+                            <td>@item.BranchCode</td>
+                            <td>@item.Phone</td>
+                            <td>@item.PName</td>
+                            <td>@item.quantity</td>
+                            <td>@item.Point</td>
+                            <td>@item.AllPoint</td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("agencyreport",
+                                                                                                new { page, CType = ViewBag.CType, EventId = ViewBag.EventInfo.Id }))
+
+        </fieldset>
+    </div>
+</div>

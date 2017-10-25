@@ -740,6 +740,7 @@
     <Property Name="Price" Type="float" />
     <Property Name="PVat" Type="float" />
     <Property Name="ShortDescibe" Type="nvarchar(max)" />
+    <Property Name="Quantity" Type="int" />
   </EntityType>
   <EntityType Name="ProductSeri">
     <Key>

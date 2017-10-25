@@ -1,0 +1,35 @@
+﻿@model NDHSITE.Models.HaiArea
+@{
+    ViewBag.Title = "ModifyArea";
+}
+
+<div class="portlet portlet-boxed">
+    <div class="portlet-header">
+        <h4 class="portlet-title">
+            Thông tin khu vực
+        </h4>
+    </div> <!-- /.portlet-header -->
+    <div class="portlet-body">
+        <form method="post" onsubmit="if(!confirm('Chỉnh sửa khu vực?')){return false;}">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label>Tên khu vực</label>
+                        <input type="text" name="Name" class="form-control" value="@Model.Name"/>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Ghi chú</label>
+                        <input type="text" name="Notes" class="form-control" value="@Model.Notes" />
+                    </div>
+                </div>
+
+                <input type="hidden" name="Id" value="@Model.Id" />
+
+            </div>
+            <button class="btn btn-primary" type="submit">Chỉnh sửa</button>
+        </form>
+    </div>
+</div>

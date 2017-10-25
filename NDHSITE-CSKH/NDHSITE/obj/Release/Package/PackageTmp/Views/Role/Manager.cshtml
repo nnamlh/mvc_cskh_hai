@@ -1,0 +1,130 @@
+﻿@using Microsoft.AspNet.Identity.EntityFramework
+@model PagedList.IPagedList<NDHSITE.Models.ApplicationUser>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Manager";
+}
+
+
+<div class="page-header">
+    <h3 class="page-title">Quản trị</h3>
+
+    <ol class="breadcrumb">
+        <li><a href="/home">Trang chủ</a></li>
+        <li><a href="#">Quản trị</a></li>
+    </ol>
+</div> <!-- /.page-header -->
+
+
+
+<div class="portlet portlet-boxed">
+
+    <div class="portlet-body">
+        <div class="layout layout-main-right layout-stack-sm">
+            <div class="col-md-3 col-sm-3 layout-sidebar">
+               @Html.Action("AdminSlideMenu", "Home", new { code = "rolemanager" })
+            </div>
+            <div class="col-md-9 col-sm-9 layout-main">
+                <div id="settings-content" class="tab-content stacked-content">
+                    <div class="tab-pane fade in active" id="usertorole">
+                        @using (Html.BeginForm("manager", "role", FormMethod.Get))
+                        {
+                            <p>
+                                Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                                <input type="submit" value="Search" />
+                            </p>
+                        }
+
+
+                        <div class="portlet-body">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th><strong>Tài khoản</strong></th>
+                                        <th><strong>Tên đầy đủ</strong></th>
+                                        <th><strong>Loại tài khoản</strong></th>
+                                        <th><strong>Quyền</strong></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var user in Model)
+                                    {
+                                        var userRoles = user.Roles.ToList();
+                                        <tr>
+                                            <td><a href="/showinfo/userinfo?user=@user.UserName" target="_blank">@user.UserName</a></td>
+                                            <td>@user.FullName</td>
+                                            <td>
+                                                @if (user.AccountType == "STAFF")
+                                                {
+                                                    <span>HAI</span>
+                                                }
+                                                else if (user.AccountType == "CI")
+                                                {
+                                                    <span>ĐẠI LÝ CẤP 1</span>
+                                                } else if (user.AccountType == "CII")
+                                                {
+                                                    <span>ĐẠI LÝ CẤP 2</span>
+                                                }
+                                                else if (user.AccountType == "FARMER")
+                                                {
+                                                    <span>NÔNG DÂN</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>KHÁC</span>
+                                                }
+                                                 
+                                            </td>
+                                            <td>
+                                                <select class="chk">
+                                                    <option value="@user.Id">none</option>
+                                                    @foreach (IdentityRole role in ViewBag.Roles)
+                                                    {
+                                                        var check = userRoles.Any(ur => ur.RoleId == role.Id) ? "selected" : "";
+                                                        <option value="@user.Id" @check>@role.Name</option>
+                                                    }
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                            @Html.PagedListPager(Model, page => Url.Action("manager",
+                                       new { page, searchString = ViewBag.CurrentFilter }))
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts {
+
+    <script>
+        $(function () {
+            $(".chk").change(function () {
+                //  uid = $(this).attr("data-uid");
+                uid = $(this).val();
+                role = $(this).find("option:selected").text();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Role/Update",
+                    data: { userId: uid, roleName: role },
+                    success: function (response) {
+                        alert(response);
+                    }
+                });
+
+            });
+        });
+    </script>
+}

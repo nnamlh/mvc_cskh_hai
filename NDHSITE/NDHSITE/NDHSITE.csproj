@@ -227,6 +227,7 @@
     <Compile Include="Controllers\HaiStaffController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\ShowInfoController.cs" />
@@ -717,6 +718,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Editor\uploadPartial.cshtml" />
     <Content Include="Views\Notification\Show.cshtml" />
+    <Content Include="Views\Order\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

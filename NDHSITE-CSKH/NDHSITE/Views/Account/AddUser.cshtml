@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "AddUser";
+}
+
+<div class="page-header">
+    <h3 class="page-title">Quản trị</h3>
+
+    <ol class="breadcrumb">
+        <li><a href="/home">Trang chủ</a></li>
+        <li><a href="#">Quản trị</a></li>
+    </ol>
+</div> <!-- /.page-header -->
+
+<div class="portlet portlet-boxed">
+
+    <div class="portlet-body">
+        <div class="layout layout-main-right layout-stack-sm">
+            <div class="col-md-3 col-sm-3 layout-sidebar">
+             @Html.Action("AdminSlideMenu", "Home", new { code = "accountadduser" })
+            </div>
+            <div class="col-md-9 col-sm-9 layout-main">
+                <div id="settings-content" class="tab-content stacked-content">
+                    <div class="tab-pane fade in active">
+
+                        <form method="post" enctype="multipart/form-data" onsubmit="if(!confirm('Tạo tài khoản cho khách hàng ?')){return false;}">
+                            <div class="row">
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Chọn quyền</label>
+                                        <select class="form-control" name="role">
+                                            @foreach (var item in ViewBag.RoleList)
+                                            {
+                                                <option value="@item.Name">@item.Name</option>
+                                            }
+
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>File Excel</label>
+                                        <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" class="form-control" name="files" />
+                                        <a href="~/haiupload/account.xlsx" class="form-control">Tải file mẫu</a>
+                                    </div>
+                                    <button class="btn-primary btn" type="submit">Cập nhật</button>
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
