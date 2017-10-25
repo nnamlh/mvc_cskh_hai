@@ -22,6 +22,7 @@ namespace NDHSITE.Models
             this.StaffWithC2 = new HashSet<StaffWithC2>();
             this.DecorImages = new HashSet<DecorImage>();
             this.SaveAgencyShopImages = new HashSet<SaveAgencyShopImage>();
+            this.OrderStaffs = new HashSet<OrderStaff>();
         }
     
         public string Id { get; set; }
@@ -58,5 +59,6 @@ namespace NDHSITE.Models
         public virtual ICollection<StaffWithC2> StaffWithC2 { get; set; }
         public virtual ICollection<DecorImage> DecorImages { get; set; }
         public virtual ICollection<SaveAgencyShopImage> SaveAgencyShopImages { get; set; }
+        public virtual ICollection<OrderStaff> OrderStaffs { get; set; }
     }
 }

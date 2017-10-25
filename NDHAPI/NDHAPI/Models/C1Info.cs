@@ -14,6 +14,7 @@ namespace NDHAPI.Models
     
     public partial class C1Info
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public C1Info()
         {
             this.C2Info = new HashSet<C2Info>();
@@ -28,10 +29,22 @@ namespace NDHAPI.Models
         public Nullable<int> IsLock { get; set; }
         public string InfoId { get; set; }
         public string HaiBrandId { get; set; }
+        public string Position { get; set; }
+        public string C1Position { get; set; }
+        public Nullable<System.DateTime> WeddingDate { get; set; }
+        public Nullable<System.DateTime> FoundingDate { get; set; }
+        public string Decison1 { get; set; }
+        public string Decision1Birthday { get; set; }
+        public string Decision1Phone { get; set; }
+        public string Decison2 { get; set; }
+        public string Decision2Birthday { get; set; }
+        public string Decision2Phone { get; set; }
     
         public virtual HaiBranch HaiBranch { get; set; }
         public virtual CInfoCommon CInfoCommon { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<C2Info> C2Info { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HaiStaff> HaiStaffs { get; set; }
     }
 }

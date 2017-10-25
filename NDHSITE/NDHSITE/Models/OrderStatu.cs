@@ -7,18 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NDHAPI.Models
+namespace NDHSITE.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class CalendarType
+    public partial class OrderStatu
     {
+        public OrderStatu()
+        {
+            this.HaiOrders = new HashSet<HaiOrder>();
+        }
+    
         public string Id { get; set; }
-        public string Notes { get; set; }
-        public Nullable<int> Compel { get; set; }
-        public Nullable<int> Number { get; set; }
-        public Nullable<int> TGroup { get; set; }
         public string Name { get; set; }
+        public string Notes { get; set; }
+    
+        public virtual ICollection<HaiOrder> HaiOrders { get; set; }
     }
 }

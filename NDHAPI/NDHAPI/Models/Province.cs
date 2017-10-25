@@ -14,6 +14,7 @@ namespace NDHAPI.Models
     
     public partial class Province
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Province()
         {
             this.Districts = new HashSet<District>();
@@ -23,6 +24,7 @@ namespace NDHAPI.Models
         public string Name { get; set; }
         public string PType { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<District> Districts { get; set; }
     }
 }

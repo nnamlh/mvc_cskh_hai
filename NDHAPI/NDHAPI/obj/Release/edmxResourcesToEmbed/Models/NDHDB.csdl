@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="NDHDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="NDHDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="AgencySavePoint">
     <Key>
       <PropertyRef Name="EventId" />
@@ -178,6 +178,16 @@
     <Property Name="IsLock" Type="Int32" />
     <Property Name="InfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="HaiBrandId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Position" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="C1Position" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="WeddingDate" Type="DateTime" Precision="3" />
+    <Property Name="FoundingDate" Type="DateTime" Precision="3" />
+    <Property Name="Decison1" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Decision1Birthday" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Decision1Phone" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="Decison2" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Decision2Birthday" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Decision2Phone" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="HaiBranch" Relationship="Self.FK__C1Info__HaiBrand__72910220" FromRole="C1Info" ToRole="HaiBranch" />
     <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C1Info__InfoId__681373AD" FromRole="C1Info" ToRole="CInfoCommon" />
     <NavigationProperty Name="C2Info" Relationship="Self.FK__C2Info__C1Id__73852659" FromRole="C1Info" ToRole="C2Info" />
@@ -192,6 +202,7 @@
     <Property Name="StoreName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="Deputy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="IsActive" Type="Int32" />
+    <Property Name="IsLock" Type="Int32" />
     <Property Name="InfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="C1Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Decision" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
@@ -211,7 +222,7 @@
     <Property Name="Phone" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Fax" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="BirthDay" Type="Int32" />
+    <Property Name="BirthDay" Type="DateTime" Precision="0" />
     <Property Name="PlaceOfBirth" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="UserLogin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -225,6 +236,7 @@
     <Property Name="CCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="CDeputy" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="Mobile" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IsClock" Type="Int32" />
     <Property Name="BankAccount" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="BankAccountHolder" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="BackName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -233,6 +245,7 @@
     <Property Name="BusinessLicense" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="Lat" Type="Double" />
     <Property Name="Lng" Type="Double" />
+    <Property Name="IsDelete" Type="Int32" />
     <NavigationProperty Name="AgencySavePoints" Relationship="Self.FK__AgencySav__CInfo__6497E884" FromRole="CInfoCommon" ToRole="AgencySavePoint" />
     <NavigationProperty Name="C1Info" Relationship="Self.FK__C1Info__InfoId__681373AD" FromRole="CInfoCommon" ToRole="C1Info" />
     <NavigationProperty Name="C2Info" Relationship="Self.FK__C2Info__InfoId__6CD828CA" FromRole="CInfoCommon" ToRole="C2Info" />
@@ -242,12 +255,6 @@
     <NavigationProperty Name="EventCustomerFarmers" Relationship="Self.FK__EventCust__CInfo__3F6663D5" FromRole="CInfoCommon" ToRole="EventCustomerFarmer" />
     <NavigationProperty Name="FarmerInfoes" Relationship="Self.FK__FarmerInf__InfoI__7EF6D905" FromRole="CInfoCommon" ToRole="FarmerInfo" />
     <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="CInfoCommon" ToRole="MSGPoint" />
-    <Property Name="BirthMonth" Type="Int32" />
-    <Property Name="BirthYear" Type="Int32" />
-    <Property Name="CRank" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-    <Property Name="CGroup" Type="Int32" />
-    <Property Name="WardName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="Country" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="District">
     <Key>
@@ -472,14 +479,13 @@
     <Property Name="DepartmentName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="AvatarUrl" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="SignatureUrl" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="IsDelete" Type="Int32" />
     <NavigationProperty Name="HaiBranch" Relationship="Self.FK__HaiStaff__Branch__24927208" FromRole="HaiStaff" ToRole="HaiBranch" />
     <NavigationProperty Name="HaiDepartment" Relationship="Self.FK__HaiStaff__Depart__25869641" FromRole="HaiStaff" ToRole="HaiDepartment" />
     <NavigationProperty Name="HaiPosition" Relationship="Self.FK__HaiStaff__Positi__239E4DCF" FromRole="HaiStaff" ToRole="HaiPosition" />
     <NavigationProperty Name="StaffCheckIns" Relationship="Self.FK__StaffChec__Staff__47DBAE45" FromRole="HaiStaff" ToRole="StaffCheckIn" />
     <NavigationProperty Name="C1Info" Relationship="Self.StaffWithC1" FromRole="HaiStaff" ToRole="C1Info" />
     <NavigationProperty Name="C2Info" Relationship="Self.StaffWithC2" FromRole="HaiStaff" ToRole="C2Info" />
-    <Property Name="IsDelete" Type="Int32" />
-    <NavigationProperty Name="CheckInCalendarHistories" Relationship="NDHDBModel.FK__CheckInCa__Staff__4B2D1C3C" FromRole="HaiStaff" ToRole="CheckInCalendarHistory" />
   </EntityType>
   <EntityType Name="HappyBirthday">
     <Key>
@@ -735,6 +741,24 @@
     <Property Name="AgencyType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="AgencyTypeName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="HaiStaff" Relationship="Self.FK__StaffChec__Staff__47DBAE45" FromRole="StaffCheckIn" ToRole="HaiStaff" />
+  </EntityType>
+  <EntityType Name="StoreStaffId">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsUser" Type="Int32" />
+    <Property Name="CountNumber" Type="Int32" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="TreeInfo">
     <Key>
@@ -1295,6 +1319,8 @@
     <EntitySet Name="SMSCodes" EntityType="Self.SMSCode" />
     <EntitySet Name="SMSHistories" EntityType="Self.SMSHistory" />
     <EntitySet Name="StaffCheckIns" EntityType="Self.StaffCheckIn" />
+    <EntitySet Name="StoreStaffIds" EntityType="Self.StoreStaffId" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="TreeInfoes" EntityType="Self.TreeInfo" />
     <EntitySet Name="Wards" EntityType="Self.Ward" />
     <EntitySet Name="Warehouses" EntityType="Self.Warehouse" />
@@ -1466,126 +1492,5 @@
       <End Role="HaiStaff" EntitySet="HaiStaffs" />
       <End Role="C2Info" EntitySet="C2Info" />
     </AssociationSet>
-    <EntitySet Name="CheckInCalendarStatus" EntityType="NDHDBModel.CheckInCalendarStatu" />
-    <EntitySet Name="CheckInCalendarHistories" EntityType="NDHDBModel.CheckInCalendarHistory" />
-    <AssociationSet Name="FK__CheckInCa__Staff__4B2D1C3C" Association="NDHDBModel.FK__CheckInCa__Staff__4B2D1C3C">
-      <End Role="HaiStaff" EntitySet="HaiStaffs" />
-      <End Role="CheckInCalendarHistory" EntitySet="CheckInCalendarHistories" />
-    </AssociationSet>
-    <EntitySet Name="CheckInCalendars" EntityType="NDHDBModel.CheckInCalendar" />
-    <FunctionImport Name="checkin_getcalendar" ReturnType="Collection(NDHDBModel.checkin_getcalendar_Result2)">
-      <Parameter Name="month" Mode="In" Type="Int32" />
-      <Parameter Name="year" Mode="In" Type="Int32" />
-      <Parameter Name="staffId" Mode="In" Type="String" />
-    </FunctionImport>
   </EntityContainer>
-  <EntityType Name="CheckInCalendarStatu">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <ComplexType Name="checkin_getcalendar_Result">
-    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
-    <Property Type="Int32" Name="CDay" Nullable="true" />
-    <Property Type="Int32" Name="CMonth" Nullable="true" />
-    <Property Type="Int32" Name="CYear" Nullable="true" />
-    <Property Type="String" Name="StaffId" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="InPlan" Nullable="true" />
-    <Property Type="Int32" Name="Perform" Nullable="true" />
-    <Property Type="String" Name="CCode" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="CInfoId" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="CType" Nullable="true" MaxLength="32" />
-    <Property Type="String" Name="CheckInStatus" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Notes" Nullable="true" />
-    <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
-    <Property Type="String" Name="CDeputy" Nullable="true" MaxLength="512" />
-    <Property Type="String" Name="StatusName" Nullable="true" MaxLength="512" />
-  </ComplexType>
-  <EntityType Name="CheckInCalendarHistory">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CMonth" Type="Int32" />
-    <Property Name="CYear" Type="Int32" />
-    <Property Name="CStatus" Type="Int32" />
-    <Property Name="CreateTime" Type="DateTime" Precision="3" />
-    <Property Name="ModifyTime" Type="DateTime" Precision="3" />
-    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="HaiStaff" Relationship="NDHDBModel.FK__CheckInCa__Staff__4B2D1C3C" FromRole="CheckInCalendarHistory" ToRole="HaiStaff" />
-  </EntityType>
-  <Association Name="FK__CheckInCa__Staff__4B2D1C3C">
-    <End Type="NDHDBModel.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
-    <End Type="NDHDBModel.CheckInCalendarHistory" Role="CheckInCalendarHistory" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiStaff">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CheckInCalendarHistory">
-        <PropertyRef Name="StaffId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="CheckInCalendar">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CDay" Type="Int32" />
-    <Property Name="CMonth" Type="Int32" />
-    <Property Name="CYear" Type="Int32" />
-    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="InPlan" Type="Int32" />
-    <Property Name="Perform" Type="Int32" />
-    <Property Name="CCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CInfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="CheckInStatus" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CDate" Type="Int32" />
-    <Property Name="LatCheck" Type="Double" />
-    <Property Name="LngCheck" Type="Double" />
-    <Property Name="TimeCheck" Type="DateTime" Precision="3" />
-    <Property Name="Distance" Type="Double" />
-  </EntityType>
-  <ComplexType Name="checkin_getcalendar_Result1">
-    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
-    <Property Type="Int32" Name="CDay" Nullable="true" />
-    <Property Type="Int32" Name="CMonth" Nullable="true" />
-    <Property Type="Int32" Name="CYear" Nullable="true" />
-    <Property Type="String" Name="StaffId" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="InPlan" Nullable="true" />
-    <Property Type="Int32" Name="Perform" Nullable="true" />
-    <Property Type="String" Name="CCode" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="CInfoId" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="CType" Nullable="true" MaxLength="32" />
-    <Property Type="String" Name="CheckInStatus" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Notes" Nullable="true" />
-    <Property Type="Int32" Name="CDate" Nullable="true" />
-    <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
-    <Property Type="String" Name="CDeputy" Nullable="true" MaxLength="512" />
-    <Property Type="String" Name="StatusName" Nullable="true" MaxLength="512" />
-  </ComplexType>
-  <ComplexType Name="checkin_getcalendar_Result2">
-    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
-    <Property Type="Int32" Name="CDay" Nullable="true" />
-    <Property Type="Int32" Name="CMonth" Nullable="true" />
-    <Property Type="Int32" Name="CYear" Nullable="true" />
-    <Property Type="String" Name="StaffId" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="InPlan" Nullable="true" />
-    <Property Type="Int32" Name="Perform" Nullable="true" />
-    <Property Type="String" Name="CCode" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="CInfoId" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="CType" Nullable="true" MaxLength="32" />
-    <Property Type="String" Name="CheckInStatus" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Notes" Nullable="true" />
-    <Property Type="Int32" Name="CDate" Nullable="true" />
-    <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
-    <Property Type="String" Name="CDeputy" Nullable="true" MaxLength="512" />
-    <Property Type="String" Name="StatusName" Nullable="true" MaxLength="512" />
-  </ComplexType>
 </Schema>

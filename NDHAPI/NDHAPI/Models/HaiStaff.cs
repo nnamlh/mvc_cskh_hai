@@ -14,13 +14,12 @@ namespace NDHAPI.Models
     
     public partial class HaiStaff
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public HaiStaff()
         {
             this.StaffCheckIns = new HashSet<StaffCheckIn>();
             this.C1Info = new HashSet<C1Info>();
             this.C2Info = new HashSet<C2Info>();
-            this.CheckInCalendarHistories = new HashSet<CheckInCalendarHistory>();
-            this.CalendarInfoes = new HashSet<CalendarInfo>();
         }
     
         public string Id { get; set; }
@@ -46,15 +45,15 @@ namespace NDHAPI.Models
         public string AvatarUrl { get; set; }
         public string SignatureUrl { get; set; }
         public Nullable<int> IsDelete { get; set; }
-        public Nullable<int> GPSDistance { get; set; }
     
         public virtual HaiBranch HaiBranch { get; set; }
         public virtual HaiDepartment HaiDepartment { get; set; }
         public virtual HaiPosition HaiPosition { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StaffCheckIn> StaffCheckIns { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<C1Info> C1Info { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<C2Info> C2Info { get; set; }
-        public virtual ICollection<CheckInCalendarHistory> CheckInCalendarHistories { get; set; }
-        public virtual ICollection<CalendarInfo> CalendarInfoes { get; set; }
     }
 }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="NDHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+<Schema Namespace="NDHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AgencySavePoint">
     <Key>
       <PropertyRef Name="EventId" />
@@ -175,6 +175,16 @@
     <Property Name="IsLock" Type="int" />
     <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
     <Property Name="HaiBrandId" Type="nvarchar" MaxLength="128" />
+    <Property Name="Position" Type="nvarchar" MaxLength="256" />
+    <Property Name="C1Position" Type="nvarchar" MaxLength="512" />
+    <Property Name="WeddingDate" Type="datetime" />
+    <Property Name="FoundingDate" Type="datetime" />
+    <Property Name="Decison1" Type="nvarchar" MaxLength="512" />
+    <Property Name="Decision1Birthday" Type="nvarchar" MaxLength="128" />
+    <Property Name="Decision1Phone" Type="nvarchar" MaxLength="32" />
+    <Property Name="Decison2" Type="nvarchar" MaxLength="512" />
+    <Property Name="Decision2Birthday" Type="nvarchar" MaxLength="128" />
+    <Property Name="Decision2Phone" Type="nvarchar" MaxLength="32" />
   </EntityType>
   <EntityType Name="C2Info">
     <Key>
@@ -185,59 +195,10 @@
     <Property Name="StoreName" Type="nvarchar" MaxLength="512" />
     <Property Name="Deputy" Type="nvarchar" MaxLength="255" />
     <Property Name="IsActive" Type="int" />
+    <Property Name="IsLock" Type="int" />
     <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
     <Property Name="C1Id" Type="nvarchar" MaxLength="128" />
     <Property Name="Decision" Type="nvarchar" MaxLength="512" />
-  </EntityType>
-  <EntityType Name="CalendarInfo">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="CMonth" Type="int" />
-    <Property Name="CYear" Type="int" />
-    <Property Name="CStatus" Type="int" />
-    <Property Name="CreateTime" Type="datetime" />
-    <Property Name="ModifyTime" Type="datetime" />
-    <Property Name="StaffId" Type="nvarchar" MaxLength="128" />
-    <Property Name="CType" Type="nvarchar" MaxLength="128" />
-    <Property Name="Notes" Type="nvarchar(max)" />
-  </EntityType>
-  <EntityType Name="CalendarType">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="Notes" Type="nvarchar(max)" />
-    <Property Name="Compel" Type="int" />
-    <Property Name="Number" Type="int" />
-    <Property Name="TGroup" Type="int" />
-    <Property Name="Name" Type="nvarchar" MaxLength="512" />
-  </EntityType>
-  <EntityType Name="CalendarWork">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="CDay" Type="int" />
-    <Property Name="CMonth" Type="int" />
-    <Property Name="CYear" Type="int" />
-    <Property Name="StaffId" Type="nvarchar" MaxLength="128" />
-    <Property Name="InPlan" Type="int" />
-    <Property Name="AgencyCode" Type="nvarchar" MaxLength="128" />
-    <Property Name="AgencyType" Type="nvarchar" MaxLength="32" />
-    <Property Name="TypeId" Type="nvarchar" MaxLength="128" />
-    <Property Name="Notes" Type="nvarchar(max)" />
-    <Property Name="CIn" Type="int" />
-    <Property Name="COut" Type="int" />
-    <Property Name="CInTime" Type="time" Precision="7" />
-    <Property Name="COutTime" Type="time" Precision="7" />
-    <Property Name="AllTime" Type="int" />
-    <Property Name="CDate" Type="int" />
-    <Property Name="LatCheck" Type="float" />
-    <Property Name="LngCheck" Type="float" />
-    <Property Name="TimeCheck" Type="datetime" />
-    <Property Name="Distance" Type="float" />
   </EntityType>
   <EntityType Name="CInfoCommon">
     <Key>
@@ -251,6 +212,7 @@
     <Property Name="Phone" Type="nvarchar" MaxLength="128" />
     <Property Name="Fax" Type="nvarchar" MaxLength="128" />
     <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="BirthDay" Type="date" />
     <Property Name="PlaceOfBirth" Type="nvarchar" MaxLength="255" />
     <Property Name="Notes" Type="nvarchar" MaxLength="255" />
     <Property Name="UserLogin" Type="nvarchar" MaxLength="255" />
@@ -264,6 +226,7 @@
     <Property Name="CCode" Type="nvarchar" MaxLength="32" />
     <Property Name="CDeputy" Type="nvarchar" MaxLength="512" />
     <Property Name="Mobile" Type="nvarchar" MaxLength="128" />
+    <Property Name="IsClock" Type="int" />
     <Property Name="BankAccount" Type="nvarchar" MaxLength="256" />
     <Property Name="BankAccountHolder" Type="nvarchar" MaxLength="512" />
     <Property Name="BackName" Type="nvarchar(max)" />
@@ -272,13 +235,7 @@
     <Property Name="BusinessLicense" Type="nvarchar" MaxLength="512" />
     <Property Name="Lat" Type="float" />
     <Property Name="Lng" Type="float" />
-    <Property Name="BirthDay" Type="int" />
-    <Property Name="BirthMonth" Type="int" />
-    <Property Name="BirthYear" Type="int" />
-    <Property Name="CRank" Type="nvarchar" MaxLength="16" />
-    <Property Name="CGroup" Type="int" />
-    <Property Name="WardName" Type="nvarchar" MaxLength="512" />
-    <Property Name="Country" Type="nvarchar" MaxLength="128" />
+    <Property Name="IsDelete" Type="int" />
   </EntityType>
   <EntityType Name="District">
     <Key>
@@ -477,7 +434,6 @@
     <Property Name="AvatarUrl" Type="nvarchar" MaxLength="512" />
     <Property Name="SignatureUrl" Type="nvarchar" MaxLength="512" />
     <Property Name="IsDelete" Type="int" />
-    <Property Name="GPSDistance" Type="int" />
   </EntityType>
   <EntityType Name="HappyBirthday">
     <Key>
@@ -577,33 +533,6 @@
     <Property Name="BoxCode" Type="nvarchar" MaxLength="32" />
     <Property Name="ProductCode" Type="nvarchar" MaxLength="32" />
     <Property Name="Quantity" Type="decimal" Precision="5" Scale="2" />
-  </EntityType>
-  <EntityType Name="ProcessHistory">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="ProcessId" Type="nvarchar" MaxLength="128" />
-    <Property Name="CalendarId" Type="nvarchar" MaxLength="128" />
-    <Property Name="CreateTime" Type="datetime" />
-  </EntityType>
-  <EntityType Name="ProcessWithRole">
-    <Key>
-      <PropertyRef Name="ProcessId" />
-      <PropertyRef Name="RoleId" />
-    </Key>
-    <Property Name="ProcessId" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
-  </EntityType>
-  <EntityType Name="ProcessWork">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="ProcessName" Type="nvarchar(max)" />
-    <Property Name="ProcessType" Type="nvarchar" MaxLength="128" />
-    <Property Name="TimeRequire" Type="int" />
-    <Property Name="Notes" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="ProductInfo">
     <Key>
@@ -770,7 +699,24 @@
     </Key>
     <Property Name="C2Id" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="StaffId" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="GroupChoose" Type="int" />
+  </EntityType>
+  <EntityType Name="StoreStaffId">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="16" Nullable="false" />
+    <Property Name="IsUser" Type="int" />
+    <Property Name="CountNumber" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="TreeInfo">
     <Key>
@@ -876,18 +822,6 @@
       </Principal>
       <Dependent Role="C2Info">
         <PropertyRef Name="InfoId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__CalendarI__Staff__5E3FF0B0">
-    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
-    <End Role="CalendarInfo" Type="Self.CalendarInfo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiStaff">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CalendarInfo">
-        <PropertyRef Name="StaffId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1239,30 +1173,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ProcessWi__Proce__4FF1D159">
-    <End Role="ProcessWork" Type="Self.ProcessWork" Multiplicity="1" />
-    <End Role="ProcessWithRole" Type="Self.ProcessWithRole" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProcessWork">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ProcessWithRole">
-        <PropertyRef Name="ProcessId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__ProcessWi__RoleI__50E5F592">
-    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1" />
-    <End Role="ProcessWithRole" Type="Self.ProcessWithRole" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetRoles">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ProcessWithRole">
-        <PropertyRef Name="RoleId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__ProductSe__Produ__10416098">
     <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
     <End Role="ProductSeri" Type="Self.ProductSeri" Multiplicity="*" />
@@ -1415,79 +1325,70 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="checkin_getcalendar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="month" Type="int" Mode="In" />
-    <Parameter Name="year" Type="int" Mode="In" />
-    <Parameter Name="staffId" Type="nvarchar" Mode="In" />
-  </Function>
   <EntityContainer Name="NDHDBModelStoreContainer">
-    <EntitySet Name="AgencySavePoint" EntityType="Self.AgencySavePoint" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="AllStatus" EntityType="Self.AllStatus" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="APIAuthHistory" EntityType="Self.APIAuthHistory" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="APIDetail" EntityType="Self.APIDetail" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="APIHistory" EntityType="Self.APIHistory" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="APILogoutHistory" EntityType="Self.APILogoutHistory" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="AwardInfo" EntityType="Self.AwardInfo" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="BarcodeHistory" EntityType="Self.BarcodeHistory" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="BasicNotification" EntityType="Self.BasicNotification" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="C1Info" EntityType="Self.C1Info" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="C2Info" EntityType="Self.C2Info" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="CalendarInfo" EntityType="Self.CalendarInfo" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="CalendarType" EntityType="Self.CalendarType" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="CalendarWork" EntityType="Self.CalendarWork" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="CInfoCommon" EntityType="Self.CInfoCommon" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="ErrorInfo" EntityType="Self.ErrorInfo" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="EventArea" EntityType="Self.EventArea" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="EventAreaFarmer" EntityType="Self.EventAreaFarmer" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="EventAward" EntityType="Self.EventAward" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="EventCustomer" EntityType="Self.EventCustomer" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="EventCustomerFarmer" EntityType="Self.EventCustomerFarmer" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="EventInfo" EntityType="Self.EventInfo" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="EventProduct" EntityType="Self.EventProduct" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="FarmerInfo" EntityType="Self.FarmerInfo" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="FuncGroup" EntityType="Self.FuncGroup" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="FuncInfo" EntityType="Self.FuncInfo" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="FuncRole" EntityType="Self.FuncRole" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="HaiArea" EntityType="Self.HaiArea" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="HaiBranch" EntityType="Self.HaiBranch" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="HaiDepartment" EntityType="Self.HaiDepartment" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="HaiPosition" EntityType="Self.HaiPosition" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="HaiStaff" EntityType="Self.HaiStaff" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="HappyBirthday" EntityType="Self.HappyBirthday" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="ImeiUser" EntityType="Self.ImeiUser" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="MessegeToHai" EntityType="Self.MessegeToHai" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="MobileFunction" EntityType="Self.MobileFunction" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="MobileRole" EntityType="Self.MobileRole" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="MSGPoint" EntityType="Self.MSGPoint" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="MSGPointEvent" EntityType="Self.MSGPointEvent" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="NotificationTopic" EntityType="Self.NotificationTopic" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="PHistory" EntityType="Self.PHistory" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="ProcessHistory" EntityType="Self.ProcessHistory" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="ProcessWithRole" EntityType="Self.ProcessWithRole" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="ProcessWork" EntityType="Self.ProcessWork" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="ProductInfo" EntityType="Self.ProductInfo" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="ProductSeri" EntityType="Self.ProductSeri" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="Province" EntityType="Self.Province" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="PTracking" EntityType="Self.PTracking" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="RegFirebase" EntityType="Self.RegFirebase" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="RoleCheckImei" EntityType="Self.RoleCheckImei" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="SendSmsHistory" EntityType="Self.SendSmsHistory" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="ServerInfo" EntityType="Self.ServerInfo" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="SmsAccount" EntityType="Self.SmsAccount" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="SMSCode" EntityType="Self.SMSCode" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="SMSHistory" EntityType="Self.SMSHistory" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="StaffCheckIn" EntityType="Self.StaffCheckIn" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="StaffWithC1" EntityType="Self.StaffWithC1" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="StaffWithC2" EntityType="Self.StaffWithC2" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="TreeInfo" EntityType="Self.TreeInfo" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="Ward" EntityType="Self.Ward" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
-    <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="AgencySavePoint" EntityType="Self.AgencySavePoint" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AllStatus" EntityType="Self.AllStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="APIAuthHistory" EntityType="Self.APIAuthHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="APIDetail" EntityType="Self.APIDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="APIHistory" EntityType="Self.APIHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="APILogoutHistory" EntityType="Self.APILogoutHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AwardInfo" EntityType="Self.AwardInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BarcodeHistory" EntityType="Self.BarcodeHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BasicNotification" EntityType="Self.BasicNotification" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="C1Info" EntityType="Self.C1Info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="C2Info" EntityType="Self.C2Info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CInfoCommon" EntityType="Self.CInfoCommon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ErrorInfo" EntityType="Self.ErrorInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventArea" EntityType="Self.EventArea" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventAreaFarmer" EntityType="Self.EventAreaFarmer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventAward" EntityType="Self.EventAward" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventCustomer" EntityType="Self.EventCustomer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventCustomerFarmer" EntityType="Self.EventCustomerFarmer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventInfo" EntityType="Self.EventInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EventProduct" EntityType="Self.EventProduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FarmerInfo" EntityType="Self.FarmerInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FuncGroup" EntityType="Self.FuncGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FuncInfo" EntityType="Self.FuncInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FuncRole" EntityType="Self.FuncRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HaiArea" EntityType="Self.HaiArea" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HaiBranch" EntityType="Self.HaiBranch" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HaiDepartment" EntityType="Self.HaiDepartment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HaiPosition" EntityType="Self.HaiPosition" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HaiStaff" EntityType="Self.HaiStaff" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HappyBirthday" EntityType="Self.HappyBirthday" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ImeiUser" EntityType="Self.ImeiUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MessegeToHai" EntityType="Self.MessegeToHai" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MobileFunction" EntityType="Self.MobileFunction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MobileRole" EntityType="Self.MobileRole" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MSGPoint" EntityType="Self.MSGPoint" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MSGPointEvent" EntityType="Self.MSGPointEvent" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NotificationTopic" EntityType="Self.NotificationTopic" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PHistory" EntityType="Self.PHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductInfo" EntityType="Self.ProductInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductSeri" EntityType="Self.ProductSeri" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Province" EntityType="Self.Province" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PTracking" EntityType="Self.PTracking" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RegFirebase" EntityType="Self.RegFirebase" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoleCheckImei" EntityType="Self.RoleCheckImei" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SendSmsHistory" EntityType="Self.SendSmsHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ServerInfo" EntityType="Self.ServerInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SmsAccount" EntityType="Self.SmsAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SMSCode" EntityType="Self.SMSCode" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SMSHistory" EntityType="Self.SMSHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StaffCheckIn" EntityType="Self.StaffCheckIn" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StaffWithC1" EntityType="Self.StaffWithC1" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StaffWithC2" EntityType="Self.StaffWithC2" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StoreStaffId" EntityType="Self.StoreStaffId" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TreeInfo" EntityType="Self.TreeInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ward" EntityType="Self.Ward" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__AgencySav__CInfo__6497E884" Association="Self.FK__AgencySav__CInfo__6497E884">
       <End Role="CInfoCommon" EntitySet="CInfoCommon" />
       <End Role="AgencySavePoint" EntitySet="AgencySavePoint" />
@@ -1511,10 +1412,6 @@
     <AssociationSet Name="FK__C2Info__InfoId__6CD828CA" Association="Self.FK__C2Info__InfoId__6CD828CA">
       <End Role="CInfoCommon" EntitySet="CInfoCommon" />
       <End Role="C2Info" EntitySet="C2Info" />
-    </AssociationSet>
-    <AssociationSet Name="FK__CalendarI__Staff__5E3FF0B0" Association="Self.FK__CalendarI__Staff__5E3FF0B0">
-      <End Role="HaiStaff" EntitySet="HaiStaff" />
-      <End Role="CalendarInfo" EntitySet="CalendarInfo" />
     </AssociationSet>
     <AssociationSet Name="FK__CInfoComm__AreaI__52E34C9D" Association="Self.FK__CInfoComm__AreaI__52E34C9D">
       <End Role="HaiArea" EntitySet="HaiArea" />
@@ -1631,14 +1528,6 @@
     <AssociationSet Name="FK__MSGPointE__MSGPo__5CC1BC92" Association="Self.FK__MSGPointE__MSGPo__5CC1BC92">
       <End Role="MSGPoint" EntitySet="MSGPoint" />
       <End Role="MSGPointEvent" EntitySet="MSGPointEvent" />
-    </AssociationSet>
-    <AssociationSet Name="FK__ProcessWi__Proce__4FF1D159" Association="Self.FK__ProcessWi__Proce__4FF1D159">
-      <End Role="ProcessWork" EntitySet="ProcessWork" />
-      <End Role="ProcessWithRole" EntitySet="ProcessWithRole" />
-    </AssociationSet>
-    <AssociationSet Name="FK__ProcessWi__RoleI__50E5F592" Association="Self.FK__ProcessWi__RoleI__50E5F592">
-      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
-      <End Role="ProcessWithRole" EntitySet="ProcessWithRole" />
     </AssociationSet>
     <AssociationSet Name="FK__ProductSe__Produ__10416098" Association="Self.FK__ProductSe__Produ__10416098">
       <End Role="ProductInfo" EntitySet="ProductInfo" />

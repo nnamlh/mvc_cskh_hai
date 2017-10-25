@@ -7,16 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NDHAPI.Models
+namespace NDHSITE.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class ProcessHistory
+    public partial class UserBranchPermiss
     {
         public string Id { get; set; }
-        public string ProcessId { get; set; }
-        public string CalendarId { get; set; }
-        public Nullable<System.DateTime> CreateTime { get; set; }
+        public string UserName { get; set; }
+        public string BranchCode { get; set; }
     }
 }

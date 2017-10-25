@@ -12,8 +12,6 @@ namespace NDHAPI.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
     public partial class NDHDBEntities : DbContext
     {
@@ -80,31 +78,10 @@ namespace NDHAPI.Models
         public virtual DbSet<SMSCode> SMSCodes { get; set; }
         public virtual DbSet<SMSHistory> SMSHistories { get; set; }
         public virtual DbSet<StaffCheckIn> StaffCheckIns { get; set; }
+        public virtual DbSet<StoreStaffId> StoreStaffIds { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TreeInfo> TreeInfoes { get; set; }
         public virtual DbSet<Ward> Wards { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
-        public virtual DbSet<CalendarType> CalendarTypes { get; set; }
-        public virtual DbSet<CalendarWork> CalendarWorks { get; set; }
-        public virtual DbSet<ProcessHistory> ProcessHistories { get; set; }
-        public virtual DbSet<ProcessWork> ProcessWorks { get; set; }
-        public virtual DbSet<CheckInCalendarHistory> CheckInCalendarHistories { get; set; }
-        public virtual DbSet<CalendarInfo> CalendarInfoes { get; set; }
-    
-        public virtual ObjectResult<checkin_getcalendar_Result2> checkin_getcalendar(Nullable<int> month, Nullable<int> year, string staffId)
-        {
-            var monthParameter = month.HasValue ?
-                new ObjectParameter("month", month) :
-                new ObjectParameter("month", typeof(int));
-    
-            var yearParameter = year.HasValue ?
-                new ObjectParameter("year", year) :
-                new ObjectParameter("year", typeof(int));
-    
-            var staffIdParameter = staffId != null ?
-                new ObjectParameter("staffId", staffId) :
-                new ObjectParameter("staffId", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<checkin_getcalendar_Result2>("checkin_getcalendar", monthParameter, yearParameter, staffIdParameter);
-        }
     }
 }

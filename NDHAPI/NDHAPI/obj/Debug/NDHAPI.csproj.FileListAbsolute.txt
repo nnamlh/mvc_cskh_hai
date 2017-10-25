@@ -339,7 +339,6 @@ N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\Microsoft.Web.Infrastructure.dll
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\Newtonsoft.Json.dll
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\Owin.dll
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\System.Net.Http.Formatting.dll
-N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\System.Web.Extensions.dll
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\System.Web.Helpers.dll
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\System.Web.Http.dll
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\System.Web.Http.WebHost.dll

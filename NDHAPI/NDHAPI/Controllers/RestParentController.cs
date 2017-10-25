@@ -21,7 +21,7 @@ namespace NDHAPI.Controllers
         {
             List<AgencyInfoC2Result> agencyResult = new List<AgencyInfoC2Result>();
             List<C2Info> c2List = new List<C2Info>();
-            c2List = staff.C2Info.Where(p => p.IsActive == 1).OrderByDescending(p => p.CInfoCommon.CGroup).ToList();
+            c2List = staff.C2Info.Where(p => p.IsActive == 1).ToList();
             foreach (var item in c2List)
             {
                 agencyResult.Add(new AgencyInfoC2Result()
@@ -35,8 +35,6 @@ namespace NDHAPI.Controllers
                     lng = item.CInfoCommon.Lng == null ? 0 : item.CInfoCommon.Lng,
                     phone = item.CInfoCommon.Phone,
                     id = item.Id,
-                    rank = item.CInfoCommon.CRank,
-                    group = item.CInfoCommon.CGroup,
                     identityCard = item.CInfoCommon.IdentityCard,
                     businessLicense = item.CInfoCommon.BusinessLicense,
                     province = item.CInfoCommon.ProvinceName,
@@ -55,7 +53,7 @@ namespace NDHAPI.Controllers
             List<AgencyInfo> agencyResult = new List<AgencyInfo>();
 
             List<C1Info> c1List = new List<C1Info>();
-            c1List = db.C1Info.Where(p => p.IsActive == 1 && p.HaiBrandId == staff.BranchId).OrderByDescending(p => p.CInfoCommon.CGroup).ToList();
+            c1List = db.C1Info.Where(p => p.IsActive == 1 && p.HaiBrandId == staff.BranchId).ToList();
             foreach (var item in c1List)
             {
                 agencyResult.Add(new AgencyInfo()

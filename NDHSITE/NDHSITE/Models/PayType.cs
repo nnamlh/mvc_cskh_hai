@@ -7,23 +7,22 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NDHAPI.Models
+namespace NDHSITE.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class CheckInCalendarHistory
+    public partial class PayType
     {
+        public PayType()
+        {
+            this.HaiOrders = new HashSet<HaiOrder>();
+        }
+    
         public string Id { get; set; }
-        public Nullable<int> CMonth { get; set; }
-        public Nullable<int> CYear { get; set; }
-        public Nullable<int> CStatus { get; set; }
-        public Nullable<System.DateTime> CreateTime { get; set; }
-        public Nullable<System.DateTime> ModifyTime { get; set; }
-        public string StaffId { get; set; }
-        public string CType { get; set; }
+        public string Name { get; set; }
         public string Notes { get; set; }
     
-        public virtual HaiStaff HaiStaff { get; set; }
+        public virtual ICollection<HaiOrder> HaiOrders { get; set; }
     }
 }

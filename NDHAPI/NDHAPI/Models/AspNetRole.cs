@@ -14,12 +14,12 @@ namespace NDHAPI.Models
     
     public partial class AspNetRole
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AspNetRole()
         {
             this.FuncRoles = new HashSet<FuncRole>();
             this.AspNetUsers = new HashSet<AspNetUser>();
             this.MobileFunctions = new HashSet<MobileFunction>();
-            this.ProcessWorks = new HashSet<ProcessWork>();
         }
     
         public string Id { get; set; }
@@ -27,9 +27,11 @@ namespace NDHAPI.Models
         public string GroupRole { get; set; }
         public Nullable<int> ShowInfoRole { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FuncRole> FuncRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MobileFunction> MobileFunctions { get; set; }
-        public virtual ICollection<ProcessWork> ProcessWorks { get; set; }
     }
 }

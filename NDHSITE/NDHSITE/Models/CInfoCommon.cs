@@ -24,6 +24,7 @@ namespace NDHSITE.Models
             this.FarmerInfoes = new HashSet<FarmerInfo>();
             this.MSGPoints = new HashSet<MSGPoint>();
             this.SaveAgencyShopImages = new HashSet<SaveAgencyShopImage>();
+            this.HaiOrders = new HashSet<HaiOrder>();
         }
     
         public string Id { get; set; }
@@ -74,5 +75,6 @@ namespace NDHSITE.Models
         public virtual ICollection<FarmerInfo> FarmerInfoes { get; set; }
         public virtual ICollection<MSGPoint> MSGPoints { get; set; }
         public virtual ICollection<SaveAgencyShopImage> SaveAgencyShopImages { get; set; }
+        public virtual ICollection<HaiOrder> HaiOrders { get; set; }
     }
 }

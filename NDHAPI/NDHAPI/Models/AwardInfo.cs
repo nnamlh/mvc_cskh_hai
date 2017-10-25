@@ -14,6 +14,7 @@ namespace NDHAPI.Models
     
     public partial class AwardInfo
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AwardInfo()
         {
             this.EventInfoes = new HashSet<EventInfo>();
@@ -25,6 +26,7 @@ namespace NDHAPI.Models
         public string Thumbnail { get; set; }
         public Nullable<System.DateTime> CreateDate { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EventInfo> EventInfoes { get; set; }
     }
 }

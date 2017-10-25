@@ -21,6 +21,7 @@ namespace NDHSITE.Models
             this.ProductImages = new HashSet<ProductImage>();
             this.ProductSeris = new HashSet<ProductSeri>();
             this.PTrackings = new HashSet<PTracking>();
+            this.OrderProducts = new HashSet<OrderProduct>();
         }
     
         public string Id { get; set; }
@@ -52,11 +53,13 @@ namespace NDHSITE.Models
         public Nullable<double> Price { get; set; }
         public Nullable<double> PVat { get; set; }
         public string ShortDescibe { get; set; }
+        public Nullable<int> Quantity { get; set; }
     
         public virtual ICollection<EventProduct> EventProducts { get; set; }
         public virtual ICollection<MSGPoint> MSGPoints { get; set; }
         public virtual ICollection<ProductImage> ProductImages { get; set; }
         public virtual ICollection<ProductSeri> ProductSeris { get; set; }
         public virtual ICollection<PTracking> PTrackings { get; set; }
+        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }

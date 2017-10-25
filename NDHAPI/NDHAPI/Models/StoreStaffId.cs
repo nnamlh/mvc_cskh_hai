@@ -12,19 +12,10 @@ namespace NDHAPI.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ProcessWork
+    public partial class StoreStaffId
     {
-        public ProcessWork()
-        {
-            this.AspNetRoles = new HashSet<AspNetRole>();
-        }
-    
         public string Id { get; set; }
-        public string ProcessName { get; set; }
-        public string ProcessType { get; set; }
-        public Nullable<int> TimeRequire { get; set; }
-        public string Notes { get; set; }
-    
-        public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+        public Nullable<int> IsUser { get; set; }
+        public Nullable<int> CountNumber { get; set; }
     }
 }

@@ -2692,8 +2692,6 @@ namespace NDHAPI.Controllers
                 if (!checkLoginSession(paser.user, paser.token))
                     throw new Exception("Tài khoản bạn đã đăng nhập ở thiết bị khác.");
 
-
-
                 var cInfo = db.CInfoCommons.Where(p => p.UserLogin == paser.user).FirstOrDefault();
 
                 var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
@@ -2711,8 +2709,6 @@ namespace NDHAPI.Controllers
                     result.fullname = cInfo.CName;
                     result.phone = cInfo.Phone;
                     result.address = cInfo.AddressInfo;
-
-                    result.birthday = cInfo.BirthDay + "/" + cInfo.BirthMonth + "/" + cInfo.BirthYear;
                     result.user = paser.user;
                     result.area = cInfo.HaiArea.Name;
                 }
@@ -2724,8 +2720,6 @@ namespace NDHAPI.Controllers
                     result.address = staff.HaiBranch.Name;
                     result.area = staff.HaiBranch.HaiArea.Name;
                     result.user = paser.user;
-                    if (staff.BirthDay != null)
-                        result.birthday = staff.BirthDay.Value.ToShortDateString();
                 }
                 else
                     throw new Exception("Tài khoản không hợp lệ");
