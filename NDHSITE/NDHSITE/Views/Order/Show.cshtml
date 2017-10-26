@@ -1,18 +1,79 @@
-﻿@model PagedList.IPagedList<NDHSITE.Models.StaffCheckIn>
+﻿@model PagedList.IPagedList<NDHSITE.Models.HaiOrder>
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "Show";
 }
 
 <div class="page-header">
-    <h3 class="page-title">Danh sách nhân viên checkin</h3>
+    <h3 class="page-title">Danh sách đơn hàng</h3>
 
     <ol class="breadcrumb">
         <li><a href="/home">Trang chủ</a></li>
-        <li><a href="#">Nhân viên checkin</a></li>
+        <li><a href="#">Danh sách đơn hàng</a></li>
     </ol>
 </div> <!-- /.page-header -->
 
+<form>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label>Chi nhánh</label>
+                <input type="text" name="search" class="form-control" />
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label>Mã cấp 2</label>
+                <input type="text" name="agency" class="form-control" />
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <button class="btn btn-primary" type="submit">Xem</button>
+        </div>
+    </div>
 
 
+</form>
+<br />
+<br />
+<div class="portlet portlet-boxed">
+    <div class="portlet-body">
 
+        <div class="table-responsive">
+
+            <table class="table table-striped table-bordered thumbnail-table">
+                <thead>
+                    <tr>
+                        <th>Cấp 2</th>
+                        <th>Tình trạng</th>
+                        <th>Chi tiết</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach(var item in Model)
+                    {
+                        <tr>
+                            <td>@item.CInfoCommon.CCode <br />
+                                @item.CInfoCommon.CName    
+                            </td>
+                            <td>
+                                @item.OStatus.Name
+                            </td>
+                            <td>
+                                <span><strong>Hình thức giao:</strong> </span>@item.SType.Name<br />
+                                <span><strong>Thanh toán:</strong> </span>@item.PType.Name<br />
+                                <span><strong>Địa chỉ:</strong> </span>@item.ReceiveAddress<br />
+                                <span><strong>Điện thoại:</strong> </span>@item.ReceivePhone1<br />
+                            </td>
+                            <td>
+                                <a href="/order/detail/@item.Id" target="_blank">Chi tiết</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

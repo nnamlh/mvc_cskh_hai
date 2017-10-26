@@ -471,6 +471,26 @@
     <Property Name="Notes" Type="nvarchar" MaxLength="255" />
     <Property Name="Code" Type="nvarchar" MaxLength="20" />
   </EntityType>
+  <EntityType Name="HaiOrder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="OrderType" Type="nvarchar" MaxLength="128" />
+    <Property Name="PayType" Type="nvarchar" MaxLength="128" />
+    <Property Name="ShipType" Type="nvarchar" MaxLength="128" />
+    <Property Name="Agency" Type="nvarchar" MaxLength="128" />
+    <Property Name="ReceiveAddress" Type="nvarchar(max)" />
+    <Property Name="ReceivePhone1" Type="nvarchar" MaxLength="32" />
+    <Property Name="ReceivePhone2" Type="nvarchar" MaxLength="32" />
+    <Property Name="ExpectDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="OrderStatus" Type="nvarchar" MaxLength="128" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="Code" Type="nvarchar" MaxLength="128" />
+    <Property Name="PriceTotal" Type="float" />
+    <Property Name="BrachCode" Type="nvarchar" MaxLength="32" />
+  </EntityType>
   <EntityType Name="HaiPosition">
     <Key>
       <PropertyRef Name="Id" />
@@ -601,6 +621,63 @@
     <Property Name="CodeType" Type="nvarchar" MaxLength="32" />
     <Property Name="CreateTime" Type="datetime" />
   </EntityType>
+  <EntityType Name="OrderProduct">
+    <Key>
+      <PropertyRef Name="OrderId" />
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="OrderId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProductId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="PriceTotal" Type="float" />
+    <Property Name="PerPrice" Type="float" />
+    <Property Name="C1Id" Type="nvarchar" MaxLength="128" />
+    <Property Name="QuantityFinish" Type="int" />
+    <Property Name="ModifyDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="OrderStaff">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="OrderId" Type="nvarchar" MaxLength="128" />
+    <Property Name="StaffId" Type="nvarchar" MaxLength="128" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="ProcessId" Type="nvarchar" MaxLength="128" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="OrderStaffProcess">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="512" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="OrderStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="512" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="OrderType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="512" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="PayType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="512" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+  </EntityType>
   <EntityType Name="PHistory">
     <Key>
       <PropertyRef Name="Id" />
@@ -696,6 +773,7 @@
     <Property Name="Price" Type="float" />
     <Property Name="PVat" Type="float" />
     <Property Name="ShortDescibe" Type="nvarchar(max)" />
+    <Property Name="Quantity" Type="int" />
   </EntityType>
   <EntityType Name="ProductSeri">
     <Key>
@@ -790,6 +868,14 @@
     <Property Name="Name" Type="nvarchar" MaxLength="512" />
     <Property Name="Code" Type="nvarchar" MaxLength="64" />
     <Property Name="Content" Type="nvarchar" MaxLength="512" />
+  </EntityType>
+  <EntityType Name="ShipType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="512" />
+    <Property Name="Notes" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="SmsAccount">
     <Key>
@@ -888,6 +974,14 @@
     <Property Name="Acreage" Type="nvarchar" MaxLength="32" />
     <Property Name="STT" Type="nvarchar" MaxLength="128" />
     <Property Name="CreateDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserBranchPermiss">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="128" />
+    <Property Name="BranchCode" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="Ward">
     <Key>
@@ -1249,6 +1343,66 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__HaiOrder__Agency__17786E0C">
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="0..1" />
+    <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CInfoCommon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiOrder">
+        <PropertyRef Name="Agency" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiOrder__OrderS__186C9245">
+    <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="0..1" />
+    <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiOrder">
+        <PropertyRef Name="OrderStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiOrder__OrderT__149C0161">
+    <End Role="OrderType" Type="Self.OrderType" Multiplicity="0..1" />
+    <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiOrder">
+        <PropertyRef Name="OrderType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiOrder__PayTyp__1590259A">
+    <End Role="PayType" Type="Self.PayType" Multiplicity="0..1" />
+    <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PayType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiOrder">
+        <PropertyRef Name="PayType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiOrder__ShipTy__168449D3">
+    <End Role="ShipType" Type="Self.ShipType" Multiplicity="0..1" />
+    <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShipType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiOrder">
+        <PropertyRef Name="ShipType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__HaiStaff__Branch__24927208">
     <End Role="HaiBranch" Type="Self.HaiBranch" Multiplicity="0..1" />
     <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="*" />
@@ -1354,6 +1508,78 @@
       </Principal>
       <Dependent Role="MSGPointEvent">
         <PropertyRef Name="MSGPointId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderProd__Order__27AED5D5">
+    <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="1" />
+    <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderProduct">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderProd__Produ__28A2FA0E">
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="1" />
+    <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderProduct">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderProdu__C1Id__29971E47">
+    <End Role="C1Info" Type="Self.C1Info" Multiplicity="0..1" />
+    <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="C1Info">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderProduct">
+        <PropertyRef Name="C1Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderStaf__Order__2101D846">
+    <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="0..1" />
+    <End Role="OrderStaff" Type="Self.OrderStaff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderStaff">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderStaf__Proce__22EA20B8">
+    <End Role="OrderStaffProcess" Type="Self.OrderStaffProcess" Multiplicity="0..1" />
+    <End Role="OrderStaff" Type="Self.OrderStaff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderStaffProcess">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderStaff">
+        <PropertyRef Name="ProcessId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderStaf__Staff__21F5FC7F">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
+    <End Role="OrderStaff" Type="Self.OrderStaff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderStaff">
+        <PropertyRef Name="StaffId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1657,6 +1883,7 @@
     <EntitySet Name="HaiArea" EntityType="Self.HaiArea" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HaiBranch" EntityType="Self.HaiBranch" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HaiDepartment" EntityType="Self.HaiDepartment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HaiOrder" EntityType="Self.HaiOrder" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HaiPosition" EntityType="Self.HaiPosition" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HaiStaff" EntityType="Self.HaiStaff" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HappyBirthday" EntityType="Self.HappyBirthday" Schema="dbo" store:Type="Tables" />
@@ -1668,6 +1895,12 @@
     <EntitySet Name="MSGPointEvent" EntityType="Self.MSGPointEvent" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="NotificationTopic" EntityType="Self.NotificationTopic" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OldKeySave" EntityType="Self.OldKeySave" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderProduct" EntityType="Self.OrderProduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderStaff" EntityType="Self.OrderStaff" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderStaffProcess" EntityType="Self.OrderStaffProcess" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderType" EntityType="Self.OrderType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PayType" EntityType="Self.PayType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PHistory" EntityType="Self.PHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProcessHistory" EntityType="Self.ProcessHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProcessWithRole" EntityType="Self.ProcessWithRole" Schema="dbo" store:Type="Tables" />
@@ -1683,6 +1916,7 @@
     <EntitySet Name="SaveAgencyShopImage" EntityType="Self.SaveAgencyShopImage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SendSmsHistory" EntityType="Self.SendSmsHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ServerInfo" EntityType="Self.ServerInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShipType" EntityType="Self.ShipType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SmsAccount" EntityType="Self.SmsAccount" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SMSCode" EntityType="Self.SMSCode" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SMSHistory" EntityType="Self.SMSHistory" Schema="dbo" store:Type="Tables" />
@@ -1692,6 +1926,7 @@
     <EntitySet Name="StoreAgencyId" EntityType="Self.StoreAgencyId" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StoreStaffId" EntityType="Self.StoreStaffId" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TreeInfo" EntityType="Self.TreeInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserBranchPermiss" EntityType="Self.UserBranchPermiss" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ward" EntityType="Self.Ward" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__AgencySav__CInfo__6497E884" Association="Self.FK__AgencySav__CInfo__6497E884">
@@ -1806,6 +2041,26 @@
       <End Role="HaiArea" EntitySet="HaiArea" />
       <End Role="HaiBranch" EntitySet="HaiBranch" />
     </AssociationSet>
+    <AssociationSet Name="FK__HaiOrder__Agency__17786E0C" Association="Self.FK__HaiOrder__Agency__17786E0C">
+      <End Role="CInfoCommon" EntitySet="CInfoCommon" />
+      <End Role="HaiOrder" EntitySet="HaiOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiOrder__OrderS__186C9245" Association="Self.FK__HaiOrder__OrderS__186C9245">
+      <End Role="OrderStatus" EntitySet="OrderStatus" />
+      <End Role="HaiOrder" EntitySet="HaiOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiOrder__OrderT__149C0161" Association="Self.FK__HaiOrder__OrderT__149C0161">
+      <End Role="OrderType" EntitySet="OrderType" />
+      <End Role="HaiOrder" EntitySet="HaiOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiOrder__PayTyp__1590259A" Association="Self.FK__HaiOrder__PayTyp__1590259A">
+      <End Role="PayType" EntitySet="PayType" />
+      <End Role="HaiOrder" EntitySet="HaiOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiOrder__ShipTy__168449D3" Association="Self.FK__HaiOrder__ShipTy__168449D3">
+      <End Role="ShipType" EntitySet="ShipType" />
+      <End Role="HaiOrder" EntitySet="HaiOrder" />
+    </AssociationSet>
     <AssociationSet Name="FK__HaiStaff__Branch__24927208" Association="Self.FK__HaiStaff__Branch__24927208">
       <End Role="HaiBranch" EntitySet="HaiBranch" />
       <End Role="HaiStaff" EntitySet="HaiStaff" />
@@ -1841,6 +2096,30 @@
     <AssociationSet Name="FK__MSGPointE__MSGPo__5CC1BC92" Association="Self.FK__MSGPointE__MSGPo__5CC1BC92">
       <End Role="MSGPoint" EntitySet="MSGPoint" />
       <End Role="MSGPointEvent" EntitySet="MSGPointEvent" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderProd__Order__27AED5D5" Association="Self.FK__OrderProd__Order__27AED5D5">
+      <End Role="HaiOrder" EntitySet="HaiOrder" />
+      <End Role="OrderProduct" EntitySet="OrderProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderProd__Produ__28A2FA0E" Association="Self.FK__OrderProd__Produ__28A2FA0E">
+      <End Role="ProductInfo" EntitySet="ProductInfo" />
+      <End Role="OrderProduct" EntitySet="OrderProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderProdu__C1Id__29971E47" Association="Self.FK__OrderProdu__C1Id__29971E47">
+      <End Role="C1Info" EntitySet="C1Info" />
+      <End Role="OrderProduct" EntitySet="OrderProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderStaf__Order__2101D846" Association="Self.FK__OrderStaf__Order__2101D846">
+      <End Role="HaiOrder" EntitySet="HaiOrder" />
+      <End Role="OrderStaff" EntitySet="OrderStaff" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderStaf__Proce__22EA20B8" Association="Self.FK__OrderStaf__Proce__22EA20B8">
+      <End Role="OrderStaffProcess" EntitySet="OrderStaffProcess" />
+      <End Role="OrderStaff" EntitySet="OrderStaff" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderStaf__Staff__21F5FC7F" Association="Self.FK__OrderStaf__Staff__21F5FC7F">
+      <End Role="HaiStaff" EntitySet="HaiStaff" />
+      <End Role="OrderStaff" EntitySet="OrderStaff" />
     </AssociationSet>
     <AssociationSet Name="FK__ProcessWi__Proce__52CE3E04" Association="Self.FK__ProcessWi__Proce__52CE3E04">
       <End Role="ProcessWork" EntitySet="ProcessWork" />
