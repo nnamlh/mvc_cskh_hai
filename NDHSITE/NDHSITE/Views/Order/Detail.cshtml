@@ -12,7 +12,43 @@
     </ol>
 </div> <!-- /.page-header -->
 
+@if (Model.OrderStatus == "begin")
+{
+  <div class="row">
+      <div class="col-sm-6">
+          <form method="post" onsubmit="if(!confirm('Xác nhận đơn hàng?')){return false;}" action="/order/approve">
+              <input type="hidden" value="@Model.Id" name="id" />
+              <div class="form-group">
+                  <label>Ghi chú</label>
+                  <input type="text" name="notes" class="form-control" required />
+              </div>
+              <button type="submit" class="btn btn-primary">Xác nhận đơn hàng</button>
+          </form>
+      </div>
+  </div>
+}
+@if (Model.OrderStatus == "process")
+{
+   <div class="row">
+       <div class="col-sm-6">
+           <form method="post" onsubmit="if(!confirm('Kết thúc đơn hàng?')){return false;}" action="/order/finish">
+               <input type="hidden" value="@Model.Id" name="id" />
+               <div class="form-group">
+                   <label>Ghi chú</label>
+                   <input type="text" name="notes" class="form-control" required />
+               </div>
 
+               <button type="submit">Xác nhận đơn hàng</button>
+           </form>
+       </div>
+   </div>
+}
+@if(Model.OrderStatus == "finish")
+{
+    <h4>Đơn hàng đã hoàn thành</h4>
+}
+<br />
+<hr />
 <div class="row">
     <div class="col-sm-6">
         <div class="form-group">
@@ -107,7 +143,7 @@
                     @foreach (var item in Model.OrderProducts)
                     {
                         <tr>
-                            <td>@item.ProductInfo.PName</td>
+                            <td><a href="/ShowInfo/ShowProduct?type=4&search=@item.ProductInfo.PCode" target="_blank">@item.ProductInfo.PName</a></td>
                             <td>@item.Quantity (@item.ProductInfo.Unit)</td>
                             <td> @(item.PerPrice != null ? item.PerPrice.Value.ToString("C", NDHSITE.Util.Cultures.VietNam) : "0")  / @item.ProductInfo.Unit</td>
                             <td>
@@ -119,7 +155,7 @@
                                 <span><strong>Số lượng giao: </strong></span>@item.QuantityFinish<br />
                                 @if (Model.OrderStatus == "begin")
                                 {
-                                    <a href="/order/modifyproduct?order=@item.OrderId&product=@item.ProductId">Thay đổi</a>
+                                    <a href="/order/modifyproduct?order=@item.OrderId&product=@item.ProductId" target="_blank">Thay đổi</a>
                                 }
                             </td>
                         </tr>

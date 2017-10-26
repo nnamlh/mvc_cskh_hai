@@ -80,5 +80,93 @@ namespace NDHSITE.Controllers
 
             return View(check);
         }
+
+        [HttpPost]
+        public ActionResult ModifyProduct(string c1, string order, string product)
+        {
+            var check = db.OrderProducts.Where(p => p.OrderId == order && p.ProductId == product).FirstOrDefault();
+            if (check == null)
+                return RedirectToAction("error", "home");
+
+            var c1Check = db.C1Info.Where(p => p.Code == c1).FirstOrDefault();
+            if (c1Check != null)
+            {
+                check.C1Id = c1Check.Id;
+                db.Entry(check).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("detail", "order", new { id = order });
+        }
+
+        [HttpPost]
+        public ActionResult Approve(string id, string notes)
+        {
+            var check = db.HaiOrders.Find(id);
+            if (check == null)
+                return RedirectToAction("error", "home");
+
+            var staff = db.HaiStaffs.Where(p => p.UserLogin == User.Identity.Name).FirstOrDefault();
+
+            if (staff == null)
+                return RedirectToAction("error", "home");
+
+            if (check.OrderStatus == "begin")
+            {
+                check.OrderStatus = "process";
+                db.Entry(check).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+                // save
+                var saveProcess = new OrderStaff()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CreateTime = DateTime.Now,
+                    OrderId = id,
+                    ProcessId = "approve",
+                    StaffId = staff.Id,
+                    Notes = notes
+                };
+                db.OrderStaffs.Add(saveProcess);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("detail", "order", new { id = id });
+        }
+
+        [HttpPost]
+        public ActionResult Finish(string id, string notes)
+        {
+            var check = db.HaiOrders.Find(id);
+            if (check == null)
+                return RedirectToAction("error", "home");
+
+            var staff = db.HaiStaffs.Where(p => p.UserLogin == User.Identity.Name).FirstOrDefault();
+
+            if (staff == null)
+                return RedirectToAction("error", "home");
+
+            if (check.OrderStatus == "process")
+            {
+                check.OrderStatus = "finish";
+                db.Entry(check).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+                // save
+                var saveProcess = new OrderStaff()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CreateTime = DateTime.Now,
+                    OrderId = id,
+                    ProcessId = "finish",
+                    StaffId = staff.Id,
+                    Notes = notes
+                };
+                db.OrderStaffs.Add(saveProcess);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("detail", "order", new { id = id });
+        }
     }
 }
