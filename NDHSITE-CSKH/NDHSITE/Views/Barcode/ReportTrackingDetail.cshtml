@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "ReportTrackingDetail";
+}
+
+<div class="page-header">
+    <h3 class="page-title">Report Tracking</h3>
+
+    <ol class="breadcrumb">
+        <li><a href="/home">Trang chủ</a></li>
+        <li><a href="#">Report Tracking</a></li>
+    </ol>
+</div> <!-- /.page-header -->
+
+<div class="portlet portlet-boxed">
+    <div class="portlet-header">
+        <h4 class="portlet-title"></h4>
+    </div> <!-- /.portlet-header -->
+    <div class="portlet-body">
+        <form method="get" action="\barcode\ExcelReportTrackingDetail">
+            <div class="row">
+
+                <div class="col-sm-5">
+
+                    <div class="form-group">
+                        <label>Từ ngày</label>
+                        <input type="text" class="form-control datetime" name="DateFrom" />
+                    </div>
+
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Đến ngày</label>
+                        <input type="text" class="form-control datetime" name="DateTo" />
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <br />
+                    <button type="submit" class="btn btn-primary">Xem</button>
+                </div>
+
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+@section styles {
+    <link href="~/content/bootstrap-datetimepicker.min.css" rel="stylesheet">
+}
+
+
+
+
+@section scripts {
+    <!-- date bootstrap -->
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/scripts/moment-with-locales.min.js"></script>
+    <script src="~/scripts/bootstrap-datetimepicker.min.js"></script>
+
+    <script type="text/javascript">
+
+        $('.datetime').datetimepicker({
+            locale: 'vi',
+            format: 'DD/MM/YYYY',
+            defaultDate: new Date()
+        });
+
+    </script>
+}

@@ -124,6 +124,19 @@
     <Property Name="Thumbnail" Type="nvarchar" MaxLength="512" />
     <Property Name="CreateDate" Type="datetime" />
   </EntityType>
+  <EntityType Name="BarcodeChangeHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="128" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CaseCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="Barcode" Type="nvarchar" MaxLength="128" />
+    <Property Name="InAction" Type="int" />
+    <Property Name="WCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="WChange" Type="nvarchar" MaxLength="128" />
+  </EntityType>
   <EntityType Name="BarcodeHistory">
     <Key>
       <PropertyRef Name="Id" />
@@ -1338,6 +1351,7 @@
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AwardInfo" EntityType="Self.AwardInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BarcodeChangeHistory" EntityType="Self.BarcodeChangeHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BarcodeHistory" EntityType="Self.BarcodeHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BasicNotification" EntityType="Self.BasicNotification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="C1Info" EntityType="Self.C1Info" Schema="dbo" store:Type="Tables" />

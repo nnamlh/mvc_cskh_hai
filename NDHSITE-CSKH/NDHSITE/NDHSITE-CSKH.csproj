@@ -180,6 +180,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AgencyController.cs" />
+    <Compile Include="Controllers\BarcodeController.cs" />
     <Compile Include="Controllers\EventManageController.cs" />
     <Compile Include="Controllers\HaiReportController.cs" />
     <Compile Include="Controllers\HaiStaffController.cs" />
@@ -227,6 +228,9 @@
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AwardInfo.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BarcodeChangeHistory.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BarcodeHistory.cs">
@@ -448,6 +452,7 @@
     </Content>
     <Content Include="haiupload\barcodereport.xlsx" />
     <Content Include="haiupload\report-tracking-barcode.xlsx" />
+    <Content Include="haiupload\report-tracking-barcodev2.xlsx" />
     <None Include="Properties\PublishProfiles\home.pubxml" />
     <None Include="Properties\PublishProfiles\ndhsite.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -586,6 +591,9 @@
     <Content Include="Views\Tracking\ShowBarcodeHistory.cshtml" />
     <Content Include="Views\HaiReport\RemainProductDetail.cshtml" />
     <Content Include="Views\HaiReport\ReportTrackingDetail.cshtml" />
+    <Content Include="Views\Barcode\ChangeKho.cshtml" />
+    <Content Include="Views\Barcode\Delete.cshtml" />
+    <Content Include="Views\Barcode\ReportTrackingDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

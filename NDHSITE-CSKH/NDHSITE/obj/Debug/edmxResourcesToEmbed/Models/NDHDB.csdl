@@ -1490,6 +1490,7 @@
       <Parameter Name="DFrom" Mode="In" Type="String" />
       <Parameter Name="DTo" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="BarcodeChangeHistories" EntityType="NDHDBModel.BarcodeChangeHistory" />
   </EntityContainer>
   <ComplexType Name="report_event_agency_Result">
     <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -1536,4 +1537,17 @@
     <Property Type="Decimal" Name="Quantity" Nullable="true" Precision="5" Scale="2" />
     <Property Type="String" Name="staffhelp" Nullable="false" MaxLength="22" />
   </ComplexType>
+  <EntityType Name="BarcodeChangeHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="CaseCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Barcode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="InAction" Type="Int32" />
+    <Property Name="WCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="WChange" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

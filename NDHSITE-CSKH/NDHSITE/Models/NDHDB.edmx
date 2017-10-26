@@ -129,6 +129,19 @@
           <Property Name="Thumbnail" Type="nvarchar" MaxLength="512" />
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="BarcodeChangeHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="CaseCode" Type="nvarchar" MaxLength="128" />
+          <Property Name="Barcode" Type="nvarchar" MaxLength="128" />
+          <Property Name="InAction" Type="int" />
+          <Property Name="WCode" Type="nvarchar" MaxLength="128" />
+          <Property Name="WChange" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <EntityType Name="BarcodeHistory">
           <Key>
             <PropertyRef Name="Id" />
@@ -1343,6 +1356,7 @@
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AwardInfo" EntityType="Self.AwardInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BarcodeChangeHistory" EntityType="Self.BarcodeChangeHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BarcodeHistory" EntityType="Self.BarcodeHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BasicNotification" EntityType="Self.BasicNotification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="C1Info" EntityType="Self.C1Info" Schema="dbo" store:Type="Tables" />
@@ -3075,6 +3089,7 @@
             <Parameter Name="DFrom" Mode="In" Type="String" />
             <Parameter Name="DTo" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="BarcodeChangeHistories" EntityType="NDHDBModel.BarcodeChangeHistory" />
         </EntityContainer>
         <ComplexType Name="report_event_agency_Result">
           <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -3121,6 +3136,19 @@
           <Property Type="Decimal" Name="Quantity" Nullable="true" Precision="5" Scale="2" />
           <Property Type="String" Name="staffhelp" Nullable="false" MaxLength="22" />
         </ComplexType>
+        <EntityType Name="BarcodeChangeHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="CaseCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Barcode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="InAction" Type="Int32" />
+          <Property Name="WCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="WChange" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3969,6 +3997,20 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="BarcodeChangeHistories">
+            <EntityTypeMapping TypeName="NDHDBModel.BarcodeChangeHistory">
+              <MappingFragment StoreEntitySet="BarcodeChangeHistory">
+                <ScalarProperty Name="WChange" ColumnName="WChange" />
+                <ScalarProperty Name="WCode" ColumnName="WCode" />
+                <ScalarProperty Name="InAction" ColumnName="InAction" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="CaseCode" ColumnName="CaseCode" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

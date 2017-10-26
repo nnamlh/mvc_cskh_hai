@@ -103,6 +103,7 @@
         <AssociationConnector Association="NDHDBModel.MobileRole" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.StaffWithC1" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.StaffWithC2" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="NDHDBModel.BarcodeChangeHistory" Width="1.5" PointX="12.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

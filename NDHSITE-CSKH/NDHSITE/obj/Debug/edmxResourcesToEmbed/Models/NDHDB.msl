@@ -843,5 +843,19 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="BarcodeChangeHistories">
+      <EntityTypeMapping TypeName="NDHDBModel.BarcodeChangeHistory">
+        <MappingFragment StoreEntitySet="BarcodeChangeHistory">
+          <ScalarProperty Name="WChange" ColumnName="WChange" />
+          <ScalarProperty Name="WCode" ColumnName="WCode" />
+          <ScalarProperty Name="InAction" ColumnName="InAction" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="CaseCode" ColumnName="CaseCode" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

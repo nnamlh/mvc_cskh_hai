@@ -61,7 +61,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/14/2017 00:56:05</publishTime>
     </File>
     <File Include="bin/NDHSITE.dll">
-      <publishTime>10/23/2017 02:29:03</publishTime>
+      <publishTime>10/26/2017 13:34:03</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>07/14/2017 00:56:05</publishTime>
@@ -204,11 +204,14 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="haiupload/report-tracking-barcode.xlsx">
       <publishTime>10/23/2017 01:48:47</publishTime>
     </File>
+    <File Include="haiupload/report-tracking-barcodev2.xlsx">
+      <publishTime>10/26/2017 13:33:16</publishTime>
+    </File>
     <File Include="haiupload/warehouseremain.xlsx">
       <publishTime>07/14/2017 00:56:02</publishTime>
     </File>
     <File Include="Models/NDHDB.edmx.diagram">
-      <publishTime>07/14/2017 00:56:01</publishTime>
+      <publishTime>10/25/2017 17:27:29</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>10/22/2017 23:52:03</publishTime>
@@ -401,6 +404,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Views/Agency/ModifyFarmer.cshtml">
       <publishTime>07/14/2017 00:56:01</publishTime>
+    </File>
+    <File Include="Views/Barcode/ChangeKho.cshtml">
+      <publishTime>10/26/2017 09:59:02</publishTime>
+    </File>
+    <File Include="Views/Barcode/Delete.cshtml">
+      <publishTime>10/26/2017 10:34:17</publishTime>
+    </File>
+    <File Include="Views/Barcode/ReportTrackingDetail.cshtml">
+      <publishTime>10/26/2017 11:41:35</publishTime>
     </File>
     <File Include="Views/EventManage/AwardManage.cshtml">
       <publishTime>07/14/2017 00:56:01</publishTime>
@@ -628,7 +640,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/14/2017 00:56:02</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/23/2017 01:49:10</publishTime>
+      <publishTime>10/26/2017 13:34:06</publishTime>
     </File>
   </ItemGroup>
 </Project>
