@@ -101,6 +101,7 @@ namespace HAIAPI.Models
         public virtual DbSet<OrderType> OrderTypes { get; set; }
         public virtual DbSet<PayType> PayTypes { get; set; }
         public virtual DbSet<ShipType> ShipTypes { get; set; }
+        public virtual DbSet<OrderProductHistory> OrderProductHistories { get; set; }
     
         public virtual ObjectResult<checkin_calendartype_group_Result> checkin_calendartype_group(Nullable<int> month, Nullable<int> year, string staffId)
         {

@@ -94,4 +94,49 @@ namespace HAIAPI.Models
 
         public List<EventGift> gifts { get; set; }
     }
+
+
+    public class YourOrder
+    {
+        public string code { get; set; }
+
+        public string c2Code { get; set; }
+
+        public string c2Name { get; set; }
+
+
+        public string date { get; set; }
+
+        public string dateSuggest { get; set; }
+
+        public int productCount { get; set; }
+
+        public string address { get; set; }
+
+        public string phone { get; set; }
+
+        public string orderId { get; set; }
+
+    }
+
+    public class ProductOrderInfo
+    {
+        public string orderId { get; set; }
+
+        public string productId { get; set; }
+
+        public string productName { get; set; }
+
+        public int? quantityFinish { get; set; }
+
+        public int? quantity { get; set; }
+
+    }
+
+    public class ProductOrderHistory
+    {
+        public string date { get; set; }
+        public int? quantity { get; set; }
+        public string notes { get; set; }
+    }
 }

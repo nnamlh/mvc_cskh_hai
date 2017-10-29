@@ -19,6 +19,7 @@ namespace HAIAPI.Models
         {
             this.OrderProducts = new HashSet<OrderProduct>();
             this.OrderStaffs = new HashSet<OrderStaff>();
+            this.OrderProductHistories = new HashSet<OrderProductHistory>();
         }
     
         public string Id { get; set; }
@@ -36,6 +37,7 @@ namespace HAIAPI.Models
         public string Code { get; set; }
         public Nullable<double> PriceTotal { get; set; }
         public string BrachCode { get; set; }
+        public Nullable<int> OrderNumber { get; set; }
     
         public virtual CInfoCommon CInfoCommon { get; set; }
         public virtual OrderStatu OrderStt { get; set; }
@@ -46,5 +48,7 @@ namespace HAIAPI.Models
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderStaff> OrderStaffs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderProductHistory> OrderProductHistories { get; set; }
     }
 }

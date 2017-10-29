@@ -23,6 +23,7 @@ namespace HAIAPI.Models
             this.ProductSeris = new HashSet<ProductSeri>();
             this.PTrackings = new HashSet<PTracking>();
             this.OrderProducts = new HashSet<OrderProduct>();
+            this.OrderProductHistories = new HashSet<OrderProductHistory>();
         }
     
         public string Id { get; set; }
@@ -68,5 +69,7 @@ namespace HAIAPI.Models
         public virtual ICollection<PTracking> PTrackings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderProductHistory> OrderProductHistories { get; set; }
     }
 }

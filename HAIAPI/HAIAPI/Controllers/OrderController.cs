@@ -152,6 +152,11 @@ namespace HAIAPI.Controllers
                 if (cinfo == null)
                     throw new Exception("Sai thong tin khach hang");
 
+                // create code
+                int? number = GetOrderNumber(cinfo.BranchCode);
+                string code = cinfo.BranchCode + (100000 + number);
+
+
                 // tạo đơn hàng
                 var order = new HaiOrder()
                 {
@@ -166,7 +171,8 @@ namespace HAIAPI.Controllers
                     Notes = paser.notes,
                     ExpectDate = dateSuggest,
                     BrachCode = cinfo.BranchCode,
-                    Code = cinfo.CCode,
+                    Code = code,
+                    OrderNumber = number,
                     ReceivePhone1 = paser.phone
                 };
                 db.HaiOrders.Add(order);
@@ -242,6 +248,26 @@ namespace HAIAPI.Controllers
 
             return result;
         }
+
+        //
+        private int? GetOrderNumber(string branch)
+        {
+            //
+            int? number = db.HaiOrders.Where(p => p.BrachCode == branch).Max(p => p.OrderNumber);
+            if (number == null)
+                number = 0;
+
+            number++;
+
+           
+            return number;
+        }
+
+        // show danh sach don hang
+        #region lay danh sách don hang
+        //lam sao
+        
+        #endregion
 
     }
 }
