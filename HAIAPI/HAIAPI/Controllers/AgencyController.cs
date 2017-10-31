@@ -434,6 +434,47 @@ namespace HAIAPI.Controllers
         }
 
         #endregion
+        [HttpGet]
+        public List<AgencyInfo> GetC2C1(string user, string token)
+        {
+
+            var log = new MongoHistoryAPI()
+            {
+                APIUrl = "/api/agency/getc2c1",
+                CreateTime = DateTime.Now,
+                Sucess = 1
+            };
+            var result = new List<AgencyInfo>();
+            //   var requestContent = Request.Content.ReadAsStringAsync().Result;
+
+            try
+            {
+                //   var jsonserializer = new JavaScriptSerializer();
+                // var paser = jsonserializer.Deserialize<RequestInfo>(requestContent);
+
+                if (!mongoHelper.checkLoginSession(user, token))
+                    throw new Exception("Wrong token and user login!");
+
+                var c1Info = db.C1Info.Where(p => p.CInfoCommon.UserLogin == user).FirstOrDefault();
+
+                if (c1Info == null)
+                    throw new Exception("Sai thong tin");
+
+
+                result = GetListC2OfC1(c1Info.Code);
+
+            }
+            catch
+            {
+                result = new List<AgencyInfo>();
+            }
+
+            log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+            mongoHelper.createHistoryAPI(log);
+
+            return result;
+        }
+
 
 
         #region

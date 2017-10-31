@@ -118,7 +118,7 @@
 
                                     @foreach (var item in Model)
                                     {
-                                        <tr class="@(item.CInfoCommon.IsClock == 1?"warning":"")">
+                                        <tr class="@(item.IsActive == 0?"warning":"")">
                                             <td>
                                                 <span><strong class="semibold">Mã đại lý:</strong> @item.Code</span> <br />
                                                 <span><strong class="semibold">Chi nhánh:</strong> @item.HaiBranch.Name</span> <br />

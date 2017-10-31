@@ -413,6 +413,9 @@
     <Compile Include="Models\OrderProduct.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderProductHistory.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\OrderStaff.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>

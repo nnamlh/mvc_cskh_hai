@@ -1,0 +1,62 @@
+﻿@model NDHSITE.Models.OrderProduct
+@{
+    ViewBag.Title = "ModifyProduct";
+}
+
+<div class="page-header">
+    <h3 class="page-title">Chỉnh sửa đơn hàng</h3>
+
+    <ol class="breadcrumb">
+        <li><a href="/home">Trang chủ</a></li>
+        <li><a href="#">Chỉnh sửa đơn hàng</a></li>
+    </ol>
+</div> <!-- /.page-header -->
+
+<form method="post">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Sản phẩm</label>
+                <input class="form-control" value="@Model.ProductInfo.PName" disabled />
+            </div>
+            <div class="form-group">
+                <label>Số lượng mua</label>
+                <input class="form-control" value="@Model.Quantity" disabled/>
+            </div>
+            <input type="hidden" value="@Model.OrderId" name="order" />
+            <input type="hidden" value="@Model.ProductId" name="product" />
+            <div class="form-group">
+                <label>Cấp 1 nhận hàng</label>
+                <select class="form-control" name="c1">
+                    @foreach(var item in ViewBag.C1)
+                    {
+                        if (item.code == Model.C1Info.Code)
+                        {
+                            <option value="@item.code" selected>@item.code - @item.name</option>
+                        }
+                        else
+                        {
+                            <option value="@item.code" >@item.code - @item.name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Thành tiền/sản phẩm</label>
+                <input class="form-control" value="@(Model.PerPrice != null ? Model.PerPrice.Value.ToString("C", NDHSITE.Util.Cultures.VietNam) : "0")" disabled />
+            </div>
+            <div class="form-group">
+                <label>Tổng tiền</label>
+                <input class="form-control" value="@(Model.PriceTotal != null ? Model.PriceTotal.Value.ToString("C", NDHSITE.Util.Cultures.VietNam) : "0")" disabled />
+            </div>
+        </div>
+    </div>
+    
+
+</form>
+
+

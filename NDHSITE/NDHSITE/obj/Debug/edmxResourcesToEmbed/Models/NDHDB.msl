@@ -1123,6 +1123,7 @@
     <EntitySetMapping Name="HaiOrders">
       <EntityTypeMapping TypeName="NDHDBModel.HaiOrder">
         <MappingFragment StoreEntitySet="HaiOrder">
+          <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
           <ScalarProperty Name="BrachCode" ColumnName="BrachCode" />
           <ScalarProperty Name="PriceTotal" ColumnName="PriceTotal" />
           <ScalarProperty Name="Code" ColumnName="Code" />
@@ -1217,6 +1218,19 @@
         <MappingFragment StoreEntitySet="UserBranchPermiss">
           <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderProductHistories">
+      <EntityTypeMapping TypeName="NDHDBModel.OrderProductHistory">
+        <MappingFragment StoreEntitySet="OrderProductHistory">
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="UserAction" ColumnName="UserAction" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

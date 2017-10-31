@@ -22,6 +22,7 @@ namespace NDHSITE.Models
             this.ProductSeris = new HashSet<ProductSeri>();
             this.PTrackings = new HashSet<PTracking>();
             this.OrderProducts = new HashSet<OrderProduct>();
+            this.OrderProductHistories = new HashSet<OrderProductHistory>();
         }
     
         public string Id { get; set; }
@@ -61,5 +62,6 @@ namespace NDHSITE.Models
         public virtual ICollection<ProductSeri> ProductSeris { get; set; }
         public virtual ICollection<PTracking> PTrackings { get; set; }
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
+        public virtual ICollection<OrderProductHistory> OrderProductHistories { get; set; }
     }
 }

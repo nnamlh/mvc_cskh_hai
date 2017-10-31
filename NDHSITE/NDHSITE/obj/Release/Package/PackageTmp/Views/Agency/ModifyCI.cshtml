@@ -277,7 +277,7 @@
                             <div class="row">
                                 <div class="col-sm-5">
                                     <select class="form-control" name="Status">
-                                        @if (agency.CInfoCommon.IsClock == 1)
+                                        @if (agency.IsActive == 0)
                                         {
                                             <option value="2">Mở tài khoản</option>
                                                 <option value="0">Xóa tài khoản</option>

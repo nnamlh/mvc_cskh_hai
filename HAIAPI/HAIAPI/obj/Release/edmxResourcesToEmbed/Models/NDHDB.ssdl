@@ -457,6 +457,7 @@
     <Property Name="Code" Type="nvarchar" MaxLength="128" />
     <Property Name="PriceTotal" Type="float" />
     <Property Name="BrachCode" Type="nvarchar" MaxLength="32" />
+    <Property Name="OrderNumber" Type="int" />
   </EntityType>
   <EntityType Name="HaiPosition">
     <Key>
@@ -601,6 +602,18 @@
     <Property Name="C1Id" Type="nvarchar" MaxLength="128" />
     <Property Name="QuantityFinish" Type="int" />
     <Property Name="ModifyDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="OrderProductHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="OrderId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ProductId" Type="nvarchar" MaxLength="128" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UserAction" Type="nvarchar" MaxLength="128" />
+    <Property Name="Notes" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="OrderStaff">
     <Key>
@@ -1474,6 +1487,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__OrderProd__Order__38D961D7">
+    <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="0..1" />
+    <End Role="OrderProductHistory" Type="Self.OrderProductHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderProductHistory">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__OrderProd__Produ__28A2FA0E">
     <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="1" />
     <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
@@ -1482,6 +1507,18 @@
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="OrderProduct">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderProd__Produ__39CD8610">
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
+    <End Role="OrderProductHistory" Type="Self.OrderProductHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderProductHistory">
         <PropertyRef Name="ProductId" />
       </Dependent>
     </ReferentialConstraint>
@@ -1809,6 +1846,7 @@
     <EntitySet Name="NotificationTopic" EntityType="Self.NotificationTopic" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OldKeySave" EntityType="Self.OldKeySave" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderProduct" EntityType="Self.OrderProduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderProductHistory" EntityType="Self.OrderProductHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderStaff" EntityType="Self.OrderStaff" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderStaffProcess" EntityType="Self.OrderStaffProcess" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
@@ -2012,9 +2050,17 @@
       <End Role="HaiOrder" EntitySet="HaiOrder" />
       <End Role="OrderProduct" EntitySet="OrderProduct" />
     </AssociationSet>
+    <AssociationSet Name="FK__OrderProd__Order__38D961D7" Association="Self.FK__OrderProd__Order__38D961D7">
+      <End Role="HaiOrder" EntitySet="HaiOrder" />
+      <End Role="OrderProductHistory" EntitySet="OrderProductHistory" />
+    </AssociationSet>
     <AssociationSet Name="FK__OrderProd__Produ__28A2FA0E" Association="Self.FK__OrderProd__Produ__28A2FA0E">
       <End Role="ProductInfo" EntitySet="ProductInfo" />
       <End Role="OrderProduct" EntitySet="OrderProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderProd__Produ__39CD8610" Association="Self.FK__OrderProd__Produ__39CD8610">
+      <End Role="ProductInfo" EntitySet="ProductInfo" />
+      <End Role="OrderProductHistory" EntitySet="OrderProductHistory" />
     </AssociationSet>
     <AssociationSet Name="FK__OrderProdu__C1Id__29971E47" Association="Self.FK__OrderProdu__C1Id__29971E47">
       <End Role="C1Info" EntitySet="C1Info" />

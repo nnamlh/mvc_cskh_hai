@@ -37,24 +37,28 @@ namespace NDHSITE.Controllers
 
             var listCalendar = new List<CalendarInfo>();
 
-            if (!Utitl.CheckRoleAdmin(db, User.Identity.Name))
-            {
-                ViewBag.IsDisable = 1;
-                var checkStaff = db.HaiStaffs.Where(p => p.UserLogin == User.Identity.Name).FirstOrDefault();
 
-                if (checkStaff != null)
-                {
-                    branch = checkStaff.HaiBranch.Code;
-                }
-                else
-                {
-                    return RedirectToAction("error", "home");
-                }
-
-                ViewBag.ShowRole = 0;
-            } else
+            List<string> branches = new List<string>();
+            int permiss = Utitl.CheckRoleShowInfo(db, User.Identity.Name);
+            if (permiss == 2)
             {
-                ViewBag.ShowRole = 1;
+                branches = Utitl.GetBranchesPermiss(db, User.Identity.Name, false);
+            } else if (permiss == 1)
+            {
+                branches = Utitl.GetBranchesPermiss(db, User.Identity.Name, true);
+            }
+
+            if (!String.IsNullOrEmpty(branch))
+            {
+               
+                if (branches.Contains(branch))
+                {
+                    branches.Clear();
+                    branches.Add(branch);
+                } else
+                {
+                    branches.Clear();
+                }
             }
 
             ViewBag.Branch = branch;
@@ -62,10 +66,10 @@ namespace NDHSITE.Controllers
 
             if (status == -1)
             {
-                listCalendar = db.CalendarInfoes.Where(p => p.CMonth == month && p.CYear == year && p.HaiStaff.Code.Contains(staff) && p.HaiStaff.HaiBranch.Code.Contains(branch)).ToList();
+                listCalendar = db.CalendarInfoes.Where(p => p.CMonth == month && p.CYear == year && p.HaiStaff.Code.Contains(staff) &&  branches.Contains(p.HaiStaff.HaiBranch.Code)).ToList();
             } else
             {
-                listCalendar = db.CalendarInfoes.Where(p => p.CMonth == month && p.CYear == year && p.CStatus == status && p.HaiStaff.Code.Contains(staff) && p.HaiStaff.HaiBranch.Code.Contains(branch)).ToList();
+                listCalendar = db.CalendarInfoes.Where(p => p.CMonth == month && p.CYear == year && p.CStatus == status && p.HaiStaff.Code.Contains(staff) && branches.Contains(p.HaiStaff.HaiBranch.Code)).ToList();
             }
 
             return View(listCalendar.OrderBy(p => p.CStatus).ToPagedList(pageNumber, pageSize));

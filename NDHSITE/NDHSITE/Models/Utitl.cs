@@ -40,6 +40,37 @@ namespace NDHSITE.Models
             return Convert.ToInt32(role.ShowInfoRole);
         }
 
+        public static List<string> GetBranchesPermiss(NDHDBEntities db, string userName, bool isAll)
+        {
+
+            if (!isAll)
+            {
+                // lay ds chi nhanh co the xem
+                var branchPermiss = db.UserBranchPermisses.Where(p => p.UserName == userName).Select(p => p.BranchCode).ToList();
+
+                if (branchPermiss.Count() == 0)
+                {
+                    List<string> branches = new List<string>();
+                    var checkStaff = db.HaiStaffs.Where(p => p.UserLogin == userName).FirstOrDefault();
+
+                    if (checkStaff != null)
+                    {
+                        branches.Add(checkStaff.HaiBranch.Code);
+                    }
+
+                    return branches;
+                }
+
+                return branchPermiss;
+            }
+
+            // lay toan bo
+            var listBranch = db.HaiBranches.Select(p => p.Code).ToList();
+
+            return listBranch;
+
+        }
+
         public static bool CheckUser(NDHDBEntities db, string userName, string func, int isAll)
         {
 

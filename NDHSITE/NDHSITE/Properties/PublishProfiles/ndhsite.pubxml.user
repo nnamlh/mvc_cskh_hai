@@ -76,7 +76,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/08/2017 14:46:02</publishTime>
     </File>
     <File Include="bin/NDHSITE.dll">
-      <publishTime>10/21/2017 11:31:18</publishTime>
+      <publishTime>10/31/2017 10:22:10</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>09/23/2016 14:14:47</publishTime>
@@ -247,7 +247,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/05/2017 12:52:10</publishTime>
     </File>
     <File Include="Models/NDHDB.edmx.diagram">
-      <publishTime>10/09/2017 17:12:57</publishTime>
+      <publishTime>10/30/2017 08:52:36</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>09/11/2017 23:34:11</publishTime>
@@ -439,7 +439,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/31/2016 08:42:18</publishTime>
     </File>
     <File Include="Views/Agency/ManageCI.cshtml">
-      <publishTime>08/21/2017 14:07:53</publishTime>
+      <publishTime>10/30/2017 09:20:37</publishTime>
     </File>
     <File Include="Views/Agency/ManageCII.cshtml">
       <publishTime>10/06/2017 13:55:38</publishTime>
@@ -451,7 +451,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/31/2016 09:06:34</publishTime>
     </File>
     <File Include="Views/Agency/ModifyCI.cshtml">
-      <publishTime>08/21/2017 16:03:41</publishTime>
+      <publishTime>10/30/2017 09:21:50</publishTime>
     </File>
     <File Include="Views/Agency/ModifyCII.cshtml">
       <publishTime>10/09/2017 17:21:27</publishTime>
@@ -463,7 +463,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/25/2017 11:03:37</publishTime>
     </File>
     <File Include="Views/CheckIn/ShowCalendar.cshtml">
-      <publishTime>10/21/2017 11:21:27</publishTime>
+      <publishTime>10/31/2017 09:57:41</publishTime>
     </File>
     <File Include="Views/CheckIn/ShowCalendarDetail.cshtml">
       <publishTime>10/21/2017 11:23:41</publishTime>
@@ -591,6 +591,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/Notification/Show.cshtml">
       <publishTime>09/15/2017 16:04:25</publishTime>
     </File>
+    <File Include="Views/Order/Detail.cshtml">
+      <publishTime>10/31/2017 08:57:17</publishTime>
+    </File>
+    <File Include="Views/Order/ModifyProduct.cshtml">
+      <publishTime>10/27/2017 00:12:07</publishTime>
+    </File>
+    <File Include="Views/Order/Show.cshtml">
+      <publishTime>10/30/2017 08:53:51</publishTime>
+    </File>
     <File Include="Views/Product/CatProduct.cshtml">
       <publishTime>10/31/2016 10:48:05</publishTime>
     </File>
@@ -664,7 +673,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/26/2017 13:44:23</publishTime>
     </File>
     <File Include="Views/ShowInfo/ShowProduct.cshtml">
-      <publishTime>12/15/2016 20:01:11</publishTime>
+      <publishTime>10/27/2017 00:09:21</publishTime>
     </File>
     <File Include="Views/ShowInfo/ShowStaff.cshtml">
       <publishTime>06/13/2017 11:57:25</publishTime>
@@ -703,7 +712,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/23/2016 14:14:41</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>10/21/2017 11:24:47</publishTime>
+      <publishTime>10/30/2017 08:54:01</publishTime>
     </File>
   </ItemGroup>
 </Project>

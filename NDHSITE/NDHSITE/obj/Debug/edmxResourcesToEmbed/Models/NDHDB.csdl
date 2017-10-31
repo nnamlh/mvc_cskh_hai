@@ -1504,6 +1504,15 @@
       <End Role="OrderStaffProcess" EntitySet="OrderStaffProcesses" />
       <End Role="OrderStaff" EntitySet="OrderStaffs" />
     </AssociationSet>
+    <EntitySet Name="OrderProductHistories" EntityType="NDHDBModel.OrderProductHistory" />
+    <AssociationSet Name="FK__OrderProd__Order__38D961D7" Association="NDHDBModel.FK__OrderProd__Order__38D961D7">
+      <End Role="HaiOrder" EntitySet="HaiOrders" />
+      <End Role="OrderProductHistory" EntitySet="OrderProductHistories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderProd__Produ__39CD8610" Association="NDHDBModel.FK__OrderProd__Produ__39CD8610">
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+      <End Role="OrderProductHistory" EntitySet="OrderProductHistories" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="report_event_agency_Result">
     <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -1813,6 +1822,7 @@
     <Property Name="ShortDescibe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Quantity" Type="Int32" />
     <NavigationProperty Name="OrderProducts" Relationship="NDHDBModel.FK__OrderProd__Produ__28A2FA0E" FromRole="ProductInfo" ToRole="OrderProduct" />
+    <NavigationProperty Name="OrderProductHistories" Relationship="NDHDBModel.FK__OrderProd__Produ__39CD8610" FromRole="ProductInfo" ToRole="OrderProductHistory" />
   </EntityType>
   <Association Name="FK__EventProd__Produ__4EDDB18F">
     <End Type="NDHDBModel.ProductInfo" Role="ProductInfo" Multiplicity="1" />
@@ -2046,6 +2056,8 @@
     <NavigationProperty Name="SType" Relationship="NDHDBModel.FK__HaiOrder__ShipTy__168449D3" FromRole="HaiOrder" ToRole="ShipType" />
     <NavigationProperty Name="OrderProducts" Relationship="NDHDBModel.FK__OrderProd__Order__27AED5D5" FromRole="HaiOrder" ToRole="OrderProduct" />
     <NavigationProperty Name="OrderStaffs" Relationship="NDHDBModel.FK__OrderStaf__Order__2101D846" FromRole="HaiOrder" ToRole="OrderStaff" />
+    <Property Name="OrderNumber" Type="Int32" />
+    <NavigationProperty Name="OrderProductHistories" Relationship="NDHDBModel.FK__OrderProd__Order__38D961D7" FromRole="HaiOrder" ToRole="OrderProductHistory" />
   </EntityType>
   <EntityType Name="OrderProduct">
     <Key>
@@ -2260,6 +2272,44 @@
       </Principal>
       <Dependent Role="OrderStaff">
         <PropertyRef Name="ProcessId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="OrderProductHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="OrderId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProductId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserAction" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiOrder" Relationship="NDHDBModel.FK__OrderProd__Order__38D961D7" FromRole="OrderProductHistory" ToRole="HaiOrder" />
+    <NavigationProperty Name="ProductInfo" Relationship="NDHDBModel.FK__OrderProd__Produ__39CD8610" FromRole="OrderProductHistory" ToRole="ProductInfo" />
+  </EntityType>
+  <Association Name="FK__OrderProd__Order__38D961D7">
+    <End Type="NDHDBModel.HaiOrder" Role="HaiOrder" Multiplicity="0..1" />
+    <End Type="NDHDBModel.OrderProductHistory" Role="OrderProductHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderProductHistory">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderProd__Produ__39CD8610">
+    <End Type="NDHDBModel.ProductInfo" Role="ProductInfo" Multiplicity="0..1" />
+    <End Type="NDHDBModel.OrderProductHistory" Role="OrderProductHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderProductHistory">
+        <PropertyRef Name="ProductId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -106,6 +106,7 @@ namespace NDHSITE.Models
         public virtual DbSet<PayType> PayTypes { get; set; }
         public virtual DbSet<ShipType> ShipTypes { get; set; }
         public virtual DbSet<UserBranchPermiss> UserBranchPermisses { get; set; }
+        public virtual DbSet<OrderProductHistory> OrderProductHistories { get; set; }
     
         public virtual ObjectResult<report_event_agency_Result> report_event_agency(string cType, string eventId)
         {

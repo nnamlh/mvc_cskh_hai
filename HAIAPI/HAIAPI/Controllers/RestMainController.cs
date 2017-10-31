@@ -205,11 +205,6 @@ namespace HAIAPI.Controllers
 
                 result.function = GetUserFunction(paser.user, "main");
 
-                if (paser.isUpdate == 1)
-                {
-                    result.products = GetProductCodeInfo();
-                    result.productGroups = GetGroupProduct();
-                }
 
                 var cinfo = db.CInfoCommons.Where(p => p.UserLogin == paser.user).FirstOrDefault();
 
@@ -221,10 +216,30 @@ namespace HAIAPI.Controllers
                 if (cinfo.CType == "CII")
                     result.type = "Đại lý cấp 2";
                 else if (cinfo.CType == "CI")
+                {
                     result.type = "Đại lý cấp 1";
+                   
+                }
                 else
                     result.type = "Chưa xác nhận";
 
+
+
+                if (paser.isUpdate == 1)
+                {
+                    result.products = GetProductCodeInfo();
+                    result.productGroups = GetGroupProduct();
+                }
+
+
+                if (cinfo.CType == "CI")
+                {
+                    result.c2 = GetListC2OfC1(cinfo.CCode);
+                }
+                else
+                {
+                    result.c2 = new List<AgencyInfo>();
+                }
 
                 var notiReg = db.RegFirebases.Where(p => p.UserLogin == paser.user).FirstOrDefault();
 
@@ -264,6 +279,42 @@ namespace HAIAPI.Controllers
             return result;
         }
 
+        protected List<AgencyInfo> GetListC2OfC1(string c1Code)
+        {
+            List<AgencyInfo> agencyResult = new List<AgencyInfo>();
+            var data = db.C2C1.Where(p => p.C1Code == c1Code).ToList();
+
+            foreach(var item in data)
+            {
+
+                var c2 = db.C2Info.Where(p => p.Code == item.C2Code).FirstOrDefault();
+
+                if (c2 != null)
+                {
+                    agencyResult.Add(new AgencyInfo()
+                    {
+                        code = c2.Code,
+                        name = c2.StoreName,
+                        type = "CII",
+                        deputy = c2.Deputy,
+                        address = c2.CInfoCommon.AddressInfo,
+                        lat = c2.CInfoCommon.Lat == null ? 0 : c2.CInfoCommon.Lat,
+                        lng = c2.CInfoCommon.Lng == null ? 0 : c2.CInfoCommon.Lng,
+                        phone = c2.CInfoCommon.Phone,
+                        id = item.Id,
+                        identityCard = c2.CInfoCommon.IdentityCard,
+                        businessLicense = c2.CInfoCommon.BusinessLicense,
+                        province = c2.CInfoCommon.ProvinceName,
+                        district = c2.CInfoCommon.DistrictName,
+                        taxCode = c2.CInfoCommon.TaxCode,
+                        haibranch = c2.CInfoCommon.BranchCode
+                    });
+                }
+            }
+
+            return agencyResult;
+
+        }
 
         protected List<ProductInfoResult> GetProductCodeInfo()
         {
