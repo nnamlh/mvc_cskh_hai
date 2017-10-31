@@ -129,7 +129,7 @@ namespace HAIAPI.Util
             var collection = db.GetCollection<MongoNotificationHistory>("NotificationHistory");
             // var builder = Builders<BsonDocument>.Filter;
             // var filter = new BsonDocument();
-            var filter = Builders<MongoNotificationHistory>.Filter.Gt("GuiId", id);
+            var filter = Builders<MongoNotificationHistory>.Filter.Eq("GuiId", id);
 
             var info = collection.Find(filter).FirstOrDefault();
 

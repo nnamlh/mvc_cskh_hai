@@ -123,8 +123,8 @@ namespace HAIAPI.Controllers
                 var paser = jsonserializer.Deserialize<OrderInfoRequest>(requestContent);
                 log.Content = new JavaScriptSerializer().Serialize(paser);
 
-                if (!mongoHelper.checkLoginSession(paser.user, paser.token))
-                    throw new Exception("Wrong token and user login!");
+               // if (!mongoHelper.checkLoginSession(paser.user, paser.token))
+                  //  throw new Exception("Wrong token and user login!");
                    
 
                 DateTime dateSuggest = DateTime.ParseExact(paser.timeSuggest, "d/M/yyyy", null);

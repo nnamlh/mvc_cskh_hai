@@ -81,9 +81,8 @@ namespace HAIAPI.Controllers
                         orders.Add(yourOrder);
                     }
 
-                    result.orders = orders;
                 }
-
+                result.orders = orders;
             }
             catch (Exception e)
             {
@@ -127,7 +126,16 @@ namespace HAIAPI.Controllers
                         productId = item.ProductId,
                         productName = item.ProductInfo.PName,
                         quantity = item.Quantity,
-                        quantityFinish = item.QuantityFinish
+                        quantityFinish = item.QuantityFinish,
+                        c1Address = item.C1Info.CInfoCommon.AddressInfo,
+                        c1Code = item.C1Info.Code,
+                        c1Id = item.C1Id,
+                        c1Phone = item.C1Info.CInfoCommon.Phone,
+                        c1Store = item.C1Info.StoreName,
+                        perPrice = item.PerPrice,
+                        price = item.PriceTotal,
+                        quantityBox = item.ProductInfo.Quantity,
+                        unit = item.ProductInfo.Unit
                     });
                 }
             }
@@ -160,7 +168,9 @@ namespace HAIAPI.Controllers
                 {
                     date = item.CreateDate.Value.ToString("dd/MM/yyyy"),
                     quantity = item.Quantity,
-                    notes = item.Notes
+                    notes = item.Notes,
+                    quantityBox = item.ProductInfo.Quantity,
+                    unit = item.ProductInfo.Unit
                 });
             }
 

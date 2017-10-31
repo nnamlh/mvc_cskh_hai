@@ -131,6 +131,23 @@ namespace HAIAPI.Models
 
         public int? quantity { get; set; }
 
+        public string c1Id { get; set; }
+
+        public string c1Code { get; set; }
+
+        public string c1Store { get; set; }
+
+        public string c1Address { get; set; }
+
+        public string c1Phone { get; set; }
+
+        public double? price { get; set; }
+
+        public double? perPrice { get; set; }
+
+        public string unit { get; set; }
+
+        public int? quantityBox { get; set; }
     }
 
     public class ProductOrderHistory
@@ -138,5 +155,8 @@ namespace HAIAPI.Models
         public string date { get; set; }
         public int? quantity { get; set; }
         public string notes { get; set; }
+        public string unit { get; set; }
+
+        public int? quantityBox { get; set; }
     }
 }
