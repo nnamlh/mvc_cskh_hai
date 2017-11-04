@@ -117,6 +117,8 @@ namespace HAIAPI.Models
 
         public string orderId { get; set; }
 
+        public string status { get; set; }
+
     }
 
     public class ProductOrderInfo

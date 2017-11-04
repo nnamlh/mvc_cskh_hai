@@ -225,11 +225,13 @@
     <Compile Include="Controllers\CheckInController.cs" />
     <Compile Include="Controllers\DecorController.cs" />
     <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\ManageOrderController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\RestMainController.cs" />
     <Compile Include="Controllers\ShowInfoController.cs" />
+    <Compile Include="Controllers\StaffOrderController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

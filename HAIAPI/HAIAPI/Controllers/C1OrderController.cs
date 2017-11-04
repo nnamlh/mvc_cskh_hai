@@ -221,7 +221,7 @@ namespace HAIAPI.Controllers
                 int? quantityRemain = orderProduct.Quantity - orderProduct.QuantityFinish;
 
                 if (quantityRemain < paser.quantity)
-                    throw new Exception("Sai thong tin");
+                    throw new Exception("Số lượng giao vượt quá");
 
                 orderProduct.QuantityFinish = orderProduct.QuantityFinish + paser.quantity;
 
