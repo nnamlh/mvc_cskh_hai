@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using PagedList;
 using System.Web.Script.Serialization;
 
 namespace HAIAPI.Controllers
@@ -53,7 +54,7 @@ namespace HAIAPI.Controllers
                 List<string> data = new List<string>();
                 if (String.IsNullOrEmpty(paser.c2Code))
                 {
-                    data = c1Info.OrderProducts.Where(p => p.HaiOrder.OrderStatus == paser.status).OrderByDescending(p => p.HaiOrder.CreateDate).Select(p => p.OrderId).Distinct().ToList();
+                    data = c1Info.OrderProducts.Where(p => p.HaiOrder.OrderStatus == paser.status).OrderByDescending(p => p.HaiOrder.CreateDate).Select(p => p.OrderId).Distinct().ToPagedList(pageNumber, pageSize).ToList();
                 }
 
                 List<YourOrder> orders = new List<YourOrder>();
@@ -82,7 +83,6 @@ namespace HAIAPI.Controllers
                     }
 
                 }
-                result.orders = orders;
             }
             catch (Exception e)
             {

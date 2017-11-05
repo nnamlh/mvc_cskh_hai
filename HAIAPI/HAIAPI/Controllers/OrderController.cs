@@ -123,8 +123,8 @@ namespace HAIAPI.Controllers
                 var paser = jsonserializer.Deserialize<OrderInfoRequest>(requestContent);
                 log.Content = new JavaScriptSerializer().Serialize(paser);
 
-               // if (!mongoHelper.checkLoginSession(paser.user, paser.token))
-                  //  throw new Exception("Wrong token and user login!");
+                if (!mongoHelper.checkLoginSession(paser.user, paser.token))
+                   throw new Exception("Wrong token and user login!");
                    
 
                 DateTime dateSuggest = DateTime.ParseExact(paser.timeSuggest, "d/M/yyyy", null);
@@ -133,7 +133,7 @@ namespace HAIAPI.Controllers
 
                 HaiStaff staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
 
-                string orderType = "";
+                string orderType = "order";
                 if (paser.inCheckIn == 1)
                     orderType = "checkinorder";
                 else if (paser.inCheckIn == 0)

@@ -15,6 +15,11 @@ namespace HAIAPI.Models
         public int? page { get; set; }
     }
 
+    public class C2OrderRequest : RequestInfo
+    {
+        public int? page { get; set; }
+    }
+
     public class YourOrderResult : ResultInfo
     {
         public List<YourOrder> orders { get; set; }

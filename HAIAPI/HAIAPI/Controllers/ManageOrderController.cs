@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using PagedList;
 using System.Web.Script.Serialization;
 
 namespace HAIAPI.Controllers
@@ -14,12 +15,12 @@ namespace HAIAPI.Controllers
 
         //
         [HttpPost]
-        public YourOrderResult Show()
+        public YourOrderResult ShowOrderC2()
         {
             //
             var log = new MongoHistoryAPI()
             {
-                APIUrl = "/api/stafforder/show",
+                APIUrl = "/api/manageorder/showorderc2",
                 CreateTime = DateTime.Now,
                 Sucess = 1
             };
@@ -34,16 +35,16 @@ namespace HAIAPI.Controllers
             {
                 var requestContent = Request.Content.ReadAsStringAsync().Result;
                 var jsonserializer = new JavaScriptSerializer();
-                var paser = jsonserializer.Deserialize<StaffOrderRequest>(requestContent);
+                var paser = jsonserializer.Deserialize<C2OrderRequest>(requestContent);
                 log.Content = new JavaScriptSerializer().Serialize(paser);
 
                 if (!mongoHelper.checkLoginSession(paser.user, paser.token))
                     throw new Exception("Wrong token and user login!");
 
                 // 
-                var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+                var cInfo = db.C2Info.Where(p => p.CInfoCommon.UserLogin == paser.user).FirstOrDefault();
 
-                if (staff == null)
+                if (cInfo == null)
                     throw new Exception("Sai thong tin");
 
 
@@ -52,10 +53,8 @@ namespace HAIAPI.Controllers
 
 
                 List<HaiOrder> data = new List<HaiOrder>();
-                if (String.IsNullOrEmpty(paser.c2Code))
-                {
-                    data = staff.OrderStaffs.Where(p => p.HaiOrder.Agency.Contains(paser.c2Code) && p.ProcessId == "create").Select(p => p.HaiOrder).OrderByDescending(p => p.CreateDate).ToPagedList(pageNumber, pageSize).ToList();
-                }
+
+                data = db.HaiOrders.Where(p => p.Agency.Contains(cInfo.Code)).OrderByDescending(p => p.CreateDate).ToPagedList(pageNumber, pageSize).ToList();
 
                 List<YourOrder> orders = new List<YourOrder>();
 
