@@ -8,6 +8,7 @@ using HAIAPI.Models;
 using PagedList;
 using System.Web.Script.Serialization;
 using System.Globalization;
+using HAIAPI.Util;
 
 namespace HAIAPI.Controllers
 {

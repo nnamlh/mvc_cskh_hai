@@ -123,8 +123,8 @@ namespace HAIAPI.Controllers
                 var paser = jsonserializer.Deserialize<OrderInfoRequest>(requestContent);
                 log.Content = new JavaScriptSerializer().Serialize(paser);
 
-                if (!mongoHelper.checkLoginSession(paser.user, paser.token))
-                   throw new Exception("Wrong token and user login!");
+              //  if (!mongoHelper.checkLoginSession(paser.user, paser.token))
+                 //  throw new Exception("Wrong token and user login!");
                    
 
                 DateTime dateSuggest = DateTime.ParseExact(paser.timeSuggest, "d/M/yyyy", null);
@@ -161,7 +161,7 @@ namespace HAIAPI.Controllers
                 var order = new HaiOrder()
                 {
                     Id = Guid.NewGuid().ToString(),
-                    OrderType = "checkinorder",
+                    OrderType = orderType,
                     ShipType = paser.shipType,
                     PayType = paser.payType,
                     Agency = cinfo.Id,
@@ -210,7 +210,6 @@ namespace HAIAPI.Controllers
                 {
                     db.HaiOrders.Remove(order);
                     db.SaveChanges();
-
                     throw new Exception("Sai thong tin san pham (ma san pham) hoac so luong");
                 } else
                 {
@@ -233,6 +232,13 @@ namespace HAIAPI.Controllers
 
                 db.OrderStaffs.Add(orderStaff);
                 db.SaveChanges();
+
+                // gui thong bao
+                // nhan vien
+                HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Bạn vừa tạo đơn hàng cho " + cinfo.CName, staff.UserLogin, db, mongoHelper);
+
+                // c2
+                HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Bạn vừa tạo đơn hàng bởi nhân viên Công ty H.A.I " + staff.FullName + "(" + staff.Code+ ")", staff.UserLogin, db, mongoHelper);
 
             }
             catch (Exception e)

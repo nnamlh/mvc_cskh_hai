@@ -19,7 +19,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/31/2017 15:54:45</publishTime>
     </File>
     <File Include="bin/HAIAPI.dll">
-      <publishTime>11/05/2017 17:27:27</publishTime>
+      <publishTime>11/06/2017 16:55:38</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
       <publishTime>08/31/2017 15:54:47</publishTime>

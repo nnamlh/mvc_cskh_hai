@@ -13,7 +13,7 @@ namespace NDHSITE.Controllers
     {
 
         NDHDBEntities db = new NDHDBEntities();
-
+        MongoHelper mongoHelp = new MongoHelper();
         // GET: Order
         public ActionResult Show( int? page, string agency = "", string search = "")
         {
@@ -129,6 +129,26 @@ namespace NDHSITE.Controllers
                 };
                 db.OrderStaffs.Add(saveProcess);
                 db.SaveChanges();
+
+
+                // thong bao
+                // nhan vien thi truong
+                var staffCreateOrder = check.OrderStaffs.Where(p => p.ProcessId == "create").FirstOrDefault();
+
+                if(staffCreateOrder != null)
+                {
+                    Utitl.Send("Đơn hàng " + check.Code, "Đơn hàng đã được xác nhận, cửa hàng đang chuẩn bị giao hàng", staffCreateOrder.HaiStaff.UserLogin, db, mongoHelp);
+                }
+
+                // c2
+                Utitl.Send("Đơn hàng " + check.Code, "Đơn hàng của " + check.CInfoCommon.CName + " đã được xác nhận", check.CInfoCommon.UserLogin, db, mongoHelp);
+
+                // c1
+                foreach(var item in check.OrderProducts)
+                {
+                    Utitl.Send("Đơn hàng " + check.Code, "Đơn hàng của " + check.CInfoCommon.CName + " đã được xác nhận, vào phần đơn hàng để xem chi tiết", staffCreateOrder.HaiStaff.UserLogin, db, mongoHelp);
+                }
+
             }
 
             return RedirectToAction("detail", "order", new { id = id });

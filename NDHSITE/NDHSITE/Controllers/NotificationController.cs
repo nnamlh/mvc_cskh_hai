@@ -103,7 +103,7 @@ namespace NDHSITE.Controllers
 
             return RedirectToAction("send", "notification", new { msg = "Đã gửi " + notification.GuiId });
         }
-        [Authorize]
+
         private string sendRequestFirebase(string json)
         {
             string url = @"https://fcm.googleapis.com/fcm/send";

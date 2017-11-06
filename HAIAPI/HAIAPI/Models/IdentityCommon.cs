@@ -12,11 +12,6 @@ namespace HAIAPI.Models
     }
 
 
-    public class HaiUtil
-    {
-        public static string HostName = "http://dms.nongduochai.vn/";
-    }
-
     public class ResultInfo
     {
         public string id { get; set; }

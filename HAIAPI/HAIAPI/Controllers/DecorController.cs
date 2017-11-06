@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using HAIAPI.Models;
 using System.Web.Script.Serialization;
+using HAIAPI.Util;
 
 namespace HAIAPI.Controllers
 {

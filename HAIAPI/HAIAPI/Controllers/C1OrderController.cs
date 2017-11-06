@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Web.Http;
 using PagedList;
 using System.Web.Script.Serialization;
+using HAIAPI.Util;
 
 namespace HAIAPI.Controllers
 {
@@ -217,6 +218,11 @@ namespace HAIAPI.Controllers
                 if (orderProduct == null)
                     throw new Exception("Sai thong tin");
 
+                if (orderProduct.HaiOrder.OrderStatus != "process")
+                {
+                    throw new Exception("Đơn hàng không thể cập nhật");
+                }
+
                 // check quantity
                 int? quantityRemain = orderProduct.Quantity - orderProduct.QuantityFinish;
 
@@ -242,6 +248,20 @@ namespace HAIAPI.Controllers
 
                 db.OrderProductHistories.Add(history);
                 db.SaveChanges();
+
+                // gui thong bao
+                var order = db.HaiOrders.Find(paser.orderId);
+                if (order != null)
+                {
+                    var staff = order.OrderStaffs.Where(p => p.ProcessId == "create").FirstOrDefault();
+                    // nhan vien
+                    if(staff != null)
+                        HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Cửa hàng " + c1Info.StoreName + " vừa giao hàng", staff.HaiStaff.UserLogin, db, mongoHelper);
+
+                    // c2
+                    HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Cửa hàng " + c1Info.StoreName + " vừa giao hàng", order.CInfoCommon.UserLogin, db, mongoHelper);
+                }
+               
 
             }
             catch (Exception e)

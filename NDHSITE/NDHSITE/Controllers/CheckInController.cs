@@ -417,7 +417,7 @@ namespace NDHSITE.Controllers
                 }
 
             }
-            catch(Exception e)
+            catch
             {
                 return RedirectToAction("error", "home");
             }
