@@ -14,38 +14,49 @@
 
 @if (Model.OrderStatus == "begin")
 {
-  <div class="row">
-      <div class="col-sm-6">
-          <form method="post" onsubmit="if(!confirm('Xác nhận đơn hàng?')){return false;}" action="/order/approve">
-              <input type="hidden" value="@Model.Id" name="id" />
-              <div class="form-group">
-                  <label>Ghi chú</label>
-                  <input type="text" name="notes" class="form-control" required />
-              </div>
-              <button type="submit" class="btn btn-primary">Xác nhận đơn hàng</button>
-          </form>
-      </div>
-  </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <form method="post" onsubmit="if(!confirm('Xác nhận đơn hàng?')){return false;}" action="/order/approve">
+                <input type="hidden" value="@Model.Id" name="id" />
+                <div class="form-group">
+                    <label>Ghi chú</label>
+                    <input type="text" name="notes" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Thao tác</label>
+                    <select class="form-control" name="status">
+                        <option value="1">Xác nhận đơn hàng</option>
+                        <option value="0">Hủy đơn hàng</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Thực hiện</button>
+            </form>
+        </div>
+    </div>
 }
 @if (Model.OrderStatus == "process")
 {
-   <div class="row">
-       <div class="col-sm-6">
-           <form method="post" onsubmit="if(!confirm('Kết thúc đơn hàng?')){return false;}" action="/order/finish">
-               <input type="hidden" value="@Model.Id" name="id" />
-               <div class="form-group">
-                   <label>Ghi chú</label>
-                   <input type="text" name="notes" class="form-control" required />
-               </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <form method="post" onsubmit="if(!confirm('Kết thúc đơn hàng?')){return false;}" action="/order/finish">
+                <input type="hidden" value="@Model.Id" name="id" />
+                <div class="form-group">
+                    <label>Ghi chú</label>
+                    <input type="text" name="notes" class="form-control" required />
+                </div>
 
-               <button type="submit" class="btn btn-primary">Kết thúc đơn hàng</button>
-           </form>
-       </div>
-   </div>
+                <button type="submit" class="btn btn-primary">Kết thúc đơn hàng</button>
+            </form>
+        </div>
+    </div>
 }
-@if(Model.OrderStatus == "finish")
+@if (Model.OrderStatus == "finish")
 {
     <h4>Đơn hàng đã hoàn thành</h4>
+}
+@if (Model.OrderStatus == "cancel")
+{
+    <h4>Đơn hàng đã hủy</h4>
 }
 <br />
 <hr />
@@ -147,7 +158,7 @@
                     {
                         <tr>
                             <td><a href="/ShowInfo/ShowProduct?type=4&search=@item.ProductInfo.PCode" target="_blank">@item.ProductInfo.PName</a></td>
-                            <td>@item.Quantity (@item.ProductInfo.Unit)</td>
+                            <td>@NDHSITE.Util.HaiUtil.ConvertProductQuantityText(item.ProductInfo.Quantity, item.Quantity, item.ProductInfo.Unit)</td>
                             <td> @(item.PerPrice != null ? item.PerPrice.Value.ToString("C", NDHSITE.Util.Cultures.VietNam) : "0")  / @item.ProductInfo.Unit</td>
                             <td>
                                 @(item.PriceTotal != null ? item.PriceTotal.Value.ToString("C", NDHSITE.Util.Cultures.VietNam) : "0")
@@ -155,10 +166,14 @@
                             <td>
                                 <span><strong>Cấp 1: </strong></span>@item.C1Info.Code <br />
                                 <span><strong>Tên cấp 1: </strong></span>@item.C1Info.StoreName <br />
-                                <span><strong>Số lượng giao: </strong></span>@item.QuantityFinish<br />
+                                <span><strong>Số lượng giao: </strong></span>@NDHSITE.Util.HaiUtil.ConvertProductQuantityText(item.ProductInfo.Quantity, item.QuantityFinish, item.ProductInfo.Unit)<br />
                                 @if (Model.OrderStatus == "begin")
                                 {
                                     <a href="/order/modifyproduct?order=@item.OrderId&product=@item.ProductId" target="_blank">Thay đổi</a>
+                                }
+                                else if (Model.OrderStatus == "process")
+                                {
+                                    <a href="javascript:updateProduct('@item.ProductId','@item.OrderId', '@item.ProductInfo.PName')">Thay đổi</a>
                                 }
                             </td>
                         </tr>
@@ -176,17 +191,18 @@
                         <th><strong>Ngày thực hiện</strong></th>
                         <th><strong>Nhân viên</strong></th>
                         <th><strong>Đơn vị</strong></th>
+                        <th>#</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach(var item in Model.OrderStaffs)
+                    @foreach (var item in Model.OrderStaffs)
                     {
                         <tr>
                             <td>@item.OrderStaffProcess.Name</td>
                             <td>@item.CreateTime</td>
                             <td>@item.HaiStaff.FullName - @item.HaiStaff.Code</td>
                             <td>@item.HaiStaff.HaiBranch.Code</td>
-                            
+                            <td>@item.Notes</td>
                         </tr>
                     }
                 </tbody>
@@ -194,3 +210,58 @@
         </fieldset>
     </div>
 </div>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Cập nhật giao hàng</h4>
+            </div>
+            <form method="post" action="/order/updatedelivery">
+                <input type="hidden" name="orderId" id="orderId" />
+                <input type="hidden" name="productId" id="productId" />
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Sản phẩm</label>
+                        <input type="text" name="productName" class="form-control" id="productName" />
+                    </div>
+                    <div class="form-group">
+                        <label>Số lượng thùng</label>
+                        <input type="number" name="can" class="form-control"  value="0"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Số lượng lẻ</label>
+                        <input type="number" name="box" class="form-control" value="0" />
+                    </div>
+                </div>
+                
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default" >Cập nhật</button>
+                </div>
+            </form>
+          
+        </div>
+
+    </div>
+</div>
+
+@section scripts {
+    
+    <script type="text/javascript">
+        function updateProduct(productId, orderId, pName) {
+            console.log("da vao");
+            $('#orderId').val(orderId);
+            $('#productId').val(productId);
+            $('#productName').val(pName);
+            $('#myModal').modal('show');
+        }
+    </script>
+
+
+}

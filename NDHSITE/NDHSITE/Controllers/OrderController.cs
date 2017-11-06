@@ -15,7 +15,7 @@ namespace NDHSITE.Controllers
         NDHDBEntities db = new NDHDBEntities();
         MongoHelper mongoHelp = new MongoHelper();
         // GET: Order
-        public ActionResult Show( int? page, string agency = "", string search = "")
+        public ActionResult Show(int? page, string agency = "", string search = "")
         {
             int permit = Utitl.CheckRoleShowInfo(db, User.Identity.Name);
             //
@@ -28,7 +28,7 @@ namespace NDHSITE.Controllers
             if (permit == 1)
             {
                 // xem toan bo
-               data = db.HaiOrders.Where(p => p.Agency.Contains(agency) && (p.BrachCode.Contains(search))).ToList();
+                data = db.HaiOrders.Where(p => p.Agency.Contains(agency) && (p.BrachCode.Contains(search))).ToList();
 
             }
             else if (permit == 2)
@@ -60,9 +60,9 @@ namespace NDHSITE.Controllers
             if (check == null)
                 return RedirectToAction("error", "home");
 
-            var c1C2= db.C2C1.Where(p => p.C2Code == check.HaiOrder.CInfoCommon.CCode).ToList();
+            var c1C2 = db.C2C1.Where(p => p.C2Code == check.HaiOrder.CInfoCommon.CCode).ToList();
             List<CommonInfo> c1List = new List<CommonInfo>();
-            foreach(var item in c1C2)
+            foreach (var item in c1C2)
             {
                 var c1Check = db.C1Info.Where(p => p.Code == item.C1Code).FirstOrDefault();
                 if (c1Check != null)
@@ -100,7 +100,7 @@ namespace NDHSITE.Controllers
         }
 
         [HttpPost]
-        public ActionResult Approve(string id, string notes)
+        public ActionResult Approve(string id, string notes, int status)
         {
             var check = db.HaiOrders.Find(id);
             if (check == null)
@@ -111,7 +111,9 @@ namespace NDHSITE.Controllers
             if (staff == null)
                 return RedirectToAction("error", "home");
 
-            if (check.OrderStatus == "begin")
+         
+
+            if (check.OrderStatus == "begin" && status == 1) 
             {
                 check.OrderStatus = "process";
                 db.Entry(check).State = System.Data.Entity.EntityState.Modified;
@@ -135,7 +137,7 @@ namespace NDHSITE.Controllers
                 // nhan vien thi truong
                 var staffCreateOrder = check.OrderStaffs.Where(p => p.ProcessId == "create").FirstOrDefault();
 
-                if(staffCreateOrder != null)
+                if (staffCreateOrder != null)
                 {
                     Utitl.Send("Đơn hàng " + check.Code, "Đơn hàng đã được xác nhận, cửa hàng đang chuẩn bị giao hàng", staffCreateOrder.HaiStaff.UserLogin, db, mongoHelp);
                 }
@@ -144,10 +146,47 @@ namespace NDHSITE.Controllers
                 Utitl.Send("Đơn hàng " + check.Code, "Đơn hàng của " + check.CInfoCommon.CName + " đã được xác nhận", check.CInfoCommon.UserLogin, db, mongoHelp);
 
                 // c1
-                foreach(var item in check.OrderProducts)
+                var c1CodeTemp = "";
+                foreach (var item in check.OrderProducts)
                 {
-                    Utitl.Send("Đơn hàng " + check.Code, "Đơn hàng của " + check.CInfoCommon.CName + " đã được xác nhận, vào phần đơn hàng để xem chi tiết", staffCreateOrder.HaiStaff.UserLogin, db, mongoHelp);
+                    if (c1CodeTemp != item.C1Info.Code)
+                    {
+                        Utitl.Send("Đơn hàng " + check.Code, "Đơn hàng của " + check.CInfoCommon.CName + " đã được xác nhận, vào phần đơn hàng để xem chi tiết", staffCreateOrder.HaiStaff.UserLogin, db, mongoHelp);
+                        c1CodeTemp = item.C1Info.Code;
+                    }
                 }
+
+            } else if (check.OrderStatus == "begin" && status == 0)
+            {
+                check.OrderStatus = "cancel";
+                db.Entry(check).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+                // save
+                var saveProcess = new OrderStaff()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CreateTime = DateTime.Now,
+                    OrderId = id,
+                    ProcessId = "cancel",
+                    StaffId = staff.Id,
+                    Notes = notes
+                };
+                db.OrderStaffs.Add(saveProcess);
+                db.SaveChanges();
+
+
+                // thong bao
+                // nhan vien thi truong
+                var staffCreateOrder = check.OrderStaffs.Where(p => p.ProcessId == "create").FirstOrDefault();
+
+                if (staffCreateOrder != null)
+                {
+                    Utitl.Send("Đơn hàng " + check.Code, "Đơn hàng của " + check.CInfoCommon.CName + " đã hủy vì " + notes, staffCreateOrder.HaiStaff.UserLogin, db, mongoHelp);
+                }
+
+                // c2
+                Utitl.Send("Đơn hàng " + check.Code, "Đơn hàng đã bị hủy vì " + notes , check.CInfoCommon.UserLogin, db, mongoHelp);
 
             }
 
@@ -184,9 +223,80 @@ namespace NDHSITE.Controllers
                 };
                 db.OrderStaffs.Add(saveProcess);
                 db.SaveChanges();
+
+                // thong bao
+                // nhan vien thi truong
+                var staffCreateOrder = check.OrderStaffs.Where(p => p.ProcessId == "create").FirstOrDefault();
+
+                if (staffCreateOrder != null)
+                {
+                    Utitl.Send("Đơn hàng " + check.Code, "Đơn hàng đã được xác nhận, cửa hàng đang chuẩn bị giao hàng", staffCreateOrder.HaiStaff.UserLogin, db, mongoHelp);
+                }
+
+                // c2
+                Utitl.Send("Đơn hàng " + check.Code, "Đơn hàng của " + check.CInfoCommon.CName + " đã được xác nhận", check.CInfoCommon.UserLogin, db, mongoHelp);
+
+                // c1
+                var c1CodeTemp = "";
+                foreach (var item in check.OrderProducts)
+                {
+                    if (c1CodeTemp != item.C1Info.Code)
+                    {
+                        Utitl.Send("Đơn hàng " + check.Code, "Đơn hàng của " + check.CInfoCommon.CName + " đã được xác nhận, vào phần đơn hàng để xem chi tiết", staffCreateOrder.HaiStaff.UserLogin, db, mongoHelp);
+                        c1CodeTemp = item.C1Info.Code;
+                    }
+                }
             }
 
             return RedirectToAction("detail", "order", new { id = id });
+        }
+
+        [HttpPost]
+        public ActionResult UpdateDelivery(string orderId, string productId, int? can, int? box)
+        {
+            if (can == null)
+                can = 0;
+
+            if (box == null)
+                box = 0;
+
+            var orderProduct = db.OrderProducts.Where(p => p.ProductId == productId && p.OrderId == orderId).FirstOrDefault();
+
+            if (orderProduct == null)
+                return RedirectToAction("error", "home");
+
+            // check quantity
+            int? quantityRemain = orderProduct.Quantity - orderProduct.QuantityFinish;
+
+            var quantity = box + orderProduct.ProductInfo.Quantity * can;
+
+            if (quantityRemain > quantity)
+            {
+                orderProduct.QuantityFinish = orderProduct.QuantityFinish + quantity;
+
+                db.Entry(orderProduct).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+                // save history
+
+                var history = new OrderProductHistory()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CreateDate = DateTime.Now,
+                    Notes = "Nhan vien cong ty cap nhat",
+                    OrderId = orderProduct.OrderId,
+                    ProductId = orderProduct.ProductId,
+                    Quantity =  quantity
+                };
+
+                db.OrderProductHistories.Add(history);
+                db.SaveChanges();
+            }
+    
+
+           
+
+            return RedirectToAction("detail", "order", new { id = orderId });
         }
     }
 }
