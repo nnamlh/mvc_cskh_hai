@@ -277,7 +277,7 @@ namespace NDHAPI.Models
     {
 
         public ImportAction(NDHDBEntities db, WavehouseInfo wareAction, string user, WavehouseInfo waveReceie)
-            : base(db, wareAction, user, waveReceie)
+            : base( db, wareAction, user, waveReceie)
         {
 
         }
@@ -397,7 +397,14 @@ namespace NDHAPI.Models
 
                 if (!wareLastImport.WareReceive.Contains(wareActionInfo.wType))
                 {
-                    history.Messenge = "Sản phẩm không thể nhập kho";
+                    if (wareActionInfo.wType == "CII")
+                    {
+                        history.Messenge = "Mã đã được sử dụng";
+                    } else
+                    {
+                        history.Messenge = "Sản phẩm không thể nhập kho";
+                    }
+                   
                     return history;
                 }
 

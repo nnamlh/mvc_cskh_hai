@@ -236,6 +236,9 @@
     <Compile Include="Models\BarcodeHistory.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BarcodeNotPermiss.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BasicNotification.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -453,6 +456,7 @@
     <Content Include="haiupload\barcodereport.xlsx" />
     <Content Include="haiupload\report-tracking-barcode.xlsx" />
     <Content Include="haiupload\report-tracking-barcodev2.xlsx" />
+    <Content Include="haiupload\barcode-not-permiss.xlsx" />
     <None Include="Properties\PublishProfiles\home.pubxml" />
     <None Include="Properties\PublishProfiles\ndhsite.pubxml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -594,6 +598,7 @@
     <Content Include="Views\Barcode\ChangeKho.cshtml" />
     <Content Include="Views\Barcode\Delete.cshtml" />
     <Content Include="Views\Barcode\ReportTrackingDetail.cshtml" />
+    <Content Include="Views\Barcode\BarcodeNotPermiss.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

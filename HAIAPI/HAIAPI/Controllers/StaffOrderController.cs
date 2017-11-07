@@ -51,10 +51,8 @@ namespace HAIAPI.Controllers
 
 
                 List<HaiOrder> data = new List<HaiOrder>();
-                if (String.IsNullOrEmpty(paser.c2Code))
-                {
-                    data = staff.OrderStaffs.Where(p => p.HaiOrder.Agency.Contains(paser.c2Code) && p.ProcessId == "create").Select(p => p.HaiOrder).OrderByDescending(p => p.CreateDate).ToPagedList(pageNumber, pageSize).ToList();
-                }
+
+                data = staff.OrderStaffs.Where(p => p.HaiOrder.CInfoCommon.CCode.Contains(paser.c2Code) && p.ProcessId == "create").Select(p => p.HaiOrder).OrderByDescending(p => p.CreateDate).ToPagedList(pageNumber, pageSize).ToList();
 
                 List<YourOrder> orders = new List<YourOrder>();
 

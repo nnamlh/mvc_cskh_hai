@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="NDHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="NDHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AgencySavePoint">
           <Key>
             <PropertyRef Name="EventId" />
@@ -153,6 +153,20 @@
           <Property Name="WareRelativeName" Type="nvarchar(max)" />
           <Property Name="ProductCode" Type="nvarchar" MaxLength="32" />
           <Property Name="ProductName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="BarcodeNotPermiss">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Barcode" Type="nvarchar" MaxLength="128" />
+          <Property Name="CaseCode" Type="nvarchar" MaxLength="128" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="512" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UserUpload" Type="nvarchar" MaxLength="128" />
+          <Property Name="BranchCode" Type="nvarchar" MaxLength="128" />
+          <Property Name="ProductName" Type="nvarchar(max)" />
+          <Property Name="ProductBarcode" Type="nvarchar" MaxLength="32" />
         </EntityType>
         <EntityType Name="BasicNotification">
           <Key>
@@ -1344,6 +1358,7 @@
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AwardInfo" EntityType="Self.AwardInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BarcodeHistory" EntityType="Self.BarcodeHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BarcodeNotPermiss" EntityType="Self.BarcodeNotPermiss" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BasicNotification" EntityType="Self.BasicNotification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="C1Info" EntityType="Self.C1Info" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="C2Info" EntityType="Self.C2Info" Schema="dbo" store:Type="Tables" />
@@ -1583,8 +1598,7 @@
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NDHDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -3080,7 +3094,22 @@
             <End Role="HaiStaff" EntitySet="HaiStaffs" />
             <End Role="C2Info" EntitySet="C2Info" />
           </AssociationSet>
+          <EntitySet Name="BarcodeNotPermisses" EntityType="NDHDBModel.BarcodeNotPermiss" />
         </EntityContainer>
+        <EntityType Name="BarcodeNotPermiss">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Barcode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CaseCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UserUpload" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="BranchCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductBarcode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3888,6 +3917,21 @@
               <ScalarProperty Name="Id" ColumnName="C2Id" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="BarcodeNotPermisses">
+            <EntityTypeMapping TypeName="NDHDBModel.BarcodeNotPermiss">
+              <MappingFragment StoreEntitySet="BarcodeNotPermiss">
+                <ScalarProperty Name="ProductBarcode" ColumnName="ProductBarcode" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="UserUpload" ColumnName="UserUpload" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="CaseCode" ColumnName="CaseCode" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -83,5 +83,6 @@ namespace NDHAPI.Models
         public virtual DbSet<TreeInfo> TreeInfoes { get; set; }
         public virtual DbSet<Ward> Wards { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
+        public virtual DbSet<BarcodeNotPermiss> BarcodeNotPermisses { get; set; }
     }
 }

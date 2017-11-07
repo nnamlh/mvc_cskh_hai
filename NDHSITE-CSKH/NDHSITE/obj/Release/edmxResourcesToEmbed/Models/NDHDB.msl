@@ -857,5 +857,20 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="BarcodeNotPermisses">
+      <EntityTypeMapping TypeName="NDHDBModel.BarcodeNotPermiss">
+        <MappingFragment StoreEntitySet="BarcodeNotPermiss">
+          <ScalarProperty Name="ProductBarcode" ColumnName="ProductBarcode" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+          <ScalarProperty Name="UserUpload" ColumnName="UserUpload" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CaseCode" ColumnName="CaseCode" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

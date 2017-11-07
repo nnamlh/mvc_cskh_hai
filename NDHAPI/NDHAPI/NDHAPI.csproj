@@ -244,6 +244,9 @@
     <Compile Include="Models\BarcodeHistory.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BarcodeNotPermiss.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BasicNotification.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>

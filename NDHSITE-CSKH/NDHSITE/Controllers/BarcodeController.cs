@@ -7,6 +7,7 @@ using NDHSITE.Models;
 using OfficeOpenXml;
 using System.IO;
 using System.Data.Entity;
+using PagedList;
 
 namespace NDHSITE.Controllers
 {
@@ -89,7 +90,7 @@ namespace NDHSITE.Controllers
                             foreach (var item in barcodeHistory)
                             {
                                 db.BarcodeHistories.Remove(item);
-                            
+
                             }
                             db.SaveChanges();
 
@@ -160,7 +161,8 @@ namespace NDHSITE.Controllers
                     {
                         wtype = "B";
                         wname = checkWcode.Name;
-                    }  else
+                    }
+                    else
                     {
                         var cinfo = db.CInfoCommons.Where(p => p.CCode == wNew).FirstOrDefault();
                         if (cinfo != null)
@@ -182,7 +184,7 @@ namespace NDHSITE.Controllers
 
                             var pHistory = db.PHistories.Where(p => p.CaseCode == caseCode && p.WCode == wOld).ToList();
 
-                            foreach(var item in pHistory)
+                            foreach (var item in pHistory)
                             {
                                 item.WCode = wcode;
                                 item.WType = wtype;
@@ -192,7 +194,7 @@ namespace NDHSITE.Controllers
                             }
 
                             var pTracking = db.PTrackings.Where(p => p.CaseCode == caseCode && p.WCode == wOld).ToList();
-                            foreach(var item in pTracking)
+                            foreach (var item in pTracking)
                             {
                                 item.WCode = wcode;
                                 item.WType = wtype;
@@ -203,7 +205,7 @@ namespace NDHSITE.Controllers
 
                             var barcodeHistory = db.BarcodeHistories.Where(p => p.CaseCode == caseCode && p.WareHouse == wOld).ToList();
 
-                            foreach(var item in barcodeHistory)
+                            foreach (var item in barcodeHistory)
                             {
                                 item.WareHouse = wcode;
                                 item.WareHouseName = wname;
@@ -250,7 +252,7 @@ namespace NDHSITE.Controllers
                 }
             }
 
-            return RedirectToAction("changekho", "barcode", new { msg = "Hoàn thành"});
+            return RedirectToAction("changekho", "barcode", new { msg = "Hoàn thành" });
         }
 
         private ProductInfo GetProduct(string barcode)
@@ -291,7 +293,7 @@ namespace NDHSITE.Controllers
         public ActionResult ExcelReportTrackingDetail(string DateTo, string DateFrom)
         {
 
-            if (!Utitl.CheckUser(db, User.Identity.Name, "Barcode",0))
+            if (!Utitl.CheckUser(db, User.Identity.Name, "Barcode", 0))
                 return RedirectToAction("relogin", "home");
 
             List<string> dsB5 = new List<string>();
@@ -333,7 +335,7 @@ namespace NDHSITE.Controllers
                         // get all tracking
                         string caseCode = allBarcode[i];
                         var trackingInfo = db.PTrackings.Where(p => p.CaseCode == caseCode).ToList();
-                        var history = db.BarcodeHistories.Where(p => p.CaseCode == caseCode && p.IsSuccess == 1 ).ToList();
+                        var history = db.BarcodeHistories.Where(p => p.CaseCode == caseCode && p.IsSuccess == 1).ToList();
 
                         // kho
                         var kho = trackingInfo.Where(p => p.WType == "W").FirstOrDefault();
@@ -344,10 +346,11 @@ namespace NDHSITE.Controllers
                             worksheet.Cells[i + 5, 1].Value = kho.CaseCode;
                             worksheet.Cells[i + 5, 2].Value = kho.ProductInfo.PName;
 
-                            if(kho.ImportTime == null)
+                            if (kho.ImportTime == null)
                             {
                                 worksheet.Cells[i + 5, 3].Value = "CHƯA NHẬP KHO";
-                            } else
+                            }
+                            else
                             {
                                 worksheet.Cells[i + 5, 3].Value = kho.ImportTime;
                             }
@@ -364,13 +367,13 @@ namespace NDHSITE.Controllers
 
                                 // tim kho nhan
                                 var barcodeHistory = history.Where(p => p.PStatus == "XK" && p.WareHouse == kho.WCode).FirstOrDefault();
-                                if(barcodeHistory != null)
+                                if (barcodeHistory != null)
                                 {
                                     worksheet.Cells[i + 5, 6].Value = barcodeHistory.WareRelative;
                                 }
                             }
 
-                           
+
                         }
 
                         // chi nhanh
@@ -387,7 +390,7 @@ namespace NDHSITE.Controllers
                             {
                                 //worksheet.Cells[i + 4, 7].Value = chiNhanh.ExportTime;
                                 var barcodeHistory = history.Where(p => p.PStatus == "XK" && p.WareHouse == chiNhanh.WCode).FirstOrDefault();
-                                if(barcodeHistory != null)
+                                if (barcodeHistory != null)
                                 {
                                     // kiem tra co phai B5
                                     if (dsB5.Contains(barcodeHistory.WareRelative))
@@ -397,7 +400,9 @@ namespace NDHSITE.Controllers
                                         worksheet.Cells[i + 5, 8].Value = chiNhanh.WCode;
                                         worksheet.Cells[i + 5, 9].Value = barcodeHistory.WareRelative;
                                         worksheet.Cells[i + 5, 10].Value = barcodeHistory.WareRelativeName;
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         worksheet.Cells[i + 5, 11].Value = chiNhanh.ExportTime;
                                         worksheet.Cells[i + 5, 12].Value = chiNhanh.WCode;
                                         worksheet.Cells[i + 5, 13].Value = barcodeHistory.WareRelative;
@@ -449,5 +454,108 @@ namespace NDHSITE.Controllers
         }
 
 
+        // add barcode not permit
+        public ActionResult BarcodeNotPermiss(int? page, string barcode = "")
+        {
+
+            // get list barcode not permiss
+            int pageSize = 100;
+            int pageNumber = (page ?? 1);
+
+            ViewBag.Barcode = barcode;
+
+            ViewBag.Branch = db.HaiBranches.ToList();
+
+            var barcodes = db.BarcodeNotPermisses.Where(p => p.Barcode.Contains(barcode)).OrderByDescending(p => p.CreateTime).ToPagedList(pageNumber, pageSize);
+
+            return View(barcodes);
+        }
+
+        public ActionResult DeleteBarcodeNotPermiss(string barcode)
+        {
+            if (!String.IsNullOrEmpty(barcode) && barcode.Length == 17)
+            {
+                var caseCode = barcode.Substring(0, 15);
+
+                var check = db.BarcodeNotPermisses.Where(p => p.CaseCode == caseCode).FirstOrDefault();
+
+                if(check != null)
+                {
+                    db.BarcodeNotPermisses.Remove(check);
+                    db.SaveChanges();
+                }
+            }
+
+            return RedirectToAction("BarcodeNotPermiss", "Barcode");
+
+        }
+
+        [HttpPost]
+        public ActionResult BarcodeNotPermiss(string branch, HttpPostedFileBase files)
+        {
+
+            if (files != null && files.ContentLength > 0)
+            {
+                string extension = System.IO.Path.GetExtension(files.FileName);
+                if (extension.Equals(".xlsx") || extension.Equals(".xls"))
+                {
+                    string fileSave = "excel_" + DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
+
+                    string path = Server.MapPath("~/temp/" + fileSave);
+
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+
+                    files.SaveAs(path);
+                    FileInfo newFile = new FileInfo(path);
+                    var package = new ExcelPackage(newFile);
+                    ExcelWorksheet sheet = package.Workbook.Worksheets[1];
+
+                    int totalRows = sheet.Dimension.End.Row;
+                    int totalCols = sheet.Dimension.End.Column;
+
+                    for (int i = 2; i <= totalRows; i++)
+                    {
+                        string barcode = Convert.ToString(sheet.Cells[i, 1].Value);
+                        string notes = Convert.ToString(sheet.Cells[i, 2].Value);
+                        if (!String.IsNullOrEmpty(barcode) && barcode.Length == 17)
+                        {
+                            var caseCode = barcode.Substring(0, 15);
+                            string productCode = barcode.Substring(8, 2);
+
+                            var product = db.ProductInfoes.Where(p => p.Barcode == productCode).FirstOrDefault();
+
+                            var check = db.BarcodeNotPermisses.Where(p => p.CaseCode == caseCode).FirstOrDefault();
+
+                            if (check == null)
+                            {
+                                var save = new BarcodeNotPermiss()
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    Barcode = barcode,
+                                    CaseCode = caseCode,
+                                    CreateTime = DateTime.Now,
+                                    BranchCode = branch,
+                                    Notes = notes,
+                                    ProductBarcode = productCode,
+                                    UserUpload = User.Identity.Name
+                                };
+
+                                if (product != null)
+                                    save.ProductName = product.PName;
+
+                                db.BarcodeNotPermisses.Add(save);
+                                db.SaveChanges();
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            return RedirectToAction("BarcodeNotPermiss", "Barcode");
+        }
     }
 }

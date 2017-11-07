@@ -84,6 +84,7 @@ namespace NDHSITE.Models
         public virtual DbSet<Ward> Wards { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
         public virtual DbSet<BarcodeChangeHistory> BarcodeChangeHistories { get; set; }
+        public virtual DbSet<BarcodeNotPermiss> BarcodeNotPermisses { get; set; }
     
         public virtual ObjectResult<report_event_agency_Result> report_event_agency(string cType, string eventId)
         {

@@ -1491,6 +1491,7 @@
       <Parameter Name="DTo" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="BarcodeChangeHistories" EntityType="NDHDBModel.BarcodeChangeHistory" />
+    <EntitySet Name="BarcodeNotPermisses" EntityType="NDHDBModel.BarcodeNotPermiss" />
   </EntityContainer>
   <ComplexType Name="report_event_agency_Result">
     <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -1549,5 +1550,19 @@
     <Property Name="InAction" Type="Int32" />
     <Property Name="WCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="WChange" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="BarcodeNotPermiss">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Barcode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CaseCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="UserUpload" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="BranchCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProductBarcode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>
