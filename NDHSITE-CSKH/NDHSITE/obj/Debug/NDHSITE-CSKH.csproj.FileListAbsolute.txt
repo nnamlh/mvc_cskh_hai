@@ -117,6 +117,5 @@ N:\csharp\mvc_cskh_hai\NDHSITE-CSKH\NDHSITE\bin\Microsoft.Owin.Security.OAuth.xm
 N:\csharp\mvc_cskh_hai\NDHSITE-CSKH\NDHSITE\bin\Microsoft.Owin.Security.Google.xml
 N:\csharp\mvc_cskh_hai\NDHSITE-CSKH\NDHSITE\bin\Microsoft.Owin.Security.Twitter.xml
 N:\csharp\mvc_cskh_hai\NDHSITE-CSKH\NDHSITE\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-N:\csharp\mvc_cskh_hai\NDHSITE-CSKH\NDHSITE\obj\Debug\NDHSITE-CSKH.csprojResolveAssemblyReference.cache
 N:\csharp\mvc_cskh_hai\NDHSITE-CSKH\NDHSITE\obj\Debug\NDHSITE.dll
 N:\csharp\mvc_cskh_hai\NDHSITE-CSKH\NDHSITE\obj\Debug\NDHSITE.pdb

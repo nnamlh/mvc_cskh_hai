@@ -441,7 +441,7 @@ namespace NDHSITE.Controllers
                             }
 
                             // kiem tra co c2 nao quet nua ko
-                            var checkC2Other = db.BarcodeHistories.Where(p => p.CaseCode == caseCode && p.IsSuccess == 0 && p.WareHouse == c2.WCode && p.WareHouseType == "CII").FirstOrDefault();
+                            var checkC2Other = db.BarcodeHistories.Where(p => p.PStatus == "NK" && p.CaseCode == caseCode && p.IsSuccess == 0 && p.WareHouse != c2.WCode && p.WareHouseType == "CII").FirstOrDefault();
                             if (checkC2Other != null)
                             {
                                 worksheet.Cells[i + 5, 22].Value = checkC2Other.StaffHelp;
