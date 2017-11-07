@@ -149,6 +149,20 @@
     <Property Name="ProductCode" Type="nvarchar" MaxLength="32" />
     <Property Name="ProductName" Type="nvarchar(max)" />
   </EntityType>
+  <EntityType Name="BarcodeNotPermiss">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Barcode" Type="nvarchar" MaxLength="128" />
+    <Property Name="CaseCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="512" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="UserUpload" Type="nvarchar" MaxLength="128" />
+    <Property Name="BranchCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="ProductName" Type="nvarchar(max)" />
+    <Property Name="ProductBarcode" Type="nvarchar" MaxLength="32" />
+  </EntityType>
   <EntityType Name="BasicNotification">
     <Key>
       <PropertyRef Name="Id" />
@@ -1339,6 +1353,7 @@
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AwardInfo" EntityType="Self.AwardInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BarcodeHistory" EntityType="Self.BarcodeHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BarcodeNotPermiss" EntityType="Self.BarcodeNotPermiss" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BasicNotification" EntityType="Self.BasicNotification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="C1Info" EntityType="Self.C1Info" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="C2Info" EntityType="Self.C2Info" Schema="dbo" store:Type="Tables" />

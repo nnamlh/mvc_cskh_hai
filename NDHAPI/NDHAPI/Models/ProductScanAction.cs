@@ -399,10 +399,10 @@ namespace NDHAPI.Models
                 {
                     if (wareActionInfo.wType == "CII")
                     {
-                        history.Messenge = "Mã đã được sử dụng";
+                        history.Messenge = "Mã đã đại lý cấp 2 khác sử dụng";
                     } else
                     {
-                        history.Messenge = "Sản phẩm không thể nhập kho";
+                        history.Messenge = "Mã đã được sử dụng";
                     }
                    
                     return history;
@@ -435,6 +435,14 @@ namespace NDHAPI.Models
             saveHistory(barcode, caseCode, boxCode, product, "NK", quantity, wareActionInfo);
             history.Quantity = quantity;
             history.Messenge = "Đã nhập kho";
+            if (wareActionInfo.wType == "CII")
+            {
+                // neu la cap 2
+                // kiem tra xem co trong ds barcode k dc tham gia
+                var checkPermiss = db.BarcodeNotPermisses.Where(p => p.CaseCode == caseCode).FirstOrDefault();
+                if (checkPermiss != null)
+                    history.Messenge = "Đã nhập kho - mã không được tham gia chương trình khuyến mãi";
+            }
             history.IsSuccess = 1;
             return history;
         }
