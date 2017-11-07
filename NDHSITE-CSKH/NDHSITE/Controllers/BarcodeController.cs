@@ -418,11 +418,11 @@ namespace NDHSITE.Controllers
                         {
                             // barcode history
                             var barcodeHistory = history.Where(p => p.PStatus == "NK" && p.StaffHelp != null && p.WareHouse == c2.WCode).FirstOrDefault();
-                            worksheet.Cells[i + 4, 19].Value = c2.WCode;
-                            worksheet.Cells[i + 4, 20].Value = c2.WName;
-                            worksheet.Cells[i + 4, 15].Value = c2.ImportTime;
+                            worksheet.Cells[i + 5, 19].Value = c2.WCode;
+                            worksheet.Cells[i + 5, 20].Value = c2.WName;
+                            worksheet.Cells[i + 5, 15].Value = c2.ImportTime;
 
-                            var checkC2 = db.C2Info.Where(p => p.Code == c2.WCode).FirstOrDefault();
+                            var checkC2 = db.C2Info.Where(p => p.Code == c2.WCode.Trim()).FirstOrDefault();
                             if (checkC2 != null)
                             {
                                 worksheet.Cells[i + 5, 21].Value = checkC2.CInfoCommon.BranchCode;
@@ -431,13 +431,43 @@ namespace NDHSITE.Controllers
                             // 
                             if (barcodeHistory != null)
                             {
-                                worksheet.Cells[i + 4, 16].Value = barcodeHistory.StaffHelp;
+                                worksheet.Cells[i + 5, 16].Value = barcodeHistory.StaffHelp;
                                 var haiStaff = db.HaiStaffs.Where(p => p.Code == barcodeHistory.StaffHelp).FirstOrDefault();
                                 if (haiStaff != null)
                                 {
-                                    worksheet.Cells[i + 4, 17].Value = haiStaff.FullName;
-                                    worksheet.Cells[i + 4, 18].Value = haiStaff.HaiBranch.Code;
+                                    worksheet.Cells[i + 5, 17].Value = haiStaff.FullName;
+                                    worksheet.Cells[i + 5, 18].Value = haiStaff.HaiBranch.Code;
                                 }
+                            }
+
+                            // kiem tra co c2 nao quet nua ko
+                            var checkC2Other = db.BarcodeHistories.Where(p => p.CaseCode == caseCode && p.IsSuccess == 0 && p.WareHouse == c2.WCode && p.WareHouseType == "CII").FirstOrDefault();
+                            if (checkC2Other != null)
+                            {
+                                worksheet.Cells[i + 5, 22].Value = checkC2Other.StaffHelp;
+                                var haiStaffHelpC2Other = db.HaiStaffs.Where(p => p.Code == checkC2Other.StaffHelp).FirstOrDefault();
+                                if (haiStaffHelpC2Other != null)
+                                {
+                                    worksheet.Cells[i + 5, 23].Value = haiStaffHelpC2Other.FullName;
+                                    worksheet.Cells[i + 5, 24].Value = haiStaffHelpC2Other.HaiBranch.Code;
+                                }
+                                var c2Other = db.C2Info.Where(p => p.Code == checkC2Other.WareHouse.Trim()).FirstOrDefault();
+                                worksheet.Cells[i + 5, 25].Value = checkC2Other.WareHouse;
+                                worksheet.Cells[i + 5, 26].Value = checkC2Other.WareHouseName;
+                                if (c2Other != null)
+                                {
+                                    worksheet.Cells[i + 5, 27].Value = c2Other.CInfoCommon.BranchCode;
+                                }
+
+                            }
+
+                            // kiem tra co tham gia chuong tỉnh ko
+                            var checkPermiss = db.BarcodeNotPermisses.Where(p => p.CaseCode == c2.CaseCode).FirstOrDefault();
+                            if(checkPermiss != null)
+                            {
+                                worksheet.Cells[i + 5, 28].Value = "Không được tham gia";
+                                worksheet.Cells[i + 5, 29].Value = checkPermiss.Notes;
+
                             }
                         }
 

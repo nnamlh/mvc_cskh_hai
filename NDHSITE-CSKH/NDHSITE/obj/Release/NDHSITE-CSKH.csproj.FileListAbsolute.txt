@@ -58,3 +58,4 @@ N:\csharp\mvc_cskh_hai\NDHSITE-CSKH\NDHSITE\bin\Microsoft.Owin.Security.Twitter.
 N:\csharp\mvc_cskh_hai\NDHSITE-CSKH\NDHSITE\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 N:\csharp\mvc_cskh_hai\NDHSITE-CSKH\NDHSITE\obj\Release\NDHSITE.dll
 N:\csharp\mvc_cskh_hai\NDHSITE-CSKH\NDHSITE\obj\Release\NDHSITE.pdb
+N:\csharp\mvc_cskh_hai\NDHSITE-CSKH\NDHSITE\obj\Release\NDHSITE-CSKH.csprojResolveAssemblyReference.cache
