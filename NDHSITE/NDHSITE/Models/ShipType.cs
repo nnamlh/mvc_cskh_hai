@@ -14,6 +14,7 @@ namespace NDHSITE.Models
     
     public partial class ShipType
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ShipType()
         {
             this.HaiOrders = new HashSet<HaiOrder>();
@@ -23,6 +24,7 @@ namespace NDHSITE.Models
         public string Name { get; set; }
         public string Notes { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HaiOrder> HaiOrders { get; set; }
     }
 }

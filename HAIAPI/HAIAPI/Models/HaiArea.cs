@@ -17,7 +17,6 @@ namespace HAIAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public HaiArea()
         {
-            this.CInfoCommons = new HashSet<CInfoCommon>();
             this.EventAreas = new HashSet<EventArea>();
             this.EventAreaFarmers = new HashSet<EventAreaFarmer>();
             this.HaiBranches = new HashSet<HaiBranch>();
@@ -28,8 +27,6 @@ namespace HAIAPI.Models
         public string Notes { get; set; }
         public string Code { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CInfoCommon> CInfoCommons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EventArea> EventAreas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

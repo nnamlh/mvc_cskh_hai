@@ -578,7 +578,7 @@ namespace NDHSITE.Controllers
 
 
         [HttpPost]
-        public ActionResult AddAgency(string id, string type, string AgencyId, HttpPostedFileBase files)
+        public ActionResult AddAgency(string id, string type, string AgencyId, HttpPostedFileBase files, int action)
         {
 
             // id: staffid
@@ -592,7 +592,15 @@ namespace NDHSITE.Controllers
 
             if (type == "c2")
             {
-                AddAgencyC2(staffCheck, AgencyId, files);
+              if (action == 1)
+                {
+                    // thêm
+                    AddAgencyC2(staffCheck, AgencyId, files);
+                } else if (action == 2)
+                {
+                    // xoa
+                    DeleteAgencyC2(staffCheck, AgencyId, files);
+                }
 
             }
             else if (type == "c1")
@@ -666,6 +674,58 @@ namespace NDHSITE.Controllers
 
            // db.Entry(staff).State = System.Data.Entity.EntityState.Modified;
           //  db.SaveChanges();
+        }
+        private void DeleteAgencyC2(HaiStaff staff, string AgencyId, HttpPostedFileBase files)
+        {
+
+            if (files != null && files.ContentLength > 0)
+            {
+
+                string extension = System.IO.Path.GetExtension(files.FileName);
+                if (extension.Equals(".xlsx"))
+                {
+
+                    string fileSave = "staffcii_" + DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
+                    string path = Server.MapPath("~/temp/" + fileSave);
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+
+                    files.SaveAs(path);
+                    FileInfo newFile = new FileInfo(path);
+                    var package = new ExcelPackage(newFile);
+                    ExcelWorksheet sheet = package.Workbook.Worksheets[1];
+
+                    int totalRows = sheet.Dimension.End.Row;
+                    int totalCols = sheet.Dimension.End.Column;
+
+                    for (int i = 2; i <= totalRows; i++)
+                    {
+                        string code = Convert.ToString(sheet.Cells[i, 1].Value);
+                        var checkC2 = staff.StaffWithC2.Where(p => p.C2Info.Code == code).FirstOrDefault();
+                        if (checkC2 != null)
+                        {
+                            staff.StaffWithC2.Remove(checkC2);
+                            db.SaveChanges();
+                        }
+                    }
+                }
+
+            }
+            else
+            {
+                var checkC2 = staff.StaffWithC2.Where(p => p.C2Info.Code == AgencyId).FirstOrDefault();
+
+                if (checkC2 != null)
+                {
+                    staff.StaffWithC2.Remove(checkC2);
+                    db.SaveChanges();
+                }
+            }
+
+            // db.Entry(staff).State = System.Data.Entity.EntityState.Modified;
+            //  db.SaveChanges();
         }
 
 

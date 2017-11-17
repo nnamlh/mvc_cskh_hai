@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="NDHDBModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+<Schema Namespace="DMSHAIModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityType Name="AgencySavePoint">
     <Key>
       <PropertyRef Name="EventId" />
@@ -13,11 +13,19 @@
     <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__AgencySav__CInfo__6497E884" FromRole="AgencySavePoint" ToRole="CInfoCommon" />
     <NavigationProperty Name="EventInfo" Relationship="Self.FK__AgencySav__Event__63A3C44B" FromRole="AgencySavePoint" ToRole="EventInfo" />
   </EntityType>
+  <EntityType Name="AgencyType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CInfoCommons" Relationship="Self.FK__CInfoComm__Agenc__4356F04A" FromRole="AgencyType" ToRole="CInfoCommon" />
+  </EntityType>
   <EntityType Name="AllStatu">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="SName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="SType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="SCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
@@ -67,13 +75,13 @@
     <NavigationProperty Name="FuncRoles" Relationship="Self.FK__FuncRole__RoleId__7ABC33CD" FromRole="AspNetRoles" ToRole="FuncRole" />
     <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
     <NavigationProperty Name="MobileFunctions" Relationship="Self.MobileRole" FromRole="AspNetRoles" ToRole="MobileFunction" />
-    <NavigationProperty Name="ProcessWorks" Relationship="NDHDBModel.ProcessWithRole" FromRole="AspNetRole" ToRole="ProcessWork" />
+    <NavigationProperty Name="ProcessWorks" Relationship="Self.ProcessWithRole" FromRole="AspNetRoles" ToRole="ProcessWork" />
   </EntityType>
   <EntityType Name="AspNetUserClaim">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
@@ -117,6 +125,19 @@
     <Property Name="Thumbnail" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="EventInfoes" Relationship="Self.EventAward" FromRole="AwardInfo" ToRole="EventInfo" />
+  </EntityType>
+  <EntityType Name="BarcodeChangeHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="CaseCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Barcode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="InAction" Type="Int32" />
+    <Property Name="WCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="WChange" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="BarcodeHistory">
     <Key>
@@ -168,12 +189,19 @@
     <Property Name="IsActive" Type="Int32" />
     <Property Name="IsLock" Type="Int32" />
     <Property Name="InfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="HaiBrandId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="HaiBranch" Relationship="Self.FK__C1Info__HaiBrand__72910220" FromRole="C1Info" ToRole="HaiBranch" />
     <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C1Info__InfoId__681373AD" FromRole="C1Info" ToRole="CInfoCommon" />
-    <NavigationProperty Name="C2Info" Relationship="Self.FK__C2Info__C1Id__73852659" FromRole="C1Info" ToRole="C2Info" />
+    <NavigationProperty Name="OrderProducts" Relationship="Self.FK__OrderProdu__C1Id__29971E47" FromRole="C1Info" ToRole="OrderProduct" />
     <NavigationProperty Name="HaiStaffs" Relationship="Self.StaffWithC1" FromRole="C1Info" ToRole="HaiStaff" />
-    <NavigationProperty Name="OrderProducts" Relationship="NDHDBModel.FK__OrderProdu__C1Id__29971E47" FromRole="C1Info" ToRole="OrderProduct" />
+  </EntityType>
+  <EntityType Name="C2C1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="C2Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="C1Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+    <Property Name="Priority" Type="Int32" />
   </EntityType>
   <EntityType Name="C2Info">
     <Key>
@@ -185,12 +213,62 @@
     <Property Name="Deputy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="IsActive" Type="Int32" />
     <Property Name="InfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="C1Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Decision" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="C1Info" Relationship="Self.FK__C2Info__C1Id__73852659" FromRole="C2Info" ToRole="C1Info" />
-    <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C2Info__InfoId__6CD828CA" FromRole="C2Info" ToRole="CInfoCommon" />
-    <NavigationProperty Name="StaffWithC2" Relationship="NDHDBModel.FK__StaffWithC__C2Id__4B622666" FromRole="C2Info" ToRole="StaffWithC2" />
     <Property Name="CStatus" Type="Int32" />
+    <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C2Info__InfoId__6CD828CA" FromRole="C2Info" ToRole="CInfoCommon" />
+    <NavigationProperty Name="StaffWithC2" Relationship="Self.FK__StaffWithC__C2Id__4B622666" FromRole="C2Info" ToRole="StaffWithC2" />
+  </EntityType>
+  <EntityType Name="CalendarInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CMonth" Type="Int32" />
+    <Property Name="CYear" Type="Int32" />
+    <Property Name="CStatus" Type="Int32" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="ModifyTime" Type="DateTime" Precision="3" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiStaff" Relationship="Self.FK__CalendarI__Staff__4297D63B" FromRole="CalendarInfo" ToRole="HaiStaff" />
+  </EntityType>
+  <EntityType Name="CalendarType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Compel" Type="Int32" />
+    <Property Name="Number" Type="Int32" />
+    <Property Name="TGroup" Type="Int32" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="CalendarWork">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CDay" Type="Int32" />
+    <Property Name="CMonth" Type="Int32" />
+    <Property Name="CYear" Type="Int32" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="InPlan" Type="Int32" />
+    <Property Name="AgencyCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="AgencyType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="TypeId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CIn" Type="Int32" />
+    <Property Name="COut" Type="Int32" />
+    <Property Name="CInTime" Type="Time" Precision="7" />
+    <Property Name="COutTime" Type="Time" Precision="7" />
+    <Property Name="AllTime" Type="Int32" />
+    <Property Name="CDate" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="LatCheck" Type="Double" />
+    <Property Name="LngCheck" Type="Double" />
+    <Property Name="TimeCheck" Type="DateTime" Precision="3" />
+    <Property Name="Distance" Type="Double" />
+    <Property Name="Perform" Type="Int32" />
+    <Property Name="DayInWeek" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="CInfoCommon">
     <Key>
@@ -200,50 +278,67 @@
     <Property Name="CName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="IdentityCard" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="AddressInfo" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-    <Property Name="WardId" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="Phone" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Fax" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="BirthDay" Type="Int32" />
     <Property Name="PlaceOfBirth" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="UserLogin" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="CreateTime" Type="DateTime" Precision="3" />
     <Property Name="ModifyDate" Type="DateTime" Precision="3" />
     <Property Name="CType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="AreaId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="ProvinceName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="DistrictName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="BranchCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="CCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="CDeputy" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="Mobile" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="BankAccount" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="BankAccountHolder" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="BackName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CStatus" Type="Int32" />
     <Property Name="TaxCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="BusinessLicense" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="Lat" Type="Double" />
     <Property Name="Lng" Type="Double" />
+    <Property Name="CRank" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+    <Property Name="WardName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="BirthDay" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="AgencyType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProvinceCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="AgencySavePoints" Relationship="Self.FK__AgencySav__CInfo__6497E884" FromRole="CInfoCommon" ToRole="AgencySavePoint" />
+    <NavigationProperty Name="AgencyType1" Relationship="Self.FK__CInfoComm__Agenc__4356F04A" FromRole="CInfoCommon" ToRole="AgencyType" />
     <NavigationProperty Name="C1Info" Relationship="Self.FK__C1Info__InfoId__681373AD" FromRole="CInfoCommon" ToRole="C1Info" />
     <NavigationProperty Name="C2Info" Relationship="Self.FK__C2Info__InfoId__6CD828CA" FromRole="CInfoCommon" ToRole="C2Info" />
-    <NavigationProperty Name="HaiArea" Relationship="Self.FK__CInfoComm__AreaI__52E34C9D" FromRole="CInfoCommon" ToRole="HaiArea" />
-    <NavigationProperty Name="Ward" Relationship="Self.FK__CInfoComm__WardI__634EBE90" FromRole="CInfoCommon" ToRole="Ward" />
     <NavigationProperty Name="EventCustomers" Relationship="Self.FK__EventCust__CInfo__1387E197" FromRole="CInfoCommon" ToRole="EventCustomer" />
     <NavigationProperty Name="EventCustomerFarmers" Relationship="Self.FK__EventCust__CInfo__3F6663D5" FromRole="CInfoCommon" ToRole="EventCustomerFarmer" />
     <NavigationProperty Name="FarmerInfoes" Relationship="Self.FK__FarmerInf__InfoI__7EF6D905" FromRole="CInfoCommon" ToRole="FarmerInfo" />
+    <NavigationProperty Name="HaiOrders" Relationship="Self.FK__HaiOrder__Agency__17786E0C" FromRole="CInfoCommon" ToRole="HaiOrder" />
     <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="CInfoCommon" ToRole="MSGPoint" />
-    <Property Name="BirthMonth" Type="Int32" />
-    <Property Name="BirthYear" Type="Int32" />
-    <Property Name="CRank" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-    <Property Name="CGroup" Type="Int32" />
-    <Property Name="WardName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="Country" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="ProvinceCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="SaveAgencyShopImages" Relationship="NDHDBModel.FK__SaveAgenc__Cinfo__7FA0E47B" FromRole="CInfoCommon" ToRole="SaveAgencyShopImage" />
-    <NavigationProperty Name="HaiOrders" Relationship="NDHDBModel.FK__HaiOrder__Agency__17786E0C" FromRole="CInfoCommon" ToRole="HaiOrder" />
+    <NavigationProperty Name="SaveAgencyShopImages" Relationship="Self.FK__SaveAgenc__Cinfo__7FA0E47B" FromRole="CInfoCommon" ToRole="SaveAgencyShopImage" />
+  </EntityType>
+  <EntityType Name="DecorGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="DecorImage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DaySend" Type="Int32" />
+    <Property Name="MonthSend" Type="Int32" />
+    <Property Name="YearSend" Type="Int32" />
+    <Property Name="AgencyCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="AgencyType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="Time" Precision="7" />
+    <Property Name="Lat" Type="Double" />
+    <Property Name="Lng" Type="Double" />
+    <Property Name="DecorGroup" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiStaff" Relationship="Self.FK__DecorImag__Staff__6F6A7CB2" FromRole="DecorImage" ToRole="HaiStaff" />
   </EntityType>
   <EntityType Name="District">
     <Key>
@@ -342,7 +437,7 @@
     <Property Name="Point" Type="Int32" />
     <Property Name="ProductName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="EventInfo" Relationship="Self.FK__EventProd__Event__4DE98D56" FromRole="EventProduct" ToRole="EventInfo" />
-    <NavigationProperty Name="ProductInfo" Relationship="NDHDBModel.FK__EventProd__Produ__4EDDB18F" FromRole="EventProduct" ToRole="ProductInfo" />
+    <NavigationProperty Name="ProductInfo" Relationship="Self.FK__EventProd__Produ__4EDDB18F" FromRole="EventProduct" ToRole="ProductInfo" />
   </EntityType>
   <EntityType Name="FarmerInfo">
     <Key>
@@ -363,7 +458,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Number" Type="Int32" />
     <NavigationProperty Name="FuncInfoes" Relationship="Self.FK__FuncInfo__GroupI__6E565CE8" FromRole="FuncGroup" ToRole="FuncInfo" />
@@ -372,7 +467,7 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="Position" Type="Int32" />
     <Property Name="Number" Type="Int32" />
@@ -402,7 +497,6 @@
     <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Code" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="CInfoCommons" Relationship="Self.FK__CInfoComm__AreaI__52E34C9D" FromRole="HaiArea" ToRole="CInfoCommon" />
     <NavigationProperty Name="EventAreas" Relationship="Self.FK__EventArea__AreaI__54968AE5" FromRole="HaiArea" ToRole="EventArea" />
     <NavigationProperty Name="EventAreaFarmers" Relationship="Self.FK__EventArea__AreaI__39AD8A7F" FromRole="HaiArea" ToRole="EventAreaFarmer" />
     <NavigationProperty Name="HaiBranches" Relationship="Self.FK__HaiBranch__AreaI__145C0A3F" FromRole="HaiArea" ToRole="HaiBranch" />
@@ -418,11 +512,10 @@
     <Property Name="AreaId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="C1Info" Relationship="Self.FK__C1Info__HaiBrand__72910220" FromRole="HaiBranch" ToRole="C1Info" />
-    <NavigationProperty Name="HaiArea" Relationship="Self.FK__HaiBranch__AreaI__145C0A3F" FromRole="HaiBranch" ToRole="HaiArea" />
-    <NavigationProperty Name="HaiStaffs" Relationship="Self.FK__HaiStaff__Branch__24927208" FromRole="HaiBranch" ToRole="HaiStaff" />
     <Property Name="LatCheck" Type="Double" />
     <Property Name="LngCheck" Type="Double" />
+    <NavigationProperty Name="HaiArea" Relationship="Self.FK__HaiBranch__AreaI__145C0A3F" FromRole="HaiBranch" ToRole="HaiArea" />
+    <NavigationProperty Name="HaiStaffs" Relationship="Self.FK__HaiStaff__Branch__24927208" FromRole="HaiBranch" ToRole="HaiStaff" />
   </EntityType>
   <EntityType Name="HaiDepartment">
     <Key>
@@ -433,6 +526,35 @@
     <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="HaiStaffs" Relationship="Self.FK__HaiStaff__Depart__25869641" FromRole="HaiDepartment" ToRole="HaiStaff" />
+  </EntityType>
+  <EntityType Name="HaiOrder">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="OrderType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PayType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ShipType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Agency" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ReceiveAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ReceivePhone1" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="ReceivePhone2" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="ExpectDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="OrderStatus" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PriceTotal" Type="Double" />
+    <Property Name="BrachCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="OrderNumber" Type="Int32" />
+    <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__HaiOrder__Agency__17786E0C" FromRole="HaiOrder" ToRole="CInfoCommon" />
+    <NavigationProperty Name="OrderStatu" Relationship="Self.FK__HaiOrder__OrderS__186C9245" FromRole="HaiOrder" ToRole="OrderStatus" />
+    <NavigationProperty Name="OrderType1" Relationship="Self.FK__HaiOrder__OrderT__149C0161" FromRole="HaiOrder" ToRole="OrderType" />
+    <NavigationProperty Name="PayType1" Relationship="Self.FK__HaiOrder__PayTyp__1590259A" FromRole="HaiOrder" ToRole="PayType" />
+    <NavigationProperty Name="ShipType1" Relationship="Self.FK__HaiOrder__ShipTy__168449D3" FromRole="HaiOrder" ToRole="ShipType" />
+    <NavigationProperty Name="OrderProducts" Relationship="Self.FK__OrderProd__Order__27AED5D5" FromRole="HaiOrder" ToRole="OrderProduct" />
+    <NavigationProperty Name="OrderProductHistories" Relationship="Self.FK__OrderProd__Order__3D9E16F4" FromRole="HaiOrder" ToRole="OrderProductHistory" />
+    <NavigationProperty Name="OrderStaffs" Relationship="Self.FK__OrderStaf__Order__2101D846" FromRole="HaiOrder" ToRole="OrderStaff" />
   </EntityType>
   <EntityType Name="HaiPosition">
     <Key>
@@ -470,18 +592,18 @@
     <Property Name="DepartmentName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="AvatarUrl" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="SignatureUrl" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="IsDelete" Type="Int32" />
+    <Property Name="GPSDistance" Type="Int32" />
+    <NavigationProperty Name="CalendarInfoes" Relationship="Self.FK__CalendarI__Staff__4297D63B" FromRole="HaiStaff" ToRole="CalendarInfo" />
+    <NavigationProperty Name="DecorImages" Relationship="Self.FK__DecorImag__Staff__6F6A7CB2" FromRole="HaiStaff" ToRole="DecorImage" />
     <NavigationProperty Name="HaiBranch" Relationship="Self.FK__HaiStaff__Branch__24927208" FromRole="HaiStaff" ToRole="HaiBranch" />
     <NavigationProperty Name="HaiDepartment" Relationship="Self.FK__HaiStaff__Depart__25869641" FromRole="HaiStaff" ToRole="HaiDepartment" />
     <NavigationProperty Name="HaiPosition" Relationship="Self.FK__HaiStaff__Positi__239E4DCF" FromRole="HaiStaff" ToRole="HaiPosition" />
+    <NavigationProperty Name="OrderStaffs" Relationship="Self.FK__OrderStaf__Staff__21F5FC7F" FromRole="HaiStaff" ToRole="OrderStaff" />
+    <NavigationProperty Name="SaveAgencyShopImages" Relationship="Self.FK__SaveAgenc__Staff__009508B4" FromRole="HaiStaff" ToRole="SaveAgencyShopImage" />
+    <NavigationProperty Name="StaffCheckIns" Relationship="Self.FK__StaffChec__Staff__47DBAE45" FromRole="HaiStaff" ToRole="StaffCheckIn" />
+    <NavigationProperty Name="StaffWithC2" Relationship="Self.FK__StaffWith__Staff__4C564A9F" FromRole="HaiStaff" ToRole="StaffWithC2" />
     <NavigationProperty Name="C1Info" Relationship="Self.StaffWithC1" FromRole="HaiStaff" ToRole="C1Info" />
-    <Property Name="IsDelete" Type="Int32" />
-    <Property Name="GPSDistance" Type="Int32" />
-    <NavigationProperty Name="CalendarInfoes" Relationship="NDHDBModel.FK__CalendarI__Staff__5E3FF0B0" FromRole="HaiStaff" ToRole="CalendarInfo" />
-    <NavigationProperty Name="StaffCheckIns" Relationship="NDHDBModel.FK__StaffChec__Staff__47DBAE45" FromRole="HaiStaff" ToRole="StaffCheckIn" />
-    <NavigationProperty Name="StaffWithC2" Relationship="NDHDBModel.FK__StaffWith__Staff__4C564A9F" FromRole="HaiStaff" ToRole="StaffWithC2" />
-    <NavigationProperty Name="DecorImages" Relationship="NDHDBModel.FK__DecorImag__Staff__742F31CF" FromRole="HaiStaff" ToRole="DecorImage" />
-    <NavigationProperty Name="SaveAgencyShopImages" Relationship="NDHDBModel.FK__SaveAgenc__Staff__009508B4" FromRole="HaiStaff" ToRole="SaveAgencyShopImage" />
-    <NavigationProperty Name="OrderStaffs" Relationship="NDHDBModel.FK__OrderStaf__Staff__21F5FC7F" FromRole="HaiStaff" ToRole="OrderStaff" />
   </EntityType>
   <EntityType Name="HappyBirthday">
     <Key>
@@ -539,8 +661,8 @@
     <Property Name="ProductId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="MSGType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="MSGPoint" ToRole="CInfoCommon" />
+    <NavigationProperty Name="ProductInfo" Relationship="Self.FK__MSGPoint__Produc__5708E33C" FromRole="MSGPoint" ToRole="ProductInfo" />
     <NavigationProperty Name="MSGPointEvents" Relationship="Self.FK__MSGPointE__MSGPo__5CC1BC92" FromRole="MSGPoint" ToRole="MSGPointEvent" />
-    <NavigationProperty Name="ProductInfo" Relationship="NDHDBModel.FK__MSGPoint__Produc__5708E33C" FromRole="MSGPoint" ToRole="ProductInfo" />
   </EntityType>
   <EntityType Name="MSGPointEvent">
     <Key>
@@ -557,11 +679,102 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Topic" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="TopicType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="OldKeySave">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="OldCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="NewCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CodeType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="OrderProduct">
+    <Key>
+      <PropertyRef Name="OrderId" />
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="OrderId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProductId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="PriceTotal" Type="Double" />
+    <Property Name="PerPrice" Type="Double" />
+    <Property Name="C1Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="QuantityFinish" Type="Int32" />
+    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="C1Info" Relationship="Self.FK__OrderProdu__C1Id__29971E47" FromRole="OrderProduct" ToRole="C1Info" />
+    <NavigationProperty Name="HaiOrder" Relationship="Self.FK__OrderProd__Order__27AED5D5" FromRole="OrderProduct" ToRole="HaiOrder" />
+    <NavigationProperty Name="ProductInfo" Relationship="Self.FK__OrderProd__Produ__28A2FA0E" FromRole="OrderProduct" ToRole="ProductInfo" />
+  </EntityType>
+  <EntityType Name="OrderProductHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="OrderId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProductId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserAction" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiOrder" Relationship="Self.FK__OrderProd__Order__3D9E16F4" FromRole="OrderProductHistory" ToRole="HaiOrder" />
+    <NavigationProperty Name="ProductInfo" Relationship="Self.FK__OrderProd__Produ__3E923B2D" FromRole="OrderProductHistory" ToRole="ProductInfo" />
+  </EntityType>
+  <EntityType Name="OrderStaff">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="OrderId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="ProcessId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiOrder" Relationship="Self.FK__OrderStaf__Order__2101D846" FromRole="OrderStaff" ToRole="HaiOrder" />
+    <NavigationProperty Name="HaiStaff" Relationship="Self.FK__OrderStaf__Staff__21F5FC7F" FromRole="OrderStaff" ToRole="HaiStaff" />
+    <NavigationProperty Name="OrderStaffProcess" Relationship="Self.FK__OrderStaf__Proce__22EA20B8" FromRole="OrderStaff" ToRole="OrderStaffProcess" />
+  </EntityType>
+  <EntityType Name="OrderStaffProcess">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="OrderStaffs" Relationship="Self.FK__OrderStaf__Proce__22EA20B8" FromRole="OrderStaffProcess" ToRole="OrderStaff" />
+  </EntityType>
+  <EntityType Name="OrderStatu">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiOrders" Relationship="Self.FK__HaiOrder__OrderS__186C9245" FromRole="OrderStatus" ToRole="HaiOrder" />
+  </EntityType>
+  <EntityType Name="OrderType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiOrders" Relationship="Self.FK__HaiOrder__OrderT__149C0161" FromRole="OrderType" ToRole="HaiOrder" />
+  </EntityType>
+  <EntityType Name="PayType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiOrders" Relationship="Self.FK__HaiOrder__PayTyp__1590259A" FromRole="PayType" ToRole="HaiOrder" />
   </EntityType>
   <EntityType Name="PHistory">
     <Key>
@@ -580,6 +793,87 @@
     <Property Name="ProductCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="Quantity" Type="Decimal" Precision="5" Scale="2" />
   </EntityType>
+  <EntityType Name="ProcessHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProcessId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CalendarId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="ProcessWork">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProcessName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProcessType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="TimeRequire" Type="Int32" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SortIndex" Type="Int32" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.ProcessWithRole" FromRole="ProcessWork" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="ProductGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Parent" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="HasChild" Type="Int32" />
+  </EntityType>
+  <EntityType Name="ProductImage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProductId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ProductInfo" Relationship="Self.FK__ProductIm__Produ__64ECEE3F" FromRole="ProductImage" ToRole="ProductInfo" />
+  </EntityType>
+  <EntityType Name="ProductInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="PCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Material" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Unit" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Producer" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="CardPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="BoxPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="IsLock" Type="Int32" />
+    <Property Name="Barcode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="QuantityBox" Type="Int32" />
+    <Property Name="IsBox" Type="Int32" />
+    <Property Name="PGroup" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Register" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CommerceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Activce" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Poision" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Uses" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Introduce" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Thumbnail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Forcus" Type="Int32" />
+    <Property Name="New" Type="Int32" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="PVat" Type="Double" />
+    <Property Name="ShortDescibe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Quantity" Type="Int32" />
+    <NavigationProperty Name="EventProducts" Relationship="Self.FK__EventProd__Produ__4EDDB18F" FromRole="ProductInfo" ToRole="EventProduct" />
+    <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__Produc__5708E33C" FromRole="ProductInfo" ToRole="MSGPoint" />
+    <NavigationProperty Name="OrderProducts" Relationship="Self.FK__OrderProd__Produ__28A2FA0E" FromRole="ProductInfo" ToRole="OrderProduct" />
+    <NavigationProperty Name="OrderProductHistories" Relationship="Self.FK__OrderProd__Produ__3E923B2D" FromRole="ProductInfo" ToRole="OrderProductHistory" />
+    <NavigationProperty Name="ProductImages" Relationship="Self.FK__ProductIm__Produ__64ECEE3F" FromRole="ProductInfo" ToRole="ProductImage" />
+    <NavigationProperty Name="ProductSeris" Relationship="Self.FK__ProductSe__Produ__10416098" FromRole="ProductInfo" ToRole="ProductSeri" />
+    <NavigationProperty Name="PTrackings" Relationship="Self.FK__PTracking__Produ__00FF1D08" FromRole="ProductInfo" ToRole="PTracking" />
+  </EntityType>
   <EntityType Name="ProductSeri">
     <Key>
       <PropertyRef Name="Id" />
@@ -593,7 +887,7 @@
     <Property Name="Seri" Type="Int32" />
     <Property Name="SeriType" Type="Int32" />
     <Property Name="ModifyTime" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="ProductInfo" Relationship="NDHDBModel.FK__ProductSe__Produ__10416098" FromRole="ProductSeri" ToRole="ProductInfo" />
+    <NavigationProperty Name="ProductInfo" Relationship="Self.FK__ProductSe__Produ__10416098" FromRole="ProductSeri" ToRole="ProductInfo" />
   </EntityType>
   <EntityType Name="Province">
     <Key>
@@ -602,8 +896,8 @@
     <Property Name="Id" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="PType" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="Districts" Relationship="Self.FK__District__Provin__07C12930" FromRole="Province" ToRole="District" />
     <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Districts" Relationship="Self.FK__District__Provin__07C12930" FromRole="Province" ToRole="District" />
   </EntityType>
   <EntityType Name="PTracking">
     <Key>
@@ -619,7 +913,7 @@
     <Property Name="ProductId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="CaseCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="Quantity" Type="Decimal" Precision="5" Scale="2" />
-    <NavigationProperty Name="ProductInfo" Relationship="NDHDBModel.FK__PTracking__Produ__00FF1D08" FromRole="PTracking" ToRole="ProductInfo" />
+    <NavigationProperty Name="ProductInfo" Relationship="Self.FK__PTracking__Produ__00FF1D08" FromRole="PTracking" ToRole="ProductInfo" />
   </EntityType>
   <EntityType Name="RegFirebase">
     <Key>
@@ -636,9 +930,28 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="SaveAgencyShopImage">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Cinfo" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Ward" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="District" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Province" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AddressFull" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Lat" Type="Double" />
+    <Property Name="Lng" Type="Double" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__SaveAgenc__Cinfo__7FA0E47B" FromRole="SaveAgencyShopImage" ToRole="CInfoCommon" />
+    <NavigationProperty Name="HaiStaff" Relationship="Self.FK__SaveAgenc__Staff__009508B4" FromRole="SaveAgencyShopImage" ToRole="HaiStaff" />
   </EntityType>
   <EntityType Name="SendSmsHistory">
     <Key>
@@ -655,16 +968,25 @@
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="Code" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
     <Property Name="Content" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ShipType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiOrders" Relationship="Self.FK__HaiOrder__ShipTy__168449D3" FromRole="ShipType" ToRole="HaiOrder" />
   </EntityType>
   <EntityType Name="SmsAccount">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="AddressSend" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="PortSend" Type="Int32" />
     <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
@@ -694,6 +1016,64 @@
     <Property Name="AgencyType" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="Success" Type="Int32" />
   </EntityType>
+  <EntityType Name="StaffCheckIn">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StaffUser" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="AcceptTime" Type="DateTime" Precision="3" />
+    <Property Name="ImageUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="Longitude" Type="Double" />
+    <Property Name="Latitude" Type="Double" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="Agency" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="AgencyName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="AgencyAddress" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="AgencyType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="AgencyTypeName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiStaff" Relationship="Self.FK__StaffChec__Staff__47DBAE45" FromRole="StaffCheckIn" ToRole="HaiStaff" />
+  </EntityType>
+  <EntityType Name="StaffWithC2">
+    <Key>
+      <PropertyRef Name="C2Id" />
+      <PropertyRef Name="StaffId" />
+    </Key>
+    <Property Name="C2Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GroupChoose" Type="Int32" />
+    <NavigationProperty Name="C2Info" Relationship="Self.FK__StaffWithC__C2Id__4B622666" FromRole="StaffWithC2" ToRole="C2Info" />
+    <NavigationProperty Name="HaiStaff" Relationship="Self.FK__StaffWith__Staff__4C564A9F" FromRole="StaffWithC2" ToRole="HaiStaff" />
+  </EntityType>
+  <EntityType Name="StoreAgencyId">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsUse" Type="Int32" />
+    <Property Name="CountNumber" Type="Int32" />
+    <Property Name="TypeStore" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="StoreStaffId">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="16" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsUser" Type="Int32" />
+    <Property Name="CountNumber" Type="Int32" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
   <EntityType Name="TreeInfo">
     <Key>
       <PropertyRef Name="Id" />
@@ -705,6 +1085,14 @@
     <Property Name="STT" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="CreateDate" Type="DateTime" Precision="3" />
   </EntityType>
+  <EntityType Name="UserBranchPermiss">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="BranchCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
   <EntityType Name="Ward">
     <Key>
       <PropertyRef Name="Id" />
@@ -714,7 +1102,6 @@
     <Property Name="WType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Location" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Districtid" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="CInfoCommons" Relationship="Self.FK__CInfoComm__WardI__634EBE90" FromRole="Ward" ToRole="CInfoCommon" />
     <NavigationProperty Name="District" Relationship="Self.FK__Ward__Districtid__0C85DE4D" FromRole="Ward" ToRole="District" />
   </EntityType>
   <EntityType Name="Warehouse">
@@ -752,6 +1139,18 @@
       </Principal>
       <Dependent Role="AgencySavePoint">
         <PropertyRef Name="EventId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CInfoComm__Agenc__4356F04A">
+    <End Role="AgencyType" Type="Self.AgencyType" Multiplicity="0..1" />
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AgencyType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CInfoCommon">
+        <PropertyRef Name="AgencyType" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -795,18 +1194,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__C1Info__HaiBrand__72910220">
-    <End Role="HaiBranch" Type="Self.HaiBranch" Multiplicity="0..1" />
-    <End Role="C1Info" Type="Self.C1Info" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiBranch">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="C1Info">
-        <PropertyRef Name="HaiBrandId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__C1Info__InfoId__681373AD">
     <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="0..1" />
     <End Role="C1Info" Type="Self.C1Info" Multiplicity="*" />
@@ -819,14 +1206,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__C2Info__C1Id__73852659">
+  <Association Name="FK__OrderProdu__C1Id__29971E47">
     <End Role="C1Info" Type="Self.C1Info" Multiplicity="0..1" />
-    <End Role="C2Info" Type="Self.C2Info" Multiplicity="*" />
+    <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="C1Info">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="C2Info">
+      <Dependent Role="OrderProduct">
         <PropertyRef Name="C1Id" />
       </Dependent>
     </ReferentialConstraint>
@@ -843,27 +1230,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CInfoComm__AreaI__52E34C9D">
-    <End Role="HaiArea" Type="Self.HaiArea" Multiplicity="0..1" />
-    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="*" />
+  <Association Name="FK__StaffWithC__C2Id__4B622666">
+    <End Role="C2Info" Type="Self.C2Info" Multiplicity="1" />
+    <End Role="StaffWithC2" Type="Self.StaffWithC2" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="HaiArea">
+      <Principal Role="C2Info">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="CInfoCommon">
-        <PropertyRef Name="AreaId" />
+      <Dependent Role="StaffWithC2">
+        <PropertyRef Name="C2Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CInfoComm__WardI__634EBE90">
-    <End Role="Ward" Type="Self.Ward" Multiplicity="0..1" />
-    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="*" />
+  <Association Name="FK__CalendarI__Staff__4297D63B">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
+    <End Role="CalendarInfo" Type="Self.CalendarInfo" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Ward">
+      <Principal Role="HaiStaff">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="CInfoCommon">
-        <PropertyRef Name="WardId" />
+      <Dependent Role="CalendarInfo">
+        <PropertyRef Name="StaffId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -903,6 +1290,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__HaiOrder__Agency__17786E0C">
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="0..1" />
+    <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CInfoCommon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiOrder">
+        <PropertyRef Name="Agency" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__MSGPoint__CInfoI__5614BF03">
     <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="1" />
     <End Role="MSGPoint" Type="Self.MSGPoint" Multiplicity="*" />
@@ -912,6 +1311,30 @@
       </Principal>
       <Dependent Role="MSGPoint">
         <PropertyRef Name="CInfoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SaveAgenc__Cinfo__7FA0E47B">
+    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="0..1" />
+    <End Role="SaveAgencyShopImage" Type="Self.SaveAgencyShopImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CInfoCommon">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SaveAgencyShopImage">
+        <PropertyRef Name="Cinfo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DecorImag__Staff__6F6A7CB2">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
+    <End Role="DecorImage" Type="Self.DecorImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DecorImage">
+        <PropertyRef Name="StaffId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1035,6 +1458,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__EventProd__Produ__4EDDB18F">
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="1" />
+    <End Role="EventProduct" Type="Self.EventProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EventProduct">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__FuncInfo__GroupI__6E565CE8">
     <End Role="FuncGroup" Type="Self.FuncGroup" Multiplicity="0..1" />
     <End Role="FuncInfo" Type="Self.FuncInfo" Multiplicity="*" />
@@ -1095,6 +1530,90 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__HaiOrder__OrderS__186C9245">
+    <End Role="OrderStatus" Type="Self.OrderStatu" Multiplicity="0..1" />
+    <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiOrder">
+        <PropertyRef Name="OrderStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiOrder__OrderT__149C0161">
+    <End Role="OrderType" Type="Self.OrderType" Multiplicity="0..1" />
+    <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiOrder">
+        <PropertyRef Name="OrderType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiOrder__PayTyp__1590259A">
+    <End Role="PayType" Type="Self.PayType" Multiplicity="0..1" />
+    <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PayType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiOrder">
+        <PropertyRef Name="PayType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiOrder__ShipTy__168449D3">
+    <End Role="ShipType" Type="Self.ShipType" Multiplicity="0..1" />
+    <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShipType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiOrder">
+        <PropertyRef Name="ShipType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderProd__Order__27AED5D5">
+    <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="1" />
+    <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderProduct">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderProd__Order__3D9E16F4">
+    <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="0..1" />
+    <End Role="OrderProductHistory" Type="Self.OrderProductHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderProductHistory">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderStaf__Order__2101D846">
+    <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="0..1" />
+    <End Role="OrderStaff" Type="Self.OrderStaff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiOrder">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderStaff">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__HaiStaff__Positi__239E4DCF">
     <End Role="HaiPosition" Type="Self.HaiPosition" Multiplicity="0..1" />
     <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="*" />
@@ -1104,6 +1623,66 @@
       </Principal>
       <Dependent Role="HaiStaff">
         <PropertyRef Name="PositionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderStaf__Staff__21F5FC7F">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
+    <End Role="OrderStaff" Type="Self.OrderStaff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderStaff">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SaveAgenc__Staff__009508B4">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
+    <End Role="SaveAgencyShopImage" Type="Self.SaveAgencyShopImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SaveAgencyShopImage">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StaffChec__Staff__47DBAE45">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
+    <End Role="StaffCheckIn" Type="Self.StaffCheckIn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaffCheckIn">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StaffWith__Staff__4C564A9F">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="1" />
+    <End Role="StaffWithC2" Type="Self.StaffWithC2" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaffWithC2">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MSGPoint__Produc__5708E33C">
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
+    <End Role="MSGPoint" Type="Self.MSGPoint" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="MSGPoint">
+        <PropertyRef Name="ProductId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1119,6 +1698,78 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__OrderProd__Produ__28A2FA0E">
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="1" />
+    <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderProduct">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderProd__Produ__3E923B2D">
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
+    <End Role="OrderProductHistory" Type="Self.OrderProductHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderProductHistory">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderStaf__Proce__22EA20B8">
+    <End Role="OrderStaffProcess" Type="Self.OrderStaffProcess" Multiplicity="0..1" />
+    <End Role="OrderStaff" Type="Self.OrderStaff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrderStaffProcess">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderStaff">
+        <PropertyRef Name="ProcessId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductIm__Produ__64ECEE3F">
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
+    <End Role="ProductImage" Type="Self.ProductImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductImage">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductSe__Produ__10416098">
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
+    <End Role="ProductSeri" Type="Self.ProductSeri" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductSeri">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PTracking__Produ__00FF1D08">
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
+    <End Role="PTracking" Type="Self.PTracking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductInfo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PTracking">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="AspNetUserRoles">
     <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
     <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
@@ -1131,12 +1782,17 @@
     <End Role="MobileFunction" Type="Self.MobileFunction" Multiplicity="*" />
     <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
   </Association>
+  <Association Name="ProcessWithRole">
+    <End Role="ProcessWork" Type="Self.ProcessWork" Multiplicity="*" />
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+  </Association>
   <Association Name="StaffWithC1">
     <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="*" />
     <End Role="C1Info" Type="Self.C1Info" Multiplicity="*" />
   </Association>
-  <EntityContainer Name="NDHDBEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+  <EntityContainer Name="NDHDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AgencySavePoints" EntityType="Self.AgencySavePoint" />
+    <EntitySet Name="AgencyTypes" EntityType="Self.AgencyType" />
     <EntitySet Name="AllStatus" EntityType="Self.AllStatu" />
     <EntitySet Name="APIAuthHistories" EntityType="Self.APIAuthHistory" />
     <EntitySet Name="APIHistories" EntityType="Self.APIHistory" />
@@ -1146,11 +1802,18 @@
     <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
     <EntitySet Name="AwardInfoes" EntityType="Self.AwardInfo" />
+    <EntitySet Name="BarcodeChangeHistories" EntityType="Self.BarcodeChangeHistory" />
     <EntitySet Name="BarcodeHistories" EntityType="Self.BarcodeHistory" />
     <EntitySet Name="BasicNotifications" EntityType="Self.BasicNotification" />
     <EntitySet Name="C1Info" EntityType="Self.C1Info" />
+    <EntitySet Name="C2C1" EntityType="Self.C2C1" />
     <EntitySet Name="C2Info" EntityType="Self.C2Info" />
+    <EntitySet Name="CalendarInfoes" EntityType="Self.CalendarInfo" />
+    <EntitySet Name="CalendarTypes" EntityType="Self.CalendarType" />
+    <EntitySet Name="CalendarWorks" EntityType="Self.CalendarWork" />
     <EntitySet Name="CInfoCommons" EntityType="Self.CInfoCommon" />
+    <EntitySet Name="DecorGroups" EntityType="Self.DecorGroup" />
+    <EntitySet Name="DecorImages" EntityType="Self.DecorImage" />
     <EntitySet Name="Districts" EntityType="Self.District" />
     <EntitySet Name="ErrorInfoes" EntityType="Self.ErrorInfo" />
     <EntitySet Name="EventAreas" EntityType="Self.EventArea" />
@@ -1166,6 +1829,7 @@
     <EntitySet Name="HaiAreas" EntityType="Self.HaiArea" />
     <EntitySet Name="HaiBranches" EntityType="Self.HaiBranch" />
     <EntitySet Name="HaiDepartments" EntityType="Self.HaiDepartment" />
+    <EntitySet Name="HaiOrders" EntityType="Self.HaiOrder" />
     <EntitySet Name="HaiPositions" EntityType="Self.HaiPosition" />
     <EntitySet Name="HaiStaffs" EntityType="Self.HaiStaff" />
     <EntitySet Name="HappyBirthdays" EntityType="Self.HappyBirthday" />
@@ -1175,18 +1839,39 @@
     <EntitySet Name="MSGPoints" EntityType="Self.MSGPoint" />
     <EntitySet Name="MSGPointEvents" EntityType="Self.MSGPointEvent" />
     <EntitySet Name="NotificationTopics" EntityType="Self.NotificationTopic" />
+    <EntitySet Name="OldKeySaves" EntityType="Self.OldKeySave" />
+    <EntitySet Name="OrderProducts" EntityType="Self.OrderProduct" />
+    <EntitySet Name="OrderProductHistories" EntityType="Self.OrderProductHistory" />
+    <EntitySet Name="OrderStaffs" EntityType="Self.OrderStaff" />
+    <EntitySet Name="OrderStaffProcesses" EntityType="Self.OrderStaffProcess" />
+    <EntitySet Name="OrderStatus" EntityType="Self.OrderStatu" />
+    <EntitySet Name="OrderTypes" EntityType="Self.OrderType" />
+    <EntitySet Name="PayTypes" EntityType="Self.PayType" />
     <EntitySet Name="PHistories" EntityType="Self.PHistory" />
+    <EntitySet Name="ProcessHistories" EntityType="Self.ProcessHistory" />
+    <EntitySet Name="ProcessWorks" EntityType="Self.ProcessWork" />
+    <EntitySet Name="ProductGroups" EntityType="Self.ProductGroup" />
+    <EntitySet Name="ProductImages" EntityType="Self.ProductImage" />
+    <EntitySet Name="ProductInfoes" EntityType="Self.ProductInfo" />
     <EntitySet Name="ProductSeris" EntityType="Self.ProductSeri" />
     <EntitySet Name="Provinces" EntityType="Self.Province" />
     <EntitySet Name="PTrackings" EntityType="Self.PTracking" />
     <EntitySet Name="RegFirebases" EntityType="Self.RegFirebase" />
     <EntitySet Name="RoleCheckImeis" EntityType="Self.RoleCheckImei" />
+    <EntitySet Name="SaveAgencyShopImages" EntityType="Self.SaveAgencyShopImage" />
     <EntitySet Name="SendSmsHistories" EntityType="Self.SendSmsHistory" />
     <EntitySet Name="ServerInfoes" EntityType="Self.ServerInfo" />
+    <EntitySet Name="ShipTypes" EntityType="Self.ShipType" />
     <EntitySet Name="SmsAccounts" EntityType="Self.SmsAccount" />
     <EntitySet Name="SMSCodes" EntityType="Self.SMSCode" />
     <EntitySet Name="SMSHistories" EntityType="Self.SMSHistory" />
+    <EntitySet Name="StaffCheckIns" EntityType="Self.StaffCheckIn" />
+    <EntitySet Name="StaffWithC2" EntityType="Self.StaffWithC2" />
+    <EntitySet Name="StoreAgencyIds" EntityType="Self.StoreAgencyId" />
+    <EntitySet Name="StoreStaffIds" EntityType="Self.StoreStaffId" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
     <EntitySet Name="TreeInfoes" EntityType="Self.TreeInfo" />
+    <EntitySet Name="UserBranchPermisses" EntityType="Self.UserBranchPermiss" />
     <EntitySet Name="Wards" EntityType="Self.Ward" />
     <EntitySet Name="Warehouses" EntityType="Self.Warehouse" />
     <AssociationSet Name="FK__AgencySav__CInfo__6497E884" Association="Self.FK__AgencySav__CInfo__6497E884">
@@ -1196,6 +1881,10 @@
     <AssociationSet Name="FK__AgencySav__Event__63A3C44B" Association="Self.FK__AgencySav__Event__63A3C44B">
       <End Role="EventInfo" EntitySet="EventInfoes" />
       <End Role="AgencySavePoint" EntitySet="AgencySavePoints" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CInfoComm__Agenc__4356F04A" Association="Self.FK__CInfoComm__Agenc__4356F04A">
+      <End Role="AgencyType" EntitySet="AgencyTypes" />
+      <End Role="CInfoCommon" EntitySet="CInfoCommons" />
     </AssociationSet>
     <AssociationSet Name="FK__FuncRole__RoleId__7ABC33CD" Association="Self.FK__FuncRole__RoleId__7ABC33CD">
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -1209,29 +1898,25 @@
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
     </AssociationSet>
-    <AssociationSet Name="FK__C1Info__HaiBrand__72910220" Association="Self.FK__C1Info__HaiBrand__72910220">
-      <End Role="HaiBranch" EntitySet="HaiBranches" />
-      <End Role="C1Info" EntitySet="C1Info" />
-    </AssociationSet>
     <AssociationSet Name="FK__C1Info__InfoId__681373AD" Association="Self.FK__C1Info__InfoId__681373AD">
       <End Role="CInfoCommon" EntitySet="CInfoCommons" />
       <End Role="C1Info" EntitySet="C1Info" />
     </AssociationSet>
-    <AssociationSet Name="FK__C2Info__C1Id__73852659" Association="Self.FK__C2Info__C1Id__73852659">
+    <AssociationSet Name="FK__OrderProdu__C1Id__29971E47" Association="Self.FK__OrderProdu__C1Id__29971E47">
       <End Role="C1Info" EntitySet="C1Info" />
-      <End Role="C2Info" EntitySet="C2Info" />
+      <End Role="OrderProduct" EntitySet="OrderProducts" />
     </AssociationSet>
     <AssociationSet Name="FK__C2Info__InfoId__6CD828CA" Association="Self.FK__C2Info__InfoId__6CD828CA">
       <End Role="CInfoCommon" EntitySet="CInfoCommons" />
       <End Role="C2Info" EntitySet="C2Info" />
     </AssociationSet>
-    <AssociationSet Name="FK__CInfoComm__AreaI__52E34C9D" Association="Self.FK__CInfoComm__AreaI__52E34C9D">
-      <End Role="HaiArea" EntitySet="HaiAreas" />
-      <End Role="CInfoCommon" EntitySet="CInfoCommons" />
+    <AssociationSet Name="FK__StaffWithC__C2Id__4B622666" Association="Self.FK__StaffWithC__C2Id__4B622666">
+      <End Role="C2Info" EntitySet="C2Info" />
+      <End Role="StaffWithC2" EntitySet="StaffWithC2" />
     </AssociationSet>
-    <AssociationSet Name="FK__CInfoComm__WardI__634EBE90" Association="Self.FK__CInfoComm__WardI__634EBE90">
-      <End Role="Ward" EntitySet="Wards" />
-      <End Role="CInfoCommon" EntitySet="CInfoCommons" />
+    <AssociationSet Name="FK__CalendarI__Staff__4297D63B" Association="Self.FK__CalendarI__Staff__4297D63B">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="CalendarInfo" EntitySet="CalendarInfoes" />
     </AssociationSet>
     <AssociationSet Name="FK__EventCust__CInfo__1387E197" Association="Self.FK__EventCust__CInfo__1387E197">
       <End Role="CInfoCommon" EntitySet="CInfoCommons" />
@@ -1245,9 +1930,21 @@
       <End Role="CInfoCommon" EntitySet="CInfoCommons" />
       <End Role="FarmerInfo" EntitySet="FarmerInfoes" />
     </AssociationSet>
+    <AssociationSet Name="FK__HaiOrder__Agency__17786E0C" Association="Self.FK__HaiOrder__Agency__17786E0C">
+      <End Role="CInfoCommon" EntitySet="CInfoCommons" />
+      <End Role="HaiOrder" EntitySet="HaiOrders" />
+    </AssociationSet>
     <AssociationSet Name="FK__MSGPoint__CInfoI__5614BF03" Association="Self.FK__MSGPoint__CInfoI__5614BF03">
       <End Role="CInfoCommon" EntitySet="CInfoCommons" />
       <End Role="MSGPoint" EntitySet="MSGPoints" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SaveAgenc__Cinfo__7FA0E47B" Association="Self.FK__SaveAgenc__Cinfo__7FA0E47B">
+      <End Role="CInfoCommon" EntitySet="CInfoCommons" />
+      <End Role="SaveAgencyShopImage" EntitySet="SaveAgencyShopImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DecorImag__Staff__6F6A7CB2" Association="Self.FK__DecorImag__Staff__6F6A7CB2">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="DecorImage" EntitySet="DecorImages" />
     </AssociationSet>
     <AssociationSet Name="FK__District__Provin__07C12930" Association="Self.FK__District__Provin__07C12930">
       <End Role="Province" EntitySet="Provinces" />
@@ -1289,6 +1986,10 @@
       <End Role="EventInfo" EntitySet="EventInfoes" />
       <End Role="MSGPointEvent" EntitySet="MSGPointEvents" />
     </AssociationSet>
+    <AssociationSet Name="FK__EventProd__Produ__4EDDB18F" Association="Self.FK__EventProd__Produ__4EDDB18F">
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+      <End Role="EventProduct" EntitySet="EventProducts" />
+    </AssociationSet>
     <AssociationSet Name="FK__FuncInfo__GroupI__6E565CE8" Association="Self.FK__FuncInfo__GroupI__6E565CE8">
       <End Role="FuncGroup" EntitySet="FuncGroups" />
       <End Role="FuncInfo" EntitySet="FuncInfoes" />
@@ -1309,13 +2010,85 @@
       <End Role="HaiDepartment" EntitySet="HaiDepartments" />
       <End Role="HaiStaff" EntitySet="HaiStaffs" />
     </AssociationSet>
+    <AssociationSet Name="FK__HaiOrder__OrderS__186C9245" Association="Self.FK__HaiOrder__OrderS__186C9245">
+      <End Role="OrderStatus" EntitySet="OrderStatus" />
+      <End Role="HaiOrder" EntitySet="HaiOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiOrder__OrderT__149C0161" Association="Self.FK__HaiOrder__OrderT__149C0161">
+      <End Role="OrderType" EntitySet="OrderTypes" />
+      <End Role="HaiOrder" EntitySet="HaiOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiOrder__PayTyp__1590259A" Association="Self.FK__HaiOrder__PayTyp__1590259A">
+      <End Role="PayType" EntitySet="PayTypes" />
+      <End Role="HaiOrder" EntitySet="HaiOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiOrder__ShipTy__168449D3" Association="Self.FK__HaiOrder__ShipTy__168449D3">
+      <End Role="ShipType" EntitySet="ShipTypes" />
+      <End Role="HaiOrder" EntitySet="HaiOrders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderProd__Order__27AED5D5" Association="Self.FK__OrderProd__Order__27AED5D5">
+      <End Role="HaiOrder" EntitySet="HaiOrders" />
+      <End Role="OrderProduct" EntitySet="OrderProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderProd__Order__3D9E16F4" Association="Self.FK__OrderProd__Order__3D9E16F4">
+      <End Role="HaiOrder" EntitySet="HaiOrders" />
+      <End Role="OrderProductHistory" EntitySet="OrderProductHistories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderStaf__Order__2101D846" Association="Self.FK__OrderStaf__Order__2101D846">
+      <End Role="HaiOrder" EntitySet="HaiOrders" />
+      <End Role="OrderStaff" EntitySet="OrderStaffs" />
+    </AssociationSet>
     <AssociationSet Name="FK__HaiStaff__Positi__239E4DCF" Association="Self.FK__HaiStaff__Positi__239E4DCF">
       <End Role="HaiPosition" EntitySet="HaiPositions" />
       <End Role="HaiStaff" EntitySet="HaiStaffs" />
     </AssociationSet>
+    <AssociationSet Name="FK__OrderStaf__Staff__21F5FC7F" Association="Self.FK__OrderStaf__Staff__21F5FC7F">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="OrderStaff" EntitySet="OrderStaffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SaveAgenc__Staff__009508B4" Association="Self.FK__SaveAgenc__Staff__009508B4">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="SaveAgencyShopImage" EntitySet="SaveAgencyShopImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StaffChec__Staff__47DBAE45" Association="Self.FK__StaffChec__Staff__47DBAE45">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="StaffCheckIn" EntitySet="StaffCheckIns" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StaffWith__Staff__4C564A9F" Association="Self.FK__StaffWith__Staff__4C564A9F">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="StaffWithC2" EntitySet="StaffWithC2" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MSGPoint__Produc__5708E33C" Association="Self.FK__MSGPoint__Produc__5708E33C">
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+      <End Role="MSGPoint" EntitySet="MSGPoints" />
+    </AssociationSet>
     <AssociationSet Name="FK__MSGPointE__MSGPo__5CC1BC92" Association="Self.FK__MSGPointE__MSGPo__5CC1BC92">
       <End Role="MSGPoint" EntitySet="MSGPoints" />
       <End Role="MSGPointEvent" EntitySet="MSGPointEvents" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderProd__Produ__28A2FA0E" Association="Self.FK__OrderProd__Produ__28A2FA0E">
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+      <End Role="OrderProduct" EntitySet="OrderProducts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderProd__Produ__3E923B2D" Association="Self.FK__OrderProd__Produ__3E923B2D">
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+      <End Role="OrderProductHistory" EntitySet="OrderProductHistories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderStaf__Proce__22EA20B8" Association="Self.FK__OrderStaf__Proce__22EA20B8">
+      <End Role="OrderStaffProcess" EntitySet="OrderStaffProcesses" />
+      <End Role="OrderStaff" EntitySet="OrderStaffs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductIm__Produ__64ECEE3F" Association="Self.FK__ProductIm__Produ__64ECEE3F">
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+      <End Role="ProductImage" EntitySet="ProductImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductSe__Produ__10416098" Association="Self.FK__ProductSe__Produ__10416098">
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+      <End Role="ProductSeri" EntitySet="ProductSeris" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PTracking__Produ__00FF1D08" Association="Self.FK__PTracking__Produ__00FF1D08">
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+      <End Role="PTracking" EntitySet="PTrackings" />
     </AssociationSet>
     <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />
@@ -1329,191 +2102,186 @@
       <End Role="MobileFunction" EntitySet="MobileFunctions" />
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />
     </AssociationSet>
+    <AssociationSet Name="ProcessWithRole" Association="Self.ProcessWithRole">
+      <End Role="ProcessWork" EntitySet="ProcessWorks" />
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+    </AssociationSet>
     <AssociationSet Name="StaffWithC1" Association="Self.StaffWithC1">
       <End Role="HaiStaff" EntitySet="HaiStaffs" />
       <End Role="C1Info" EntitySet="C1Info" />
     </AssociationSet>
-    <FunctionImport Name="report_event_agency" ReturnType="Collection(NDHDBModel.report_event_agency_Result)">
-      <Parameter Name="CType" Mode="In" Type="String" />
-      <Parameter Name="EventId" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="report_remain_product" ReturnType="Collection(NDHDBModel.report_remain_product_Result)">
-      <Parameter Name="Product" Mode="In" Type="String" />
-      <Parameter Name="DFrom" Mode="In" Type="String" />
-      <Parameter Name="DTo" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="report_remain_wcode" ReturnType="Collection(NDHDBModel.report_remain_wcode_Result)">
-      <Parameter Name="WCode" Mode="In" Type="String" />
-      <Parameter Name="DFrom" Mode="In" Type="String" />
-      <Parameter Name="DTo" Mode="In" Type="String" />
-    </FunctionImport>
-    <FunctionImport Name="report_cii_product" ReturnType="Collection(NDHDBModel.report_cii_product_Result)">
-      <Parameter Name="DFrom" Mode="In" Type="String" />
-      <Parameter Name="DTo" Mode="In" Type="String" />
-    </FunctionImport>
-    <EntitySet Name="StoreStaffIds" EntityType="NDHDBModel.StoreStaffId" />
-    <EntitySet Name="CalendarInfoes" EntityType="NDHDBModel.CalendarInfo" />
-    <EntitySet Name="CalendarTypes" EntityType="NDHDBModel.CalendarType" />
-    <EntitySet Name="CalendarWorks" EntityType="NDHDBModel.CalendarWork" />
-    <EntitySet Name="ProcessHistories" EntityType="NDHDBModel.ProcessHistory" />
-    <EntitySet Name="ProcessWorks" EntityType="NDHDBModel.ProcessWork" />
-    <AssociationSet Name="FK__CalendarI__Staff__5E3FF0B0" Association="NDHDBModel.FK__CalendarI__Staff__5E3FF0B0">
-      <End Role="HaiStaff" EntitySet="HaiStaffs" />
-      <End Role="CalendarInfo" EntitySet="CalendarInfoes" />
-    </AssociationSet>
-    <AssociationSet Name="ProcessWithRole" Association="NDHDBModel.ProcessWithRole">
-      <End Role="ProcessWork" EntitySet="ProcessWorks" />
-      <End Role="AspNetRole" EntitySet="AspNetRoles" />
-    </AssociationSet>
-    <FunctionImport Name="checkin_getcalendar" ReturnType="Collection(NDHDBModel.checkin_getcalendar_Result)">
+    <FunctionImport Name="checkin_calendartype_group" ReturnType="Collection(DMSHAIModel.checkin_calendartype_group_Result)">
       <Parameter Name="month" Mode="In" Type="Int32" />
       <Parameter Name="year" Mode="In" Type="Int32" />
       <Parameter Name="staffId" Mode="In" Type="String" />
     </FunctionImport>
-    <EntitySet Name="StaffCheckIns" EntityType="NDHDBModel.StaffCheckIn" />
-    <AssociationSet Name="FK__StaffChec__Staff__47DBAE45" Association="NDHDBModel.FK__StaffChec__Staff__47DBAE45">
-      <End Role="HaiStaff" EntitySet="HaiStaffs" />
-      <End Role="StaffCheckIn" EntitySet="StaffCheckIns" />
-    </AssociationSet>
-    <FunctionImport Name="checkin_calendartype_group" ReturnType="Collection(NDHDBModel.checkin_calendartype_group_Result)">
+    <FunctionImport Name="checkin_count_day_agency" ReturnType="Collection(DMSHAIModel.checkin_count_day_agency_Result)">
       <Parameter Name="month" Mode="In" Type="Int32" />
       <Parameter Name="year" Mode="In" Type="Int32" />
       <Parameter Name="staffId" Mode="In" Type="String" />
     </FunctionImport>
-    <EntitySet Name="StaffWithC2" EntityType="NDHDBModel.StaffWithC2" />
-    <AssociationSet Name="FK__StaffWithC__C2Id__4B622666" Association="NDHDBModel.FK__StaffWithC__C2Id__4B622666">
-      <End Role="C2Info" EntitySet="C2Info" />
-      <End Role="StaffWithC2" EntitySet="StaffWithC2" />
-    </AssociationSet>
-    <AssociationSet Name="FK__StaffWith__Staff__4C564A9F" Association="NDHDBModel.FK__StaffWith__Staff__4C564A9F">
-      <End Role="HaiStaff" EntitySet="HaiStaffs" />
-      <End Role="StaffWithC2" EntitySet="StaffWithC2" />
-    </AssociationSet>
-    <EntitySet Name="ProductImages" EntityType="NDHDBModel.ProductImage" />
-    <EntitySet Name="StoreAgencyIds" EntityType="NDHDBModel.StoreAgencyId" />
-    <EntitySet Name="ProductGroups" EntityType="NDHDBModel.ProductGroup" />
-    <EntitySet Name="ProductInfoes" EntityType="NDHDBModel.ProductInfo" />
-    <AssociationSet Name="FK__EventProd__Produ__4EDDB18F" Association="NDHDBModel.FK__EventProd__Produ__4EDDB18F">
-      <End Role="ProductInfo" EntitySet="ProductInfoes" />
-      <End Role="EventProduct" EntitySet="EventProducts" />
-    </AssociationSet>
-    <AssociationSet Name="FK__MSGPoint__Produc__5708E33C" Association="NDHDBModel.FK__MSGPoint__Produc__5708E33C">
-      <End Role="ProductInfo" EntitySet="ProductInfoes" />
-      <End Role="MSGPoint" EntitySet="MSGPoints" />
-    </AssociationSet>
-    <AssociationSet Name="FK__ProductIm__Produ__611C5D5B" Association="NDHDBModel.FK__ProductIm__Produ__611C5D5B">
-      <End Role="ProductInfo" EntitySet="ProductInfoes" />
-      <End Role="ProductImage" EntitySet="ProductImages" />
-    </AssociationSet>
-    <AssociationSet Name="FK__ProductSe__Produ__10416098" Association="NDHDBModel.FK__ProductSe__Produ__10416098">
-      <End Role="ProductInfo" EntitySet="ProductInfoes" />
-      <End Role="ProductSeri" EntitySet="ProductSeris" />
-    </AssociationSet>
-    <AssociationSet Name="FK__PTracking__Produ__00FF1D08" Association="NDHDBModel.FK__PTracking__Produ__00FF1D08">
-      <End Role="ProductInfo" EntitySet="ProductInfoes" />
-      <End Role="PTracking" EntitySet="PTrackings" />
-    </AssociationSet>
-    <EntitySet Name="DecorGroups" EntityType="NDHDBModel.DecorGroup" />
-    <EntitySet Name="DecorImages" EntityType="NDHDBModel.DecorImage" />
-    <AssociationSet Name="FK__DecorImag__Staff__742F31CF" Association="NDHDBModel.FK__DecorImag__Staff__742F31CF">
-      <End Role="HaiStaff" EntitySet="HaiStaffs" />
-      <End Role="DecorImage" EntitySet="DecorImages" />
-    </AssociationSet>
+    <FunctionImport Name="checkin_getcalendar" ReturnType="Collection(DMSHAIModel.checkin_getcalendar_Result)">
+      <Parameter Name="month" Mode="In" Type="Int32" />
+      <Parameter Name="year" Mode="In" Type="Int32" />
+      <Parameter Name="staffId" Mode="In" Type="String" />
+    </FunctionImport>
     <FunctionImport Name="checkin_report_plan">
       <Parameter Name="maxday" Mode="In" Type="Int32" />
       <Parameter Name="month" Mode="In" Type="String" />
       <Parameter Name="year" Mode="In" Type="String" />
       <Parameter Name="staffId" Mode="In" Type="String" />
     </FunctionImport>
-    <EntitySet Name="OldKeySaves" EntityType="NDHDBModel.OldKeySave" />
-    <EntitySet Name="C2C1" EntityType="NDHDBModel.C2C1" />
-    <FunctionImport Name="checkin_count_day_agency" ReturnType="Collection(NDHDBModel.checkin_count_day_agency_Result)">
-      <Parameter Name="month" Mode="In" Type="Int32" />
-      <Parameter Name="year" Mode="In" Type="Int32" />
-      <Parameter Name="staffId" Mode="In" Type="String" />
+    <FunctionImport Name="procduct_item_detail" ReturnType="Collection(DMSHAIModel.procduct_item_detail_Result)">
+      <Parameter Name="id" Mode="In" Type="String" />
     </FunctionImport>
-    <EntitySet Name="SaveAgencyShopImages" EntityType="NDHDBModel.SaveAgencyShopImage" />
-    <AssociationSet Name="FK__SaveAgenc__Cinfo__7FA0E47B" Association="NDHDBModel.FK__SaveAgenc__Cinfo__7FA0E47B">
-      <End Role="CInfoCommon" EntitySet="CInfoCommons" />
-      <End Role="SaveAgencyShopImage" EntitySet="SaveAgencyShopImages" />
-    </AssociationSet>
-    <AssociationSet Name="FK__SaveAgenc__Staff__009508B4" Association="NDHDBModel.FK__SaveAgenc__Staff__009508B4">
-      <End Role="HaiStaff" EntitySet="HaiStaffs" />
-      <End Role="SaveAgencyShopImage" EntitySet="SaveAgencyShopImages" />
-    </AssociationSet>
-    <FunctionImport Name="report_checkin_detail_by_branch" ReturnType="Collection(NDHDBModel.report_checkin_detail_by_branch_Result)">
+    <FunctionImport Name="product_list" ReturnType="Collection(DMSHAIModel.product_list_Result)" />
+    <FunctionImport Name="report_checkin_detail_by_branch" ReturnType="Collection(DMSHAIModel.report_checkin_detail_by_branch_Result)">
       <Parameter Name="month" Mode="In" Type="Int32" />
       <Parameter Name="year" Mode="In" Type="Int32" />
       <Parameter Name="branch" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="report_checkin_detail_by_staff" ReturnType="Collection(NDHDBModel.report_checkin_detail_by_staff_Result)">
+    <FunctionImport Name="report_checkin_detail_by_staff" ReturnType="Collection(DMSHAIModel.report_checkin_detail_by_staff_Result)">
       <Parameter Name="month" Mode="In" Type="Int32" />
       <Parameter Name="year" Mode="In" Type="Int32" />
       <Parameter Name="staffId" Mode="In" Type="String" />
     </FunctionImport>
-    <EntitySet Name="HaiOrders" EntityType="NDHDBModel.HaiOrder" />
-    <EntitySet Name="OrderProducts" EntityType="NDHDBModel.OrderProduct" />
-    <EntitySet Name="OrderStaffs" EntityType="NDHDBModel.OrderStaff" />
-    <EntitySet Name="OrderStaffProcesses" EntityType="NDHDBModel.OrderStaffProcess" />
-    <EntitySet Name="OrderStatus" EntityType="NDHDBModel.OrderStatu" />
-    <EntitySet Name="OrderTypes" EntityType="NDHDBModel.OrderType" />
-    <EntitySet Name="PayTypes" EntityType="NDHDBModel.PayType" />
-    <EntitySet Name="ShipTypes" EntityType="NDHDBModel.ShipType" />
-    <EntitySet Name="UserBranchPermisses" EntityType="NDHDBModel.UserBranchPermiss" />
-    <AssociationSet Name="FK__OrderProdu__C1Id__29971E47" Association="NDHDBModel.FK__OrderProdu__C1Id__29971E47">
-      <End Role="C1Info" EntitySet="C1Info" />
-      <End Role="OrderProduct" EntitySet="OrderProducts" />
-    </AssociationSet>
-    <AssociationSet Name="FK__HaiOrder__Agency__17786E0C" Association="NDHDBModel.FK__HaiOrder__Agency__17786E0C">
-      <End Role="CInfoCommon" EntitySet="CInfoCommons" />
-      <End Role="HaiOrder" EntitySet="HaiOrders" />
-    </AssociationSet>
-    <AssociationSet Name="FK__HaiOrder__OrderS__186C9245" Association="NDHDBModel.FK__HaiOrder__OrderS__186C9245">
-      <End Role="OrderStatu" EntitySet="OrderStatus" />
-      <End Role="HaiOrder" EntitySet="HaiOrders" />
-    </AssociationSet>
-    <AssociationSet Name="FK__HaiOrder__OrderT__149C0161" Association="NDHDBModel.FK__HaiOrder__OrderT__149C0161">
-      <End Role="OrderType" EntitySet="OrderTypes" />
-      <End Role="HaiOrder" EntitySet="HaiOrders" />
-    </AssociationSet>
-    <AssociationSet Name="FK__HaiOrder__PayTyp__1590259A" Association="NDHDBModel.FK__HaiOrder__PayTyp__1590259A">
-      <End Role="PayType" EntitySet="PayTypes" />
-      <End Role="HaiOrder" EntitySet="HaiOrders" />
-    </AssociationSet>
-    <AssociationSet Name="FK__HaiOrder__ShipTy__168449D3" Association="NDHDBModel.FK__HaiOrder__ShipTy__168449D3">
-      <End Role="ShipType" EntitySet="ShipTypes" />
-      <End Role="HaiOrder" EntitySet="HaiOrders" />
-    </AssociationSet>
-    <AssociationSet Name="FK__OrderProd__Order__27AED5D5" Association="NDHDBModel.FK__OrderProd__Order__27AED5D5">
-      <End Role="HaiOrder" EntitySet="HaiOrders" />
-      <End Role="OrderProduct" EntitySet="OrderProducts" />
-    </AssociationSet>
-    <AssociationSet Name="FK__OrderStaf__Order__2101D846" Association="NDHDBModel.FK__OrderStaf__Order__2101D846">
-      <End Role="HaiOrder" EntitySet="HaiOrders" />
-      <End Role="OrderStaff" EntitySet="OrderStaffs" />
-    </AssociationSet>
-    <AssociationSet Name="FK__OrderStaf__Staff__21F5FC7F" Association="NDHDBModel.FK__OrderStaf__Staff__21F5FC7F">
-      <End Role="HaiStaff" EntitySet="HaiStaffs" />
-      <End Role="OrderStaff" EntitySet="OrderStaffs" />
-    </AssociationSet>
-    <AssociationSet Name="FK__OrderProd__Produ__28A2FA0E" Association="NDHDBModel.FK__OrderProd__Produ__28A2FA0E">
-      <End Role="ProductInfo" EntitySet="ProductInfoes" />
-      <End Role="OrderProduct" EntitySet="OrderProducts" />
-    </AssociationSet>
-    <AssociationSet Name="FK__OrderStaf__Proce__22EA20B8" Association="NDHDBModel.FK__OrderStaf__Proce__22EA20B8">
-      <End Role="OrderStaffProcess" EntitySet="OrderStaffProcesses" />
-      <End Role="OrderStaff" EntitySet="OrderStaffs" />
-    </AssociationSet>
-    <EntitySet Name="OrderProductHistories" EntityType="NDHDBModel.OrderProductHistory" />
-    <AssociationSet Name="FK__OrderProd__Order__38D961D7" Association="NDHDBModel.FK__OrderProd__Order__38D961D7">
-      <End Role="HaiOrder" EntitySet="HaiOrders" />
-      <End Role="OrderProductHistory" EntitySet="OrderProductHistories" />
-    </AssociationSet>
-    <AssociationSet Name="FK__OrderProd__Produ__39CD8610" Association="NDHDBModel.FK__OrderProd__Produ__39CD8610">
-      <End Role="ProductInfo" EntitySet="ProductInfoes" />
-      <End Role="OrderProductHistory" EntitySet="OrderProductHistories" />
-    </AssociationSet>
+    <FunctionImport Name="report_cii_product" ReturnType="Collection(DMSHAIModel.report_cii_product_Result)">
+      <Parameter Name="DFrom" Mode="In" Type="String" />
+      <Parameter Name="DTo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="report_event_agency" ReturnType="Collection(DMSHAIModel.report_event_agency_Result)">
+      <Parameter Name="CType" Mode="In" Type="String" />
+      <Parameter Name="EventId" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="report_remain_product" ReturnType="Collection(DMSHAIModel.report_remain_product_Result)">
+      <Parameter Name="Product" Mode="In" Type="String" />
+      <Parameter Name="DFrom" Mode="In" Type="String" />
+      <Parameter Name="DTo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="report_remain_wcode" ReturnType="Collection(DMSHAIModel.report_remain_wcode_Result)">
+      <Parameter Name="WCode" Mode="In" Type="String" />
+      <Parameter Name="DFrom" Mode="In" Type="String" />
+      <Parameter Name="DTo" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="c2_get_list_c1" ReturnType="Collection(DMSHAIModel.c2_get_list_c1_Result)">
+      <Parameter Name="Code" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
+  <ComplexType Name="checkin_calendartype_group_Result">
+    <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="true" MaxLength="512" />
+    <Property Type="Int32" Name="countday" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="checkin_count_day_agency_Result">
+    <Property Type="String" Name="AgencyName" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="AgencyDeputy" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="AgencyCode" Nullable="true" MaxLength="32" />
+    <Property Type="Int32" Name="InPlan" Nullable="true" />
+    <Property Type="Int32" Name="CountDay" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="checkin_getcalendar_Result">
+    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="CDay" Nullable="true" />
+    <Property Type="Int32" Name="CMonth" Nullable="true" />
+    <Property Type="Int32" Name="CYear" Nullable="true" />
+    <Property Type="String" Name="StaffId" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="InPlan" Nullable="true" />
+    <Property Type="String" Name="AgencyCode" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="AgencyType" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Notes" Nullable="true" />
+    <Property Type="Int32" Name="CIn" Nullable="true" />
+    <Property Type="Int32" Name="COut" Nullable="true" />
+    <Property Type="Time" Name="CInTime" Nullable="true" />
+    <Property Type="Time" Name="COutTime" Nullable="true" />
+    <Property Type="Int32" Name="AllTime" Nullable="true" />
+    <Property Type="String" Name="CDate" Nullable="true" MaxLength="5" />
+    <Property Type="Double" Name="LatCheck" Nullable="true" />
+    <Property Type="Double" Name="LngCheck" Nullable="true" />
+    <Property Type="DateTime" Name="TimeCheck" Nullable="true" Precision="23" />
+    <Property Type="Double" Name="Distance" Nullable="true" />
+    <Property Type="Int32" Name="Perform" Nullable="true" />
+    <Property Type="String" Name="DayInWeek" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="StoreName" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="Deputy" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="TypeName" Nullable="true" MaxLength="512" />
+  </ComplexType>
+  <ComplexType Name="procduct_item_detail_Result">
+    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="PCode" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Material" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="Unit" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Producer" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="CardPoint" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="BoxPoint" Nullable="true" MaxLength="32" />
+    <Property Type="Int32" Name="IsLock" Nullable="true" />
+    <Property Type="String" Name="Barcode" Nullable="true" MaxLength="32" />
+    <Property Type="Int32" Name="QuantityBox" Nullable="true" />
+    <Property Type="Int32" Name="IsBox" Nullable="true" />
+    <Property Type="String" Name="PGroup" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Register" Nullable="true" />
+    <Property Type="String" Name="CommerceName" Nullable="true" />
+    <Property Type="String" Name="Activce" Nullable="true" />
+    <Property Type="String" Name="Poision" Nullable="true" />
+    <Property Type="String" Name="Describe" Nullable="true" />
+    <Property Type="String" Name="Uses" Nullable="true" />
+    <Property Type="String" Name="Introduce" Nullable="true" />
+    <Property Type="String" Name="Notes" Nullable="true" />
+    <Property Type="String" Name="Other" Nullable="true" />
+    <Property Type="String" Name="Thumbnail" Nullable="true" />
+    <Property Type="Int32" Name="Forcus" Nullable="true" />
+    <Property Type="Int32" Name="New" Nullable="true" />
+    <Property Type="DateTime" Name="CreateTime" Nullable="true" Precision="23" />
+    <Property Type="Double" Name="Price" Nullable="true" />
+    <Property Type="Double" Name="PVat" Nullable="true" />
+    <Property Type="String" Name="ShortDescibe" Nullable="true" />
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
+    <Property Type="String" Name="GroupId" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="GroupName" Nullable="true" MaxLength="512" />
+  </ComplexType>
+  <ComplexType Name="product_list_Result">
+    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="PCode" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="ShortDescibe" Nullable="true" />
+    <Property Type="String" Name="Unit" Nullable="true" MaxLength="128" />
+    <Property Type="Double" Name="Price" Nullable="true" />
+    <Property Type="Double" Name="PVat" Nullable="true" />
+    <Property Type="Int32" Name="QuantityBox" Nullable="true" />
+    <Property Type="String" Name="Barcode" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="Thumbnail" Nullable="true" />
+    <Property Type="Int32" Name="New" Nullable="true" />
+    <Property Type="Int32" Name="Forcus" Nullable="true" />
+    <Property Type="String" Name="GroupId" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="GroupName" Nullable="true" MaxLength="512" />
+  </ComplexType>
+  <ComplexType Name="report_checkin_detail_by_branch_Result">
+    <Property Type="String" Name="Branch" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="StaffCode" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="StaffName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="CalendarType" Nullable="true" MaxLength="512" />
+    <Property Type="Int32" Name="CalendarDay" Nullable="true" />
+    <Property Type="Int32" Name="CalendarMonth" Nullable="true" />
+    <Property Type="Int32" Name="CalendarYear" Nullable="true" />
+    <Property Type="String" Name="AgencyCode" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="StoreName" Nullable="true" MaxLength="512" />
+    <Property Type="Int32" Name="InPlan" Nullable="true" />
+    <Property Type="Int32" Name="Perform" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="report_checkin_detail_by_staff_Result">
+    <Property Type="String" Name="Branch" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="StaffCode" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="StaffName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="CalendarType" Nullable="true" MaxLength="512" />
+    <Property Type="Int32" Name="CalendarDay" Nullable="true" />
+    <Property Type="Int32" Name="CalendarMonth" Nullable="true" />
+    <Property Type="Int32" Name="CalendarYear" Nullable="true" />
+    <Property Type="String" Name="AgencyCode" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="StoreName" Nullable="true" MaxLength="512" />
+    <Property Type="Int32" Name="InPlan" Nullable="true" />
+    <Property Type="Int32" Name="Perform" Nullable="true" />
+  </ComplexType>
   <ComplexType Name="report_event_agency_Result">
     <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
     <Property Type="String" Name="CDeputy" Nullable="true" MaxLength="512" />
@@ -1545,772 +2313,30 @@
     <Property Type="String" Name="ProductCode" Nullable="true" MaxLength="32" />
   </ComplexType>
   <ComplexType Name="report_cii_product_Result">
+    <Property Type="String" Name="CaseCode" Nullable="true" MaxLength="256" />
     <Property Type="String" Name="PStatus" Nullable="true" MaxLength="32" />
     <Property Type="String" Name="WareHouse" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="BoxPoint" Nullable="true" MaxLength="32" />
-    <Property Type="String" Name="Staff" Nullable="true" MaxLength="100" />
-    <Property Type="Decimal" Name="Quantity" Nullable="true" Precision="5" Scale="2" />
     <Property Type="String" Name="WareHouseName" Nullable="true" />
-    <Property Type="String" Name="CaseCode" Nullable="true" MaxLength="256" />
-    <Property Type="String" Name="C1" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="BoxPoint" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="C1" Nullable="true" MaxLength="512" />
     <Property Type="DateTime" Name="ctime" Nullable="true" Precision="23" />
     <Property Type="String" Name="branch" Nullable="true" MaxLength="128" />
     <Property Type="String" Name="branchExport" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="Staff" Nullable="true" MaxLength="100" />
+    <Property Type="Decimal" Name="Quantity" Nullable="true" Precision="5" Scale="2" />
     <Property Type="String" Name="staffhelp" Nullable="false" MaxLength="22" />
-    <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
   </ComplexType>
-  <EntityType Name="StoreStaffId">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-    <Property Name="IsUser" Type="Int32" />
-    <Property Name="CountNumber" Type="Int32" />
-  </EntityType>
-  <EntityType Name="CalendarInfo">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CMonth" Type="Int32" />
-    <Property Name="CYear" Type="Int32" />
-    <Property Name="CStatus" Type="Int32" />
-    <Property Name="CreateTime" Type="DateTime" Precision="3" />
-    <Property Name="ModifyTime" Type="DateTime" Precision="3" />
-    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="HaiStaff" Relationship="NDHDBModel.FK__CalendarI__Staff__5E3FF0B0" FromRole="CalendarInfo" ToRole="HaiStaff" />
-  </EntityType>
-  <EntityType Name="CalendarType">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Compel" Type="Int32" />
-    <Property Name="Number" Type="Int32" />
-    <Property Name="TGroup" Type="Int32" />
-    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="CalendarWork">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CDay" Type="Int32" />
-    <Property Name="CMonth" Type="Int32" />
-    <Property Name="CYear" Type="Int32" />
-    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="InPlan" Type="Int32" />
-    <Property Name="AgencyCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="AgencyType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="TypeId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CIn" Type="Int32" />
-    <Property Name="COut" Type="Int32" />
-    <Property Name="CInTime" Type="Time" Precision="7" />
-    <Property Name="COutTime" Type="Time" Precision="7" />
-    <Property Name="AllTime" Type="Int32" />
-    <Property Name="LatCheck" Type="Double" />
-    <Property Name="LngCheck" Type="Double" />
-    <Property Name="TimeCheck" Type="DateTime" Precision="3" />
-    <Property Name="Distance" Type="Double" />
-    <Property Name="Perform" Type="Int32" />
-    <Property Name="DayInWeek" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="ProcessHistory">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="ProcessId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CalendarId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CreateTime" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="ProcessWork">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="ProcessName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ProcessType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="TimeRequire" Type="Int32" />
-    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="AspNetRoles" Relationship="NDHDBModel.ProcessWithRole" FromRole="ProcessWork" ToRole="AspNetRole" />
-    <Property Name="SortIndex" Type="Int32" />
-  </EntityType>
-  <Association Name="FK__CalendarI__Staff__5E3FF0B0">
-    <End Type="NDHDBModel.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
-    <End Type="NDHDBModel.CalendarInfo" Role="CalendarInfo" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiStaff">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CalendarInfo">
-        <PropertyRef Name="StaffId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="ProcessWithRole">
-    <End Type="NDHDBModel.ProcessWork" Role="ProcessWork" Multiplicity="*" />
-    <End Type="NDHDBModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
-  </Association>
-  <EntityType Name="StaffCheckIn">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="StaffUser" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="AcceptTime" Type="DateTime" Precision="3" />
-    <Property Name="ImageUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="Longitude" Type="Double" />
-    <Property Name="Latitude" Type="Double" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="Agency" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="AgencyName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="AgencyAddress" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="AgencyType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="AgencyTypeName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="HaiStaff" Relationship="NDHDBModel.FK__StaffChec__Staff__47DBAE45" FromRole="StaffCheckIn" ToRole="HaiStaff" />
-  </EntityType>
-  <Association Name="FK__StaffChec__Staff__47DBAE45">
-    <End Type="NDHDBModel.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
-    <End Type="NDHDBModel.StaffCheckIn" Role="StaffCheckIn" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiStaff">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="StaffCheckIn">
-        <PropertyRef Name="StaffId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <ComplexType Name="checkin_getcalendar_Result">
-    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
-    <Property Type="Int32" Name="CDay" Nullable="true" />
-    <Property Type="Int32" Name="CMonth" Nullable="true" />
-    <Property Type="Int32" Name="CYear" Nullable="true" />
-    <Property Type="String" Name="StaffId" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="InPlan" Nullable="true" />
-    <Property Type="String" Name="AgencyCode" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="AgencyType" Nullable="true" MaxLength="32" />
-    <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Notes" Nullable="true" />
-    <Property Type="Int32" Name="CIn" Nullable="true" />
-    <Property Type="Int32" Name="COut" Nullable="true" />
-    <Property Type="Time" Name="CInTime" Nullable="true" />
-    <Property Type="Time" Name="COutTime" Nullable="true" />
-    <Property Type="Int32" Name="AllTime" Nullable="true" />
-    <Property Type="String" Name="CDate" Nullable="true" MaxLength="5" />
-    <Property Type="Double" Name="LatCheck" Nullable="true" />
-    <Property Type="Double" Name="LngCheck" Nullable="true" />
-    <Property Type="DateTime" Name="TimeCheck" Nullable="true" Precision="23" />
-    <Property Type="Double" Name="Distance" Nullable="true" />
-    <Property Type="Int32" Name="Perform" Nullable="true" />
-    <Property Type="String" Name="TypeName" Nullable="true" MaxLength="512" />
+  <ComplexType Name="c2_get_list_c1_Result">
+    <Property Type="String" Name="Code" Nullable="true" MaxLength="32" />
     <Property Type="String" Name="StoreName" Nullable="true" MaxLength="512" />
     <Property Type="String" Name="Deputy" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="DayInWeek" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="AddressInfo" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="ProvinceName" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="DistrictName" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="WardName" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+    <Property Type="Int32" Name="Priority" Nullable="true" />
   </ComplexType>
-  <ComplexType Name="checkin_calendartype_group_Result">
-    <Property Type="String" Name="Name" Nullable="true" MaxLength="512" />
-    <Property Type="Int32" Name="countday" Nullable="true" />
-    <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
-  </ComplexType>
-  <EntityType Name="StaffWithC2">
-    <Key>
-      <PropertyRef Name="C2Id" />
-      <PropertyRef Name="StaffId" />
-    </Key>
-    <Property Name="C2Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="StaffId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="GroupChoose" Type="Int32" />
-    <NavigationProperty Name="C2Info" Relationship="NDHDBModel.FK__StaffWithC__C2Id__4B622666" FromRole="StaffWithC2" ToRole="C2Info" />
-    <NavigationProperty Name="HaiStaff" Relationship="NDHDBModel.FK__StaffWith__Staff__4C564A9F" FromRole="StaffWithC2" ToRole="HaiStaff" />
-  </EntityType>
-  <Association Name="FK__StaffWithC__C2Id__4B622666">
-    <End Type="NDHDBModel.C2Info" Role="C2Info" Multiplicity="1" />
-    <End Type="NDHDBModel.StaffWithC2" Role="StaffWithC2" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="C2Info">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="StaffWithC2">
-        <PropertyRef Name="C2Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__StaffWith__Staff__4C564A9F">
-    <End Type="NDHDBModel.HaiStaff" Role="HaiStaff" Multiplicity="1" />
-    <End Type="NDHDBModel.StaffWithC2" Role="StaffWithC2" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiStaff">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="StaffWithC2">
-        <PropertyRef Name="StaffId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="ProductImage">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ProductId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="ProductInfo" Relationship="NDHDBModel.FK__ProductIm__Produ__611C5D5B" FromRole="ProductImage" ToRole="ProductInfo" />
-  </EntityType>
-  <EntityType Name="StoreAgencyId">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="IsUse" Type="Int32" />
-    <Property Name="CountNumber" Type="Int32" />
-    <Property Name="TypeStore" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="ProductGroup">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Parent" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="HasChild" Type="Int32" />
-  </EntityType>
-  <EntityType Name="ProductInfo">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="PName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="PCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Material" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="Unit" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Producer" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Name="CardPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="BoxPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="IsLock" Type="Int32" />
-    <Property Name="Barcode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="QuantityBox" Type="Int32" />
-    <Property Name="IsBox" Type="Int32" />
-    <Property Name="Register" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CommerceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Activce" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Poision" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Uses" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Introduce" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Thumbnail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="EventProducts" Relationship="NDHDBModel.FK__EventProd__Produ__4EDDB18F" FromRole="ProductInfo" ToRole="EventProduct" />
-    <NavigationProperty Name="MSGPoints" Relationship="NDHDBModel.FK__MSGPoint__Produc__5708E33C" FromRole="ProductInfo" ToRole="MSGPoint" />
-    <NavigationProperty Name="ProductImages" Relationship="NDHDBModel.FK__ProductIm__Produ__611C5D5B" FromRole="ProductInfo" ToRole="ProductImage" />
-    <NavigationProperty Name="ProductSeris" Relationship="NDHDBModel.FK__ProductSe__Produ__10416098" FromRole="ProductInfo" ToRole="ProductSeri" />
-    <NavigationProperty Name="PTrackings" Relationship="NDHDBModel.FK__PTracking__Produ__00FF1D08" FromRole="ProductInfo" ToRole="PTracking" />
-    <Property Name="PGroup" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Forcus" Type="Int32" />
-    <Property Name="New" Type="Int32" />
-    <Property Name="CreateTime" Type="DateTime" Precision="3" />
-    <Property Name="Price" Type="Double" />
-    <Property Name="PVat" Type="Double" />
-    <Property Name="ShortDescibe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Quantity" Type="Int32" />
-    <NavigationProperty Name="OrderProducts" Relationship="NDHDBModel.FK__OrderProd__Produ__28A2FA0E" FromRole="ProductInfo" ToRole="OrderProduct" />
-    <NavigationProperty Name="OrderProductHistories" Relationship="NDHDBModel.FK__OrderProd__Produ__39CD8610" FromRole="ProductInfo" ToRole="OrderProductHistory" />
-  </EntityType>
-  <Association Name="FK__EventProd__Produ__4EDDB18F">
-    <End Type="NDHDBModel.ProductInfo" Role="ProductInfo" Multiplicity="1" />
-    <End Type="NDHDBModel.EventProduct" Role="EventProduct" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProductInfo">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="EventProduct">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__MSGPoint__Produc__5708E33C">
-    <End Type="NDHDBModel.ProductInfo" Role="ProductInfo" Multiplicity="0..1" />
-    <End Type="NDHDBModel.MSGPoint" Role="MSGPoint" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProductInfo">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="MSGPoint">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__ProductIm__Produ__611C5D5B">
-    <End Type="NDHDBModel.ProductInfo" Role="ProductInfo" Multiplicity="0..1" />
-    <End Type="NDHDBModel.ProductImage" Role="ProductImage" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProductInfo">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ProductImage">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__ProductSe__Produ__10416098">
-    <End Type="NDHDBModel.ProductInfo" Role="ProductInfo" Multiplicity="0..1" />
-    <End Type="NDHDBModel.ProductSeri" Role="ProductSeri" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProductInfo">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ProductSeri">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__PTracking__Produ__00FF1D08">
-    <End Type="NDHDBModel.ProductInfo" Role="ProductInfo" Multiplicity="0..1" />
-    <End Type="NDHDBModel.PTracking" Role="PTracking" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProductInfo">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PTracking">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="DecorGroup">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <EntityType Name="DecorImage">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="DaySend" Type="Int32" />
-    <Property Name="MonthSend" Type="Int32" />
-    <Property Name="YearSend" Type="Int32" />
-    <Property Name="AgencyCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="AgencyType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CreateTime" Type="Time" Precision="7" />
-    <Property Name="Lat" Type="Double" />
-    <Property Name="Lng" Type="Double" />
-    <Property Name="DecorGroup" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="HaiStaff" Relationship="NDHDBModel.FK__DecorImag__Staff__742F31CF" FromRole="DecorImage" ToRole="HaiStaff" />
-  </EntityType>
-  <Association Name="FK__DecorImag__Staff__742F31CF">
-    <End Type="NDHDBModel.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
-    <End Type="NDHDBModel.DecorImage" Role="DecorImage" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiStaff">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="DecorImage">
-        <PropertyRef Name="StaffId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="OldKeySave">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="OldCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="NewCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CodeType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="CreateTime" Type="DateTime" Precision="3" />
-  </EntityType>
-  <EntityType Name="C2C1">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="C2Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="C1Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
-    <Property Name="Priority" Type="Int32" />
-  </EntityType>
-  <ComplexType Name="checkin_count_day_agency_Result">
-    <Property Type="String" Name="AgencyName" Nullable="true" MaxLength="512" />
-    <Property Type="String" Name="AgencyDeputy" Nullable="true" MaxLength="512" />
-    <Property Type="String" Name="AgencyCode" Nullable="true" MaxLength="32" />
-    <Property Type="Int32" Name="InPlan" Nullable="true" />
-    <Property Type="Int32" Name="CountDay" Nullable="true" />
-  </ComplexType>
-  <EntityType Name="SaveAgencyShopImage">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Cinfo" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Ward" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="District" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Province" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="AddressFull" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Lat" Type="Double" />
-    <Property Name="Lng" Type="Double" />
-    <Property Name="CreateTime" Type="DateTime" Precision="3" />
-    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="CInfoCommon" Relationship="NDHDBModel.FK__SaveAgenc__Cinfo__7FA0E47B" FromRole="SaveAgencyShopImage" ToRole="CInfoCommon" />
-    <NavigationProperty Name="HaiStaff" Relationship="NDHDBModel.FK__SaveAgenc__Staff__009508B4" FromRole="SaveAgencyShopImage" ToRole="HaiStaff" />
-  </EntityType>
-  <Association Name="FK__SaveAgenc__Cinfo__7FA0E47B">
-    <End Type="NDHDBModel.CInfoCommon" Role="CInfoCommon" Multiplicity="0..1" />
-    <End Type="NDHDBModel.SaveAgencyShopImage" Role="SaveAgencyShopImage" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CInfoCommon">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SaveAgencyShopImage">
-        <PropertyRef Name="Cinfo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__SaveAgenc__Staff__009508B4">
-    <End Type="NDHDBModel.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
-    <End Type="NDHDBModel.SaveAgencyShopImage" Role="SaveAgencyShopImage" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiStaff">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="SaveAgencyShopImage">
-        <PropertyRef Name="StaffId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <ComplexType Name="report_checkin_detail_all_branch_Result">
-    <Property Type="String" Name="Branch" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="StaffCode" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="StaffName" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="CalendarType" Nullable="true" MaxLength="512" />
-    <Property Type="Int32" Name="CalendarDay" Nullable="true" />
-    <Property Type="Int32" Name="CalendarMonth" Nullable="true" />
-    <Property Type="Int32" Name="CalendarYear" Nullable="true" />
-    <Property Type="String" Name="AgencyCode" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="StoreName" Nullable="true" MaxLength="512" />
-    <Property Type="Int32" Name="InPlan" Nullable="true" />
-    <Property Type="Int32" Name="Perform" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="report_checkin_detail_by_branch_Result">
-    <Property Type="String" Name="Branch" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="StaffCode" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="StaffName" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="CalendarType" Nullable="true" MaxLength="512" />
-    <Property Type="Int32" Name="CalendarDay" Nullable="true" />
-    <Property Type="Int32" Name="CalendarMonth" Nullable="true" />
-    <Property Type="Int32" Name="CalendarYear" Nullable="true" />
-    <Property Type="String" Name="AgencyCode" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="StoreName" Nullable="true" MaxLength="512" />
-    <Property Type="Int32" Name="InPlan" Nullable="true" />
-    <Property Type="Int32" Name="Perform" Nullable="true" />
-  </ComplexType>
-  <ComplexType Name="report_checkin_detail_by_staff_Result">
-    <Property Type="String" Name="Branch" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="StaffCode" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="StaffName" Nullable="true" MaxLength="100" />
-    <Property Type="String" Name="CalendarType" Nullable="true" MaxLength="512" />
-    <Property Type="Int32" Name="CalendarDay" Nullable="true" />
-    <Property Type="Int32" Name="CalendarMonth" Nullable="true" />
-    <Property Type="Int32" Name="CalendarYear" Nullable="true" />
-    <Property Type="String" Name="AgencyCode" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="StoreName" Nullable="true" MaxLength="512" />
-    <Property Type="Int32" Name="InPlan" Nullable="true" />
-    <Property Type="Int32" Name="Perform" Nullable="true" />
-  </ComplexType>
-  <EntityType Name="HaiOrder">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="OrderType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="PayType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="ShipType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Agency" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="ReceiveAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="ReceivePhone1" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="ReceivePhone2" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <Property Name="ExpectDate" Type="DateTime" Precision="3" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="OrderStatus" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="PriceTotal" Type="Double" />
-    <Property Name="BrachCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="CInfoCommon" Relationship="NDHDBModel.FK__HaiOrder__Agency__17786E0C" FromRole="HaiOrder" ToRole="CInfoCommon" />
-    <NavigationProperty Name="OStatus" Relationship="NDHDBModel.FK__HaiOrder__OrderS__186C9245" FromRole="HaiOrder" ToRole="OrderStatu" />
-    <NavigationProperty Name="OType" Relationship="NDHDBModel.FK__HaiOrder__OrderT__149C0161" FromRole="HaiOrder" ToRole="OrderType" />
-    <NavigationProperty Name="PType" Relationship="NDHDBModel.FK__HaiOrder__PayTyp__1590259A" FromRole="HaiOrder" ToRole="PayType" />
-    <NavigationProperty Name="SType" Relationship="NDHDBModel.FK__HaiOrder__ShipTy__168449D3" FromRole="HaiOrder" ToRole="ShipType" />
-    <NavigationProperty Name="OrderProducts" Relationship="NDHDBModel.FK__OrderProd__Order__27AED5D5" FromRole="HaiOrder" ToRole="OrderProduct" />
-    <NavigationProperty Name="OrderStaffs" Relationship="NDHDBModel.FK__OrderStaf__Order__2101D846" FromRole="HaiOrder" ToRole="OrderStaff" />
-    <Property Name="OrderNumber" Type="Int32" />
-    <NavigationProperty Name="OrderProductHistories" Relationship="NDHDBModel.FK__OrderProd__Order__38D961D7" FromRole="HaiOrder" ToRole="OrderProductHistory" />
-  </EntityType>
-  <EntityType Name="OrderProduct">
-    <Key>
-      <PropertyRef Name="OrderId" />
-      <PropertyRef Name="ProductId" />
-    </Key>
-    <Property Name="OrderId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="ProductId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Quantity" Type="Int32" />
-    <Property Name="PriceTotal" Type="Double" />
-    <Property Name="PerPrice" Type="Double" />
-    <Property Name="C1Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="QuantityFinish" Type="Int32" />
-    <Property Name="ModifyDate" Type="DateTime" Precision="3" />
-    <NavigationProperty Name="C1Info" Relationship="NDHDBModel.FK__OrderProdu__C1Id__29971E47" FromRole="OrderProduct" ToRole="C1Info" />
-    <NavigationProperty Name="HaiOrder" Relationship="NDHDBModel.FK__OrderProd__Order__27AED5D5" FromRole="OrderProduct" ToRole="HaiOrder" />
-    <NavigationProperty Name="ProductInfo" Relationship="NDHDBModel.FK__OrderProd__Produ__28A2FA0E" FromRole="OrderProduct" ToRole="ProductInfo" />
-  </EntityType>
-  <EntityType Name="OrderStaff">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="OrderId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CreateTime" Type="DateTime" Precision="3" />
-    <Property Name="ProcessId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="HaiOrder" Relationship="NDHDBModel.FK__OrderStaf__Order__2101D846" FromRole="OrderStaff" ToRole="HaiOrder" />
-    <NavigationProperty Name="HaiStaff" Relationship="NDHDBModel.FK__OrderStaf__Staff__21F5FC7F" FromRole="OrderStaff" ToRole="HaiStaff" />
-    <NavigationProperty Name="OrderStaffProcess" Relationship="NDHDBModel.FK__OrderStaf__Proce__22EA20B8" FromRole="OrderStaff" ToRole="OrderStaffProcess" />
-  </EntityType>
-  <EntityType Name="OrderStaffProcess">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="OrderStaffs" Relationship="NDHDBModel.FK__OrderStaf__Proce__22EA20B8" FromRole="OrderStaffProcess" ToRole="OrderStaff" />
-  </EntityType>
-  <EntityType Name="OrderStatu">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="HaiOrders" Relationship="NDHDBModel.FK__HaiOrder__OrderS__186C9245" FromRole="OrderStatu" ToRole="HaiOrder" />
-  </EntityType>
-  <EntityType Name="OrderType">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="HaiOrders" Relationship="NDHDBModel.FK__HaiOrder__OrderT__149C0161" FromRole="OrderType" ToRole="HaiOrder" />
-  </EntityType>
-  <EntityType Name="PayType">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="HaiOrders" Relationship="NDHDBModel.FK__HaiOrder__PayTyp__1590259A" FromRole="PayType" ToRole="HaiOrder" />
-  </EntityType>
-  <EntityType Name="ShipType">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="HaiOrders" Relationship="NDHDBModel.FK__HaiOrder__ShipTy__168449D3" FromRole="ShipType" ToRole="HaiOrder" />
-  </EntityType>
-  <EntityType Name="UserBranchPermiss">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="BranchCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-  </EntityType>
-  <Association Name="FK__OrderProdu__C1Id__29971E47">
-    <End Type="NDHDBModel.C1Info" Role="C1Info" Multiplicity="0..1" />
-    <End Type="NDHDBModel.OrderProduct" Role="OrderProduct" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="C1Info">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OrderProduct">
-        <PropertyRef Name="C1Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__HaiOrder__Agency__17786E0C">
-    <End Type="NDHDBModel.CInfoCommon" Role="CInfoCommon" Multiplicity="0..1" />
-    <End Type="NDHDBModel.HaiOrder" Role="HaiOrder" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="CInfoCommon">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="HaiOrder">
-        <PropertyRef Name="Agency" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__HaiOrder__OrderS__186C9245">
-    <End Type="NDHDBModel.OrderStatu" Role="OrderStatu" Multiplicity="0..1" />
-    <End Type="NDHDBModel.HaiOrder" Role="HaiOrder" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OrderStatu">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="HaiOrder">
-        <PropertyRef Name="OrderStatus" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__HaiOrder__OrderT__149C0161">
-    <End Type="NDHDBModel.OrderType" Role="OrderType" Multiplicity="0..1" />
-    <End Type="NDHDBModel.HaiOrder" Role="HaiOrder" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OrderType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="HaiOrder">
-        <PropertyRef Name="OrderType" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__HaiOrder__PayTyp__1590259A">
-    <End Type="NDHDBModel.PayType" Role="PayType" Multiplicity="0..1" />
-    <End Type="NDHDBModel.HaiOrder" Role="HaiOrder" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PayType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="HaiOrder">
-        <PropertyRef Name="PayType" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__HaiOrder__ShipTy__168449D3">
-    <End Type="NDHDBModel.ShipType" Role="ShipType" Multiplicity="0..1" />
-    <End Type="NDHDBModel.HaiOrder" Role="HaiOrder" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ShipType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="HaiOrder">
-        <PropertyRef Name="ShipType" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__OrderProd__Order__27AED5D5">
-    <End Type="NDHDBModel.HaiOrder" Role="HaiOrder" Multiplicity="1" />
-    <End Type="NDHDBModel.OrderProduct" Role="OrderProduct" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiOrder">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OrderProduct">
-        <PropertyRef Name="OrderId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__OrderStaf__Order__2101D846">
-    <End Type="NDHDBModel.HaiOrder" Role="HaiOrder" Multiplicity="0..1" />
-    <End Type="NDHDBModel.OrderStaff" Role="OrderStaff" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiOrder">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OrderStaff">
-        <PropertyRef Name="OrderId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__OrderStaf__Staff__21F5FC7F">
-    <End Type="NDHDBModel.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
-    <End Type="NDHDBModel.OrderStaff" Role="OrderStaff" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiStaff">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OrderStaff">
-        <PropertyRef Name="StaffId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__OrderProd__Produ__28A2FA0E">
-    <End Type="NDHDBModel.ProductInfo" Role="ProductInfo" Multiplicity="1" />
-    <End Type="NDHDBModel.OrderProduct" Role="OrderProduct" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProductInfo">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OrderProduct">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__OrderStaf__Proce__22EA20B8">
-    <End Type="NDHDBModel.OrderStaffProcess" Role="OrderStaffProcess" Multiplicity="0..1" />
-    <End Type="NDHDBModel.OrderStaff" Role="OrderStaff" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="OrderStaffProcess">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OrderStaff">
-        <PropertyRef Name="ProcessId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="OrderProductHistory">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="OrderId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="ProductId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Quantity" Type="Int32" />
-    <Property Name="CreateDate" Type="DateTime" Precision="3" />
-    <Property Name="UserAction" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="HaiOrder" Relationship="NDHDBModel.FK__OrderProd__Order__38D961D7" FromRole="OrderProductHistory" ToRole="HaiOrder" />
-    <NavigationProperty Name="ProductInfo" Relationship="NDHDBModel.FK__OrderProd__Produ__39CD8610" FromRole="OrderProductHistory" ToRole="ProductInfo" />
-  </EntityType>
-  <Association Name="FK__OrderProd__Order__38D961D7">
-    <End Type="NDHDBModel.HaiOrder" Role="HaiOrder" Multiplicity="0..1" />
-    <End Type="NDHDBModel.OrderProductHistory" Role="OrderProductHistory" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiOrder">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OrderProductHistory">
-        <PropertyRef Name="OrderId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__OrderProd__Produ__39CD8610">
-    <End Type="NDHDBModel.ProductInfo" Role="ProductInfo" Multiplicity="0..1" />
-    <End Type="NDHDBModel.OrderProductHistory" Role="OrderProductHistory" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProductInfo">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OrderProductHistory">
-        <PropertyRef Name="ProductId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

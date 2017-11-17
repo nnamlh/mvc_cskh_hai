@@ -16,6 +16,13 @@
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="ModifyTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="AgencyType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="AllStatus">
           <Key>
             <PropertyRef Name="Id" />
@@ -136,7 +143,6 @@
           <Property Name="IsActive" Type="int" />
           <Property Name="IsLock" Type="int" />
           <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
-          <Property Name="HaiBrandId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="C2C1">
           <Key>
@@ -158,8 +164,6 @@
           <Property Name="Deputy" Type="nvarchar" MaxLength="255" />
           <Property Name="IsActive" Type="int" />
           <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
-          <Property Name="C1Id" Type="nvarchar" MaxLength="128" />
-          <Property Name="Decision" Type="nvarchar" MaxLength="512" />
           <Property Name="CStatus" Type="int" />
         </EntityType>
         <EntityType Name="CalendarInfo">
@@ -222,9 +226,7 @@
           <Property Name="CName" Type="nvarchar" MaxLength="512" />
           <Property Name="IdentityCard" Type="nvarchar" MaxLength="128" />
           <Property Name="AddressInfo" Type="nvarchar" MaxLength="1000" />
-          <Property Name="WardId" Type="nvarchar" MaxLength="32" />
           <Property Name="Phone" Type="nvarchar" MaxLength="128" />
-          <Property Name="Fax" Type="nvarchar" MaxLength="128" />
           <Property Name="Email" Type="nvarchar" MaxLength="256" />
           <Property Name="PlaceOfBirth" Type="nvarchar" MaxLength="255" />
           <Property Name="Notes" Type="nvarchar" MaxLength="255" />
@@ -232,29 +234,24 @@
           <Property Name="CreateTime" Type="datetime" />
           <Property Name="ModifyDate" Type="datetime" />
           <Property Name="CType" Type="nvarchar" MaxLength="32" />
-          <Property Name="AreaId" Type="nvarchar" MaxLength="128" />
           <Property Name="ProvinceName" Type="nvarchar" MaxLength="256" />
           <Property Name="DistrictName" Type="nvarchar" MaxLength="256" />
           <Property Name="BranchCode" Type="nvarchar" MaxLength="128" />
           <Property Name="CCode" Type="nvarchar" MaxLength="32" />
           <Property Name="CDeputy" Type="nvarchar" MaxLength="512" />
-          <Property Name="Mobile" Type="nvarchar" MaxLength="128" />
           <Property Name="BankAccount" Type="nvarchar" MaxLength="256" />
           <Property Name="BankAccountHolder" Type="nvarchar" MaxLength="512" />
           <Property Name="BackName" Type="nvarchar(max)" />
-          <Property Name="CStatus" Type="int" />
           <Property Name="TaxCode" Type="nvarchar" MaxLength="128" />
           <Property Name="BusinessLicense" Type="nvarchar" MaxLength="512" />
           <Property Name="Lat" Type="float" />
           <Property Name="Lng" Type="float" />
-          <Property Name="BirthMonth" Type="int" />
-          <Property Name="BirthYear" Type="int" />
           <Property Name="CRank" Type="nvarchar" MaxLength="16" />
-          <Property Name="CGroup" Type="int" />
           <Property Name="WardName" Type="nvarchar" MaxLength="512" />
           <Property Name="Country" Type="nvarchar" MaxLength="128" />
-          <Property Name="BirthDay" Type="int" />
-          <Property Name="ProvinceCode" Type="nvarchar" MaxLength="5" />
+          <Property Name="BirthDay" Type="nvarchar" MaxLength="128" />
+          <Property Name="AgencyType" Type="nvarchar" MaxLength="128" />
+          <Property Name="ProvinceCode" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="DecorGroup">
           <Key>
@@ -1000,18 +997,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__C1Info__HaiBrand__72910220">
-          <End Role="HaiBranch" Type="Self.HaiBranch" Multiplicity="0..1" />
-          <End Role="C1Info" Type="Self.C1Info" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HaiBranch">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="C1Info">
-              <PropertyRef Name="HaiBrandId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__C1Info__InfoId__681373AD">
           <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="0..1" />
           <End Role="C1Info" Type="Self.C1Info" Multiplicity="*" />
@@ -1021,18 +1006,6 @@
             </Principal>
             <Dependent Role="C1Info">
               <PropertyRef Name="InfoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__C2Info__C1Id__73852659">
-          <End Role="C1Info" Type="Self.C1Info" Multiplicity="0..1" />
-          <End Role="C2Info" Type="Self.C2Info" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="C1Info">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="C2Info">
-              <PropertyRef Name="C1Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1060,27 +1033,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__CInfoComm__AreaI__52E34C9D">
-          <End Role="HaiArea" Type="Self.HaiArea" Multiplicity="0..1" />
+        <Association Name="FK__CInfoComm__Agenc__4356F04A">
+          <End Role="AgencyType" Type="Self.AgencyType" Multiplicity="0..1" />
           <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="HaiArea">
+            <Principal Role="AgencyType">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="CInfoCommon">
-              <PropertyRef Name="AreaId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CInfoComm__WardI__634EBE90">
-          <End Role="Ward" Type="Self.Ward" Multiplicity="0..1" />
-          <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ward">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CInfoCommon">
-              <PropertyRef Name="WardId" />
+              <PropertyRef Name="AgencyType" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1492,7 +1453,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderProd__Order__38D961D7">
+        <Association Name="FK__OrderProd__Order__3D9E16F4">
           <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="0..1" />
           <End Role="OrderProductHistory" Type="Self.OrderProductHistory" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1516,7 +1477,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderProd__Produ__39CD8610">
+        <Association Name="FK__OrderProd__Produ__3E923B2D">
           <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
           <End Role="OrderProductHistory" Type="Self.OrderProductHistory" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1804,6 +1765,7 @@
         <Function Name="product_list" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="NDHDB1ModelStoreContainer">
           <EntitySet Name="AgencySavePoint" EntityType="Self.AgencySavePoint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AgencyType" EntityType="Self.AgencyType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AllStatus" EntityType="Self.AllStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -1891,17 +1853,9 @@
             <End Role="EventInfo" EntitySet="EventInfo" />
             <End Role="AgencySavePoint" EntitySet="AgencySavePoint" />
           </AssociationSet>
-          <AssociationSet Name="FK__C1Info__HaiBrand__72910220" Association="Self.FK__C1Info__HaiBrand__72910220">
-            <End Role="HaiBranch" EntitySet="HaiBranch" />
-            <End Role="C1Info" EntitySet="C1Info" />
-          </AssociationSet>
           <AssociationSet Name="FK__C1Info__InfoId__681373AD" Association="Self.FK__C1Info__InfoId__681373AD">
             <End Role="CInfoCommon" EntitySet="CInfoCommon" />
             <End Role="C1Info" EntitySet="C1Info" />
-          </AssociationSet>
-          <AssociationSet Name="FK__C2Info__C1Id__73852659" Association="Self.FK__C2Info__C1Id__73852659">
-            <End Role="C1Info" EntitySet="C1Info" />
-            <End Role="C2Info" EntitySet="C2Info" />
           </AssociationSet>
           <AssociationSet Name="FK__C2Info__InfoId__6CD828CA" Association="Self.FK__C2Info__InfoId__6CD828CA">
             <End Role="CInfoCommon" EntitySet="CInfoCommon" />
@@ -1911,12 +1865,8 @@
             <End Role="HaiStaff" EntitySet="HaiStaff" />
             <End Role="CalendarInfo" EntitySet="CalendarInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK__CInfoComm__AreaI__52E34C9D" Association="Self.FK__CInfoComm__AreaI__52E34C9D">
-            <End Role="HaiArea" EntitySet="HaiArea" />
-            <End Role="CInfoCommon" EntitySet="CInfoCommon" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CInfoComm__WardI__634EBE90" Association="Self.FK__CInfoComm__WardI__634EBE90">
-            <End Role="Ward" EntitySet="Ward" />
+          <AssociationSet Name="FK__CInfoComm__Agenc__4356F04A" Association="Self.FK__CInfoComm__Agenc__4356F04A">
+            <End Role="AgencyType" EntitySet="AgencyType" />
             <End Role="CInfoCommon" EntitySet="CInfoCommon" />
           </AssociationSet>
           <AssociationSet Name="FK__DecorImag__Staff__6F6A7CB2" Association="Self.FK__DecorImag__Staff__6F6A7CB2">
@@ -2055,7 +2005,7 @@
             <End Role="HaiOrder" EntitySet="HaiOrder" />
             <End Role="OrderProduct" EntitySet="OrderProduct" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderProd__Order__38D961D7" Association="Self.FK__OrderProd__Order__38D961D7">
+          <AssociationSet Name="FK__OrderProd__Order__3D9E16F4" Association="Self.FK__OrderProd__Order__3D9E16F4">
             <End Role="HaiOrder" EntitySet="HaiOrder" />
             <End Role="OrderProductHistory" EntitySet="OrderProductHistory" />
           </AssociationSet>
@@ -2063,7 +2013,7 @@
             <End Role="ProductInfo" EntitySet="ProductInfo" />
             <End Role="OrderProduct" EntitySet="OrderProduct" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderProd__Produ__39CD8610" Association="Self.FK__OrderProd__Produ__39CD8610">
+          <AssociationSet Name="FK__OrderProd__Produ__3E923B2D" Association="Self.FK__OrderProd__Produ__3E923B2D">
             <End Role="ProductInfo" EntitySet="ProductInfo" />
             <End Role="OrderProductHistory" EntitySet="OrderProductHistory" />
           </AssociationSet>
@@ -2291,10 +2241,7 @@
           <Property Name="IsActive" Type="Int32" />
           <Property Name="IsLock" Type="Int32" />
           <Property Name="InfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="HaiBrandId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="HaiBranch" Relationship="Self.FK__C1Info__HaiBrand__72910220" FromRole="C1Info" ToRole="HaiBranch" />
           <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C1Info__InfoId__681373AD" FromRole="C1Info" ToRole="CInfoCommon" />
-          <NavigationProperty Name="C2Info" Relationship="Self.FK__C2Info__C1Id__73852659" FromRole="C1Info" ToRole="C2Info" />
           <NavigationProperty Name="HaiStaffs" Relationship="Self.StaffWithC1" FromRole="C1Info" ToRole="HaiStaff" />
           <NavigationProperty Name="OrderProducts" Relationship="NDHDB1Model.FK__OrderProdu__C1Id__29971E47" FromRole="C1Info" ToRole="OrderProduct" />
         </EntityType>
@@ -2308,9 +2255,6 @@
           <Property Name="Deputy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Int32" />
           <Property Name="InfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="C1Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Decision" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="C1Info" Relationship="Self.FK__C2Info__C1Id__73852659" FromRole="C2Info" ToRole="C1Info" />
           <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C2Info__InfoId__6CD828CA" FromRole="C2Info" ToRole="CInfoCommon" />
           <NavigationProperty Name="StaffWithC2" Relationship="Self.FK__StaffWithC__C2Id__4B622666" FromRole="C2Info" ToRole="StaffWithC2" />
           <Property Name="CStatus" Type="Int32" />
@@ -2376,9 +2320,7 @@
           <Property Name="CName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="IdentityCard" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="AddressInfo" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="WardId" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Fax" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="PlaceOfBirth" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -2386,40 +2328,34 @@
           <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="ModifyDate" Type="DateTime" Precision="3" />
           <Property Name="CType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <Property Name="AreaId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="ProvinceName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="DistrictName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="BranchCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="CCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="CDeputy" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <Property Name="Mobile" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="BankAccount" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="BankAccountHolder" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="BackName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CStatus" Type="Int32" />
           <Property Name="TaxCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="BusinessLicense" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Lat" Type="Double" />
           <Property Name="Lng" Type="Double" />
-          <Property Name="BirthMonth" Type="Int32" />
-          <Property Name="BirthYear" Type="Int32" />
           <Property Name="CRank" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="CGroup" Type="Int32" />
           <Property Name="WardName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Country" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="BirthDay" Type="Int32" />
+          <Property Name="BirthDay" Type="String" />
           <NavigationProperty Name="AgencySavePoints" Relationship="Self.FK__AgencySav__CInfo__6497E884" FromRole="CInfoCommon" ToRole="AgencySavePoint" />
           <NavigationProperty Name="C1Info" Relationship="Self.FK__C1Info__InfoId__681373AD" FromRole="CInfoCommon" ToRole="C1Info" />
           <NavigationProperty Name="C2Info" Relationship="Self.FK__C2Info__InfoId__6CD828CA" FromRole="CInfoCommon" ToRole="C2Info" />
-          <NavigationProperty Name="HaiArea" Relationship="Self.FK__CInfoComm__AreaI__52E34C9D" FromRole="CInfoCommon" ToRole="HaiArea" />
-          <NavigationProperty Name="Ward" Relationship="Self.FK__CInfoComm__WardI__634EBE90" FromRole="CInfoCommon" ToRole="Ward" />
           <NavigationProperty Name="EventCustomers" Relationship="Self.FK__EventCust__CInfo__1387E197" FromRole="CInfoCommon" ToRole="EventCustomer" />
           <NavigationProperty Name="EventCustomerFarmers" Relationship="Self.FK__EventCust__CInfo__3F6663D5" FromRole="CInfoCommon" ToRole="EventCustomerFarmer" />
           <NavigationProperty Name="FarmerInfoes" Relationship="Self.FK__FarmerInf__InfoI__7EF6D905" FromRole="CInfoCommon" ToRole="FarmerInfo" />
           <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="CInfoCommon" ToRole="MSGPoint" />
-          <Property Name="ProvinceCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="ProvinceCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="SaveAgencyShopImages" Relationship="NDHDB1Model.FK__SaveAgenc__Cinfo__7FA0E47B" FromRole="CInfoCommon" ToRole="SaveAgencyShopImage" />
           <NavigationProperty Name="HaiOrders" Relationship="NDHDB1Model.FK__HaiOrder__Agency__17786E0C" FromRole="CInfoCommon" ToRole="HaiOrder" />
+          <Property Name="AgencyType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AgencyType1" Relationship="NDHDB1Model.FK__CInfoComm__Agenc__4356F04A" FromRole="CInfoCommon" ToRole="AgencyType" />
         </EntityType>
         <EntityType Name="DecorGroup">
           <Key>
@@ -2603,7 +2539,6 @@
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" MaxLength="55" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CInfoCommons" Relationship="Self.FK__CInfoComm__AreaI__52E34C9D" FromRole="HaiArea" ToRole="CInfoCommon" />
           <NavigationProperty Name="EventAreas" Relationship="Self.FK__EventArea__AreaI__54968AE5" FromRole="HaiArea" ToRole="EventArea" />
           <NavigationProperty Name="EventAreaFarmers" Relationship="Self.FK__EventArea__AreaI__39AD8A7F" FromRole="HaiArea" ToRole="EventAreaFarmer" />
           <NavigationProperty Name="HaiBranches" Relationship="Self.FK__HaiBranch__AreaI__145C0A3F" FromRole="HaiArea" ToRole="HaiBranch" />
@@ -2619,7 +2554,6 @@
           <Property Name="AreaId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Phone" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="C1Info" Relationship="Self.FK__C1Info__HaiBrand__72910220" FromRole="HaiBranch" ToRole="C1Info" />
           <NavigationProperty Name="HaiArea" Relationship="Self.FK__HaiBranch__AreaI__145C0A3F" FromRole="HaiBranch" ToRole="HaiArea" />
           <NavigationProperty Name="HaiStaffs" Relationship="Self.FK__HaiStaff__Branch__24927208" FromRole="HaiBranch" ToRole="HaiStaff" />
           <Property Name="LatCheck" Type="Double" />
@@ -3036,7 +2970,6 @@
           <Property Name="WType" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Location" Type="String" MaxLength="64" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Districtid" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CInfoCommons" Relationship="Self.FK__CInfoComm__WardI__634EBE90" FromRole="Ward" ToRole="CInfoCommon" />
           <NavigationProperty Name="District" Relationship="Self.FK__Ward__Districtid__0C85DE4D" FromRole="Ward" ToRole="District" />
         </EntityType>
         <EntityType Name="Warehouse">
@@ -3117,18 +3050,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__C1Info__HaiBrand__72910220">
-          <End Role="HaiBranch" Type="Self.HaiBranch" Multiplicity="0..1" />
-          <End Role="C1Info" Type="Self.C1Info" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HaiBranch">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="C1Info">
-              <PropertyRef Name="HaiBrandId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__C1Info__InfoId__681373AD">
           <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="0..1" />
           <End Role="C1Info" Type="Self.C1Info" Multiplicity="*" />
@@ -3138,18 +3059,6 @@
             </Principal>
             <Dependent Role="C1Info">
               <PropertyRef Name="InfoId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__C2Info__C1Id__73852659">
-          <End Role="C1Info" Type="Self.C1Info" Multiplicity="0..1" />
-          <End Role="C2Info" Type="Self.C2Info" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="C1Info">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="C2Info">
-              <PropertyRef Name="C1Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3186,30 +3095,6 @@
             </Principal>
             <Dependent Role="CalendarInfo">
               <PropertyRef Name="StaffId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CInfoComm__AreaI__52E34C9D">
-          <End Role="HaiArea" Type="Self.HaiArea" Multiplicity="0..1" />
-          <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HaiArea">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CInfoCommon">
-              <PropertyRef Name="AreaId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__CInfoComm__WardI__634EBE90">
-          <End Role="Ward" Type="Self.Ward" Multiplicity="0..1" />
-          <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ward">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CInfoCommon">
-              <PropertyRef Name="WardId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3665,17 +3550,9 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
-          <AssociationSet Name="FK__C1Info__HaiBrand__72910220" Association="Self.FK__C1Info__HaiBrand__72910220">
-            <End Role="HaiBranch" EntitySet="HaiBranches" />
-            <End Role="C1Info" EntitySet="C1Info" />
-          </AssociationSet>
           <AssociationSet Name="FK__C1Info__InfoId__681373AD" Association="Self.FK__C1Info__InfoId__681373AD">
             <End Role="CInfoCommon" EntitySet="CInfoCommons" />
             <End Role="C1Info" EntitySet="C1Info" />
-          </AssociationSet>
-          <AssociationSet Name="FK__C2Info__C1Id__73852659" Association="Self.FK__C2Info__C1Id__73852659">
-            <End Role="C1Info" EntitySet="C1Info" />
-            <End Role="C2Info" EntitySet="C2Info" />
           </AssociationSet>
           <AssociationSet Name="FK__C2Info__InfoId__6CD828CA" Association="Self.FK__C2Info__InfoId__6CD828CA">
             <End Role="CInfoCommon" EntitySet="CInfoCommons" />
@@ -3688,14 +3565,6 @@
           <AssociationSet Name="FK__CalendarI__Staff__4297D63B" Association="Self.FK__CalendarI__Staff__4297D63B">
             <End Role="HaiStaff" EntitySet="HaiStaffs" />
             <End Role="CalendarInfo" EntitySet="CalendarInfoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CInfoComm__AreaI__52E34C9D" Association="Self.FK__CInfoComm__AreaI__52E34C9D">
-            <End Role="HaiArea" EntitySet="HaiAreas" />
-            <End Role="CInfoCommon" EntitySet="CInfoCommons" />
-          </AssociationSet>
-          <AssociationSet Name="FK__CInfoComm__WardI__634EBE90" Association="Self.FK__CInfoComm__WardI__634EBE90">
-            <End Role="Ward" EntitySet="Wards" />
-            <End Role="CInfoCommon" EntitySet="CInfoCommons" />
           </AssociationSet>
           <AssociationSet Name="FK__EventCust__CInfo__1387E197" Association="Self.FK__EventCust__CInfo__1387E197">
             <End Role="CInfoCommon" EntitySet="CInfoCommons" />
@@ -3918,6 +3787,11 @@
           <AssociationSet Name="FK__OrderProd__Produ__39CD8610" Association="NDHDB1Model.FK__OrderProd__Produ__39CD8610">
             <End Role="ProductInfo" EntitySet="ProductInfoes" />
             <End Role="OrderProductHistory" EntitySet="OrderProductHistories" />
+          </AssociationSet>
+          <EntitySet Name="AgencyTypes" EntityType="NDHDB1Model.AgencyType" />
+          <AssociationSet Name="FK__CInfoComm__Agenc__4356F04A" Association="NDHDB1Model.FK__CInfoComm__Agenc__4356F04A">
+            <End Role="AgencyType" EntitySet="AgencyTypes" />
+            <End Role="CInfoCommon" EntitySet="CInfoCommons" />
           </AssociationSet>
         </EntityContainer>
         <ComplexType Name="checkin_calendartype_group_Result">
@@ -4336,6 +4210,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AgencyType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CInfoCommons" Relationship="NDHDB1Model.FK__CInfoComm__Agenc__4356F04A" FromRole="AgencyType" ToRole="CInfoCommon" />
+        </EntityType>
+        <Association Name="FK__CInfoComm__Agenc__4356F04A">
+          <End Type="NDHDB1Model.AgencyType" Role="AgencyType" Multiplicity="0..1" />
+          <End Type="NDHDB1Model.CInfoCommon" Role="CInfoCommon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AgencyType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CInfoCommon">
+              <PropertyRef Name="AgencyType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4470,7 +4364,6 @@
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="IsLock" ColumnName="IsLock" />
                 <ScalarProperty Name="InfoId" ColumnName="InfoId" />
-                <ScalarProperty Name="HaiBrandId" ColumnName="HaiBrandId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -4484,9 +4377,7 @@
                 <ScalarProperty Name="Deputy" ColumnName="Deputy" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="InfoId" ColumnName="InfoId" />
-                <ScalarProperty Name="C1Id" ColumnName="C1Id" />
-                <ScalarProperty Name="Decision" ColumnName="Decision" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CalendarInfoes">
@@ -4547,14 +4438,13 @@
           <EntitySetMapping Name="CInfoCommons">
             <EntityTypeMapping TypeName="NDHDB1Model.CInfoCommon">
               <MappingFragment StoreEntitySet="CInfoCommon">
+                <ScalarProperty Name="AgencyType" ColumnName="AgencyType" />
                 <ScalarProperty Name="ProvinceCode" ColumnName="ProvinceCode" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CName" ColumnName="CName" />
                 <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
                 <ScalarProperty Name="AddressInfo" ColumnName="AddressInfo" />
-                <ScalarProperty Name="WardId" ColumnName="WardId" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Fax" ColumnName="Fax" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="PlaceOfBirth" ColumnName="PlaceOfBirth" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
@@ -4562,25 +4452,19 @@
                 <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
                 <ScalarProperty Name="CType" ColumnName="CType" />
-                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
                 <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
                 <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
                 <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
                 <ScalarProperty Name="CCode" ColumnName="CCode" />
                 <ScalarProperty Name="CDeputy" ColumnName="CDeputy" />
-                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
                 <ScalarProperty Name="BankAccount" ColumnName="BankAccount" />
                 <ScalarProperty Name="BankAccountHolder" ColumnName="BankAccountHolder" />
                 <ScalarProperty Name="BackName" ColumnName="BackName" />
-                <ScalarProperty Name="CStatus" ColumnName="CStatus" />
                 <ScalarProperty Name="TaxCode" ColumnName="TaxCode" />
                 <ScalarProperty Name="BusinessLicense" ColumnName="BusinessLicense" />
                 <ScalarProperty Name="Lat" ColumnName="Lat" />
                 <ScalarProperty Name="Lng" ColumnName="Lng" />
-                <ScalarProperty Name="BirthMonth" ColumnName="BirthMonth" />
-                <ScalarProperty Name="BirthYear" ColumnName="BirthYear" />
                 <ScalarProperty Name="CRank" ColumnName="CRank" />
-                <ScalarProperty Name="CGroup" ColumnName="CGroup" />
                 <ScalarProperty Name="WardName" ColumnName="WardName" />
                 <ScalarProperty Name="Country" ColumnName="Country" />
                 <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
@@ -5466,6 +5350,14 @@
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgencyTypes">
+            <EntityTypeMapping TypeName="NDHDB1Model.AgencyType">
+              <MappingFragment StoreEntitySet="AgencyType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

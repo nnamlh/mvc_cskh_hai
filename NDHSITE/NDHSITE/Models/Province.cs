@@ -14,6 +14,7 @@ namespace NDHSITE.Models
     
     public partial class Province
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Province()
         {
             this.Districts = new HashSet<District>();
@@ -24,6 +25,7 @@ namespace NDHSITE.Models
         public string PType { get; set; }
         public string Code { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<District> Districts { get; set; }
     }
 }

@@ -398,7 +398,6 @@ namespace NDHSITE.Controllers
                                 worksheet.Cells[tableIndex, 7].Value = c2.CInfoCommon.AddressInfo;
                                 worksheet.Cells[tableIndex, 8].Value = c2.CInfoCommon.DistrictName;
                                 worksheet.Cells[tableIndex, 9].Value = c2.CInfoCommon.ProvinceName;
-                                worksheet.Cells[tableIndex, 10].Value = c2.C1Info.Code;
                             }
 
                         }

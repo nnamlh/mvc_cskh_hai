@@ -59,13 +59,13 @@ namespace HAIAPI.Controllers
                     if (cInfo.CType == "CII")
                     {
                         var eventArea = (from log in db.EventAreas
-                                         where log.AreaId == cInfo.AreaId && log.EventInfo.ESTT == 1 && (DbFunctions.TruncateTime(log.EventInfo.BeginTime)
+                                         where log.EventInfo.ESTT == 1 && (DbFunctions.TruncateTime(log.EventInfo.BeginTime)
                                                        <= DbFunctions.TruncateTime(dateNow) && DbFunctions.TruncateTime(log.EventInfo.EndTime)
                                                        >= DbFunctions.TruncateTime(dateNow))
                                          select log).ToList();
                         foreach (var item in eventArea)
                         {
-                            var cusJoin = db.EventCustomers.Where(p => p.EventId == item.EventId && p.CInfoCommon.AreaId == item.AreaId).ToList();
+                            var cusJoin = db.EventCustomers.Where(p => p.EventId == item.EventId).ToList();
 
                             if (cusJoin.Count() > 0)
                             {
@@ -83,14 +83,14 @@ namespace HAIAPI.Controllers
                     else if (cInfo.CType == "FARMER")
                     {
                         var eventArea = (from log in db.EventAreaFarmers
-                                         where log.AreaId == cInfo.AreaId && log.EventInfo.ESTT == 1 && (DbFunctions.TruncateTime(log.EventInfo.BeginTime)
+                                         where log.EventInfo.ESTT == 1 && (DbFunctions.TruncateTime(log.EventInfo.BeginTime)
                                                        <= DbFunctions.TruncateTime(dateNow) && DbFunctions.TruncateTime(log.EventInfo.EndTime)
                                                        >= DbFunctions.TruncateTime(dateNow))
                                          select log).ToList();
 
                         foreach (var item in eventArea)
                         {
-                            var cusJoin = db.EventCustomerFarmers.Where(p => p.EventId == item.EventId && p.CInfoCommon.AreaId == item.AreaId).ToList();
+                            var cusJoin = db.EventCustomerFarmers.Where(p => p.EventId == item.EventId ).ToList();
 
                             if (cusJoin.Count() > 0)
                             {
@@ -303,14 +303,14 @@ namespace HAIAPI.Controllers
                 {
                     // var eventArea = db.EventAreas.Where(p => p.AreaId == cInfo.AreaId && p.EventInfo.ESTT == 1).ToList();
                     var eventArea = (from log in db.EventAreas
-                                     where log.AreaId == cInfo.AreaId && log.EventInfo.ESTT == 1 && (DbFunctions.TruncateTime(log.EventInfo.BeginTime)
+                                     where  log.EventInfo.ESTT == 1 && (DbFunctions.TruncateTime(log.EventInfo.BeginTime)
                                                    <= DbFunctions.TruncateTime(dateNow) && DbFunctions.TruncateTime(log.EventInfo.EndTime)
                                                    >= DbFunctions.TruncateTime(dateNow))
                                      select log).ToList();
 
                     foreach (var item in eventArea)
                     {
-                        var cusJoin = db.EventCustomers.Where(p => p.EventId == item.EventId && p.CInfoCommon.AreaId == item.AreaId).ToList();
+                        var cusJoin = db.EventCustomers.Where(p => p.EventId == item.EventId).ToList();
 
                         if (cusJoin.Count() > 0)
                         {
@@ -331,14 +331,14 @@ namespace HAIAPI.Controllers
                 {
                     // var eventArea = db.EventAreaFarmers.Where(p => p.AreaId == cInfo.AreaId && p.EventInfo.ESTT == 1).ToList();
                     var eventArea = (from log in db.EventAreaFarmers
-                                     where log.AreaId == cInfo.AreaId && log.EventInfo.ESTT == 1 && (DbFunctions.TruncateTime(log.EventInfo.BeginTime)
+                                     where log.EventInfo.ESTT == 1 && (DbFunctions.TruncateTime(log.EventInfo.BeginTime)
                                                    <= DbFunctions.TruncateTime(dateNow) && DbFunctions.TruncateTime(log.EventInfo.EndTime)
                                                    >= DbFunctions.TruncateTime(dateNow))
                                      select log).ToList();
 
                     foreach (var item in eventArea)
                     {
-                        var cusJoin = db.EventCustomerFarmers.Where(p => p.EventId == item.EventId && p.CInfoCommon.AreaId == item.AreaId).ToList();
+                        var cusJoin = db.EventCustomerFarmers.Where(p => p.EventId == item.EventId ).ToList();
 
                         if (cusJoin.Count() > 0)
                         {

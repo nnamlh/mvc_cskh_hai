@@ -14,6 +14,7 @@ namespace NDHSITE.Models
     
     public partial class CInfoCommon
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CInfoCommon()
         {
             this.AgencySavePoints = new HashSet<AgencySavePoint>();
@@ -22,59 +23,60 @@ namespace NDHSITE.Models
             this.EventCustomers = new HashSet<EventCustomer>();
             this.EventCustomerFarmers = new HashSet<EventCustomerFarmer>();
             this.FarmerInfoes = new HashSet<FarmerInfo>();
+            this.HaiOrders = new HashSet<HaiOrder>();
             this.MSGPoints = new HashSet<MSGPoint>();
             this.SaveAgencyShopImages = new HashSet<SaveAgencyShopImage>();
-            this.HaiOrders = new HashSet<HaiOrder>();
         }
     
         public string Id { get; set; }
         public string CName { get; set; }
         public string IdentityCard { get; set; }
         public string AddressInfo { get; set; }
-        public string WardId { get; set; }
         public string Phone { get; set; }
-        public string Fax { get; set; }
         public string Email { get; set; }
-        public Nullable<int> BirthDay { get; set; }
         public string PlaceOfBirth { get; set; }
         public string Notes { get; set; }
         public string UserLogin { get; set; }
         public Nullable<System.DateTime> CreateTime { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public string CType { get; set; }
-        public string AreaId { get; set; }
         public string ProvinceName { get; set; }
         public string DistrictName { get; set; }
         public string BranchCode { get; set; }
         public string CCode { get; set; }
         public string CDeputy { get; set; }
-        public string Mobile { get; set; }
         public string BankAccount { get; set; }
         public string BankAccountHolder { get; set; }
         public string BackName { get; set; }
-        public Nullable<int> CStatus { get; set; }
         public string TaxCode { get; set; }
         public string BusinessLicense { get; set; }
         public Nullable<double> Lat { get; set; }
         public Nullable<double> Lng { get; set; }
-        public Nullable<int> BirthMonth { get; set; }
-        public Nullable<int> BirthYear { get; set; }
         public string CRank { get; set; }
-        public Nullable<int> CGroup { get; set; }
         public string WardName { get; set; }
         public string Country { get; set; }
+        public string BirthDay { get; set; }
+        public string AgencyType { get; set; }
         public string ProvinceCode { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AgencySavePoint> AgencySavePoints { get; set; }
+        public virtual AgencyType AgencyType1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<C1Info> C1Info { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<C2Info> C2Info { get; set; }
-        public virtual HaiArea HaiArea { get; set; }
-        public virtual Ward Ward { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EventCustomer> EventCustomers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EventCustomerFarmer> EventCustomerFarmers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FarmerInfo> FarmerInfoes { get; set; }
-        public virtual ICollection<MSGPoint> MSGPoints { get; set; }
-        public virtual ICollection<SaveAgencyShopImage> SaveAgencyShopImages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HaiOrder> HaiOrders { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MSGPoint> MSGPoints { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SaveAgencyShopImage> SaveAgencyShopImages { get; set; }
     }
 }

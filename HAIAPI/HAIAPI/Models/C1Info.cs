@@ -17,7 +17,6 @@ namespace HAIAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public C1Info()
         {
-            this.C2Info = new HashSet<C2Info>();
             this.HaiStaffs = new HashSet<HaiStaff>();
             this.OrderProducts = new HashSet<OrderProduct>();
         }
@@ -29,12 +28,8 @@ namespace HAIAPI.Models
         public Nullable<int> IsActive { get; set; }
         public Nullable<int> IsLock { get; set; }
         public string InfoId { get; set; }
-        public string HaiBrandId { get; set; }
     
-        public virtual HaiBranch HaiBranch { get; set; }
         public virtual CInfoCommon CInfoCommon { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<C2Info> C2Info { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HaiStaff> HaiStaffs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

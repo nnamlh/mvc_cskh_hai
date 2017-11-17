@@ -12,19 +12,18 @@ namespace NDHSITE.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderStaffProcess
+    public partial class AgencyType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public OrderStaffProcess()
+        public AgencyType()
         {
-            this.OrderStaffs = new HashSet<OrderStaff>();
+            this.CInfoCommons = new HashSet<CInfoCommon>();
         }
     
         public string Id { get; set; }
         public string Name { get; set; }
-        public string Notes { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderStaff> OrderStaffs { get; set; }
+        public virtual ICollection<CInfoCommon> CInfoCommons { get; set; }
     }
 }

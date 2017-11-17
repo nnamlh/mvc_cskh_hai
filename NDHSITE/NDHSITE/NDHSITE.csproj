@@ -242,6 +242,9 @@
     <Compile Include="Models\AgencySavePoint.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AgencyType.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\AllStatu.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -269,6 +272,9 @@
     <Compile Include="Models\AwardInfo.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BarcodeChangeHistory.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BarcodeHistory.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -282,6 +288,9 @@
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\C2Info.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\c2_get_list_c1_Result.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CalendarInfo.cs">
@@ -434,6 +443,9 @@
     <Compile Include="Models\PHistory.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\procduct_item_detail_Result.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ProcessHistory.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -452,6 +464,9 @@
     <Compile Include="Models\ProductSeri.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\product_list_Result.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Province.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -459,9 +474,6 @@
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RegFirebase.cs">
-      <DependentUpon>NDHDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\report_checkin_detail_all_branch_Result.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\report_checkin_detail_by_branch_Result.cs">
@@ -516,6 +528,9 @@
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StoreStaffId.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TokenData.cs" />
@@ -573,32 +588,32 @@
     <Content Include="haiupload\accountresult.xlsx" />
     <Content Include="haiupload\exceleventfarmer.xlsx" />
     <Content Include="haiupload\areacustomerevent.xlsx" />
-    <EntityDeploy Include="Models\NDHDB.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>NDHDB.Designer.cs</LastGenOutput>
-    </EntityDeploy>
+    <Content Include="haiupload\barcodereport.xlsx" />
+    <Content Include="haiupload\barcodereportdeatail.xlsx" />
+    <Content Include="haiupload\update-ds-khach-hang-c2-v2.xlsx" />
+    <Content Include="haiupload\stafftandagency.xlsx" />
     <Content Include="Models\NDHDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>NDHDB.edmx</DependentUpon>
       <LastGenOutput>NDHDB.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\NDHDB.edmx.diagram">
-      <DependentUpon>NDHDB.edmx</DependentUpon>
     </Content>
     <Content Include="Models\NDHDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>NDHDB.edmx</DependentUpon>
       <LastGenOutput>NDHDB.cs</LastGenOutput>
     </Content>
-    <Content Include="haiupload\barcodereport.xlsx" />
-    <Content Include="haiupload\barcodereportdeatail.xlsx" />
-    <Content Include="haiupload\update-ds-khach-hang-c2-v2.xlsx" />
-    <Content Include="haiupload\stafftandagency.xlsx" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="haiupload\report-check-in-detail.xlsx" />
+    <EntityDeploy Include="Models\NDHDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NDHDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\NDHDB.edmx.diagram">
+      <DependentUpon>NDHDB.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\home.pubxml" />
     <None Include="Properties\PublishProfiles\ndhsite.pubxml" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />

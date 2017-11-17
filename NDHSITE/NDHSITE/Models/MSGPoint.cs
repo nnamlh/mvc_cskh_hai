@@ -14,6 +14,7 @@ namespace NDHSITE.Models
     
     public partial class MSGPoint
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MSGPoint()
         {
             this.MSGPointEvents = new HashSet<MSGPointEvent>();
@@ -28,7 +29,8 @@ namespace NDHSITE.Models
         public string MSGType { get; set; }
     
         public virtual CInfoCommon CInfoCommon { get; set; }
-        public virtual ICollection<MSGPointEvent> MSGPointEvents { get; set; }
         public virtual ProductInfo ProductInfo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MSGPointEvent> MSGPointEvents { get; set; }
     }
 }

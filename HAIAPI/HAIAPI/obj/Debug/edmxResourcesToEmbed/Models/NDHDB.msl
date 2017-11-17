@@ -129,7 +129,6 @@
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="IsLock" ColumnName="IsLock" />
           <ScalarProperty Name="InfoId" ColumnName="InfoId" />
-          <ScalarProperty Name="HaiBrandId" ColumnName="HaiBrandId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -143,8 +142,6 @@
           <ScalarProperty Name="Deputy" ColumnName="Deputy" />
           <ScalarProperty Name="IsActive" ColumnName="IsActive" />
           <ScalarProperty Name="InfoId" ColumnName="InfoId" />
-          <ScalarProperty Name="C1Id" ColumnName="C1Id" />
-          <ScalarProperty Name="Decision" ColumnName="Decision" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -206,14 +203,13 @@
     <EntitySetMapping Name="CInfoCommons">
       <EntityTypeMapping TypeName="NDHDB1Model.CInfoCommon">
         <MappingFragment StoreEntitySet="CInfoCommon">
+          <ScalarProperty Name="AgencyType" ColumnName="AgencyType" />
           <ScalarProperty Name="ProvinceCode" ColumnName="ProvinceCode" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CName" ColumnName="CName" />
           <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
           <ScalarProperty Name="AddressInfo" ColumnName="AddressInfo" />
-          <ScalarProperty Name="WardId" ColumnName="WardId" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Fax" ColumnName="Fax" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="PlaceOfBirth" ColumnName="PlaceOfBirth" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
@@ -221,25 +217,19 @@
           <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
           <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
           <ScalarProperty Name="CType" ColumnName="CType" />
-          <ScalarProperty Name="AreaId" ColumnName="AreaId" />
           <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
           <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
           <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
           <ScalarProperty Name="CCode" ColumnName="CCode" />
           <ScalarProperty Name="CDeputy" ColumnName="CDeputy" />
-          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
           <ScalarProperty Name="BankAccount" ColumnName="BankAccount" />
           <ScalarProperty Name="BankAccountHolder" ColumnName="BankAccountHolder" />
           <ScalarProperty Name="BackName" ColumnName="BackName" />
-          <ScalarProperty Name="CStatus" ColumnName="CStatus" />
           <ScalarProperty Name="TaxCode" ColumnName="TaxCode" />
           <ScalarProperty Name="BusinessLicense" ColumnName="BusinessLicense" />
           <ScalarProperty Name="Lat" ColumnName="Lat" />
           <ScalarProperty Name="Lng" ColumnName="Lng" />
-          <ScalarProperty Name="BirthMonth" ColumnName="BirthMonth" />
-          <ScalarProperty Name="BirthYear" ColumnName="BirthYear" />
           <ScalarProperty Name="CRank" ColumnName="CRank" />
-          <ScalarProperty Name="CGroup" ColumnName="CGroup" />
           <ScalarProperty Name="WardName" ColumnName="WardName" />
           <ScalarProperty Name="Country" ColumnName="Country" />
           <ScalarProperty Name="BirthDay" ColumnName="BirthDay" />
@@ -1125,6 +1115,14 @@
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AgencyTypes">
+      <EntityTypeMapping TypeName="NDHDB1Model.AgencyType">
+        <MappingFragment StoreEntitySet="AgencyType">
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

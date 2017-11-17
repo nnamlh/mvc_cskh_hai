@@ -14,6 +14,7 @@ namespace NDHSITE.Models
     
     public partial class C2Info
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public C2Info()
         {
             this.StaffWithC2 = new HashSet<StaffWithC2>();
@@ -25,12 +26,10 @@ namespace NDHSITE.Models
         public string Deputy { get; set; }
         public Nullable<int> IsActive { get; set; }
         public string InfoId { get; set; }
-        public string C1Id { get; set; }
-        public string Decision { get; set; }
         public Nullable<int> CStatus { get; set; }
     
-        public virtual C1Info C1Info { get; set; }
         public virtual CInfoCommon CInfoCommon { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<StaffWithC2> StaffWithC2 { get; set; }
     }
 }

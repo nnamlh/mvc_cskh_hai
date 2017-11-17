@@ -52,21 +52,19 @@ namespace HAIAPI.Controllers
                     throw new Exception("Chỉ nhân viên công ty mới được quyền tạo");
 
 
-                var checkC1 = db.C1Info.Where(p => p.Code == paser.c1Id).FirstOrDefault();
 
+                /*
                 if (checkC1 == null)
                     checkC1 = db.C1Info.Where(p => p.Code == "0000000000").FirstOrDefault();
-
+                    */
                 var agencyCode = GetAgencyCodeTemp(staff.HaiBranch.Code);
 
                 CInfoCommon cInfo = new CInfoCommon()
                 {
                     Id = Guid.NewGuid().ToString(),
                     AddressInfo = paser.address,
-                    AreaId = staff.HaiBranch.AreaId,
                     BranchCode = staff.HaiBranch.Code,
                     BusinessLicense = paser.businessLicense,
-                    CGroup = paser.group,
                     CRank = paser.rank,
                     CDeputy = paser.deputy,
                     CName = paser.name,
@@ -77,7 +75,6 @@ namespace HAIAPI.Controllers
                     IdentityCard = paser.identityCard,
                     CType = "CII",
                     TaxCode = paser.taxCode,
-                    WardId = "11111",
                     Lat = paser.lat,
                     Lng = paser.lng,
                     CCode = agencyCode,
@@ -91,7 +88,6 @@ namespace HAIAPI.Controllers
                 C2Info c2 = new C2Info()
                 {
                     Id = Guid.NewGuid().ToString(),
-                    C1Id = checkC1.Id,
                     StoreName = paser.name,
                     Deputy = paser.deputy,
                     IsActive = 0,
@@ -114,6 +110,25 @@ namespace HAIAPI.Controllers
 
                 db.StaffWithC2.Add(staffC2);
                 db.SaveChanges();
+
+
+                var checkC1 = db.C1Info.Where(p => p.Code == paser.c1Id).FirstOrDefault();
+
+                // import c1
+                if (checkC1 != null)
+                {
+                    var c2C1Add = new C2C1()
+                    {
+                        C1Code = checkC1.Code,
+                        C2Code = agencyCode,
+                        Id = Guid.NewGuid().ToString(),
+                        Priority = 1,
+                        ModifyDate = DateTime.Now
+                    };
+
+                    db.C2C1.Add(c2C1Add);
+                    db.SaveChanges();
+                }
 
                 // save info
                 var agencyImage = new SaveAgencyShopImage()

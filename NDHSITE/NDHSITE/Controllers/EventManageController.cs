@@ -80,14 +80,14 @@ namespace NDHSITE.Controllers
 
         public ActionResult jsonChooseCII(string id)
         {
-            var listArea = db.C2Info.Where(p => p.CInfoCommon.AreaId == id).Select(p => new { Id = p.InfoId, Name = p.StoreName, Deputy = p.Deputy }).ToList();
+            var listArea = db.C2Info.Select(p => new { Id = p.InfoId, Name = p.StoreName, Deputy = p.Deputy }).ToList();
        
             return Json(listArea, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult jsonChooseFarmer(string id)
         {
-            var listArea = db.FarmerInfoes.Where(p => p.CInfoCommon.AreaId == id).Select(p => new { Id = p.InfoId, Name = p.FarmerName }).ToList();
+            var listArea = db.FarmerInfoes.Select(p => new { Id = p.InfoId, Name = p.FarmerName }).ToList();
 
             return Json(listArea, JsonRequestBehavior.AllowGet);
         }
@@ -318,14 +318,13 @@ namespace NDHSITE.Controllers
                         if (checkCII != null)
                         {
                             // kiem tra khu vu cua dai ly nay da add chua, chua thi add
-                            var checkAreaEvent = db.EventAreas.Where(p => p.EventId == info.Id && p.AreaId == checkCII.CInfoCommon.AreaId).FirstOrDefault();
+                            var checkAreaEvent = db.EventAreas.Where(p => p.EventId == info.Id).FirstOrDefault();
 
                             if (checkAreaEvent == null)
                             {
                                 var areaEvent = new EventArea()
                                 {
                                     EventId = info.Id,
-                                    AreaId = checkCII.CInfoCommon.AreaId,
                                     AllAgency = 1
                                 };
                                 db.EventAreas.Add(areaEvent);
@@ -410,14 +409,13 @@ namespace NDHSITE.Controllers
                         if (cInfo != null)
                         {
 
-                            var checkAreaFarmer = db.EventAreaFarmers.Where(p => p.EventId == info.Id && p.AreaId == cInfo.AreaId).FirstOrDefault();
+                            var checkAreaFarmer = db.EventAreaFarmers.Where(p => p.EventId == info.Id).FirstOrDefault();
 
                             if (checkAreaFarmer == null)
                             {
                                 var areaEvent = new EventAreaFarmer()
                                 {
                                     EventId = info.Id,
-                                    AreaId = cInfo.AreaId,
                                     AllAgency = 1
                                 };
                                 db.EventAreaFarmers.Add(areaEvent);
@@ -943,7 +941,7 @@ namespace NDHSITE.Controllers
 
             if (type == 1)
             {
-                var data = db.EventCustomers.Where(p => p.EventId == eventId).OrderBy(p => p.CInfoCommon.AreaId).ToList();
+                var data = db.EventCustomers.Where(p => p.EventId == eventId).ToList();
                 string pathRoot = Server.MapPath("~/haiupload/areacustomerevent.xlsx");
                 string name = "areacustomer" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".xlsx";
                 string pathTo = Server.MapPath("~/temp/" + name);
@@ -969,7 +967,6 @@ namespace NDHSITE.Controllers
                                 worksheet.Cells[i + 2, 4].Value = data[i].CInfoCommon.CDeputy;
                                 worksheet.Cells[i + 2, 5].Value = data[i].CInfoCommon.CName;
 
-                                worksheet.Cells[i + 2, 6].Value = data[i].CInfoCommon.HaiArea.Name;
                                 worksheet.Cells[i + 2, 7].Value = "CẤP 2";
                             }
                             catch
@@ -992,7 +989,7 @@ namespace NDHSITE.Controllers
             }
             else
             {
-                var data = db.EventCustomerFarmers.Where(p => p.EventId == eventId).OrderBy(p => p.CInfoCommon.AreaId).ToList();
+                var data = db.EventCustomerFarmers.Where(p => p.EventId == eventId).ToList();
                 string pathRoot = Server.MapPath("~/haiupload/areacustomerevent.xlsx");
                 string name = "areacustomer" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".xlsx";
                 string pathTo = Server.MapPath("~/temp/" + name);
@@ -1017,7 +1014,7 @@ namespace NDHSITE.Controllers
                                 worksheet.Cells[i + 2, 3].Value = data[i].CInfoCommon.Phone;
                                 worksheet.Cells[i + 2, 4].Value = data[i].CInfoCommon.CName;
 
-                                worksheet.Cells[i + 2, 6].Value = data[i].CInfoCommon.HaiArea.Name;
+  
                                 worksheet.Cells[i + 2, 7].Value = "NÔNG DÂN";
                             }
                             catch
@@ -1058,7 +1055,7 @@ namespace NDHSITE.Controllers
                 return Json(new { error = 0, msg = "Chương trình đang thực thi." }, JsonRequestBehavior.AllowGet);
             }
 
-            var listAreaCustomer = db.EventCustomers.Where(p => p.CInfoCommon.AreaId == areaId).ToList();
+            var listAreaCustomer = db.EventCustomers.ToList();
 
             foreach (var item in listAreaCustomer)
             {
@@ -1107,7 +1104,7 @@ namespace NDHSITE.Controllers
 
 
 
-            return View(db.EventCustomers.Where(p => p.CInfoCommon.AreaId == areaId && p.EventId == eventId).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
+            return View(db.EventCustomers.Where(p => p.EventId == eventId).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult RemoveEventCustomer(string eventId, string areaId, string cid)
@@ -1175,7 +1172,7 @@ namespace NDHSITE.Controllers
                     {
                         string cCode = Convert.ToString(sheet.Cells[i, 1].Value);
 
-                        var checkCII = db.C2Info.Where(p => p.Code == cCode && p.CInfoCommon.AreaId == areaId).FirstOrDefault();
+                        var checkCII = db.C2Info.Where(p => p.Code == cCode).FirstOrDefault();
                         if (checkCII != null)
                         {
                             var cEvent = new EventCustomer()
@@ -1256,7 +1253,7 @@ namespace NDHSITE.Controllers
                 return Json(new { error = 0, msg = "Chương trình đang thực thi." }, JsonRequestBehavior.AllowGet);
             }
 
-            var listAreaCustomer = db.EventCustomerFarmers.Where(p => p.CInfoCommon.AreaId == areaId).ToList();
+            var listAreaCustomer = db.EventCustomerFarmers.ToList();
 
             foreach (var item in listAreaCustomer)
             {
@@ -1305,7 +1302,7 @@ namespace NDHSITE.Controllers
 
 
 
-            return View(db.EventCustomerFarmers.Where(p => p.CInfoCommon.AreaId == areaId).OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
+            return View(db.EventCustomerFarmers.OrderByDescending(p => p.CInfoCommon.CreateTime).ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult RemoveEventCustomerFarmer(string eventId, string areaId, string cid)
@@ -1373,7 +1370,7 @@ namespace NDHSITE.Controllers
                     {
                         string phone = Convert.ToString(sheet.Cells[i, 1].Value);
 
-                        var checkFarmer = db.CInfoCommons.Where(p => p.Phone == phone && p.AreaId == areaId && p.CType == "FARMER").FirstOrDefault();
+                        var checkFarmer = db.CInfoCommons.Where(p => p.Phone == phone && p.CType == "FARMER").FirstOrDefault();
                         if (checkFarmer != null)
                         {
                             var cEvent = new EventCustomerFarmer()

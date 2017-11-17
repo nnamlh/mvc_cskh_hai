@@ -339,28 +339,15 @@ namespace NDHSITE.Controllers
                                     Phone = phone,
                                     CreateTime = DateTime.Now,
                                     CType = "CII",
-                                    AreaId = branch.AreaId,
                                     BranchCode = branch.Code,
                                     CCode = code,
-                                    WardId = "11111",
                                     CDeputy = deputy
                                 };
-
-                                string ward = Convert.ToString(sheet.Cells[i, 8].Value);
-
-                                var wardInfo = db.Wards.Find(ward);
-
-                                if (wardInfo != null)
-                                {
-                                    cInfo.WardId = ward;
-                                }
-
 
                                 var c2 = new C2Info()
                                 {
                                     Id = Guid.NewGuid().ToString(),
                                     InfoId = cInfo.Id,
-                                    C1Id = c1Check.Id,
                                     Code = code,
                                     IsActive = 1,
                                     StoreName = storeName,
@@ -1028,7 +1015,6 @@ namespace NDHSITE.Controllers
                 result.address = cInfo.AddressInfo;
                 result.birthday = "";
                 result.user = user;
-                result.area = cInfo.HaiArea.Name;
                 result.code = cInfo.CCode;
                 result.branch = cInfo.BranchCode;
 

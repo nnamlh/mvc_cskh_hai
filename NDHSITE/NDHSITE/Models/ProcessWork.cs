@@ -14,6 +14,7 @@ namespace NDHSITE.Models
     
     public partial class ProcessWork
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ProcessWork()
         {
             this.AspNetRoles = new HashSet<AspNetRole>();
@@ -26,6 +27,7 @@ namespace NDHSITE.Models
         public string Notes { get; set; }
         public Nullable<int> SortIndex { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
     }
 }

@@ -14,9 +14,9 @@ namespace NDHSITE.Models
     
     public partial class HaiBranch
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public HaiBranch()
         {
-            this.C1Info = new HashSet<C1Info>();
             this.HaiStaffs = new HashSet<HaiStaff>();
         }
     
@@ -30,8 +30,8 @@ namespace NDHSITE.Models
         public Nullable<double> LatCheck { get; set; }
         public Nullable<double> LngCheck { get; set; }
     
-        public virtual ICollection<C1Info> C1Info { get; set; }
         public virtual HaiArea HaiArea { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HaiStaff> HaiStaffs { get; set; }
     }
 }

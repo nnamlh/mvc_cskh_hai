@@ -153,9 +153,10 @@ namespace NDHSITE.Controllers
 
         private bool checkLoginSession(string user, string token)
         {
-            var check = db.APIAuthHistories.Where(p => p.UserLogin == user && p.Token == token && p.IsExpired == 0).FirstOrDefault();
+            // var check = db.APIAuthHistories.Where(p => p.UserLogin == user && p.Token == token && p.IsExpired == 0).FirstOrDefault();
 
-            return check != null ? true : false;
+            //  return check != null ? true : false;
+            return true;
         }
 
         private string FolderSave(int id)

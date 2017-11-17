@@ -61,8 +61,7 @@
                                                     <li><a href="javascript:addtype(1, 'Mã đại lý')">Mã đại lý</a></li>
                                                     <li><a href="javascript:addtype(2, 'Số điện thoại')">Số điện thoại</a></li>
                                                     <li><a href="javascript:addtype(3 , 'Tên cửa hàng')">Tên cửa hàng</a></li>
-                                                    <li><a href="javascript:addtype(4 , 'Mã cấp 1')">Mã cấp 1</a></li>
-                                                    <li><a href="javascript:addtype(5 , 'Mã chi nhánh')">Mã chi nhánh</a></li>
+                                                    <li><a href="javascript:addtype(4 , 'Mã chi nhánh')">Mã chi nhánh</a></li>
                                                 </ul>
                                             </div><!-- /btn-group -->
                                         </div>
@@ -76,7 +75,7 @@
                                         <select class="form-control" name="status">
                                             <option value="-1"  @(ViewBag.Status == -1?"selected":"")>Tất cả</option>
                                             <option value="1"  @(ViewBag.Status == 1?"selected":"") >Đang hoặt động</option>
-                                            <option value="0"  @(ViewBag.Status == 0?"selected":"")>Chưa kích hoặt</option>
+                                            <option value="0"  @(ViewBag.Status == 0?"selected":"")>Khác</option>
                                         </select>
                                     </div>
                                 </div>
@@ -105,24 +104,18 @@
                                                 <span><strong class="semibold">Mã cấp 2:</strong> @item.CInfoCommon.CCode</span> <br />
                                                 <span><strong class="semibold">Tên cửu hàng:</strong> @item.StoreName</span> <br />
                                                 <span><strong class="semibold">Người đại diện:</strong> @item.Deputy</span> <br />
-                                                <span><strong class="semibold">Khu vực:</strong> @item.CInfoCommon.HaiArea.Name</span> <br />
                                                 <span><strong class="semibold">Chi nhánh:</strong> @item.CInfoCommon.BranchCode</span> <br />
-                                                <span><strong class="semibold">Đại lý cấp 1:</strong> @item.C1Info.StoreName - @item.C1Info.Code</span> <br />
                                                 <span><strong class="semibold">Tài khoản:</strong> @item.CInfoCommon.UserLogin</span><br />
                                                 <span><strong class="semibold">CMND:</strong> @item.CInfoCommon.IdentityCard</span><br />
                                                 <span><strong class="semibold">Số điện thoái:</strong> @item.CInfoCommon.Phone</span> <br />
                                                 <span><strong class="semibold">Email:</strong> @item.CInfoCommon.Email</span> <br />
                                             </td>
                                             <td>
-
                                                 <span><strong class="semibold">Địa chỉ:</strong> @item.CInfoCommon.AddressInfo</span> <br />
                                                 <span><strong class="semibold">Tỉnh thành:</strong> @item.CInfoCommon.ProvinceName</span> <br />
                                                 <span><strong class="semibold">Quận/huyện:</strong> @item.CInfoCommon.DistrictName</span> <br />
                                                 <span><strong class="semibold">Mã số thuế:</strong> @item.CInfoCommon.TaxCode</span> <br />
                                                 <span><strong class="semibold">Giấy phép kinh doanh:</strong> @item.CInfoCommon.BusinessLicense</span> <br />
-                                                <span><strong class="semibold">Tài khoản ngân hàng:</strong> @item.CInfoCommon.BankAccount</span> <br />
-                                                <span><strong class="semibold">Chủ tài khoản:</strong> @item.CInfoCommon.BankAccountHolder</span> <br />
-                                                <span><strong class="semibold">Tên ngân hàng:</strong> @item.CInfoCommon.BackName</span> <br />
                                                 <span><strong class="semibold">Ghi chú:</strong> @item.CInfoCommon.Notes</span>
                                             </td>
                                             <td class="text-center valign-middle">
@@ -147,7 +140,7 @@
                                     <div class="col-sm-6">
                                         <div class="form-group">
                                             <label>Mã đại lý</label>
-                                            <input type="text" name="Code" class="form-control" required />
+                                            <input type="text" name="Code" class="form-control" />
                                         </div>
                                         <div class="form-group">
                                             <label>Tên cửa hàng</label>
@@ -157,14 +150,17 @@
                                             <label>Người đại diện</label>
                                             <input type="text" name="Deputy" class="form-control" required />
                                         </div>
+                                      
                                         <div class="form-group">
-                                            <label>Đại lý cấp 1</label>
-                                            <input class="form-control c1search" type="text" name="C1Code" autocomplete="off" required autofocus data-provide="typeahead">
+                                            <label>Loại khách hàng</label>
+                                            <select class="form-control selectpicker" data-live-search="true" name="AgencyType">
+                                                @foreach (var item in ViewBag.AgencyType)
+                                                {
+                                                    <option value="@item.Id">@item.Name</option>
+                                                }
+                                            </select>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Hạng</label>
-                                            <input type="text" name="CRank" class="form-control" required />
-                                        </div>
+
                                         <div class="form-group">
                                             <label>Chi nhánh</label>
                                             <select class="form-control selectpicker" data-live-search="true" name="BranchCode">
@@ -180,7 +176,7 @@
                                             <input type="text" name="IdentityCard" class="form-control" required />
                                         </div>
                                         <div class="form-group">
-                                            <label>Phone</label>
+                                            <label>Điện thoại</label>
                                             <input type="text" name="Phone" class="form-control" required />
                                         </div>
                                         <div class="form-group">
@@ -188,27 +184,18 @@
                                             <input type="text" name="Email" class="form-control" />
                                         </div>
                                         <div class="form-group">
-                                            <label>TK ngân hàng</label>
-                                            <input type="text" name="BankAccount" class="form-control" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Người hưởng thụ</label>
-                                            <input type="text" name="BankAccountHolder" class="form-control" />
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Ngân hàng - chi nhánh</label>
-                                            <input type="text" name="BackName" class="form-control" />
-                                        </div>
-
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
                                             <label>Langitude</label>
                                             <input type="number" name="Lat" class="form-control" />
                                         </div>
                                         <div class="form-group">
                                             <label>Longitude</label>
                                             <input type="number" name="Lng" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label>Hạng</label>
+                                            <input type="text" name="CRank" class="form-control" required />
                                         </div>
                                         <div class="form-group">
                                             <label>Ngày sinh</label>
@@ -223,28 +210,26 @@
                                             <input type="text" name="AddressInfo" class="form-control" />
                                         </div>
                                         <div class="form-group">
+                                            <label>Quốc gia</label>
+                                            <input type="text" name="Country" class="form-control" value="VN"/>
+                                        </div>
+                                        <div class="form-group">
                                             <label>Thành phố/tỉnh</label>
-
-                                            <select class="form-control selectpicker" data-live-search="true" id="dsprovince">
-                                                <option value="-1">--Chọn--</option>
-                                                @foreach (var item in ViewBag.Provinces)
+                                            <!--<input type="text" name="ProvinceName" class="form-control" id="provincesearch" autocomplete="off" required autofocus data-provide="typeahead" />-->
+                                            <select class="form-control selectpicker" data-live-search="true" name="Province" required>
+                                                @foreach (var item in ViewBag.Province)
                                                 {
-                                                    <option data-tokens="@item.Name" value="@item.Id">@item.Name</option>
+                                                    <option value="@item.Code">@item.Name</option>
                                                 }
                                             </select>
-
                                         </div>
                                         <div class="form-group">
                                             <label>Quận/huyện</label>
-
-                                            <select class="form-control" id="dsdistrict"></select>
-
+                                            <input type="text" name="DistrictName" class="form-control"  id="districtsearch"/>
                                         </div>
                                         <div class="form-group">
                                             <label>Phường/xã</label>
-
-                                            <select class="form-control" id="dsward" required name="WardId"></select>
-
+                                            <input type="text" name="WardName" class="form-control" id="wardsearch"/>
                                         </div>
                                         <div class="form-group">
                                             <label>Mã số thuế</label>
@@ -254,11 +239,6 @@
                                             <label>Giấy phép kinh doanh</label>
                                             <input type="text" name="BusinessLicense" class="form-control" />
                                         </div>
-                                        <div class="form-group">
-                                            <label>Ghi chú</label>
-                                            <textarea name="Notes" class="form-control"></textarea>
-                                        </div>
-
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -288,9 +268,11 @@
         </div>
     </div>
 </div>
+
 <form method="post" action="/agency/RemoveCII" onsubmit="if(!confirm('Xóa đại lý?')){return false;}" id="formagency">
     <input type="hidden" name="id" id="idagency" />
 </form>
+
 @section styles {
 
     <!-- bootstrap select-->
@@ -319,16 +301,34 @@
             $('input[name=type]').val(id);
             $('#btnchoose').html(name);
         }
-        databranch();
 
-        function databranch() {
+
+        dataSearch();
+
+        function dataSearch() {
+           
+
             $.ajax({
-                url: "/agency/c1json",
+                url: "/agency/DistrictJson",
                 type: "get",
                 success: function (response) {
-                    $('.c1search').typeahead({
+                    $('#districtsearch').typeahead({
                         source: response,
-                        display: 'Code',
+                        display: 'Name',
+                        val: 'Name',
+                        itemSelected: displayResult
+                    });
+
+                }
+            });
+
+            $.ajax({
+                url: "/agency/WardJson",
+                type: "get",
+                success: function (response) {
+                    $('#wardsearch').typeahead({
+                        source: response,
+                        display: 'Name',
                         val: 'Name',
                         itemSelected: displayResult
                     });
@@ -342,54 +342,10 @@
             console.log(item);
         }
 
-
         $('#datetimecreate').datetimepicker({
             locale: 'vi',
-            format: 'MM/DD/YYYY'
+            format: 'DD/MM/YYYY'
         });
-
-
-
-        $("#dsprovince").change(function () {
-            var id = $("#dsprovince").val();
-
-            if (id == -1) {
-                $("#dsdistrict").html("");
-            } else {
-                $.ajax({
-                    url: "/Agency/JsonDistict",
-                    data: { Provinceid: id },
-                    success: function (response) {
-                        $("#dsdistrict").html("");
-                        $("<option value='-1'></option>").html("--chọn--").appendTo("#dsdistrict");
-                        $(response).each(function (i, e) {
-                            $("<option value='" + e.Id + "'></option>").html(e.Name).appendTo("#dsdistrict");
-                        });
-                    }
-                });
-            }
-        });
-
-        $("#dsdistrict").change(function () {
-            var id = $("#dsdistrict").val();
-
-            if (id == -1) {
-                $("#dsward").html("");
-            } else {
-                $.ajax({
-                    url: "/Agency/JsonWard",
-                    data: { Id: id },
-                    success: function (response) {
-                        $("#dsward").html("");
-                        $(response).each(function (i, e) {
-
-                            $("<option value='" + e.Id + "'></option>").html(e.Name).appendTo("#dsward");
-                        });
-                    }
-                });
-            }
-        });
-
 
     </script>
 }

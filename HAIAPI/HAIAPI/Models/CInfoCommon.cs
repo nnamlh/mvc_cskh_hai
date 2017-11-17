@@ -32,9 +32,7 @@ namespace HAIAPI.Models
         public string CName { get; set; }
         public string IdentityCard { get; set; }
         public string AddressInfo { get; set; }
-        public string WardId { get; set; }
         public string Phone { get; set; }
-        public string Fax { get; set; }
         public string Email { get; set; }
         public string PlaceOfBirth { get; set; }
         public string Notes { get; set; }
@@ -42,29 +40,24 @@ namespace HAIAPI.Models
         public Nullable<System.DateTime> CreateTime { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public string CType { get; set; }
-        public string AreaId { get; set; }
         public string ProvinceName { get; set; }
         public string DistrictName { get; set; }
         public string BranchCode { get; set; }
         public string CCode { get; set; }
         public string CDeputy { get; set; }
-        public string Mobile { get; set; }
         public string BankAccount { get; set; }
         public string BankAccountHolder { get; set; }
         public string BackName { get; set; }
-        public Nullable<int> CStatus { get; set; }
         public string TaxCode { get; set; }
         public string BusinessLicense { get; set; }
         public Nullable<double> Lat { get; set; }
         public Nullable<double> Lng { get; set; }
-        public Nullable<int> BirthMonth { get; set; }
-        public Nullable<int> BirthYear { get; set; }
         public string CRank { get; set; }
-        public Nullable<int> CGroup { get; set; }
         public string WardName { get; set; }
         public string Country { get; set; }
-        public Nullable<int> BirthDay { get; set; }
+        public string BirthDay { get; set; }
         public string ProvinceCode { get; set; }
+        public string AgencyType { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AgencySavePoint> AgencySavePoints { get; set; }
@@ -72,8 +65,6 @@ namespace HAIAPI.Models
         public virtual ICollection<C1Info> C1Info { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<C2Info> C2Info { get; set; }
-        public virtual HaiArea HaiArea { get; set; }
-        public virtual Ward Ward { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EventCustomer> EventCustomers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -86,5 +77,6 @@ namespace HAIAPI.Models
         public virtual ICollection<SaveAgencyShopImage> SaveAgencyShopImages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HaiOrder> HaiOrders { get; set; }
+        public virtual AgencyType AgencyType1 { get; set; }
     }
 }

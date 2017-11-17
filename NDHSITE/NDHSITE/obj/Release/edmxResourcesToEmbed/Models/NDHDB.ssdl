@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="NDHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="DMSHAIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AgencySavePoint">
     <Key>
       <PropertyRef Name="EventId" />
@@ -10,6 +10,13 @@
     <Property Name="PointSave" Type="int" />
     <Property Name="CreateTime" Type="datetime" />
     <Property Name="ModifyTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="AgencyType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="AllStatus">
     <Key>
@@ -114,6 +121,19 @@
     <Property Name="Thumbnail" Type="nvarchar" MaxLength="512" />
     <Property Name="CreateDate" Type="datetime" />
   </EntityType>
+  <EntityType Name="BarcodeChangeHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="128" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CaseCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="Barcode" Type="nvarchar" MaxLength="128" />
+    <Property Name="InAction" Type="int" />
+    <Property Name="WCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="WChange" Type="nvarchar" MaxLength="128" />
+  </EntityType>
   <EntityType Name="BarcodeHistory">
     <Key>
       <PropertyRef Name="Id" />
@@ -164,7 +184,6 @@
     <Property Name="IsActive" Type="int" />
     <Property Name="IsLock" Type="int" />
     <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
-    <Property Name="HaiBrandId" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="C2C1">
     <Key>
@@ -186,8 +205,6 @@
     <Property Name="Deputy" Type="nvarchar" MaxLength="255" />
     <Property Name="IsActive" Type="int" />
     <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
-    <Property Name="C1Id" Type="nvarchar" MaxLength="128" />
-    <Property Name="Decision" Type="nvarchar" MaxLength="512" />
     <Property Name="CStatus" Type="int" />
   </EntityType>
   <EntityType Name="CalendarInfo">
@@ -250,9 +267,7 @@
     <Property Name="CName" Type="nvarchar" MaxLength="512" />
     <Property Name="IdentityCard" Type="nvarchar" MaxLength="128" />
     <Property Name="AddressInfo" Type="nvarchar" MaxLength="1000" />
-    <Property Name="WardId" Type="nvarchar" MaxLength="32" />
     <Property Name="Phone" Type="nvarchar" MaxLength="128" />
-    <Property Name="Fax" Type="nvarchar" MaxLength="128" />
     <Property Name="Email" Type="nvarchar" MaxLength="256" />
     <Property Name="PlaceOfBirth" Type="nvarchar" MaxLength="255" />
     <Property Name="Notes" Type="nvarchar" MaxLength="255" />
@@ -260,29 +275,24 @@
     <Property Name="CreateTime" Type="datetime" />
     <Property Name="ModifyDate" Type="datetime" />
     <Property Name="CType" Type="nvarchar" MaxLength="32" />
-    <Property Name="AreaId" Type="nvarchar" MaxLength="128" />
     <Property Name="ProvinceName" Type="nvarchar" MaxLength="256" />
     <Property Name="DistrictName" Type="nvarchar" MaxLength="256" />
     <Property Name="BranchCode" Type="nvarchar" MaxLength="128" />
     <Property Name="CCode" Type="nvarchar" MaxLength="32" />
     <Property Name="CDeputy" Type="nvarchar" MaxLength="512" />
-    <Property Name="Mobile" Type="nvarchar" MaxLength="128" />
     <Property Name="BankAccount" Type="nvarchar" MaxLength="256" />
     <Property Name="BankAccountHolder" Type="nvarchar" MaxLength="512" />
     <Property Name="BackName" Type="nvarchar(max)" />
-    <Property Name="CStatus" Type="int" />
     <Property Name="TaxCode" Type="nvarchar" MaxLength="128" />
     <Property Name="BusinessLicense" Type="nvarchar" MaxLength="512" />
     <Property Name="Lat" Type="float" />
     <Property Name="Lng" Type="float" />
-    <Property Name="BirthMonth" Type="int" />
-    <Property Name="BirthYear" Type="int" />
     <Property Name="CRank" Type="nvarchar" MaxLength="16" />
-    <Property Name="CGroup" Type="int" />
     <Property Name="WardName" Type="nvarchar" MaxLength="512" />
     <Property Name="Country" Type="nvarchar" MaxLength="128" />
-    <Property Name="BirthDay" Type="int" />
-    <Property Name="ProvinceCode" Type="nvarchar" MaxLength="5" />
+    <Property Name="BirthDay" Type="nvarchar" MaxLength="128" />
+    <Property Name="AgencyType" Type="nvarchar" MaxLength="128" />
+    <Property Name="ProvinceCode" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="DecorGroup">
     <Key>
@@ -977,6 +987,16 @@
     <Property Name="IsUser" Type="int" />
     <Property Name="CountNumber" Type="int" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="TreeInfo">
     <Key>
       <PropertyRef Name="Id" />
@@ -1044,18 +1064,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__C1Info__HaiBrand__72910220">
-    <End Role="HaiBranch" Type="Self.HaiBranch" Multiplicity="0..1" />
-    <End Role="C1Info" Type="Self.C1Info" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiBranch">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="C1Info">
-        <PropertyRef Name="HaiBrandId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__C1Info__InfoId__681373AD">
     <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="0..1" />
     <End Role="C1Info" Type="Self.C1Info" Multiplicity="*" />
@@ -1065,18 +1073,6 @@
       </Principal>
       <Dependent Role="C1Info">
         <PropertyRef Name="InfoId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__C2Info__C1Id__73852659">
-    <End Role="C1Info" Type="Self.C1Info" Multiplicity="0..1" />
-    <End Role="C2Info" Type="Self.C2Info" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="C1Info">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="C2Info">
-        <PropertyRef Name="C1Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1104,27 +1100,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__CInfoComm__AreaI__52E34C9D">
-    <End Role="HaiArea" Type="Self.HaiArea" Multiplicity="0..1" />
+  <Association Name="FK__CInfoComm__Agenc__4356F04A">
+    <End Role="AgencyType" Type="Self.AgencyType" Multiplicity="0..1" />
     <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="HaiArea">
+      <Principal Role="AgencyType">
         <PropertyRef Name="Id" />
       </Principal>
       <Dependent Role="CInfoCommon">
-        <PropertyRef Name="AreaId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__CInfoComm__WardI__634EBE90">
-    <End Role="Ward" Type="Self.Ward" Multiplicity="0..1" />
-    <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Ward">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="CInfoCommon">
-        <PropertyRef Name="WardId" />
+        <PropertyRef Name="AgencyType" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1536,7 +1520,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrderProd__Order__38D961D7">
+  <Association Name="FK__OrderProd__Order__3D9E16F4">
     <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="0..1" />
     <End Role="OrderProductHistory" Type="Self.OrderProductHistory" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1560,7 +1544,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrderProd__Produ__39CD8610">
+  <Association Name="FK__OrderProd__Produ__3E923B2D">
     <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
     <End Role="OrderProductHistory" Type="Self.OrderProductHistory" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1832,6 +1816,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="c2_get_list_c1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Code" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="checkin_calendartype_group" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="month" Type="int" Mode="In" />
     <Parameter Name="year" Type="int" Mode="In" />
@@ -1853,6 +1840,10 @@
     <Parameter Name="year" Type="varchar" Mode="In" />
     <Parameter Name="staffId" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="procduct_item_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="product_list" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="report_checkin_detail_by_branch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="month" Type="int" Mode="In" />
     <Parameter Name="year" Type="int" Mode="In" />
@@ -1881,8 +1872,9 @@
     <Parameter Name="DFrom" Type="nvarchar" Mode="In" />
     <Parameter Name="DTo" Type="nvarchar" Mode="In" />
   </Function>
-  <EntityContainer Name="NDHDBModelStoreContainer">
+  <EntityContainer Name="DMSHAIModelStoreContainer">
     <EntitySet Name="AgencySavePoint" EntityType="Self.AgencySavePoint" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AgencyType" EntityType="Self.AgencyType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AllStatus" EntityType="Self.AllStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="APIAuthHistory" EntityType="Self.APIAuthHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="APIHistory" EntityType="Self.APIHistory" Schema="dbo" store:Type="Tables" />
@@ -1893,6 +1885,7 @@
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AwardInfo" EntityType="Self.AwardInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BarcodeChangeHistory" EntityType="Self.BarcodeChangeHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BarcodeHistory" EntityType="Self.BarcodeHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BasicNotification" EntityType="Self.BasicNotification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="C1Info" EntityType="Self.C1Info" Schema="dbo" store:Type="Tables" />
@@ -1963,6 +1956,7 @@
     <EntitySet Name="StaffWithC2" EntityType="Self.StaffWithC2" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StoreAgencyId" EntityType="Self.StoreAgencyId" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StoreStaffId" EntityType="Self.StoreStaffId" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TreeInfo" EntityType="Self.TreeInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserBranchPermiss" EntityType="Self.UserBranchPermiss" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ward" EntityType="Self.Ward" Schema="dbo" store:Type="Tables" />
@@ -1975,17 +1969,9 @@
       <End Role="EventInfo" EntitySet="EventInfo" />
       <End Role="AgencySavePoint" EntitySet="AgencySavePoint" />
     </AssociationSet>
-    <AssociationSet Name="FK__C1Info__HaiBrand__72910220" Association="Self.FK__C1Info__HaiBrand__72910220">
-      <End Role="HaiBranch" EntitySet="HaiBranch" />
-      <End Role="C1Info" EntitySet="C1Info" />
-    </AssociationSet>
     <AssociationSet Name="FK__C1Info__InfoId__681373AD" Association="Self.FK__C1Info__InfoId__681373AD">
       <End Role="CInfoCommon" EntitySet="CInfoCommon" />
       <End Role="C1Info" EntitySet="C1Info" />
-    </AssociationSet>
-    <AssociationSet Name="FK__C2Info__C1Id__73852659" Association="Self.FK__C2Info__C1Id__73852659">
-      <End Role="C1Info" EntitySet="C1Info" />
-      <End Role="C2Info" EntitySet="C2Info" />
     </AssociationSet>
     <AssociationSet Name="FK__C2Info__InfoId__6CD828CA" Association="Self.FK__C2Info__InfoId__6CD828CA">
       <End Role="CInfoCommon" EntitySet="CInfoCommon" />
@@ -1995,12 +1981,8 @@
       <End Role="HaiStaff" EntitySet="HaiStaff" />
       <End Role="CalendarInfo" EntitySet="CalendarInfo" />
     </AssociationSet>
-    <AssociationSet Name="FK__CInfoComm__AreaI__52E34C9D" Association="Self.FK__CInfoComm__AreaI__52E34C9D">
-      <End Role="HaiArea" EntitySet="HaiArea" />
-      <End Role="CInfoCommon" EntitySet="CInfoCommon" />
-    </AssociationSet>
-    <AssociationSet Name="FK__CInfoComm__WardI__634EBE90" Association="Self.FK__CInfoComm__WardI__634EBE90">
-      <End Role="Ward" EntitySet="Ward" />
+    <AssociationSet Name="FK__CInfoComm__Agenc__4356F04A" Association="Self.FK__CInfoComm__Agenc__4356F04A">
+      <End Role="AgencyType" EntitySet="AgencyType" />
       <End Role="CInfoCommon" EntitySet="CInfoCommon" />
     </AssociationSet>
     <AssociationSet Name="FK__DecorImag__Staff__6F6A7CB2" Association="Self.FK__DecorImag__Staff__6F6A7CB2">
@@ -2139,7 +2121,7 @@
       <End Role="HaiOrder" EntitySet="HaiOrder" />
       <End Role="OrderProduct" EntitySet="OrderProduct" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrderProd__Order__38D961D7" Association="Self.FK__OrderProd__Order__38D961D7">
+    <AssociationSet Name="FK__OrderProd__Order__3D9E16F4" Association="Self.FK__OrderProd__Order__3D9E16F4">
       <End Role="HaiOrder" EntitySet="HaiOrder" />
       <End Role="OrderProductHistory" EntitySet="OrderProductHistory" />
     </AssociationSet>
@@ -2147,7 +2129,7 @@
       <End Role="ProductInfo" EntitySet="ProductInfo" />
       <End Role="OrderProduct" EntitySet="OrderProduct" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrderProd__Produ__39CD8610" Association="Self.FK__OrderProd__Produ__39CD8610">
+    <AssociationSet Name="FK__OrderProd__Produ__3E923B2D" Association="Self.FK__OrderProd__Produ__3E923B2D">
       <End Role="ProductInfo" EntitySet="ProductInfo" />
       <End Role="OrderProductHistory" EntitySet="OrderProductHistory" />
     </AssociationSet>

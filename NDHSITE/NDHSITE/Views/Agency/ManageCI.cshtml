@@ -121,8 +121,7 @@
                                         <tr class="@(item.IsActive == 0?"warning":"")">
                                             <td>
                                                 <span><strong class="semibold">Mã đại lý:</strong> @item.Code</span> <br />
-                                                <span><strong class="semibold">Chi nhánh:</strong> @item.HaiBranch.Name</span> <br />
-                                                <span><strong class="semibold">Khu vực:</strong> @item.CInfoCommon.HaiArea.Name</span> <br />
+                                                <span><strong class="semibold">Thuộc chi nhánh:</strong> @item.CInfoCommon.BranchCode</span> <br />
                                                 <span><strong class="semibold">Tên doanh nghiệp:</strong> @item.StoreName</span> <br />
                                                 <span><strong class="semibold">Chủ doanh nghiệp:</strong> @item.Deputy</span> <br />
                                                 <span><strong class="semibold">Số điện thoái:</strong> @item.CInfoCommon.Phone</span> <br />
@@ -136,7 +135,6 @@
                                                 <span><strong class="semibold">Tài khoản ngân hàng:</strong> @item.CInfoCommon.BankAccount</span> <br />
                                                 <span><strong class="semibold">Chủ tài khoản:</strong> @item.CInfoCommon.BankAccountHolder</span> <br />
                                                 <span><strong class="semibold">Tên ngân hàng:</strong> @item.CInfoCommon.BackName</span> <br />
-                                                <span><strong class="semibold">Ghi chú:</strong> @item.CInfoCommon.Notes</span>
                                             </td>
                                             <td class="text-center valign-middle">
                                                 <a href="/agency/modifyci/@item.Id" target="_blank">Chi tiết</a>

@@ -13,8 +13,8 @@ namespace NDHSITE.Models
     
     public partial class checkin_calendartype_group_Result
     {
+        public string TypeId { get; set; }
         public string Name { get; set; }
         public Nullable<int> countday { get; set; }
-        public string TypeId { get; set; }
     }
 }

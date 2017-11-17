@@ -14,15 +14,16 @@ namespace NDHSITE.Models
     
     public partial class HaiStaff
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public HaiStaff()
         {
-            this.C1Info = new HashSet<C1Info>();
             this.CalendarInfoes = new HashSet<CalendarInfo>();
+            this.DecorImages = new HashSet<DecorImage>();
+            this.OrderStaffs = new HashSet<OrderStaff>();
+            this.SaveAgencyShopImages = new HashSet<SaveAgencyShopImage>();
             this.StaffCheckIns = new HashSet<StaffCheckIn>();
             this.StaffWithC2 = new HashSet<StaffWithC2>();
-            this.DecorImages = new HashSet<DecorImage>();
-            this.SaveAgencyShopImages = new HashSet<SaveAgencyShopImage>();
-            this.OrderStaffs = new HashSet<OrderStaff>();
+            this.C1Info = new HashSet<C1Info>();
         }
     
         public string Id { get; set; }
@@ -50,15 +51,22 @@ namespace NDHSITE.Models
         public Nullable<int> IsDelete { get; set; }
         public Nullable<int> GPSDistance { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CalendarInfo> CalendarInfoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DecorImage> DecorImages { get; set; }
         public virtual HaiBranch HaiBranch { get; set; }
         public virtual HaiDepartment HaiDepartment { get; set; }
         public virtual HaiPosition HaiPosition { get; set; }
-        public virtual ICollection<C1Info> C1Info { get; set; }
-        public virtual ICollection<CalendarInfo> CalendarInfoes { get; set; }
-        public virtual ICollection<StaffCheckIn> StaffCheckIns { get; set; }
-        public virtual ICollection<StaffWithC2> StaffWithC2 { get; set; }
-        public virtual ICollection<DecorImage> DecorImages { get; set; }
-        public virtual ICollection<SaveAgencyShopImage> SaveAgencyShopImages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderStaff> OrderStaffs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SaveAgencyShopImage> SaveAgencyShopImages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StaffCheckIn> StaffCheckIns { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StaffWithC2> StaffWithC2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<C1Info> C1Info { get; set; }
     }
 }

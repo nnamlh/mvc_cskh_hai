@@ -14,18 +14,12 @@ namespace NDHSITE.Models
     
     public partial class Ward
     {
-        public Ward()
-        {
-            this.CInfoCommons = new HashSet<CInfoCommon>();
-        }
-    
         public string Id { get; set; }
         public string Name { get; set; }
         public string WType { get; set; }
         public string Location { get; set; }
         public string Districtid { get; set; }
     
-        public virtual ICollection<CInfoCommon> CInfoCommons { get; set; }
         public virtual District District { get; set; }
     }
 }

@@ -13,18 +13,18 @@ namespace NDHSITE.Models
     
     public partial class report_cii_product_Result
     {
+        public string CaseCode { get; set; }
         public string PStatus { get; set; }
         public string WareHouse { get; set; }
-        public string BoxPoint { get; set; }
-        public string Staff { get; set; }
-        public Nullable<decimal> Quantity { get; set; }
         public string WareHouseName { get; set; }
-        public string CaseCode { get; set; }
+        public string BoxPoint { get; set; }
+        public string PName { get; set; }
         public string C1 { get; set; }
         public Nullable<System.DateTime> ctime { get; set; }
         public string branch { get; set; }
         public string branchExport { get; set; }
+        public string Staff { get; set; }
+        public Nullable<decimal> Quantity { get; set; }
         public string staffhelp { get; set; }
-        public string PName { get; set; }
     }
 }

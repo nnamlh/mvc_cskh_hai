@@ -438,7 +438,6 @@ namespace HAIAPI.Controllers
                     province = item.CInfoCommon.ProvinceName,
                     district = item.CInfoCommon.DistrictName,
                     taxCode = item.CInfoCommon.TaxCode,
-                    c1Id = item.C1Info.Code,
                     haibranch = item.CInfoCommon.BranchCode,
                     c1 = agencyC2C1
                 });
@@ -459,12 +458,12 @@ namespace HAIAPI.Controllers
 
             if (roleCheck == 1)
             {
-                c1List = db.C1Info.Where(p => p.IsActive == 1).OrderByDescending(p => p.CInfoCommon.CGroup).ToList();
+                c1List = db.C1Info.Where(p => p.IsActive == 1).ToList();
 
             }
             else
             {
-                c1List = db.C1Info.Where(p => p.IsActive == 1 && p.HaiBrandId == staff.BranchId).OrderByDescending(p => p.CInfoCommon.CGroup).ToList();
+                c1List = db.C1Info.Where(p => p.IsActive == 1 && p.CInfoCommon.BranchCode == staff.HaiBranch.Code).ToList();
 
             }
 
@@ -511,7 +510,7 @@ namespace HAIAPI.Controllers
             {
                 topics.Add(cInfo.CType + "ALL");
                 topics.Add(cInfo.CType + cInfo.BranchCode);
-                topics.Add(cInfo.CType + cInfo.HaiArea.Code);
+               // topics.Add(cInfo.CType + cInfo.HaiArea.Code);
             }
             else
             {

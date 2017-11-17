@@ -14,11 +14,12 @@ namespace NDHSITE.Models
     
     public partial class HaiOrder
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public HaiOrder()
         {
             this.OrderProducts = new HashSet<OrderProduct>();
-            this.OrderStaffs = new HashSet<OrderStaff>();
             this.OrderProductHistories = new HashSet<OrderProductHistory>();
+            this.OrderStaffs = new HashSet<OrderStaff>();
         }
     
         public string Id { get; set; }
@@ -39,12 +40,15 @@ namespace NDHSITE.Models
         public Nullable<int> OrderNumber { get; set; }
     
         public virtual CInfoCommon CInfoCommon { get; set; }
-        public virtual OrderStatu OStatus { get; set; }
-        public virtual OrderType OType { get; set; }
-        public virtual PayType PType { get; set; }
-        public virtual ShipType SType { get; set; }
+        public virtual OrderStatu OrderStatu { get; set; }
+        public virtual OrderType OrderType1 { get; set; }
+        public virtual PayType PayType1 { get; set; }
+        public virtual ShipType ShipType1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
-        public virtual ICollection<OrderStaff> OrderStaffs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderProductHistory> OrderProductHistories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderStaff> OrderStaffs { get; set; }
     }
 }

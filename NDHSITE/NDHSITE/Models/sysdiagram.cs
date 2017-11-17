@@ -12,13 +12,12 @@ namespace NDHSITE.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CalendarType
+    public partial class sysdiagram
     {
-        public string Id { get; set; }
-        public string Notes { get; set; }
-        public Nullable<int> Compel { get; set; }
-        public Nullable<int> Number { get; set; }
-        public Nullable<int> TGroup { get; set; }
-        public string Name { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
