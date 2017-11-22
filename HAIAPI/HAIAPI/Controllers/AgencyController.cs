@@ -425,13 +425,13 @@ namespace HAIAPI.Controllers
              //   var jsonserializer = new JavaScriptSerializer();
                // var paser = jsonserializer.Deserialize<RequestInfo>(requestContent);
 
-                if (!mongoHelper.checkLoginSession(user, token))
-                    throw new Exception("Wrong token and user login!");
+              //  if (!mongoHelper.checkLoginSession(user, token))
+                  //  throw new Exception("Wrong token and user login!");
 
                 var staff = db.HaiStaffs.Where(p => p.UserLogin == user).FirstOrDefault();
 
                 if (staff == null)
-                    throw new Exception("Chỉ nhân viên công ty mới được quyền tạo");
+                    throw new Exception("Chỉ nhân viên công ty mới được quyền truy cập");
 
 
                 result = GetListC2(staff);

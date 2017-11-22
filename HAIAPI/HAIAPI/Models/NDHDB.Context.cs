@@ -138,18 +138,18 @@ namespace HAIAPI.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<checkin_getcalendar_Result>("checkin_getcalendar", monthParameter, yearParameter, staffIdParameter);
         }
     
-        public virtual ObjectResult<procduct_item_detail_Result> procduct_item_detail(string id)
+        public virtual ObjectResult<product_list_Result> product_list()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<product_list_Result>("product_list");
+        }
+    
+        public virtual ObjectResult<procduct_item_detail_Result1> procduct_item_detail(string id)
         {
             var idParameter = id != null ?
                 new ObjectParameter("id", id) :
                 new ObjectParameter("id", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<procduct_item_detail_Result>("procduct_item_detail", idParameter);
-        }
-    
-        public virtual ObjectResult<product_list_Result> product_list()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<product_list_Result>("product_list");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<procduct_item_detail_Result1>("procduct_item_detail", idParameter);
         }
     }
 }

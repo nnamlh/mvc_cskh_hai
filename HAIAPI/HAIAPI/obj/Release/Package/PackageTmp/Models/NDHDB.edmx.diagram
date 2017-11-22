@@ -140,6 +140,7 @@
         <AssociationConnector Association="NDHDB1Model.FK__OrderProd__Produ__39CD8610" />
         <EntityTypeShape EntityType="NDHDB1Model.AgencyType" Width="1.5" PointX="22.375" PointY="0.875" />
         <AssociationConnector Association="NDHDB1Model.FK__CInfoComm__Agenc__4356F04A" />
+        <AssociationConnector Association="NDHDB1Model.FK__ProductIn__Group__453F38BC" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

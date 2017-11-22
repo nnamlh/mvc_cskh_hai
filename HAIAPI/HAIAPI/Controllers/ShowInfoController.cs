@@ -62,9 +62,7 @@ namespace HAIAPI.Controllers
                 id = find.Id,
                 code = find.PCode,
                 name = find.PName,
-                activce = find.Activce,
                 barcode = find.Barcode,
-                commerceName = find.CommerceName,
                 isForcus = find.Forcus,
                 groupId = find.GroupId,
                 groupName = find.GroupName,
@@ -75,9 +73,7 @@ namespace HAIAPI.Controllers
                 introduce = find.Introduce,
                 notes = find.Notes,
                 other = find.Other,
-                register = find.Register,
                 unit = find.Unit,
-                uses = find.Uses,
                 images = new List<string>()
             };
 

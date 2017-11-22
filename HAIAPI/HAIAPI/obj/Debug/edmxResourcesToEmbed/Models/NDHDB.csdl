@@ -237,7 +237,7 @@
     <Property Name="CRank" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
     <Property Name="WardName" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="Country" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="BirthDay" Type="String" />
+    <Property Name="BirthDay" Type="String" MaxLength="128" Unicode="true" FixedLength="false" />
     <NavigationProperty Name="AgencySavePoints" Relationship="Self.FK__AgencySav__CInfo__6497E884" FromRole="CInfoCommon" ToRole="AgencySavePoint" />
     <NavigationProperty Name="C1Info" Relationship="Self.FK__C1Info__InfoId__681373AD" FromRole="CInfoCommon" ToRole="C1Info" />
     <NavigationProperty Name="C2Info" Relationship="Self.FK__C2Info__InfoId__6CD828CA" FromRole="CInfoCommon" ToRole="C2Info" />
@@ -245,11 +245,13 @@
     <NavigationProperty Name="EventCustomerFarmers" Relationship="Self.FK__EventCust__CInfo__3F6663D5" FromRole="CInfoCommon" ToRole="EventCustomerFarmer" />
     <NavigationProperty Name="FarmerInfoes" Relationship="Self.FK__FarmerInf__InfoI__7EF6D905" FromRole="CInfoCommon" ToRole="FarmerInfo" />
     <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="CInfoCommon" ToRole="MSGPoint" />
-    <Property Name="ProvinceCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProvinceCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="SaveAgencyShopImages" Relationship="NDHDB1Model.FK__SaveAgenc__Cinfo__7FA0E47B" FromRole="CInfoCommon" ToRole="SaveAgencyShopImage" />
     <NavigationProperty Name="HaiOrders" Relationship="NDHDB1Model.FK__HaiOrder__Agency__17786E0C" FromRole="CInfoCommon" ToRole="HaiOrder" />
     <Property Name="AgencyType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="AgencyType1" Relationship="NDHDB1Model.FK__CInfoComm__Agenc__4356F04A" FromRole="CInfoCommon" ToRole="AgencyType" />
+    <Property Name="Fax" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="DecorGroup">
     <Key>
@@ -638,6 +640,7 @@
     <Property Name="Parent" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="HasChild" Type="Int32" />
+    <NavigationProperty Name="ProductInfoes" Relationship="NDHDB1Model.FK__ProductIn__Group__453F38BC" FromRole="ProductGroup" ToRole="ProductInfo" />
   </EntityType>
   <EntityType Name="ProductImage">
     <Key>
@@ -655,7 +658,6 @@
     <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="PName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="PCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Material" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="Unit" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Producer" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="CardPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
@@ -664,13 +666,7 @@
     <Property Name="Barcode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="QuantityBox" Type="Int32" />
     <Property Name="IsBox" Type="Int32" />
-    <Property Name="PGroup" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Register" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CommerceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Activce" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Poision" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Uses" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Introduce" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -689,6 +685,8 @@
     <NavigationProperty Name="OrderProducts" Relationship="NDHDB1Model.FK__OrderProd__Produ__28A2FA0E" FromRole="ProductInfo" ToRole="OrderProduct" />
     <Property Name="Quantity" Type="Int32" />
     <NavigationProperty Name="OrderProductHistories" Relationship="NDHDB1Model.FK__OrderProd__Produ__39CD8610" FromRole="ProductInfo" ToRole="OrderProductHistory" />
+    <Property Name="GroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ProductGroup" Relationship="NDHDB1Model.FK__ProductIn__Group__453F38BC" FromRole="ProductInfo" ToRole="ProductGroup" />
   </EntityType>
   <EntityType Name="ProductSeri">
     <Key>
@@ -1606,9 +1604,6 @@
       <Parameter Name="year" Mode="In" Type="Int32" />
       <Parameter Name="staffId" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="procduct_item_detail" ReturnType="Collection(NDHDB1Model.procduct_item_detail_Result)">
-      <Parameter Name="id" Mode="In" Type="String" />
-    </FunctionImport>
     <FunctionImport Name="product_list" ReturnType="Collection(NDHDB1Model.product_list_Result)" />
     <EntitySet Name="C2C1" EntityType="NDHDB1Model.C2C1" />
     <EntitySet Name="OldKeySaves" EntityType="NDHDB1Model.OldKeySave" />
@@ -1687,6 +1682,13 @@
       <End Role="AgencyType" EntitySet="AgencyTypes" />
       <End Role="CInfoCommon" EntitySet="CInfoCommons" />
     </AssociationSet>
+    <AssociationSet Name="FK__ProductIn__Group__453F38BC" Association="NDHDB1Model.FK__ProductIn__Group__453F38BC">
+      <End Role="ProductGroup" EntitySet="ProductGroups" />
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+    </AssociationSet>
+    <FunctionImport Name="procduct_item_detail" ReturnType="Collection(NDHDB1Model.procduct_item_detail_Result1)">
+      <Parameter Name="id" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="checkin_calendartype_group_Result">
     <Property Type="String" Name="Name" Nullable="true" MaxLength="512" />
@@ -2124,4 +2126,44 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__ProductIn__Group__453F38BC">
+    <End Type="NDHDB1Model.ProductGroup" Role="ProductGroup" Multiplicity="0..1" />
+    <End Type="NDHDB1Model.ProductInfo" Role="ProductInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductInfo">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="procduct_item_detail_Result1">
+    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="PCode" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Unit" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Producer" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="CardPoint" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="BoxPoint" Nullable="true" MaxLength="32" />
+    <Property Type="Int32" Name="IsLock" Nullable="true" />
+    <Property Type="String" Name="Barcode" Nullable="true" MaxLength="32" />
+    <Property Type="Int32" Name="QuantityBox" Nullable="true" />
+    <Property Type="Int32" Name="IsBox" Nullable="true" />
+    <Property Type="String" Name="Describe" Nullable="true" />
+    <Property Type="String" Name="Introduce" Nullable="true" />
+    <Property Type="String" Name="Notes" Nullable="true" />
+    <Property Type="String" Name="Other" Nullable="true" />
+    <Property Type="String" Name="Thumbnail" Nullable="true" />
+    <Property Type="Int32" Name="Forcus" Nullable="true" />
+    <Property Type="Int32" Name="New" Nullable="true" />
+    <Property Type="DateTime" Name="CreateTime" Nullable="true" Precision="23" />
+    <Property Type="Double" Name="PVat" Nullable="true" />
+    <Property Type="String" Name="ShortDescibe" Nullable="true" />
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
+    <Property Type="Double" Name="Price" Nullable="true" />
+    <Property Type="String" Name="GroupId" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="GroupId1" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="GroupName" Nullable="true" MaxLength="512" />
+  </ComplexType>
 </Schema>

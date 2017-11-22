@@ -434,6 +434,9 @@
     <Compile Include="Models\procduct_item_detail_Result.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\procduct_item_detail_Result1.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ProcessHistory.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
