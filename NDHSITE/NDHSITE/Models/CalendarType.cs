@@ -20,5 +20,7 @@ namespace NDHSITE.Models
         public Nullable<int> Number { get; set; }
         public Nullable<int> TGroup { get; set; }
         public string Name { get; set; }
+        public Nullable<int> InPlan { get; set; }
+        public Nullable<int> OutPlan { get; set; }
     }
 }

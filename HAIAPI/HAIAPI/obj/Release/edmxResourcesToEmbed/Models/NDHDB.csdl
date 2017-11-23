@@ -152,6 +152,8 @@
     <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C2Info__InfoId__6CD828CA" FromRole="C2Info" ToRole="CInfoCommon" />
     <NavigationProperty Name="StaffWithC2" Relationship="Self.FK__StaffWithC__C2Id__4B622666" FromRole="C2Info" ToRole="StaffWithC2" />
     <Property Name="CStatus" Type="Int32" />
+    <Property Name="OldData" Type="Int32" />
+    <Property Name="SMSCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="CalendarInfo">
     <Key>
@@ -178,6 +180,8 @@
     <Property Name="Number" Type="Int32" />
     <Property Name="TGroup" Type="Int32" />
     <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="InPlan" Type="Int32" />
+    <Property Name="OutPlan" Type="Int32" />
   </EntityType>
   <EntityType Name="CalendarWork">
     <Key>

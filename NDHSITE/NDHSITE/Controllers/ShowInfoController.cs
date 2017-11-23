@@ -364,7 +364,7 @@ namespace NDHSITE.Controllers
                     return View(db.ProductInfoes.Where(p => p.PName.Contains(search)).OrderBy(p => p.PName).ToPagedList(pageNumber, pageSize));
                 case 3:
                     ViewBag.STypeName = "Nhóm sản phẩm";
-                    return View(db.ProductInfoes.Where(p => p.PGroup.Contains(search)).OrderBy(p => p.PName).ToPagedList(pageNumber, pageSize));
+                    return View(db.ProductInfoes.Where(p => p.GroupId.Contains(search)).OrderBy(p => p.PName).ToPagedList(pageNumber, pageSize));
                 case 4:
                     ViewBag.STypeName = "Mã sản phẩm";
                     return View(db.ProductInfoes.Where(p => p.PCode.Contains(search)).OrderBy(p => p.PName).ToPagedList(pageNumber, pageSize));

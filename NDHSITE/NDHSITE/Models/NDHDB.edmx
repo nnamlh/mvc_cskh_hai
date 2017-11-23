@@ -211,6 +211,8 @@
           <Property Name="IsActive" Type="int" />
           <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
           <Property Name="CStatus" Type="int" />
+          <Property Name="OldData" Type="int" />
+          <Property Name="SMSCode" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="CalendarInfo">
           <Key>
@@ -236,6 +238,8 @@
           <Property Name="Number" Type="int" />
           <Property Name="TGroup" Type="int" />
           <Property Name="Name" Type="nvarchar" MaxLength="512" />
+          <Property Name="InPlan" Type="int" />
+          <Property Name="OutPlan" Type="int" />
         </EntityType>
         <EntityType Name="CalendarWork">
           <Key>
@@ -273,6 +277,7 @@
           <Property Name="IdentityCard" Type="nvarchar" MaxLength="128" />
           <Property Name="AddressInfo" Type="nvarchar" MaxLength="1000" />
           <Property Name="Phone" Type="nvarchar" MaxLength="128" />
+          <Property Name="Fax" Type="nvarchar" MaxLength="128" />
           <Property Name="Email" Type="nvarchar" MaxLength="256" />
           <Property Name="PlaceOfBirth" Type="nvarchar" MaxLength="255" />
           <Property Name="Notes" Type="nvarchar" MaxLength="255" />
@@ -285,6 +290,7 @@
           <Property Name="BranchCode" Type="nvarchar" MaxLength="128" />
           <Property Name="CCode" Type="nvarchar" MaxLength="32" />
           <Property Name="CDeputy" Type="nvarchar" MaxLength="512" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="128" />
           <Property Name="BankAccount" Type="nvarchar" MaxLength="256" />
           <Property Name="BankAccountHolder" Type="nvarchar" MaxLength="512" />
           <Property Name="BackName" Type="nvarchar(max)" />
@@ -295,9 +301,10 @@
           <Property Name="CRank" Type="nvarchar" MaxLength="16" />
           <Property Name="WardName" Type="nvarchar" MaxLength="512" />
           <Property Name="Country" Type="nvarchar" MaxLength="128" />
+          <Property Name="ProvinceCode" Type="nvarchar" MaxLength="5" />
           <Property Name="BirthDay" Type="nvarchar" MaxLength="128" />
           <Property Name="AgencyType" Type="nvarchar" MaxLength="128" />
-          <Property Name="ProvinceCode" Type="nvarchar" MaxLength="128" />
+          <Property Name="OldData" Type="int" />
         </EntityType>
         <EntityType Name="DecorGroup">
           <Key>
@@ -775,7 +782,6 @@
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="PName" Type="nvarchar" MaxLength="256" />
           <Property Name="PCode" Type="nvarchar" MaxLength="128" />
-          <Property Name="Material" Type="nvarchar" MaxLength="512" />
           <Property Name="Unit" Type="nvarchar" MaxLength="128" />
           <Property Name="Producer" Type="nvarchar" MaxLength="256" />
           <Property Name="CardPoint" Type="nvarchar" MaxLength="32" />
@@ -784,13 +790,7 @@
           <Property Name="Barcode" Type="nvarchar" MaxLength="32" />
           <Property Name="QuantityBox" Type="int" />
           <Property Name="IsBox" Type="int" />
-          <Property Name="PGroup" Type="nvarchar" MaxLength="128" />
-          <Property Name="Register" Type="nvarchar(max)" />
-          <Property Name="CommerceName" Type="nvarchar(max)" />
-          <Property Name="Activce" Type="nvarchar(max)" />
-          <Property Name="Poision" Type="nvarchar(max)" />
           <Property Name="Describe" Type="nvarchar(max)" />
-          <Property Name="Uses" Type="nvarchar(max)" />
           <Property Name="Introduce" Type="nvarchar(max)" />
           <Property Name="Notes" Type="nvarchar(max)" />
           <Property Name="Other" Type="nvarchar(max)" />
@@ -798,10 +798,11 @@
           <Property Name="Forcus" Type="int" />
           <Property Name="New" Type="int" />
           <Property Name="CreateTime" Type="datetime" />
-          <Property Name="Price" Type="float" />
           <Property Name="PVat" Type="float" />
           <Property Name="ShortDescibe" Type="nvarchar(max)" />
           <Property Name="Quantity" Type="int" />
+          <Property Name="Price" Type="float" />
+          <Property Name="GroupId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="ProductSeri">
           <Key>
@@ -1645,6 +1646,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ProductIn__Group__453F38BC">
+          <End Role="ProductGroup" Type="Self.ProductGroup" Multiplicity="0..1" />
+          <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductInfo">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__ProductSe__Produ__10416098">
           <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
           <End Role="ProductSeri" Type="Self.ProductSeri" Multiplicity="*" />
@@ -1821,9 +1834,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="c2_get_list_c1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Code" Type="nvarchar" Mode="In" />
-        </Function>
         <Function Name="checkin_calendartype_group" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="month" Type="int" Mode="In" />
           <Parameter Name="year" Type="int" Mode="In" />
@@ -2166,6 +2176,10 @@
             <End Role="ProductInfo" EntitySet="ProductInfo" />
             <End Role="ProductImage" EntitySet="ProductImage" />
           </AssociationSet>
+          <AssociationSet Name="FK__ProductIn__Group__453F38BC" Association="Self.FK__ProductIn__Group__453F38BC">
+            <End Role="ProductGroup" EntitySet="ProductGroup" />
+            <End Role="ProductInfo" EntitySet="ProductInfo" />
+          </AssociationSet>
           <AssociationSet Name="FK__ProductSe__Produ__10416098" Association="Self.FK__ProductSe__Produ__10416098">
             <End Role="ProductInfo" EntitySet="ProductInfo" />
             <End Role="ProductSeri" EntitySet="ProductSeri" />
@@ -2443,6 +2457,8 @@
           <Property Name="CStatus" Type="Int32" />
           <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C2Info__InfoId__6CD828CA" FromRole="C2Info" ToRole="CInfoCommon" />
           <NavigationProperty Name="StaffWithC2" Relationship="Self.FK__StaffWithC__C2Id__4B622666" FromRole="C2Info" ToRole="StaffWithC2" />
+          <Property Name="OldData" Type="Int32" />
+          <Property Name="SMSCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CalendarInfo">
           <Key>
@@ -2469,6 +2485,8 @@
           <Property Name="Number" Type="Int32" />
           <Property Name="TGroup" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="InPlan" Type="Int32" />
+          <Property Name="OutPlan" Type="Int32" />
         </EntityType>
         <EntityType Name="CalendarWork">
           <Key>
@@ -2530,7 +2548,7 @@
           <Property Name="Country" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="BirthDay" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="AgencyType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="ProvinceCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProvinceCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="AgencySavePoints" Relationship="Self.FK__AgencySav__CInfo__6497E884" FromRole="CInfoCommon" ToRole="AgencySavePoint" />
           <NavigationProperty Name="AgencyType1" Relationship="Self.FK__CInfoComm__Agenc__4356F04A" FromRole="CInfoCommon" ToRole="AgencyType" />
           <NavigationProperty Name="C1Info" Relationship="Self.FK__C1Info__InfoId__681373AD" FromRole="CInfoCommon" ToRole="C1Info" />
@@ -2541,6 +2559,9 @@
           <NavigationProperty Name="HaiOrders" Relationship="Self.FK__HaiOrder__Agency__17786E0C" FromRole="CInfoCommon" ToRole="HaiOrder" />
           <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="CInfoCommon" ToRole="MSGPoint" />
           <NavigationProperty Name="SaveAgencyShopImages" Relationship="Self.FK__SaveAgenc__Cinfo__7FA0E47B" FromRole="CInfoCommon" ToRole="SaveAgencyShopImage" />
+          <Property Name="Fax" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="OldData" Type="Int32" />
         </EntityType>
         <EntityType Name="DecorGroup">
           <Key>
@@ -3049,6 +3070,7 @@
           <Property Name="Parent" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="HasChild" Type="Int32" />
+          <NavigationProperty Name="ProductInfoes" Relationship="DMSHAIModel.FK__ProductIn__Group__453F38BC" FromRole="ProductGroup" ToRole="ProductInfo" />
         </EntityType>
         <EntityType Name="ProductImage">
           <Key>
@@ -3066,7 +3088,6 @@
           <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="PCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Material" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Unit" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Producer" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="CardPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
@@ -3075,13 +3096,7 @@
           <Property Name="Barcode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="QuantityBox" Type="Int32" />
           <Property Name="IsBox" Type="Int32" />
-          <Property Name="PGroup" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Register" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CommerceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Activce" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Poision" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Uses" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Introduce" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -3100,6 +3115,8 @@
           <NavigationProperty Name="ProductImages" Relationship="Self.FK__ProductIm__Produ__64ECEE3F" FromRole="ProductInfo" ToRole="ProductImage" />
           <NavigationProperty Name="ProductSeris" Relationship="Self.FK__ProductSe__Produ__10416098" FromRole="ProductInfo" ToRole="ProductSeri" />
           <NavigationProperty Name="PTrackings" Relationship="Self.FK__PTracking__Produ__00FF1D08" FromRole="ProductInfo" ToRole="PTracking" />
+          <Property Name="GroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ProductGroup" Relationship="DMSHAIModel.FK__ProductIn__Group__453F38BC" FromRole="ProductInfo" ToRole="ProductGroup" />
         </EntityType>
         <EntityType Name="ProductSeri">
           <Key>
@@ -4393,6 +4410,10 @@
           <FunctionImport Name="c2_get_list_c1" ReturnType="Collection(DMSHAIModel.c2_get_list_c1_Result)">
             <Parameter Name="Code" Mode="In" Type="String" />
           </FunctionImport>
+          <AssociationSet Name="FK__ProductIn__Group__453F38BC" Association="DMSHAIModel.FK__ProductIn__Group__453F38BC">
+            <End Role="ProductGroup" EntitySet="ProductGroups" />
+            <End Role="ProductInfo" EntitySet="ProductInfoes" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="checkin_calendartype_group_Result">
           <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
@@ -4566,6 +4587,18 @@
           <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
           <Property Type="Int32" Name="Priority" Nullable="true" />
         </ComplexType>
+        <Association Name="FK__ProductIn__Group__453F38BC">
+          <End Type="DMSHAIModel.ProductGroup" Role="ProductGroup" Multiplicity="0..1" />
+          <End Type="DMSHAIModel.ProductInfo" Role="ProductInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductInfo">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -4775,6 +4808,8 @@
           <EntitySetMapping Name="C2Info">
             <EntityTypeMapping TypeName="DMSHAIModel.C2Info">
               <MappingFragment StoreEntitySet="C2Info">
+                <ScalarProperty Name="SMSCode" ColumnName="SMSCode" />
+                <ScalarProperty Name="OldData" ColumnName="OldData" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="StoreName" ColumnName="StoreName" />
@@ -4803,6 +4838,8 @@
           <EntitySetMapping Name="CalendarTypes">
             <EntityTypeMapping TypeName="DMSHAIModel.CalendarType">
               <MappingFragment StoreEntitySet="CalendarType">
+                <ScalarProperty Name="OutPlan" ColumnName="OutPlan" />
+                <ScalarProperty Name="InPlan" ColumnName="InPlan" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Compel" ColumnName="Compel" />
@@ -4843,6 +4880,9 @@
           <EntitySetMapping Name="CInfoCommons">
             <EntityTypeMapping TypeName="DMSHAIModel.CInfoCommon">
               <MappingFragment StoreEntitySet="CInfoCommon">
+                <ScalarProperty Name="OldData" ColumnName="OldData" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CName" ColumnName="CName" />
                 <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
@@ -5356,10 +5396,10 @@
           <EntitySetMapping Name="ProductInfoes">
             <EntityTypeMapping TypeName="DMSHAIModel.ProductInfo">
               <MappingFragment StoreEntitySet="ProductInfo">
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="PName" ColumnName="PName" />
                 <ScalarProperty Name="PCode" ColumnName="PCode" />
-                <ScalarProperty Name="Material" ColumnName="Material" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
                 <ScalarProperty Name="Producer" ColumnName="Producer" />
                 <ScalarProperty Name="CardPoint" ColumnName="CardPoint" />
@@ -5368,13 +5408,7 @@
                 <ScalarProperty Name="Barcode" ColumnName="Barcode" />
                 <ScalarProperty Name="QuantityBox" ColumnName="QuantityBox" />
                 <ScalarProperty Name="IsBox" ColumnName="IsBox" />
-                <ScalarProperty Name="PGroup" ColumnName="PGroup" />
-                <ScalarProperty Name="Register" ColumnName="Register" />
-                <ScalarProperty Name="CommerceName" ColumnName="CommerceName" />
-                <ScalarProperty Name="Activce" ColumnName="Activce" />
-                <ScalarProperty Name="Poision" ColumnName="Poision" />
                 <ScalarProperty Name="Describe" ColumnName="Describe" />
-                <ScalarProperty Name="Uses" ColumnName="Uses" />
                 <ScalarProperty Name="Introduce" ColumnName="Introduce" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Other" ColumnName="Other" />
@@ -5885,22 +5919,6 @@
                 <ScalarProperty Name="countXK" ColumnName="countXK" />
                 <ScalarProperty Name="PName" ColumnName="PName" />
                 <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="c2_get_list_c1" FunctionName="DMSHAIModel.Store.c2_get_list_c1">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DMSHAIModel.c2_get_list_c1_Result">
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
-                <ScalarProperty Name="Deputy" ColumnName="Deputy" />
-                <ScalarProperty Name="AddressInfo" ColumnName="AddressInfo" />
-                <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
-                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
-                <ScalarProperty Name="WardName" ColumnName="WardName" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Priority" ColumnName="Priority" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

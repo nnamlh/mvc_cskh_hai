@@ -206,6 +206,8 @@
     <Property Name="IsActive" Type="int" />
     <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
     <Property Name="CStatus" Type="int" />
+    <Property Name="OldData" Type="int" />
+    <Property Name="SMSCode" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="CalendarInfo">
     <Key>
@@ -231,6 +233,8 @@
     <Property Name="Number" Type="int" />
     <Property Name="TGroup" Type="int" />
     <Property Name="Name" Type="nvarchar" MaxLength="512" />
+    <Property Name="InPlan" Type="int" />
+    <Property Name="OutPlan" Type="int" />
   </EntityType>
   <EntityType Name="CalendarWork">
     <Key>
@@ -268,6 +272,7 @@
     <Property Name="IdentityCard" Type="nvarchar" MaxLength="128" />
     <Property Name="AddressInfo" Type="nvarchar" MaxLength="1000" />
     <Property Name="Phone" Type="nvarchar" MaxLength="128" />
+    <Property Name="Fax" Type="nvarchar" MaxLength="128" />
     <Property Name="Email" Type="nvarchar" MaxLength="256" />
     <Property Name="PlaceOfBirth" Type="nvarchar" MaxLength="255" />
     <Property Name="Notes" Type="nvarchar" MaxLength="255" />
@@ -280,6 +285,7 @@
     <Property Name="BranchCode" Type="nvarchar" MaxLength="128" />
     <Property Name="CCode" Type="nvarchar" MaxLength="32" />
     <Property Name="CDeputy" Type="nvarchar" MaxLength="512" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="128" />
     <Property Name="BankAccount" Type="nvarchar" MaxLength="256" />
     <Property Name="BankAccountHolder" Type="nvarchar" MaxLength="512" />
     <Property Name="BackName" Type="nvarchar(max)" />
@@ -290,9 +296,10 @@
     <Property Name="CRank" Type="nvarchar" MaxLength="16" />
     <Property Name="WardName" Type="nvarchar" MaxLength="512" />
     <Property Name="Country" Type="nvarchar" MaxLength="128" />
+    <Property Name="ProvinceCode" Type="nvarchar" MaxLength="5" />
     <Property Name="BirthDay" Type="nvarchar" MaxLength="128" />
     <Property Name="AgencyType" Type="nvarchar" MaxLength="128" />
-    <Property Name="ProvinceCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="OldData" Type="int" />
   </EntityType>
   <EntityType Name="DecorGroup">
     <Key>
@@ -770,7 +777,6 @@
     <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="PName" Type="nvarchar" MaxLength="256" />
     <Property Name="PCode" Type="nvarchar" MaxLength="128" />
-    <Property Name="Material" Type="nvarchar" MaxLength="512" />
     <Property Name="Unit" Type="nvarchar" MaxLength="128" />
     <Property Name="Producer" Type="nvarchar" MaxLength="256" />
     <Property Name="CardPoint" Type="nvarchar" MaxLength="32" />
@@ -779,13 +785,7 @@
     <Property Name="Barcode" Type="nvarchar" MaxLength="32" />
     <Property Name="QuantityBox" Type="int" />
     <Property Name="IsBox" Type="int" />
-    <Property Name="PGroup" Type="nvarchar" MaxLength="128" />
-    <Property Name="Register" Type="nvarchar(max)" />
-    <Property Name="CommerceName" Type="nvarchar(max)" />
-    <Property Name="Activce" Type="nvarchar(max)" />
-    <Property Name="Poision" Type="nvarchar(max)" />
     <Property Name="Describe" Type="nvarchar(max)" />
-    <Property Name="Uses" Type="nvarchar(max)" />
     <Property Name="Introduce" Type="nvarchar(max)" />
     <Property Name="Notes" Type="nvarchar(max)" />
     <Property Name="Other" Type="nvarchar(max)" />
@@ -793,10 +793,11 @@
     <Property Name="Forcus" Type="int" />
     <Property Name="New" Type="int" />
     <Property Name="CreateTime" Type="datetime" />
-    <Property Name="Price" Type="float" />
     <Property Name="PVat" Type="float" />
     <Property Name="ShortDescibe" Type="nvarchar(max)" />
     <Property Name="Quantity" Type="int" />
+    <Property Name="Price" Type="float" />
+    <Property Name="GroupId" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="ProductSeri">
     <Key>
@@ -1640,6 +1641,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__ProductIn__Group__453F38BC">
+    <End Role="ProductGroup" Type="Self.ProductGroup" Multiplicity="0..1" />
+    <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductInfo">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__ProductSe__Produ__10416098">
     <End Role="ProductInfo" Type="Self.ProductInfo" Multiplicity="0..1" />
     <End Role="ProductSeri" Type="Self.ProductSeri" Multiplicity="*" />
@@ -1816,9 +1829,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Function Name="c2_get_list_c1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-    <Parameter Name="Code" Type="nvarchar" Mode="In" />
-  </Function>
   <Function Name="checkin_calendartype_group" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="month" Type="int" Mode="In" />
     <Parameter Name="year" Type="int" Mode="In" />
@@ -2160,6 +2170,10 @@
     <AssociationSet Name="FK__ProductIm__Produ__64ECEE3F" Association="Self.FK__ProductIm__Produ__64ECEE3F">
       <End Role="ProductInfo" EntitySet="ProductInfo" />
       <End Role="ProductImage" EntitySet="ProductImage" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductIn__Group__453F38BC" Association="Self.FK__ProductIn__Group__453F38BC">
+      <End Role="ProductGroup" EntitySet="ProductGroup" />
+      <End Role="ProductInfo" EntitySet="ProductInfo" />
     </AssociationSet>
     <AssociationSet Name="FK__ProductSe__Produ__10416098" Association="Self.FK__ProductSe__Produ__10416098">
       <End Role="ProductInfo" EntitySet="ProductInfo" />

@@ -165,6 +165,8 @@
           <Property Name="IsActive" Type="int" />
           <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
           <Property Name="CStatus" Type="int" />
+          <Property Name="OldData" Type="int" />
+          <Property Name="SMSCode" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="CalendarInfo">
           <Key>
@@ -190,6 +192,8 @@
           <Property Name="Number" Type="int" />
           <Property Name="TGroup" Type="int" />
           <Property Name="Name" Type="nvarchar" MaxLength="512" />
+          <Property Name="InPlan" Type="int" />
+          <Property Name="OutPlan" Type="int" />
         </EntityType>
         <EntityType Name="CalendarWork">
           <Key>
@@ -2270,6 +2274,8 @@
           <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C2Info__InfoId__6CD828CA" FromRole="C2Info" ToRole="CInfoCommon" />
           <NavigationProperty Name="StaffWithC2" Relationship="Self.FK__StaffWithC__C2Id__4B622666" FromRole="C2Info" ToRole="StaffWithC2" />
           <Property Name="CStatus" Type="Int32" />
+          <Property Name="OldData" Type="Int32" />
+          <Property Name="SMSCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CalendarInfo">
           <Key>
@@ -2296,6 +2302,8 @@
           <Property Name="Number" Type="Int32" />
           <Property Name="TGroup" Type="Int32" />
           <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="InPlan" Type="Int32" />
+          <Property Name="OutPlan" Type="Int32" />
         </EntityType>
         <EntityType Name="CalendarWork">
           <Key>
@@ -3805,7 +3813,7 @@
             <End Role="ProductInfo" EntitySet="ProductInfoes" />
           </AssociationSet>
           <FunctionImport Name="procduct_item_detail" ReturnType="Collection(NDHDB1Model.procduct_item_detail_Result1)">
-            <Parameter Name="id" Mode="In" Type="String" />
+          <Parameter Name="id" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="checkin_calendartype_group_Result">
@@ -4424,6 +4432,8 @@
           <EntitySetMapping Name="C2Info">
             <EntityTypeMapping TypeName="NDHDB1Model.C2Info">
               <MappingFragment StoreEntitySet="C2Info">
+                <ScalarProperty Name="SMSCode" ColumnName="SMSCode" />
+                <ScalarProperty Name="OldData" ColumnName="OldData" />
                 <ScalarProperty Name="CStatus" ColumnName="CStatus" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -4452,6 +4462,8 @@
           <EntitySetMapping Name="CalendarTypes">
             <EntityTypeMapping TypeName="NDHDB1Model.CalendarType">
               <MappingFragment StoreEntitySet="CalendarType">
+                <ScalarProperty Name="OutPlan" ColumnName="OutPlan" />
+                <ScalarProperty Name="InPlan" ColumnName="InPlan" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Compel" ColumnName="Compel" />

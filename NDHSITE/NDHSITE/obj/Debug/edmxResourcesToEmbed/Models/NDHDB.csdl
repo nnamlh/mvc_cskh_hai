@@ -216,6 +216,8 @@
     <Property Name="CStatus" Type="Int32" />
     <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C2Info__InfoId__6CD828CA" FromRole="C2Info" ToRole="CInfoCommon" />
     <NavigationProperty Name="StaffWithC2" Relationship="Self.FK__StaffWithC__C2Id__4B622666" FromRole="C2Info" ToRole="StaffWithC2" />
+    <Property Name="OldData" Type="Int32" />
+    <Property Name="SMSCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="CalendarInfo">
     <Key>
@@ -242,6 +244,8 @@
     <Property Name="Number" Type="Int32" />
     <Property Name="TGroup" Type="Int32" />
     <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="InPlan" Type="Int32" />
+    <Property Name="OutPlan" Type="Int32" />
   </EntityType>
   <EntityType Name="CalendarWork">
     <Key>
@@ -303,7 +307,7 @@
     <Property Name="Country" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="BirthDay" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="AgencyType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="ProvinceCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProvinceCode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="AgencySavePoints" Relationship="Self.FK__AgencySav__CInfo__6497E884" FromRole="CInfoCommon" ToRole="AgencySavePoint" />
     <NavigationProperty Name="AgencyType1" Relationship="Self.FK__CInfoComm__Agenc__4356F04A" FromRole="CInfoCommon" ToRole="AgencyType" />
     <NavigationProperty Name="C1Info" Relationship="Self.FK__C1Info__InfoId__681373AD" FromRole="CInfoCommon" ToRole="C1Info" />
@@ -314,6 +318,8 @@
     <NavigationProperty Name="HaiOrders" Relationship="Self.FK__HaiOrder__Agency__17786E0C" FromRole="CInfoCommon" ToRole="HaiOrder" />
     <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__CInfoI__5614BF03" FromRole="CInfoCommon" ToRole="MSGPoint" />
     <NavigationProperty Name="SaveAgencyShopImages" Relationship="Self.FK__SaveAgenc__Cinfo__7FA0E47B" FromRole="CInfoCommon" ToRole="SaveAgencyShopImage" />
+    <Property Name="Fax" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Mobile" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="DecorGroup">
     <Key>
@@ -822,6 +828,7 @@
     <Property Name="Parent" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="HasChild" Type="Int32" />
+    <NavigationProperty Name="ProductInfoes" Relationship="DMSHAIModel.FK__ProductIn__Group__453F38BC" FromRole="ProductGroup" ToRole="ProductInfo" />
   </EntityType>
   <EntityType Name="ProductImage">
     <Key>
@@ -839,7 +846,6 @@
     <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="PName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="PCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Material" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="Unit" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Producer" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="CardPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
@@ -848,13 +854,7 @@
     <Property Name="Barcode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="QuantityBox" Type="Int32" />
     <Property Name="IsBox" Type="Int32" />
-    <Property Name="PGroup" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Register" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="CommerceName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Activce" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Poision" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Uses" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Introduce" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -873,6 +873,8 @@
     <NavigationProperty Name="ProductImages" Relationship="Self.FK__ProductIm__Produ__64ECEE3F" FromRole="ProductInfo" ToRole="ProductImage" />
     <NavigationProperty Name="ProductSeris" Relationship="Self.FK__ProductSe__Produ__10416098" FromRole="ProductInfo" ToRole="ProductSeri" />
     <NavigationProperty Name="PTrackings" Relationship="Self.FK__PTracking__Produ__00FF1D08" FromRole="ProductInfo" ToRole="PTracking" />
+    <Property Name="GroupId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ProductGroup" Relationship="DMSHAIModel.FK__ProductIn__Group__453F38BC" FromRole="ProductInfo" ToRole="ProductGroup" />
   </EntityType>
   <EntityType Name="ProductSeri">
     <Key>
@@ -2166,6 +2168,10 @@
     <FunctionImport Name="c2_get_list_c1" ReturnType="Collection(DMSHAIModel.c2_get_list_c1_Result)">
       <Parameter Name="Code" Mode="In" Type="String" />
     </FunctionImport>
+    <AssociationSet Name="FK__ProductIn__Group__453F38BC" Association="DMSHAIModel.FK__ProductIn__Group__453F38BC">
+      <End Role="ProductGroup" EntitySet="ProductGroups" />
+      <End Role="ProductInfo" EntitySet="ProductInfoes" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="checkin_calendartype_group_Result">
     <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
@@ -2339,4 +2345,16 @@
     <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
     <Property Type="Int32" Name="Priority" Nullable="true" />
   </ComplexType>
+  <Association Name="FK__ProductIn__Group__453F38BC">
+    <End Type="DMSHAIModel.ProductGroup" Role="ProductGroup" Multiplicity="0..1" />
+    <End Type="DMSHAIModel.ProductInfo" Role="ProductInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ProductInfo">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

@@ -531,6 +531,8 @@ namespace NDHSITE.Controllers
             return RedirectToAction("modifycii", "agency", new { id = agency.Id });
         }
 
+
+        [HttpPost]
         public ActionResult excelAgencyC2(HttpPostedFileBase files)
         {
 
@@ -560,16 +562,13 @@ namespace NDHSITE.Controllers
                     List<ImportC2Result> listError = new List<ImportC2Result>();
                     for (int i = 2; i <= totalRows; i++)
                     {
-                        string code = Convert.ToString(sheet.Cells[i, 2].Value);
+                        string codeSMS = Convert.ToString(sheet.Cells[i, 2].Value);
 
                         string branch = Convert.ToString(sheet.Cells[i, 3].Value);
 
                         string staffCode = Convert.ToString(sheet.Cells[i, 6].Value);
 
                         string phone = Convert.ToString(sheet.Cells[i, 13].Value);
-
-                        // create code for c2 and save 
-                        var branchInfo = db.HaiBranches.Where(p => p.Code == branch).FirstOrDefault();
 
                         string storeName = Convert.ToString(sheet.Cells[i, 4].Value);
 
@@ -586,11 +585,20 @@ namespace NDHSITE.Controllers
                         string district = Convert.ToString(sheet.Cells[i, 10].Value);
                         string rank = Convert.ToString(sheet.Cells[i, 17].Value);
                         string group = Convert.ToString(sheet.Cells[i, 1].Value);
+
+
+
                         string c1Code1 = Convert.ToString(sheet.Cells[i, 14].Value).Trim();
                         string c1Code2 = Convert.ToString(sheet.Cells[i, 15].Value).Trim();
-                        string c1Code3 = Convert.ToString(sheet.Cells[i, 16].Value).Trim();
-
-                        var c1No = db.C1Info.Where(p => p.Code == "0000000000").FirstOrDefault();
+                        string type = Convert.ToString(sheet.Cells[i, 18].Value).Trim();
+                        if (String.IsNullOrEmpty(type))
+                        {
+                            type = "normal";
+                        }
+                        else
+                        {
+                            type = "close";
+                        }
 
                         var cInfo = new CInfoCommon()
                         {
@@ -605,9 +613,11 @@ namespace NDHSITE.Controllers
                             CType = "CII",
                             BranchCode = branch,
                             CDeputy = deputy,
-                            Country = "vn",
+                            Country = "VN",
                             CRank = rank,
-                            BusinessLicense = bussiness
+                            BusinessLicense = bussiness,
+                            AgencyType = type,
+                            OldData = 0
                         };
 
 
@@ -617,36 +627,15 @@ namespace NDHSITE.Controllers
                             InfoId = cInfo.Id,
                             StoreName = storeName,
                             Deputy = deputy,
-                            IsActive = 1
+                            IsActive = 1,
+                            OldData = 0,
+                            SMSCode = codeSMS,
+                            CStatus = 1
                         };
 
-                        string newCode = code;
-                        if (String.IsNullOrEmpty(newCode))
-                        {
-                            newCode = GetAgencyCodeTemp(branch);
-                            c2.CStatus = 0;
-                        }
-
-
-                        /*
-                        var saveOldKey = new OldKeySave()
-                        {
-                            CodeType = "C2",
-                            CreateTime = DateTime.Now,
-                            Id = Guid.NewGuid().ToString(),
-                            OldCode = code,
-                            NewCode = newCode
-                        };
-                        db.OldKeySaves.Add(saveOldKey);
-                        db.SaveChanges();
-                        */
-
+                        string newCode = GetAgencyCode(provinceCode);
                         c2.Code = newCode;
                         cInfo.CCode = newCode;
-
-                        var check = db.C2Info.Where(p => p.Code == newCode).FirstOrDefault();
-
-                        // if (check == null && staffInfo != null && !String.IsNullOrEmpty(phone))
 
                         HaiStaff staffInfo = null;
                         if (!String.IsNullOrEmpty(staffCode))
@@ -654,7 +643,7 @@ namespace NDHSITE.Controllers
                             staffInfo = db.HaiStaffs.Where(p => p.Code.Contains(staffCode.Trim())).FirstOrDefault();
                         }
 
-                        if (staffInfo != null && check == null)
+                        if (staffInfo != null)
                         {
 
                             db.CInfoCommons.Add(cInfo);
@@ -710,28 +699,12 @@ namespace NDHSITE.Controllers
                                 db.C2C1.Add(c2c1);
                                 db.SaveChanges();
                             }
-
-                            var checkC13 = db.C1Info.Where(p => p.Code == c1Code3).FirstOrDefault();
-                            if (checkC13 != null)
-                            {
-                                var c2c1 = new C2C1()
-                                {
-                                    Id = Guid.NewGuid().ToString(),
-                                    C1Code = checkC13.Code,
-                                    C2Code = newCode,
-                                    ModifyDate = DateTime.Now,
-                                    Priority = 0
-                                };
-                                db.C2C1.Add(c2c1);
-                                db.SaveChanges();
-                            }
-
                         }
                         else
                         {
                             listError.Add(new ImportC2Result()
                             {
-                                old = code,
+                                old = codeSMS,
                                 newCode = newCode,
                                 phone = phone,
                                 staff = staffCode,
@@ -814,7 +787,7 @@ namespace NDHSITE.Controllers
                 number = 0;
 
             number++;
-
+            /*
             var count = Convert.ToString(number).Count();
 
             var numberAddMore = 100000;
@@ -833,7 +806,8 @@ namespace NDHSITE.Controllers
 
             var temp = Convert.ToString(number);
             temp = temp.Substring(1);
-            /*
+            */
+       
             var count = Convert.ToString(number).Count();
             var temp = "";
             if (count == 1)
@@ -844,7 +818,7 @@ namespace NDHSITE.Controllers
                 temp = "0" + number;
             else
                 temp = number + "";
-                */
+         
             string code = province + temp;
 
             var store = new StoreAgencyId()

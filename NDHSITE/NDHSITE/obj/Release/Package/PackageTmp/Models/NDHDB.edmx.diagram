@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="34a8a2cf01244a67b13650a8f04c6067" Name="Diagram1">
+      <Diagram DiagramId="34a8a2cf01244a67b13650a8f04c6067" Name="Diagram1" ZoomLevel="92">
         <EntityTypeShape EntityType="DMSHAIModel.AgencySavePoint" Width="1.5" PointX="12.5" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="DMSHAIModel.AgencyType" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DMSHAIModel.AllStatu" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
@@ -147,6 +147,7 @@
         <AssociationConnector Association="DMSHAIModel.MobileRole" ManuallyRouted="false" />
         <AssociationConnector Association="DMSHAIModel.ProcessWithRole" ManuallyRouted="false" />
         <AssociationConnector Association="DMSHAIModel.StaffWithC1" ManuallyRouted="false" />
+        <AssociationConnector Association="DMSHAIModel.FK__ProductIn__Group__453F38BC" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

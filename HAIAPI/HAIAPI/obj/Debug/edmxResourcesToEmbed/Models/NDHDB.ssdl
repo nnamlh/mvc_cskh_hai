@@ -160,6 +160,8 @@
     <Property Name="IsActive" Type="int" />
     <Property Name="InfoId" Type="nvarchar" MaxLength="128" />
     <Property Name="CStatus" Type="int" />
+    <Property Name="OldData" Type="int" />
+    <Property Name="SMSCode" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="CalendarInfo">
     <Key>
@@ -185,6 +187,8 @@
     <Property Name="Number" Type="int" />
     <Property Name="TGroup" Type="int" />
     <Property Name="Name" Type="nvarchar" MaxLength="512" />
+    <Property Name="InPlan" Type="int" />
+    <Property Name="OutPlan" Type="int" />
   </EntityType>
   <EntityType Name="CalendarWork">
     <Key>

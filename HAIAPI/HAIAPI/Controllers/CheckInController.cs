@@ -260,7 +260,7 @@ namespace HAIAPI.Controllers
                 db.Entry(checkCalendar).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
 
-                result.status = db.CalendarTypes.OrderBy(p => p.TGroup).ToList();
+                result.status = db.CalendarTypes.Where(p => p.InPlan == 1).OrderBy(p => p.TGroup).ToList();
             }
             catch (Exception e)
             {
@@ -343,7 +343,7 @@ namespace HAIAPI.Controllers
                             CYear = paser.year,
                             CDay = item.day,
                             InPlan = 1,
-                            Perform = 0,
+                            Perform = 1,
                             CIn = 0,
                             COut = 0,
                             AllTime = 0,
@@ -351,7 +351,7 @@ namespace HAIAPI.Controllers
                             TypeId = item.status,
                             Notes = item.notes,
                             StaffId = staff.Id,
-                            DayInWeek = GetDayOfWeek(item.day,paser.month, paser.year)
+                            DayInWeek = GetDayOfWeek(item.day, paser.month, paser.year)
                         };
 
                         db.CalendarWorks.Add(plan);
@@ -492,24 +492,24 @@ namespace HAIAPI.Controllers
                 if (allItemInDay.Count > 0)
                 {
 
-                    itemDay.type = allItemInDay[0].TypeId;
-                    itemDay.notes = allItemInDay[0].Notes;
-                    itemDay.typeName = allItemInDay[0].TypeName;
+                       itemDay.type = allItemInDay[0].TypeId;
+                      itemDay.notes = allItemInDay[0].Notes;
+                       itemDay.typeName = allItemInDay[0].TypeName;
 
                     foreach (var agency in allItemInDay)
                     {
-                        if (!String.IsNullOrEmpty(agency.AgencyCode))
+
+                        itemDay.agences.Add(new CalendarShowAgencyItem()
                         {
-                            itemDay.agences.Add(new CalendarShowAgencyItem()
-                            {
-                                code = agency.AgencyCode,
-                                ctype = agency.AgencyType,
-                                deputy = agency.Deputy,
-                                name = agency.StoreName,
-                                inPlan = agency.InPlan,
-                                perform = agency.Perform
-                            });
-                        }
+                            code = agency.AgencyCode,
+                            ctype = agency.AgencyType,
+                            deputy = agency.Deputy,
+                            name = agency.StoreName,
+                            inPlan = agency.InPlan,
+                            perform = agency.Perform,
+                            ctypename = agency.TypeName
+                        });
+
                     }
 
                 }
@@ -586,33 +586,38 @@ namespace HAIAPI.Controllers
                 if (!compareDateCurrent(paser.day, paser.month, paser.year))
                     throw new Exception("Sai thông tin ngày tháng");
 
-                result.inplan = new List<string>();
-                result.outplan = new List<string>();
+                result.checkin = new List<AgencyCheckIn>();
+                //result.outplan = new List<string>();
+                result.status = db.CalendarTypes.Where(p => p.OutPlan == 1).OrderBy(p => p.TGroup).ToList();
 
                 var listPlan = db.CalendarWorks.Where(p => p.CMonth == paser.month && p.CYear == paser.year && p.CDay == paser.day && p.StaffId == staff.Id).ToList();
+                var calendarType = db.CalendarTypes.ToList();
                 foreach (var item in listPlan)
                 {
-                    if (item.InPlan == 1)
+                    if (!String.IsNullOrEmpty(item.AgencyCode))
                     {
+                        // lay danh sach khach hang ghé thăm 
                         if (item.Perform == 0)
                         {
-                            result.inplan.Add(item.AgencyCode);
+                            var type = calendarType.Where(p => p.Id == item.TypeId).FirstOrDefault();
+                            var agencyInfo = db.CInfoCommons.Where(p => p.CCode == item.AgencyCode).FirstOrDefault();
+                            if (type != null && agencyInfo != null)
+                            {
+                                result.checkin.Add(new AgencyCheckIn()
+                                {
+                                    ctype = type.Id,
+                                    cname = type.Name,
+                                    code = item.AgencyCode,
+                                    deputy = agencyInfo.CDeputy,
+                                    name = agencyInfo.CName,
+                                    inPlan = item.InPlan,
+                                    lat = agencyInfo.Lat != null ? agencyInfo.Lat : 0,
+                                    lng = agencyInfo.Lng != null ? agencyInfo.Lng : 0
+                                });
+                            }
+
                         }
                     }
-
-                    // tat ca ma ko co ke hoach va da thuc hien + ma trong ke hoach
-                    if (item.InPlan == 0)
-                    {
-                        if (item.Perform == 1)
-                        {
-                            result.outplan.Add(item.AgencyCode);
-                        }
-                    }
-                    else
-                    {
-                        result.outplan.Add(item.AgencyCode);
-                    }
-
                 }
 
 
@@ -733,10 +738,12 @@ namespace HAIAPI.Controllers
                         // kiem tra thoi gian
                         TimeSpan span = DateTime.Now.TimeOfDay.Subtract(checkCalendar.CInTime.Value);
                         int minuteDistance = span.Hours * 60 + span.Minutes;
+                        /*
                         if (minuteDistance >= timeRequireCheckIn)
                             minuteDistance = 0;
                         else
                             minuteDistance = timeRequireCheckIn - minuteDistance;
+                            */
                         result.timeRemain = minuteDistance;
                     }
                     else
@@ -751,38 +758,7 @@ namespace HAIAPI.Controllers
                     saveHistoryProcess("begintask", checkCalendar.Id);
 
                 }
-                else
-                {
-                    // ngoai ke hoach va tao moi
-                    CalendarWork calendar = new CalendarWork()
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        AgencyCode = cinfo.CCode,
-                        AgencyType = cinfo.CType,
-                        CDate = day + "",
-                        CDay = day,
-                        CMonth = month,
-                        CYear = year,
-                        TypeId = "CSKH",
-                        InPlan = 0,
-                        Perform = 0,
-                        CIn = 1,
-                        CInTime = DateTime.Now.TimeOfDay,
-                        COut = 0,
-                        AllTime = 0,
-                        Distance = 0,
-                        StaffId = staff.Id,
-                        TimeCheck = DateTime.Now,
-                        Notes = "Tham ngoai ke hoach"
-                    };
-                    db.CalendarWorks.Add(calendar);
-                    db.SaveChanges();
 
-                    saveHistoryProcess("begintask", calendar.Id);
-
-                    result.timeRemain = timeRequireCheckIn;
-                    result.inPlan = 0;
-                }
 
             }
             catch (Exception e)
@@ -800,6 +776,134 @@ namespace HAIAPI.Controllers
         }
 
         #endregion
+
+        #region check in ngoai ke hoach
+        [HttpPost]
+        public ResultInfo CheckInOutPlan()
+        {
+            var log = new MongoHistoryAPI()
+            {
+                APIUrl = "/api/checkin/checkinoutplan",
+                CreateTime = DateTime.Now,
+                Sucess = 1
+            };
+
+            var result = new ResultInfo()
+            {
+                id = "1",
+                msg = "success"
+            };
+            var requestContent = Request.Content.ReadAsStringAsync().Result;
+            try
+            {
+                var jsonserializer = new JavaScriptSerializer();
+                var paser = jsonserializer.Deserialize<CheckInOutPlanRequest>(requestContent);
+                log.Content = new JavaScriptSerializer().Serialize(paser);
+
+                if (!mongoHelper.checkLoginSession(paser.user, paser.token))
+                    throw new Exception("Wrong token and user login!");
+
+                var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+
+                if (staff == null)
+                    throw new Exception("Chỉ nhân viên công ty mới được sử dụng");
+                // check 
+                var day = DateTime.Now.Day;
+                var month = DateTime.Now.Month;
+                var year = DateTime.Now.Year;
+
+                var calendarType = db.CalendarTypes.Where(p => p.Id == paser.ctype).FirstOrDefault();
+                if (calendarType == null)
+                    throw new Exception("Sai ke hoach");
+
+                // check ke hoach nay da co chua
+                if (String.IsNullOrEmpty(paser.code))
+                {
+                    var checkCalendar = db.CalendarWorks.Where(p => p.CMonth == month && p.CYear == year && p.CDay == day && p.StaffId == staff.Id && p.TypeId == calendarType.Id).FirstOrDefault();
+                    if (checkCalendar != null)
+                        throw new Exception("Ke hoach nay da ton tai");
+
+
+                    // tao lich
+                    CalendarWork plan = new CalendarWork()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        CDate = "D" + day + "",
+                        CDay = day,
+                        CMonth = month,
+                        CYear = year,
+                        InPlan = 0,
+                        Perform = 1,
+                        CIn = 0,
+                        COut = 0,
+                        AllTime = 0,
+                        Distance = 0,
+                        TypeId = calendarType.Id,
+                        Notes = "Ngoai ke hoach",
+                        StaffId = staff.Id,
+                        DayInWeek = GetDayOfWeek(day, month, year),
+                        LatCheck = paser.lat,
+                        LngCheck = paser.lng,
+                        TimeCheck = DateTime.Now
+                    };
+
+                    db.CalendarWorks.Add(plan);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    var cinfo = db.CInfoCommons.Where(p => p.CCode == paser.code).FirstOrDefault();
+                    if (cinfo == null)
+                        throw new Exception("Sai mã khách hàng");
+
+                    var checkCalendar = db.CalendarWorks.Where(p => p.CMonth == month && p.CYear == year && p.CDay == day && p.StaffId == staff.Id && p.AgencyCode == paser.code).FirstOrDefault();
+                    if (checkCalendar != null)
+                        throw new Exception("Ke hoach nay da ton tai");
+
+                    // tao lich
+                    CalendarWork calendar = new CalendarWork()
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        AgencyCode = cinfo.CCode,
+                        AgencyType = cinfo.CType,
+                        CDate = "D" + day + "",
+                        CDay = day,
+                        CMonth = month,
+                        CYear = year,
+                        InPlan = 0,
+                        Perform = 0,
+                        CIn = 0,
+                        COut = 0,
+                        AllTime = 0,
+                        Distance = 0,
+                        TypeId = calendarType.Id,
+                        Notes = "Ngoai ke hoach",
+                        StaffId = staff.Id,
+                        DayInWeek = GetDayOfWeek(day, month, year),
+                        LatCheck = paser.lat,
+                        LngCheck = paser.lng,
+                        TimeCheck = DateTime.Now
+                    };
+                    db.CalendarWorks.Add(calendar);
+                    db.SaveChanges();
+
+                }
+            }
+            catch (Exception e)
+            {
+                result.id = "0";
+                result.msg = e.Message;
+                log.Sucess = 0;
+            }
+
+            log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+            mongoHelper.createHistoryAPI(log);
+
+            return result;
+
+        }
+        #endregion
+
 
         #region
         [HttpPost]
@@ -861,7 +965,9 @@ namespace HAIAPI.Controllers
                     // kiem tra da thuc hien xong chua
                     if (checkCalendar.Perform == 1)
                         throw new Exception("Đã hoàn thành ghé thăm");
+
                     TimeSpan span = DateTime.Now.TimeOfDay.Subtract(checkCalendar.CInTime.Value);
+                    /*
                     int minuteDistance = span.Hours * 60 + span.Minutes;
                     if (minuteDistance >= timeRequireCheckIn)
                         minuteDistance = 0;
@@ -870,7 +976,7 @@ namespace HAIAPI.Controllers
 
                     if (minuteDistance > 0)
                         throw new Exception("Còn " + minuteDistance + " phút để có thể checkin");
-
+                        */
                     checkCalendar.COut = 1;
                     checkCalendar.Perform = 1;
                     checkCalendar.TimeCheck = DateTime.Now;

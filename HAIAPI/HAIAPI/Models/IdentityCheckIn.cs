@@ -102,9 +102,33 @@ namespace HAIAPI.Models
 
         public string ctype { get; set; }
 
+        public string ctypename { get; set; }
+
         public int? inPlan { get; set; }
 
         public int? perform { get; set; }
+
+
+    }
+
+    public class AgencyCheckIn
+    {
+        public string deputy { get; set; }
+
+        public string code { get; set; }
+
+        public string name { get; set; }
+
+        public int? inPlan { get; set; }
+
+        public double? lng { get; set; }
+
+        public double? lat { get; set; }
+
+        public string ctype { get; set; }
+
+        public string cname { get; set; }
+
     }
 
     public class CalendarShowRequest : RequestInfo
@@ -117,8 +141,11 @@ namespace HAIAPI.Models
     //
     public class CheckInGetPlanResult : ResultInfo
     {
-        public List<string> inplan { get; set; }
-        public List<string> outplan { get; set; }
+        public List<AgencyCheckIn> checkin { get; set; }
+        //   public List<string> outplan { get; set; }
+
+        public List<CalendarType> status { get; set; }
+
     }
     public class CheckInGetPlanRequest : RequestInfo
     {
@@ -134,6 +161,17 @@ namespace HAIAPI.Models
     public class CheckInTaskRequest : RequestInfo
     {
         public string code { get; set; }
+    }
+
+    public class CheckInOutPlanRequest : RequestInfo
+    {
+        public string code { get; set; }
+
+        public string ctype { get; set; }
+
+        public double? lat { get; set; }
+
+        public double? lng { get; set; }
     }
 
     public class CheckInTaskResult : ResultInfo

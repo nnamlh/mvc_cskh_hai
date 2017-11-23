@@ -204,6 +204,8 @@
     <EntitySetMapping Name="C2Info">
       <EntityTypeMapping TypeName="DMSHAIModel.C2Info">
         <MappingFragment StoreEntitySet="C2Info">
+          <ScalarProperty Name="SMSCode" ColumnName="SMSCode" />
+          <ScalarProperty Name="OldData" ColumnName="OldData" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="StoreName" ColumnName="StoreName" />
@@ -232,6 +234,8 @@
     <EntitySetMapping Name="CalendarTypes">
       <EntityTypeMapping TypeName="DMSHAIModel.CalendarType">
         <MappingFragment StoreEntitySet="CalendarType">
+          <ScalarProperty Name="OutPlan" ColumnName="OutPlan" />
+          <ScalarProperty Name="InPlan" ColumnName="InPlan" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="Compel" ColumnName="Compel" />
@@ -272,6 +276,8 @@
     <EntitySetMapping Name="CInfoCommons">
       <EntityTypeMapping TypeName="DMSHAIModel.CInfoCommon">
         <MappingFragment StoreEntitySet="CInfoCommon">
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CName" ColumnName="CName" />
           <ScalarProperty Name="IdentityCard" ColumnName="IdentityCard" />
@@ -785,10 +791,10 @@
     <EntitySetMapping Name="ProductInfoes">
       <EntityTypeMapping TypeName="DMSHAIModel.ProductInfo">
         <MappingFragment StoreEntitySet="ProductInfo">
+          <ScalarProperty Name="GroupId" ColumnName="GroupId" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="PName" ColumnName="PName" />
           <ScalarProperty Name="PCode" ColumnName="PCode" />
-          <ScalarProperty Name="Material" ColumnName="Material" />
           <ScalarProperty Name="Unit" ColumnName="Unit" />
           <ScalarProperty Name="Producer" ColumnName="Producer" />
           <ScalarProperty Name="CardPoint" ColumnName="CardPoint" />
@@ -797,13 +803,7 @@
           <ScalarProperty Name="Barcode" ColumnName="Barcode" />
           <ScalarProperty Name="QuantityBox" ColumnName="QuantityBox" />
           <ScalarProperty Name="IsBox" ColumnName="IsBox" />
-          <ScalarProperty Name="PGroup" ColumnName="PGroup" />
-          <ScalarProperty Name="Register" ColumnName="Register" />
-          <ScalarProperty Name="CommerceName" ColumnName="CommerceName" />
-          <ScalarProperty Name="Activce" ColumnName="Activce" />
-          <ScalarProperty Name="Poision" ColumnName="Poision" />
           <ScalarProperty Name="Describe" ColumnName="Describe" />
-          <ScalarProperty Name="Uses" ColumnName="Uses" />
           <ScalarProperty Name="Introduce" ColumnName="Introduce" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="Other" ColumnName="Other" />
@@ -1314,22 +1314,6 @@
           <ScalarProperty Name="countXK" ColumnName="countXK" />
           <ScalarProperty Name="PName" ColumnName="PName" />
           <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="c2_get_list_c1" FunctionName="DMSHAIModel.Store.c2_get_list_c1">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="DMSHAIModel.c2_get_list_c1_Result">
-          <ScalarProperty Name="Code" ColumnName="Code" />
-          <ScalarProperty Name="StoreName" ColumnName="StoreName" />
-          <ScalarProperty Name="Deputy" ColumnName="Deputy" />
-          <ScalarProperty Name="AddressInfo" ColumnName="AddressInfo" />
-          <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
-          <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
-          <ScalarProperty Name="WardName" ColumnName="WardName" />
-          <ScalarProperty Name="Phone" ColumnName="Phone" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="Priority" ColumnName="Priority" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

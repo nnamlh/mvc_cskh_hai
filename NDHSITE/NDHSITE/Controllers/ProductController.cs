@@ -177,19 +177,12 @@ namespace NDHSITE.Controllers
 
             productCheck.PName = product.PName;
             productCheck.Producer = product.Producer;
-            productCheck.PGroup = product.PGroup;
             productCheck.Unit = product.Unit;
             productCheck.QuantityBox = product.QuantityBox;
-            productCheck.PGroup = product.PGroup;
-            productCheck.Register = product.Register;
             productCheck.Describe = product.Describe;
             productCheck.Notes = product.Notes;
-            productCheck.Uses = product.Uses;
-            productCheck.Activce = product.Activce;
-            productCheck.CommerceName = product.CommerceName;
             productCheck.Introduce = product.Introduce;
             productCheck.Other = product.Other;
-            productCheck.Poision = product.Poision;
 
             if (Thumbnail != null)
             {

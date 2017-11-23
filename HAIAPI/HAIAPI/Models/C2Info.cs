@@ -27,6 +27,8 @@ namespace HAIAPI.Models
         public Nullable<int> IsActive { get; set; }
         public string InfoId { get; set; }
         public Nullable<int> CStatus { get; set; }
+        public Nullable<int> OldData { get; set; }
+        public string SMSCode { get; set; }
     
         public virtual CInfoCommon CInfoCommon { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -29,7 +29,6 @@ namespace NDHSITE.Models
         public string Id { get; set; }
         public string PName { get; set; }
         public string PCode { get; set; }
-        public string Material { get; set; }
         public string Unit { get; set; }
         public string Producer { get; set; }
         public string CardPoint { get; set; }
@@ -38,13 +37,7 @@ namespace NDHSITE.Models
         public string Barcode { get; set; }
         public Nullable<int> QuantityBox { get; set; }
         public Nullable<int> IsBox { get; set; }
-        public string PGroup { get; set; }
-        public string Register { get; set; }
-        public string CommerceName { get; set; }
-        public string Activce { get; set; }
-        public string Poision { get; set; }
         public string Describe { get; set; }
-        public string Uses { get; set; }
         public string Introduce { get; set; }
         public string Notes { get; set; }
         public string Other { get; set; }
@@ -56,6 +49,7 @@ namespace NDHSITE.Models
         public Nullable<double> PVat { get; set; }
         public string ShortDescibe { get; set; }
         public Nullable<int> Quantity { get; set; }
+        public string GroupId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EventProduct> EventProducts { get; set; }
@@ -71,5 +65,6 @@ namespace NDHSITE.Models
         public virtual ICollection<ProductSeri> ProductSeris { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PTracking> PTrackings { get; set; }
+        public virtual ProductGroup ProductGroup { get; set; }
     }
 }
