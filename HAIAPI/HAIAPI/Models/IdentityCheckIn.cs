@@ -129,6 +129,8 @@ namespace HAIAPI.Models
 
         public string cname { get; set; }
 
+        public List<AgencyC2C1> c1 { get; set; }
+
     }
 
     public class CalendarShowRequest : RequestInfo

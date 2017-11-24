@@ -63,8 +63,8 @@ namespace HAIAPI.Controllers
                 var paser = jsonserializer.Deserialize<MainInfoRequest>(requestContent);
                 history.Content = new JavaScriptSerializer().Serialize(paser);
 
-                if (!mongoHelper.checkLoginSession(paser.user, paser.token))
-                    throw new Exception("Tài khoản bạn đã đăng nhập ở thiết bị khác.");
+               // if (!mongoHelper.checkLoginSession(paser.user, paser.token))
+                  //  throw new Exception("Tài khoản bạn đã đăng nhập ở thiết bị khác.");
 
                 var checkUser = db.AspNetUsers.Where(p => p.UserName == paser.user).FirstOrDefault();
 
@@ -190,8 +190,8 @@ namespace HAIAPI.Controllers
                 var paser = jsonserializer.Deserialize<MainInfoRequest>(requestContent);
                 history.Content = new JavaScriptSerializer().Serialize(paser);
 
-                if (!mongoHelper.checkLoginSession(paser.user, paser.token))
-                    throw new Exception("Tài khoản bạn đã đăng nhập ở thiết bị khác.");
+              //  if (!mongoHelper.checkLoginSession(paser.user, paser.token))
+                   // throw new Exception("Tài khoản bạn đã đăng nhập ở thiết bị khác.");
 
                 var checkUser = db.AspNetUsers.Where(p => p.UserName == paser.user).FirstOrDefault();
 
@@ -334,8 +334,8 @@ namespace HAIAPI.Controllers
                     image = HaiUtil.HostName + item.Thumbnail,
                     isNew = item.New,
                     price = item.Price == null ? 0 : item.Price,
-                    //quantity_box = item.QuantityBox == null ? 0 : item.QuantityBox,
-                    quantity_box = item.Quantity == null ? 0 : item.Quantity,
+                    quantity_box = item.QuantityBox == null ? 0 : item.QuantityBox,
+                    quantity = item.Quantity == null ? 0 : item.Quantity,
                     short_describe = item.ShortDescibe,
                     unit = item.Unit,
                     vat = item.PVat == null ? 0 : item.PVat

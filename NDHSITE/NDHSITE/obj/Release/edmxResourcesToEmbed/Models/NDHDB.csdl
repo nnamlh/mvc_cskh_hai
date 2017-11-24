@@ -2166,13 +2166,13 @@
       <Parameter Name="DFrom" Mode="In" Type="String" />
       <Parameter Name="DTo" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="c2_get_list_c1" ReturnType="Collection(DMSHAIModel.c2_get_list_c1_Result)">
-      <Parameter Name="Code" Mode="In" Type="String" />
-    </FunctionImport>
     <AssociationSet Name="FK__ProductIn__Group__453F38BC" Association="DMSHAIModel.FK__ProductIn__Group__453F38BC">
       <End Role="ProductGroup" EntitySet="ProductGroups" />
       <End Role="ProductInfo" EntitySet="ProductInfoes" />
     </AssociationSet>
+    <FunctionImport Name="c2_get_list_c1" ReturnType="Collection(DMSHAIModel.c2_get_list_c1_Result)">
+      <Parameter Name="Code" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="checkin_calendartype_group_Result">
     <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
@@ -2334,18 +2334,6 @@
     <Property Type="Decimal" Name="Quantity" Nullable="true" Precision="5" Scale="2" />
     <Property Type="String" Name="staffhelp" Nullable="false" MaxLength="22" />
   </ComplexType>
-  <ComplexType Name="c2_get_list_c1_Result">
-    <Property Type="String" Name="Code" Nullable="true" MaxLength="32" />
-    <Property Type="String" Name="StoreName" Nullable="true" MaxLength="512" />
-    <Property Type="String" Name="Deputy" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="AddressInfo" Nullable="true" MaxLength="1000" />
-    <Property Type="String" Name="ProvinceName" Nullable="true" MaxLength="256" />
-    <Property Type="String" Name="DistrictName" Nullable="true" MaxLength="256" />
-    <Property Type="String" Name="WardName" Nullable="true" MaxLength="512" />
-    <Property Type="String" Name="Phone" Nullable="true" MaxLength="128" />
-    <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
-    <Property Type="Int32" Name="Priority" Nullable="true" />
-  </ComplexType>
   <Association Name="FK__ProductIn__Group__453F38BC">
     <End Type="DMSHAIModel.ProductGroup" Role="ProductGroup" Multiplicity="0..1" />
     <End Type="DMSHAIModel.ProductInfo" Role="ProductInfo" Multiplicity="*" />
@@ -2358,4 +2346,16 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="c2_get_list_c1_Result">
+    <Property Type="String" Name="Code" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="StoreName" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="Deputy" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="AddressInfo" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="ProvinceName" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="DistrictName" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="WardName" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="Phone" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
+    <Property Type="Int32" Name="Priority" Nullable="true" />
+  </ComplexType>
 </Schema>

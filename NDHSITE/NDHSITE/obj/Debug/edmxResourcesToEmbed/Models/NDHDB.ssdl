@@ -299,6 +299,7 @@
     <Property Name="ProvinceCode" Type="nvarchar" MaxLength="5" />
     <Property Name="BirthDay" Type="nvarchar" MaxLength="128" />
     <Property Name="AgencyType" Type="nvarchar" MaxLength="128" />
+    <Property Name="OldData" Type="int" />
   </EntityType>
   <EntityType Name="DecorGroup">
     <Key>
@@ -1828,6 +1829,9 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="c2_get_list_c1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Code" Type="nvarchar" Mode="In" />
+  </Function>
   <Function Name="checkin_calendartype_group" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="month" Type="int" Mode="In" />
     <Parameter Name="year" Type="int" Mode="In" />

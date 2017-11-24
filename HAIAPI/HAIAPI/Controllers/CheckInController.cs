@@ -603,7 +603,7 @@ namespace HAIAPI.Controllers
                             var agencyInfo = db.CInfoCommons.Where(p => p.CCode == item.AgencyCode).FirstOrDefault();
                             if (type != null && agencyInfo != null)
                             {
-                                result.checkin.Add(new AgencyCheckIn()
+                                var agency = new AgencyCheckIn()
                                 {
                                     ctype = type.Id,
                                     cname = type.Name,
@@ -613,7 +613,29 @@ namespace HAIAPI.Controllers
                                     inPlan = item.InPlan,
                                     lat = agencyInfo.Lat != null ? agencyInfo.Lat : 0,
                                     lng = agencyInfo.Lng != null ? agencyInfo.Lng : 0
-                                });
+                                };
+
+                                var c2c1 = db.C2C1.Where(p => p.C2Code == item.AgencyCode).ToList();
+                                List<AgencyC2C1> agencyC2C1 = new List<AgencyC2C1>();
+
+                                foreach (var item2 in c2c1)
+                                {
+                                    var checkC1 = db.C1Info.Where(p => p.Code == item2.C1Code).FirstOrDefault();
+                                    if (checkC1 != null)
+                                    {
+                                        agencyC2C1.Add(new AgencyC2C1()
+                                        {
+                                            code = checkC1.Code,
+                                            name = checkC1.Deputy,
+                                            store = checkC1.StoreName,
+                                            priority = item2.Priority
+                                        });
+                                    }
+                                }
+
+                                agency.c1 = agencyC2C1;
+
+                                result.checkin.Add(agency);
                             }
 
                         }
@@ -702,8 +724,11 @@ namespace HAIAPI.Controllers
                 var month = DateTime.Now.Month;
                 var year = DateTime.Now.Year;
 
-                int timeRequireCheckIn = 0;
+                
+                //int timeRequireCheckIn = 0;
+
                 var processCheckIn = role.ProcessWorks.OrderBy(p => p.SortIndex).ToList();
+
                 List<TaskInfo> taskInfo = new List<TaskInfo>();
                 foreach (var item in processCheckIn)
                 {
@@ -713,9 +738,9 @@ namespace HAIAPI.Controllers
                         name = item.ProcessName,
                         time = Convert.ToInt32(item.TimeRequire)
                     });
-                    timeRequireCheckIn += Convert.ToInt32(item.TimeRequire);
+                   // timeRequireCheckIn += Convert.ToInt32(item.TimeRequire);
                 }
-
+                
                 result.tasks = taskInfo;
                 result.agencyCode = cinfo.CCode;
                 result.agencyDeputy = cinfo.CDeputy;
@@ -752,7 +777,7 @@ namespace HAIAPI.Controllers
                         checkCalendar.CInTime = DateTime.Now.TimeOfDay;
                         db.Entry(checkCalendar).State = System.Data.Entity.EntityState.Modified;
                         db.SaveChanges();
-                        result.timeRemain = timeRequireCheckIn;
+                        result.timeRemain = 0;
                     }
 
                     saveHistoryProcess("begintask", checkCalendar.Id);

@@ -215,10 +215,6 @@ namespace NDHSITE.Controllers
             agency.StoreName = c1.StoreName;
             agency.Code = c1.Code;
 
-            if (birthday != null)
-            {
-
-            }
             infoCommon.CName = c1.StoreName;
             infoCommon.ModifyDate = DateTime.Now;
             infoCommon.Notes = info.Notes;
