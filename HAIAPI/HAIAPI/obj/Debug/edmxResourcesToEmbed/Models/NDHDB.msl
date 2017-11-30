@@ -207,6 +207,7 @@
     <EntitySetMapping Name="CInfoCommons">
       <EntityTypeMapping TypeName="NDHDB1Model.CInfoCommon">
         <MappingFragment StoreEntitySet="CInfoCommon">
+          <ScalarProperty Name="OldData" ColumnName="OldData" />
           <ScalarProperty Name="Mobile" ColumnName="Mobile" />
           <ScalarProperty Name="Fax" ColumnName="Fax" />
           <ScalarProperty Name="AgencyType" ColumnName="AgencyType" />
@@ -982,6 +983,10 @@
     <EntitySetMapping Name="HaiOrders">
       <EntityTypeMapping TypeName="NDHDB1Model.HaiOrder">
         <MappingFragment StoreEntitySet="HaiOrder">
+          <ScalarProperty Name="Sender" ColumnName="Sender" />
+          <ScalarProperty Name="C1Name" ColumnName="C1Name" />
+          <ScalarProperty Name="C1Code" ColumnName="C1Code" />
+          <ScalarProperty Name="C1Id" ColumnName="C1Id" />
           <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
           <ScalarProperty Name="BrachCode" ColumnName="BrachCode" />
           <ScalarProperty Name="PriceTotal" ColumnName="PriceTotal" />
@@ -1006,7 +1011,6 @@
         <MappingFragment StoreEntitySet="OrderProduct">
           <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
           <ScalarProperty Name="QuantityFinish" ColumnName="QuantityFinish" />
-          <ScalarProperty Name="C1Id" ColumnName="C1Id" />
           <ScalarProperty Name="PerPrice" ColumnName="PerPrice" />
           <ScalarProperty Name="PriceTotal" ColumnName="PriceTotal" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />

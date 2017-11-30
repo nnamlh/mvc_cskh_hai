@@ -17,7 +17,6 @@ namespace NDHSITE.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public C1Info()
         {
-            this.OrderProducts = new HashSet<OrderProduct>();
             this.HaiStaffs = new HashSet<HaiStaff>();
         }
     
@@ -30,8 +29,6 @@ namespace NDHSITE.Models
         public string InfoId { get; set; }
     
         public virtual CInfoCommon CInfoCommon { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HaiStaff> HaiStaffs { get; set; }
     }

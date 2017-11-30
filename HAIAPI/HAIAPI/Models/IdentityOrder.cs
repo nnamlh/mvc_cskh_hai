@@ -37,6 +37,8 @@ namespace HAIAPI.Models
         public int inCheckIn { get; set; }
         // 1 : dat hang trong checkin
         // 0: dat hang ngoai
+
+        public string c1 { get; set; }
     }
 
     public class OrderProductInfo
@@ -44,8 +46,6 @@ namespace HAIAPI.Models
         public string code { get; set; }
 
         public int quantity { get; set; }
-
-        public string c1 { get; set; }
     }
 
 
@@ -56,6 +56,8 @@ namespace HAIAPI.Models
         public List<IdentityCommon> payType { get; set; }
 
         public List<IdentityCommon> shipType { get; set; }
+
+        public List<AgencyC2C1> c1 { get; set; }
 
         public string store { get; set; }
 

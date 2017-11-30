@@ -505,6 +505,10 @@
     <EntitySetMapping Name="HaiOrders">
       <EntityTypeMapping TypeName="DMSHAIModel.HaiOrder">
         <MappingFragment StoreEntitySet="HaiOrder">
+          <ScalarProperty Name="Sender" ColumnName="Sender" />
+          <ScalarProperty Name="C1Name" ColumnName="C1Name" />
+          <ScalarProperty Name="C1Code" ColumnName="C1Code" />
+          <ScalarProperty Name="C1Id" ColumnName="C1Id" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="OrderType" ColumnName="OrderType" />
           <ScalarProperty Name="PayType" ColumnName="PayType" />
@@ -663,7 +667,6 @@
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="PriceTotal" ColumnName="PriceTotal" />
           <ScalarProperty Name="PerPrice" ColumnName="PerPrice" />
-          <ScalarProperty Name="C1Id" ColumnName="C1Id" />
           <ScalarProperty Name="QuantityFinish" ColumnName="QuantityFinish" />
           <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
         </MappingFragment>
@@ -1334,5 +1337,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="calendar_remove" FunctionName="DMSHAIModel.Store.calendar_remove" />
   </EntityContainerMapping>
 </Mapping>

@@ -39,6 +39,10 @@ namespace HAIAPI.Controllers
                 if (!mongoHelper.checkLoginSession(paser.user, paser.token))
                     throw new Exception("Wrong token and user login!");
 
+                var haiStaff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+                if (haiStaff == null)
+                    throw new Exception("Chỉ nhân viên công ty mới có quyền thực hiện");
+
                 // check C2
                 C2Info c2 = db.C2Info.Where(p => p.Code == paser.agency).FirstOrDefault();
 
@@ -55,6 +59,16 @@ namespace HAIAPI.Controllers
                 result.phone = c2.CInfoCommon.Phone;
                 result.address = c2.CInfoCommon.AddressInfo ;
 
+                result.c1 = GetC2C1(c2.Code);
+
+                // add them 
+                result.c1.Add(new AgencyC2C1()
+                {
+                    code = "000",
+                    name = "Chi nhánh",
+                    priority = 0,
+                    store = "Chi nhánh : " + haiStaff.HaiBranch.Name
+                });
 
                 // lay danh sach type
                 var payType = db.PayTypes.ToList();
@@ -123,10 +137,9 @@ namespace HAIAPI.Controllers
                 var paser = jsonserializer.Deserialize<OrderInfoRequest>(requestContent);
                 log.Content = new JavaScriptSerializer().Serialize(paser);
 
-              //  if (!mongoHelper.checkLoginSession(paser.user, paser.token))
+             //  if (!mongoHelper.checkLoginSession(paser.user, paser.token))
                  //  throw new Exception("Wrong token and user login!");
                    
-
                 DateTime dateSuggest = DateTime.ParseExact(paser.timeSuggest, "d/M/yyyy", null);
 
                 CInfoCommon cinfo = db.CInfoCommons.Where(p => p.CCode == paser.code).FirstOrDefault();
@@ -175,6 +188,24 @@ namespace HAIAPI.Controllers
                     OrderNumber = number,
                     ReceivePhone1 = paser.phone
                 };
+
+                if (paser.c1 == "000")
+                {
+                    order.Sender = "B";
+                } else
+                {
+                    order.Sender = "CI";
+
+                    var checkC1 = db.C1Info.Where(p => p.Code == paser.c1).FirstOrDefault();
+
+                    if (checkC1 == null)
+                        throw new Exception("Sai thông tin nơi lấy hàng");
+
+                    order.C1Code = checkC1.Code;
+                    order.C1Id = checkC1.Id;
+                    order.C1Name = checkC1.StoreName;
+                }
+
                 db.HaiOrders.Add(order);
                 db.SaveChanges();
 
@@ -184,15 +215,13 @@ namespace HAIAPI.Controllers
                 {
                     // kiem tra san pham
                     var checkProduct = db.ProductInfoes.Find(item.code);
-                    var checkC1 = db.C1Info.Where(p => p.Code == item.c1).FirstOrDefault();
-                    if (checkProduct != null && item.quantity > 0 && checkC1 != null)
+                    if (checkProduct != null && item.quantity > 0)
                     {
                         double? perPrice = checkProduct.Price != null ? checkProduct.Price : 0;
                         double? price = perPrice * item.quantity;
                         var productOrder = new OrderProduct()
                         {
                             OrderId = order.Id,
-                            C1Id = checkC1.Id,
                             ModifyDate = DateTime.Now,
                             PerPrice = checkProduct.Price,
                             Quantity = item.quantity,
@@ -238,7 +267,7 @@ namespace HAIAPI.Controllers
                 HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Bạn vừa tạo đơn hàng cho " + cinfo.CName, staff.UserLogin, db, mongoHelper);
 
                 // c2
-                HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Bạn vừa tạo đơn hàng bởi nhân viên Công ty H.A.I " + staff.FullName + "(" + staff.Code+ ")", staff.UserLogin, db, mongoHelper);
+                HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Bạn có 1 đơn hàng được tạo bởi nhân viên Công ty H.A.I " + staff.FullName + "(" + staff.Code+ ")", cinfo.UserLogin, db, mongoHelper);
 
             }
             catch (Exception e)

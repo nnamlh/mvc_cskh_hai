@@ -18,7 +18,6 @@ namespace HAIAPI.Models
         public C1Info()
         {
             this.HaiStaffs = new HashSet<HaiStaff>();
-            this.OrderProducts = new HashSet<OrderProduct>();
         }
     
         public string Id { get; set; }
@@ -32,7 +31,5 @@ namespace HAIAPI.Models
         public virtual CInfoCommon CInfoCommon { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HaiStaff> HaiStaffs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
     }
 }

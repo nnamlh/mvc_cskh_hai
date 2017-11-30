@@ -51,37 +51,27 @@ namespace HAIAPI.Controllers
                 int pageSize = 20;
                 int pageNumber = (paser.page ?? 1);
 
-
-                List<string> data = new List<string>();
-            
-                    data = c1Info.OrderProducts.Where(p => p.HaiOrder.OrderStatus == paser.status && p.HaiOrder.CInfoCommon.CCode.Contains(paser.c2Code)).OrderByDescending(p => p.HaiOrder.CreateDate).Select(p => p.OrderId).Distinct().ToPagedList(pageNumber, pageSize).ToList();
-                
+                var data = db.HaiOrders.Where(p => p.OrderStatus == paser.status && p.C1Id == c1Info.Id && p.CInfoCommon.CCode.Contains(paser.c2Code)).OrderByDescending(p => p.CreateDate).ToPagedList(pageNumber, pageSize).ToList();
 
                 List<YourOrder> orders = new List<YourOrder>();
 
-                foreach (var item in data)
+                foreach (var order in data)
                 {
-                    var order = db.HaiOrders.Find(item);
-                    if (order != null)
+                    YourOrder yourOrder = new YourOrder()
                     {
-                        YourOrder yourOrder = new YourOrder()
-                        {
-                            address = order.ReceiveAddress,
-                            c2Code = order.CInfoCommon.CCode,
-                            c2Name = order.CInfoCommon.CName,
-                            code = order.Code,
-                            date = order.CreateDate.Value.ToString("dd/MM/yyyy"),
-                            dateSuggest = order.ExpectDate == null ? "" : order.ExpectDate.Value.ToString("dd/MM/yyyy"),
-                            orderId = order.Id,
-                            phone = order.ReceivePhone1
-                        };
+                        address = order.ReceiveAddress,
+                        c2Code = order.CInfoCommon.CCode,
+                        c2Name = order.CInfoCommon.CName,
+                        code = order.Code,
+                        date = order.CreateDate.Value.ToString("dd/MM/yyyy"),
+                        dateSuggest = order.ExpectDate == null ? "" : order.ExpectDate.Value.ToString("dd/MM/yyyy"),
+                        orderId = order.Id,
+                        phone = order.ReceivePhone1
+                    };
 
-                        var orderProduct = order.OrderProducts.Where(p => p.C1Id == c1Info.Id).ToList();
-                        yourOrder.productCount = orderProduct.Count();
+                    yourOrder.productCount = order.OrderProducts.Count();
 
-                        orders.Add(yourOrder);
-                    }
-
+                    orders.Add(yourOrder);
                 }
 
                 result.orders = orders;
@@ -118,7 +108,7 @@ namespace HAIAPI.Controllers
 
             if (c1Info != null)
             {
-                var data = db.OrderProducts.Where(p => p.OrderId == id && p.C1Id == c1Info.Id).ToList();
+                var data = db.OrderProducts.Where(p => p.OrderId == id).ToList();
 
                 foreach (var item in data)
                 {
@@ -129,11 +119,11 @@ namespace HAIAPI.Controllers
                         productName = item.ProductInfo.PName,
                         quantity = item.Quantity,
                         quantityFinish = item.QuantityFinish,
-                        c1Address = item.C1Info.CInfoCommon.AddressInfo,
-                        c1Code = item.C1Info.Code,
-                        c1Id = item.C1Id,
-                        c1Phone = item.C1Info.CInfoCommon.Phone,
-                        c1Store = item.C1Info.StoreName,
+                        c1Address = c1Info.CInfoCommon.AddressInfo,
+                        c1Code = c1Info.Code,
+                        c1Id = c1Info.Id,
+                        c1Phone = c1Info.CInfoCommon.Phone,
+                        c1Store = c1Info.StoreName,
                         perPrice = item.PerPrice,
                         price = item.PriceTotal,
                         quantityBox = item.ProductInfo.Quantity,
@@ -215,7 +205,7 @@ namespace HAIAPI.Controllers
                 if (c1Info == null)
                     throw new Exception("Sai thong tin");
 
-                var orderProduct = db.OrderProducts.Where(p => p.C1Id == c1Info.Id && p.ProductId == paser.productId && p.OrderId == paser.orderId).FirstOrDefault();
+                var orderProduct = db.OrderProducts.Where(p => p.ProductId == paser.productId && p.OrderId == paser.orderId).FirstOrDefault();
                 if (orderProduct == null)
                     throw new Exception("Sai thong tin");
 
@@ -256,13 +246,13 @@ namespace HAIAPI.Controllers
                 {
                     var staff = order.OrderStaffs.Where(p => p.ProcessId == "create").FirstOrDefault();
                     // nhan vien
-                    if(staff != null)
+                    if (staff != null)
                         HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Cửa hàng " + c1Info.StoreName + " vừa giao hàng", staff.HaiStaff.UserLogin, db, mongoHelper);
 
                     // c2
                     HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Cửa hàng " + c1Info.StoreName + " vừa giao hàng", order.CInfoCommon.UserLogin, db, mongoHelper);
                 }
-               
+
 
             }
             catch (Exception e)

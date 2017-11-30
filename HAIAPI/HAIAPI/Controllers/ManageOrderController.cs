@@ -139,11 +139,46 @@ namespace HAIAPI.Controllers
 
             var staff = db.HaiStaffs.Where(p => p.UserLogin == user).FirstOrDefault();
 
-            if (staff != null)
-            {
-                var data = db.OrderProducts.Where(p => p.OrderId == id).ToList();
 
-                foreach (var item in data)
+            try
+            {
+                var orders = db.HaiOrders.Find(id); 
+
+                if (staff == null && orders == null)
+                    throw new Exception();
+
+                string c1Address = "";
+                string c1Code = "";
+                string c1Id = "";
+                string c1Phone = "";
+                string c1Store = "";
+
+                if (orders.Sender == "CI")
+                {
+                    var checkC1 = db.C1Info.Find(orders.C1Id);
+
+                    if (checkC1 != null)
+                    {
+                        c1Address = checkC1.CInfoCommon.AddressInfo + ", " + checkC1.CInfoCommon.DistrictName + ", " + checkC1.CInfoCommon.ProvinceName;
+                        c1Code = checkC1.Code;
+                        c1Id = checkC1.Id;
+                        c1Phone = checkC1.CInfoCommon.Phone;
+                        c1Store = checkC1.StoreName;
+                    }
+                } else
+                {
+                    var branch = db.HaiBranches.Where(p => p.Code == orders.BrachCode).FirstOrDefault();
+                    if(branch != null)
+                    {
+                        c1Address = branch.AddressInfo;
+                        c1Code = branch.Code;
+                        c1Id = branch.Id;
+                        c1Phone = branch.Phone;
+                        c1Store = branch.Name;
+                    }
+                }
+
+                foreach (var item in orders.OrderProducts)
                 {
                     result.Add(new ProductOrderInfo()
                     {
@@ -152,17 +187,21 @@ namespace HAIAPI.Controllers
                         productName = item.ProductInfo.PName,
                         quantity = item.Quantity,
                         quantityFinish = item.QuantityFinish,
-                        c1Address = item.C1Info.CInfoCommon.AddressInfo,
-                        c1Code = item.C1Info.Code,
-                        c1Id = item.C1Id,
-                        c1Phone = item.C1Info.CInfoCommon.Phone,
-                        c1Store = item.C1Info.StoreName,
+                        c1Address = c1Address,
+                        c1Code = c1Code,
+                        c1Id = c1Id,
+                        c1Phone = c1Phone,
+                        c1Store = c1Store,
                         perPrice = item.PerPrice,
                         price = item.PriceTotal,
                         quantityBox = item.ProductInfo.Quantity,
                         unit = item.ProductInfo.Unit
                     });
                 }
+
+            } catch
+            {
+                result = new List<ProductOrderInfo>();
             }
 
             log.ReturnInfo = new JavaScriptSerializer().Serialize(result);

@@ -38,6 +38,10 @@ namespace NDHSITE.Models
         public Nullable<double> PriceTotal { get; set; }
         public string BrachCode { get; set; }
         public Nullable<int> OrderNumber { get; set; }
+        public string C1Id { get; set; }
+        public string C1Code { get; set; }
+        public string C1Name { get; set; }
+        public string Sender { get; set; }
     
         public virtual CInfoCommon CInfoCommon { get; set; }
         public virtual OrderStatu OrderStatu { get; set; }

@@ -75,6 +75,23 @@ namespace NDHSITE.Controllers
             return View(listCalendar.OrderBy(p => p.CStatus).ToPagedList(pageNumber, pageSize));
         }
 
+        [HttpPost]
+        public ActionResult RemoveCalendar(string id)
+        {
+            if (!Utitl.CheckUser(db, User.Identity.Name, "CheckIn", 1))
+                return RedirectToAction("relogin", "home");
+
+            var check = db.CalendarInfoes.Find(id);
+
+            if (check == null || check.CStatus != 0)
+                return RedirectToAction("error", "home");
+
+            var actionRemove = db.calendar_remove(check.StaffId, check.CMonth, check.CYear);
+
+            return RedirectToAction("showcalendar", "checkin");
+
+        }
+
         public ActionResult ShowCalendarDetail(string id)
         {
             if (!Utitl.CheckUser(db, User.Identity.Name, "CheckIn", 0))

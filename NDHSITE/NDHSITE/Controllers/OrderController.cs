@@ -91,7 +91,7 @@ namespace NDHSITE.Controllers
             var c1Check = db.C1Info.Where(p => p.Code == c1).FirstOrDefault();
             if (c1Check != null)
             {
-                check.C1Id = c1Check.Id;
+                //check.C1Id = c1Check.Id;
                 db.Entry(check).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
             }
@@ -147,14 +147,7 @@ namespace NDHSITE.Controllers
 
                 // c1
                 var c1CodeTemp = "";
-                foreach (var item in check.OrderProducts)
-                {
-                    if (c1CodeTemp != item.C1Info.Code)
-                    {
-                        Utitl.Send("Đơn hàng " + check.Code, "Đơn hàng của " + check.CInfoCommon.CName + " đã được xác nhận, vào phần đơn hàng để xem chi tiết", staffCreateOrder.HaiStaff.UserLogin, db, mongoHelp);
-                        c1CodeTemp = item.C1Info.Code;
-                    }
-                }
+         
 
             } else if (check.OrderStatus == "begin" && status == 0)
             {
@@ -238,14 +231,7 @@ namespace NDHSITE.Controllers
 
                 // c1
                 var c1CodeTemp = "";
-                foreach (var item in check.OrderProducts)
-                {
-                    if (c1CodeTemp != item.C1Info.Code)
-                    {
-                        Utitl.Send("Đơn hàng " + check.Code, "Đơn hàng của " + check.CInfoCommon.CName + " đã được xác nhận, vào phần đơn hàng để xem chi tiết", staffCreateOrder.HaiStaff.UserLogin, db, mongoHelp);
-                        c1CodeTemp = item.C1Info.Code;
-                    }
-                }
+              
             }
 
             return RedirectToAction("detail", "order", new { id = id });

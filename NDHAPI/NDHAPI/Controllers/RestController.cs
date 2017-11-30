@@ -1758,7 +1758,6 @@ namespace NDHAPI.Controllers
                 }
 
                 // kiem tra toa do
-
                 ProductScanAction wareAction = new ImportAction(db, wareActionInfo, paser.user, null);
 
                 string msg = wareAction.checkRole();

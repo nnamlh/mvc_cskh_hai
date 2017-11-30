@@ -53,6 +53,9 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
+                                        <input type="number" class="form-control" name="group" placeholder="cụm" />
+                                    </div>
+                                    <div class="form-group">
                                         <button type="submit" class="btn btn-primary">Thêm</button>
                                     </div>
                                 </div>
@@ -71,6 +74,7 @@
                                     <tr>
                                         <th>Mã khách hàng</th>
                                         <th>Tên khách hàng</th>
+                                        <th>Cụm</th>
                                         <th>#</th>
                                     </tr>
                                 </thead>
@@ -80,6 +84,7 @@
                                         <tr>
                                             <td>@item.C2Info.Code</td>
                                             <td>@item.C2Info.StoreName - @item.C2Info.Deputy</td>
+                                            <td>@item.GroupChoose</td>
                                             <td><a href="/agency/modifycii/@item.C2Info.Id" target="_blank">Chi tiết</a></td>
                                         </tr>
                                     }
@@ -104,7 +109,10 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-primary">Thêm</button>
+                                        <input type="number" class="form-control" name="group" placeholder="cụm" />
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Thực hiện</button>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">

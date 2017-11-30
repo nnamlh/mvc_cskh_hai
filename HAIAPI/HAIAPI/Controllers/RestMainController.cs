@@ -597,5 +597,29 @@ namespace HAIAPI.Controllers
             return mapDayOfWeeks[dt.DayOfWeek];
         }
 
+        protected List<AgencyC2C1> GetC2C1(string code)
+        {
+            // danh sach c1
+            var c2c1 = db.C2C1.Where(p => p.C2Code == code).ToList();
+            List<AgencyC2C1> agencyC2C1 = new List<AgencyC2C1>();
+
+            foreach (var item2 in c2c1)
+            {
+                var checkC1 = db.C1Info.Where(p => p.Code == item2.C1Code).FirstOrDefault();
+                if (checkC1 != null)
+                {
+                    agencyC2C1.Add(new AgencyC2C1()
+                    {
+                        code = checkC1.Code,
+                        name = checkC1.Deputy,
+                        store = checkC1.StoreName,
+                        priority = item2.Priority
+                    });
+                }
+            }
+
+            return agencyC2C1;
+        }
+
     }
 }

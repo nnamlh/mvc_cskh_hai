@@ -95,7 +95,6 @@
         <AssociationConnector Association="DMSHAIModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" ManuallyRouted="false" />
         <AssociationConnector Association="DMSHAIModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="DMSHAIModel.FK__C1Info__InfoId__681373AD" ManuallyRouted="false" />
-        <AssociationConnector Association="DMSHAIModel.FK__OrderProdu__C1Id__29971E47" ManuallyRouted="false" />
         <AssociationConnector Association="DMSHAIModel.FK__C2Info__InfoId__6CD828CA" ManuallyRouted="false" />
         <AssociationConnector Association="DMSHAIModel.FK__StaffWithC__C2Id__4B622666" ManuallyRouted="false" />
         <AssociationConnector Association="DMSHAIModel.FK__CalendarI__Staff__4297D63B" ManuallyRouted="false" />

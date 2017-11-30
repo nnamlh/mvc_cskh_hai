@@ -299,5 +299,22 @@ namespace NDHSITE.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<c2_get_list_c1_Result>("c2_get_list_c1", codeParameter);
         }
+    
+        public virtual int calendar_remove(string staffId, Nullable<int> cMonth, Nullable<int> cYear)
+        {
+            var staffIdParameter = staffId != null ?
+                new ObjectParameter("StaffId", staffId) :
+                new ObjectParameter("StaffId", typeof(string));
+    
+            var cMonthParameter = cMonth.HasValue ?
+                new ObjectParameter("CMonth", cMonth) :
+                new ObjectParameter("CMonth", typeof(int));
+    
+            var cYearParameter = cYear.HasValue ?
+                new ObjectParameter("CYear", cYear) :
+                new ObjectParameter("CYear", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("calendar_remove", staffIdParameter, cMonthParameter, cYearParameter);
+        }
     }
 }

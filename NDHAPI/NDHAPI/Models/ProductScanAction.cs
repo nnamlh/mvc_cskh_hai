@@ -378,16 +378,16 @@ namespace NDHAPI.Models
 
             if (product.IsBox == 1 && wareInfo.IsScanBox == 1)
             {
-                checkLastImport = db.PHistories.Where(p => p.CaseCode == caseCode && p.BoxCode == boxCode && p.WCode != wareActionInfo.wCode).OrderByDescending(p => p.CreateDate).FirstOrDefault();
+                checkLastImport = db.PHistories.Where(p => p.CaseCode == caseCode && p.BoxCode == boxCode).OrderByDescending(p => p.CreateDate).FirstOrDefault();
 
                 if (checkLastImport == null)
                 {
-                    checkLastImport = db.PHistories.Where(p => p.CaseCode == caseCode && p.WCode != wareActionInfo.wCode).OrderByDescending(p => p.CreateDate).FirstOrDefault();
+                    checkLastImport = db.PHistories.Where(p => p.CaseCode == caseCode).OrderByDescending(p => p.CreateDate).FirstOrDefault();
                 }
             }
             else
             {
-                checkLastImport = db.PHistories.Where(p => p.CaseCode == caseCode && p.WCode != wareActionInfo.wCode).OrderByDescending(p => p.CreateDate).FirstOrDefault();
+                checkLastImport = db.PHistories.Where(p => p.CaseCode == caseCode ).OrderByDescending(p => p.CreateDate).FirstOrDefault();
             }
 
             if (checkLastImport != null)

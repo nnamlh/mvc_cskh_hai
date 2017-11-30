@@ -114,7 +114,7 @@
                     <br />
                     Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
                     @Html.PagedListPager(Model, page => Url.Action("showcalendar",
-                                                         new { page, branch = ViewBag.Branch, staff = ViewBag.Staff, status = ViewBag.Status }))
+                                                         new { page, branch = ViewBag.Branch, staff = ViewBag.Staff, status = ViewBag.Status, month = ViewBag.Month, year = ViewBag.Year}))
                 </fieldset>
             </div>
             <div class="tab-pane fade" id="profile-3">

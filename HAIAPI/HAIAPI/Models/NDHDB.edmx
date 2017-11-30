@@ -258,6 +258,7 @@
           <Property Name="ProvinceCode" Type="nvarchar" MaxLength="5" />
           <Property Name="BirthDay" Type="nvarchar" MaxLength="128" />
           <Property Name="AgencyType" Type="nvarchar" MaxLength="128" />
+          <Property Name="OldData" Type="int" />
         </EntityType>
         <EntityType Name="DecorGroup">
           <Key>
@@ -466,6 +467,10 @@
           <Property Name="PriceTotal" Type="float" />
           <Property Name="BrachCode" Type="nvarchar" MaxLength="32" />
           <Property Name="OrderNumber" Type="int" />
+          <Property Name="C1Id" Type="nvarchar" MaxLength="128" />
+          <Property Name="C1Code" Type="nvarchar" MaxLength="128" />
+          <Property Name="C1Name" Type="nvarchar(max)" />
+          <Property Name="Sender" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="HaiPosition">
           <Key>
@@ -607,7 +612,6 @@
           <Property Name="Quantity" Type="int" />
           <Property Name="PriceTotal" Type="float" />
           <Property Name="PerPrice" Type="float" />
-          <Property Name="C1Id" Type="nvarchar" MaxLength="128" />
           <Property Name="QuantityFinish" Type="int" />
           <Property Name="ModifyDate" Type="datetime" />
         </EntityType>
@@ -751,10 +755,10 @@
           <Property Name="Forcus" Type="int" />
           <Property Name="New" Type="int" />
           <Property Name="CreateTime" Type="datetime" />
+          <Property Name="Price" Type="float" />
           <Property Name="PVat" Type="float" />
           <Property Name="ShortDescibe" Type="nvarchar(max)" />
           <Property Name="Quantity" Type="int" />
-          <Property Name="Price" Type="float" />
           <Property Name="GroupId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="ProductSeri">
@@ -1489,18 +1493,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderProdu__C1Id__29971E47">
-          <End Role="C1Info" Type="Self.C1Info" Multiplicity="0..1" />
-          <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="C1Info">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderProduct">
-              <PropertyRef Name="C1Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__OrderStaf__Order__2101D846">
           <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="0..1" />
           <End Role="OrderStaff" Type="Self.OrderStaff" Multiplicity="*" />
@@ -2029,10 +2021,6 @@
             <End Role="ProductInfo" EntitySet="ProductInfo" />
             <End Role="OrderProductHistory" EntitySet="OrderProductHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderProdu__C1Id__29971E47" Association="Self.FK__OrderProdu__C1Id__29971E47">
-            <End Role="C1Info" EntitySet="C1Info" />
-            <End Role="OrderProduct" EntitySet="OrderProduct" />
-          </AssociationSet>
           <AssociationSet Name="FK__OrderStaf__Order__2101D846" Association="Self.FK__OrderStaf__Order__2101D846">
             <End Role="HaiOrder" EntitySet="HaiOrder" />
             <End Role="OrderStaff" EntitySet="OrderStaff" />
@@ -2259,7 +2247,6 @@
           <Property Name="InfoId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__C1Info__InfoId__681373AD" FromRole="C1Info" ToRole="CInfoCommon" />
           <NavigationProperty Name="HaiStaffs" Relationship="Self.StaffWithC1" FromRole="C1Info" ToRole="HaiStaff" />
-          <NavigationProperty Name="OrderProducts" Relationship="NDHDB1Model.FK__OrderProdu__C1Id__29971E47" FromRole="C1Info" ToRole="OrderProduct" />
         </EntityType>
         <EntityType Name="C2Info">
           <Key>
@@ -2378,6 +2365,7 @@
           <NavigationProperty Name="AgencyType1" Relationship="NDHDB1Model.FK__CInfoComm__Agenc__4356F04A" FromRole="CInfoCommon" ToRole="AgencyType" />
           <Property Name="Fax" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Mobile" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="OldData" Type="Int32" />
         </EntityType>
         <EntityType Name="DecorGroup">
           <Key>
@@ -3750,10 +3738,6 @@
           <EntitySet Name="OrderTypes" EntityType="NDHDB1Model.OrderType" />
           <EntitySet Name="PayTypes" EntityType="NDHDB1Model.PayType" />
           <EntitySet Name="ShipTypes" EntityType="NDHDB1Model.ShipType" />
-          <AssociationSet Name="FK__OrderProdu__C1Id__29971E47" Association="NDHDB1Model.FK__OrderProdu__C1Id__29971E47">
-            <End Role="C1Info" EntitySet="C1Info" />
-            <End Role="OrderProduct" EntitySet="OrderProducts" />
-          </AssociationSet>
           <AssociationSet Name="FK__HaiOrder__Agency__17786E0C" Association="NDHDB1Model.FK__HaiOrder__Agency__17786E0C">
             <End Role="CInfoCommon" EntitySet="CInfoCommons" />
             <End Role="HaiOrder" EntitySet="HaiOrders" />
@@ -3985,6 +3969,10 @@
           <NavigationProperty Name="OrderStaffs" Relationship="NDHDB1Model.FK__OrderStaf__Order__2101D846" FromRole="HaiOrder" ToRole="OrderStaff" />
           <Property Name="OrderNumber" Type="Int32" />
           <NavigationProperty Name="OrderProductHistories" Relationship="NDHDB1Model.FK__OrderProd__Order__38D961D7" FromRole="HaiOrder" ToRole="OrderProductHistory" />
+          <Property Name="C1Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="C1Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="C1Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sender" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="OrderProduct">
           <Key>
@@ -3996,10 +3984,8 @@
           <Property Name="Quantity" Type="Int32" />
           <Property Name="PriceTotal" Type="Double" />
           <Property Name="PerPrice" Type="Double" />
-          <Property Name="C1Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="QuantityFinish" Type="Int32" />
           <Property Name="ModifyDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="C1Info" Relationship="NDHDB1Model.FK__OrderProdu__C1Id__29971E47" FromRole="OrderProduct" ToRole="C1Info" />
           <NavigationProperty Name="HaiOrder" Relationship="NDHDB1Model.FK__OrderProd__Order__27AED5D5" FromRole="OrderProduct" ToRole="HaiOrder" />
           <NavigationProperty Name="ProductInfo" Relationship="NDHDB1Model.FK__OrderProd__Produ__28A2FA0E" FromRole="OrderProduct" ToRole="ProductInfo" />
         </EntityType>
@@ -4062,18 +4048,6 @@
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="HaiOrders" Relationship="NDHDB1Model.FK__HaiOrder__ShipTy__168449D3" FromRole="ShipType" ToRole="HaiOrder" />
         </EntityType>
-        <Association Name="FK__OrderProdu__C1Id__29971E47">
-          <End Type="NDHDB1Model.C1Info" Role="C1Info" Multiplicity="0..1" />
-          <End Type="NDHDB1Model.OrderProduct" Role="OrderProduct" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="C1Info">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrderProduct">
-              <PropertyRef Name="C1Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__HaiOrder__Agency__17786E0C">
           <End Type="NDHDB1Model.CInfoCommon" Role="CInfoCommon" Multiplicity="0..1" />
           <End Type="NDHDB1Model.HaiOrder" Role="HaiOrder" Multiplicity="*" />
@@ -4504,6 +4478,7 @@
           <EntitySetMapping Name="CInfoCommons">
             <EntityTypeMapping TypeName="NDHDB1Model.CInfoCommon">
               <MappingFragment StoreEntitySet="CInfoCommon">
+                <ScalarProperty Name="OldData" ColumnName="OldData" />
                 <ScalarProperty Name="Mobile" ColumnName="Mobile" />
                 <ScalarProperty Name="Fax" ColumnName="Fax" />
                 <ScalarProperty Name="AgencyType" ColumnName="AgencyType" />
@@ -5279,6 +5254,10 @@
           <EntitySetMapping Name="HaiOrders">
             <EntityTypeMapping TypeName="NDHDB1Model.HaiOrder">
               <MappingFragment StoreEntitySet="HaiOrder">
+                <ScalarProperty Name="Sender" ColumnName="Sender" />
+                <ScalarProperty Name="C1Name" ColumnName="C1Name" />
+                <ScalarProperty Name="C1Code" ColumnName="C1Code" />
+                <ScalarProperty Name="C1Id" ColumnName="C1Id" />
                 <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
                 <ScalarProperty Name="BrachCode" ColumnName="BrachCode" />
                 <ScalarProperty Name="PriceTotal" ColumnName="PriceTotal" />
@@ -5303,7 +5282,6 @@
               <MappingFragment StoreEntitySet="OrderProduct">
                 <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
                 <ScalarProperty Name="QuantityFinish" ColumnName="QuantityFinish" />
-                <ScalarProperty Name="C1Id" ColumnName="C1Id" />
                 <ScalarProperty Name="PerPrice" ColumnName="PerPrice" />
                 <ScalarProperty Name="PriceTotal" ColumnName="PriceTotal" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />

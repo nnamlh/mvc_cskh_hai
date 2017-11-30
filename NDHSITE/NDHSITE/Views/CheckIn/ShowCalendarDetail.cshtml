@@ -102,6 +102,9 @@
             <li>
                 <a href="#profile-3" data-toggle="tab">Report Excel</a>
             </li>
+            <li>
+                <a href="#profile-4" data-toggle="tab">Xóa lịch</a>
+            </li>
         </ul>
         <div id="myTab2Content" class="tab-content">
             <div class="tab-pane fade in active" id="home-2">
@@ -219,6 +222,15 @@
             </div>
             <div class="tab-pane fade" id="profile-3">
                 <a href="/checkin/ExcelCheckInDetail?month=@calendar.CMonth&year=@calendar.CYear&staff=@calendar.StaffId">Lịch chi tiết</a>
+            </div>
+            <div class="tab-pane fade" id="profile-4">
+                @if (calendar.CStatus == 0)
+                {
+                    <form method="post" action="/checkin/removecalendar" onsubmit="if(!confirm('Xác nhận xóa lịch?')){return false;}">
+                        <input type="hidden" name="id" value="@calendar.Id" />
+                        <button type="submit" class="btn btn-primary">Thực hiện</button>
+                    </form>
+                }
             </div>
         </div>
 

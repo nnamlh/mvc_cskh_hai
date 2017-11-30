@@ -578,12 +578,15 @@ namespace NDHSITE.Controllers
 
 
         [HttpPost]
-        public ActionResult AddAgency(string id, string type, string AgencyId, HttpPostedFileBase files, int action)
+        public ActionResult AddAgency(string id, string type, string AgencyId, HttpPostedFileBase files, int action, int? group)
         {
 
             // id: staffid
             if (!Utitl.CheckUser(db, User.Identity.Name, "ManageStaff", 1))
                 return RedirectToAction("relogin", "home");
+
+            if (group == null)
+                group = 1;
 
             var staffCheck = db.HaiStaffs.Find(id);
             if (staffCheck == null)
@@ -595,7 +598,7 @@ namespace NDHSITE.Controllers
               if (action == 1)
                 {
                     // thêm
-                    AddAgencyC2(staffCheck, AgencyId, files);
+                    AddAgencyC2(staffCheck, AgencyId, files, group);
                 } else if (action == 2)
                 {
                     // xoa
@@ -611,8 +614,9 @@ namespace NDHSITE.Controllers
             return RedirectToAction("AddAgency", "HaiStaff", new { id = id });
         }
 
-        private void AddAgencyC2(HaiStaff staff, string AgencyId, HttpPostedFileBase files)
+        private void AddAgencyC2(HaiStaff staff, string AgencyId, HttpPostedFileBase files, int? group)
         {
+           
 
             if (files != null && files.ContentLength > 0)
             {
@@ -639,6 +643,7 @@ namespace NDHSITE.Controllers
                     for (int i = 2; i <= totalRows; i++)
                     {
                         string code = Convert.ToString(sheet.Cells[i, 1].Value);
+                        int groupNumber = Convert.ToInt32(sheet.Cells[i, 2].Value);
                         var checkC2 = db.C2Info.Where(p => p.Code == code).FirstOrDefault();
                         if (checkC2 != null)
                         {
@@ -647,7 +652,7 @@ namespace NDHSITE.Controllers
                             {
                                 C2Id = checkC2.Id,
                                 StaffId = staff.Id,
-                                GroupChoose = 0
+                                GroupChoose = groupNumber
                             };
                             db.StaffWithC2.Add(staffC2);
                             db.SaveChanges();
@@ -665,7 +670,7 @@ namespace NDHSITE.Controllers
                     {
                         C2Id = checkC2.Id,
                         StaffId = staff.Id,
-                        GroupChoose = 0
+                        GroupChoose = group
                     };
                     db.StaffWithC2.Add(staffC2);
                     db.SaveChanges();

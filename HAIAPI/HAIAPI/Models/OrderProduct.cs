@@ -19,11 +19,9 @@ namespace HAIAPI.Models
         public Nullable<int> Quantity { get; set; }
         public Nullable<double> PriceTotal { get; set; }
         public Nullable<double> PerPrice { get; set; }
-        public string C1Id { get; set; }
         public Nullable<int> QuantityFinish { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }
     
-        public virtual C1Info C1Info { get; set; }
         public virtual HaiOrder HaiOrder { get; set; }
         public virtual ProductInfo ProductInfo { get; set; }
     }

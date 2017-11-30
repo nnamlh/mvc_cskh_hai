@@ -253,6 +253,7 @@
     <Property Name="ProvinceCode" Type="nvarchar" MaxLength="5" />
     <Property Name="BirthDay" Type="nvarchar" MaxLength="128" />
     <Property Name="AgencyType" Type="nvarchar" MaxLength="128" />
+    <Property Name="OldData" Type="int" />
   </EntityType>
   <EntityType Name="DecorGroup">
     <Key>
@@ -461,6 +462,10 @@
     <Property Name="PriceTotal" Type="float" />
     <Property Name="BrachCode" Type="nvarchar" MaxLength="32" />
     <Property Name="OrderNumber" Type="int" />
+    <Property Name="C1Id" Type="nvarchar" MaxLength="128" />
+    <Property Name="C1Code" Type="nvarchar" MaxLength="128" />
+    <Property Name="C1Name" Type="nvarchar(max)" />
+    <Property Name="Sender" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="HaiPosition">
     <Key>
@@ -602,7 +607,6 @@
     <Property Name="Quantity" Type="int" />
     <Property Name="PriceTotal" Type="float" />
     <Property Name="PerPrice" Type="float" />
-    <Property Name="C1Id" Type="nvarchar" MaxLength="128" />
     <Property Name="QuantityFinish" Type="int" />
     <Property Name="ModifyDate" Type="datetime" />
   </EntityType>
@@ -746,10 +750,10 @@
     <Property Name="Forcus" Type="int" />
     <Property Name="New" Type="int" />
     <Property Name="CreateTime" Type="datetime" />
+    <Property Name="Price" Type="float" />
     <Property Name="PVat" Type="float" />
     <Property Name="ShortDescibe" Type="nvarchar(max)" />
     <Property Name="Quantity" Type="int" />
-    <Property Name="Price" Type="float" />
     <Property Name="GroupId" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="ProductSeri">
@@ -1484,18 +1488,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrderProdu__C1Id__29971E47">
-    <End Role="C1Info" Type="Self.C1Info" Multiplicity="0..1" />
-    <End Role="OrderProduct" Type="Self.OrderProduct" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="C1Info">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="OrderProduct">
-        <PropertyRef Name="C1Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__OrderStaf__Order__2101D846">
     <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="0..1" />
     <End Role="OrderStaff" Type="Self.OrderStaff" Multiplicity="*" />
@@ -2023,10 +2015,6 @@
     <AssociationSet Name="FK__OrderProd__Produ__3E923B2D" Association="Self.FK__OrderProd__Produ__3E923B2D">
       <End Role="ProductInfo" EntitySet="ProductInfo" />
       <End Role="OrderProductHistory" EntitySet="OrderProductHistory" />
-    </AssociationSet>
-    <AssociationSet Name="FK__OrderProdu__C1Id__29971E47" Association="Self.FK__OrderProdu__C1Id__29971E47">
-      <End Role="C1Info" EntitySet="C1Info" />
-      <End Role="OrderProduct" EntitySet="OrderProduct" />
     </AssociationSet>
     <AssociationSet Name="FK__OrderStaf__Order__2101D846" Association="Self.FK__OrderStaf__Order__2101D846">
       <End Role="HaiOrder" EntitySet="HaiOrder" />
