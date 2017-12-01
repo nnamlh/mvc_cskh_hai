@@ -2790,10 +2790,10 @@
           <Property Name="BrachCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="OrderNumber" Type="Int32" />
           <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__HaiOrder__Agency__17786E0C" FromRole="HaiOrder" ToRole="CInfoCommon" />
-          <NavigationProperty Name="OrderStatu" Relationship="Self.FK__HaiOrder__OrderS__186C9245" FromRole="HaiOrder" ToRole="OrderStatus" />
-          <NavigationProperty Name="OrderType1" Relationship="Self.FK__HaiOrder__OrderT__149C0161" FromRole="HaiOrder" ToRole="OrderType" />
-          <NavigationProperty Name="PayType1" Relationship="Self.FK__HaiOrder__PayTyp__1590259A" FromRole="HaiOrder" ToRole="PayType" />
-          <NavigationProperty Name="ShipType1" Relationship="Self.FK__HaiOrder__ShipTy__168449D3" FromRole="HaiOrder" ToRole="ShipType" />
+          <NavigationProperty Name="OStatus" Relationship="Self.FK__HaiOrder__OrderS__186C9245" FromRole="HaiOrder" ToRole="OrderStatus" />
+          <NavigationProperty Name="OType" Relationship="Self.FK__HaiOrder__OrderT__149C0161" FromRole="HaiOrder" ToRole="OrderType" />
+          <NavigationProperty Name="PType" Relationship="Self.FK__HaiOrder__PayTyp__1590259A" FromRole="HaiOrder" ToRole="PayType" />
+          <NavigationProperty Name="SType" Relationship="Self.FK__HaiOrder__ShipTy__168449D3" FromRole="HaiOrder" ToRole="ShipType" />
           <NavigationProperty Name="OrderProducts" Relationship="Self.FK__OrderProd__Order__27AED5D5" FromRole="HaiOrder" ToRole="OrderProduct" />
           <NavigationProperty Name="OrderProductHistories" Relationship="Self.FK__OrderProd__Order__3D9E16F4" FromRole="HaiOrder" ToRole="OrderProductHistory" />
           <NavigationProperty Name="OrderStaffs" Relationship="Self.FK__OrderStaf__Order__2101D846" FromRole="HaiOrder" ToRole="OrderStaff" />

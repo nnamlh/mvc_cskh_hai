@@ -15,7 +15,7 @@ namespace NDHSITE.Controllers
         NDHDBEntities db = new NDHDBEntities();
         MongoHelper mongoHelp = new MongoHelper();
         // GET: Order
-        public ActionResult Show(int? page, string agency = "", string search = "")
+        public ActionResult Show(int? page, string search = "", string status = "")
         {
             int permit = Utitl.CheckRoleShowInfo(db, User.Identity.Name);
             //
@@ -25,18 +25,19 @@ namespace NDHSITE.Controllers
             int pageNumber = (page ?? 1);
             List<HaiOrder> data = new List<HaiOrder>();
 
+            ViewBag.Status = status;
+            ViewBag.Search = search;
+
             if (permit == 1)
             {
                 // xem toan bo
-                data = db.HaiOrders.Where(p => p.Agency.Contains(agency) && (p.BrachCode.Contains(search))).ToList();
-
+                data = db.HaiOrders.Where(p => p.C1Code.Contains(search) && p.OrderStatus==status).ToList();
             }
             else if (permit == 2)
             {
                 // get list cn
                 var branchPermit = db.UserBranchPermisses.Where(p => p.UserName == User.Identity.Name).Select(p => p.BranchCode).ToList();
-                data = db.HaiOrders.Where(p => branchPermit.Contains(p.BrachCode)).ToList();
-
+                data = db.HaiOrders.Where(p => branchPermit.Contains(p.BrachCode) && p.OrderStatus.Contains(status) && p.C1Code.Contains(search)).ToList();
             }
 
             return View(data.OrderByDescending(p => p.CreateDate).ToPagedList(pageNumber, pageSize));
@@ -111,9 +112,9 @@ namespace NDHSITE.Controllers
             if (staff == null)
                 return RedirectToAction("error", "home");
 
-         
 
-            if (check.OrderStatus == "begin" && status == 1) 
+
+            if (check.OrderStatus == "begin" && status == 1)
             {
                 check.OrderStatus = "process";
                 db.Entry(check).State = System.Data.Entity.EntityState.Modified;
@@ -147,9 +148,10 @@ namespace NDHSITE.Controllers
 
                 // c1
                 var c1CodeTemp = "";
-         
 
-            } else if (check.OrderStatus == "begin" && status == 0)
+
+            }
+            else if (check.OrderStatus == "begin" && status == 0)
             {
                 check.OrderStatus = "cancel";
                 db.Entry(check).State = System.Data.Entity.EntityState.Modified;
@@ -179,7 +181,7 @@ namespace NDHSITE.Controllers
                 }
 
                 // c2
-                Utitl.Send("Đơn hàng " + check.Code, "Đơn hàng đã bị hủy vì " + notes , check.CInfoCommon.UserLogin, db, mongoHelp);
+                Utitl.Send("Đơn hàng " + check.Code, "Đơn hàng đã bị hủy vì " + notes, check.CInfoCommon.UserLogin, db, mongoHelp);
 
             }
 
@@ -231,7 +233,7 @@ namespace NDHSITE.Controllers
 
                 // c1
                 var c1CodeTemp = "";
-              
+
             }
 
             return RedirectToAction("detail", "order", new { id = id });
@@ -272,15 +274,15 @@ namespace NDHSITE.Controllers
                     Notes = "Nhan vien cong ty cap nhat",
                     OrderId = orderProduct.OrderId,
                     ProductId = orderProduct.ProductId,
-                    Quantity =  quantity
+                    Quantity = quantity
                 };
 
                 db.OrderProductHistories.Add(history);
                 db.SaveChanges();
             }
-    
 
-           
+
+
 
             return RedirectToAction("detail", "order", new { id = orderId });
         }

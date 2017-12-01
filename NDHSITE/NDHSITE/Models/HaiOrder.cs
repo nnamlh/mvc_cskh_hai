@@ -44,10 +44,10 @@ namespace NDHSITE.Models
         public string Sender { get; set; }
     
         public virtual CInfoCommon CInfoCommon { get; set; }
-        public virtual OrderStatu OrderStatu { get; set; }
-        public virtual OrderType OrderType1 { get; set; }
-        public virtual PayType PayType1 { get; set; }
-        public virtual ShipType ShipType1 { get; set; }
+        public virtual OrderStatu OStatus { get; set; }
+        public virtual OrderType OType { get; set; }
+        public virtual PayType PType { get; set; }
+        public virtual ShipType SType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderProduct> OrderProducts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
