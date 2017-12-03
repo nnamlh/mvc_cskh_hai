@@ -80,7 +80,7 @@
         </div>
         <div class="form-group">
             <label>Chi nhánh</label>
-            <input type="text" value="@Model.CInfoCommon.BranchCode" class="form-control" disabled />
+            <input type="text" value="@Model.BrachCode" class="form-control" disabled />
         </div>
         <div class="form-group">
             <label>Địa chỉ giao hàng</label>
@@ -90,6 +90,18 @@
             <label>Điện thoại liên hệ</label>
             <input type="text" value="@Model.ReceivePhone1" class="form-control" disabled />
         </div>
+        <div class="form-group">
+            <label>Nơi giao</label>
+            @if (Model.Sender == "CI")
+            {
+                <input type="text" value="@Model.C1Name (@Model.C1Code)" class="form-control" disabled />
+            }
+            else
+            {
+                <input type="text" value="Lấy hàng tại chi nhánh" class="form-control" disabled />
+            }
+        </div>
+
 
     </div>
     <div class="col-sm-6">
@@ -147,10 +159,10 @@
                 <thead>
                     <tr>
                         <th><strong>Sản phẩm</strong></th>
-                        <th><strong>Số lượng</strong></th>
+                        <th><strong>Số lượng đặt</strong></th>
                         <th><strong>Giá tiền/đơn vị</strong></th>
                         <th><strong>Tổng tiền</strong></th>
-                        <th><strong>Trạng thái</strong></th>
+                        <th><strong>Số lượng đã giao</strong></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -164,14 +176,14 @@
                                 @(item.PriceTotal != null ? item.PriceTotal.Value.ToString("C", NDHSITE.Util.Cultures.VietNam) : "0")
                             </td>
                             <td>
-                                <span><strong>Cấp 1: </strong></span>@item.C1Info.Code <br />
-                                <span><strong>Tên cấp 1: </strong></span>@item.C1Info.StoreName <br />
-                                <span><strong>Số lượng giao: </strong></span>@NDHSITE.Util.HaiUtil.ConvertProductQuantityText(item.ProductInfo.Quantity, item.QuantityFinish, item.ProductInfo.Unit)<br />
+                                @NDHSITE.Util.HaiUtil.ConvertProductQuantityText(item.ProductInfo.Quantity, item.QuantityFinish, item.ProductInfo.Unit)<br />
+                                <!--
                                 @if (Model.OrderStatus == "begin")
                                 {
                                     <a href="/order/modifyproduct?order=@item.OrderId&product=@item.ProductId" target="_blank">Thay đổi</a>
                                 }
-                                else if (Model.OrderStatus == "process")
+                                -->
+                                @if (Model.OrderStatus == "process")
                                 {
                                     <a href="javascript:updateProduct('@item.ProductId','@item.OrderId', '@item.ProductInfo.PName')">Thay đổi</a>
                                 }
@@ -261,6 +273,8 @@
             $('#productName').val(pName);
             $('#myModal').modal('show');
         }
+
+
     </script>
 
 

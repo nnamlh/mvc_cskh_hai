@@ -140,6 +140,9 @@
         <EntityTypeShape EntityType="NDHDB1Model.AgencyType" Width="1.5" PointX="22.375" PointY="0.875" />
         <AssociationConnector Association="NDHDB1Model.FK__CInfoComm__Agenc__4356F04A" />
         <AssociationConnector Association="NDHDB1Model.FK__ProductIn__Group__453F38BC" />
+        <EntityTypeShape EntityType="NDHDB1Model.BarcodeChangeHistory" Width="1.5" PointX="22.375" PointY="3.75" />
+        <EntityTypeShape EntityType="NDHDB1Model.BarcodeNotPermiss" Width="1.5" PointX="22.375" PointY="7.75" />
+        <EntityTypeShape EntityType="NDHDB1Model.UserBranchPermiss" Width="1.5" PointX="23.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

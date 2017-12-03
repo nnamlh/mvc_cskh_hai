@@ -18,16 +18,16 @@
         <div class="col-sm-3">
             <div class="form-group">
                 <label>Cấp 1</label>
-                <input type="text" name="search" class="form-control" value="@ViewBag.Branch" />
+                <input type="text" name="search" class="form-control" value="@ViewBag.Search" />
             </div>
         </div>
         <div class="col-sm-3">
             <label>Tình trạng</label>
             <select class="form-control" name="status">
-                <option value="" @(ViewBag.Status == "" ? "selected" : "")>Tất cả</option>
                 <option value="begin" @(ViewBag.Status == "begin" ? "selected" : "")>Đang liên hệ</option>
                 <option value="process" @(ViewBag.Status == "process" ? "selected" : "")>Đang giao hàng</option>
                 <option value="finish" @(ViewBag.Status == "finish" ? "selected" : "")>Kết thúc</option>
+                <option value="cancel" @(ViewBag.Status == "cancel" ? "selected" : "")>Đã hủy</option>
             </select>
         </div>
         <div class="col-sm-12">

@@ -15,7 +15,7 @@ namespace NDHSITE.Controllers
         NDHDBEntities db = new NDHDBEntities();
         MongoHelper mongoHelp = new MongoHelper();
         // GET: Order
-        public ActionResult Show(int? page, string search = "", string status = "")
+        public ActionResult Show(int? page, string search = "", string status = "process")
         {
             int permit = Utitl.CheckRoleShowInfo(db, User.Identity.Name);
             //
@@ -31,7 +31,7 @@ namespace NDHSITE.Controllers
             if (permit == 1)
             {
                 // xem toan bo
-                data = db.HaiOrders.Where(p => p.C1Code.Contains(search) && p.OrderStatus==status).ToList();
+                data = db.HaiOrders.Where(p => (p.BrachCode.Contains(search) || p.C1Code.Contains(search)) && p.OrderStatus==status).ToList();
             }
             else if (permit == 2)
             {
@@ -147,8 +147,14 @@ namespace NDHSITE.Controllers
                 Utitl.Send("Đơn hàng " + check.Code, "Đơn hàng của " + check.CInfoCommon.CName + " đã được xác nhận", check.CInfoCommon.UserLogin, db, mongoHelp);
 
                 // c1
-                var c1CodeTemp = "";
-
+                if(check.Sender == "CI")
+                {
+                    var checkC1 = db.C1Info.Find(check.C1Id);
+                    if(checkC1 != null)
+                    {
+                        Utitl.Send("Bạn có 1 đơn hàng cần giao: " + check.Code, "đơn hàng của " + check.CInfoCommon.CName + " (" + check.CInfoCommon.CCode + ")", check.CInfoCommon.UserLogin, db, mongoHelp);
+                    }
+                }
 
             }
             else if (check.OrderStatus == "begin" && status == 0)
@@ -258,7 +264,7 @@ namespace NDHSITE.Controllers
 
             var quantity = box + orderProduct.ProductInfo.Quantity * can;
 
-            if (quantityRemain > quantity)
+            if (quantityRemain >= quantity)
             {
                 orderProduct.QuantityFinish = orderProduct.QuantityFinish + quantity;
 

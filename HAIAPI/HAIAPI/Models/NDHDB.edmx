@@ -93,6 +93,19 @@
           <Property Name="Thumbnail" Type="nvarchar" MaxLength="512" />
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="BarcodeChangeHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="128" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="CaseCode" Type="nvarchar" MaxLength="128" />
+          <Property Name="Barcode" Type="nvarchar" MaxLength="128" />
+          <Property Name="InAction" Type="int" />
+          <Property Name="WCode" Type="nvarchar" MaxLength="128" />
+          <Property Name="WChange" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <EntityType Name="BarcodeHistory">
           <Key>
             <PropertyRef Name="Id" />
@@ -117,6 +130,20 @@
           <Property Name="WareRelativeName" Type="nvarchar(max)" />
           <Property Name="ProductCode" Type="nvarchar" MaxLength="32" />
           <Property Name="ProductName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="BarcodeNotPermiss">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Barcode" Type="nvarchar" MaxLength="128" />
+          <Property Name="CaseCode" Type="nvarchar" MaxLength="128" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="512" />
+          <Property Name="CreateTime" Type="datetime" />
+          <Property Name="UserUpload" Type="nvarchar" MaxLength="128" />
+          <Property Name="BranchCode" Type="nvarchar" MaxLength="128" />
+          <Property Name="ProductName" Type="nvarchar(max)" />
+          <Property Name="ProductBarcode" Type="nvarchar" MaxLength="32" />
         </EntityType>
         <EntityType Name="BasicNotification">
           <Key>
@@ -953,6 +980,14 @@
           <Property Name="STT" Type="nvarchar" MaxLength="128" />
           <Property Name="CreateDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="UserBranchPermiss">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="128" />
+          <Property Name="BranchCode" Type="nvarchar" MaxLength="128" />
+        </EntityType>
         <EntityType Name="Ward">
           <Key>
             <PropertyRef Name="Id" />
@@ -1777,7 +1812,9 @@
           <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AwardInfo" EntityType="Self.AwardInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BarcodeChangeHistory" EntityType="Self.BarcodeChangeHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BarcodeHistory" EntityType="Self.BarcodeHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BarcodeNotPermiss" EntityType="Self.BarcodeNotPermiss" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BasicNotification" EntityType="Self.BasicNotification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="C1Info" EntityType="Self.C1Info" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="C2C1" EntityType="Self.C2C1" Schema="dbo" store:Type="Tables" />
@@ -1847,6 +1884,7 @@
           <EntitySet Name="StaffWithC2" EntityType="Self.StaffWithC2" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreAgencyId" EntityType="Self.StoreAgencyId" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TreeInfo" EntityType="Self.TreeInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserBranchPermiss" EntityType="Self.UserBranchPermiss" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ward" EntityType="Self.Ward" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__AgencySav__CInfo__6497E884" Association="Self.FK__AgencySav__CInfo__6497E884">
@@ -3799,6 +3837,9 @@
           <FunctionImport Name="procduct_item_detail" ReturnType="Collection(NDHDB1Model.procduct_item_detail_Result1)">
           <Parameter Name="id" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="BarcodeChangeHistories" EntityType="NDHDB1Model.BarcodeChangeHistory" />
+          <EntitySet Name="BarcodeNotPermisses" EntityType="NDHDB1Model.BarcodeNotPermiss" />
+          <EntitySet Name="UserBranchPermisses" EntityType="NDHDB1Model.UserBranchPermiss" />
         </EntityContainer>
         <ComplexType Name="checkin_calendartype_group_Result">
           <Property Type="String" Name="Name" Nullable="true" MaxLength="512" />
@@ -4266,6 +4307,41 @@
           <Property Type="String" Name="GroupId1" Nullable="true" MaxLength="128" />
           <Property Type="String" Name="GroupName" Nullable="true" MaxLength="512" />
         </ComplexType>
+        <EntityType Name="BarcodeChangeHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="CaseCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Barcode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="InAction" Type="Int32" />
+          <Property Name="WCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="WChange" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="BarcodeNotPermiss">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Barcode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CaseCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+          <Property Name="CreateTime" Type="DateTime" Precision="3" />
+          <Property Name="UserUpload" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="BranchCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductBarcode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserBranchPermiss">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="BranchCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5400,6 +5476,44 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="BarcodeChangeHistories">
+            <EntityTypeMapping TypeName="NDHDB1Model.BarcodeChangeHistory">
+              <MappingFragment StoreEntitySet="BarcodeChangeHistory">
+                <ScalarProperty Name="WChange" ColumnName="WChange" />
+                <ScalarProperty Name="WCode" ColumnName="WCode" />
+                <ScalarProperty Name="InAction" ColumnName="InAction" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="CaseCode" ColumnName="CaseCode" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BarcodeNotPermisses">
+            <EntityTypeMapping TypeName="NDHDB1Model.BarcodeNotPermiss">
+              <MappingFragment StoreEntitySet="BarcodeNotPermiss">
+                <ScalarProperty Name="ProductBarcode" ColumnName="ProductBarcode" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="UserUpload" ColumnName="UserUpload" />
+                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="CaseCode" ColumnName="CaseCode" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserBranchPermisses">
+            <EntityTypeMapping TypeName="NDHDB1Model.UserBranchPermiss">
+              <MappingFragment StoreEntitySet="UserBranchPermiss">
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

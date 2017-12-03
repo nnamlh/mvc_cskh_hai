@@ -379,16 +379,16 @@ namespace HAIAPI.Util
 
             if (product.IsBox == 1 && wareInfo.IsScanBox == 1)
             {
-                checkLastImport = db.PHistories.Where(p => p.CaseCode == caseCode && p.BoxCode == boxCode && p.WCode != wareActionInfo.wCode).OrderByDescending(p => p.CreateDate).FirstOrDefault();
+                checkLastImport = db.PHistories.Where(p => p.CaseCode == caseCode && p.BoxCode == boxCode).OrderByDescending(p => p.CreateDate).FirstOrDefault();
 
                 if (checkLastImport == null)
                 {
-                    checkLastImport = db.PHistories.Where(p => p.CaseCode == caseCode && p.WCode != wareActionInfo.wCode).OrderByDescending(p => p.CreateDate).FirstOrDefault();
+                    checkLastImport = db.PHistories.Where(p => p.CaseCode == caseCode).OrderByDescending(p => p.CreateDate).FirstOrDefault();
                 }
             }
             else
             {
-                checkLastImport = db.PHistories.Where(p => p.CaseCode == caseCode && p.WCode != wareActionInfo.wCode).OrderByDescending(p => p.CreateDate).FirstOrDefault();
+                checkLastImport = db.PHistories.Where(p => p.CaseCode == caseCode).OrderByDescending(p => p.CreateDate).FirstOrDefault();
             }
 
             if (checkLastImport != null)
@@ -398,7 +398,15 @@ namespace HAIAPI.Util
 
                 if (!wareLastImport.WareReceive.Contains(wareActionInfo.wType))
                 {
-                    history.Messenge = "Sản phẩm không thể nhập kho";
+                    if (wareActionInfo.wType == "CII")
+                    {
+                        history.Messenge = "Mã đã đại lý cấp 2 khác sử dụng";
+                    }
+                    else
+                    {
+                        history.Messenge = "Mã đã được sử dụng";
+                    }
+
                     return history;
                 }
 
@@ -430,6 +438,14 @@ namespace HAIAPI.Util
             saveHistory(barcode, caseCode, boxCode, product, "NK", quantity, wareActionInfo);
             history.Quantity = quantity;
             history.Messenge = "Đã nhập kho";
+            if (wareActionInfo.wType == "CII")
+            {
+                // neu la cap 2
+                // kiem tra xem co trong ds barcode k dc tham gia
+                var checkPermiss = db.BarcodeNotPermisses.Where(p => p.CaseCode == caseCode).FirstOrDefault();
+                if (checkPermiss != null)
+                    history.Messenge = "Đã nhập kho - mã không được tham gia chương trình khuyến mãi";
+            }
             history.IsSuccess = 1;
             return history;
         }

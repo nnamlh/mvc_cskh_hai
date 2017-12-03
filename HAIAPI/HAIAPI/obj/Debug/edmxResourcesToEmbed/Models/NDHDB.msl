@@ -1129,5 +1129,43 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="BarcodeChangeHistories">
+      <EntityTypeMapping TypeName="NDHDB1Model.BarcodeChangeHistory">
+        <MappingFragment StoreEntitySet="BarcodeChangeHistory">
+          <ScalarProperty Name="WChange" ColumnName="WChange" />
+          <ScalarProperty Name="WCode" ColumnName="WCode" />
+          <ScalarProperty Name="InAction" ColumnName="InAction" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="CaseCode" ColumnName="CaseCode" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BarcodeNotPermisses">
+      <EntityTypeMapping TypeName="NDHDB1Model.BarcodeNotPermiss">
+        <MappingFragment StoreEntitySet="BarcodeNotPermiss">
+          <ScalarProperty Name="ProductBarcode" ColumnName="ProductBarcode" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+          <ScalarProperty Name="UserUpload" ColumnName="UserUpload" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="CaseCode" ColumnName="CaseCode" />
+          <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserBranchPermisses">
+      <EntityTypeMapping TypeName="NDHDB1Model.UserBranchPermiss">
+        <MappingFragment StoreEntitySet="UserBranchPermiss">
+          <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

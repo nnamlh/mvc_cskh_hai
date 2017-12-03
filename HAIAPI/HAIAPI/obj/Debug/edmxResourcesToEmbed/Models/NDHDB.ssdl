@@ -88,6 +88,19 @@
     <Property Name="Thumbnail" Type="nvarchar" MaxLength="512" />
     <Property Name="CreateDate" Type="datetime" />
   </EntityType>
+  <EntityType Name="BarcodeChangeHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="128" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="CaseCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="Barcode" Type="nvarchar" MaxLength="128" />
+    <Property Name="InAction" Type="int" />
+    <Property Name="WCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="WChange" Type="nvarchar" MaxLength="128" />
+  </EntityType>
   <EntityType Name="BarcodeHistory">
     <Key>
       <PropertyRef Name="Id" />
@@ -112,6 +125,20 @@
     <Property Name="WareRelativeName" Type="nvarchar(max)" />
     <Property Name="ProductCode" Type="nvarchar" MaxLength="32" />
     <Property Name="ProductName" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="BarcodeNotPermiss">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Barcode" Type="nvarchar" MaxLength="128" />
+    <Property Name="CaseCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="Notes" Type="nvarchar" MaxLength="512" />
+    <Property Name="CreateTime" Type="datetime" />
+    <Property Name="UserUpload" Type="nvarchar" MaxLength="128" />
+    <Property Name="BranchCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="ProductName" Type="nvarchar(max)" />
+    <Property Name="ProductBarcode" Type="nvarchar" MaxLength="32" />
   </EntityType>
   <EntityType Name="BasicNotification">
     <Key>
@@ -948,6 +975,14 @@
     <Property Name="STT" Type="nvarchar" MaxLength="128" />
     <Property Name="CreateDate" Type="datetime" />
   </EntityType>
+  <EntityType Name="UserBranchPermiss">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="128" />
+    <Property Name="BranchCode" Type="nvarchar" MaxLength="128" />
+  </EntityType>
   <EntityType Name="Ward">
     <Key>
       <PropertyRef Name="Id" />
@@ -1772,7 +1807,9 @@
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AwardInfo" EntityType="Self.AwardInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BarcodeChangeHistory" EntityType="Self.BarcodeChangeHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BarcodeHistory" EntityType="Self.BarcodeHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BarcodeNotPermiss" EntityType="Self.BarcodeNotPermiss" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BasicNotification" EntityType="Self.BasicNotification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="C1Info" EntityType="Self.C1Info" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="C2C1" EntityType="Self.C2C1" Schema="dbo" store:Type="Tables" />
@@ -1842,6 +1879,7 @@
     <EntitySet Name="StaffWithC2" EntityType="Self.StaffWithC2" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StoreAgencyId" EntityType="Self.StoreAgencyId" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TreeInfo" EntityType="Self.TreeInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserBranchPermiss" EntityType="Self.UserBranchPermiss" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ward" EntityType="Self.Ward" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__AgencySav__CInfo__6497E884" Association="Self.FK__AgencySav__CInfo__6497E884">

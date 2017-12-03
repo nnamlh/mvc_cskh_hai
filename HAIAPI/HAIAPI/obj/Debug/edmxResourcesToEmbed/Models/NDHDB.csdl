@@ -1689,6 +1689,9 @@
     <FunctionImport Name="procduct_item_detail" ReturnType="Collection(NDHDB1Model.procduct_item_detail_Result1)">
       <Parameter Name="id" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="BarcodeChangeHistories" EntityType="NDHDB1Model.BarcodeChangeHistory" />
+    <EntitySet Name="BarcodeNotPermisses" EntityType="NDHDB1Model.BarcodeNotPermiss" />
+    <EntitySet Name="UserBranchPermisses" EntityType="NDHDB1Model.UserBranchPermiss" />
   </EntityContainer>
   <ComplexType Name="checkin_calendartype_group_Result">
     <Property Type="String" Name="Name" Nullable="true" MaxLength="512" />
@@ -2156,4 +2159,39 @@
     <Property Type="String" Name="GroupId1" Nullable="true" MaxLength="128" />
     <Property Type="String" Name="GroupName" Nullable="true" MaxLength="512" />
   </ComplexType>
+  <EntityType Name="BarcodeChangeHistory">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="CaseCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Barcode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="InAction" Type="Int32" />
+    <Property Name="WCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="WChange" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="BarcodeNotPermiss">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Barcode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CaseCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="UserUpload" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="BranchCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ProductBarcode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="UserBranchPermiss">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="BranchCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>
