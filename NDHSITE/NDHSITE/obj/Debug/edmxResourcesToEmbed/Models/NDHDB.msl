@@ -1223,6 +1223,7 @@
           <ScalarProperty Name="Forcus" ColumnName="Forcus" />
           <ScalarProperty Name="GroupId" ColumnName="GroupId" />
           <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -1240,6 +1241,12 @@
           <ScalarProperty Name="StoreName" ColumnName="StoreName" />
           <ScalarProperty Name="InPlan" ColumnName="InPlan" />
           <ScalarProperty Name="Perform" ColumnName="Perform" />
+          <ScalarProperty Name="DayInWeek" ColumnName="DayInWeek" />
+          <ScalarProperty Name="CalendarId" ColumnName="CalendarId" />
+          <ScalarProperty Name="CInTime" ColumnName="CInTime" />
+          <ScalarProperty Name="COutTime" ColumnName="COutTime" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="Lng" ColumnName="Lng" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -1257,6 +1264,12 @@
           <ScalarProperty Name="StoreName" ColumnName="StoreName" />
           <ScalarProperty Name="InPlan" ColumnName="InPlan" />
           <ScalarProperty Name="Perform" ColumnName="Perform" />
+          <ScalarProperty Name="CalendarId" ColumnName="CalendarId" />
+          <ScalarProperty Name="DayInWeek" ColumnName="DayInWeek" />
+          <ScalarProperty Name="CInTime" ColumnName="CInTime" />
+          <ScalarProperty Name="COutTime" ColumnName="COutTime" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="Lng" ColumnName="Lng" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -1338,5 +1351,31 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="calendar_remove" FunctionName="DMSHAIModel.Store.calendar_remove" />
+    <FunctionImportMapping FunctionImportName="get_decor_info" FunctionName="DMSHAIModel.Store.get_decor_info">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DMSHAIModel.get_decor_info_Result">
+          <ScalarProperty Name="DDay" ColumnName="DDay" />
+          <ScalarProperty Name="DMonth" ColumnName="DMonth" />
+          <ScalarProperty Name="DYear" ColumnName="DYear" />
+          <ScalarProperty Name="Agency" ColumnName="Agency" />
+          <ScalarProperty Name="AgencyName" ColumnName="AgencyName" />
+          <ScalarProperty Name="AgencyDeputy" ColumnName="AgencyDeputy" />
+          <ScalarProperty Name="AddressInfo" ColumnName="AddressInfo" />
+          <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
+          <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
+          <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+          <ScalarProperty Name="DTime" ColumnName="DTime" />
+          <ScalarProperty Name="DGroup" ColumnName="DGroup" />
+          <ScalarProperty Name="DGroupName" ColumnName="DGroupName" />
+          <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="Lng" ColumnName="Lng" />
+          <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+          <ScalarProperty Name="StaffCode" ColumnName="StaffCode" />
+          <ScalarProperty Name="StaffBranch" ColumnName="StaffBranch" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

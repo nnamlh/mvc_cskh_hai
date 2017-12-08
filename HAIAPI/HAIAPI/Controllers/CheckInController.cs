@@ -1004,6 +1004,7 @@ namespace HAIAPI.Controllers
                         */
                     checkCalendar.COut = 1;
                     checkCalendar.Perform = 1;
+                    checkCalendar.COutTime = DateTime.Now.TimeOfDay;
                     checkCalendar.TimeCheck = DateTime.Now;
                     checkCalendar.Distance = paser.distance;
                     checkCalendar.LatCheck = paser.lat;

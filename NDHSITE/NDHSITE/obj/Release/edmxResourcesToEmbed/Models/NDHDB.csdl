@@ -554,10 +554,10 @@
     <Property Name="BrachCode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="OrderNumber" Type="Int32" />
     <NavigationProperty Name="CInfoCommon" Relationship="Self.FK__HaiOrder__Agency__17786E0C" FromRole="HaiOrder" ToRole="CInfoCommon" />
-    <NavigationProperty Name="OrderStatu" Relationship="Self.FK__HaiOrder__OrderS__186C9245" FromRole="HaiOrder" ToRole="OrderStatus" />
-    <NavigationProperty Name="OrderType1" Relationship="Self.FK__HaiOrder__OrderT__149C0161" FromRole="HaiOrder" ToRole="OrderType" />
-    <NavigationProperty Name="PayType1" Relationship="Self.FK__HaiOrder__PayTyp__1590259A" FromRole="HaiOrder" ToRole="PayType" />
-    <NavigationProperty Name="ShipType1" Relationship="Self.FK__HaiOrder__ShipTy__168449D3" FromRole="HaiOrder" ToRole="ShipType" />
+    <NavigationProperty Name="OStatus" Relationship="Self.FK__HaiOrder__OrderS__186C9245" FromRole="HaiOrder" ToRole="OrderStatus" />
+    <NavigationProperty Name="OType" Relationship="Self.FK__HaiOrder__OrderT__149C0161" FromRole="HaiOrder" ToRole="OrderType" />
+    <NavigationProperty Name="PType" Relationship="Self.FK__HaiOrder__PayTyp__1590259A" FromRole="HaiOrder" ToRole="PayType" />
+    <NavigationProperty Name="SType" Relationship="Self.FK__HaiOrder__ShipTy__168449D3" FromRole="HaiOrder" ToRole="ShipType" />
     <NavigationProperty Name="OrderProducts" Relationship="Self.FK__OrderProd__Order__27AED5D5" FromRole="HaiOrder" ToRole="OrderProduct" />
     <NavigationProperty Name="OrderProductHistories" Relationship="Self.FK__OrderProd__Order__3D9E16F4" FromRole="HaiOrder" ToRole="OrderProductHistory" />
     <NavigationProperty Name="OrderStaffs" Relationship="Self.FK__OrderStaf__Order__2101D846" FromRole="HaiOrder" ToRole="OrderStaff" />
@@ -2163,6 +2163,13 @@
       <Parameter Name="CMonth" Mode="In" Type="Int32" />
       <Parameter Name="CYear" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="get_decor_info" ReturnType="Collection(DMSHAIModel.get_decor_info_Result)">
+      <Parameter Name="branch" Mode="In" Type="String" />
+      <Parameter Name="agency" Mode="In" Type="String" />
+      <Parameter Name="group" Mode="In" Type="String" />
+      <Parameter Name="month" Mode="In" Type="Int32" />
+      <Parameter Name="year" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="checkin_calendartype_group_Result">
     <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
@@ -2252,6 +2259,7 @@
     <Property Type="Int32" Name="Forcus" Nullable="true" />
     <Property Type="String" Name="GroupId" Nullable="true" MaxLength="128" />
     <Property Type="String" Name="GroupName" Nullable="true" MaxLength="512" />
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
   </ComplexType>
   <ComplexType Name="report_checkin_detail_by_branch_Result">
     <Property Type="String" Name="Branch" Nullable="true" MaxLength="20" />
@@ -2265,6 +2273,12 @@
     <Property Type="String" Name="StoreName" Nullable="true" MaxLength="512" />
     <Property Type="Int32" Name="InPlan" Nullable="true" />
     <Property Type="Int32" Name="Perform" Nullable="true" />
+    <Property Type="String" Name="DayInWeek" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="CalendarId" Nullable="false" MaxLength="128" />
+    <Property Type="Time" Name="CInTime" Nullable="true" />
+    <Property Type="Time" Name="COutTime" Nullable="true" />
+    <Property Type="Double" Name="Lat" Nullable="true" />
+    <Property Type="Double" Name="Lng" Nullable="true" />
   </ComplexType>
   <ComplexType Name="report_checkin_detail_by_staff_Result">
     <Property Type="String" Name="Branch" Nullable="true" MaxLength="20" />
@@ -2278,6 +2292,12 @@
     <Property Type="String" Name="StoreName" Nullable="true" MaxLength="512" />
     <Property Type="Int32" Name="InPlan" Nullable="true" />
     <Property Type="Int32" Name="Perform" Nullable="true" />
+    <Property Type="String" Name="CalendarId" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="DayInWeek" Nullable="true" MaxLength="32" />
+    <Property Type="Time" Name="CInTime" Nullable="true" />
+    <Property Type="Time" Name="COutTime" Nullable="true" />
+    <Property Type="Double" Name="Lat" Nullable="true" />
+    <Property Type="Double" Name="Lng" Nullable="true" />
   </ComplexType>
   <ComplexType Name="report_event_agency_Result">
     <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -2347,5 +2367,27 @@
     <Property Type="String" Name="Phone" Nullable="true" MaxLength="128" />
     <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
     <Property Type="Int32" Name="Priority" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="get_decor_info_Result">
+    <Property Type="Int32" Name="DDay" Nullable="true" />
+    <Property Type="Int32" Name="DMonth" Nullable="true" />
+    <Property Type="Int32" Name="DYear" Nullable="true" />
+    <Property Type="String" Name="Agency" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="AgencyName" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="AgencyDeputy" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="AddressInfo" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="ProvinceName" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="DistrictName" Nullable="true" MaxLength="256" />
+    <Property Type="String" Name="BranchCode" Nullable="true" MaxLength="128" />
+    <Property Type="Time" Name="DTime" Nullable="true" />
+    <Property Type="String" Name="DGroup" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="DGroupName" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="ImageUrl" Nullable="true" />
+    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+    <Property Type="Double" Name="Lat" Nullable="true" />
+    <Property Type="Double" Name="Lng" Nullable="true" />
+    <Property Type="String" Name="StaffName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="StaffCode" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="StaffBranch" Nullable="true" MaxLength="20" />
   </ComplexType>
 </Schema>

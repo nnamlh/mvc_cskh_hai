@@ -221,6 +221,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AgencyController.cs" />
     <Compile Include="Controllers\CheckInController.cs" />
+    <Compile Include="Controllers\DecorController.cs" />
     <Compile Include="Controllers\EditorController.cs" />
     <Compile Include="Controllers\EventManageController.cs" />
     <Compile Include="Controllers\HaiReportController.cs" />
@@ -354,6 +355,9 @@
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FuncRole.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\get_decor_info_Result.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HaiArea.cs">
@@ -614,6 +618,7 @@
     <Content Include="Models\NDHDB.edmx.diagram">
       <DependentUpon>NDHDB.edmx</DependentUpon>
     </Content>
+    <Content Include="haiupload\report-decor-detail.xlsx" />
     <None Include="Properties\PublishProfiles\home.pubxml" />
     <None Include="Properties\PublishProfiles\ndhsite.pubxml" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
@@ -768,6 +773,7 @@
     <Content Include="Views\Order\Show.cshtml" />
     <Content Include="Views\Order\Detail.cshtml" />
     <Content Include="Views\Order\ModifyProduct.cshtml" />
+    <Content Include="Views\Decor\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

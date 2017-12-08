@@ -21,7 +21,7 @@ namespace NDHSITE.Controllers
 
         //
         // GET: /Product/
-        public ActionResult Manage(int? page, string search, int? type)
+        public ActionResult Manage(int? page, string search)
         {
             if (!Utitl.CheckUser(db, User.Identity.Name, "ManageProduct", 0))
                 return RedirectToAction("relogin", "home");
@@ -30,32 +30,12 @@ namespace NDHSITE.Controllers
             if (search == null)
                 search = "";
 
-            if (type == null)
-                type = 1;
-
             ViewBag.SearchText = search;
-            int pageSize = 10;
+            int pageSize = 20;
             int pageNumber = (page ?? 1);
-            ViewBag.SType = type;
 
             ViewBag.PGroup = db.ProductGroups.Where(p => p.HasChild == 0).ToList();
-            /*
-            switch (type)
-            {
-                case 2:
-                    ViewBag.STypeName = "Nhà sản xuất";
-                    return View(db.ProductInfoes.Where(p => p.Producer.Contains(search)).OrderBy(p => p.CreateTime).ToPagedList(pageNumber, pageSize));
-                case 1:
-                    ViewBag.STypeName = "Tên sản phẩm";
-                    return View(db.ProductInfoes.Where(p => p.PName.Contains(search)).OrderBy(p => p.CreateTime).ToPagedList(pageNumber, pageSize));
-                case 3:
-                    ViewBag.STypeName = "Nhóm sản phẩm";
-                    return View(db.ProductInfoes.Where(p => p.PGroup.Contains(search)).OrderBy(p => p.CreateTime).ToPagedList(pageNumber, pageSize));
-                case 4:
-                    ViewBag.STypeName = "Mã sản phẩm";
-                    return View(db.ProductInfoes.Where(p => p.PCode.Contains(search)).OrderBy(p => p.CreateTime).ToPagedList(pageNumber, pageSize));
-            }*/
-
+        
             return View(db.ProductInfoes.Where(p => p.Barcode.Contains(search) || p.PName.Contains(search) || p.PCode.Contains(search)).OrderBy(p => p.CreateTime).ToPagedList(pageNumber, pageSize));
         }
 
@@ -146,7 +126,7 @@ namespace NDHSITE.Controllers
                 return RedirectToAction("relogin", "home");
 
             var product = db.ProductInfoes.Find(id);
-            ViewBag.PGroup = db.ProductGroups.Where(p => p.HasChild == 0).ToList();
+            ViewBag.PGroup = db.ProductGroups.ToList();
             if (product == null)
             {
                 return RedirectToAction("error", "home");

@@ -27,5 +27,6 @@ namespace NDHSITE.Models
         public Nullable<int> Forcus { get; set; }
         public string GroupId { get; set; }
         public string GroupName { get; set; }
+        public Nullable<int> Quantity { get; set; }
     }
 }

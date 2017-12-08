@@ -22,7 +22,7 @@ namespace NDHSITE.Controllers
                 return RedirectToAction("relogin", "home");
 
 
-            int pageSize = 10;
+            int pageSize = 30;
             int pageNumber = (page ?? 1);
 
             if (month == null)
@@ -154,53 +154,66 @@ namespace NDHSITE.Controllers
 
                 using (ExcelPackage package = new ExcelPackage(newFile))
                 {
-                    ExcelWorksheet worksheet = package.Workbook.Worksheets["hai"];
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[1];
 
                     for (int i = 0; i < data.Count; i++)
                     {
 
                         try
                         {
-                            worksheet.Cells[i + 6, 1].Value = data[i].Branch;
-                            worksheet.Cells[i + 6, 2].Value = data[i].StaffCode;
-                            worksheet.Cells[i + 6, 3].Value = data[i].StaffName;
-                            worksheet.Cells[i + 6, 4].Value = data[i].CalendarType;
+                            worksheet.Cells[i + 2, 1].Value = data[i].Branch;
+                            worksheet.Cells[i + 2, 2].Value = data[i].StaffCode;
+                            worksheet.Cells[i + 2, 3].Value = data[i].StaffName;
+                            worksheet.Cells[i + 2, 4].Value = data[i].CalendarType;
+                            worksheet.Cells[i + 2, 5].Value = data[i].DayInWeek;
                             string date = data[i].CalendarDay + "/" + data[i].CalendarMonth + "/" + data[i].CalendarYear;
-                            worksheet.Cells[i + 6, 5].Value = date;
+                            worksheet.Cells[i + 2, 6].Value = date;
 
-                            worksheet.Cells[i + 6, 6].Value = data[i].AgencyCode;
-                            worksheet.Cells[i + 6, 7].Value = data[i].StoreName;
+                            worksheet.Cells[i + 2, 7].Value = data[i].AgencyCode;
+                            worksheet.Cells[i + 2, 8].Value = data[i].StoreName;
                             if(data[i].InPlan == 1)
-                                worksheet.Cells[i + 6, 8].Value = "X";
+                                worksheet.Cells[i + 2, 9].Value = "X";
 
                             if(data[i].Perform == 1)
-                                worksheet.Cells[i + 6, 9].Value = "X";
+                                worksheet.Cells[i + 2, 10].Value = "X";
+
+                            if (data[i].CalendarId == "HOLIDAY")
+                            {
+                                worksheet.Cells[i + 2, 11].Value = "X";
+                            }
+
 
                             if (data[i].InPlan == 1 && data[i].Perform == 1)
                             {
-                                worksheet.Cells[i + 6, 10].Value = "ĐÚNG KẾ HOẠCH";
+                                worksheet.Cells[i + 2, 12].Value = "ĐÚNG KẾ HOẠCH";
                             }
 
                             if (data[i].InPlan == 1 && data[i].Perform == 0)
                             {
                                 if (!String.IsNullOrEmpty(data[i].AgencyCode))
-                                    worksheet.Cells[i + 6, 10].Value = "RỚT";
+                                    worksheet.Cells[i + 2, 12].Value = "RỚT";
                                 else
-                                    worksheet.Cells[i + 6, 10].Value = "NGÀY NGHỈ";
+                                    worksheet.Cells[i + 2, 12].Value = "NGÀY NGHỈ";
                             }
 
                             if(data[i].InPlan == 0 && data[i].Perform == 1)
                             {
-                                worksheet.Cells[i + 6, 10].Value = "NGOÀI KẾ HOẠCH";
+                                worksheet.Cells[i + 2, 12].Value = "NGOÀI KẾ HOẠCH";
                             }
 
                             if (data[i].InPlan == 0 && data[i].Perform == 0)
                             {
-                                worksheet.Cells[i + 6, 10].Value = "NGOÀI KẾ HOẠCH (RỚT)";
+                                worksheet.Cells[i + 2, 12].Value = "NGOÀI KẾ HOẠCH (RỚT)";
                             }
 
+
+                            worksheet.Cells[i + 2, 13].Value = data[i].CInTime;
+                            worksheet.Cells[i + 2, 14].Value = data[i].COutTime;
+                            // lay toa do khach hang
+                            worksheet.Cells[i + 2, 15].Value = data[i].Lat;
+                            worksheet.Cells[i + 2, 16].Value = data[i].Lng;
                         }
-                        catch
+                        catch(Exception e)
                         {
                             return RedirectToAction("error", "home");
                         }
@@ -246,40 +259,57 @@ namespace NDHSITE.Controllers
 
                         try
                         {
-                            worksheet.Cells[i + 6, 1].Value = data[i].Branch;
-                            worksheet.Cells[i + 6, 2].Value = data[i].StaffCode;
-                            worksheet.Cells[i + 6, 3].Value = data[i].StaffName;
-                            worksheet.Cells[i + 6, 4].Value = data[i].CalendarType;
+                            worksheet.Cells[i + 1, 1].Value = data[i].Branch;
+                            worksheet.Cells[i + 1, 2].Value = data[i].StaffCode;
+                            worksheet.Cells[i + 1, 3].Value = data[i].StaffName;
+                            worksheet.Cells[i + 1, 4].Value = data[i].CalendarType;
+                            worksheet.Cells[i + 1, 5].Value = data[i].DayInWeek;
                             string date = data[i].CalendarDay + "/" + data[i].CalendarMonth + "/" + data[i].CalendarYear;
-                            worksheet.Cells[i + 6, 5].Value = date;
+                            worksheet.Cells[i + 1, 6].Value = date;
 
-                            worksheet.Cells[i + 6, 6].Value = data[i].AgencyCode;
-                            worksheet.Cells[i + 6, 7].Value = data[i].StoreName;
+                            worksheet.Cells[i + 1, 7].Value = data[i].AgencyCode;
+                            worksheet.Cells[i + 1, 8].Value = data[i].StoreName;
                             if (data[i].InPlan == 1)
-                                worksheet.Cells[i + 6, 8].Value = "X";
+                                worksheet.Cells[i + 1, 9].Value = "X";
 
                             if (data[i].Perform == 1)
-                                worksheet.Cells[i + 6, 9].Value = "X";
+                                worksheet.Cells[i + 1, 10].Value = "X";
+
+                            if (data[i].CalendarId == "HOLIDAY")
+                            {
+                                worksheet.Cells[i + 1, 11].Value = "X";
+                            }
+
 
                             if (data[i].InPlan == 1 && data[i].Perform == 1)
                             {
-                                worksheet.Cells[i + 6, 10].Value = "ĐÚNG KẾ HOẠCH";
+                                worksheet.Cells[i + 1, 12].Value = "ĐÚNG KẾ HOẠCH";
                             }
 
                             if (data[i].InPlan == 1 && data[i].Perform == 0)
                             {
-                                worksheet.Cells[i + 6, 10].Value = "RỚT";
+                                if (!String.IsNullOrEmpty(data[i].AgencyCode))
+                                    worksheet.Cells[i + 1, 12].Value = "RỚT";
+                                else
+                                    worksheet.Cells[i + 1, 12].Value = "NGÀY NGHỈ";
                             }
 
                             if (data[i].InPlan == 0 && data[i].Perform == 1)
                             {
-                                worksheet.Cells[i + 6, 10].Value = "NGOÀI KẾ HOẠCH";
+                                worksheet.Cells[i + 1, 12].Value = "NGOÀI KẾ HOẠCH";
                             }
 
                             if (data[i].InPlan == 0 && data[i].Perform == 0)
                             {
-                                worksheet.Cells[i + 6, 10].Value = "NGOÀI KẾ HOẠCH (RỚT)";
+                                worksheet.Cells[i + 1, 12].Value = "NGOÀI KẾ HOẠCH (RỚT)";
                             }
+
+
+                            worksheet.Cells[i + 1, 13].Value = data[i].CInTime;
+                            worksheet.Cells[i + 1, 14].Value = data[i].COutTime;
+                            // lay toa do khach hang
+                            worksheet.Cells[i + 1, 15].Value = data[i].Lat;
+                            worksheet.Cells[i + 1, 16].Value = data[i].Lng;
 
                         }
                         catch

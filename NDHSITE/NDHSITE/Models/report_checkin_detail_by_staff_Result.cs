@@ -24,5 +24,11 @@ namespace NDHSITE.Models
         public string StoreName { get; set; }
         public Nullable<int> InPlan { get; set; }
         public Nullable<int> Perform { get; set; }
+        public string CalendarId { get; set; }
+        public string DayInWeek { get; set; }
+        public Nullable<System.TimeSpan> CInTime { get; set; }
+        public Nullable<System.TimeSpan> COutTime { get; set; }
+        public Nullable<double> Lat { get; set; }
+        public Nullable<double> Lng { get; set; }
     }
 }

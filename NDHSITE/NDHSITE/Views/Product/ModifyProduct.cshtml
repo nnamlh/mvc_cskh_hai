@@ -43,7 +43,7 @@
                             <select name="PGroup" class="form-control">
                                 @foreach (var item in ViewBag.PGroup)
                                 {
-                                    if (item.Id == Model.PGroup)
+                                    if (item.Id == Model.GroupId)
                                     {
                                         <option value="@item.Id" selected>@item.Name</option>
                                     }
@@ -54,35 +54,57 @@
                                 }
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label>Số lượng hộp</label>
-                            <input type="number" name="QuantityBox" class="form-control" value="@Model.QuantityBox" />
-                        </div>
 
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Tên thương mại</label>
-                            <input type="text" name="CommerceName" class="form-control" value="@Model.CommerceName" />
-                        </div>
                         <div class="form-group">
                             <label>Nhà sản xuất</label>
                             <input type="text" name="Producer" class="form-control" value="@Model.Producer" />
                         </div>
-                        <div class="form-group">
-                            <label>Nhà phân phối</label>
-                            <input type="text" name="Register" class="form-control" value="@Model.Register" />
-                        </div>
-                        <div class="form-group">
-                            <label>Đơn vị tính</label>
-                            <input type="text" name="Unit" class="form-control" value="@Model.Unit" />
-                        </div>
-                        <div class="form-group">
-                            <label>Độ độc</label>
-                            <input type="text" name="Poision" class="form-control" value="@Model.Poision" />
-                        </div>
-
+                
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td>Số lượng hộp</td>
+                                    <td><input type="number" name="QuantityBox" value="@Model.QuantityBox" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Yêu cầu CII quét hộp</td>
+                                    <td><input type="checkbox" name="IsBox" @(Model.IsBox == 1 ? "checked" : "") /></td>
+                                </tr>
+                                <tr>
+                                    <td>Sản phẩm trọng tâm</td>
+                                    <td><input type="checkbox" name="Forcus" @(Model.Forcus == 1 ? "checked" : "") /></td>
+                                </tr>
+                                <tr>
+                                    <td>Sản phẩm mới</td>
+                                    <td><input type="checkbox" name="New" @(Model.New == 1 ? "checked" : "")/></td>
+                                </tr>
+                                <tr>
+                                    <td>Ảnh hiển thị</td>
+                                    <td><input type="file" name="Thumbnail" pattern="([^\s]+(\.(?i)(png))$)" /> <br />
+                                        <img class="img-responsive" alt="img" height="100" width="100" src="@Model.Thumbnail" />
+                                    </td>
+                                   
+                                </tr>
+                                <tr>
+                                    <td>Thêm hình ảnh</td>
+                                    <td><input type="file" name="files" multiple pattern="([^\s]+(\.(?i)(png))$)" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Điểm thùng</td>
+                                    <td><input type="text" name="CardPoint"  value="@Model.CardPoint"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Điểm thẻ</td>
+                                    <td><input type="text" name="BoxPoint" value="@Model.BoxPoint" /></td>
+                                </tr>
+                                <tr>
+                                    <td>Đơn vị tính</td>
+                                    <td><input type="text" name="Unit" value="@Model.Unit" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
+  
 
                     <div class="col-sm-6">
                         <div class="form-group">
@@ -94,12 +116,6 @@
                             <textarea name="Introduce" class="form-control">@Model.Introduce</textarea>
                         </div>
                         <div class="form-group">
-                            <label>Công dụng</label>
-                            <textarea name="Uses" class="form-control">@Model.Uses</textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
                             <label>Chủ ý</label>
                             <textarea name="Notes" class="form-control">@Model.Notes</textarea>
                         </div>
@@ -107,52 +123,10 @@
                             <label>Lưu ý khác</label>
                             <textarea name="Other" class="form-control">@Model.Other</textarea>
                         </div>
-                        <div class="form-group">
-                            <label>Hoặt tính</label>
-                            <textarea name="Activce" class="form-control">@Model.Activce</textarea>
-                        </div>
-
-
+        
                     </div>
+  
                     <div class="col-sm-6">
-
-                        <div class="form-group">
-                            <label>Yêu cầu CII quét hộp</label>
-                            <input type="checkbox" name="IsBox" @(Model.IsBox == 1 ? "checked" : "") />
-                        </div>
-                        <div class="form-group">
-                            <label>Sản phẩm trọng tâm</label>
-                            <input type="checkbox" name="Forcus" @(Model.Forcus == 1 ? "checked" : "") />
-                        </div>
-                        <div class="form-group">
-                            <label>Sản phẩm mới</label>
-                            <input type="checkbox" name="New" @(Model.New == 1 ? "checked" : "") />
-                        </div>
-                        <div class="form-group">
-                            <label>Đổi ảnh hiển thị</label>
-                            <input type="file" name="Thumbnail" class="form-control" pattern="([^\s]+(\.(?i)(png))$)" />
-                            <img class="img-responsive" alt="img" height="100" width="100" src="@Model.Thumbnail" />
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6">
-
-                        <div class="form-group">
-                            <label>Điểm thẻ</label>
-                            <input type="text" name="CardPoint" class="form-control" value="@Model.CardPoint" />
-                        </div>
-
-                        <div class="form-group">
-                            <label>Điểm thùng</label>
-                            <input type="text" name="BoxPoint" class="form-control" value="@Model.BoxPoint" />
-                        </div>
-
-
-                        <div class="form-group">
-                            <label>Thêm hình ảnh</label>
-                            <input type="file" name="files" class="form-control" multiple pattern="([^\s]+(\.(?i)(png))$)" />
-                        </div>
-
                         <div class="form-group">
                             <button class="btn btn-primary" type="submit">Sửa sản phẩm</button>
                         </div>

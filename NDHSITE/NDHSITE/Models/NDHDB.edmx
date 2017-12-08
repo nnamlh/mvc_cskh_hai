@@ -1854,6 +1854,13 @@
           <Parameter Name="year" Type="varchar" Mode="In" />
           <Parameter Name="staffId" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="get_decor_info" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="branch" Type="nvarchar" Mode="In" />
+          <Parameter Name="agency" Type="nvarchar" Mode="In" />
+          <Parameter Name="group" Type="nvarchar" Mode="In" />
+          <Parameter Name="month" Type="int" Mode="In" />
+          <Parameter Name="year" Type="int" Mode="In" />
+        </Function>
         <Function Name="procduct_item_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="nvarchar" Mode="In" />
         </Function>
@@ -4399,6 +4406,13 @@
             <Parameter Name="CMonth" Mode="In" Type="Int32" />
             <Parameter Name="CYear" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="get_decor_info" ReturnType="Collection(DMSHAIModel.get_decor_info_Result)">
+            <Parameter Name="branch" Mode="In" Type="String" />
+            <Parameter Name="agency" Mode="In" Type="String" />
+            <Parameter Name="group" Mode="In" Type="String" />
+            <Parameter Name="month" Mode="In" Type="Int32" />
+            <Parameter Name="year" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="checkin_calendartype_group_Result">
           <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
@@ -4488,6 +4502,7 @@
           <Property Type="Int32" Name="Forcus" Nullable="true" />
           <Property Type="String" Name="GroupId" Nullable="true" MaxLength="128" />
           <Property Type="String" Name="GroupName" Nullable="true" MaxLength="512" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
         </ComplexType>
         <ComplexType Name="report_checkin_detail_by_branch_Result">
           <Property Type="String" Name="Branch" Nullable="true" MaxLength="20" />
@@ -4501,6 +4516,12 @@
           <Property Type="String" Name="StoreName" Nullable="true" MaxLength="512" />
           <Property Type="Int32" Name="InPlan" Nullable="true" />
           <Property Type="Int32" Name="Perform" Nullable="true" />
+          <Property Type="String" Name="DayInWeek" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="CalendarId" Nullable="false" MaxLength="128" />
+          <Property Type="Time" Name="CInTime" Nullable="true" />
+          <Property Type="Time" Name="COutTime" Nullable="true" />
+          <Property Type="Double" Name="Lat" Nullable="true" />
+          <Property Type="Double" Name="Lng" Nullable="true" />
         </ComplexType>
         <ComplexType Name="report_checkin_detail_by_staff_Result">
           <Property Type="String" Name="Branch" Nullable="true" MaxLength="20" />
@@ -4514,6 +4535,12 @@
           <Property Type="String" Name="StoreName" Nullable="true" MaxLength="512" />
           <Property Type="Int32" Name="InPlan" Nullable="true" />
           <Property Type="Int32" Name="Perform" Nullable="true" />
+          <Property Type="String" Name="CalendarId" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="DayInWeek" Nullable="true" MaxLength="32" />
+          <Property Type="Time" Name="CInTime" Nullable="true" />
+          <Property Type="Time" Name="COutTime" Nullable="true" />
+          <Property Type="Double" Name="Lat" Nullable="true" />
+          <Property Type="Double" Name="Lng" Nullable="true" />
         </ComplexType>
         <ComplexType Name="report_event_agency_Result">
           <Property Type="String" Name="CName" Nullable="true" MaxLength="512" />
@@ -4583,6 +4610,28 @@
           <Property Type="String" Name="Phone" Nullable="true" MaxLength="128" />
           <Property Type="String" Name="Email" Nullable="true" MaxLength="256" />
           <Property Type="Int32" Name="Priority" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="get_decor_info_Result">
+          <Property Type="Int32" Name="DDay" Nullable="true" />
+          <Property Type="Int32" Name="DMonth" Nullable="true" />
+          <Property Type="Int32" Name="DYear" Nullable="true" />
+          <Property Type="String" Name="Agency" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="AgencyName" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="AgencyDeputy" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="AddressInfo" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="ProvinceName" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="DistrictName" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="BranchCode" Nullable="true" MaxLength="128" />
+          <Property Type="Time" Name="DTime" Nullable="true" />
+          <Property Type="String" Name="DGroup" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="DGroupName" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="ImageUrl" Nullable="true" />
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+          <Property Type="Double" Name="Lat" Nullable="true" />
+          <Property Type="Double" Name="Lng" Nullable="true" />
+          <Property Type="String" Name="StaffName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="StaffCode" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="StaffBranch" Nullable="true" MaxLength="20" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -5812,6 +5861,7 @@
                 <ScalarProperty Name="Forcus" ColumnName="Forcus" />
                 <ScalarProperty Name="GroupId" ColumnName="GroupId" />
                 <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -5829,6 +5879,12 @@
                 <ScalarProperty Name="StoreName" ColumnName="StoreName" />
                 <ScalarProperty Name="InPlan" ColumnName="InPlan" />
                 <ScalarProperty Name="Perform" ColumnName="Perform" />
+                <ScalarProperty Name="DayInWeek" ColumnName="DayInWeek" />
+                <ScalarProperty Name="CalendarId" ColumnName="CalendarId" />
+                <ScalarProperty Name="CInTime" ColumnName="CInTime" />
+                <ScalarProperty Name="COutTime" ColumnName="COutTime" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -5846,6 +5902,12 @@
                 <ScalarProperty Name="StoreName" ColumnName="StoreName" />
                 <ScalarProperty Name="InPlan" ColumnName="InPlan" />
                 <ScalarProperty Name="Perform" ColumnName="Perform" />
+                <ScalarProperty Name="CalendarId" ColumnName="CalendarId" />
+                <ScalarProperty Name="DayInWeek" ColumnName="DayInWeek" />
+                <ScalarProperty Name="CInTime" ColumnName="CInTime" />
+                <ScalarProperty Name="COutTime" ColumnName="COutTime" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -5927,6 +5989,32 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="calendar_remove" FunctionName="DMSHAIModel.Store.calendar_remove" />
+          <FunctionImportMapping FunctionImportName="get_decor_info" FunctionName="DMSHAIModel.Store.get_decor_info">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DMSHAIModel.get_decor_info_Result">
+                <ScalarProperty Name="DDay" ColumnName="DDay" />
+                <ScalarProperty Name="DMonth" ColumnName="DMonth" />
+                <ScalarProperty Name="DYear" ColumnName="DYear" />
+                <ScalarProperty Name="Agency" ColumnName="Agency" />
+                <ScalarProperty Name="AgencyName" ColumnName="AgencyName" />
+                <ScalarProperty Name="AgencyDeputy" ColumnName="AgencyDeputy" />
+                <ScalarProperty Name="AddressInfo" ColumnName="AddressInfo" />
+                <ScalarProperty Name="ProvinceName" ColumnName="ProvinceName" />
+                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="DTime" ColumnName="DTime" />
+                <ScalarProperty Name="DGroup" ColumnName="DGroup" />
+                <ScalarProperty Name="DGroupName" ColumnName="DGroupName" />
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+                <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+                <ScalarProperty Name="StaffCode" ColumnName="StaffCode" />
+                <ScalarProperty Name="StaffBranch" ColumnName="StaffBranch" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

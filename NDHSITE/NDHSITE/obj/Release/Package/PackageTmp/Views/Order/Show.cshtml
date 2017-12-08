@@ -17,15 +17,18 @@
     <div class="row">
         <div class="col-sm-3">
             <div class="form-group">
-                <label>Chi nhánh</label>
-                <input type="text" name="search" class="form-control" />
+                <label>Cấp 1</label>
+                <input type="text" name="search" class="form-control" value="@ViewBag.Search" />
             </div>
         </div>
         <div class="col-sm-3">
-            <div class="form-group">
-                <label>Mã cấp 2</label>
-                <input type="text" name="agency" class="form-control" />
-            </div>
+            <label>Tình trạng</label>
+            <select class="form-control" name="status">
+                <option value="begin" @(ViewBag.Status == "begin" ? "selected" : "")>Đang liên hệ</option>
+                <option value="process" @(ViewBag.Status == "process" ? "selected" : "")>Đang giao hàng</option>
+                <option value="finish" @(ViewBag.Status == "finish" ? "selected" : "")>Kết thúc</option>
+                <option value="cancel" @(ViewBag.Status == "cancel" ? "selected" : "")>Đã hủy</option>
+            </select>
         </div>
         <div class="col-sm-12">
             <button class="btn btn-primary" type="submit">Xem</button>
@@ -44,38 +47,49 @@
             <table class="table table-striped table-bordered thumbnail-table">
                 <thead>
                     <tr>
-                        <th>Mã đơn hàng</th>
-                        <th>Cấp 2</th>
+                        <th>Nơi lấy hàng</th>
                         <th>Tình trạng</th>
                         <th>Chi tiết</th>
-                        <th>#</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                    @foreach(var item in Model)
+                    @foreach (var item in Model)
                     {
                         <tr>
                             <td>@item.Code</td>
-                            <td>@item.CInfoCommon.CCode <br />
-                                @item.CInfoCommon.CName    
+                            <td>
+                                @if (item.Sender == "CI")
+                                {
+                                    @item.C1Code <br />
+                                    @item.C1Name
+                                }
+                                else
+                                {
+                                    <p>Lấy hàng tại chi nhánh (@item.BrachCode)</p>
+                                }
                             </td>
                             <td>
                                 @item.OStatus.Name
                             </td>
                             <td>
+                                <span><strong>Mã hàng: </strong>@item.Code</span><br />
+                                <span><strong>Đại lý cấp 2:</strong> @item.CInfoCommon.CName - @item.CInfoCommon.CCode</span><br />
                                 <span><strong>Hình thức giao:</strong> </span>@item.SType.Name<br />
                                 <span><strong>Thanh toán:</strong> </span>@item.PType.Name<br />
                                 <span><strong>Địa chỉ:</strong> </span>@item.ReceiveAddress<br />
                                 <span><strong>Điện thoại:</strong> </span>@item.ReceivePhone1<br />
-                            </td>
-                            <td>
-                                <a href="/order/detail/@item.Id" target="_blank">Chi tiết</a>
+                                <span><strong>Thời gian đặt: </strong>@item.CreateDate</span><br />
+                                <span><strong>Ngày đề nghị: </strong>@item.ExpectDate</span><br />
+                                <span><a href="/order/detail/@item.Id" target="_blank">Chi tiết</a></span>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("show",
+                                                   new { page, status = ViewBag.Status, c1 = ViewBag.C1, branch = ViewBag.Branch }))
         </div>
     </div>
 </div>

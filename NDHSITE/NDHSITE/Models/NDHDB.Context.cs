@@ -316,5 +316,30 @@ namespace NDHSITE.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("calendar_remove", staffIdParameter, cMonthParameter, cYearParameter);
         }
+    
+        public virtual ObjectResult<get_decor_info_Result> get_decor_info(string branch, string agency, string group, Nullable<int> month, Nullable<int> year)
+        {
+            var branchParameter = branch != null ?
+                new ObjectParameter("branch", branch) :
+                new ObjectParameter("branch", typeof(string));
+    
+            var agencyParameter = agency != null ?
+                new ObjectParameter("agency", agency) :
+                new ObjectParameter("agency", typeof(string));
+    
+            var groupParameter = group != null ?
+                new ObjectParameter("group", group) :
+                new ObjectParameter("group", typeof(string));
+    
+            var monthParameter = month.HasValue ?
+                new ObjectParameter("month", month) :
+                new ObjectParameter("month", typeof(int));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("year", year) :
+                new ObjectParameter("year", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<get_decor_info_Result>("get_decor_info", branchParameter, agencyParameter, groupParameter, monthParameter, yearParameter);
+        }
     }
 }
