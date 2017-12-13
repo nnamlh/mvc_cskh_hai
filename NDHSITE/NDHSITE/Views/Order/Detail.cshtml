@@ -19,16 +19,17 @@
             <form method="post" onsubmit="if(!confirm('Xác nhận đơn hàng?')){return false;}" action="/order/approve">
                 <input type="hidden" value="@Model.Id" name="id" />
                 <div class="form-group">
-                    <label>Ghi chú</label>
-                    <input type="text" name="notes" class="form-control" required />
-                </div>
-                <div class="form-group">
                     <label>Thao tác</label>
                     <select class="form-control" name="status">
                         <option value="1">Xác nhận đơn hàng</option>
                         <option value="0">Hủy đơn hàng</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label>Ghi chú</label>
+                    <input type="text" name="notes" class="form-control" required />
+                </div>
+
                 <button type="submit" class="btn btn-primary">Thực hiện</button>
             </form>
         </div>
@@ -60,86 +61,142 @@
 }
 <br />
 <hr />
-<div class="row">
-    <div class="col-sm-6">
-        <div class="form-group">
-            <label>Mã đơn hàng</label>
-            <input type="text" value="@Model.Code" class="form-control" disabled />
+<form method="post" onsubmit="if(!confirm('Chỉnh sửa đơn hàng?')){return false;}" action="/order/update">
+    <div class="row">
+        <div class="col-sm-6">
+            <input type="hidden" value="@Model.Id" name="Id" />
+            <div class="form-group">
+                <label>Mã đơn hàng</label>
+                <input type="text" value="@Model.Code" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label>Mã khách hàng</label>
+                <input type="text" value="@Model.CInfoCommon.CCode" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label>Cửa hàng</label>
+                <input type="text" value="@Model.CInfoCommon.CName" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label>Người đại diện</label>
+                <input type="text" value="@Model.CInfoCommon.CDeputy" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label>Chi nhánh</label>
+                <input type="text" value="@Model.BrachCode" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label>Địa chỉ giao hàng</label>
+                <input type="text" value="@Model.ReceiveAddress" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label>Điện thoại liên hệ</label>
+                <input type="text" value="@Model.ReceivePhone1" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label>Nơi giao</label>
+                @if (Model.Sender == "CI")
+                {
+                    <input type="text" value="@Model.C1Name (@Model.C1Code)" class="form-control" disabled />
+                }
+                else
+                {
+                    <input type="text" value="Lấy hàng tại chi nhánh" class="form-control" disabled />
+                }
+            </div>
+
+
         </div>
-        <div class="form-group">
-            <label>Mã khách hàng</label>
-            <input type="text" value="@Model.CInfoCommon.CCode" class="form-control" disabled />
-        </div>
-        <div class="form-group">
-            <label>Cửa hàng</label>
-            <input type="text" value="@Model.CInfoCommon.CName" class="form-control" disabled />
-        </div>
-        <div class="form-group">
-            <label>Người đại diện</label>
-            <input type="text" value="@Model.CInfoCommon.CDeputy" class="form-control" disabled />
-        </div>
-        <div class="form-group">
-            <label>Chi nhánh</label>
-            <input type="text" value="@Model.BrachCode" class="form-control" disabled />
-        </div>
-        <div class="form-group">
-            <label>Địa chỉ giao hàng</label>
-            <input type="text" value="@Model.ReceiveAddress" class="form-control" disabled />
-        </div>
-        <div class="form-group">
-            <label>Điện thoại liên hệ</label>
-            <input type="text" value="@Model.ReceivePhone1" class="form-control" disabled />
-        </div>
-        <div class="form-group">
-            <label>Nơi giao</label>
-            @if (Model.Sender == "CI")
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label>Tình trạng đơn hàng</label>
+                <input type="text" value="@Model.OStatus.Name" class="form-control warning" disabled />
+            </div>
+            <div class="form-group">
+                <label>Hình thức thành toán</label>
+
+                @if (Model.OrderStatus == "begin")
+                {
+                    <select class="form-control" name="PayType">
+                        @foreach (var item in ViewBag.PayType)
+                        {
+                            if (item.Id == Model.PayType)
+                            {
+                                <option selected value="@item.Id">@item.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        }
+                    </select>
+                }
+                else
+                {
+                    <input type="text" value="@Model.PType.Name" class="form-control" disabled />
+                }
+            </div>
+            <div class="form-group">
+                <label>Phương thức giao hàng</label>
+
+                @if (Model.OrderStatus == "begin")
+                {
+                    <select class="form-control" name="ShipType">
+                        @foreach (var item in ViewBag.ShipType)
+                        {
+                            if (item.Id == Model.ShipType)
+                            {
+                                <option selected value="@item.Id">@item.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        }
+                    </select>
+                }
+                else
+                {
+                    <input type="text" value="@Model.SType.Name" class="form-control" disabled />
+                }
+            </div>
+            <div class="form-group">
+                <label>Ngày đặt hàng</label>
+                <input type="text" value="@Model.CreateDate" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label>Ngày đề nghị giao</label>
+                @if (Model.OrderStatus == "begin")
+                {
+                    <input type="text" class="form-control" id="datesuggest" name="ExpectDate" value="@Model.ExpectDate" />
+                }
+                else
+                {
+                    <input type="text" value="@Model.ExpectDate" class="form-control" disabled />
+
+                }
+            </div>
+            <div class="form-group">
+                <label>Tổng tiền</label>
+                <input type="text" value="@(Model.PriceTotal != null?Model.PriceTotal.Value.ToString("C", NDHSITE.Util.Cultures.VietNam):"0")" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label>Ghi chú đặt hàng</label>
+                <input type="text" value="@Model.Notes" class="form-control" disabled />
+            </div>
+            <div class="form-group">
+                <label>Hình thức đặt hàng</label>
+                <input type="text" value="@Model.OType.Name" class="form-control" disabled />
+            </div>
+
+            @if (Model.OrderStatus == "begin")
             {
-                <input type="text" value="@Model.C1Name (@Model.C1Code)" class="form-control" disabled />
-            }
-            else
-            {
-                <input type="text" value="Lấy hàng tại chi nhánh" class="form-control" disabled />
+                <button type="submit" class="btn btn-primary">Cập nhật đơn hàng</button>
             }
         </div>
-
-
     </div>
-    <div class="col-sm-6">
-        <div class="form-group">
-            <label>Tình trạng đơn hàng</label>
-            <input type="text" value="@Model.OStatus.Name" class="form-control warning" disabled />
-        </div>
-        <div class="form-group">
-            <label>Hình thức thành toán</label>
-            <input type="text" value="@Model.PType.Name" class="form-control" disabled />
-        </div>
-        <div class="form-group">
-            <label>Phương thức giao hàng</label>
-            <input type="text" value="@Model.SType.Name" class="form-control" disabled />
-        </div>
-        <div class="form-group">
-            <label>Ngày đặt hàng</label>
-            <input type="text" value="@Model.CreateDate" class="form-control" disabled />
-        </div>
-        <div class="form-group">
-            <label>Ngày đề nghị giao</label>
-            <input type="text" value="@Model.ExpectDate" class="form-control" disabled />
-        </div>
-        <div class="form-group">
-            <label>Tổng tiền</label>
-            <input type="text" value="@(Model.PriceTotal != null?Model.PriceTotal.Value.ToString("C", NDHSITE.Util.Cultures.VietNam):"0")" class="form-control" disabled />
-        </div>
-        <div class="form-group">
-            <label>Ghi chú đặt hàng</label>
-            <input type="text" value="@Model.Notes" class="form-control" disabled />
-        </div>
-        <div class="form-group">
-            <label>Hình thức đặt hàng</label>
-            <input type="text" value="@Model.OType.Name" class="form-control" disabled />
-        </div>
-    </div>
-</div>
 
+</form>
 
 <br />
 <br />
@@ -170,25 +227,27 @@
                     {
                         <tr>
                             <td><a href="/ShowInfo/ShowProduct?type=4&search=@item.ProductInfo.PCode" target="_blank">@item.ProductInfo.PName</a></td>
-                            <td>@NDHSITE.Util.HaiUtil.ConvertProductQuantityText(item.ProductInfo.Quantity, item.Quantity, item.ProductInfo.Unit)</td>
+                            <td>
+                                @NDHSITE.Util.HaiUtil.ConvertProductQuantityText(item.ProductInfo.Quantity, item.Quantity, item.ProductInfo.Unit)<br />
+
+                                @if (Model.OrderStatus == "begin")
+                                {
+                                    <a href="javascript:updateProduct('@item.ProductId','@item.OrderId', '@item.ProductInfo.PName', @NDHSITE.Util.HaiUtil.CountCan(item.ProductInfo.Quantity, item.Quantity), @NDHSITE.Util.HaiUtil.CountBox(item.ProductInfo.Quantity, item.Quantity))" target="_blank">Thay đổi</a>
+                                }
+                            </td>
                             <td> @(item.PerPrice != null ? item.PerPrice.Value.ToString("C", NDHSITE.Util.Cultures.VietNam) : "0")  / @item.ProductInfo.Unit</td>
                             <td>
                                 @(item.PriceTotal != null ? item.PriceTotal.Value.ToString("C", NDHSITE.Util.Cultures.VietNam) : "0")
                             </td>
                             <td>
                                 @NDHSITE.Util.HaiUtil.ConvertProductQuantityText(item.ProductInfo.Quantity, item.QuantityFinish, item.ProductInfo.Unit)<br />
-                                <!--
-                                @if (Model.OrderStatus == "begin")
-                                {
-                                    <a href="/order/modifyproduct?order=@item.OrderId&product=@item.ProductId" target="_blank">Thay đổi</a>
-                                }
-                                -->
+
                                 @if (Model.OrderStatus == "process")
                                 {
-                                    <a href="javascript:updateProduct('@item.ProductId','@item.OrderId', '@item.ProductInfo.PName')">Thay đổi</a>
+                                <a href="javascript:updateDeliveryProduct('@item.ProductId','@item.OrderId', '@item.ProductInfo.PName')">Thay đổi</a>
                                 }
                             </td>
-                        </tr>
+                    </tr>
                     }
                 </tbody>
             </table>
@@ -203,7 +262,7 @@
                         <th><strong>Ngày thực hiện</strong></th>
                         <th><strong>Nhân viên</strong></th>
                         <th><strong>Đơn vị</strong></th>
-                        <th>#</th>
+                        <th><strong>Ghi chú</strong></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -232,9 +291,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Cập nhật giao hàng</h4>
+                <h4 class="modal-title" id="tile-modal">Cập nhật giao hàng</h4>
             </div>
-            <form method="post" action="/order/updatedelivery">
+            <form method="post" action="@(Model.OrderStatus == "begin"?"/order/UpdateProductQuantity":"/order/updatedelivery")">
                 <input type="hidden" name="orderId" id="orderId" />
                 <input type="hidden" name="productId" id="productId" />
                 <div class="modal-body">
@@ -244,29 +303,35 @@
                     </div>
                     <div class="form-group">
                         <label>Số lượng thùng</label>
-                        <input type="number" name="can" class="form-control"  value="0"/>
+                        <input type="number" name="can" class="form-control" value="0" id="quantityBox" />
                     </div>
                     <div class="form-group">
                         <label>Số lượng lẻ</label>
-                        <input type="number" name="box" class="form-control" value="0" />
+                        <input type="number" name="box" class="form-control" value="0" id="quantity" />
                     </div>
                 </div>
-                
+
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-default" >Cập nhật</button>
+                    <button type="submit" class="btn btn-default">Cập nhật</button>
                 </div>
             </form>
-          
+
         </div>
 
     </div>
 </div>
 
+@section styles {
+    <link href="~/content/bootstrap-datetimepicker.min.css" rel="stylesheet">
+}
+
 @section scripts {
-    
+
+
     <script type="text/javascript">
-        function updateProduct(productId, orderId, pName) {
+        function updateDeliveryProduct(productId, orderId, pName) {
+            $('#tile-modal').html("Cập nhật giao hàng");
             console.log("da vao");
             $('#orderId').val(orderId);
             $('#productId').val(productId);
@@ -274,8 +339,31 @@
             $('#myModal').modal('show');
         }
 
+        function updateProduct(productId, orderId, pName, quantityBox, quantity) {
+            console.log("da vao " + quantityBox + " , " + quantity);
+            $('#tile-modal').html("Cập nhật số lượng đặt");
+            $('#orderId').val(orderId);
+            $('#productId').val(productId);
+            $('#productName').val(pName);
+            $('#quantityBox').val(quantityBox);
+            $('#quantity').val(quantity);
+            $('#myModal').modal('show');
+        }
+
 
     </script>
 
+    @if (Model.OrderStatus == "begin")
+    {
+        <script src="~/Scripts/moment.min.js"></script>
+        <script src="~/scripts/moment-with-locales.min.js"></script>
+        <script src="~/scripts/bootstrap-datetimepicker.min.js"></script>
 
+        <script type="text/javascript">
+            $('#datesuggest').datetimepicker({
+                locale: 'vi',
+                format: 'MM/DD/YYYY'
+            });
+        </script>
+    }
 }

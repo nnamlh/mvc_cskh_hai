@@ -26,5 +26,21 @@ namespace NDHSITE.Util
 
         }
 
+
+        public static int? CountCan(int? box, int? quantity)
+        {
+            int? countCan = quantity / box;
+
+            return countCan;
+        }
+
+        public static int? CountBox(int? box, int? quantity)
+        {
+            int? countCan = quantity / box;
+            int? countBox = quantity - countCan * box;
+
+            return countBox;
+        }
+
     }
 }

@@ -31,7 +31,7 @@ namespace NDHSITE.Controllers
             if (permit == 1)
             {
                 // xem toan bo
-                data = db.HaiOrders.Where(p => (p.BrachCode.Contains(search) || p.C1Code.Contains(search)) && p.OrderStatus==status).ToList();
+                data = db.HaiOrders.Where(p => (p.BrachCode.Contains(search) || p.C1Code.Contains(search)) && p.OrderStatus == status).ToList();
             }
             else if (permit == 2)
             {
@@ -51,10 +51,86 @@ namespace NDHSITE.Controllers
             if (checkOrder == null)
                 return RedirectToAction("error", "home");
 
+            ViewBag.PayType = db.PayTypes.ToList();
+            ViewBag.ShipType = db.ShipTypes.ToList();
+
 
             return View(checkOrder);
         }
 
+        [HttpPost]
+        public ActionResult Update(string Id, string PayType, string ShipType, string ExpectDate)
+        {
+            var checkOrder = db.HaiOrders.Find(Id);
+
+            if (checkOrder == null)
+                return RedirectToAction("error", "home");
+
+
+            if(checkOrder.OrderStatus == "begin")
+            {
+                checkOrder.PayType = PayType;
+                checkOrder.ShipType = ShipType;
+                var date = DateTime.ParseExact(ExpectDate, "MM/dd/yyyy", null);
+
+                checkOrder.ExpectDate = date;
+
+                db.Entry(checkOrder).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+            }
+
+            return RedirectToAction("detail", "order", new { id = Id });
+        }
+
+        public ActionResult UpdateProductQuantity(string orderId, string productId, int? can, int? box)
+        {
+            if (can == null)
+                can = 0;
+
+            if (box == null)
+                box = 0;
+
+            var orderProduct = db.OrderProducts.Where(p => p.ProductId == productId && p.OrderId == orderId).FirstOrDefault();
+
+            if (orderProduct == null && orderProduct.HaiOrder.OrderStatus == "begin")
+                return RedirectToAction("error", "home");
+
+            ProductInfo pInfo = orderProduct.ProductInfo;
+            var quantity = can * pInfo.Quantity + box;
+
+            if (quantity != 0)
+            {
+                orderProduct.Quantity = quantity;
+                orderProduct.PerPrice = pInfo.Price;
+                orderProduct.PriceTotal = pInfo.Price * quantity;
+                db.Entry(orderProduct).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+                // update order 
+                double? priceTotal = 0;
+
+                var allOrderProduct = db.OrderProducts.Where(p => p.OrderId == orderId).ToList();
+                foreach(var item in allOrderProduct)
+                {
+                    priceTotal += item.PriceTotal;
+                }
+
+
+                var haiOrder = db.HaiOrders.Find(orderId);
+
+                haiOrder.PriceTotal = priceTotal;
+
+                db.Entry(haiOrder).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+            }
+
+            return RedirectToAction("detail", "order", new { id = orderId });
+        }
+
+
+        /*
         public ActionResult ModifyProduct(string order, string product)
         {
             var check = db.OrderProducts.Where(p => p.OrderId == order && p.ProductId == product).FirstOrDefault();
@@ -99,7 +175,7 @@ namespace NDHSITE.Controllers
 
             return RedirectToAction("detail", "order", new { id = order });
         }
-
+        */
         [HttpPost]
         public ActionResult Approve(string id, string notes, int status)
         {
@@ -147,10 +223,10 @@ namespace NDHSITE.Controllers
                 Utitl.Send("Đơn hàng " + check.Code, "Đơn hàng của " + check.CInfoCommon.CName + " đã được xác nhận", check.CInfoCommon.UserLogin, db, mongoHelp);
 
                 // c1
-                if(check.Sender == "CI")
+                if (check.Sender == "CI")
                 {
                     var checkC1 = db.C1Info.Find(check.C1Id);
-                    if(checkC1 != null)
+                    if (checkC1 != null)
                     {
                         Utitl.Send("Bạn có 1 đơn hàng cần giao: " + check.Code, "đơn hàng của " + check.CInfoCommon.CName + " (" + check.CInfoCommon.CCode + ")", check.CInfoCommon.UserLogin, db, mongoHelp);
                     }
