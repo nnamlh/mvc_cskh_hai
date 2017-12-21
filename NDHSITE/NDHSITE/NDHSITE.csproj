@@ -486,7 +486,13 @@
     <Compile Include="Models\report_checkin_detail_by_staff_Result.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\report_checkin_general_day_Result.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\report_checkin_general_Result.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\report_checkin_general_Result1.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\report_cii_product_Result.cs">
@@ -623,6 +629,7 @@
     </Content>
     <Content Include="haiupload\report-decor-detail.xlsx" />
     <Content Include="haiupload\report_checkin_general.xlsx" />
+    <Content Include="haiupload\report_checkin_general_day.xlsx" />
     <None Include="Properties\PublishProfiles\home.pubxml" />
     <None Include="Properties\PublishProfiles\ndhsite.pubxml" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />

@@ -523,10 +523,60 @@ namespace NDHSITE.Controllers
                             worksheet.Cells[i + 4, 8].Value = data[i].AllAgencyCheckIn;
                             worksheet.Cells[i + 4, 9].Value = data[i].AllDayCSBH;
                             worksheet.Cells[i + 4, 10].Value = data[i].AllDayCSBH4;
-                            worksheet.Cells[i + 4, 14].Value = data[i].AgencyCheckInDay;
-                            worksheet.Cells[i + 4, 15].Value = data[i].AgencyCheckInInPlanDay;
-                            worksheet.Cells[i + 4, 16].Value = data[i].AgencyCheckInOutPlanDay;
-                            worksheet.Cells[i + 4, 17].Value = data[i].CheckInNotCSKH;
+                        }
+                        catch
+                        {
+
+                        }
+
+                    }
+                    package.Save();
+                }
+            }
+            catch
+            {
+                return RedirectToAction("error", "home");
+            }
+
+            return File(pathTo, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", string.Format("report-checkin-tong-hop-" + DateTime.Now.ToString("ddMMyyyyhhmmss") + ".{0}", "xlsx"));
+
+        }
+
+        //
+        public ActionResult ReportGeneralDay(int month, int year, int fDay)
+        {
+            if (!Utitl.CheckUser(db, User.Identity.Name, "CheckIn", 1))
+                return RedirectToAction("relogin", "home");
+
+            string pathRoot = Server.MapPath("~/haiupload/report_checkin_general_day.xlsx");
+            string name = "report" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".xlsx";
+            string pathTo = Server.MapPath("~/temp/" + name);
+
+            System.IO.File.Copy(pathRoot, pathTo);
+
+            try
+            {
+                FileInfo newFile = new FileInfo(pathTo);
+
+                var data = db.report_checkin_general_day(month, year, fDay).ToList();
+
+                using (ExcelPackage package = new ExcelPackage(newFile))
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[1];
+
+                    for (int i = 0; i < data.Count; i++)
+                    {
+
+                        try
+                        {
+                            worksheet.Cells[i + 4, 2].Value = i + 1;
+                            worksheet.Cells[i + 4, 3].Value = data[i].BranchCode;
+                            worksheet.Cells[i + 4, 4].Value = data[i].Code;
+                            worksheet.Cells[i + 4, 5].Value = data[i].FullName;
+                            worksheet.Cells[i + 4, 6].Value = data[i].AgencyCheckInDay;
+                            worksheet.Cells[i + 4, 7].Value = data[i].AgencyCheckInInPlanDay;
+                            worksheet.Cells[i + 4, 8].Value = data[i].AgencyCheckInOutPlanDay;
+                            worksheet.Cells[i + 4, 9].Value = data[i].CheckInNotCSKH;
 
                         }
                         catch

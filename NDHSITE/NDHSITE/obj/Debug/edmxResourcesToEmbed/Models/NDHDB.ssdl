@@ -1876,6 +1876,11 @@
     <Parameter Name="fDay" Type="int" Mode="In" />
     <Parameter Name="tDay" Type="int" Mode="In" />
   </Function>
+  <Function Name="report_checkin_general_day" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="month" Type="int" Mode="In" />
+    <Parameter Name="year" Type="int" Mode="In" />
+    <Parameter Name="day" Type="int" Mode="In" />
+  </Function>
   <Function Name="report_cii_product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="DFrom" Type="nvarchar" Mode="In" />
     <Parameter Name="DTo" Type="nvarchar" Mode="In" />

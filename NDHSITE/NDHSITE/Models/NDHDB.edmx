@@ -1881,6 +1881,11 @@
           <Parameter Name="fDay" Type="int" Mode="In" />
           <Parameter Name="tDay" Type="int" Mode="In" />
         </Function>
+        <Function Name="report_checkin_general_day" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="month" Type="int" Mode="In" />
+          <Parameter Name="year" Type="int" Mode="In" />
+          <Parameter Name="day" Type="int" Mode="In" />
+        </Function>
         <Function Name="report_cii_product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DFrom" Type="nvarchar" Mode="In" />
           <Parameter Name="DTo" Type="nvarchar" Mode="In" />
@@ -4419,11 +4424,16 @@
             <Parameter Name="month" Mode="In" Type="Int32" />
             <Parameter Name="year" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="report_checkin_general" ReturnType="Collection(DMSHAIModel.report_checkin_general_Result)">
+          <FunctionImport Name="report_checkin_general" ReturnType="Collection(DMSHAIModel.report_checkin_general_Result1)">
             <Parameter Name="month" Mode="In" Type="Int32" />
             <Parameter Name="year" Mode="In" Type="Int32" />
             <Parameter Name="fDay" Mode="In" Type="Int32" />
             <Parameter Name="tDay" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="report_checkin_general_day" ReturnType="Collection(DMSHAIModel.report_checkin_general_day_Result)">
+            <Parameter Name="month" Mode="In" Type="Int32" />
+            <Parameter Name="year" Mode="In" Type="Int32" />
+            <Parameter Name="day" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="checkin_calendartype_group_Result">
@@ -4655,6 +4665,27 @@
           <Property Type="Int32" Name="AllAgencyCheckIn" Nullable="true" />
           <Property Type="Int32" Name="AllDayCSBH" Nullable="true" />
           <Property Type="Int32" Name="AllDayCSBH4" Nullable="true" />
+          <Property Type="Int32" Name="AgencyCheckInDay" Nullable="true" />
+          <Property Type="Int32" Name="AgencyCheckInInPlanDay" Nullable="true" />
+          <Property Type="Int32" Name="AgencyCheckInOutPlanDay" Nullable="true" />
+          <Property Type="Int32" Name="CheckInNotCSKH" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="report_checkin_general_Result1">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="BranchCode" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="AllAgency" Nullable="true" />
+          <Property Type="Int32" Name="AllAgencyCloser" Nullable="true" />
+          <Property Type="Int32" Name="AllAgencyCheckIn" Nullable="true" />
+          <Property Type="Int32" Name="AllDayCSBH" Nullable="true" />
+          <Property Type="Int32" Name="AllDayCSBH4" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="report_checkin_general_day_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="BranchCode" Nullable="true" MaxLength="20" />
           <Property Type="Int32" Name="AgencyCheckInDay" Nullable="true" />
           <Property Type="Int32" Name="AgencyCheckInInPlanDay" Nullable="true" />
           <Property Type="Int32" Name="AgencyCheckInOutPlanDay" Nullable="true" />
@@ -6044,7 +6075,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="report_checkin_general" FunctionName="DMSHAIModel.Store.report_checkin_general">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="DMSHAIModel.report_checkin_general_Result">
+              <ComplexTypeMapping TypeName="DMSHAIModel.report_checkin_general_Result1">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
@@ -6054,6 +6085,16 @@
                 <ScalarProperty Name="AllAgencyCheckIn" ColumnName="AllAgencyCheckIn" />
                 <ScalarProperty Name="AllDayCSBH" ColumnName="AllDayCSBH" />
                 <ScalarProperty Name="AllDayCSBH4" ColumnName="AllDayCSBH4" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="report_checkin_general_day" FunctionName="DMSHAIModel.Store.report_checkin_general_day">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DMSHAIModel.report_checkin_general_day_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
                 <ScalarProperty Name="AgencyCheckInDay" ColumnName="AgencyCheckInDay" />
                 <ScalarProperty Name="AgencyCheckInInPlanDay" ColumnName="AgencyCheckInInPlanDay" />
                 <ScalarProperty Name="AgencyCheckInOutPlanDay" ColumnName="AgencyCheckInOutPlanDay" />
