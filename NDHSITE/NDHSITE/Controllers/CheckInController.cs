@@ -43,19 +43,21 @@ namespace NDHSITE.Controllers
             if (permiss == 2)
             {
                 branches = Utitl.GetBranchesPermiss(db, User.Identity.Name, false);
-            } else if (permiss == 1)
+            }
+            else if (permiss == 1)
             {
                 branches = Utitl.GetBranchesPermiss(db, User.Identity.Name, true);
             }
 
             if (!String.IsNullOrEmpty(branch))
             {
-               
+
                 if (branches.Contains(branch))
                 {
                     branches.Clear();
                     branches.Add(branch);
-                } else
+                }
+                else
                 {
                     branches.Clear();
                 }
@@ -66,8 +68,9 @@ namespace NDHSITE.Controllers
 
             if (status == -1)
             {
-                listCalendar = db.CalendarInfoes.Where(p => p.CMonth == month && p.CYear == year && p.HaiStaff.Code.Contains(staff) &&  branches.Contains(p.HaiStaff.HaiBranch.Code)).ToList();
-            } else
+                listCalendar = db.CalendarInfoes.Where(p => p.CMonth == month && p.CYear == year && p.HaiStaff.Code.Contains(staff) && branches.Contains(p.HaiStaff.HaiBranch.Code)).ToList();
+            }
+            else
             {
                 listCalendar = db.CalendarInfoes.Where(p => p.CMonth == month && p.CYear == year && p.CStatus == status && p.HaiStaff.Code.Contains(staff) && branches.Contains(p.HaiStaff.HaiBranch.Code)).ToList();
             }
@@ -171,10 +174,10 @@ namespace NDHSITE.Controllers
 
                             worksheet.Cells[i + 2, 7].Value = data[i].AgencyCode;
                             worksheet.Cells[i + 2, 8].Value = data[i].StoreName;
-                            if(data[i].InPlan == 1)
+                            if (data[i].InPlan == 1)
                                 worksheet.Cells[i + 2, 9].Value = "X";
 
-                            if(data[i].Perform == 1)
+                            if (data[i].Perform == 1)
                                 worksheet.Cells[i + 2, 10].Value = "X";
 
                             if (data[i].CalendarId == "HOLIDAY")
@@ -196,7 +199,7 @@ namespace NDHSITE.Controllers
                                     worksheet.Cells[i + 2, 12].Value = "NGÀY NGHỈ";
                             }
 
-                            if(data[i].InPlan == 0 && data[i].Perform == 1)
+                            if (data[i].InPlan == 0 && data[i].Perform == 1)
                             {
                                 worksheet.Cells[i + 2, 12].Value = "NGOÀI KẾ HOẠCH";
                             }
@@ -213,7 +216,7 @@ namespace NDHSITE.Controllers
                             worksheet.Cells[i + 2, 15].Value = data[i].Lat;
                             worksheet.Cells[i + 2, 16].Value = data[i].Lng;
                         }
-                        catch(Exception e)
+                        catch (Exception e)
                         {
                             return RedirectToAction("error", "home");
                         }
@@ -224,7 +227,8 @@ namespace NDHSITE.Controllers
 
                 }
 
-            } catch
+            }
+            catch
             {
                 return RedirectToAction("error", "home");
             }
@@ -348,7 +352,7 @@ namespace NDHSITE.Controllers
             string name = "report" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".xlsx";
             string pathTo = Server.MapPath("~/temp/" + name);
 
-            
+
 
             try
             {
@@ -370,7 +374,7 @@ namespace NDHSITE.Controllers
                 using (ExcelPackage package = new ExcelPackage(newFile))
                 {
                     ExcelWorksheet worksheet = package.Workbook.Worksheets.Add(staff.FullName);
-                  
+
                     worksheet.Cells[1, 2].Value = "KẾ HOẠCH CHĂM SÓC KHÁCH HÀNG";
                     worksheet.Cells[1, 2].Style.Font.Bold = true;
                     worksheet.Cells[3, 2].Value = "Chi nhánh: " + staff.HaiBranch.Code;
@@ -378,7 +382,7 @@ namespace NDHSITE.Controllers
                     worksheet.Cells[5, 2].Value = "Mã Nv: " + staff.Code;
                     worksheet.Cells[6, 2].Value = "Khu vực: " + staff.HaiBranch.HaiArea.Name;
 
-                   
+
                     for (var i = 0; i < sumary.Count(); i++)
                     {
                         worksheet.Cells[i + 1, 9].Value = sumary[i].Name + ": " + sumary[i].countday;
@@ -415,7 +419,7 @@ namespace NDHSITE.Controllers
                     worksheet.Cells[tableIndex, 11].Value = "MIÊU TẢ";
                     worksheet.Cells[tableIndex, 11].Style.Font.Bold = true;
 
-                    for (int i = 0; i< days; i++)
+                    for (int i = 0; i < days; i++)
                     {
                         worksheet.Cells[tableIndex, i + 12].Value = i + 1;
                         worksheet.Cells[tableIndex, i + 12].Style.Font.Bold = true;
@@ -425,7 +429,7 @@ namespace NDHSITE.Controllers
                     tableIndex++;
                     var agency = "";
                     var agencyCount = 1;
-                    for(int i= 0; i< data.Count(); i++)
+                    for (int i = 0; i < data.Count(); i++)
                     {
                         if (agency != data[i].AgencyCode)
                         {
@@ -452,13 +456,13 @@ namespace NDHSITE.Controllers
 
                         for (int j = 0; j < days; j++)
                         {
-                            worksheet.Cells[tableIndex, j + 12].Value = data[i].getValue(j+1);
+                            worksheet.Cells[tableIndex, j + 12].Value = data[i].getValue(j + 1);
                         }
 
 
                         tableIndex++;
                     }
-                  
+
                     package.Save();
                 }
 
@@ -470,6 +474,76 @@ namespace NDHSITE.Controllers
 
 
             return File(pathTo, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", string.Format("report-ke-hoach-" + DateTime.Now.ToString("ddMMyyyyhhmmss") + ".{0}", "xlsx"));
+
+        }
+
+        public ActionResult ReportCheckIn()
+        {
+            if (!Utitl.CheckUser(db, User.Identity.Name, "CheckIn", 1))
+                return RedirectToAction("relogin", "home");
+            ViewBag.Month = DateTime.Now.Month;
+            ViewBag.Year = DateTime.Now.Year;
+            ViewBag.Day = DateTime.Now.Day;
+            return View();
+        }
+
+
+        public ActionResult ReportGeneral(int month, int year, int fDay, int tDay)
+        {
+            if (!Utitl.CheckUser(db, User.Identity.Name, "CheckIn", 1))
+                return RedirectToAction("relogin", "home");
+
+            string pathRoot = Server.MapPath("~/haiupload/report_checkin_general.xlsx");
+            string name = "report" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".xlsx";
+            string pathTo = Server.MapPath("~/temp/" + name);
+
+            System.IO.File.Copy(pathRoot, pathTo);
+
+            try
+            {
+                FileInfo newFile = new FileInfo(pathTo);
+
+                var data = db.report_checkin_general(month, year, fDay, tDay).ToList();
+
+                using (ExcelPackage package = new ExcelPackage(newFile))
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[1];
+
+                    for (int i = 0; i < data.Count; i++)
+                    {
+
+                        try
+                        {
+                            worksheet.Cells[i + 4, 2].Value = i + 1;
+                            worksheet.Cells[i + 4, 3].Value = data[i].BranchCode;
+                            worksheet.Cells[i + 4, 4].Value = data[i].Code;
+                            worksheet.Cells[i + 4, 5].Value = data[i].FullName;
+                            worksheet.Cells[i + 4, 6].Value = data[i].AllAgency;
+                            worksheet.Cells[i + 4, 7].Value = data[i].AllAgencyCloser;
+                            worksheet.Cells[i + 4, 8].Value = data[i].AllAgencyCheckIn;
+                            worksheet.Cells[i + 4, 9].Value = data[i].AllDayCSBH;
+                            worksheet.Cells[i + 4, 10].Value = data[i].AllDayCSBH4;
+                            worksheet.Cells[i + 4, 14].Value = data[i].AgencyCheckInDay;
+                            worksheet.Cells[i + 4, 15].Value = data[i].AgencyCheckInInPlanDay;
+                            worksheet.Cells[i + 4, 16].Value = data[i].AgencyCheckInOutPlanDay;
+                            worksheet.Cells[i + 4, 17].Value = data[i].CheckInNotCSKH;
+
+                        }
+                        catch
+                        {
+
+                        }
+
+                    }
+                    package.Save();
+                }
+            }
+            catch
+            {
+                return RedirectToAction("error", "home");
+            }
+
+            return File(pathTo, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", string.Format("report-checkin-tong-hop-" + DateTime.Now.ToString("ddMMyyyyhhmmss") + ".{0}", "xlsx"));
 
         }
     }

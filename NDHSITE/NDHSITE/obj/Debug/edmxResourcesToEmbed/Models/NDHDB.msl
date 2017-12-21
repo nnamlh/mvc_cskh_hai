@@ -1377,5 +1377,24 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="report_checkin_general" FunctionName="DMSHAIModel.Store.report_checkin_general">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DMSHAIModel.report_checkin_general_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+          <ScalarProperty Name="AllAgency" ColumnName="AllAgency" />
+          <ScalarProperty Name="AllAgencyCloser" ColumnName="AllAgencyCloser" />
+          <ScalarProperty Name="AllAgencyCheckIn" ColumnName="AllAgencyCheckIn" />
+          <ScalarProperty Name="AllDayCSBH" ColumnName="AllDayCSBH" />
+          <ScalarProperty Name="AllDayCSBH4" ColumnName="AllDayCSBH4" />
+          <ScalarProperty Name="AgencyCheckInDay" ColumnName="AgencyCheckInDay" />
+          <ScalarProperty Name="AgencyCheckInInPlanDay" ColumnName="AgencyCheckInInPlanDay" />
+          <ScalarProperty Name="AgencyCheckInOutPlanDay" ColumnName="AgencyCheckInOutPlanDay" />
+          <ScalarProperty Name="CheckInNotCSKH" ColumnName="CheckInNotCSKH" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

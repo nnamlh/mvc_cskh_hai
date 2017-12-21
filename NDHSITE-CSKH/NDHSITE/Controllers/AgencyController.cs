@@ -129,8 +129,9 @@ namespace NDHSITE.Controllers
 
             info.CreateTime = DateTime.Now;
 
-            DateTime dt = DateTime.ParseExact(birthday, "MM/dd/yyyy HH:mm", null);
-            info.CreateTime = DateTime.Now;
+           
+           // DateTime dt = DateTime.ParseExact(birthday, "MM/dd/yyyy HH:mm", null);
+           
             info.Id = Guid.NewGuid().ToString();
             info.CType = "CI";
 

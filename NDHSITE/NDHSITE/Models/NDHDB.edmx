@@ -1875,6 +1875,12 @@
           <Parameter Name="year" Type="int" Mode="In" />
           <Parameter Name="staffId" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="report_checkin_general" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="month" Type="int" Mode="In" />
+          <Parameter Name="year" Type="int" Mode="In" />
+          <Parameter Name="fDay" Type="int" Mode="In" />
+          <Parameter Name="tDay" Type="int" Mode="In" />
+        </Function>
         <Function Name="report_cii_product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DFrom" Type="nvarchar" Mode="In" />
           <Parameter Name="DTo" Type="nvarchar" Mode="In" />
@@ -4413,6 +4419,12 @@
             <Parameter Name="month" Mode="In" Type="Int32" />
             <Parameter Name="year" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="report_checkin_general" ReturnType="Collection(DMSHAIModel.report_checkin_general_Result)">
+            <Parameter Name="month" Mode="In" Type="Int32" />
+            <Parameter Name="year" Mode="In" Type="Int32" />
+            <Parameter Name="fDay" Mode="In" Type="Int32" />
+            <Parameter Name="tDay" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="checkin_calendartype_group_Result">
           <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
@@ -4632,6 +4644,21 @@
           <Property Type="String" Name="StaffName" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="StaffCode" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="StaffBranch" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="report_checkin_general_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="BranchCode" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="AllAgency" Nullable="true" />
+          <Property Type="Int32" Name="AllAgencyCloser" Nullable="true" />
+          <Property Type="Int32" Name="AllAgencyCheckIn" Nullable="true" />
+          <Property Type="Int32" Name="AllDayCSBH" Nullable="true" />
+          <Property Type="Int32" Name="AllDayCSBH4" Nullable="true" />
+          <Property Type="Int32" Name="AgencyCheckInDay" Nullable="true" />
+          <Property Type="Int32" Name="AgencyCheckInInPlanDay" Nullable="true" />
+          <Property Type="Int32" Name="AgencyCheckInOutPlanDay" Nullable="true" />
+          <Property Type="Int32" Name="CheckInNotCSKH" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -6012,6 +6039,25 @@
                 <ScalarProperty Name="StaffName" ColumnName="StaffName" />
                 <ScalarProperty Name="StaffCode" ColumnName="StaffCode" />
                 <ScalarProperty Name="StaffBranch" ColumnName="StaffBranch" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="report_checkin_general" FunctionName="DMSHAIModel.Store.report_checkin_general">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DMSHAIModel.report_checkin_general_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
+                <ScalarProperty Name="AllAgency" ColumnName="AllAgency" />
+                <ScalarProperty Name="AllAgencyCloser" ColumnName="AllAgencyCloser" />
+                <ScalarProperty Name="AllAgencyCheckIn" ColumnName="AllAgencyCheckIn" />
+                <ScalarProperty Name="AllDayCSBH" ColumnName="AllDayCSBH" />
+                <ScalarProperty Name="AllDayCSBH4" ColumnName="AllDayCSBH4" />
+                <ScalarProperty Name="AgencyCheckInDay" ColumnName="AgencyCheckInDay" />
+                <ScalarProperty Name="AgencyCheckInInPlanDay" ColumnName="AgencyCheckInInPlanDay" />
+                <ScalarProperty Name="AgencyCheckInOutPlanDay" ColumnName="AgencyCheckInOutPlanDay" />
+                <ScalarProperty Name="CheckInNotCSKH" ColumnName="CheckInNotCSKH" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

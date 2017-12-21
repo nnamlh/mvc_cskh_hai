@@ -48,6 +48,8 @@ namespace NDHSITE.Controllers
             ViewBag.DepartmentId = departmentId;
             ViewBag.PosId = posId;
 
+            
+
             ViewBag.MaxId = db.HaiStaffs.Max(p => p.Code);
 
 
@@ -127,7 +129,14 @@ namespace NDHSITE.Controllers
                 staff.SignatureUrl = urlSignature;
                 staff.Id = Guid.NewGuid().ToString();
                 staff.IsLock = 0;
+                staff.Code = generalCode();
+
                 db.HaiStaffs.Add(staff);
+                db.SaveChanges();
+
+                var findStoreId = db.StoreStaffIds.Find(staff.Code);
+                findStoreId.IsUser = 1;
+                db.Entry(findStoreId).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
 
             }
@@ -136,8 +145,17 @@ namespace NDHSITE.Controllers
 
             }
 
-            return RedirectToAction("createstaff", "haistaff", new { brand = staff.BranchId });
+            return RedirectToAction("modifystaff", "haistaff", new { id = staff.Id });
         }
+
+        private string generalCode()
+        {
+            var storeId = db.StoreStaffIds.Where(p => p.IsUser == 0).OrderBy(p=> p.CountNumber).FirstOrDefault();
+
+            return storeId.Id;
+
+        }
+
 
         [HttpPost]
         public ActionResult ActiveAccount(string id, int clock)

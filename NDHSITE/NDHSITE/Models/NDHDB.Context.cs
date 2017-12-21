@@ -341,5 +341,26 @@ namespace NDHSITE.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<get_decor_info_Result>("get_decor_info", branchParameter, agencyParameter, groupParameter, monthParameter, yearParameter);
         }
+    
+        public virtual ObjectResult<report_checkin_general_Result> report_checkin_general(Nullable<int> month, Nullable<int> year, Nullable<int> fDay, Nullable<int> tDay)
+        {
+            var monthParameter = month.HasValue ?
+                new ObjectParameter("month", month) :
+                new ObjectParameter("month", typeof(int));
+    
+            var yearParameter = year.HasValue ?
+                new ObjectParameter("year", year) :
+                new ObjectParameter("year", typeof(int));
+    
+            var fDayParameter = fDay.HasValue ?
+                new ObjectParameter("fDay", fDay) :
+                new ObjectParameter("fDay", typeof(int));
+    
+            var tDayParameter = tDay.HasValue ?
+                new ObjectParameter("tDay", tDay) :
+                new ObjectParameter("tDay", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<report_checkin_general_Result>("report_checkin_general", monthParameter, yearParameter, fDayParameter, tDayParameter);
+        }
     }
 }
