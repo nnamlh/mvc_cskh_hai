@@ -95,14 +95,31 @@
             </div>
             <div class="form-group">
                 <label>Nơi giao</label>
-                @if (Model.Sender == "CI")
-                {
-                    <input type="text" value="@Model.C1Name (@Model.C1Code)" class="form-control" disabled />
-                }
-                else
-                {
-                    <input type="text" value="Lấy hàng tại chi nhánh" class="form-control" disabled />
-                }
+                <select class="form-control" name="Sender">
+                    @foreach (var item in ViewBag.C1)
+                    {
+                        if (item.code == "B")
+                        {
+                            if (Model.Sender == "B")
+                            {
+                                <option value="@item.code" selected>@item.name</option>
+                            }
+                            else
+                            {
+                                <option value="@item.code">@item.name</option>
+                            }
+                        }
+                        else if (Model.C1Code == item.code)
+                        {
+                            <option value="@item.code" selected>@item.name - @item.code</option>
+                        }
+                        else
+                        {
+                            <option value="@item.code">@item.name - @item.code </option>
+                        }
+
+                    }
+                </select>    
             </div>
 
 

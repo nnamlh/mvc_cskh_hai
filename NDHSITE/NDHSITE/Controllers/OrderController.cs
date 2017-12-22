@@ -54,12 +54,36 @@ namespace NDHSITE.Controllers
             ViewBag.PayType = db.PayTypes.ToList();
             ViewBag.ShipType = db.ShipTypes.ToList();
 
+            var c1C2 = db.C2C1.Where(p => p.C2Code == checkOrder.CInfoCommon.CCode).ToList();
+            List<CommonInfo> c1List = new List<CommonInfo>();
+            foreach (var item in c1C2)
+            {
+                var c1Check = db.C1Info.Where(p => p.Code == item.C1Code).FirstOrDefault();
+                if (c1Check != null)
+                {
+                    //
+                    c1List.Add(new CommonInfo()
+                    {
+                        code = c1Check.Code,
+                        name = c1Check.StoreName
+                    });
+                }
+            }
+
+            c1List.Add(new CommonInfo()
+            {
+                code = "B",
+                name = "Lấy tại chi nhánh"
+            });
+
+            ViewBag.C1 = c1List;
+
 
             return View(checkOrder);
         }
 
         [HttpPost]
-        public ActionResult Update(string Id, string PayType, string ShipType, string ExpectDate)
+        public ActionResult Update(string Id, string PayType, string ShipType, string ExpectDate, string Sender)
         {
             var checkOrder = db.HaiOrders.Find(Id);
 
@@ -72,6 +96,26 @@ namespace NDHSITE.Controllers
                 checkOrder.PayType = PayType;
                 checkOrder.ShipType = ShipType;
                 var date = DateTime.ParseExact(ExpectDate, "MM/dd/yyyy", null);
+
+                if (Sender == "B")
+                {
+                    // lay tai chi nhanh
+                    checkOrder.Sender = "B";
+                    checkOrder.C1Code = "";
+                    checkOrder.C1Id = "";
+                    checkOrder.C1Name = "";
+                } else
+                {
+                    checkOrder.Sender = "CI";
+                    var c1 = db.C1Info.Where(p => p.Code == Sender).FirstOrDefault();
+                    if (c1 != null)
+                    {
+                        checkOrder.C1Code = c1.Code;
+                        checkOrder.C1Id = c1.Id;
+                        checkOrder.C1Name = c1.StoreName;
+                    }
+
+                }
 
                 checkOrder.ExpectDate = date;
 

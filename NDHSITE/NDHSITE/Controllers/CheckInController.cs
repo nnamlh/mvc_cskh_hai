@@ -152,8 +152,36 @@ namespace NDHSITE.Controllers
             {
                 FileInfo newFile = new FileInfo(pathTo);
                 brand = "%" + brand + "%";
+
+                string branch = "";
+                List<string> branches = new List<string>();
+                int permiss = Utitl.CheckRoleShowInfo(db, User.Identity.Name);
+                if (permiss == 2)
+                {
+                    branches = Utitl.GetBranchesPermiss(db, User.Identity.Name, false);
+                }
+                else if (permiss == 1)
+                {
+                    branches = Utitl.GetBranchesPermiss(db, User.Identity.Name, true);
+                }
+
+                if (!String.IsNullOrEmpty(branch))
+                {
+
+                    if (branches.Contains(branch))
+                    {
+                        branches.Clear();
+                        branches.Add(branch);
+                    }
+                    else
+                    {
+                        branches.Clear();
+                    }
+                }
+
                 var data = db.report_checkin_detail_by_branch(month, year, brand).ToList();
 
+                data = data.Where(p => branches.Contains(p.Branch)).ToList();
 
                 using (ExcelPackage package = new ExcelPackage(newFile))
                 {

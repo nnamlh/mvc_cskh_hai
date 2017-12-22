@@ -121,6 +121,10 @@ namespace HAIAPI.Models
 
         public string status { get; set; }
 
+        public string senderCode { get; set; }
+
+        public string senderName { get; set; }
+
     }
 
     public class ProductOrderInfo

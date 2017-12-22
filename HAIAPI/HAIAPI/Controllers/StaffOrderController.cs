@@ -70,6 +70,17 @@ namespace HAIAPI.Controllers
                         phone = order.ReceivePhone1,
                         status = order.OrderStt.Name
                     };
+
+                    if (order.Sender == "B")
+                    {
+                        yourOrder.senderCode = order.BrachCode;
+                        yourOrder.senderName = "Tại chi nhánh";
+                    } else
+                    {
+                        yourOrder.senderName = order.C1Name;
+                        yourOrder.senderCode = order.C1Code;
+                    }
+
                     yourOrder.productCount = order.OrderProducts.Count();
                     orders.Add(yourOrder);
                 }
