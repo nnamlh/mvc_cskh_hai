@@ -695,6 +695,18 @@ namespace NDHSITE.Controllers
                                 db.C2C1.Add(c2c1);
                                 db.SaveChanges();
                             }
+
+
+                            listError.Add(new ImportC2Result()
+                            {
+                                old = codeSMS,
+                                newCode = newCode,
+                                phone = phone,
+                                staff = staffCode,
+                                name = storeName,
+                                deputy = deputy,
+                                success = "hoan thanh"
+                            });
                         }
                         else
                         {
@@ -705,7 +717,8 @@ namespace NDHSITE.Controllers
                                 phone = phone,
                                 staff = staffCode,
                                 name = storeName,
-                                deputy = deputy
+                                deputy = deputy,
+                                success = "loi"
                             });
                         }
 
@@ -734,6 +747,7 @@ namespace NDHSITE.Controllers
                             worksheet.Cells[1, 4].Value = "Tên khách hàng";
                             worksheet.Cells[1, 5].Value = "Nhân viên";
                             worksheet.Cells[1, 6].Value = "Số điện thoại";
+                            worksheet.Cells[1, 7].Value = "Kết quả";
 
                             for (int i = 0; i < listError.Count; i++)
                             {
@@ -743,6 +757,7 @@ namespace NDHSITE.Controllers
                                 worksheet.Cells[i + 2, 4].Value = listError[i].deputy;
                                 worksheet.Cells[i + 2, 5].Value = listError[i].staff;
                                 worksheet.Cells[i + 2, 6].Value = listError[i].phone;
+                                worksheet.Cells[i + 2, 7].Value = listError[i].success;
                             }
 
                             pakageExport.Save();

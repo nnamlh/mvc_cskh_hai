@@ -531,7 +531,7 @@ namespace NDHSITE.Controllers
             {
                 FileInfo newFile = new FileInfo(pathTo);
 
-                var data = db.report_checkin_general(month, year, fDay, tDay).ToList();
+                var data = db.report_checkin_general(month, year, fDay, tDay, year + "-" + month + "-" + fDay, year + "-" + month + "-" + tDay).ToList();
 
                 using (ExcelPackage package = new ExcelPackage(newFile))
                 {
@@ -551,6 +551,8 @@ namespace NDHSITE.Controllers
                             worksheet.Cells[i + 4, 8].Value = data[i].AllAgencyCheckIn;
                             worksheet.Cells[i + 4, 9].Value = data[i].AllDayCSBH;
                             worksheet.Cells[i + 4, 10].Value = data[i].AllDayCSBH4;
+                            worksheet.Cells[i + 4, 11].Value = data[i].AllAgencyOrder;
+                            worksheet.Cells[i + 4, 12].Value = data[i].AllOrderPrice;
                         }
                         catch
                         {
@@ -601,11 +603,13 @@ namespace NDHSITE.Controllers
                             worksheet.Cells[i + 4, 3].Value = data[i].BranchCode;
                             worksheet.Cells[i + 4, 4].Value = data[i].Code;
                             worksheet.Cells[i + 4, 5].Value = data[i].FullName;
-                            worksheet.Cells[i + 4, 6].Value = data[i].AgencyCheckInDay;
-                            worksheet.Cells[i + 4, 7].Value = data[i].AgencyCheckInInPlanDay;
-                            worksheet.Cells[i + 4, 8].Value = data[i].AgencyCheckInOutPlanDay;
-                            worksheet.Cells[i + 4, 9].Value = data[i].CheckInNotCSKH;
-
+                            worksheet.Cells[i + 4, 6].Value = data[i].AgencyPlanInDay;
+                            worksheet.Cells[i + 4, 7].Value = data[i].AgencyCheckInDay;
+                            worksheet.Cells[i + 4, 8].Value = data[i].AgencyCheckInInPlanDay;
+                            worksheet.Cells[i + 4, 9].Value = data[i].AgencyCheckInOutPlanDay;
+                            worksheet.Cells[i + 4, 10].Value = data[i].CheckInNotCSKH;
+                            worksheet.Cells[i + 4, 11].Value = data[i].AgencyOrder;
+                            worksheet.Cells[i + 4, 12].Value = data[i].OrderPrice;
                         }
                         catch
                         {

@@ -225,6 +225,7 @@
     <Compile Include="Controllers\CheckInController.cs" />
     <Compile Include="Controllers\DecorController.cs" />
     <Compile Include="Controllers\EventController.cs" />
+    <Compile Include="Controllers\KPIController.cs" />
     <Compile Include="Controllers\ManageOrderController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
@@ -379,6 +380,15 @@
     <Compile Include="Models\ImeiUser.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\KPIDetail.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KPIType.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KPIWork.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MessegeToHai.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -500,6 +510,9 @@
     <Compile Include="Models\StaffCheckIn.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StaffKPI.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\StaffWithC2.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -526,8 +539,6 @@
     <Compile Include="Util\XString.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\PagedList.css" />
-    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <EntityDeploy Include="Models\NDHDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -536,7 +547,6 @@
     <Content Include="Models\NDHDB.edmx.diagram">
       <DependentUpon>NDHDB.edmx</DependentUpon>
     </Content>
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Models\NDHDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>NDHDB.edmx</DependentUpon>
@@ -547,16 +557,6 @@
       <DependentUpon>NDHDB.edmx</DependentUpon>
       <LastGenOutput>NDHDB.cs</LastGenOutput>
     </Content>
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -567,13 +567,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\ManageOrder\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <None Include="Properties\PublishProfiles\aaa.pubxml" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

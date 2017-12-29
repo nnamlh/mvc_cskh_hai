@@ -226,6 +226,7 @@ namespace NDHSITE.Controllers
         #endregion 
 
 
+        /*
         #region  xem nhan vien
         ///
         /// xem nhan vien
@@ -791,7 +792,7 @@ namespace NDHSITE.Controllers
 
             return View(allMsg);
         }
-
+        */
         public ActionResult UserInfo(string user)
         {
             if (!Utitl.CheckUser(db, User.Identity.Name, "UserInfo", 0))

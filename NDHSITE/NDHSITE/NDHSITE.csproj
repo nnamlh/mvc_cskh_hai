@@ -489,10 +489,16 @@
     <Compile Include="Models\report_checkin_general_day_Result.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\report_checkin_general_day_Result1.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\report_checkin_general_Result.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\report_checkin_general_Result1.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\report_checkin_general_Result2.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\report_cii_product_Result.cs">

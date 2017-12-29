@@ -22,9 +22,7 @@ namespace NDHSITE.Models
         public Nullable<int> AllAgencyCheckIn { get; set; }
         public Nullable<int> AllDayCSBH { get; set; }
         public Nullable<int> AllDayCSBH4 { get; set; }
-        public Nullable<int> AgencyCheckInDay { get; set; }
-        public Nullable<int> AgencyCheckInInPlanDay { get; set; }
-        public Nullable<int> AgencyCheckInOutPlanDay { get; set; }
-        public Nullable<int> CheckInNotCSKH { get; set; }
+        public Nullable<int> AllAgencyOrder { get; set; }
+        public Nullable<double> AllOrderPrice { get; set; }
     }
 }

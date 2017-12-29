@@ -50,7 +50,7 @@ namespace NDHSITE.Controllers
 
             
 
-            ViewBag.MaxId = db.HaiStaffs.Max(p => p.Code);
+           // ViewBag.MaxId = generalCode();
 
 
             switch (func)

@@ -24,6 +24,7 @@ namespace HAIAPI.Models
             this.C1Info = new HashSet<C1Info>();
             this.SaveAgencyShopImages = new HashSet<SaveAgencyShopImage>();
             this.OrderStaffs = new HashSet<OrderStaff>();
+            this.StaffKPIs = new HashSet<StaffKPI>();
         }
     
         public string Id { get; set; }
@@ -68,5 +69,7 @@ namespace HAIAPI.Models
         public virtual ICollection<SaveAgencyShopImage> SaveAgencyShopImages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderStaff> OrderStaffs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StaffKPI> StaffKPIs { get; set; }
     }
 }

@@ -505,6 +505,8 @@
     <EntitySetMapping Name="HaiOrders">
       <EntityTypeMapping TypeName="DMSHAIModel.HaiOrder">
         <MappingFragment StoreEntitySet="HaiOrder">
+          <ScalarProperty Name="DateCode" ColumnName="DateCode" />
+          <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
           <ScalarProperty Name="Sender" ColumnName="Sender" />
           <ScalarProperty Name="C1Name" ColumnName="C1Name" />
           <ScalarProperty Name="C1Code" ColumnName="C1Code" />
@@ -1379,7 +1381,7 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="report_checkin_general" FunctionName="DMSHAIModel.Store.report_checkin_general">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="DMSHAIModel.report_checkin_general_Result1">
+        <ComplexTypeMapping TypeName="DMSHAIModel.report_checkin_general_Result2">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FullName" ColumnName="FullName" />
           <ScalarProperty Name="Code" ColumnName="Code" />
@@ -1389,12 +1391,14 @@
           <ScalarProperty Name="AllAgencyCheckIn" ColumnName="AllAgencyCheckIn" />
           <ScalarProperty Name="AllDayCSBH" ColumnName="AllDayCSBH" />
           <ScalarProperty Name="AllDayCSBH4" ColumnName="AllDayCSBH4" />
+          <ScalarProperty Name="AllAgencyOrder" ColumnName="AllAgencyOrder" />
+          <ScalarProperty Name="AllOrderPrice" ColumnName="AllOrderPrice" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="report_checkin_general_day" FunctionName="DMSHAIModel.Store.report_checkin_general_day">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="DMSHAIModel.report_checkin_general_day_Result">
+        <ComplexTypeMapping TypeName="DMSHAIModel.report_checkin_general_day_Result1">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FullName" ColumnName="FullName" />
           <ScalarProperty Name="Code" ColumnName="Code" />
@@ -1403,6 +1407,9 @@
           <ScalarProperty Name="AgencyCheckInInPlanDay" ColumnName="AgencyCheckInInPlanDay" />
           <ScalarProperty Name="AgencyCheckInOutPlanDay" ColumnName="AgencyCheckInOutPlanDay" />
           <ScalarProperty Name="CheckInNotCSKH" ColumnName="CheckInNotCSKH" />
+          <ScalarProperty Name="AgencyPlanInDay" ColumnName="AgencyPlanInDay" />
+          <ScalarProperty Name="AgencyOrder" ColumnName="AgencyOrder" />
+          <ScalarProperty Name="OrderPrice" ColumnName="OrderPrice" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

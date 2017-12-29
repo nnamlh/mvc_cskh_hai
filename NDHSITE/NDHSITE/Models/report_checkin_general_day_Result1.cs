@@ -11,18 +11,18 @@ namespace NDHSITE.Models
 {
     using System;
     
-    public partial class report_checkin_general_Result1
+    public partial class report_checkin_general_day_Result1
     {
         public string Id { get; set; }
         public string FullName { get; set; }
         public string Code { get; set; }
         public string BranchCode { get; set; }
-        public Nullable<int> AllAgency { get; set; }
-        public Nullable<int> AllAgencyCloser { get; set; }
-        public Nullable<int> AllAgencyCheckIn { get; set; }
-        public Nullable<int> AllDayCSBH { get; set; }
-        public Nullable<int> AllDayCSBH4 { get; set; }
-        public Nullable<int> AllAgencyOrder { get; set; }
-        public Nullable<double> AllOrderPrice { get; set; }
+        public Nullable<int> AgencyCheckInDay { get; set; }
+        public Nullable<int> AgencyCheckInInPlanDay { get; set; }
+        public Nullable<int> AgencyCheckInOutPlanDay { get; set; }
+        public Nullable<int> CheckInNotCSKH { get; set; }
+        public Nullable<int> AgencyPlanInDay { get; set; }
+        public Nullable<int> AgencyOrder { get; set; }
+        public Nullable<double> OrderPrice { get; set; }
     }
 }

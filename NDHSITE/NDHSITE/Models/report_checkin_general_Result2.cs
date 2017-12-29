@@ -11,7 +11,7 @@ namespace NDHSITE.Models
 {
     using System;
     
-    public partial class report_checkin_general_Result1
+    public partial class report_checkin_general_Result2
     {
         public string Id { get; set; }
         public string FullName { get; set; }

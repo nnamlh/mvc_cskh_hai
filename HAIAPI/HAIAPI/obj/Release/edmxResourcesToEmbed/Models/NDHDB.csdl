@@ -517,6 +517,7 @@
     <NavigationProperty Name="C1Info" Relationship="Self.StaffWithC1" FromRole="HaiStaff" ToRole="C1Info" />
     <NavigationProperty Name="SaveAgencyShopImages" Relationship="NDHDB1Model.FK__SaveAgenc__Staff__009508B4" FromRole="HaiStaff" ToRole="SaveAgencyShopImage" />
     <NavigationProperty Name="OrderStaffs" Relationship="NDHDB1Model.FK__OrderStaf__Staff__21F5FC7F" FromRole="HaiStaff" ToRole="OrderStaff" />
+    <NavigationProperty Name="StaffKPIs" Relationship="NDHDB1Model.FK__StaffKPI__StaffI__5C229E14" FromRole="HaiStaff" ToRole="StaffKPI" />
   </EntityType>
   <EntityType Name="HappyBirthday">
     <Key>
@@ -1692,6 +1693,26 @@
     <EntitySet Name="BarcodeChangeHistories" EntityType="NDHDB1Model.BarcodeChangeHistory" />
     <EntitySet Name="BarcodeNotPermisses" EntityType="NDHDB1Model.BarcodeNotPermiss" />
     <EntitySet Name="UserBranchPermisses" EntityType="NDHDB1Model.UserBranchPermiss" />
+    <EntitySet Name="KPIDetails" EntityType="NDHDB1Model.KPIDetail" />
+    <EntitySet Name="KPITypes" EntityType="NDHDB1Model.KPIType" />
+    <EntitySet Name="KPIWorks" EntityType="NDHDB1Model.KPIWork" />
+    <EntitySet Name="StaffKPIs" EntityType="NDHDB1Model.StaffKPI" />
+    <AssociationSet Name="FK__StaffKPI__StaffI__5C229E14" Association="NDHDB1Model.FK__StaffKPI__StaffI__5C229E14">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="StaffKPI" EntitySet="StaffKPIs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KPIDetail__KPIWo__61DB776A" Association="NDHDB1Model.FK__KPIDetail__KPIWo__61DB776A">
+      <End Role="KPIWork" EntitySet="KPIWorks" />
+      <End Role="KPIDetail" EntitySet="KPIDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KPIDetail__Staff__60E75331" Association="NDHDB1Model.FK__KPIDetail__Staff__60E75331">
+      <End Role="StaffKPI" EntitySet="StaffKPIs" />
+      <End Role="KPIDetail" EntitySet="KPIDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KPIWork__KPIType__575DE8F7" Association="NDHDB1Model.FK__KPIWork__KPIType__575DE8F7">
+      <End Role="KPIType" EntitySet="KPITypes" />
+      <End Role="KPIWork" EntitySet="KPIWorks" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="checkin_calendartype_group_Result">
     <Property Type="String" Name="Name" Nullable="true" MaxLength="512" />
@@ -1866,6 +1887,8 @@
     <Property Name="C1Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="C1Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Sender" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserCreate" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DateCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="OrderProduct">
     <Key>
@@ -2194,4 +2217,99 @@
     <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="BranchCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="KPIDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PlanPoint" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Perform" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PlanPercent" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Point" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="StaffKPIId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="KPIWorkId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="KPIWork" Relationship="NDHDB1Model.FK__KPIDetail__KPIWo__61DB776A" FromRole="KPIDetail" ToRole="KPIWork" />
+    <NavigationProperty Name="StaffKPI" Relationship="NDHDB1Model.FK__KPIDetail__Staff__60E75331" FromRole="KPIDetail" ToRole="StaffKPI" />
+  </EntityType>
+  <EntityType Name="KPIType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="KPIWorks" Relationship="NDHDB1Model.FK__KPIWork__KPIType__575DE8F7" FromRole="KPIType" ToRole="KPIWork" />
+  </EntityType>
+  <EntityType Name="KPIWork">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="STT" Type="Int32" />
+    <Property Name="ExcelCol" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <Property Name="KPITypeId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="KPIDetails" Relationship="NDHDB1Model.FK__KPIDetail__KPIWo__61DB776A" FromRole="KPIWork" ToRole="KPIDetail" />
+    <NavigationProperty Name="KPIType" Relationship="NDHDB1Model.FK__KPIWork__KPIType__575DE8F7" FromRole="KPIWork" ToRole="KPIType" />
+  </EntityType>
+  <EntityType Name="StaffKPI">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="ModiftTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="HaiStaff" Relationship="NDHDB1Model.FK__StaffKPI__StaffI__5C229E14" FromRole="StaffKPI" ToRole="HaiStaff" />
+    <NavigationProperty Name="KPIDetails" Relationship="NDHDB1Model.FK__KPIDetail__Staff__60E75331" FromRole="StaffKPI" ToRole="KPIDetail" />
+  </EntityType>
+  <Association Name="FK__StaffKPI__StaffI__5C229E14">
+    <End Type="NDHDB1Model.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
+    <End Type="NDHDB1Model.StaffKPI" Role="StaffKPI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaffKPI">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KPIDetail__KPIWo__61DB776A">
+    <End Type="NDHDB1Model.KPIWork" Role="KPIWork" Multiplicity="0..1" />
+    <End Type="NDHDB1Model.KPIDetail" Role="KPIDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KPIWork">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="KPIDetail">
+        <PropertyRef Name="KPIWorkId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KPIDetail__Staff__60E75331">
+    <End Type="NDHDB1Model.StaffKPI" Role="StaffKPI" Multiplicity="0..1" />
+    <End Type="NDHDB1Model.KPIDetail" Role="KPIDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffKPI">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="KPIDetail">
+        <PropertyRef Name="StaffKPIId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KPIWork__KPIType__575DE8F7">
+    <End Type="NDHDB1Model.KPIType" Role="KPIType" Multiplicity="0..1" />
+    <End Type="NDHDB1Model.KPIWork" Role="KPIWork" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KPIType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="KPIWork">
+        <PropertyRef Name="KPITypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

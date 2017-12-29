@@ -76,7 +76,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/08/2017 14:46:02</publishTime>
     </File>
     <File Include="bin/NDHSITE.dll">
-      <publishTime>12/22/2017 12:10:02</publishTime>
+      <publishTime>12/30/2017 02:17:13</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>09/23/2016 14:14:47</publishTime>
@@ -241,10 +241,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/08/2017 16:50:48</publishTime>
     </File>
     <File Include="haiupload/report_checkin_general.xlsx">
-      <publishTime>12/21/2017 17:12:23</publishTime>
+      <publishTime>12/30/2017 01:37:24</publishTime>
     </File>
     <File Include="haiupload/report_checkin_general_day.xlsx">
-      <publishTime>12/21/2017 17:12:23</publishTime>
+      <publishTime>12/30/2017 01:56:45</publishTime>
     </File>
     <File Include="haiupload/stafftandagency.xlsx">
       <publishTime>11/28/2017 09:25:43</publishTime>
@@ -550,7 +550,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/15/2016 20:20:59</publishTime>
     </File>
     <File Include="Views/HaiStaff/CreateStaff.cshtml">
-      <publishTime>12/20/2017 11:11:04</publishTime>
+      <publishTime>12/28/2017 10:55:51</publishTime>
     </File>
     <File Include="Views/HaiStaff/ModifyArea.cshtml">
       <publishTime>11/18/2016 16:07:45</publishTime>
@@ -607,7 +607,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/31/2017 15:18:22</publishTime>
     </File>
     <File Include="Views/Order/Detail.cshtml">
-      <publishTime>12/22/2017 12:05:41</publishTime>
+      <publishTime>12/30/2017 02:08:06</publishTime>
     </File>
     <File Include="Views/Order/ModifyProduct.cshtml">
       <publishTime>10/27/2017 00:12:07</publishTime>
@@ -649,7 +649,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/19/2017 09:18:46</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>09/14/2017 15:55:12</publishTime>
+      <publishTime>12/29/2017 16:03:25</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
       <publishTime>03/02/2017 14:00:46</publishTime>

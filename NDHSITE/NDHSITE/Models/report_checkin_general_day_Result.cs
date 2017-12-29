@@ -21,5 +21,6 @@ namespace NDHSITE.Models
         public Nullable<int> AgencyCheckInInPlanDay { get; set; }
         public Nullable<int> AgencyCheckInOutPlanDay { get; set; }
         public Nullable<int> CheckInNotCSKH { get; set; }
+        public Nullable<int> AgencyPlanInDay { get; set; }
     }
 }

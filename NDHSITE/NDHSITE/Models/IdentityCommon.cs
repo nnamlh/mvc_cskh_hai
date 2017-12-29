@@ -22,6 +22,8 @@ namespace NDHSITE.Models
         public string name { get; set; }
 
         public string deputy { get; set; }
+
+        public string success { get; set; }
     }
 
     public class CommonInfo

@@ -42,6 +42,8 @@ namespace NDHSITE.Models
         public string C1Code { get; set; }
         public string C1Name { get; set; }
         public string Sender { get; set; }
+        public string UserCreate { get; set; }
+        public string DateCode { get; set; }
     
         public virtual CInfoCommon CInfoCommon { get; set; }
         public virtual OrderStatu OStatus { get; set; }

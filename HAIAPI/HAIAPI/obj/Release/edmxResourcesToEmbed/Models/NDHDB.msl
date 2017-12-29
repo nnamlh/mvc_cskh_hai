@@ -983,6 +983,8 @@
     <EntitySetMapping Name="HaiOrders">
       <EntityTypeMapping TypeName="NDHDB1Model.HaiOrder">
         <MappingFragment StoreEntitySet="HaiOrder">
+          <ScalarProperty Name="DateCode" ColumnName="DateCode" />
+          <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
           <ScalarProperty Name="Sender" ColumnName="Sender" />
           <ScalarProperty Name="C1Name" ColumnName="C1Name" />
           <ScalarProperty Name="C1Code" ColumnName="C1Code" />
@@ -1163,6 +1165,50 @@
         <MappingFragment StoreEntitySet="UserBranchPermiss">
           <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KPIDetails">
+      <EntityTypeMapping TypeName="NDHDB1Model.KPIDetail">
+        <MappingFragment StoreEntitySet="KPIDetail">
+          <ScalarProperty Name="KPIWorkId" ColumnName="KPIWorkId" />
+          <ScalarProperty Name="StaffKPIId" ColumnName="StaffKPIId" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="PlanPercent" ColumnName="PlanPercent" />
+          <ScalarProperty Name="Perform" ColumnName="Perform" />
+          <ScalarProperty Name="PlanPoint" ColumnName="PlanPoint" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KPITypes">
+      <EntityTypeMapping TypeName="NDHDB1Model.KPIType">
+        <MappingFragment StoreEntitySet="KPIType">
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KPIWorks">
+      <EntityTypeMapping TypeName="NDHDB1Model.KPIWork">
+        <MappingFragment StoreEntitySet="KPIWork">
+          <ScalarProperty Name="KPITypeId" ColumnName="KPITypeId" />
+          <ScalarProperty Name="ExcelCol" ColumnName="ExcelCol" />
+          <ScalarProperty Name="STT" ColumnName="STT" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StaffKPIs">
+      <EntityTypeMapping TypeName="NDHDB1Model.StaffKPI">
+        <MappingFragment StoreEntitySet="StaffKPI">
+          <ScalarProperty Name="ModiftTime" ColumnName="ModiftTime" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>

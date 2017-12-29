@@ -186,7 +186,9 @@ namespace HAIAPI.Controllers
                     BrachCode = cinfo.BranchCode,
                     Code = code,
                     OrderNumber = number,
-                    ReceivePhone1 = paser.phone
+                    ReceivePhone1 = paser.phone,
+                    UserCreate = paser.user,
+                    DateCode = DateTime.Now.Date.ToString("ddMMyyyy")
                 };
 
                 if (paser.c1 == "000")

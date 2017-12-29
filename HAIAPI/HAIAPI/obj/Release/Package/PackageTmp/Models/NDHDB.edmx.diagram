@@ -143,6 +143,14 @@
         <EntityTypeShape EntityType="NDHDB1Model.BarcodeChangeHistory" Width="1.5" PointX="22.375" PointY="3.75" />
         <EntityTypeShape EntityType="NDHDB1Model.BarcodeNotPermiss" Width="1.5" PointX="22.375" PointY="7.75" />
         <EntityTypeShape EntityType="NDHDB1Model.UserBranchPermiss" Width="1.5" PointX="23.375" PointY="11.75" />
+        <EntityTypeShape EntityType="NDHDB1Model.KPIDetail" Width="1.5" PointX="9.75" PointY="44.875" />
+        <EntityTypeShape EntityType="NDHDB1Model.KPIType" Width="1.5" PointX="5.25" PointY="48.25" />
+        <EntityTypeShape EntityType="NDHDB1Model.KPIWork" Width="1.5" PointX="7.5" PointY="48" />
+        <EntityTypeShape EntityType="NDHDB1Model.StaffKPI" Width="1.5" PointX="7.5" PointY="45" />
+        <AssociationConnector Association="NDHDB1Model.FK__StaffKPI__StaffI__5C229E14" />
+        <AssociationConnector Association="NDHDB1Model.FK__KPIDetail__KPIWo__61DB776A" />
+        <AssociationConnector Association="NDHDB1Model.FK__KPIDetail__Staff__60E75331" />
+        <AssociationConnector Association="NDHDB1Model.FK__KPIWork__KPIType__575DE8F7" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

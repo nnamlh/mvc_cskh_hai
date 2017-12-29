@@ -106,6 +106,10 @@ namespace HAIAPI.Models
         public virtual DbSet<BarcodeChangeHistory> BarcodeChangeHistories { get; set; }
         public virtual DbSet<BarcodeNotPermiss> BarcodeNotPermisses { get; set; }
         public virtual DbSet<UserBranchPermiss> UserBranchPermisses { get; set; }
+        public virtual DbSet<KPIDetail> KPIDetails { get; set; }
+        public virtual DbSet<KPIType> KPITypes { get; set; }
+        public virtual DbSet<KPIWork> KPIWorks { get; set; }
+        public virtual DbSet<StaffKPI> StaffKPIs { get; set; }
     
         public virtual ObjectResult<checkin_calendartype_group_Result> checkin_calendartype_group(Nullable<int> month, Nullable<int> year, string staffId)
         {

@@ -315,7 +315,7 @@ namespace NDHSITE.Controllers
         }
 
         [HttpPost]
-        public ActionResult Finish(string id, string notes)
+        public ActionResult Finish(string id, string notes, int status)
         {
             var check = db.HaiOrders.Find(id);
             if (check == null)
@@ -328,22 +328,44 @@ namespace NDHSITE.Controllers
 
             if (check.OrderStatus == "process")
             {
-                check.OrderStatus = "finish";
-                db.Entry(check).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-
                 // save
                 var saveProcess = new OrderStaff()
                 {
                     Id = Guid.NewGuid().ToString(),
                     CreateTime = DateTime.Now,
                     OrderId = id,
-                    ProcessId = "finish",
                     StaffId = staff.Id,
                     Notes = notes
                 };
+
+                if (status == 1)
+                {
+                    check.OrderStatus = "finish";
+                    saveProcess.ProcessId = "finish";
+                } else if (status == 0)
+                {
+                    check.OrderStatus = "notfinish";
+                    saveProcess.ProcessId = "notfinish";
+                } else
+                {
+                    return RedirectToAction("error", "home");
+                }
+
+                db.Entry(check).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
                 db.OrderStaffs.Add(saveProcess);
                 db.SaveChanges();
+
+
+                string msgStaff = "Đơn hàng đã hoàn tất giao hàng tới đại lý " + check.CInfoCommon.CName + "-" + check.CInfoCommon.CCode;
+                string msgC2 = "Đơn hàng đã giao hàng hoàn tất, quý khách kiểm tra và thông báo lại nếu có sai xót";
+
+                if(status == 0)
+                {
+                    msgStaff = "Đơn hàng đã hủy giao hàng tới đại lý " + check.CInfoCommon.CName + "-" + check.CInfoCommon.CCode + ", vì " + notes;
+                    msgC2 = "Đơn hàng của quý khách đã hủy vì " + notes;
+                } 
 
                 // thong bao
                 // nhan vien thi truong
@@ -351,14 +373,12 @@ namespace NDHSITE.Controllers
 
                 if (staffCreateOrder != null)
                 {
-                    Utitl.Send("Đơn hàng " + check.Code, "Đơn hàng đã được xác nhận, cửa hàng đang chuẩn bị giao hàng", staffCreateOrder.HaiStaff.UserLogin, db, mongoHelp);
+                    Utitl.Send("Đơn hàng " + check.Code, msgStaff, staffCreateOrder.HaiStaff.UserLogin, db, mongoHelp);
                 }
 
                 // c2
-                Utitl.Send("Đơn hàng " + check.Code, "Đơn hàng của " + check.CInfoCommon.CName + " đã được xác nhận", check.CInfoCommon.UserLogin, db, mongoHelp);
+                Utitl.Send("Đơn hàng " + check.Code, msgC2, check.CInfoCommon.UserLogin, db, mongoHelp);
 
-                // c1
-                var c1CodeTemp = "";
 
             }
 

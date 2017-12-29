@@ -342,7 +342,7 @@ namespace NDHSITE.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<get_decor_info_Result>("get_decor_info", branchParameter, agencyParameter, groupParameter, monthParameter, yearParameter);
         }
     
-        public virtual ObjectResult<report_checkin_general_Result1> report_checkin_general(Nullable<int> month, Nullable<int> year, Nullable<int> fDay, Nullable<int> tDay)
+        public virtual ObjectResult<report_checkin_general_Result2> report_checkin_general(Nullable<int> month, Nullable<int> year, Nullable<int> fDay, Nullable<int> tDay, string fDate, string tDate)
         {
             var monthParameter = month.HasValue ?
                 new ObjectParameter("month", month) :
@@ -360,10 +360,18 @@ namespace NDHSITE.Models
                 new ObjectParameter("tDay", tDay) :
                 new ObjectParameter("tDay", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<report_checkin_general_Result1>("report_checkin_general", monthParameter, yearParameter, fDayParameter, tDayParameter);
+            var fDateParameter = fDate != null ?
+                new ObjectParameter("fDate", fDate) :
+                new ObjectParameter("fDate", typeof(string));
+    
+            var tDateParameter = tDate != null ?
+                new ObjectParameter("tDate", tDate) :
+                new ObjectParameter("tDate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<report_checkin_general_Result2>("report_checkin_general", monthParameter, yearParameter, fDayParameter, tDayParameter, fDateParameter, tDateParameter);
         }
     
-        public virtual ObjectResult<report_checkin_general_day_Result> report_checkin_general_day(Nullable<int> month, Nullable<int> year, Nullable<int> day)
+        public virtual ObjectResult<report_checkin_general_day_Result1> report_checkin_general_day(Nullable<int> month, Nullable<int> year, Nullable<int> day)
         {
             var monthParameter = month.HasValue ?
                 new ObjectParameter("month", month) :
@@ -377,7 +385,7 @@ namespace NDHSITE.Models
                 new ObjectParameter("day", day) :
                 new ObjectParameter("day", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<report_checkin_general_day_Result>("report_checkin_general_day", monthParameter, yearParameter, dayParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<report_checkin_general_day_Result1>("report_checkin_general_day", monthParameter, yearParameter, dayParameter);
         }
     }
 }

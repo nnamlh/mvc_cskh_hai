@@ -512,6 +512,8 @@
     <Property Name="C1Code" Type="nvarchar" MaxLength="128" />
     <Property Name="C1Name" Type="nvarchar(max)" />
     <Property Name="Sender" Type="nvarchar" MaxLength="128" />
+    <Property Name="UserCreate" Type="nvarchar" MaxLength="128" />
+    <Property Name="DateCode" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="HaiPosition">
     <Key>
@@ -1875,6 +1877,8 @@
     <Parameter Name="year" Type="int" Mode="In" />
     <Parameter Name="fDay" Type="int" Mode="In" />
     <Parameter Name="tDay" Type="int" Mode="In" />
+    <Parameter Name="fDate" Type="varchar" Mode="In" />
+    <Parameter Name="tDate" Type="varchar" Mode="In" />
   </Function>
   <Function Name="report_checkin_general_day" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="month" Type="int" Mode="In" />

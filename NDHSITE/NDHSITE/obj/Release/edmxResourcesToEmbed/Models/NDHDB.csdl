@@ -565,6 +565,8 @@
     <Property Name="C1Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="C1Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Sender" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserCreate" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="DateCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="HaiPosition">
     <Key>
@@ -2170,13 +2172,15 @@
       <Parameter Name="month" Mode="In" Type="Int32" />
       <Parameter Name="year" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="report_checkin_general" ReturnType="Collection(DMSHAIModel.report_checkin_general_Result1)">
+    <FunctionImport Name="report_checkin_general" ReturnType="Collection(DMSHAIModel.report_checkin_general_Result2)">
       <Parameter Name="month" Mode="In" Type="Int32" />
       <Parameter Name="year" Mode="In" Type="Int32" />
       <Parameter Name="fDay" Mode="In" Type="Int32" />
       <Parameter Name="tDay" Mode="In" Type="Int32" />
+      <Parameter Name="fDate" Mode="In" Type="String" />
+      <Parameter Name="tDate" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="report_checkin_general_day" ReturnType="Collection(DMSHAIModel.report_checkin_general_day_Result)">
+    <FunctionImport Name="report_checkin_general_day" ReturnType="Collection(DMSHAIModel.report_checkin_general_day_Result1)">
       <Parameter Name="month" Mode="In" Type="Int32" />
       <Parameter Name="year" Mode="In" Type="Int32" />
       <Parameter Name="day" Mode="In" Type="Int32" />
@@ -2411,10 +2415,8 @@
     <Property Type="Int32" Name="AllAgencyCheckIn" Nullable="true" />
     <Property Type="Int32" Name="AllDayCSBH" Nullable="true" />
     <Property Type="Int32" Name="AllDayCSBH4" Nullable="true" />
-    <Property Type="Int32" Name="AgencyCheckInDay" Nullable="true" />
-    <Property Type="Int32" Name="AgencyCheckInInPlanDay" Nullable="true" />
-    <Property Type="Int32" Name="AgencyCheckInOutPlanDay" Nullable="true" />
-    <Property Type="Int32" Name="CheckInNotCSKH" Nullable="true" />
+    <Property Type="Int32" Name="AllAgencyOrder" Nullable="true" />
+    <Property Type="Double" Name="AllOrderPrice" Nullable="true" />
   </ComplexType>
   <ComplexType Name="report_checkin_general_Result1">
     <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
@@ -2426,6 +2428,8 @@
     <Property Type="Int32" Name="AllAgencyCheckIn" Nullable="true" />
     <Property Type="Int32" Name="AllDayCSBH" Nullable="true" />
     <Property Type="Int32" Name="AllDayCSBH4" Nullable="true" />
+    <Property Type="Int32" Name="AllAgencyOrder" Nullable="true" />
+    <Property Type="Double" Name="AllOrderPrice" Nullable="true" />
   </ComplexType>
   <ComplexType Name="report_checkin_general_day_Result">
     <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
@@ -2436,5 +2440,32 @@
     <Property Type="Int32" Name="AgencyCheckInInPlanDay" Nullable="true" />
     <Property Type="Int32" Name="AgencyCheckInOutPlanDay" Nullable="true" />
     <Property Type="Int32" Name="CheckInNotCSKH" Nullable="true" />
+    <Property Type="Int32" Name="AgencyPlanInDay" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="report_checkin_general_Result2">
+    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="BranchCode" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="AllAgency" Nullable="true" />
+    <Property Type="Int32" Name="AllAgencyCloser" Nullable="true" />
+    <Property Type="Int32" Name="AllAgencyCheckIn" Nullable="true" />
+    <Property Type="Int32" Name="AllDayCSBH" Nullable="true" />
+    <Property Type="Int32" Name="AllDayCSBH4" Nullable="true" />
+    <Property Type="Int32" Name="AllAgencyOrder" Nullable="true" />
+    <Property Type="Double" Name="AllOrderPrice" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="report_checkin_general_day_Result1">
+    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="FullName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="BranchCode" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="AgencyCheckInDay" Nullable="true" />
+    <Property Type="Int32" Name="AgencyCheckInInPlanDay" Nullable="true" />
+    <Property Type="Int32" Name="AgencyCheckInOutPlanDay" Nullable="true" />
+    <Property Type="Int32" Name="CheckInNotCSKH" Nullable="true" />
+    <Property Type="Int32" Name="AgencyPlanInDay" Nullable="true" />
+    <Property Type="Int32" Name="AgencyOrder" Nullable="true" />
+    <Property Type="Double" Name="OrderPrice" Nullable="true" />
   </ComplexType>
 </Schema>
