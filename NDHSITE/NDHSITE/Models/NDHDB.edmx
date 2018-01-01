@@ -1898,6 +1898,10 @@
           <Parameter Name="CType" Type="nvarchar" Mode="In" />
           <Parameter Name="EventId" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="report_order_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fDate" Type="varchar" Mode="In" />
+          <Parameter Name="tDate" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="report_remain_product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Product" Type="nvarchar" Mode="In" />
           <Parameter Name="DFrom" Type="nvarchar" Mode="In" />
@@ -4443,6 +4447,10 @@
             <Parameter Name="year" Mode="In" Type="Int32" />
             <Parameter Name="day" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="report_order_detail" ReturnType="Collection(DMSHAIModel.report_order_detail_Result)">
+            <Parameter Name="fDate" Mode="In" Type="String" />
+            <Parameter Name="tDate" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="checkin_calendartype_group_Result">
           <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
@@ -4725,6 +4733,27 @@
           <Property Type="Int32" Name="AgencyPlanInDay" Nullable="true" />
           <Property Type="Int32" Name="AgencyOrder" Nullable="true" />
           <Property Type="Double" Name="OrderPrice" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="report_order_detail_Result">
+          <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="OrderCode" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="StaffCode" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="StaffName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="C2Code" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="SMSCode" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="StoreName" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="OderType" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="C1Code" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="C1Name" Nullable="true" />
+          <Property Type="String" Name="ProductCode" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="ProductName" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="Unit" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="Double" Name="PerPrice" Nullable="true" />
+          <Property Type="Int32" Name="QuantityBuy" Nullable="true" />
+          <Property Type="Double" Name="PriceTotal" Nullable="true" />
+          <Property Type="Int32" Name="QuantityFinish" Nullable="true" />
+          <Property Type="DateTime" Name="ExpectDate" Nullable="true" Precision="23" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -6141,6 +6170,31 @@
                 <ScalarProperty Name="AgencyPlanInDay" ColumnName="AgencyPlanInDay" />
                 <ScalarProperty Name="AgencyOrder" ColumnName="AgencyOrder" />
                 <ScalarProperty Name="OrderPrice" ColumnName="OrderPrice" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="report_order_detail" FunctionName="DMSHAIModel.Store.report_order_detail">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DMSHAIModel.report_order_detail_Result">
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="OrderCode" ColumnName="OrderCode" />
+                <ScalarProperty Name="StaffCode" ColumnName="StaffCode" />
+                <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+                <ScalarProperty Name="C2Code" ColumnName="C2Code" />
+                <ScalarProperty Name="SMSCode" ColumnName="SMSCode" />
+                <ScalarProperty Name="StoreName" ColumnName="StoreName" />
+                <ScalarProperty Name="OderType" ColumnName="OderType" />
+                <ScalarProperty Name="C1Code" ColumnName="C1Code" />
+                <ScalarProperty Name="C1Name" ColumnName="C1Name" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="PerPrice" ColumnName="PerPrice" />
+                <ScalarProperty Name="QuantityBuy" ColumnName="QuantityBuy" />
+                <ScalarProperty Name="PriceTotal" ColumnName="PriceTotal" />
+                <ScalarProperty Name="QuantityFinish" ColumnName="QuantityFinish" />
+                <ScalarProperty Name="ExpectDate" ColumnName="ExpectDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

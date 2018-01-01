@@ -507,6 +507,9 @@
     <Compile Include="Models\report_event_agency_Result.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\report_order_detail_Result.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\report_remain_product_Result.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -636,6 +639,7 @@
     <Content Include="haiupload\report-decor-detail.xlsx" />
     <Content Include="haiupload\report_checkin_general.xlsx" />
     <Content Include="haiupload\report_checkin_general_day.xlsx" />
+    <Content Include="haiupload\report_order_detail.xlsx" />
     <None Include="Properties\PublishProfiles\home.pubxml" />
     <None Include="Properties\PublishProfiles\ndhsite.pubxml" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
@@ -792,6 +796,7 @@
     <Content Include="Views\Order\ModifyProduct.cshtml" />
     <Content Include="Views\Decor\Show.cshtml" />
     <Content Include="Views\CheckIn\ReportCheckIn.cshtml" />
+    <Content Include="Views\HaiReport\ReportOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

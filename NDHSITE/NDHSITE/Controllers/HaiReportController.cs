@@ -473,5 +473,85 @@ namespace NDHSITE.Controllers
 
         }
 
+        public ActionResult ReportOrder()
+        {
+            ViewBag.Month = DateTime.Now.Month;
+            ViewBag.Year = DateTime.Now.Year;
+            ViewBag.Day = DateTime.Now.Day;
+
+            return View();
+        }
+
+
+        public ActionResult ReportOrderDetail (int month, int year, int fDay, int tDay)
+        {
+           
+
+            string pathRoot = Server.MapPath("~/haiupload/report_order_detail.xlsx");
+            string name = "report" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".xlsx";
+            string pathTo = Server.MapPath("~/temp/" + name);
+
+            System.IO.File.Copy(pathRoot, pathTo);
+
+            try
+            {
+                FileInfo newFile = new FileInfo(pathTo);
+
+                var data = db.report_order_detail(year + "-" + month + "-" + fDay, year + "-" + month + "-" + tDay).ToList();
+
+                using (ExcelPackage package = new ExcelPackage(newFile))
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[1];
+
+                    for (int i = 0; i < data.Count; i++)
+                    {
+
+                        try
+                        {
+                            worksheet.Cells[i + 2, 1].Value = i + 1;
+                            worksheet.Cells[i + 2, 2].Value = data[i].CreateDate;
+                            worksheet.Cells[i + 2, 3].Value = data[i].OrderCode;
+                            worksheet.Cells[i + 2, 4].Value = data[i].StaffCode;
+                            worksheet.Cells[i + 2, 5].Value = data[i].StaffName;
+                            worksheet.Cells[i + 2, 6].Value = data[i].C2Code;
+                            worksheet.Cells[i + 2, 7].Value = data[i].SMSCode;
+                            worksheet.Cells[i + 2, 8].Value = data[i].StoreName;
+                            worksheet.Cells[i + 2, 9].Value = data[i].OderType;
+                            worksheet.Cells[i + 2, 10].Value = data[i].C1Code;
+                            worksheet.Cells[i + 2, 11].Value = data[i].C1Name;
+                            worksheet.Cells[i + 2, 12].Value = data[i].ProductCode;
+                            worksheet.Cells[i + 2, 13].Value = data[i].ProductName;
+                            worksheet.Cells[i + 2, 14].Value = data[i].Unit;
+                            worksheet.Cells[i + 2, 15].Value = data[i].Quantity;
+                            worksheet.Cells[i + 2, 16].Value = data[i].PerPrice;
+                            worksheet.Cells[i + 2, 17].Value = data[i].QuantityBuy/data[i].Quantity;
+                            worksheet.Cells[i + 2, 18].Value = data[i].PriceTotal;
+                            if (data[i].QuantityBuy > data[i].QuantityFinish)
+                            {
+                                worksheet.Cells[i + 2, 19].Value = "Đang giao";
+                            } else
+                            {
+                                worksheet.Cells[i + 2, 19].Value = "Đã giao";
+                            }
+                            worksheet.Cells[i + 2, 21].Value = data[i].QuantityFinish / data[i].Quantity;
+                            worksheet.Cells[i + 2, 22].Value = data[i].QuantityFinish * data[i].PerPrice;
+                        }
+                        catch
+                        {
+
+                        }
+
+                    }
+                    package.Save();
+                }
+            }
+            catch
+            {
+                return RedirectToAction("error", "home");
+            }
+
+            return File(pathTo, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", string.Format("report-don-hang-chi-tiet-" + DateTime.Now.ToString("ddMMyyyyhhmmss") + ".{0}", "xlsx"));
+
+        }
     }
 }

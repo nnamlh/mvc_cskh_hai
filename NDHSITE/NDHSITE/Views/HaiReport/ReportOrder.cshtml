@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "ReportOrder";
+}
+
+<div class="portlet portlet-boxed">
+    <div class="portlet-header">
+        <h4 class="portlet-title">
+            Report đơn hàng
+        </h4>
+    </div> <!-- /.portlet-header -->
+    <div class="portlet-body">
+
+        <form method="get" id="report-form">
+
+            <div class="row">
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Tháng</label>
+                        <input type="number" name="month" value="@ViewBag.Month" class="form-control" required />
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Năm</label>
+                        <input type="number" name="year" value="@ViewBag.Year" class="form-control" required />
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Ngày xem</label>
+                        <input type="number" name="fDay" value="1" class="form-control" required />
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label>Đến ngày</label>
+                        <input type="number" name="tDay" value="@ViewBag.Day" class="form-control" required />
+                    </div>
+                </div>
+            </div>
+
+        </form>
+        <br />
+        <br />
+        <table class="table table-striped table-bordered thumbnail-table">
+
+            <thead>
+                <tr>
+                    <th><strong>Tên báo cáo</strong></th>
+                    <th>#</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Đơn hàng chi tiết</td>
+                    <td><a href="javascript:report('/haireport/reportorderdetail')">Xem</a></td>
+                </tr>
+               
+            </tbody>
+        </table>
+
+
+
+    </div>
+</div>
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        function report(action) {
+            $("#report-form").attr("action", action);
+            $("#report-form").submit();
+        }
+
+    </script>
+
+
+}
+
+

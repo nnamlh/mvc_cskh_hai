@@ -387,5 +387,18 @@ namespace NDHSITE.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<report_checkin_general_day_Result1>("report_checkin_general_day", monthParameter, yearParameter, dayParameter);
         }
+    
+        public virtual ObjectResult<report_order_detail_Result> report_order_detail(string fDate, string tDate)
+        {
+            var fDateParameter = fDate != null ?
+                new ObjectParameter("fDate", fDate) :
+                new ObjectParameter("fDate", typeof(string));
+    
+            var tDateParameter = tDate != null ?
+                new ObjectParameter("tDate", tDate) :
+                new ObjectParameter("tDate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<report_order_detail_Result>("report_order_detail", fDateParameter, tDateParameter);
+        }
     }
 }
