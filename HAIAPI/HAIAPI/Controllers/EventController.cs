@@ -56,12 +56,13 @@ namespace HAIAPI.Controllers
                 {
                     // lay danh sach sự kiện phù hợp với user (theo khu vực)
                     List<EventInfo> listEventUser = new List<EventInfo>();
+                    var haiBranch = db.HaiBranches.Where(p => p.Code == cInfo.BranchCode).FirstOrDefault();
                     if (cInfo.CType == "CII")
                     {
                         var eventArea = (from log in db.EventAreas
                                          where log.EventInfo.ESTT == 1 && (DbFunctions.TruncateTime(log.EventInfo.BeginTime)
                                                        <= DbFunctions.TruncateTime(dateNow) && DbFunctions.TruncateTime(log.EventInfo.EndTime)
-                                                       >= DbFunctions.TruncateTime(dateNow))
+                                                       >= DbFunctions.TruncateTime(dateNow) && log.AreaId == haiBranch.AreaId)
                                          select log).ToList();
                         foreach (var item in eventArea)
                         {
@@ -85,7 +86,7 @@ namespace HAIAPI.Controllers
                         var eventArea = (from log in db.EventAreaFarmers
                                          where log.EventInfo.ESTT == 1 && (DbFunctions.TruncateTime(log.EventInfo.BeginTime)
                                                        <= DbFunctions.TruncateTime(dateNow) && DbFunctions.TruncateTime(log.EventInfo.EndTime)
-                                                       >= DbFunctions.TruncateTime(dateNow))
+                                                       >= DbFunctions.TruncateTime(dateNow) && log.AreaId == haiBranch.AreaId)
                                          select log).ToList();
 
                         foreach (var item in eventArea)

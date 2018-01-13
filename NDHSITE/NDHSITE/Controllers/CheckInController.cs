@@ -244,7 +244,7 @@ namespace NDHSITE.Controllers
                             worksheet.Cells[i + 2, 15].Value = data[i].Lat;
                             worksheet.Cells[i + 2, 16].Value = data[i].Lng;
                         }
-                        catch (Exception e)
+                        catch 
                         {
                             return RedirectToAction("error", "home");
                         }
@@ -531,7 +531,22 @@ namespace NDHSITE.Controllers
             {
                 FileInfo newFile = new FileInfo(pathTo);
 
-                var data = db.report_checkin_general(month, year, fDay, tDay, year + "-" + month + "-" + fDay, year + "-" + month + "-" + tDay).ToList();
+                var allData = db.report_checkin_general(month, year, fDay, tDay, year + "-" + month + "-" + fDay, year + "-" + month + "-" + tDay).ToList();
+
+
+                List<string> branches = new List<string>();
+                int permiss = Utitl.CheckRoleShowInfo(db, User.Identity.Name);
+                if (permiss == 2)
+                {
+                    branches = Utitl.GetBranchesPermiss(db, User.Identity.Name, false);
+                }
+                else if (permiss == 1)
+                {
+                    branches = Utitl.GetBranchesPermiss(db, User.Identity.Name, true);
+                }
+
+                var data = allData.Where(p => branches.Contains(p.BranchCode)).ToList();
+
 
                 using (ExcelPackage package = new ExcelPackage(newFile))
                 {
@@ -588,7 +603,20 @@ namespace NDHSITE.Controllers
             {
                 FileInfo newFile = new FileInfo(pathTo);
 
-                var data = db.report_checkin_general_day(month, year, fDay).ToList();
+                var allData = db.report_checkin_general_day(month, year, fDay).ToList();
+
+                List<string> branches = new List<string>();
+                int permiss = Utitl.CheckRoleShowInfo(db, User.Identity.Name);
+                if (permiss == 2)
+                {
+                    branches = Utitl.GetBranchesPermiss(db, User.Identity.Name, false);
+                }
+                else if (permiss == 1)
+                {
+                    branches = Utitl.GetBranchesPermiss(db, User.Identity.Name, true);
+                }
+
+                var data = allData.Where(p => branches.Contains(p.BranchCode)).ToList();
 
                 using (ExcelPackage package = new ExcelPackage(newFile))
                 {

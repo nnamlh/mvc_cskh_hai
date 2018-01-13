@@ -513,6 +513,7 @@
     <Compile Include="Models\StaffKPI.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StaffKPIRequest.cs" />
     <Compile Include="Models\StaffWithC2.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>

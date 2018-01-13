@@ -21,15 +21,13 @@ namespace HAIAPI.Models
         public List<YourOrder> orders { get; set; }
     }
 
-   public class C1UpdateOrderRequest: RequestInfo
+   public class UpdateOrderRequest: RequestInfo
     {
         public string orderId { get; set; }
 
         public string productId { get; set; }
 
         public int? quantity { get; set; }
-
-        public string notes { get; set; }
     }
    
 }

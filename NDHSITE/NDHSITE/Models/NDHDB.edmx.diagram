@@ -147,6 +147,17 @@
         <AssociationConnector Association="DMSHAIModel.ProcessWithRole" ManuallyRouted="false" />
         <AssociationConnector Association="DMSHAIModel.StaffWithC1" ManuallyRouted="false" />
         <AssociationConnector Association="DMSHAIModel.FK__ProductIn__Group__453F38BC" />
+        <EntityTypeShape EntityType="DMSHAIModel.KPIDetail" Width="1.5" PointX="15.75" PointY="32.375" />
+        <EntityTypeShape EntityType="DMSHAIModel.KPITemplate" Width="1.5" PointX="15.75" PointY="44.25" />
+        <EntityTypeShape EntityType="DMSHAIModel.KPIType" Width="1.5" PointX="11.25" PointY="52.875" />
+        <EntityTypeShape EntityType="DMSHAIModel.KPIWork" Width="1.5" PointX="13.5" PointY="35.75" />
+        <EntityTypeShape EntityType="DMSHAIModel.StaffKPI" Width="1.5" PointX="13.5" PointY="32.5" />
+        <AssociationConnector Association="DMSHAIModel.FK__StaffKPI__StaffI__174363E2" />
+        <AssociationConnector Association="DMSHAIModel.FK__KPIDetail__KPIWo__1DF06171" />
+        <AssociationConnector Association="DMSHAIModel.FK__KPIDetail__Staff__1CFC3D38" />
+        <AssociationConnector Association="DMSHAIModel.FK__KPITempla__KPITy__127EAEC5" />
+        <AssociationConnector Association="DMSHAIModel.FK__KPITempla__KPIWo__118A8A8C" />
+        <AssociationConnector Association="DMSHAIModel.FK__StaffKPI__TypeId__1837881B" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

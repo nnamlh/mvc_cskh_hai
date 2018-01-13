@@ -87,7 +87,7 @@ namespace NDHSITE.Controllers
                         worksheet.Cells[i + 2, 11].Value = data[i].ProvinceName;
 
                     }
-                    catch(Exception e)
+                    catch
                     {
                         return RedirectToAction("error", "home");
                     }

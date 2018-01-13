@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HAIAPI.Models
+namespace NDHSITE.Models
 {
     using System;
     using System.Collections.Generic;

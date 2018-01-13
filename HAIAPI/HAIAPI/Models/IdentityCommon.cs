@@ -101,4 +101,9 @@ namespace HAIAPI.Models
     }
 
 
+    public class ResultCommonType : ResultInfo
+    {
+        public List<IdentityCommon> data { get; set; }
+    }
+
 }

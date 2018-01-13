@@ -110,6 +110,11 @@ namespace NDHSITE.Models
         public virtual DbSet<UserBranchPermiss> UserBranchPermisses { get; set; }
         public virtual DbSet<Ward> Wards { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
+        public virtual DbSet<KPIDetail> KPIDetails { get; set; }
+        public virtual DbSet<KPITemplate> KPITemplates { get; set; }
+        public virtual DbSet<KPIType> KPITypes { get; set; }
+        public virtual DbSet<KPIWork> KPIWorks { get; set; }
+        public virtual DbSet<StaffKPI> StaffKPIs { get; set; }
     
         public virtual ObjectResult<checkin_calendartype_group_Result> checkin_calendartype_group(Nullable<int> month, Nullable<int> year, string staffId)
         {

@@ -119,11 +119,7 @@ namespace HAIAPI.Controllers
                         productName = item.ProductInfo.PName,
                         quantity = item.Quantity,
                         quantityFinish = item.QuantityFinish,
-                        c1Address = c1Info.CInfoCommon.AddressInfo,
-                        c1Code = c1Info.Code,
-                        c1Id = c1Info.Id,
-                        c1Phone = c1Info.CInfoCommon.Phone,
-                        c1Store = c1Info.StoreName,
+                     
                         perPrice = item.PerPrice,
                         price = item.PriceTotal,
                         quantityBox = item.ProductInfo.Quantity,
@@ -194,7 +190,7 @@ namespace HAIAPI.Controllers
             {
                 var requestContent = Request.Content.ReadAsStringAsync().Result;
                 var jsonserializer = new JavaScriptSerializer();
-                var paser = jsonserializer.Deserialize<C1UpdateOrderRequest>(requestContent);
+                var paser = jsonserializer.Deserialize<UpdateOrderRequest>(requestContent);
                 log.Content = new JavaScriptSerializer().Serialize(paser);
 
                 if (!mongoHelper.checkLoginSession(paser.user, paser.token))
@@ -231,7 +227,7 @@ namespace HAIAPI.Controllers
                 {
                     Id = Guid.NewGuid().ToString(),
                     CreateDate = DateTime.Now,
-                    Notes = paser.notes,
+                    Notes = "Đại lý " + c1Info.StoreName + "(" + c1Info.Code + ") đã cập nhật",
                     OrderId = orderProduct.OrderId,
                     ProductId = orderProduct.ProductId,
                     Quantity = paser.quantity

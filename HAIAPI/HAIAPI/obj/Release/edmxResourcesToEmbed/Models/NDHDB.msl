@@ -1172,6 +1172,7 @@
     <EntitySetMapping Name="KPIDetails">
       <EntityTypeMapping TypeName="NDHDB1Model.KPIDetail">
         <MappingFragment StoreEntitySet="KPIDetail">
+          <ScalarProperty Name="Number" ColumnName="Number" />
           <ScalarProperty Name="KPIWorkId" ColumnName="KPIWorkId" />
           <ScalarProperty Name="StaffKPIId" ColumnName="StaffKPIId" />
           <ScalarProperty Name="Point" ColumnName="Point" />
@@ -1194,7 +1195,6 @@
     <EntitySetMapping Name="KPIWorks">
       <EntityTypeMapping TypeName="NDHDB1Model.KPIWork">
         <MappingFragment StoreEntitySet="KPIWork">
-          <ScalarProperty Name="KPITypeId" ColumnName="KPITypeId" />
           <ScalarProperty Name="ExcelCol" ColumnName="ExcelCol" />
           <ScalarProperty Name="STT" ColumnName="STT" />
           <ScalarProperty Name="Title" ColumnName="Title" />
@@ -1205,6 +1205,7 @@
     <EntitySetMapping Name="StaffKPIs">
       <EntityTypeMapping TypeName="NDHDB1Model.StaffKPI">
         <MappingFragment StoreEntitySet="StaffKPI">
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
           <ScalarProperty Name="ModiftTime" ColumnName="ModiftTime" />
           <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
           <ScalarProperty Name="StaffId" ColumnName="StaffId" />
@@ -1213,5 +1214,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <AssociationSetMapping Name="KPITemplate" TypeName="NDHDB1Model.KPITemplate" StoreEntitySet="KPITemplate">
+      <EndProperty Name="KPIWork">
+        <ScalarProperty Name="Id" ColumnName="KPIWorkId" />
+      </EndProperty>
+      <EndProperty Name="KPIType">
+        <ScalarProperty Name="Id" ColumnName="KPITypeId" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

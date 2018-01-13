@@ -7,29 +7,28 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HAIAPI.Models
+namespace NDHSITE.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class StaffKPI
+    public partial class KPIWork
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public StaffKPI()
+        public KPIWork()
         {
             this.KPIDetails = new HashSet<KPIDetail>();
+            this.KPITemplates = new HashSet<KPITemplate>();
         }
     
         public string Id { get; set; }
         public string Title { get; set; }
-        public string StaffId { get; set; }
-        public Nullable<System.DateTime> CreateTime { get; set; }
-        public Nullable<System.DateTime> ModiftTime { get; set; }
-        public string TypeId { get; set; }
+        public Nullable<int> STT { get; set; }
+        public string ExcelCol { get; set; }
     
-        public virtual HaiStaff HaiStaff { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KPIDetail> KPIDetails { get; set; }
-        public virtual KPIType KPIType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KPITemplate> KPITemplates { get; set; }
     }
 }

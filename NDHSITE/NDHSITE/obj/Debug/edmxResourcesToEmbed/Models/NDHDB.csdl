@@ -616,6 +616,7 @@
     <NavigationProperty Name="StaffCheckIns" Relationship="Self.FK__StaffChec__Staff__47DBAE45" FromRole="HaiStaff" ToRole="StaffCheckIn" />
     <NavigationProperty Name="StaffWithC2" Relationship="Self.FK__StaffWith__Staff__4C564A9F" FromRole="HaiStaff" ToRole="StaffWithC2" />
     <NavigationProperty Name="C1Info" Relationship="Self.StaffWithC1" FromRole="HaiStaff" ToRole="C1Info" />
+    <NavigationProperty Name="StaffKPIs" Relationship="DMSHAIModel.FK__StaffKPI__StaffI__174363E2" FromRole="HaiStaff" ToRole="StaffKPI" />
   </EntityType>
   <EntityType Name="HappyBirthday">
     <Key>
@@ -2189,6 +2190,35 @@
       <Parameter Name="fDate" Mode="In" Type="String" />
       <Parameter Name="tDate" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="KPIDetails" EntityType="DMSHAIModel.KPIDetail" />
+    <EntitySet Name="KPITemplates" EntityType="DMSHAIModel.KPITemplate" />
+    <EntitySet Name="KPITypes" EntityType="DMSHAIModel.KPIType" />
+    <EntitySet Name="KPIWorks" EntityType="DMSHAIModel.KPIWork" />
+    <EntitySet Name="StaffKPIs" EntityType="DMSHAIModel.StaffKPI" />
+    <AssociationSet Name="FK__StaffKPI__StaffI__174363E2" Association="DMSHAIModel.FK__StaffKPI__StaffI__174363E2">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="StaffKPI" EntitySet="StaffKPIs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KPIDetail__KPIWo__1DF06171" Association="DMSHAIModel.FK__KPIDetail__KPIWo__1DF06171">
+      <End Role="KPIWork" EntitySet="KPIWorks" />
+      <End Role="KPIDetail" EntitySet="KPIDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KPIDetail__Staff__1CFC3D38" Association="DMSHAIModel.FK__KPIDetail__Staff__1CFC3D38">
+      <End Role="StaffKPI" EntitySet="StaffKPIs" />
+      <End Role="KPIDetail" EntitySet="KPIDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KPITempla__KPITy__127EAEC5" Association="DMSHAIModel.FK__KPITempla__KPITy__127EAEC5">
+      <End Role="KPIType" EntitySet="KPITypes" />
+      <End Role="KPITemplate" EntitySet="KPITemplates" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KPITempla__KPIWo__118A8A8C" Association="DMSHAIModel.FK__KPITempla__KPIWo__118A8A8C">
+      <End Role="KPIWork" EntitySet="KPIWorks" />
+      <End Role="KPITemplate" EntitySet="KPITemplates" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StaffKPI__TypeId__1837881B" Association="DMSHAIModel.FK__StaffKPI__TypeId__1837881B">
+      <End Role="KPIType" EntitySet="KPITypes" />
+      <End Role="StaffKPI" EntitySet="StaffKPIs" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="checkin_calendartype_group_Result">
     <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
@@ -2492,5 +2522,139 @@
     <Property Type="Double" Name="PriceTotal" Nullable="true" />
     <Property Type="Int32" Name="QuantityFinish" Nullable="true" />
     <Property Type="DateTime" Name="ExpectDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Branch" Nullable="true" MaxLength="32" />
   </ComplexType>
+  <EntityType Name="KPIDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PlanPoint" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Perform" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PlanPercent" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Point" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="StaffKPIId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="KPIWorkId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Number" Type="Int32" />
+    <NavigationProperty Name="KPIWork" Relationship="DMSHAIModel.FK__KPIDetail__KPIWo__1DF06171" FromRole="KPIDetail" ToRole="KPIWork" />
+    <NavigationProperty Name="StaffKPI" Relationship="DMSHAIModel.FK__KPIDetail__Staff__1CFC3D38" FromRole="KPIDetail" ToRole="StaffKPI" />
+  </EntityType>
+  <EntityType Name="KPITemplate">
+    <Key>
+      <PropertyRef Name="KPIWorkId" />
+      <PropertyRef Name="KPITypeId" />
+    </Key>
+    <Property Name="KPIWorkId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="KPITypeId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Number" Type="Int32" />
+    <NavigationProperty Name="KPIType" Relationship="DMSHAIModel.FK__KPITempla__KPITy__127EAEC5" FromRole="KPITemplate" ToRole="KPIType" />
+    <NavigationProperty Name="KPIWork" Relationship="DMSHAIModel.FK__KPITempla__KPIWo__118A8A8C" FromRole="KPITemplate" ToRole="KPIWork" />
+  </EntityType>
+  <EntityType Name="KPIType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="KPITemplates" Relationship="DMSHAIModel.FK__KPITempla__KPITy__127EAEC5" FromRole="KPIType" ToRole="KPITemplate" />
+    <NavigationProperty Name="StaffKPIs" Relationship="DMSHAIModel.FK__StaffKPI__TypeId__1837881B" FromRole="KPIType" ToRole="StaffKPI" />
+  </EntityType>
+  <EntityType Name="KPIWork">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="STT" Type="Int32" />
+    <Property Name="ExcelCol" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="KPIDetails" Relationship="DMSHAIModel.FK__KPIDetail__KPIWo__1DF06171" FromRole="KPIWork" ToRole="KPIDetail" />
+    <NavigationProperty Name="KPITemplates" Relationship="DMSHAIModel.FK__KPITempla__KPIWo__118A8A8C" FromRole="KPIWork" ToRole="KPITemplate" />
+  </EntityType>
+  <EntityType Name="StaffKPI">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreateTime" Type="DateTime" Precision="3" />
+    <Property Name="ModiftTime" Type="DateTime" Precision="3" />
+    <Property Name="TypeId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiStaff" Relationship="DMSHAIModel.FK__StaffKPI__StaffI__174363E2" FromRole="StaffKPI" ToRole="HaiStaff" />
+    <NavigationProperty Name="KPIDetails" Relationship="DMSHAIModel.FK__KPIDetail__Staff__1CFC3D38" FromRole="StaffKPI" ToRole="KPIDetail" />
+    <NavigationProperty Name="KPIType" Relationship="DMSHAIModel.FK__StaffKPI__TypeId__1837881B" FromRole="StaffKPI" ToRole="KPIType" />
+  </EntityType>
+  <Association Name="FK__StaffKPI__StaffI__174363E2">
+    <End Type="DMSHAIModel.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
+    <End Type="DMSHAIModel.StaffKPI" Role="StaffKPI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaffKPI">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KPIDetail__KPIWo__1DF06171">
+    <End Type="DMSHAIModel.KPIWork" Role="KPIWork" Multiplicity="0..1" />
+    <End Type="DMSHAIModel.KPIDetail" Role="KPIDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KPIWork">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="KPIDetail">
+        <PropertyRef Name="KPIWorkId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KPIDetail__Staff__1CFC3D38">
+    <End Type="DMSHAIModel.StaffKPI" Role="StaffKPI" Multiplicity="0..1" />
+    <End Type="DMSHAIModel.KPIDetail" Role="KPIDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StaffKPI">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="KPIDetail">
+        <PropertyRef Name="StaffKPIId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KPITempla__KPITy__127EAEC5">
+    <End Type="DMSHAIModel.KPIType" Role="KPIType" Multiplicity="1" />
+    <End Type="DMSHAIModel.KPITemplate" Role="KPITemplate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KPIType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="KPITemplate">
+        <PropertyRef Name="KPITypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KPITempla__KPIWo__118A8A8C">
+    <End Type="DMSHAIModel.KPIWork" Role="KPIWork" Multiplicity="1" />
+    <End Type="DMSHAIModel.KPITemplate" Role="KPITemplate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KPIWork">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="KPITemplate">
+        <PropertyRef Name="KPIWorkId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StaffKPI__TypeId__1837881B">
+    <End Type="DMSHAIModel.KPIType" Role="KPIType" Multiplicity="0..1" />
+    <End Type="DMSHAIModel.StaffKPI" Role="StaffKPI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KPIType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaffKPI">
+        <PropertyRef Name="TypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

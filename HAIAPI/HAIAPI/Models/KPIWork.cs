@@ -18,16 +18,17 @@ namespace HAIAPI.Models
         public KPIWork()
         {
             this.KPIDetails = new HashSet<KPIDetail>();
+            this.KPITypes = new HashSet<KPIType>();
         }
     
         public string Id { get; set; }
         public string Title { get; set; }
         public Nullable<int> STT { get; set; }
         public string ExcelCol { get; set; }
-        public string KPITypeId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KPIDetail> KPIDetails { get; set; }
-        public virtual KPIType KPIType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KPIType> KPITypes { get; set; }
     }
 }

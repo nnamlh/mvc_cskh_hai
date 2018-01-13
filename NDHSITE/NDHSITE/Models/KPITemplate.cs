@@ -7,23 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace HAIAPI.Models
+namespace NDHSITE.Models
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class KPIDetail
+    public partial class KPITemplate
     {
-        public string Id { get; set; }
-        public string PlanPoint { get; set; }
-        public string Perform { get; set; }
-        public string PlanPercent { get; set; }
-        public string Point { get; set; }
-        public string StaffKPIId { get; set; }
         public string KPIWorkId { get; set; }
+        public string KPITypeId { get; set; }
         public Nullable<int> Number { get; set; }
     
+        public virtual KPIType KPIType { get; set; }
         public virtual KPIWork KPIWork { get; set; }
-        public virtual StaffKPI StaffKPI { get; set; }
     }
 }

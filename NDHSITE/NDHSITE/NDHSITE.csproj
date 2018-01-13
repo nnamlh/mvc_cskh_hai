@@ -227,6 +227,7 @@
     <Compile Include="Controllers\HaiReportController.cs" />
     <Compile Include="Controllers\HaiStaffController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KPIController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -388,6 +389,18 @@
     <Compile Include="Models\ImeiUser.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\KPIDetail.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KPITemplate.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KPIType.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KPIWork.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\MessegeToHai.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -541,6 +554,9 @@
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StaffCheckIn.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StaffKPI.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StaffWithC2.cs">
@@ -797,6 +813,7 @@
     <Content Include="Views\Decor\Show.cshtml" />
     <Content Include="Views\CheckIn\ReportCheckIn.cshtml" />
     <Content Include="Views\HaiReport\ReportOrder.cshtml" />
+    <Content Include="Views\KPI\Template.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

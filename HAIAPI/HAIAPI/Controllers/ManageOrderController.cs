@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Web.Http;
 using PagedList;
 using System.Web.Script.Serialization;
+using HAIAPI.Util;
 
 namespace HAIAPI.Controllers
 {
@@ -125,6 +126,103 @@ namespace HAIAPI.Controllers
             return result;
         }
 
+        #region
+        [HttpPost]
+        public ResultInfo UpdateOrderProduct()
+        {
+            var log = new MongoHistoryAPI()
+            {
+                APIUrl = "/api/c1order/updateorderproduct",
+                CreateTime = DateTime.Now,
+                Sucess = 1
+            };
+
+            var result = new C1OrderResult()
+            {
+                id = "1",
+                msg = "success"
+            };
+
+            try
+            {
+                var requestContent = Request.Content.ReadAsStringAsync().Result;
+                var jsonserializer = new JavaScriptSerializer();
+                var paser = jsonserializer.Deserialize<UpdateOrderRequest>(requestContent);
+                log.Content = new JavaScriptSerializer().Serialize(paser);
+
+                if (!mongoHelper.checkLoginSession(paser.user, paser.token))
+                    throw new Exception("Wrong token and user login!");
+
+                var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+
+                if (staff == null)
+                    throw new Exception("Sai thong tin");
+
+                var orderProduct = db.OrderProducts.Where(p => p.ProductId == paser.productId && p.OrderId == paser.orderId).FirstOrDefault();
+                if (orderProduct == null)
+                    throw new Exception("Sai thong tin");
+
+                if (orderProduct.HaiOrder.OrderStatus != "process")
+                {
+                    throw new Exception("Đơn hàng không thể cập nhật");
+                }
+
+                // check quantity
+                int? quantityRemain = orderProduct.Quantity - orderProduct.QuantityFinish;
+
+                if (quantityRemain < paser.quantity)
+                    throw new Exception("Số lượng giao vượt quá");
+
+                orderProduct.QuantityFinish = orderProduct.QuantityFinish + paser.quantity;
+
+                db.Entry(orderProduct).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+                // save history
+
+                var history = new OrderProductHistory()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CreateDate = DateTime.Now,
+                    Notes = "Nhân viên HAI: " + staff.FullName + "(" + staff.Code+ ") đã cập nhật" ,
+                    OrderId = orderProduct.OrderId,
+                    ProductId = orderProduct.ProductId,
+                    Quantity = paser.quantity
+                };
+
+                db.OrderProductHistories.Add(history);
+                db.SaveChanges();
+
+                // gui thong bao
+                var order = db.HaiOrders.Find(paser.orderId);
+                if (order != null)
+                {
+                    var staffCreate = order.OrderStaffs.Where(p => p.ProcessId == "create").FirstOrDefault();
+                    // nhan vien
+                    if (staff != null)
+                        HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Cửa hàng vừa giao hàng với số lượng : " + paser.quantity + " " + orderProduct.ProductInfo.Unit, staffCreate.HaiStaff.UserLogin, db, mongoHelper);
+
+                    // c2
+                    HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Cửa hàng vừa giao hàng với số lượng : " + paser.quantity + " " + orderProduct.ProductInfo.Unit, order.CInfoCommon.UserLogin, db, mongoHelper);
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                result.id = "0";
+                result.msg = e.Message;
+                log.Sucess = 0;
+            }
+
+            log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+
+            mongoHelper.createHistoryAPI(log);
+
+            return result;
+        }
+        #endregion
+
         #region danh sach san pham
         [HttpGet]
         public List<ProductOrderInfo> GetProduct(string user, string id)
@@ -187,11 +285,7 @@ namespace HAIAPI.Controllers
                         productName = item.ProductInfo.PName,
                         quantity = item.Quantity,
                         quantityFinish = item.QuantityFinish,
-                        c1Address = c1Address,
-                        c1Code = c1Code,
-                        c1Id = c1Id,
-                        c1Phone = c1Phone,
-                        c1Store = c1Store,
+   
                         perPrice = item.PerPrice,
                         price = item.PriceTotal,
                         quantityBox = item.ProductInfo.Quantity,

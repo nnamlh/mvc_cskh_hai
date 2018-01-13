@@ -32,5 +32,6 @@ namespace NDHSITE.Models
         public Nullable<double> PriceTotal { get; set; }
         public Nullable<int> QuantityFinish { get; set; }
         public Nullable<System.DateTime> ExpectDate { get; set; }
+        public string Branch { get; set; }
     }
 }

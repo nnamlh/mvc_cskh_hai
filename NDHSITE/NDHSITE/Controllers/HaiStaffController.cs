@@ -244,7 +244,7 @@ namespace NDHSITE.Controllers
                 }
 
                 staffCheck.FullName = staff.FullName;
-                staffCheck.Code = staff.Code;
+               // staffCheck.Code = staff.Code;
                 staffCheck.BranchId = staff.BranchId;
                 staffCheck.DepartmentId = staff.DepartmentId;
                 staffCheck.PositionId = staff.PositionId;

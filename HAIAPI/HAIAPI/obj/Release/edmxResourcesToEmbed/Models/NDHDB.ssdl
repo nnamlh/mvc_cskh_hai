@@ -566,6 +566,16 @@
     <Property Name="Point" Type="nvarchar" MaxLength="128" />
     <Property Name="StaffKPIId" Type="nvarchar" MaxLength="128" />
     <Property Name="KPIWorkId" Type="nvarchar" MaxLength="128" />
+    <Property Name="Number" Type="int" />
+  </EntityType>
+  <EntityType Name="KPITemplate">
+    <Key>
+      <PropertyRef Name="KPIWorkId" />
+      <PropertyRef Name="KPITypeId" />
+    </Key>
+    <Property Name="KPIWorkId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="KPITypeId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Number" Type="int" />
   </EntityType>
   <EntityType Name="KPIType">
     <Key>
@@ -583,7 +593,6 @@
     <Property Name="Title" Type="nvarchar(max)" />
     <Property Name="STT" Type="int" />
     <Property Name="ExcelCol" Type="nvarchar" MaxLength="512" />
-    <Property Name="KPITypeId" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="MessegeToHai">
     <Key>
@@ -979,6 +988,7 @@
     <Property Name="StaffId" Type="nvarchar" MaxLength="128" />
     <Property Name="CreateTime" Type="datetime" />
     <Property Name="ModiftTime" Type="datetime" />
+    <Property Name="TypeId" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="StaffWithC1">
     <Key>
@@ -1445,7 +1455,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__KPIDetail__KPIWo__61DB776A">
+  <Association Name="FK__KPIDetail__KPIWo__1DF06171">
     <End Role="KPIWork" Type="Self.KPIWork" Multiplicity="0..1" />
     <End Role="KPIDetail" Type="Self.KPIDetail" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1457,7 +1467,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__KPIDetail__Staff__60E75331">
+  <Association Name="FK__KPIDetail__Staff__1CFC3D38">
     <End Role="StaffKPI" Type="Self.StaffKPI" Multiplicity="0..1" />
     <End Role="KPIDetail" Type="Self.KPIDetail" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1469,15 +1479,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__KPIWork__KPIType__575DE8F7">
-    <End Role="KPIType" Type="Self.KPIType" Multiplicity="0..1" />
-    <End Role="KPIWork" Type="Self.KPIWork" Multiplicity="*" />
+  <Association Name="FK__KPITempla__KPITy__127EAEC5">
+    <End Role="KPIType" Type="Self.KPIType" Multiplicity="1" />
+    <End Role="KPITemplate" Type="Self.KPITemplate" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="KPIType">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="KPIWork">
+      <Dependent Role="KPITemplate">
         <PropertyRef Name="KPITypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__KPITempla__KPIWo__118A8A8C">
+    <End Role="KPIWork" Type="Self.KPIWork" Multiplicity="1" />
+    <End Role="KPITemplate" Type="Self.KPITemplate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KPIWork">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="KPITemplate">
+        <PropertyRef Name="KPIWorkId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1745,7 +1767,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__StaffKPI__StaffI__5C229E14">
+  <Association Name="FK__StaffKPI__StaffI__174363E2">
     <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
     <End Role="StaffKPI" Type="Self.StaffKPI" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1754,6 +1776,18 @@
       </Principal>
       <Dependent Role="StaffKPI">
         <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StaffKPI__TypeId__1837881B">
+    <End Role="KPIType" Type="Self.KPIType" Multiplicity="0..1" />
+    <End Role="StaffKPI" Type="Self.StaffKPI" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KPIType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="StaffKPI">
+        <PropertyRef Name="TypeId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1932,6 +1966,7 @@
     <EntitySet Name="HappyBirthday" EntityType="Self.HappyBirthday" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ImeiUser" EntityType="Self.ImeiUser" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KPIDetail" EntityType="Self.KPIDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KPITemplate" EntityType="Self.KPITemplate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KPIType" EntityType="Self.KPIType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KPIWork" EntityType="Self.KPIWork" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MessegeToHai" EntityType="Self.MessegeToHai" Schema="dbo" store:Type="Tables" />
@@ -2108,17 +2143,21 @@
       <End Role="HaiPosition" EntitySet="HaiPosition" />
       <End Role="HaiStaff" EntitySet="HaiStaff" />
     </AssociationSet>
-    <AssociationSet Name="FK__KPIDetail__KPIWo__61DB776A" Association="Self.FK__KPIDetail__KPIWo__61DB776A">
+    <AssociationSet Name="FK__KPIDetail__KPIWo__1DF06171" Association="Self.FK__KPIDetail__KPIWo__1DF06171">
       <End Role="KPIWork" EntitySet="KPIWork" />
       <End Role="KPIDetail" EntitySet="KPIDetail" />
     </AssociationSet>
-    <AssociationSet Name="FK__KPIDetail__Staff__60E75331" Association="Self.FK__KPIDetail__Staff__60E75331">
+    <AssociationSet Name="FK__KPIDetail__Staff__1CFC3D38" Association="Self.FK__KPIDetail__Staff__1CFC3D38">
       <End Role="StaffKPI" EntitySet="StaffKPI" />
       <End Role="KPIDetail" EntitySet="KPIDetail" />
     </AssociationSet>
-    <AssociationSet Name="FK__KPIWork__KPIType__575DE8F7" Association="Self.FK__KPIWork__KPIType__575DE8F7">
+    <AssociationSet Name="FK__KPITempla__KPITy__127EAEC5" Association="Self.FK__KPITempla__KPITy__127EAEC5">
       <End Role="KPIType" EntitySet="KPIType" />
+      <End Role="KPITemplate" EntitySet="KPITemplate" />
+    </AssociationSet>
+    <AssociationSet Name="FK__KPITempla__KPIWo__118A8A8C" Association="Self.FK__KPITempla__KPIWo__118A8A8C">
       <End Role="KPIWork" EntitySet="KPIWork" />
+      <End Role="KPITemplate" EntitySet="KPITemplate" />
     </AssociationSet>
     <AssociationSet Name="FK__MobileRol__Mobil__7D98A078" Association="Self.FK__MobileRol__Mobil__7D98A078">
       <End Role="MobileFunction" EntitySet="MobileFunction" />
@@ -2208,8 +2247,12 @@
       <End Role="HaiStaff" EntitySet="HaiStaff" />
       <End Role="StaffCheckIn" EntitySet="StaffCheckIn" />
     </AssociationSet>
-    <AssociationSet Name="FK__StaffKPI__StaffI__5C229E14" Association="Self.FK__StaffKPI__StaffI__5C229E14">
+    <AssociationSet Name="FK__StaffKPI__StaffI__174363E2" Association="Self.FK__StaffKPI__StaffI__174363E2">
       <End Role="HaiStaff" EntitySet="HaiStaff" />
+      <End Role="StaffKPI" EntitySet="StaffKPI" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StaffKPI__TypeId__1837881B" Association="Self.FK__StaffKPI__TypeId__1837881B">
+      <End Role="KPIType" EntitySet="KPIType" />
       <End Role="StaffKPI" EntitySet="StaffKPI" />
     </AssociationSet>
     <AssociationSet Name="FK__StaffWith__Staff__4C564A9F" Association="Self.FK__StaffWith__Staff__4C564A9F">

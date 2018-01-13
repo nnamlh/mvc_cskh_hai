@@ -68,7 +68,8 @@ namespace HAIAPI.Controllers
                         dateSuggest = order.ExpectDate == null ? "" : order.ExpectDate.Value.ToString("dd/MM/yyyy"),
                         orderId = order.Id,
                         phone = order.ReceivePhone1,
-                        status = order.OrderStt.Name
+                        status = order.OrderStt.Name,
+                        money = order.PriceTotal==null?0:order.PriceTotal
                     };
 
                     if (order.Sender == "B")

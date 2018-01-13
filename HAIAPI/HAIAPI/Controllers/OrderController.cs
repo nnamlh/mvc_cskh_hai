@@ -98,7 +98,8 @@ namespace HAIAPI.Controllers
                 result.shipType = shipTypeAll;
 
                 // danh sach khuyen mai
-                result.events = new List<EventOrderInfo>();
+                result.events = getEvent(paser.product, c2.CInfoCommon);
+
             }
             catch (Exception e)
             {
@@ -113,6 +114,121 @@ namespace HAIAPI.Controllers
 
             return result;
 
+        }
+
+        private List<EventOrderInfo> getEvent(List<OrderProductInfo> products, CInfoCommon cInfo)
+        {
+            List<EventOrderInfo> events = new List<EventOrderInfo>();
+            var dateNow = DateTime.Now;
+
+            var haiBranch = db.HaiBranches.Where(p => p.Code == cInfo.BranchCode).FirstOrDefault();
+
+            var eventArea = (from log in db.EventAreas
+                             where log.EventInfo.ESTT == 1 
+                             && DbFunctions.TruncateTime(log.EventInfo.BeginTime) <= DbFunctions.TruncateTime(dateNow) && 
+                                           DbFunctions.TruncateTime(log.EventInfo.EndTime) >= DbFunctions.TruncateTime(dateNow) && log.AreaId == haiBranch.AreaId
+                             select log).ToList();
+
+
+            foreach (var item in eventArea)
+            {
+                var cusJoin = db.EventCustomers.Where(p => p.EventId == item.EventId).ToList();
+
+                if (cusJoin.Count() > 0)
+                {
+                    var cJoin = cusJoin.Where(p => p.CInfoId == cInfo.Id).FirstOrDefault();
+                    if (cJoin != null)
+                    {
+                        var eInfo = new EventOrderInfo()
+                        {
+                            id = item.EventId,
+                            describe = item.EventInfo.Descibe,
+                            hasPoint = agencyEventPont(item.EventId, cInfo.Id),
+                            time = "Diễn ra từ ngày " + item.EventInfo.BeginTime.Value.ToShortDateString() + " đến " + item.EventInfo.EndTime.Value.ToShortDateString(),
+                            name = item.EventInfo.Name
+
+                        };
+                        int? point = calPointEvent(item.EventId, products);
+                       
+                        eInfo.point = point + "";
+                        eInfo.gift = getGiftEvent(item.EventInfo, point);
+
+                        events.Add(eInfo);
+                    }
+                }
+                else
+                {
+                    var eInfo = new EventOrderInfo()
+                    {
+                        id = item.EventId,
+                        describe = item.EventInfo.Descibe,
+                        hasPoint = agencyEventPont(item.EventId, cInfo.Id),
+                        time = "Diễn ra từ ngày " + item.EventInfo.BeginTime.Value.ToShortDateString() + " đến " + item.EventInfo.EndTime.Value.ToShortDateString(),
+                        name = item.EventInfo.Name
+
+                    };
+                    int? point = calPointEvent(item.EventId, products);
+
+                    eInfo.point = point + "";
+                    eInfo.gift = getGiftEvent(item.EventInfo, point);
+
+                    events.Add(eInfo);
+                }
+            }
+
+
+
+            return events;
+        }
+
+        private int? calPointEvent(string eventId, List<OrderProductInfo> products)
+        {
+            int? sum = 0;
+            foreach(var item in products)
+            {
+                var check = db.EventProducts.Where(p => p.EventId == eventId && p.ProductId == item.code).FirstOrDefault();
+
+                if(check != null)
+                {
+                    sum += check.Point;
+                }
+            }
+
+            return sum;
+        }
+
+        private EventGift getGiftEvent(EventInfo eventInfo, int? point)
+        {
+            var gift = eventInfo.AwardInfoes.ToList();
+
+            EventGift giftEvents = new EventGift();
+
+            int maxPoint = 0;
+
+            foreach(var item in gift)
+            {
+                if (item.Point <= point && item.Point > maxPoint)
+                {
+                    giftEvents = new EventGift()
+                    {
+                        point = item.Point + "",
+                        image = HaiUtil.HostName + item.Thumbnail,
+                        name = item.Name
+                    };
+                }
+            }
+
+
+            return giftEvents;
+        }
+
+        private string agencyEventPont(string eventId, string infoId)
+        {
+            var agencyPoint = db.AgencySavePoints.Where(p => p.EventId == eventId && p.CInfoId == infoId).FirstOrDefault();
+            if (agencyPoint == null)
+                return "0";
+
+            return agencyPoint.PointSave + "";
         }
 
         [HttpPost]
@@ -137,8 +253,8 @@ namespace HAIAPI.Controllers
                 var paser = jsonserializer.Deserialize<OrderInfoRequest>(requestContent);
                 log.Content = new JavaScriptSerializer().Serialize(paser);
 
-             //  if (!mongoHelper.checkLoginSession(paser.user, paser.token))
-                 //  throw new Exception("Wrong token and user login!");
+               if (!mongoHelper.checkLoginSession(paser.user, paser.token))
+                   throw new Exception("Wrong token and user login!");
                    
                 DateTime dateSuggest = DateTime.ParseExact(paser.timeSuggest, "d/M/yyyy", null);
 

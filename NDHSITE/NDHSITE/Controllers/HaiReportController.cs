@@ -497,7 +497,19 @@ namespace NDHSITE.Controllers
             {
                 FileInfo newFile = new FileInfo(pathTo);
 
-                var data = db.report_order_detail(year + "-" + month + "-" + fDay, year + "-" + month + "-" + tDay).ToList();
+                var allData = db.report_order_detail(year + "-" + month + "-" + fDay, year + "-" + month + "-" + tDay).ToList();
+                List<string> branches = new List<string>();
+                int permiss = Utitl.CheckRoleShowInfo(db, User.Identity.Name);
+                if (permiss == 2)
+                {
+                    branches = Utitl.GetBranchesPermiss(db, User.Identity.Name, false);
+                }
+                else if (permiss == 1)
+                {
+                    branches = Utitl.GetBranchesPermiss(db, User.Identity.Name, true);
+                }
+
+                var data = allData.Where(p => branches.Contains(p.Branch)).ToList();
 
                 using (ExcelPackage package = new ExcelPackage(newFile))
                 {
@@ -511,30 +523,31 @@ namespace NDHSITE.Controllers
                             worksheet.Cells[i + 2, 1].Value = i + 1;
                             worksheet.Cells[i + 2, 2].Value = data[i].CreateDate;
                             worksheet.Cells[i + 2, 3].Value = data[i].OrderCode;
-                            worksheet.Cells[i + 2, 4].Value = data[i].StaffCode;
-                            worksheet.Cells[i + 2, 5].Value = data[i].StaffName;
-                            worksheet.Cells[i + 2, 6].Value = data[i].C2Code;
-                            worksheet.Cells[i + 2, 7].Value = data[i].SMSCode;
-                            worksheet.Cells[i + 2, 8].Value = data[i].StoreName;
-                            worksheet.Cells[i + 2, 9].Value = data[i].OderType;
-                            worksheet.Cells[i + 2, 10].Value = data[i].C1Code;
-                            worksheet.Cells[i + 2, 11].Value = data[i].C1Name;
-                            worksheet.Cells[i + 2, 12].Value = data[i].ProductCode;
-                            worksheet.Cells[i + 2, 13].Value = data[i].ProductName;
-                            worksheet.Cells[i + 2, 14].Value = data[i].Unit;
-                            worksheet.Cells[i + 2, 15].Value = data[i].Quantity;
-                            worksheet.Cells[i + 2, 16].Value = data[i].PerPrice;
-                            worksheet.Cells[i + 2, 17].Value = data[i].QuantityBuy/data[i].Quantity;
-                            worksheet.Cells[i + 2, 18].Value = data[i].PriceTotal;
+                            worksheet.Cells[i + 2, 4].Value = data[i].Branch;
+                            worksheet.Cells[i + 2, 5].Value = data[i].StaffCode;
+                            worksheet.Cells[i + 2, 6].Value = data[i].StaffName;
+                            worksheet.Cells[i + 2, 7].Value = data[i].C2Code;
+                            worksheet.Cells[i + 2, 8].Value = data[i].SMSCode;
+                            worksheet.Cells[i + 2, 9].Value = data[i].StoreName;
+                            worksheet.Cells[i + 2, 10].Value = data[i].OderType;
+                            worksheet.Cells[i + 2, 11].Value = data[i].C1Code;
+                            worksheet.Cells[i + 2, 12].Value = data[i].C1Name;
+                            worksheet.Cells[i + 2, 13].Value = data[i].ProductCode;
+                            worksheet.Cells[i + 2, 14].Value = data[i].ProductName;
+                            worksheet.Cells[i + 2, 15].Value = data[i].Unit;
+                            worksheet.Cells[i + 2, 16].Value = data[i].Quantity;
+                            worksheet.Cells[i + 2, 17].Value = data[i].PerPrice;
+                            worksheet.Cells[i + 2, 18].Value = data[i].QuantityBuy/data[i].Quantity;
+                            worksheet.Cells[i + 2, 19].Value = data[i].PriceTotal;
                             if (data[i].QuantityBuy > data[i].QuantityFinish)
                             {
-                                worksheet.Cells[i + 2, 19].Value = "Đang giao";
+                                worksheet.Cells[i + 2, 20].Value = "Đang giao";
                             } else
                             {
-                                worksheet.Cells[i + 2, 19].Value = "Đã giao";
+                                worksheet.Cells[i + 2, 20].Value = "Đã giao";
                             }
-                            worksheet.Cells[i + 2, 21].Value = data[i].QuantityFinish / data[i].Quantity;
-                            worksheet.Cells[i + 2, 22].Value = data[i].QuantityFinish * data[i].PerPrice;
+                            worksheet.Cells[i + 2, 22].Value = data[i].QuantityFinish / data[i].Quantity;
+                            worksheet.Cells[i + 2, 23].Value = data[i].QuantityFinish * data[i].PerPrice;
                         }
                         catch
                         {

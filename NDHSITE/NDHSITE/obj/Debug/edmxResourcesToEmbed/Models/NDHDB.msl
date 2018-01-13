@@ -1435,8 +1435,63 @@
           <ScalarProperty Name="PriceTotal" ColumnName="PriceTotal" />
           <ScalarProperty Name="QuantityFinish" ColumnName="QuantityFinish" />
           <ScalarProperty Name="ExpectDate" ColumnName="ExpectDate" />
+          <ScalarProperty Name="Branch" ColumnName="Branch" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="KPIDetails">
+      <EntityTypeMapping TypeName="DMSHAIModel.KPIDetail">
+        <MappingFragment StoreEntitySet="KPIDetail">
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="KPIWorkId" ColumnName="KPIWorkId" />
+          <ScalarProperty Name="StaffKPIId" ColumnName="StaffKPIId" />
+          <ScalarProperty Name="Point" ColumnName="Point" />
+          <ScalarProperty Name="PlanPercent" ColumnName="PlanPercent" />
+          <ScalarProperty Name="Perform" ColumnName="Perform" />
+          <ScalarProperty Name="PlanPoint" ColumnName="PlanPoint" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KPITemplates">
+      <EntityTypeMapping TypeName="DMSHAIModel.KPITemplate">
+        <MappingFragment StoreEntitySet="KPITemplate">
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="KPITypeId" ColumnName="KPITypeId" />
+          <ScalarProperty Name="KPIWorkId" ColumnName="KPIWorkId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KPITypes">
+      <EntityTypeMapping TypeName="DMSHAIModel.KPIType">
+        <MappingFragment StoreEntitySet="KPIType">
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KPIWorks">
+      <EntityTypeMapping TypeName="DMSHAIModel.KPIWork">
+        <MappingFragment StoreEntitySet="KPIWork">
+          <ScalarProperty Name="ExcelCol" ColumnName="ExcelCol" />
+          <ScalarProperty Name="STT" ColumnName="STT" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StaffKPIs">
+      <EntityTypeMapping TypeName="DMSHAIModel.StaffKPI">
+        <MappingFragment StoreEntitySet="StaffKPI">
+          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+          <ScalarProperty Name="ModiftTime" ColumnName="ModiftTime" />
+          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

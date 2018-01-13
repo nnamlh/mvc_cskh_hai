@@ -17,6 +17,7 @@ namespace HAIAPI.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public KPIType()
         {
+            this.StaffKPIs = new HashSet<StaffKPI>();
             this.KPIWorks = new HashSet<KPIWork>();
         }
     
@@ -24,6 +25,8 @@ namespace HAIAPI.Models
         public string Title { get; set; }
         public string Notes { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<StaffKPI> StaffKPIs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KPIWork> KPIWorks { get; set; }
     }

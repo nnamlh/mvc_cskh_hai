@@ -90,11 +90,13 @@ namespace HAIAPI.Models
 
         public string point { get; set; }
 
+        public string hasPoint { get; set; }
+
         public string time { get; set; }
 
-        public string notes { get; set; }
+        public string describe { get; set; }
 
-        public List<EventGift> gifts { get; set; }
+        public EventGift gift { get; set; }
     }
 
 
@@ -125,6 +127,8 @@ namespace HAIAPI.Models
 
         public string senderName { get; set; }
 
+        public double? money { get; set; }
+
     }
 
     public class ProductOrderInfo
@@ -139,6 +143,7 @@ namespace HAIAPI.Models
 
         public int? quantity { get; set; }
 
+        /*
         public string c1Id { get; set; }
 
         public string c1Code { get; set; }
@@ -148,7 +153,7 @@ namespace HAIAPI.Models
         public string c1Address { get; set; }
 
         public string c1Phone { get; set; }
-
+        */
         public double? price { get; set; }
 
         public double? perPrice { get; set; }
