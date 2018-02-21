@@ -983,9 +983,11 @@
     <EntitySetMapping Name="HaiOrders">
       <EntityTypeMapping TypeName="NDHDB1Model.HaiOrder">
         <MappingFragment StoreEntitySet="HaiOrder">
+          <ScalarProperty Name="DStatus" ColumnName="DStatus" />
+          <ScalarProperty Name="DebtTimeLine" ColumnName="DebtTimeLine" />
+          <ScalarProperty Name="SalePlace" ColumnName="SalePlace" />
           <ScalarProperty Name="DateCode" ColumnName="DateCode" />
           <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
-          <ScalarProperty Name="Sender" ColumnName="Sender" />
           <ScalarProperty Name="C1Name" ColumnName="C1Name" />
           <ScalarProperty Name="C1Code" ColumnName="C1Code" />
           <ScalarProperty Name="C1Id" ColumnName="C1Id" />
@@ -1222,5 +1224,13 @@
         <ScalarProperty Name="Id" ColumnName="KPITypeId" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="DeliveryStatus">
+      <EntityTypeMapping TypeName="NDHDB1Model.DeliveryStatu">
+        <MappingFragment StoreEntitySet="DeliveryStatus">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

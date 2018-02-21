@@ -41,9 +41,12 @@ namespace HAIAPI.Models
         public string C1Id { get; set; }
         public string C1Code { get; set; }
         public string C1Name { get; set; }
-        public string Sender { get; set; }
         public string UserCreate { get; set; }
         public string DateCode { get; set; }
+        public string SalePlace { get; set; }
+        public Nullable<int> DebtTimeLine { get; set; }
+        public string DStatus { get; set; }
+        public Nullable<int> HasBill { get; set; }
     
         public virtual CInfoCommon CInfoCommon { get; set; }
         public virtual OrderStatu OrderStt { get; set; }
@@ -56,5 +59,6 @@ namespace HAIAPI.Models
         public virtual ICollection<OrderStaff> OrderStaffs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderProductHistory> OrderProductHistories { get; set; }
+        public virtual DeliveryStatu DeliveryStatu { get; set; }
     }
 }

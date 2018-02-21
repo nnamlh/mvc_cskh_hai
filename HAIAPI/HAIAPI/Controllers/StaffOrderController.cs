@@ -72,7 +72,7 @@ namespace HAIAPI.Controllers
                         money = order.PriceTotal==null?0:order.PriceTotal
                     };
 
-                    if (order.Sender == "B")
+                    if (order.SalePlace == "B")
                     {
                         yourOrder.senderCode = order.BrachCode;
                         yourOrder.senderName = "Tại chi nhánh";

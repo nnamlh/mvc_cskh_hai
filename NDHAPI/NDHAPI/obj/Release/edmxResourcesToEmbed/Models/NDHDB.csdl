@@ -1493,6 +1493,7 @@
       <End Role="C2Info" EntitySet="C2Info" />
     </AssociationSet>
     <EntitySet Name="BarcodeNotPermisses" EntityType="NDHDBModel.BarcodeNotPermiss" />
+    <EntitySet Name="BarcodeReplaces" EntityType="NDHDBModel.BarcodeReplace" />
   </EntityContainer>
   <EntityType Name="BarcodeNotPermiss">
     <Key>
@@ -1507,5 +1508,16 @@
     <Property Name="BranchCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ProductBarcode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="BarcodeReplace">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="ProductCode" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Name="TimeUpdate" Type="DateTime" Precision="3" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CaseCode" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="Barcode" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

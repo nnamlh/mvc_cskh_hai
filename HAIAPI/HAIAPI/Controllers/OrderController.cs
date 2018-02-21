@@ -57,8 +57,9 @@ namespace HAIAPI.Controllers
                 result.store = c2.StoreName;
                 result.deputy = c2.Deputy;
                 result.phone = c2.CInfoCommon.Phone;
-                result.address = c2.CInfoCommon.AddressInfo ;
+                result.address = c2.CInfoCommon.AddressInfo;
 
+                /*
                 result.c1 = GetC2C1(c2.Code);
 
                 // add them 
@@ -69,7 +70,7 @@ namespace HAIAPI.Controllers
                     priority = 0,
                     store = "Chi nhánh : " + haiStaff.HaiBranch.Name
                 });
-
+                */
                 // lay danh sach type
                 var payType = db.PayTypes.ToList();
                 List<IdentityCommon> paytypeAll = new List<IdentityCommon>();
@@ -124,8 +125,8 @@ namespace HAIAPI.Controllers
             var haiBranch = db.HaiBranches.Where(p => p.Code == cInfo.BranchCode).FirstOrDefault();
 
             var eventArea = (from log in db.EventAreas
-                             where log.EventInfo.ESTT == 1 
-                             && DbFunctions.TruncateTime(log.EventInfo.BeginTime) <= DbFunctions.TruncateTime(dateNow) && 
+                             where log.EventInfo.ESTT == 1
+                             && DbFunctions.TruncateTime(log.EventInfo.BeginTime) <= DbFunctions.TruncateTime(dateNow) &&
                                            DbFunctions.TruncateTime(log.EventInfo.EndTime) >= DbFunctions.TruncateTime(dateNow) && log.AreaId == haiBranch.AreaId
                              select log).ToList();
 
@@ -149,7 +150,7 @@ namespace HAIAPI.Controllers
 
                         };
                         int? point = calPointEvent(item.EventId, products);
-                       
+
                         eInfo.point = point + "";
                         eInfo.gift = getGiftEvent(item.EventInfo, point);
 
@@ -184,11 +185,11 @@ namespace HAIAPI.Controllers
         private int? calPointEvent(string eventId, List<OrderProductInfo> products)
         {
             int? sum = 0;
-            foreach(var item in products)
+            foreach (var item in products)
             {
                 var check = db.EventProducts.Where(p => p.EventId == eventId && p.ProductId == item.code).FirstOrDefault();
 
-                if(check != null)
+                if (check != null)
                 {
                     sum += check.Point;
                 }
@@ -205,7 +206,7 @@ namespace HAIAPI.Controllers
 
             int maxPoint = 0;
 
-            foreach(var item in gift)
+            foreach (var item in gift)
             {
                 if (item.Point <= point && item.Point > maxPoint)
                 {
@@ -253,9 +254,9 @@ namespace HAIAPI.Controllers
                 var paser = jsonserializer.Deserialize<OrderInfoRequest>(requestContent);
                 log.Content = new JavaScriptSerializer().Serialize(paser);
 
-               if (!mongoHelper.checkLoginSession(paser.user, paser.token))
-                   throw new Exception("Wrong token and user login!");
-                   
+                if (!mongoHelper.checkLoginSession(paser.user, paser.token))
+                    throw new Exception("Wrong token and user login!");
+
                 DateTime dateSuggest = DateTime.ParseExact(paser.timeSuggest, "d/M/yyyy", null);
 
                 CInfoCommon cinfo = db.CInfoCommons.Where(p => p.CCode == paser.code).FirstOrDefault();
@@ -294,7 +295,7 @@ namespace HAIAPI.Controllers
                     ShipType = paser.shipType,
                     PayType = paser.payType,
                     Agency = cinfo.Id,
-                    CreateDate =DateTime.Now,
+                    CreateDate = DateTime.Now,
                     OrderStatus = "begin",
                     ReceiveAddress = paser.address,
                     Notes = paser.notes,
@@ -309,10 +310,11 @@ namespace HAIAPI.Controllers
 
                 if (paser.c1 == "000")
                 {
-                    order.Sender = "B";
-                } else
+                    order.SalePlace = "B";
+                }
+                else
                 {
-                    order.Sender = "CI";
+                    order.SalePlace = "CI";
 
                     var checkC1 = db.C1Info.Where(p => p.Code == paser.c1).FirstOrDefault();
 
@@ -329,7 +331,7 @@ namespace HAIAPI.Controllers
 
                 // danh sach san pham mua
                 double? priceTotal = 0;
-                foreach(var item in paser.product)
+                foreach (var item in paser.product)
                 {
                     // kiem tra san pham
                     var checkProduct = db.ProductInfoes.Find(item.code);
@@ -358,7 +360,8 @@ namespace HAIAPI.Controllers
                     db.HaiOrders.Remove(order);
                     db.SaveChanges();
                     throw new Exception("Sai thong tin san pham (ma san pham) hoac so luong");
-                } else
+                }
+                else
                 {
                     order.PriceTotal = priceTotal;
                     db.Entry(order).State = EntityState.Modified;
@@ -385,7 +388,7 @@ namespace HAIAPI.Controllers
                 HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Bạn vừa tạo đơn hàng cho " + cinfo.CName, staff.UserLogin, db, mongoHelper);
 
                 // c2
-                HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Bạn có 1 đơn hàng được tạo bởi nhân viên Công ty H.A.I " + staff.FullName + "(" + staff.Code+ ")", cinfo.UserLogin, db, mongoHelper);
+                HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Bạn có 1 đơn hàng được tạo bởi nhân viên Công ty H.A.I " + staff.FullName + "(" + staff.Code + ")", cinfo.UserLogin, db, mongoHelper);
 
             }
             catch (Exception e)
@@ -412,14 +415,43 @@ namespace HAIAPI.Controllers
 
             number++;
 
-           
+
             return number;
         }
 
         // show danh sach don hang
         #region lay danh sách don hang
         //lam sao
-        
+
+        #endregion
+
+
+        #region lay danh sach c1 of c2
+        [HttpGet]
+        public List<AgencyC2C1> GetSalePlaces(string id, string user)
+        {
+
+            List<AgencyC2C1> result = GetC2C1(id);
+
+            var place = new AgencyC2C1()
+            {
+                code = "000",
+                name = "Lấy tại chi nhánh",
+                priority = 0
+            };
+
+            var staff = db.HaiStaffs.Where(p => p.UserLogin == user).FirstOrDefault();
+
+            if (staff != null)
+                place.store = "Chi nhánh: " + staff.HaiBranch.Name;
+
+            // add them 
+            result.Add(place);
+
+            return result;
+
+        }
+
         #endregion
 
     }

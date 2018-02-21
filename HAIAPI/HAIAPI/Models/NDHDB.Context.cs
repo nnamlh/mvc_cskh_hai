@@ -110,6 +110,7 @@ namespace HAIAPI.Models
         public virtual DbSet<KPIType> KPITypes { get; set; }
         public virtual DbSet<KPIWork> KPIWorks { get; set; }
         public virtual DbSet<StaffKPI> StaffKPIs { get; set; }
+        public virtual DbSet<DeliveryStatu> DeliveryStatus { get; set; }
     
         public virtual ObjectResult<checkin_calendartype_group_Result> checkin_calendartype_group(Nullable<int> month, Nullable<int> year, string staffId)
         {

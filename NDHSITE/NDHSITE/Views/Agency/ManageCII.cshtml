@@ -101,22 +101,31 @@
                                     {
                                         <tr class="@(item.IsActive == 0?"warning":"")">
                                             <td>
-                                                <span><strong class="semibold">Mã cấp 2:</strong> @item.CInfoCommon.CCode</span> <br />
+                                                <span><strong class="semibold">Mã DMS:</strong> @item.Code</span> <br />
+                                                <span><strong class="semibold">Mã SMS:</strong> @item.SMSCode</span> <br />
                                                 <span><strong class="semibold">Tên cửu hàng:</strong> @item.StoreName</span> <br />
                                                 <span><strong class="semibold">Người đại diện:</strong> @item.Deputy</span> <br />
                                                 <span><strong class="semibold">Chi nhánh:</strong> @item.CInfoCommon.BranchCode</span> <br />
-                                                <span><strong class="semibold">Tài khoản:</strong> @item.CInfoCommon.UserLogin</span><br />
                                                 <span><strong class="semibold">CMND:</strong> @item.CInfoCommon.IdentityCard</span><br />
                                                 <span><strong class="semibold">Số điện thoái:</strong> @item.CInfoCommon.Phone</span> <br />
                                                 <span><strong class="semibold">Email:</strong> @item.CInfoCommon.Email</span> <br />
                                             </td>
                                             <td>
+                                               
                                                 <span><strong class="semibold">Địa chỉ:</strong> @item.CInfoCommon.AddressInfo</span> <br />
                                                 <span><strong class="semibold">Tỉnh thành:</strong> @item.CInfoCommon.ProvinceName</span> <br />
                                                 <span><strong class="semibold">Quận/huyện:</strong> @item.CInfoCommon.DistrictName</span> <br />
                                                 <span><strong class="semibold">Mã số thuế:</strong> @item.CInfoCommon.TaxCode</span> <br />
                                                 <span><strong class="semibold">Giấy phép kinh doanh:</strong> @item.CInfoCommon.BusinessLicense</span> <br />
-                                                <span><strong class="semibold">Ghi chú:</strong> @item.CInfoCommon.Notes</span>
+                                                <span><strong class="semibold">Ghi chú:</strong> @item.CInfoCommon.Notes</span><br />
+                                                @if (item.CInfoCommon.Lat == 0 || item.CInfoCommon.Lng == 0)
+                                                {
+                                                    <span>Chưa cập nhật tọa độ</span>
+                                                }
+                                                else
+                                                {
+                                                     <span>Đã cập nhật tọa độ - <a href="#">reset</a></span>
+                                                }
                                             </td>
                                             <td class="text-center valign-middle">
                                                 <a href="/agency/modifycii/@item.Id" target="_blank">Chi tiết</a>

@@ -251,7 +251,7 @@ namespace HAIAPI.Controllers
                 string c1Phone = "";
                 string c1Store = "";
 
-                if (orders.Sender == "CI")
+                if (orders.SalePlace == "CI")
                 {
                     var checkC1 = db.C1Info.Find(orders.C1Id);
 

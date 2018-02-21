@@ -57,7 +57,7 @@ namespace HAIAPI.Models
 
         public List<IdentityCommon> shipType { get; set; }
 
-        public List<AgencyC2C1> c1 { get; set; }
+    //    public List<AgencyC2C1> c1 { get; set; }
 
         public string store { get; set; }
 

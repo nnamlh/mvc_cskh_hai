@@ -320,7 +320,6 @@ N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\NDHAPI.dll.config
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\NDHAPI.dll
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\NDHAPI.pdb
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\Antlr3.Runtime.dll
-N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\Dapper.dll
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\EntityFramework.dll
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\EntityFramework.SqlServer.dll
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\Microsoft.AspNet.Identity.Core.dll
@@ -349,7 +348,6 @@ N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\System.Web.WebPages.Deployment.dll
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\System.Web.WebPages.dll
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\System.Web.WebPages.Razor.dll
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\WebGrease.dll
-N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\Dapper.xml
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\System.Web.Helpers.xml
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\System.Web.Mvc.xml
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\System.Web.Optimization.xml
@@ -379,3 +377,5 @@ N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\Microsoft.Owin.Security.MicrosoftAccoun
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\obj\Debug\NDHAPI.csprojResolveAssemblyReference.cache
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\obj\Debug\NDHAPI.dll
 N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\obj\Debug\NDHAPI.pdb
+N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\Dapper.dll
+N:\csharp\mvc_cskh_hai\NDHAPI\NDHAPI\bin\Dapper.xml

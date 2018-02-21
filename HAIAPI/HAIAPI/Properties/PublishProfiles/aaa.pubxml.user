@@ -19,7 +19,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/31/2017 15:54:45</publishTime>
     </File>
     <File Include="bin/HAIAPI.dll">
-      <publishTime>01/14/2018 04:28:45</publishTime>
+      <publishTime>02/21/2018 23:04:01</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
       <publishTime>08/31/2017 15:54:47</publishTime>
@@ -136,7 +136,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/03/2018 16:14:07</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>09/15/2017 09:35:34</publishTime>
+      <publishTime>01/22/2018 17:19:22</publishTime>
     </File>
     <File Include="Scripts/jquery-1.10.2.js">
       <publishTime>09/12/2017 00:06:31</publishTime>
@@ -169,7 +169,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/12/2017 00:06:57</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/27/2017 10:19:34</publishTime>
+      <publishTime>02/21/2018 22:44:42</publishTime>
     </File>
   </ItemGroup>
 </Project>

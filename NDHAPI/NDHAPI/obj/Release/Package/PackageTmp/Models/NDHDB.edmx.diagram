@@ -106,6 +106,7 @@
         <AssociationConnector Association="NDHDBModel.StaffWithC1" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDBModel.StaffWithC2" ManuallyRouted="false" />
         <EntityTypeShape EntityType="NDHDBModel.BarcodeNotPermiss" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NDHDBModel.BarcodeReplace" Width="1.5" PointX="21.375" PointY="18.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

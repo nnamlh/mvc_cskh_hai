@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="NDHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="NDHDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AgencySavePoint">
     <Key>
       <PropertyRef Name="EventId" />
@@ -162,6 +162,17 @@
     <Property Name="BranchCode" Type="nvarchar" MaxLength="128" />
     <Property Name="ProductName" Type="nvarchar(max)" />
     <Property Name="ProductBarcode" Type="nvarchar" MaxLength="32" />
+  </EntityType>
+  <EntityType Name="BarcodeReplace">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="varchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProductCode" Type="varchar" MaxLength="32" />
+    <Property Name="TimeUpdate" Type="datetime" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="CaseCode" Type="varchar" MaxLength="128" />
+    <Property Name="Barcode" Type="varchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="BasicNotification">
     <Key>
@@ -1354,6 +1365,7 @@
     <EntitySet Name="AwardInfo" EntityType="Self.AwardInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BarcodeHistory" EntityType="Self.BarcodeHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BarcodeNotPermiss" EntityType="Self.BarcodeNotPermiss" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BarcodeReplace" EntityType="Self.BarcodeReplace" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BasicNotification" EntityType="Self.BasicNotification" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="C1Info" EntityType="Self.C1Info" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="C2Info" EntityType="Self.C2Info" Schema="dbo" store:Type="Tables" />

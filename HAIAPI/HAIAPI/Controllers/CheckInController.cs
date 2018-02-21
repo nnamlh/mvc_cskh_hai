@@ -992,7 +992,7 @@ namespace HAIAPI.Controllers
                         throw new Exception("Đã hoàn thành ghé thăm");
 
                     TimeSpan span = DateTime.Now.TimeOfDay.Subtract(checkCalendar.CInTime.Value);
-                    /*
+                   
                     int minuteDistance = span.Hours * 60 + span.Minutes;
                     if (minuteDistance >= timeRequireCheckIn)
                         minuteDistance = 0;
@@ -1001,7 +1001,7 @@ namespace HAIAPI.Controllers
 
                     if (minuteDistance > 0)
                         throw new Exception("Còn " + minuteDistance + " phút để có thể checkin");
-                        */
+                        
                     checkCalendar.COut = 1;
                     checkCalendar.Perform = 1;
                     checkCalendar.COutTime = DateTime.Now.TimeOfDay;

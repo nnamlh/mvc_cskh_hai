@@ -365,7 +365,6 @@ N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\NDHSITE.dll.config
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\NDHSITE.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\NDHSITE.pdb
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Antlr3.Runtime.dll
-N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Dapper.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\EntityFramework.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\EntityFramework.SqlServer.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\EPPlus.dll
@@ -401,7 +400,6 @@ N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\System.Web.WebPages.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\System.Web.WebPages.Razor.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\WebGrease.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Antlr3.Runtime.pdb
-N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Dapper.xml
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\EntityFramework.xml
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\EntityFramework.SqlServer.xml
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Microsoft.AspNet.Identity.Core.xml
@@ -433,3 +431,5 @@ N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\System.Web.WebPages.Razor.xml
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\obj\Debug\NDHSITE.dll
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\obj\Debug\NDHSITE.pdb
 N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\obj\Debug\NDHSITE.csprojResolveAssemblyReference.cache
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Dapper.dll
+N:\csharp\mvc_cskh_hai\NDHSITE\NDHSITE\bin\Dapper.xml

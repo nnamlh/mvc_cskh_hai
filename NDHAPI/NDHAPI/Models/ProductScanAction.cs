@@ -33,6 +33,19 @@ namespace NDHAPI.Models
             if (barcode.Length < 17)
                 return null;
 
+            // kiem tra barcode in ds doi ma san pham
+            var caseCode = barcode.Substring(0, 15);
+            var checkBarcodeReplace = db.BarcodeReplaces.Where(p => p.CaseCode == caseCode).FirstOrDefault();
+            if (checkBarcodeReplace != null)
+            {
+                var productReplace = db.ProductInfoes.Where(p => p.Barcode == checkBarcodeReplace.ProductCode).FirstOrDefault();
+                if (productReplace != null)
+                {
+                    return productReplace;
+                }
+            }
+            //
+
             string countryCode = barcode.Substring(0, 3);
             if (countryCode != "893")
                 return null;

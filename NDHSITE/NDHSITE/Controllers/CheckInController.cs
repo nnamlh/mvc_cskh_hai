@@ -86,7 +86,7 @@ namespace NDHSITE.Controllers
 
             var check = db.CalendarInfoes.Find(id);
 
-            if (check == null || check.CStatus != 0)
+            if (check == null)
                 return RedirectToAction("error", "home");
 
             var actionRemove = db.calendar_remove(check.StaffId, check.CMonth, check.CYear);
