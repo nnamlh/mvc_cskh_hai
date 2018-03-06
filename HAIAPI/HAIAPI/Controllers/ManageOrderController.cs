@@ -289,7 +289,8 @@ namespace HAIAPI.Controllers
                         perPrice = item.PerPrice,
                         price = item.PriceTotal,
                         quantityBox = item.ProductInfo.Quantity,
-                        unit = item.ProductInfo.Unit
+                        unit = item.ProductInfo.Unit,
+                        hasBill = item.HasBill
                     });
                 }
 
@@ -306,5 +307,229 @@ namespace HAIAPI.Controllers
 
         }
         #endregion
+
+
+        #region cap nhat giao du
+        [HttpPost]
+        public UpdateDeliveryCompleteResult CompleteDelivery()
+        {
+             //
+            var log = new MongoHistoryAPI()
+            {
+                APIUrl = "/api/manageorder/completedelivery",
+                CreateTime = DateTime.Now,
+                Sucess = 1
+            };
+
+            var result = new UpdateDeliveryCompleteResult()
+            {
+                id = "1",
+                msg = "success"
+            };
+
+            try
+            {
+                var requestContent = Request.Content.ReadAsStringAsync().Result;
+                var jsonserializer = new JavaScriptSerializer();
+                var paser = jsonserializer.Deserialize<UpdateDeliveryCompleteRequest>(requestContent);
+                log.Content = new JavaScriptSerializer().Serialize(paser);
+
+                if (!mongoHelper.checkLoginSession(paser.user, paser.token))
+                    throw new Exception("Wrong token and user login!");
+
+                HaiStaff staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+                if (staff == null)
+                    throw new Exception("Sai thong tin nguoi dat");
+
+                var checkOrder = db.HaiOrders.Where(p => p.Code == paser.orderId).FirstOrDefault();
+
+                if (checkOrder == null)
+                    throw new Exception("Sai thông tin");
+
+                var product = checkOrder.OrderProducts;
+                result.products = new List<ProductOrderInfo>();
+
+                foreach (var item in product)
+                {
+                    item.ModifyDate = DateTime.Now;
+                    item.QuantityFinish = item.Quantity;
+                    db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+
+                    result.products.Add(new ProductOrderInfo()
+                    {
+                        orderId = item.OrderId,
+                        productId = item.ProductId,
+                        productName = item.ProductInfo.PName,
+                        quantity = item.Quantity,
+                        quantityFinish = item.QuantityFinish,
+
+                        perPrice = item.PerPrice,
+                        price = item.PriceTotal,
+                        quantityBox = item.ProductInfo.Quantity,
+                        unit = item.ProductInfo.Unit
+                    });
+                }
+
+                checkOrder.DStatus = "complete";
+
+                db.Entry(checkOrder).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+                result.deliveryStatus = checkOrder.DeliveryStatu.Name;
+                result.deliveryStatusCode = checkOrder.DeliveryStatu.Id;
+
+
+                // update process: nhan vien khoi tao
+                OrderStaff orderStaff = new OrderStaff()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CreateTime = DateTime.Now,
+                    OrderId = checkOrder.Id,
+                    Notes = "Cập nhật giao đủ hàng",
+                    ProcessId = "deliverycomplete",
+                    StaffId = staff.Id
+                };
+
+                db.OrderStaffs.Add(orderStaff);
+                db.SaveChanges();
+
+                // gui thong bao
+                // nhan vien
+                HaiUtil.SendNotifi("Đơn hàng " + checkOrder.Code, "Cập nhật giao hàng đủ", staff.UserLogin, db, mongoHelper);
+
+            }
+            catch (Exception e)
+            {
+                result.id = "0";
+                result.msg = e.Message;
+                log.Sucess = 0;
+            }
+
+            log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+
+            mongoHelper.createHistoryAPI(log);
+
+            return result;
+        }
+        #endregion
+
+        #region giao hang
+        [HttpGet]
+        public UpdateDeliveryResult UpdateDelivery(string productId, string orderId, int quantity, string user, string token)
+        {
+
+                var log = new MongoHistoryAPI()
+            {
+                APIUrl = "/api/manageorder/updatedelivery",
+                CreateTime = DateTime.Now,
+                Sucess = 1
+            };
+
+                var result = new UpdateDeliveryResult()
+            {
+                id = "1",
+                msg = "success"
+            };
+
+            try
+            {
+                if (!mongoHelper.checkLoginSession(user, token))
+                    throw new Exception("Wrong token and user login!");
+
+                HaiStaff staff = db.HaiStaffs.Where(p => p.UserLogin == user).FirstOrDefault();
+                if (staff == null)
+                    throw new Exception("Sai thong tin nguoi dat");
+
+
+                var checkOrderProduct = db.OrderProducts.Where(p => p.OrderId == orderId && p.ProductId == productId).FirstOrDefault();
+
+                if(checkOrderProduct == null)
+                    throw new Exception("Sai thong tin");
+
+
+                checkOrderProduct.QuantityFinish = quantity;
+
+                checkOrderProduct.ModifyDate = DateTime.Now;
+
+                db.Entry(checkOrderProduct).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+
+                //
+                var order = checkOrderProduct.HaiOrder;
+                string deliveryStt = GetDeliveryStatus(order);
+                var status = db.DeliveryStatus.Find(deliveryStt);
+                order.DStatus = deliveryStt;
+
+                result.deliveryStatus = status.Name;
+                result.deliveryStatusCode = status.Id;
+                result.finish = quantity;
+
+                db.Entry(order).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+
+                //
+                // update process: nhan vien khoi tao
+                OrderStaff orderStaff = new OrderStaff()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CreateTime = DateTime.Now,
+                    OrderId = order.Id,
+                    Notes = "Cập nhật hàng",
+                    ProcessId = "updatedelivery",
+                    StaffId = staff.Id
+                };
+
+                db.OrderStaffs.Add(orderStaff);
+                db.SaveChanges();
+
+            }
+            catch (Exception e)
+            {
+                result.id = "0";
+                result.msg = e.Message;
+                log.Sucess = 0;
+            }
+
+            log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+
+            mongoHelper.createHistoryAPI(log);
+
+            return result;
+        }
+
+ 
+        private string GetDeliveryStatus(HaiOrder order)
+        {
+
+            int? totalOrder = 0;
+            int? totalDelivery = 0;
+            var products = order.OrderProducts;
+
+            foreach (var item in products)
+            {
+                totalOrder += item.Quantity;
+                totalDelivery += item.QuantityFinish;
+            }
+
+            if (totalDelivery == 0)
+                return "incomplete";
+
+            if (totalDelivery == totalOrder)
+                return "complete";
+
+            if (totalOrder > totalDelivery)
+                return "less";
+
+            if (totalOrder < totalDelivery)
+                return "more";
+
+            return "incomplete";
+        }
+
+        #endregion
+
     }
 }

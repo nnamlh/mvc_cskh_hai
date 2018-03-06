@@ -10,18 +10,9 @@
 namespace NDHSITE.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class HaiOrder
+    public partial class get_list_orders_product_Result
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public HaiOrder()
-        {
-            this.OrderProducts = new HashSet<OrderProduct>();
-            this.OrderProductHistories = new HashSet<OrderProductHistory>();
-            this.OrderStaffs = new HashSet<OrderStaff>();
-        }
-    
         public string Id { get; set; }
         public string OrderType { get; set; }
         public string PayType { get; set; }
@@ -46,18 +37,19 @@ namespace NDHSITE.Models
         public string SalePlace { get; set; }
         public string DStatus { get; set; }
         public Nullable<int> DebtTimeLine { get; set; }
-    
-        public virtual CInfoCommon CInfoCommon { get; set; }
-        public virtual OrderStatu OStatus { get; set; }
-        public virtual OrderType OType { get; set; }
-        public virtual PayType PType { get; set; }
-        public virtual ShipType SType { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderProduct> OrderProducts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderProductHistory> OrderProductHistories { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderStaff> OrderStaffs { get; set; }
-        public virtual DeliveryStatu DeliveryStatu { get; set; }
+        public string Store { get; set; }
+        public string Deputy { get; set; }
+        public string AgencyCode { get; set; }
+        public string StaffId { get; set; }
+        public string StaffCode { get; set; }
+        public string StaffName { get; set; }
+        public string PName { get; set; }
+        public string PCode { get; set; }
+        public Nullable<int> PQuantity { get; set; }
+        public Nullable<int> HasBill { get; set; }
+        public Nullable<double> PerPrice { get; set; }
+        public Nullable<double> PPriceTotal { get; set; }
+        public Nullable<int> OrderQuantity { get; set; }
+        public Nullable<int> QuantityFinish { get; set; }
     }
 }

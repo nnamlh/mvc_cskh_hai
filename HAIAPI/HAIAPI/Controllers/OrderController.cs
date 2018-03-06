@@ -72,7 +72,7 @@ namespace HAIAPI.Controllers
                 });
                 */
                 // lay danh sach type
-                var payType = db.PayTypes.ToList();
+                var payType = db.PayTypes.OrderBy(p=> p.Idx).ToList();
                 List<IdentityCommon> paytypeAll = new List<IdentityCommon>();
                 foreach (var item in payType)
                 {
@@ -86,7 +86,7 @@ namespace HAIAPI.Controllers
                 result.payType = paytypeAll;
 
                 // 
-                var shipType = db.ShipTypes.ToList();
+                var shipType = db.ShipTypes.OrderBy(p => p.Idx).ToList();
                 List<IdentityCommon> shipTypeAll = new List<IdentityCommon>();
                 foreach (var item in shipType)
                 {
@@ -262,6 +262,9 @@ namespace HAIAPI.Controllers
                 CInfoCommon cinfo = db.CInfoCommons.Where(p => p.CCode == paser.code).FirstOrDefault();
 
                 HaiStaff staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+                if (staff == null)
+                    throw new Exception("Sai thong tin nguoi dat");
+
 
                 string orderType = "order";
                 if (paser.inCheckIn == 1)
@@ -272,8 +275,7 @@ namespace HAIAPI.Controllers
                 if (String.IsNullOrEmpty(orderType))
                     throw new Exception("Sai thong tin dat hang");
 
-                if (staff == null)
-                    throw new Exception("Sai thong tin nguoi dat");
+                
 
                 //
                 if (paser.product == null || paser.product.Count() == 0)
@@ -296,7 +298,7 @@ namespace HAIAPI.Controllers
                     PayType = paser.payType,
                     Agency = cinfo.Id,
                     CreateDate = DateTime.Now,
-                    OrderStatus = "begin",
+                    OrderStatus = "process",
                     ReceiveAddress = paser.address,
                     Notes = paser.notes,
                     ExpectDate = dateSuggest,
@@ -305,7 +307,9 @@ namespace HAIAPI.Controllers
                     OrderNumber = number,
                     ReceivePhone1 = paser.phone,
                     UserCreate = paser.user,
-                    DateCode = DateTime.Now.Date.ToString("ddMMyyyy")
+                    DateCode = DateTime.Now.Date.ToString("ddMMyyyy"),
+                    DebtTimeLine = paser.debtTime,
+                    DStatus = "incomplete"
                 };
 
                 if (paser.c1 == "000")
@@ -347,7 +351,8 @@ namespace HAIAPI.Controllers
                             Quantity = item.quantity,
                             ProductId = checkProduct.Id,
                             PriceTotal = price,
-                            QuantityFinish = 0
+                            QuantityFinish = 0,
+                            HasBill = item.hasBill
                         };
                         db.OrderProducts.Add(productOrder);
                         db.SaveChanges();
@@ -388,7 +393,7 @@ namespace HAIAPI.Controllers
                 HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Bạn vừa tạo đơn hàng cho " + cinfo.CName, staff.UserLogin, db, mongoHelper);
 
                 // c2
-                HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Bạn có 1 đơn hàng được tạo bởi nhân viên Công ty H.A.I " + staff.FullName + "(" + staff.Code + ")", cinfo.UserLogin, db, mongoHelper);
+               // HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Bạn có 1 đơn hàng được tạo bởi nhân viên Công ty H.A.I " + staff.FullName + "(" + staff.Code + ")", cinfo.UserLogin, db, mongoHelper);
 
             }
             catch (Exception e)

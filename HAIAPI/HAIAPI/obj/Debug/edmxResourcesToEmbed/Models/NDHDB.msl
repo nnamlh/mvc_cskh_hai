@@ -1013,6 +1013,7 @@
     <EntitySetMapping Name="OrderProducts">
       <EntityTypeMapping TypeName="NDHDB1Model.OrderProduct">
         <MappingFragment StoreEntitySet="OrderProduct">
+          <ScalarProperty Name="HasBill" ColumnName="HasBill" />
           <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
           <ScalarProperty Name="QuantityFinish" ColumnName="QuantityFinish" />
           <ScalarProperty Name="PerPrice" ColumnName="PerPrice" />

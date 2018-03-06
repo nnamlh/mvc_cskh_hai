@@ -46,7 +46,6 @@ namespace HAIAPI.Models
         public string SalePlace { get; set; }
         public Nullable<int> DebtTimeLine { get; set; }
         public string DStatus { get; set; }
-        public Nullable<int> HasBill { get; set; }
     
         public virtual CInfoCommon CInfoCommon { get; set; }
         public virtual OrderStatu OrderStt { get; set; }

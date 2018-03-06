@@ -110,11 +110,7 @@ namespace NDHSITE.Models
         public virtual DbSet<UserBranchPermiss> UserBranchPermisses { get; set; }
         public virtual DbSet<Ward> Wards { get; set; }
         public virtual DbSet<Warehouse> Warehouses { get; set; }
-        public virtual DbSet<KPIDetail> KPIDetails { get; set; }
-        public virtual DbSet<KPITemplate> KPITemplates { get; set; }
-        public virtual DbSet<KPIType> KPITypes { get; set; }
-        public virtual DbSet<KPIWork> KPIWorks { get; set; }
-        public virtual DbSet<StaffKPI> StaffKPIs { get; set; }
+        public virtual DbSet<DeliveryStatu> DeliveryStatus { get; set; }
     
         public virtual ObjectResult<checkin_calendartype_group_Result> checkin_calendartype_group(Nullable<int> month, Nullable<int> year, string staffId)
         {
@@ -404,6 +400,73 @@ namespace NDHSITE.Models
                 new ObjectParameter("tDate", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<report_order_detail_Result>("report_order_detail", fDateParameter, tDateParameter);
+        }
+    
+        public virtual ObjectResult<get_list_orders_Result> get_list_orders(string fdate, string tdate, string ostt, string dstt, string staff, string c1)
+        {
+            var fdateParameter = fdate != null ?
+                new ObjectParameter("fdate", fdate) :
+                new ObjectParameter("fdate", typeof(string));
+    
+            var tdateParameter = tdate != null ?
+                new ObjectParameter("tdate", tdate) :
+                new ObjectParameter("tdate", typeof(string));
+    
+            var osttParameter = ostt != null ?
+                new ObjectParameter("ostt", ostt) :
+                new ObjectParameter("ostt", typeof(string));
+    
+            var dsttParameter = dstt != null ?
+                new ObjectParameter("dstt", dstt) :
+                new ObjectParameter("dstt", typeof(string));
+    
+            var staffParameter = staff != null ?
+                new ObjectParameter("staff", staff) :
+                new ObjectParameter("staff", typeof(string));
+    
+            var c1Parameter = c1 != null ?
+                new ObjectParameter("c1", c1) :
+                new ObjectParameter("c1", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<get_list_orders_Result>("get_list_orders", fdateParameter, tdateParameter, osttParameter, dsttParameter, staffParameter, c1Parameter);
+        }
+    
+        public virtual ObjectResult<get_list_orders_Result> get_list_orders_by_code(string code)
+        {
+            var codeParameter = code != null ?
+                new ObjectParameter("code", code) :
+                new ObjectParameter("code", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<get_list_orders_Result>("get_list_orders_by_code", codeParameter);
+        }
+    
+        public virtual ObjectResult<get_list_orders_product_Result> get_list_orders_product(string fdate, string tdate, string ostt, string dstt, string staff, string c1)
+        {
+            var fdateParameter = fdate != null ?
+                new ObjectParameter("fdate", fdate) :
+                new ObjectParameter("fdate", typeof(string));
+    
+            var tdateParameter = tdate != null ?
+                new ObjectParameter("tdate", tdate) :
+                new ObjectParameter("tdate", typeof(string));
+    
+            var osttParameter = ostt != null ?
+                new ObjectParameter("ostt", ostt) :
+                new ObjectParameter("ostt", typeof(string));
+    
+            var dsttParameter = dstt != null ?
+                new ObjectParameter("dstt", dstt) :
+                new ObjectParameter("dstt", typeof(string));
+    
+            var staffParameter = staff != null ?
+                new ObjectParameter("staff", staff) :
+                new ObjectParameter("staff", typeof(string));
+    
+            var c1Parameter = c1 != null ?
+                new ObjectParameter("c1", c1) :
+                new ObjectParameter("c1", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<get_list_orders_product_Result>("get_list_orders_product", fdateParameter, tdateParameter, osttParameter, dsttParameter, staffParameter, c1Parameter);
         }
     }
 }

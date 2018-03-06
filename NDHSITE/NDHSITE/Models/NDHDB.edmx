@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DMSHAIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DMSHAIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AgencySavePoint">
           <Key>
             <PropertyRef Name="EventId" />
@@ -330,6 +330,13 @@
           <Property Name="DecorGroup" Type="nvarchar" MaxLength="128" />
           <Property Name="StaffId" Type="nvarchar" MaxLength="128" />
         </EntityType>
+        <EntityType Name="DeliveryStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="District">
           <Key>
             <PropertyRef Name="Id" />
@@ -516,9 +523,11 @@
           <Property Name="C1Id" Type="nvarchar" MaxLength="128" />
           <Property Name="C1Code" Type="nvarchar" MaxLength="128" />
           <Property Name="C1Name" Type="nvarchar(max)" />
-          <Property Name="Sender" Type="nvarchar" MaxLength="128" />
           <Property Name="UserCreate" Type="nvarchar" MaxLength="128" />
           <Property Name="DateCode" Type="nvarchar" MaxLength="128" />
+          <Property Name="SalePlace" Type="varchar" MaxLength="32" />
+          <Property Name="DStatus" Type="varchar" MaxLength="128" />
+          <Property Name="DebtTimeLine" Type="int" />
         </EntityType>
         <EntityType Name="HaiPosition">
           <Key>
@@ -578,45 +587,6 @@
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="ModifyDate" Type="datetime" />
           <Property Name="IsUpdate" Type="int" />
-        </EntityType>
-        <EntityType Name="KPIDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="PlanPoint" Type="nvarchar" MaxLength="128" />
-          <Property Name="Perform" Type="nvarchar" MaxLength="128" />
-          <Property Name="PlanPercent" Type="nvarchar" MaxLength="128" />
-          <Property Name="Point" Type="nvarchar" MaxLength="128" />
-          <Property Name="StaffKPIId" Type="nvarchar" MaxLength="128" />
-          <Property Name="KPIWorkId" Type="nvarchar" MaxLength="128" />
-          <Property Name="Number" Type="int" />
-        </EntityType>
-        <EntityType Name="KPITemplate">
-          <Key>
-            <PropertyRef Name="KPIWorkId" />
-            <PropertyRef Name="KPITypeId" />
-          </Key>
-          <Property Name="KPIWorkId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="KPITypeId" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Number" Type="int" />
-        </EntityType>
-        <EntityType Name="KPIType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Title" Type="nvarchar(max)" />
-          <Property Name="Notes" Type="nvarchar(max)" />
-        </EntityType>
-        <EntityType Name="KPIWork">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Title" Type="nvarchar(max)" />
-          <Property Name="STT" Type="int" />
-          <Property Name="ExcelCol" Type="nvarchar" MaxLength="512" />
         </EntityType>
         <EntityType Name="MessegeToHai">
           <Key>
@@ -701,6 +671,7 @@
           <Property Name="PerPrice" Type="float" />
           <Property Name="QuantityFinish" Type="int" />
           <Property Name="ModifyDate" Type="datetime" />
+          <Property Name="HasBill" Type="int" />
         </EntityType>
         <EntityType Name="OrderProductHistory">
           <Key>
@@ -756,6 +727,7 @@
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="512" />
           <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="Idx" Type="int" />
         </EntityType>
         <EntityType Name="PHistory">
           <Key>
@@ -949,6 +921,7 @@
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="512" />
           <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="Idx" Type="int" />
         </EntityType>
         <EntityType Name="SmsAccount">
           <Key>
@@ -1002,17 +975,6 @@
           <Property Name="AgencyAddress" Type="nvarchar" MaxLength="512" />
           <Property Name="AgencyType" Type="nvarchar" MaxLength="32" />
           <Property Name="AgencyTypeName" Type="nvarchar" MaxLength="256" />
-        </EntityType>
-        <EntityType Name="StaffKPI">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="Title" Type="nvarchar(max)" />
-          <Property Name="StaffId" Type="nvarchar" MaxLength="128" />
-          <Property Name="CreateTime" Type="datetime" />
-          <Property Name="ModiftTime" Type="datetime" />
-          <Property Name="TypeId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="StaffWithC1">
           <Key>
@@ -1413,6 +1375,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__HaiOrder__DStatu__697C9932">
+          <End Role="DeliveryStatus" Type="Self.DeliveryStatus" Multiplicity="0..1" />
+          <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DeliveryStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HaiOrder">
+              <PropertyRef Name="DStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__HaiOrder__OrderS__186C9245">
           <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="0..1" />
           <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="*" />
@@ -1494,54 +1468,6 @@
             </Principal>
             <Dependent Role="HaiStaff">
               <PropertyRef Name="PositionId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__KPIDetail__KPIWo__1DF06171">
-          <End Role="KPIWork" Type="Self.KPIWork" Multiplicity="0..1" />
-          <End Role="KPIDetail" Type="Self.KPIDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KPIWork">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="KPIDetail">
-              <PropertyRef Name="KPIWorkId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__KPIDetail__Staff__1CFC3D38">
-          <End Role="StaffKPI" Type="Self.StaffKPI" Multiplicity="0..1" />
-          <End Role="KPIDetail" Type="Self.KPIDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StaffKPI">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="KPIDetail">
-              <PropertyRef Name="StaffKPIId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__KPITempla__KPITy__127EAEC5">
-          <End Role="KPIType" Type="Self.KPIType" Multiplicity="1" />
-          <End Role="KPITemplate" Type="Self.KPITemplate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KPIType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="KPITemplate">
-              <PropertyRef Name="KPITypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__KPITempla__KPIWo__118A8A8C">
-          <End Role="KPIWork" Type="Self.KPIWork" Multiplicity="1" />
-          <End Role="KPITemplate" Type="Self.KPITemplate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KPIWork">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="KPITemplate">
-              <PropertyRef Name="KPIWorkId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1809,30 +1735,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__StaffKPI__StaffI__174363E2">
-          <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
-          <End Role="StaffKPI" Type="Self.StaffKPI" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="HaiStaff">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StaffKPI">
-              <PropertyRef Name="StaffId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StaffKPI__TypeId__1837881B">
-          <End Role="KPIType" Type="Self.KPIType" Multiplicity="0..1" />
-          <End Role="StaffKPI" Type="Self.StaffKPI" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KPIType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StaffKPI">
-              <PropertyRef Name="TypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__StaffWith__Staff__4C564A9F">
           <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="1" />
           <End Role="StaffWithC2" Type="Self.StaffWithC2" Multiplicity="*" />
@@ -1985,6 +1887,25 @@
           <Parameter Name="month" Type="int" Mode="In" />
           <Parameter Name="year" Type="int" Mode="In" />
         </Function>
+        <Function Name="get_list_orders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fdate" Type="varchar" Mode="In" />
+          <Parameter Name="tdate" Type="varchar" Mode="In" />
+          <Parameter Name="ostt" Type="varchar" Mode="In" />
+          <Parameter Name="dstt" Type="varchar" Mode="In" />
+          <Parameter Name="staff" Type="varchar" Mode="In" />
+          <Parameter Name="c1" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="get_list_orders_by_code" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="code" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="get_list_orders_product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="fdate" Type="varchar" Mode="In" />
+          <Parameter Name="tdate" Type="varchar" Mode="In" />
+          <Parameter Name="ostt" Type="varchar" Mode="In" />
+          <Parameter Name="dstt" Type="varchar" Mode="In" />
+          <Parameter Name="staff" Type="varchar" Mode="In" />
+          <Parameter Name="c1" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="procduct_item_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="nvarchar" Mode="In" />
         </Function>
@@ -2059,6 +1980,7 @@
           <EntitySet Name="CInfoCommon" EntityType="Self.CInfoCommon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DecorGroup" EntityType="Self.DecorGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DecorImage" EntityType="Self.DecorImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeliveryStatus" EntityType="Self.DeliveryStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ErrorInfo" EntityType="Self.ErrorInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EventArea" EntityType="Self.EventArea" Schema="dbo" store:Type="Tables" />
@@ -2080,10 +2002,6 @@
           <EntitySet Name="HaiStaff" EntityType="Self.HaiStaff" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HappyBirthday" EntityType="Self.HappyBirthday" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImeiUser" EntityType="Self.ImeiUser" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="KPIDetail" EntityType="Self.KPIDetail" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="KPITemplate" EntityType="Self.KPITemplate" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="KPIType" EntityType="Self.KPIType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="KPIWork" EntityType="Self.KPIWork" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MessegeToHai" EntityType="Self.MessegeToHai" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MobileFunction" EntityType="Self.MobileFunction" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MobileRole" EntityType="Self.MobileRole" Schema="dbo" store:Type="Tables" />
@@ -2118,7 +2036,6 @@
           <EntitySet Name="SMSCode" EntityType="Self.SMSCode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SMSHistory" EntityType="Self.SMSHistory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StaffCheckIn" EntityType="Self.StaffCheckIn" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="StaffKPI" EntityType="Self.StaffKPI" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StaffWithC1" EntityType="Self.StaffWithC1" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StaffWithC2" EntityType="Self.StaffWithC2" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StoreAgencyId" EntityType="Self.StoreAgencyId" Schema="dbo" store:Type="Tables" />
@@ -2232,6 +2149,10 @@
             <End Role="CInfoCommon" EntitySet="CInfoCommon" />
             <End Role="HaiOrder" EntitySet="HaiOrder" />
           </AssociationSet>
+          <AssociationSet Name="FK__HaiOrder__DStatu__697C9932" Association="Self.FK__HaiOrder__DStatu__697C9932">
+            <End Role="DeliveryStatus" EntitySet="DeliveryStatus" />
+            <End Role="HaiOrder" EntitySet="HaiOrder" />
+          </AssociationSet>
           <AssociationSet Name="FK__HaiOrder__OrderS__186C9245" Association="Self.FK__HaiOrder__OrderS__186C9245">
             <End Role="OrderStatus" EntitySet="OrderStatus" />
             <End Role="HaiOrder" EntitySet="HaiOrder" />
@@ -2259,22 +2180,6 @@
           <AssociationSet Name="FK__HaiStaff__Positi__239E4DCF" Association="Self.FK__HaiStaff__Positi__239E4DCF">
             <End Role="HaiPosition" EntitySet="HaiPosition" />
             <End Role="HaiStaff" EntitySet="HaiStaff" />
-          </AssociationSet>
-          <AssociationSet Name="FK__KPIDetail__KPIWo__1DF06171" Association="Self.FK__KPIDetail__KPIWo__1DF06171">
-            <End Role="KPIWork" EntitySet="KPIWork" />
-            <End Role="KPIDetail" EntitySet="KPIDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK__KPIDetail__Staff__1CFC3D38" Association="Self.FK__KPIDetail__Staff__1CFC3D38">
-            <End Role="StaffKPI" EntitySet="StaffKPI" />
-            <End Role="KPIDetail" EntitySet="KPIDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK__KPITempla__KPITy__127EAEC5" Association="Self.FK__KPITempla__KPITy__127EAEC5">
-            <End Role="KPIType" EntitySet="KPIType" />
-            <End Role="KPITemplate" EntitySet="KPITemplate" />
-          </AssociationSet>
-          <AssociationSet Name="FK__KPITempla__KPIWo__118A8A8C" Association="Self.FK__KPITempla__KPIWo__118A8A8C">
-            <End Role="KPIWork" EntitySet="KPIWork" />
-            <End Role="KPITemplate" EntitySet="KPITemplate" />
           </AssociationSet>
           <AssociationSet Name="FK__MobileRol__Mobil__7D98A078" Association="Self.FK__MobileRol__Mobil__7D98A078">
             <End Role="MobileFunction" EntitySet="MobileFunction" />
@@ -2363,14 +2268,6 @@
           <AssociationSet Name="FK__StaffChec__Staff__47DBAE45" Association="Self.FK__StaffChec__Staff__47DBAE45">
             <End Role="HaiStaff" EntitySet="HaiStaff" />
             <End Role="StaffCheckIn" EntitySet="StaffCheckIn" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StaffKPI__StaffI__174363E2" Association="Self.FK__StaffKPI__StaffI__174363E2">
-            <End Role="HaiStaff" EntitySet="HaiStaff" />
-            <End Role="StaffKPI" EntitySet="StaffKPI" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StaffKPI__TypeId__1837881B" Association="Self.FK__StaffKPI__TypeId__1837881B">
-            <End Role="KPIType" EntitySet="KPIType" />
-            <End Role="StaffKPI" EntitySet="StaffKPI" />
           </AssociationSet>
           <AssociationSet Name="FK__StaffWith__Staff__4C564A9F" Association="Self.FK__StaffWith__Staff__4C564A9F">
             <End Role="HaiStaff" EntitySet="HaiStaff" />
@@ -2977,9 +2874,12 @@
           <Property Name="C1Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="C1Code" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="C1Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Sender" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="UserCreate" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="DateCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SalePlace" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="DStatus" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="DebtTimeLine" Type="Int32" />
+          <NavigationProperty Name="DeliveryStatu" Relationship="DMSHAIModel.FK__HaiOrder__DStatu__697C9932" FromRole="HaiOrder" ToRole="DeliveryStatu" />
         </EntityType>
         <EntityType Name="HaiPosition">
           <Key>
@@ -3029,7 +2929,6 @@
           <NavigationProperty Name="StaffCheckIns" Relationship="Self.FK__StaffChec__Staff__47DBAE45" FromRole="HaiStaff" ToRole="StaffCheckIn" />
           <NavigationProperty Name="StaffWithC2" Relationship="Self.FK__StaffWith__Staff__4C564A9F" FromRole="HaiStaff" ToRole="StaffWithC2" />
           <NavigationProperty Name="C1Info" Relationship="Self.StaffWithC1" FromRole="HaiStaff" ToRole="C1Info" />
-          <NavigationProperty Name="StaffKPIs" Relationship="DMSHAIModel.FK__StaffKPI__StaffI__174363E2" FromRole="HaiStaff" ToRole="StaffKPI" />
         </EntityType>
         <EntityType Name="HappyBirthday">
           <Key>
@@ -3135,6 +3034,7 @@
           <Property Name="ModifyDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="HaiOrder" Relationship="Self.FK__OrderProd__Order__27AED5D5" FromRole="OrderProduct" ToRole="HaiOrder" />
           <NavigationProperty Name="ProductInfo" Relationship="Self.FK__OrderProd__Produ__28A2FA0E" FromRole="OrderProduct" ToRole="ProductInfo" />
+          <Property Name="HasBill" Type="Int32" />
         </EntityType>
         <EntityType Name="OrderProductHistory">
           <Key>
@@ -3199,6 +3099,7 @@
           <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="HaiOrders" Relationship="Self.FK__HaiOrder__PayTyp__1590259A" FromRole="PayType" ToRole="HaiOrder" />
+          <Property Name="Idx" Type="Int32" />
         </EntityType>
         <EntityType Name="PHistory">
           <Key>
@@ -3401,6 +3302,7 @@
           <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="HaiOrders" Relationship="Self.FK__HaiOrder__ShipTy__168449D3" FromRole="ShipType" ToRole="HaiOrder" />
+          <Property Name="Idx" Type="Int32" />
         </EntityType>
         <EntityType Name="SmsAccount">
           <Key>
@@ -4603,35 +4505,30 @@
             <Parameter Name="fDate" Mode="In" Type="String" />
             <Parameter Name="tDate" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="KPIDetails" EntityType="DMSHAIModel.KPIDetail" />
-          <EntitySet Name="KPITemplates" EntityType="DMSHAIModel.KPITemplate" />
-          <EntitySet Name="KPITypes" EntityType="DMSHAIModel.KPIType" />
-          <EntitySet Name="KPIWorks" EntityType="DMSHAIModel.KPIWork" />
-          <EntitySet Name="StaffKPIs" EntityType="DMSHAIModel.StaffKPI" />
-          <AssociationSet Name="FK__StaffKPI__StaffI__174363E2" Association="DMSHAIModel.FK__StaffKPI__StaffI__174363E2">
-            <End Role="HaiStaff" EntitySet="HaiStaffs" />
-            <End Role="StaffKPI" EntitySet="StaffKPIs" />
+          <EntitySet Name="DeliveryStatus" EntityType="DMSHAIModel.DeliveryStatu" />
+          <AssociationSet Name="FK__HaiOrder__DStatu__697C9932" Association="DMSHAIModel.FK__HaiOrder__DStatu__697C9932">
+            <End Role="DeliveryStatu" EntitySet="DeliveryStatus" />
+            <End Role="HaiOrder" EntitySet="HaiOrders" />
           </AssociationSet>
-          <AssociationSet Name="FK__KPIDetail__KPIWo__1DF06171" Association="DMSHAIModel.FK__KPIDetail__KPIWo__1DF06171">
-            <End Role="KPIWork" EntitySet="KPIWorks" />
-            <End Role="KPIDetail" EntitySet="KPIDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK__KPIDetail__Staff__1CFC3D38" Association="DMSHAIModel.FK__KPIDetail__Staff__1CFC3D38">
-            <End Role="StaffKPI" EntitySet="StaffKPIs" />
-            <End Role="KPIDetail" EntitySet="KPIDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK__KPITempla__KPITy__127EAEC5" Association="DMSHAIModel.FK__KPITempla__KPITy__127EAEC5">
-            <End Role="KPIType" EntitySet="KPITypes" />
-            <End Role="KPITemplate" EntitySet="KPITemplates" />
-          </AssociationSet>
-          <AssociationSet Name="FK__KPITempla__KPIWo__118A8A8C" Association="DMSHAIModel.FK__KPITempla__KPIWo__118A8A8C">
-            <End Role="KPIWork" EntitySet="KPIWorks" />
-            <End Role="KPITemplate" EntitySet="KPITemplates" />
-          </AssociationSet>
-          <AssociationSet Name="FK__StaffKPI__TypeId__1837881B" Association="DMSHAIModel.FK__StaffKPI__TypeId__1837881B">
-            <End Role="KPIType" EntitySet="KPITypes" />
-            <End Role="StaffKPI" EntitySet="StaffKPIs" />
-          </AssociationSet>
+          <FunctionImport Name="get_list_orders" ReturnType="Collection(DMSHAIModel.get_list_orders_Result)">
+            <Parameter Name="fdate" Mode="In" Type="String" />
+            <Parameter Name="tdate" Mode="In" Type="String" />
+            <Parameter Name="ostt" Mode="In" Type="String" />
+            <Parameter Name="dstt" Mode="In" Type="String" />
+            <Parameter Name="staff" Mode="In" Type="String" />
+            <Parameter Name="c1" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="get_list_orders_by_code" ReturnType="Collection(DMSHAIModel.get_list_orders_Result)">
+            <Parameter Name="code" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="get_list_orders_product" ReturnType="Collection(DMSHAIModel.get_list_orders_product_Result)">
+            <Parameter Name="fdate" Mode="In" Type="String" />
+            <Parameter Name="tdate" Mode="In" Type="String" />
+            <Parameter Name="ostt" Mode="In" Type="String" />
+            <Parameter Name="dstt" Mode="In" Type="String" />
+            <Parameter Name="staff" Mode="In" Type="String" />
+            <Parameter Name="c1" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="checkin_calendartype_group_Result">
           <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
@@ -4937,139 +4834,132 @@
           <Property Type="DateTime" Name="ExpectDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="Branch" Nullable="true" MaxLength="32" />
         </ComplexType>
-        <EntityType Name="KPIDetail">
+        <EntityType Name="DeliveryStatu">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="PlanPoint" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Perform" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="PlanPercent" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Point" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="StaffKPIId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="KPIWorkId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Number" Type="Int32" />
-          <NavigationProperty Name="KPIWork" Relationship="DMSHAIModel.FK__KPIDetail__KPIWo__1DF06171" FromRole="KPIDetail" ToRole="KPIWork" />
-          <NavigationProperty Name="StaffKPI" Relationship="DMSHAIModel.FK__KPIDetail__Staff__1CFC3D38" FromRole="KPIDetail" ToRole="StaffKPI" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HaiOrders" Relationship="DMSHAIModel.FK__HaiOrder__DStatu__697C9932" FromRole="DeliveryStatu" ToRole="HaiOrder" />
         </EntityType>
-        <EntityType Name="KPITemplate">
-          <Key>
-            <PropertyRef Name="KPIWorkId" />
-            <PropertyRef Name="KPITypeId" />
-          </Key>
-          <Property Name="KPIWorkId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="KPITypeId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Number" Type="Int32" />
-          <NavigationProperty Name="KPIType" Relationship="DMSHAIModel.FK__KPITempla__KPITy__127EAEC5" FromRole="KPITemplate" ToRole="KPIType" />
-          <NavigationProperty Name="KPIWork" Relationship="DMSHAIModel.FK__KPITempla__KPIWo__118A8A8C" FromRole="KPITemplate" ToRole="KPIWork" />
-        </EntityType>
-        <EntityType Name="KPIType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="KPITemplates" Relationship="DMSHAIModel.FK__KPITempla__KPITy__127EAEC5" FromRole="KPIType" ToRole="KPITemplate" />
-          <NavigationProperty Name="StaffKPIs" Relationship="DMSHAIModel.FK__StaffKPI__TypeId__1837881B" FromRole="KPIType" ToRole="StaffKPI" />
-        </EntityType>
-        <EntityType Name="KPIWork">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="STT" Type="Int32" />
-          <Property Name="ExcelCol" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="KPIDetails" Relationship="DMSHAIModel.FK__KPIDetail__KPIWo__1DF06171" FromRole="KPIWork" ToRole="KPIDetail" />
-          <NavigationProperty Name="KPITemplates" Relationship="DMSHAIModel.FK__KPITempla__KPIWo__118A8A8C" FromRole="KPIWork" ToRole="KPITemplate" />
-        </EntityType>
-        <EntityType Name="StaffKPI">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="CreateTime" Type="DateTime" Precision="3" />
-          <Property Name="ModiftTime" Type="DateTime" Precision="3" />
-          <Property Name="TypeId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="HaiStaff" Relationship="DMSHAIModel.FK__StaffKPI__StaffI__174363E2" FromRole="StaffKPI" ToRole="HaiStaff" />
-          <NavigationProperty Name="KPIDetails" Relationship="DMSHAIModel.FK__KPIDetail__Staff__1CFC3D38" FromRole="StaffKPI" ToRole="KPIDetail" />
-          <NavigationProperty Name="KPIType" Relationship="DMSHAIModel.FK__StaffKPI__TypeId__1837881B" FromRole="StaffKPI" ToRole="KPIType" />
-        </EntityType>
-        <Association Name="FK__StaffKPI__StaffI__174363E2">
-          <End Type="DMSHAIModel.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
-          <End Type="DMSHAIModel.StaffKPI" Role="StaffKPI" Multiplicity="*" />
+        <Association Name="FK__HaiOrder__DStatu__697C9932">
+          <End Type="DMSHAIModel.DeliveryStatu" Role="DeliveryStatu" Multiplicity="0..1" />
+          <End Type="DMSHAIModel.HaiOrder" Role="HaiOrder" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="HaiStaff">
+            <Principal Role="DeliveryStatu">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="StaffKPI">
-              <PropertyRef Name="StaffId" />
+            <Dependent Role="HaiOrder">
+              <PropertyRef Name="DStatus" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__KPIDetail__KPIWo__1DF06171">
-          <End Type="DMSHAIModel.KPIWork" Role="KPIWork" Multiplicity="0..1" />
-          <End Type="DMSHAIModel.KPIDetail" Role="KPIDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KPIWork">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="KPIDetail">
-              <PropertyRef Name="KPIWorkId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__KPIDetail__Staff__1CFC3D38">
-          <End Type="DMSHAIModel.StaffKPI" Role="StaffKPI" Multiplicity="0..1" />
-          <End Type="DMSHAIModel.KPIDetail" Role="KPIDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="StaffKPI">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="KPIDetail">
-              <PropertyRef Name="StaffKPIId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__KPITempla__KPITy__127EAEC5">
-          <End Type="DMSHAIModel.KPIType" Role="KPIType" Multiplicity="1" />
-          <End Type="DMSHAIModel.KPITemplate" Role="KPITemplate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KPIType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="KPITemplate">
-              <PropertyRef Name="KPITypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__KPITempla__KPIWo__118A8A8C">
-          <End Type="DMSHAIModel.KPIWork" Role="KPIWork" Multiplicity="1" />
-          <End Type="DMSHAIModel.KPITemplate" Role="KPITemplate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KPIWork">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="KPITemplate">
-              <PropertyRef Name="KPIWorkId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__StaffKPI__TypeId__1837881B">
-          <End Type="DMSHAIModel.KPIType" Role="KPIType" Multiplicity="0..1" />
-          <End Type="DMSHAIModel.StaffKPI" Role="StaffKPI" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KPIType">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="StaffKPI">
-              <PropertyRef Name="TypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <ComplexType Name="get_list_orders_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="OrderType" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="PayType" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="ShipType" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Agency" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="ReceiveAddress" Nullable="true" />
+          <Property Type="String" Name="ReceivePhone1" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="ReceivePhone2" Nullable="true" MaxLength="32" />
+          <Property Type="DateTime" Name="ExpectDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="OrderStatus" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Notes" Nullable="true" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="128" />
+          <Property Type="Double" Name="PriceTotal" Nullable="true" />
+          <Property Type="String" Name="BrachCode" Nullable="true" MaxLength="32" />
+          <Property Type="Int32" Name="OrderNumber" Nullable="true" />
+          <Property Type="String" Name="C1Id" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="C1Code" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="C1Name" Nullable="true" />
+          <Property Type="String" Name="UserCreate" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="DateCode" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="SalePlace" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="DStatus" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="DebtTimeLine" Nullable="true" />
+          <Property Type="String" Name="Store" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="Deputy" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="AgencyCode" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="StaffId" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="StaffCode" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="StaffName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="ProductTotal" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="get_list_orders_by_code_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="OrderType" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="PayType" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="ShipType" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Agency" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="ReceiveAddress" Nullable="true" />
+          <Property Type="String" Name="ReceivePhone1" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="ReceivePhone2" Nullable="true" MaxLength="32" />
+          <Property Type="DateTime" Name="ExpectDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="OrderStatus" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Notes" Nullable="true" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="128" />
+          <Property Type="Double" Name="PriceTotal" Nullable="true" />
+          <Property Type="String" Name="BrachCode" Nullable="true" MaxLength="32" />
+          <Property Type="Int32" Name="OrderNumber" Nullable="true" />
+          <Property Type="String" Name="C1Id" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="C1Code" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="C1Name" Nullable="true" />
+          <Property Type="String" Name="UserCreate" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="DateCode" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="SalePlace" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="DStatus" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="DebtTimeLine" Nullable="true" />
+          <Property Type="String" Name="Store" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="Deputy" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="AgencyCode" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="StaffId" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="StaffCode" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="StaffName" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="ProductTotal" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="get_list_orders_product_Result">
+          <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="OrderType" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="PayType" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="ShipType" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Agency" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="ReceiveAddress" Nullable="true" />
+          <Property Type="String" Name="ReceivePhone1" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="ReceivePhone2" Nullable="true" MaxLength="32" />
+          <Property Type="DateTime" Name="ExpectDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="OrderStatus" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Notes" Nullable="true" />
+          <Property Type="String" Name="Code" Nullable="true" MaxLength="128" />
+          <Property Type="Double" Name="PriceTotal" Nullable="true" />
+          <Property Type="String" Name="BrachCode" Nullable="true" MaxLength="32" />
+          <Property Type="Int32" Name="OrderNumber" Nullable="true" />
+          <Property Type="String" Name="C1Id" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="C1Code" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="C1Name" Nullable="true" />
+          <Property Type="String" Name="UserCreate" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="DateCode" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="SalePlace" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="DStatus" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="DebtTimeLine" Nullable="true" />
+          <Property Type="String" Name="Store" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="Deputy" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="AgencyCode" Nullable="true" MaxLength="32" />
+          <Property Type="String" Name="StaffId" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="StaffCode" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="StaffName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
+          <Property Type="String" Name="PCode" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="PQuantity" Nullable="true" />
+          <Property Type="Int32" Name="HasBill" Nullable="true" />
+          <Property Type="Double" Name="PerPrice" Nullable="true" />
+          <Property Type="Double" Name="PPriceTotal" Nullable="true" />
+          <Property Type="Int32" Name="OrderQuantity" Nullable="true" />
+          <Property Type="Int32" Name="QuantityFinish" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5580,9 +5470,11 @@
           <EntitySetMapping Name="HaiOrders">
             <EntityTypeMapping TypeName="DMSHAIModel.HaiOrder">
               <MappingFragment StoreEntitySet="HaiOrder">
+                <ScalarProperty Name="DebtTimeLine" ColumnName="DebtTimeLine" />
+                <ScalarProperty Name="DStatus" ColumnName="DStatus" />
+                <ScalarProperty Name="SalePlace" ColumnName="SalePlace" />
                 <ScalarProperty Name="DateCode" ColumnName="DateCode" />
                 <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
-                <ScalarProperty Name="Sender" ColumnName="Sender" />
                 <ScalarProperty Name="C1Name" ColumnName="C1Name" />
                 <ScalarProperty Name="C1Code" ColumnName="C1Code" />
                 <ScalarProperty Name="C1Id" ColumnName="C1Id" />
@@ -5739,6 +5631,7 @@
           <EntitySetMapping Name="OrderProducts">
             <EntityTypeMapping TypeName="DMSHAIModel.OrderProduct">
               <MappingFragment StoreEntitySet="OrderProduct">
+                <ScalarProperty Name="HasBill" ColumnName="HasBill" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
@@ -5804,6 +5697,7 @@
           <EntitySetMapping Name="PayTypes">
             <EntityTypeMapping TypeName="DMSHAIModel.PayType">
               <MappingFragment StoreEntitySet="PayType">
+                <ScalarProperty Name="Idx" ColumnName="Idx" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
@@ -6004,6 +5898,7 @@
           <EntitySetMapping Name="ShipTypes">
             <EntityTypeMapping TypeName="DMSHAIModel.ShipType">
               <MappingFragment StoreEntitySet="ShipType">
+                <ScalarProperty Name="Idx" ColumnName="Idx" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
@@ -6514,60 +6409,132 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="KPIDetails">
-            <EntityTypeMapping TypeName="DMSHAIModel.KPIDetail">
-              <MappingFragment StoreEntitySet="KPIDetail">
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="KPIWorkId" ColumnName="KPIWorkId" />
-                <ScalarProperty Name="StaffKPIId" ColumnName="StaffKPIId" />
-                <ScalarProperty Name="Point" ColumnName="Point" />
-                <ScalarProperty Name="PlanPercent" ColumnName="PlanPercent" />
-                <ScalarProperty Name="Perform" ColumnName="Perform" />
-                <ScalarProperty Name="PlanPoint" ColumnName="PlanPoint" />
+          <EntitySetMapping Name="DeliveryStatus">
+            <EntityTypeMapping TypeName="DMSHAIModel.DeliveryStatu">
+              <MappingFragment StoreEntitySet="DeliveryStatus">
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="KPITemplates">
-            <EntityTypeMapping TypeName="DMSHAIModel.KPITemplate">
-              <MappingFragment StoreEntitySet="KPITemplate">
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="KPITypeId" ColumnName="KPITypeId" />
-                <ScalarProperty Name="KPIWorkId" ColumnName="KPIWorkId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="KPITypes">
-            <EntityTypeMapping TypeName="DMSHAIModel.KPIType">
-              <MappingFragment StoreEntitySet="KPIType">
+          <FunctionImportMapping FunctionImportName="get_list_orders" FunctionName="DMSHAIModel.Store.get_list_orders">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DMSHAIModel.get_list_orders_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="ShipType" ColumnName="ShipType" />
+                <ScalarProperty Name="Agency" ColumnName="Agency" />
+                <ScalarProperty Name="ReceiveAddress" ColumnName="ReceiveAddress" />
+                <ScalarProperty Name="ReceivePhone1" ColumnName="ReceivePhone1" />
+                <ScalarProperty Name="ReceivePhone2" ColumnName="ReceivePhone2" />
+                <ScalarProperty Name="ExpectDate" ColumnName="ExpectDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="KPIWorks">
-            <EntityTypeMapping TypeName="DMSHAIModel.KPIWork">
-              <MappingFragment StoreEntitySet="KPIWork">
-                <ScalarProperty Name="ExcelCol" ColumnName="ExcelCol" />
-                <ScalarProperty Name="STT" ColumnName="STT" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="StaffKPIs">
-            <EntityTypeMapping TypeName="DMSHAIModel.StaffKPI">
-              <MappingFragment StoreEntitySet="StaffKPI">
-                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
-                <ScalarProperty Name="ModiftTime" ColumnName="ModiftTime" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="PriceTotal" ColumnName="PriceTotal" />
+                <ScalarProperty Name="BrachCode" ColumnName="BrachCode" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="C1Id" ColumnName="C1Id" />
+                <ScalarProperty Name="C1Code" ColumnName="C1Code" />
+                <ScalarProperty Name="C1Name" ColumnName="C1Name" />
+                <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+                <ScalarProperty Name="DateCode" ColumnName="DateCode" />
+                <ScalarProperty Name="SalePlace" ColumnName="SalePlace" />
+                <ScalarProperty Name="DStatus" ColumnName="DStatus" />
+                <ScalarProperty Name="DebtTimeLine" ColumnName="DebtTimeLine" />
+                <ScalarProperty Name="Store" ColumnName="Store" />
+                <ScalarProperty Name="Deputy" ColumnName="Deputy" />
+                <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
                 <ScalarProperty Name="StaffId" ColumnName="StaffId" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="StaffCode" ColumnName="StaffCode" />
+                <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+                <ScalarProperty Name="ProductTotal" ColumnName="ProductTotal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="get_list_orders_by_code" FunctionName="DMSHAIModel.Store.get_list_orders_by_code">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="DMSHAIModel.get_list_orders_Result">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="ShipType" ColumnName="ShipType" />
+                <ScalarProperty Name="Agency" ColumnName="Agency" />
+                <ScalarProperty Name="ReceiveAddress" ColumnName="ReceiveAddress" />
+                <ScalarProperty Name="ReceivePhone1" ColumnName="ReceivePhone1" />
+                <ScalarProperty Name="ReceivePhone2" ColumnName="ReceivePhone2" />
+                <ScalarProperty Name="ExpectDate" ColumnName="ExpectDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="PriceTotal" ColumnName="PriceTotal" />
+                <ScalarProperty Name="BrachCode" ColumnName="BrachCode" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="C1Id" ColumnName="C1Id" />
+                <ScalarProperty Name="C1Code" ColumnName="C1Code" />
+                <ScalarProperty Name="C1Name" ColumnName="C1Name" />
+                <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+                <ScalarProperty Name="DateCode" ColumnName="DateCode" />
+                <ScalarProperty Name="SalePlace" ColumnName="SalePlace" />
+                <ScalarProperty Name="DStatus" ColumnName="DStatus" />
+                <ScalarProperty Name="DebtTimeLine" ColumnName="DebtTimeLine" />
+                <ScalarProperty Name="Store" ColumnName="Store" />
+                <ScalarProperty Name="Deputy" ColumnName="Deputy" />
+                <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+                <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+                <ScalarProperty Name="StaffCode" ColumnName="StaffCode" />
+                <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+                <ScalarProperty Name="ProductTotal" ColumnName="ProductTotal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="get_list_orders_product" FunctionName="DMSHAIModel.Store.get_list_orders_product">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DMSHAIModel.get_list_orders_product_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="ShipType" ColumnName="ShipType" />
+                <ScalarProperty Name="Agency" ColumnName="Agency" />
+                <ScalarProperty Name="ReceiveAddress" ColumnName="ReceiveAddress" />
+                <ScalarProperty Name="ReceivePhone1" ColumnName="ReceivePhone1" />
+                <ScalarProperty Name="ReceivePhone2" ColumnName="ReceivePhone2" />
+                <ScalarProperty Name="ExpectDate" ColumnName="ExpectDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="PriceTotal" ColumnName="PriceTotal" />
+                <ScalarProperty Name="BrachCode" ColumnName="BrachCode" />
+                <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+                <ScalarProperty Name="C1Id" ColumnName="C1Id" />
+                <ScalarProperty Name="C1Code" ColumnName="C1Code" />
+                <ScalarProperty Name="C1Name" ColumnName="C1Name" />
+                <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+                <ScalarProperty Name="DateCode" ColumnName="DateCode" />
+                <ScalarProperty Name="SalePlace" ColumnName="SalePlace" />
+                <ScalarProperty Name="DStatus" ColumnName="DStatus" />
+                <ScalarProperty Name="DebtTimeLine" ColumnName="DebtTimeLine" />
+                <ScalarProperty Name="Store" ColumnName="Store" />
+                <ScalarProperty Name="Deputy" ColumnName="Deputy" />
+                <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+                <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+                <ScalarProperty Name="StaffCode" ColumnName="StaffCode" />
+                <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+                <ScalarProperty Name="PName" ColumnName="PName" />
+                <ScalarProperty Name="PCode" ColumnName="PCode" />
+                <ScalarProperty Name="PQuantity" ColumnName="PQuantity" />
+                <ScalarProperty Name="HasBill" ColumnName="HasBill" />
+                <ScalarProperty Name="PerPrice" ColumnName="PerPrice" />
+                <ScalarProperty Name="PPriceTotal" ColumnName="PPriceTotal" />
+                <ScalarProperty Name="OrderQuantity" ColumnName="OrderQuantity" />
+                <ScalarProperty Name="QuantityFinish" ColumnName="QuantityFinish" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

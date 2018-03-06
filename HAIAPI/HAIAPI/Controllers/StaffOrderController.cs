@@ -5,6 +5,8 @@ using System.Linq;
 using PagedList;
 using System.Web.Http;
 using System.Web.Script.Serialization;
+using System.Data.Entity;
+using PagedList;
 
 namespace HAIAPI.Controllers
 {
@@ -26,7 +28,8 @@ namespace HAIAPI.Controllers
             var result = new YourOrderResult()
             {
                 id = "1",
-                msg = "success"
+                msg = "success", 
+                orders= new List<YourOrder>()
             };
 
             try
@@ -46,15 +49,46 @@ namespace HAIAPI.Controllers
                     throw new Exception("Sai thong tin");
 
 
-                int pageSize = 20;
+                int pageSize = 50;
                 int pageNumber = (paser.page ?? 1);
 
+                if (String.IsNullOrEmpty(paser.fdate) || String.IsNullOrEmpty(paser.tdate))
+                {
+                    paser.tdate = DateTime.Now.ToString("d/M/yyyy");
+                    paser.fdate = DateTime.Now.ToString("d/M/yyyy");
+                }
 
-                List<HaiOrder> data = new List<HaiOrder>();
 
-                data = staff.OrderStaffs.Where(p => p.HaiOrder.CInfoCommon.CCode.Contains(paser.c2Code) && p.ProcessId == "create").Select(p => p.HaiOrder).OrderByDescending(p => p.CreateDate).ToPagedList(pageNumber, pageSize).ToList();
+                if (String.IsNullOrEmpty(paser.place))
+                {
+                    paser.place = "";
+                }
 
-                List<YourOrder> orders = new List<YourOrder>();
+                if (String.IsNullOrEmpty(paser.status))
+                {
+                    paser.status = "";
+                }
+
+                if (String.IsNullOrEmpty(paser.c1Code))
+                {
+                    paser.c1Code = "";
+                }
+
+
+                //data = staff.OrderStaffs.Where(p => p.HaiOrder.CInfoCommon.CCode.Contains(paser.c2Code) && p.ProcessId == "create").Select(p => p.HaiOrder).OrderByDescending(p => p.CreateDate).ToPagedList(pageNumber, pageSize).ToList();
+                 DateTime fromDate = DateTime.ParseExact(paser.fdate, "d/M/yyyy", null);
+
+                DateTime toDate = DateTime.ParseExact(paser.tdate, "d/M/yyyy", null);
+
+                var data = (from p in db.OrderStaffs
+                            where DbFunctions.TruncateTime(p.CreateTime)
+                                               >= DbFunctions.TruncateTime(fromDate) && DbFunctions.TruncateTime(p.CreateTime)
+                                               <= DbFunctions.TruncateTime(toDate) && p.ProcessId == "create" && p.HaiOrder.C1Code.Contains(paser.c1Code) 
+                                               && p.HaiOrder.SalePlace.Contains(paser.place) && p.HaiOrder.DStatus.Contains(paser.status)
+                            select p.HaiOrder).OrderByDescending(p => p.CreateDate).ToPagedList(pageNumber, pageSize);
+
+
+               // List<YourOrder> orders = new List<YourOrder>();
 
                 foreach (var order in data)
                 {
@@ -69,8 +103,21 @@ namespace HAIAPI.Controllers
                         orderId = order.Id,
                         phone = order.ReceivePhone1,
                         status = order.OrderStt.Name,
-                        money = order.PriceTotal==null?0:order.PriceTotal
+                        money = order.PriceTotal==null?0:order.PriceTotal,
+                        statusCode = order.OrderStt.Id,
+                        deliveryStatus = order.DeliveryStatu.Name,
+                        deliveryStatusCode = order.DeliveryStatu.Id,
+                        shipInfo = order.SType.Name
                     };
+
+                    if (order.PayType == "debt")
+                    {
+                        yourOrder.payInfo = order.PType.Name + " - " + order.DebtTimeLine + " ngày";
+                    }
+                    else
+                    {
+                        yourOrder.payInfo = order.PType.Name;
+                    }
 
                     if (order.SalePlace == "B")
                     {
@@ -83,9 +130,9 @@ namespace HAIAPI.Controllers
                     }
 
                     yourOrder.productCount = order.OrderProducts.Count();
-                    orders.Add(yourOrder);
+                    result.orders.Add(yourOrder);
                 }
-                result.orders = orders;
+              //  result.orders = orders;
             }
             catch (Exception e)
             {

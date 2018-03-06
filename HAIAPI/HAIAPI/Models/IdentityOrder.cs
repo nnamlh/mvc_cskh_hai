@@ -39,6 +39,9 @@ namespace HAIAPI.Models
         // 0: dat hang ngoai
 
         public string c1 { get; set; }
+
+
+        public int debtTime { get; set; }
     }
 
     public class OrderProductInfo
@@ -46,6 +49,8 @@ namespace HAIAPI.Models
         public string code { get; set; }
 
         public int quantity { get; set; }
+
+        public int hasBill { get; set; }
     }
 
 
@@ -123,11 +128,21 @@ namespace HAIAPI.Models
 
         public string status { get; set; }
 
+        public string statusCode { get; set; }
+
+        public string deliveryStatus { get; set; }
+
+        public string deliveryStatusCode { get; set; }
+
         public string senderCode { get; set; }
 
         public string senderName { get; set; }
 
         public double? money { get; set; }
+
+        public string payInfo { get; set; }
+
+        public string shipInfo { get; set; }
 
     }
 
@@ -143,17 +158,6 @@ namespace HAIAPI.Models
 
         public int? quantity { get; set; }
 
-        /*
-        public string c1Id { get; set; }
-
-        public string c1Code { get; set; }
-
-        public string c1Store { get; set; }
-
-        public string c1Address { get; set; }
-
-        public string c1Phone { get; set; }
-        */
         public double? price { get; set; }
 
         public double? perPrice { get; set; }
@@ -161,6 +165,8 @@ namespace HAIAPI.Models
         public string unit { get; set; }
 
         public int? quantityBox { get; set; }
+
+        public int? hasBill { get; set; }
     }
 
     public class ProductOrderHistory

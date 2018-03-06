@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<NDHSITE.Models.HaiOrder>
+﻿@model PagedList.IPagedList<NDHSITE.Models.get_list_orders_Result>
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "Show";
@@ -13,82 +13,199 @@
     </ol>
 </div> <!-- /.page-header -->
 
-<form>
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label>Cấp 1 / CN</label>
-                <input type="text" name="search" class="form-control" value="@ViewBag.Search" />
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <label>Tình trạng</label>
-            <select class="form-control" name="status">
-                <option value="begin" @(ViewBag.Status == "begin" ? "selected" : "")>Đang liên hệ</option>
-                <option value="process" @(ViewBag.Status == "process" ? "selected" : "")>Đang giao hàng</option>
-                <option value="finish" @(ViewBag.Status == "finish" ? "selected" : "")>Kết thúc</option>
-                <option value="cancel" @(ViewBag.Status == "cancel" ? "selected" : "")>Đã hủy</option>
-            </select>
-        </div>
-        <div class="col-sm-12">
-            <button class="btn btn-primary" type="submit">Xem</button>
-        </div>
-    </div>
 
-
-</form>
-<br />
-<br />
 <div class="portlet portlet-boxed">
     <div class="portlet-body">
+        <div class="row">
 
-        <div class="table-responsive">
+            <form method="get" id="formload">
 
-            <table class="table table-striped table-bordered thumbnail-table">
-                <thead>
-                    <tr>
-                        <th>Nơi bán</th>
-                        <th>Đại lý cấp 2</th>
-                        <th>Chi tiết</th>
-                    </tr>
-                </thead>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label>Tìm theo mã đơn hàng</label>
+                        <input type="text" name="OrderCode" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Từ ngày</label>
+                        <input type="text" class="form-control datetime" name="DateFrom" value="@ViewBag.DateFrom" />
+                    </div>
+                    <div class="form-group">
+                        <label>Đến ngày</label>
+                        <input type="text" class="form-control datetime" name="DateTo" value="@ViewBag.DateTo" />
+                    </div>
+                    <div class="form-group">
+                        <label>Mã nhân viên</label>
+                        <input type="text" name="StaffCode" class="form-control" value="@ViewBag.StaffCode" />
+                    </div>
+                   
+                </div>
 
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @if (item.Sender == "CI")
-                                {
-                                    @item.C1Code <br />
-                                    @item.C1Name
-                                }
-                                else
-                                {
-                                    <p>Lấy hàng tại chi nhánh (@item.BrachCode)</p>
-                                }
-                            </td>
-                            <td>
-                                @item.CInfoCommon.CName - @item.CInfoCommon.CCode
-                            </td>
-                            <td>
-                                <span><strong>Mã hàng: </strong>@item.Code</span><br />
-                                <span><strong>Tình trạng: </strong>@item.OStatus.Name</span><br />
-                                <span><strong>Hình thức giao:</strong> </span>@item.SType.Name<br />
-                                <span><strong>Thanh toán:</strong> </span>@item.PType.Name<br />
-                                <span><strong>Địa chỉ:</strong> </span>@item.ReceiveAddress<br />
-                                <span><strong>Điện thoại:</strong> </span>@item.ReceivePhone1<br />
-                                <span><strong>Thời gian đặt: </strong>@item.CreateDate</span><br />
-                                <span><strong>Ngày đề nghị: </strong>@item.ExpectDate</span><br />
-                                <span><a href="/order/detail/@item.Id" target="_blank">Chi tiết</a></span>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-            @Html.PagedListPager(Model, page => Url.Action("show",
-                                                   new { page, status = ViewBag.Status, c1 = ViewBag.C1, branch = ViewBag.Branch }))
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label>Tình trạng xử lý</label>
+                        <select class="form-control" name="ProcessId">
+                            <option value="">Tất cả</option>
+                            <option value="process" @(ViewBag.ProcessId == "process" ? "selected" : "")>Đang xử lý</option>
+                            <option value="finish" @(ViewBag.ProcessId == "finish" ? "selected" : "")>Hoàn thành</option>
+                            <option value="cancel" @(ViewBag.ProcessId == "cancel" ? "selected" : "")>Đã hủy</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Tình trạng giao hàng</label>
+                        <select class="form-control" name="StatusId">
+                            <option value="">Tất cả</option>
+                            <option value="incomplete" @(ViewBag.StatusId == "incomplete" ? "selected" : "")>Chưa giao</option>
+                            <option value="complete" @(ViewBag.StatusId == "complete" ? "selected" : "")>Giao đủ</option>
+                            <option value="less" @(ViewBag.StatusId == "less" ? "selected" : "")>Giao ít hơn</option>
+                            <option value="more" @(ViewBag.StatusId == "more" ? "selected" : "")>Giao nhiều hơn</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Chọn nơi lấy</label>
+                        <select class="form-control" name="SalePlace" id="saleplace">
+                            <option value="" >Tất cả</option>
+                            <option value="B" @(ViewBag.SalePlace == "B" ? "selected" : "")>Chi nhánh</option>
+                            <option value="CI" @(ViewBag.SalePlace == "CI" ? "selected" : "")>Đại lý cấp 1</option>
+                        </select>
+                    </div>
+                    <div class="form-group" id="c1choose">
+                        <label>Cấp 1</label>
+                        <input type="text" name="C1Code" class="form-control" value="@ViewBag.C1Code" />
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <button class="btn btn-primary" type="button" onclick="formload('/order/show')">Xem</button>
+                </div>
+      
+            </form>
+
+            <div class="col-sm-12">
+                <br />
+                <br />
+                <div class="table-responsive">
+                    <a href="javascript:formload('/order/listorderexcel')">Tải Excel</a>
+                    <table class="table table-striped table-bordered thumbnail-table">
+                        <thead>
+                            <tr>
+                                <th>Số ĐH</th>
+                                <th>Ngày đặt</th>
+                                <th>Ngày dự kiến</th>
+                                <th>Nhân viên</th>
+                                <th>Cấp 2</th>
+                                <th>Cấp 1</th>
+                                <th>TT xử lý</th>
+                                <th>TT giao hàng</th>
+                                <th>Tống SL</th>
+                                <th>Tổng tiền</th>
+                                <th>#</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                
+                                <tr>
+                                   <td>@item.Code</td>
+                                    <td>@item.CreateDate.Value.ToString("dd/MM/yyyy")</td>
+                                    <td>@(item.ExpectDate != null?item.ExpectDate.Value.ToString("dd/MM/yyyy"):"")</td>
+                                    <td>@item.StaffName - @item.StaffCode</td>
+                                    <td>@item.Store - @item.AgencyCode</td>
+                                    <td>@item.C1Name - @item.C1Code</td>
+                                    <td>
+                                        @if (item.OrderStatus == "process")
+                                        {
+                                            <span>Đang xử lý</span>
+                                        }
+                                        else if (item.OrderStatus == "finish")
+                                        {
+                                            <span>Hoàn thành</span>
+                                        }
+                                        else if (item.OrderStatus == "cancel")
+                                        {
+                                            <span>Hủy</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (item.DStatus == "complete")
+                                        {
+                                            <span>Giao đủ</span>
+                                        }
+                                        else if (item.DStatus == "incomplete")
+                                        {
+                                            <span>Chưa giao</span>
+                                        }
+                                        else if (item.DStatus == "less")
+                                        {
+                                            <span>Giao ít hơn</span>
+                                        }
+                                        else if (item.DStatus == "more")
+                                        {
+                                            <span>Giao nhiều hơn</span>
+                                        }
+                                    </td>
+                                    <td>@item.ProductTotal</td>
+                                    <td>@item.PriceTotal.Value.ToString("C", NDHSITE.Util.Cultures.VietNam)</td>
+                                    <td>
+                                        <a href="/order/detail/@item.Id">Chi tiết</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+                    @Html.PagedListPager(Model, page => Url.Action("show",
+                                                                                                                                                                                                   new { page, OrderCode = ViewBag.OrderCode, DateFrom = ViewBag.DateFrom, DateTo = ViewBag.DateTo, StaffCode = ViewBag.StaffCode, ProcessId = ViewBag.ProcessId, StatusId = ViewBag.StatusId, SalePlace = ViewBag.SalePlace, C1Code = ViewBag.C1Code }))
+                </div>
+            </div>
+
+
         </div>
     </div>
 </div>
+
+
+@section styles {
+
+    <link href="~/content/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <!-- bootstrap select-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/css/bootstrap-select.min.css">
+}
+
+@section scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/js/bootstrap-select.min.js"></script>
+    <!-- date bootstrap -->
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/scripts/moment-with-locales.min.js"></script>
+    <script src="~/scripts/bootstrap-datetimepicker.min.js"></script>
+
+    <script type="text/javascript">
+        $('.datetime').datetimepicker({
+            locale: 'vi',
+            format: 'DD/MM/YYYY'
+        });
+        
+        if ('#saleplace'.val() === "CI") {
+            $('#c1choose').show();
+        } else {
+            $('#c1choose').hide();
+        }
+        
+
+        $('#saleplace').change(function () {
+            var value = this.value;
+            if (value === "CI") {
+                $('#c1choose').show();
+            } else {
+                $('#c1choose').hide();
+            }
+        });
+
+        function formload(action) {
+            $('#formload').attr("action", action);
+            $('#formload').submit();
+        }
+
+    </script>
+}

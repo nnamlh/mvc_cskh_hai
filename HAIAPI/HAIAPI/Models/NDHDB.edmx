@@ -509,7 +509,6 @@
           <Property Name="SalePlace" Type="varchar" MaxLength="32" />
           <Property Name="DebtTimeLine" Type="int" />
           <Property Name="DStatus" Type="varchar" MaxLength="128" />
-          <Property Name="HasBill" Type="int" />
         </EntityType>
         <EntityType Name="HaiPosition">
           <Key>
@@ -692,6 +691,7 @@
           <Property Name="PerPrice" Type="float" />
           <Property Name="QuantityFinish" Type="int" />
           <Property Name="ModifyDate" Type="datetime" />
+          <Property Name="HasBill" Type="int" />
         </EntityType>
         <EntityType Name="OrderProductHistory">
           <Key>
@@ -747,6 +747,7 @@
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="512" />
           <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="Idx" Type="int" />
         </EntityType>
         <EntityType Name="PHistory">
           <Key>
@@ -940,6 +941,7 @@
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="512" />
           <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="Idx" Type="int" />
         </EntityType>
         <EntityType Name="SmsAccount">
           <Key>
@@ -4229,7 +4231,6 @@
           <Property Name="DebtTimeLine" Type="Int32" />
           <Property Name="DStatus" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DeliveryStatu" Relationship="NDHDB1Model.FK__HaiOrder__DStatu__25918339" FromRole="HaiOrder" ToRole="DeliveryStatu" />
-          <Property Name="HasBill" Type="Int32" />
         </EntityType>
         <EntityType Name="OrderProduct">
           <Key>
@@ -4245,6 +4246,7 @@
           <Property Name="ModifyDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="HaiOrder" Relationship="NDHDB1Model.FK__OrderProd__Order__27AED5D5" FromRole="OrderProduct" ToRole="HaiOrder" />
           <NavigationProperty Name="ProductInfo" Relationship="NDHDB1Model.FK__OrderProd__Produ__28A2FA0E" FromRole="OrderProduct" ToRole="ProductInfo" />
+          <Property Name="HasBill" Type="Int32" />
         </EntityType>
         <EntityType Name="OrderStaff">
           <Key>
@@ -4295,6 +4297,7 @@
           <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="HaiOrders" Relationship="NDHDB1Model.FK__HaiOrder__PayTyp__1590259A" FromRole="PayType" ToRole="HaiOrder" />
+          <Property Name="Idx" Type="Int32" />
         </EntityType>
         <EntityType Name="ShipType">
           <Key>
@@ -4304,6 +4307,7 @@
           <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="HaiOrders" Relationship="NDHDB1Model.FK__HaiOrder__ShipTy__168449D3" FromRole="ShipType" ToRole="HaiOrder" />
+          <Property Name="Idx" Type="Int32" />
         </EntityType>
         <Association Name="FK__HaiOrder__Agency__17786E0C">
           <End Type="NDHDB1Model.CInfoCommon" Role="CInfoCommon" Multiplicity="0..1" />
@@ -5668,7 +5672,6 @@
           <EntitySetMapping Name="HaiOrders">
             <EntityTypeMapping TypeName="NDHDB1Model.HaiOrder">
               <MappingFragment StoreEntitySet="HaiOrder">
-                <ScalarProperty Name="HasBill" ColumnName="HasBill" />
                 <ScalarProperty Name="DStatus" ColumnName="DStatus" />
                 <ScalarProperty Name="DebtTimeLine" ColumnName="DebtTimeLine" />
                 <ScalarProperty Name="SalePlace" ColumnName="SalePlace" />
@@ -5699,6 +5702,7 @@
           <EntitySetMapping Name="OrderProducts">
             <EntityTypeMapping TypeName="NDHDB1Model.OrderProduct">
               <MappingFragment StoreEntitySet="OrderProduct">
+                <ScalarProperty Name="HasBill" ColumnName="HasBill" />
                 <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
                 <ScalarProperty Name="QuantityFinish" ColumnName="QuantityFinish" />
                 <ScalarProperty Name="PerPrice" ColumnName="PerPrice" />
@@ -5751,6 +5755,7 @@
           <EntitySetMapping Name="PayTypes">
             <EntityTypeMapping TypeName="NDHDB1Model.PayType">
               <MappingFragment StoreEntitySet="PayType">
+                <ScalarProperty Name="Idx" ColumnName="Idx" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -5760,6 +5765,7 @@
           <EntitySetMapping Name="ShipTypes">
             <EntityTypeMapping TypeName="NDHDB1Model.ShipType">
               <MappingFragment StoreEntitySet="ShipType">
+                <ScalarProperty Name="Idx" ColumnName="Idx" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />

@@ -11,31 +11,10 @@
         <li><a href="#">Chi tiết đơn hàng</a></li>
     </ol>
 </div> <!-- /.page-header -->
-
-@if (Model.OrderStatus == "begin")
-{
-    <div class="row">
-        <div class="col-sm-6">
-            <form method="post" onsubmit="if(!confirm('Xác nhận đơn hàng?')){return false;}" action="/order/approve">
-                <input type="hidden" value="@Model.Id" name="id" />
-                <div class="form-group">
-                    <select class="form-control" name="status">
-                        <option value="1">Xác nhận đơn hàng</option>
-                        <option value="0">Hủy đơn hàng</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Ghi chú</label>
-                    <input type="text" name="notes" class="form-control" required />
-                </div>
-
-                <button type="submit" class="btn btn-primary">Thực hiện</button>
-            </form>
-        </div>
-    </div>
-}
+ <!--
 @if (Model.OrderStatus == "process")
 {
+   
     <div class="row">
         <div class="col-sm-6">
             <form method="post" onsubmit="if(!confirm('Kết thúc đơn hàng?')){return false;}" action="/order/finish">
@@ -62,12 +41,125 @@
 @if (Model.OrderStatus == "cancel")
 {
     <h4>Đơn hàng đã hủy</h4>
-}@if (Model.OrderStatus == "notfinish")
-{
-    <h4>Đơn hàng đã hủy không giao</h4>
 }
+
+        -->
+
+<ul id="myTab2" class="nav nav-pills">
+    <li class="active">
+        <a href="#home-2" data-toggle="tab">Đơn hàng</a>
+    </li>
+    <li>
+        <a href="#profile-3" data-toggle="tab">Nhân viên thực hiện</a>
+    </li>
+</ul>
+
+<div id="myTab2Content" class="tab-content">
+    <div class="tab-pane fade in active" id="home-2">
+        <fieldset>
+            <table class="table table-striped table-bordered thumbnail-table">
+                <thead>
+                    <tr>
+                        <th><strong>Mã hàng</strong></th>
+                        <th><strong>Tên hàng</strong></th>
+                        <th><strong>SL đặt</strong></th>
+                        <th><strong>Tổng tiền</strong></th>
+                        <th><strong>Tông tiền thực</strong></th>
+                        <th><strong>Trạng thái</strong></th>
+                        @if (Model.OrderStatus == "process")
+                        {
+                            <th><strong>Số thùng giao</strong></th>
+                            <th><strong>Số lẽ giao</strong></th>
+                        }
+                        else
+                        {
+                            <th><strong>SL giao</strong></th>
+                        }
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderProducts)
+                    {
+                        <tr>
+                            <td>@item.ProductInfo.PCode</td>
+                            <td>@item.ProductInfo.PName</td>
+                            <td>
+                                @NDHSITE.Util.HaiUtil.ConvertProductQuantityText(item.ProductInfo.Quantity, item.Quantity, item.ProductInfo.Unit)<br />
+                            </td>
+                            <td> @(item.PriceTotal != null ? item.PriceTotal.Value.ToString("C", NDHSITE.Util.Cultures.VietNam) : "0") </td>
+                            <td id="@("money" + item.ProductId)">
+                                @(item.PerPrice != null ? (item.PerPrice * item.QuantityFinish).Value.ToString("C", NDHSITE.Util.Cultures.VietNam) : "0")
+                            </td>
+                            <td id="@("stt" + item.ProductId)">
+                                @if (item.QuantityFinish == 0)
+                                {
+                                    <span>Chưa giao</span>
+                                }
+                                else if (item.QuantityFinish == item.Quantity)
+                                {
+                                    <span>Giao đủ</span>
+                                }
+                                else if (item.Quantity < item.QuantityFinish)
+                                {
+                                    <span>Giao nhiều hơn</span>
+                                }
+                                else if (item.Quantity > item.QuantityFinish)
+                                {
+                                    <span>Giao ít hơn</span>
+                                }
+                            </td>
+                            @if (Model.OrderStatus == "process")
+                            {
+                                <td><input type="number" id="@("can"+ item.ProductId)" value="@(item.QuantityFinish/item.ProductInfo.Quantity)" /></td>
+                                <td><input type="number" id="@("box"+ item.ProductId)" value="@(item.QuantityFinish%item.ProductInfo.Quantity)" /></td>
+                                <td>
+                                    <button type="button" onclick="updateReal('@item.ProductId', '@item.OrderId')">nhập</button>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>@NDHSITE.Util.HaiUtil.ConvertProductQuantityText(item.ProductInfo.Quantity, item.QuantityFinish, item.ProductInfo.Unit)</td>
+                            }
+
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+    <div class="tab-pane fade" id="profile-3">
+        <fieldset>
+            <table class="table table-striped table-bordered thumbnail-table">
+                <thead>
+                    <tr>
+                        <th><strong>Thao tác</strong></th>
+                        <th><strong>Ngày thực hiện</strong></th>
+                        <th><strong>Nhân viên</strong></th>
+                        <th><strong>Đơn vị</strong></th>
+                        <th><strong>Ghi chú</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderStaffs)
+                    {
+                        <tr>
+                            <td>@item.OrderStaffProcess.Name</td>
+                            <td>@item.CreateTime</td>
+                            <td>@item.HaiStaff.FullName - @item.HaiStaff.Code</td>
+                            <td>@item.HaiStaff.HaiBranch.Code</td>
+                            <td>@item.Notes</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+</div>
+
 <br />
-<hr />
+<br />
 <form method="post" onsubmit="if(!confirm('Chỉnh sửa đơn hàng?')){return false;}" action="/order/update">
     <div class="row">
         <div class="col-sm-6">
@@ -107,7 +199,7 @@
                     {
                         if (item.code == "B")
                         {
-                            if (Model.Sender == "B")
+                            if (Model.SalePlace == "B")
                             {
                                 <option value="@item.code" selected>@item.name</option>
                             }
@@ -126,7 +218,7 @@
                         }
 
                     }
-                </select>    
+                </select>
             </div>
 
 
@@ -212,11 +304,6 @@
                 <label>Hình thức đặt hàng</label>
                 <input type="text" value="@Model.OType.Name" class="form-control" disabled />
             </div>
-
-            @if (Model.OrderStatus == "begin")
-            {
-                <button type="submit" class="btn btn-primary">Cập nhật đơn hàng</button>
-            }
         </div>
     </div>
 
@@ -224,170 +311,44 @@
 
 <br />
 <br />
-<ul id="myTab2" class="nav nav-pills">
-    <li class="active">
-        <a href="#home-2" data-toggle="tab">Đơn hàng</a>
-    </li>
-    <li>
-        <a href="#profile-3" data-toggle="tab">Nhân viên thực hiện</a>
-    </li>
-</ul>
-
-<div id="myTab2Content" class="tab-content">
-    <div class="tab-pane fade in active" id="home-2">
-        <fieldset>
-            <table class="table table-striped table-bordered thumbnail-table">
-                <thead>
-                    <tr>
-                        <th><strong>Sản phẩm</strong></th>
-                        <th><strong>Số lượng đặt</strong></th>
-                        <th><strong>Giá tiền/đơn vị</strong></th>
-                        <th><strong>Tổng tiền</strong></th>
-                        <th><strong>Số lượng đã giao</strong></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.OrderProducts)
-                    {
-                        <tr>
-                            <td><a href="/ShowInfo/ShowProduct?type=4&search=@item.ProductInfo.PCode" target="_blank">@item.ProductInfo.PName</a></td>
-                            <td>
-                                @NDHSITE.Util.HaiUtil.ConvertProductQuantityText(item.ProductInfo.Quantity, item.Quantity, item.ProductInfo.Unit)<br />
-
-                                @if (Model.OrderStatus == "begin")
-                                {
-                                    <a href="javascript:updateProduct('@item.ProductId','@item.OrderId', '@item.ProductInfo.PName', @NDHSITE.Util.HaiUtil.CountCan(item.ProductInfo.Quantity, item.Quantity), @NDHSITE.Util.HaiUtil.CountBox(item.ProductInfo.Quantity, item.Quantity))" target="_blank">Thay đổi</a>
-                                }
-                            </td>
-                            <td> @(item.PerPrice != null ? item.PerPrice.Value.ToString("C", NDHSITE.Util.Cultures.VietNam) : "0")  / @item.ProductInfo.Unit</td>
-                            <td>
-                                @(item.PriceTotal != null ? item.PriceTotal.Value.ToString("C", NDHSITE.Util.Cultures.VietNam) : "0")
-                            </td>
-                            <td>
-                                @NDHSITE.Util.HaiUtil.ConvertProductQuantityText(item.ProductInfo.Quantity, item.QuantityFinish, item.ProductInfo.Unit)<br />
-
-                                @if (Model.OrderStatus == "process")
-                                {
-                                <a href="javascript:updateDeliveryProduct('@item.ProductId','@item.OrderId', '@item.ProductInfo.PName')">Thay đổi</a>
-                                }
-                            </td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
-        </fieldset>
-    </div>
-    <div class="tab-pane fade" id="profile-3">
-        <fieldset>
-            <table class="table table-striped table-bordered thumbnail-table">
-                <thead>
-                    <tr>
-                        <th><strong>Thao tác</strong></th>
-                        <th><strong>Ngày thực hiện</strong></th>
-                        <th><strong>Nhân viên</strong></th>
-                        <th><strong>Đơn vị</strong></th>
-                        <th><strong>Ghi chú</strong></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.OrderStaffs)
-                    {
-                        <tr>
-                            <td>@item.OrderStaffProcess.Name</td>
-                            <td>@item.CreateTime</td>
-                            <td>@item.HaiStaff.FullName - @item.HaiStaff.Code</td>
-                            <td>@item.HaiStaff.HaiBranch.Code</td>
-                            <td>@item.Notes</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </fieldset>
-    </div>
-</div>
-
-
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title" id="tile-modal">Cập nhật giao hàng</h4>
-            </div>
-            <form method="post" action="@(Model.OrderStatus == "begin"?"/order/UpdateProductQuantity":"/order/updatedelivery")">
-                <input type="hidden" name="orderId" id="orderId" />
-                <input type="hidden" name="productId" id="productId" />
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>Sản phẩm</label>
-                        <input type="text" name="productName" class="form-control" id="productName" />
-                    </div>
-                    <div class="form-group">
-                        <label>Số lượng thùng</label>
-                        <input type="number" name="can" class="form-control" value="0" id="quantityBox" />
-                    </div>
-                    <div class="form-group">
-                        <label>Số lượng lẻ</label>
-                        <input type="number" name="box" class="form-control" value="0" id="quantity" />
-                    </div>
-                </div>
-
-
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-default">Cập nhật</button>
-                </div>
-            </form>
-
-        </div>
-
-    </div>
-</div>
-
-@section styles {
-    <link href="~/content/bootstrap-datetimepicker.min.css" rel="stylesheet">
-}
 
 @section scripts {
 
 
     <script type="text/javascript">
-        function updateDeliveryProduct(productId, orderId, pName) {
-            $('#tile-modal').html("Cập nhật giao hàng");
-            console.log("da vao");
-            $('#orderId').val(orderId);
-            $('#productId').val(productId);
-            $('#productName').val(pName);
-            $('#myModal').modal('show');
-        }
 
-        function updateProduct(productId, orderId, pName, quantityBox, quantity) {
-            console.log("da vao " + quantityBox + " , " + quantity);
-            $('#tile-modal').html("Cập nhật số lượng đặt");
-            $('#orderId').val(orderId);
-            $('#productId').val(productId);
-            $('#productName').val(pName);
-            $('#quantityBox').val(quantityBox);
-            $('#quantity').val(quantity);
-            $('#myModal').modal('show');
-        }
 
+
+        function updateReal(productId, orderId) {
+
+            var quantityCan = $('#can' + productId).val();
+            var quantityBox = $('#box' + productId).val();
+
+            if (quantityCan === '' || quantityBox === '')
+                alert("Nhập số lượng");
+            else {
+
+                $.ajax({
+                    type: "POST",
+                    url: "/order/UpdateDelivery",
+                    data: { productId: productId, orderId: orderId, can: quantityCan, box: quantityBox },
+                    success: function (response) {
+                        if (response.id === 0) {
+                            alert("Không thành công");
+                        } else {
+
+                            $('#money' + productId).text(response.money);
+                            $('#stt' + productId).text(response.stt);
+                            alert("Hoàn thành");
+                        }
+                    }
+                });
+
+            }
+
+
+        }
 
     </script>
 
-    @if (Model.OrderStatus == "begin")
-    {
-        <script src="~/Scripts/moment.min.js"></script>
-        <script src="~/scripts/moment-with-locales.min.js"></script>
-        <script src="~/scripts/bootstrap-datetimepicker.min.js"></script>
-
-        <script type="text/javascript">
-            $('#datesuggest').datetimepicker({
-                locale: 'vi',
-                format: 'MM/DD/YYYY'
-            });
-        </script>
-    }
 }

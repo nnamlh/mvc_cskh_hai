@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="NDHDB1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="NDHDB1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AgencySavePoint">
     <Key>
       <PropertyRef Name="EventId" />
@@ -306,6 +306,13 @@
     <Property Name="DecorGroup" Type="nvarchar" MaxLength="128" />
     <Property Name="StaffId" Type="nvarchar" MaxLength="128" />
   </EntityType>
+  <EntityType Name="DeliveryStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="varchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+  </EntityType>
   <EntityType Name="District">
     <Key>
       <PropertyRef Name="Id" />
@@ -492,9 +499,11 @@
     <Property Name="C1Id" Type="nvarchar" MaxLength="128" />
     <Property Name="C1Code" Type="nvarchar" MaxLength="128" />
     <Property Name="C1Name" Type="nvarchar(max)" />
-    <Property Name="Sender" Type="nvarchar" MaxLength="128" />
     <Property Name="UserCreate" Type="nvarchar" MaxLength="128" />
     <Property Name="DateCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="SalePlace" Type="varchar" MaxLength="32" />
+    <Property Name="DebtTimeLine" Type="int" />
+    <Property Name="DStatus" Type="varchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="HaiPosition">
     <Key>
@@ -677,6 +686,7 @@
     <Property Name="PerPrice" Type="float" />
     <Property Name="QuantityFinish" Type="int" />
     <Property Name="ModifyDate" Type="datetime" />
+    <Property Name="HasBill" Type="int" />
   </EntityType>
   <EntityType Name="OrderProductHistory">
     <Key>
@@ -732,6 +742,7 @@
     <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="512" />
     <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="Idx" Type="int" />
   </EntityType>
   <EntityType Name="PHistory">
     <Key>
@@ -925,6 +936,7 @@
     <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="Name" Type="nvarchar" MaxLength="512" />
     <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="Idx" Type="int" />
   </EntityType>
   <EntityType Name="SmsAccount">
     <Key>
@@ -1368,6 +1380,18 @@
       </Principal>
       <Dependent Role="HaiOrder">
         <PropertyRef Name="Agency" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HaiOrder__DStatu__25918339">
+    <End Role="DeliveryStatus" Type="Self.DeliveryStatus" Multiplicity="0..1" />
+    <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DeliveryStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="HaiOrder">
+        <PropertyRef Name="DStatus" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1944,6 +1968,7 @@
     <EntitySet Name="CInfoCommon" EntityType="Self.CInfoCommon" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DecorGroup" EntityType="Self.DecorGroup" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="DecorImage" EntityType="Self.DecorImage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DeliveryStatus" EntityType="Self.DeliveryStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ErrorInfo" EntityType="Self.ErrorInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EventArea" EntityType="Self.EventArea" Schema="dbo" store:Type="Tables" />
@@ -2113,6 +2138,10 @@
     </AssociationSet>
     <AssociationSet Name="FK__HaiOrder__Agency__17786E0C" Association="Self.FK__HaiOrder__Agency__17786E0C">
       <End Role="CInfoCommon" EntitySet="CInfoCommon" />
+      <End Role="HaiOrder" EntitySet="HaiOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HaiOrder__DStatu__25918339" Association="Self.FK__HaiOrder__DStatu__25918339">
+      <End Role="DeliveryStatus" EntitySet="DeliveryStatus" />
       <End Role="HaiOrder" EntitySet="HaiOrder" />
     </AssociationSet>
     <AssociationSet Name="FK__HaiOrder__OrderS__186C9245" Association="Self.FK__HaiOrder__OrderS__186C9245">

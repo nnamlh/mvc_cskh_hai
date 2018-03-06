@@ -505,9 +505,11 @@
     <EntitySetMapping Name="HaiOrders">
       <EntityTypeMapping TypeName="DMSHAIModel.HaiOrder">
         <MappingFragment StoreEntitySet="HaiOrder">
+          <ScalarProperty Name="DebtTimeLine" ColumnName="DebtTimeLine" />
+          <ScalarProperty Name="DStatus" ColumnName="DStatus" />
+          <ScalarProperty Name="SalePlace" ColumnName="SalePlace" />
           <ScalarProperty Name="DateCode" ColumnName="DateCode" />
           <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
-          <ScalarProperty Name="Sender" ColumnName="Sender" />
           <ScalarProperty Name="C1Name" ColumnName="C1Name" />
           <ScalarProperty Name="C1Code" ColumnName="C1Code" />
           <ScalarProperty Name="C1Id" ColumnName="C1Id" />
@@ -664,6 +666,7 @@
     <EntitySetMapping Name="OrderProducts">
       <EntityTypeMapping TypeName="DMSHAIModel.OrderProduct">
         <MappingFragment StoreEntitySet="OrderProduct">
+          <ScalarProperty Name="HasBill" ColumnName="HasBill" />
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
@@ -729,6 +732,7 @@
     <EntitySetMapping Name="PayTypes">
       <EntityTypeMapping TypeName="DMSHAIModel.PayType">
         <MappingFragment StoreEntitySet="PayType">
+          <ScalarProperty Name="Idx" ColumnName="Idx" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
@@ -929,6 +933,7 @@
     <EntitySetMapping Name="ShipTypes">
       <EntityTypeMapping TypeName="DMSHAIModel.ShipType">
         <MappingFragment StoreEntitySet="ShipType">
+          <ScalarProperty Name="Idx" ColumnName="Idx" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
@@ -1439,59 +1444,131 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <EntitySetMapping Name="KPIDetails">
-      <EntityTypeMapping TypeName="DMSHAIModel.KPIDetail">
-        <MappingFragment StoreEntitySet="KPIDetail">
-          <ScalarProperty Name="Number" ColumnName="Number" />
-          <ScalarProperty Name="KPIWorkId" ColumnName="KPIWorkId" />
-          <ScalarProperty Name="StaffKPIId" ColumnName="StaffKPIId" />
-          <ScalarProperty Name="Point" ColumnName="Point" />
-          <ScalarProperty Name="PlanPercent" ColumnName="PlanPercent" />
-          <ScalarProperty Name="Perform" ColumnName="Perform" />
-          <ScalarProperty Name="PlanPoint" ColumnName="PlanPoint" />
+    <EntitySetMapping Name="DeliveryStatus">
+      <EntityTypeMapping TypeName="DMSHAIModel.DeliveryStatu">
+        <MappingFragment StoreEntitySet="DeliveryStatus">
+          <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="KPITemplates">
-      <EntityTypeMapping TypeName="DMSHAIModel.KPITemplate">
-        <MappingFragment StoreEntitySet="KPITemplate">
-          <ScalarProperty Name="Number" ColumnName="Number" />
-          <ScalarProperty Name="KPITypeId" ColumnName="KPITypeId" />
-          <ScalarProperty Name="KPIWorkId" ColumnName="KPIWorkId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="KPITypes">
-      <EntityTypeMapping TypeName="DMSHAIModel.KPIType">
-        <MappingFragment StoreEntitySet="KPIType">
+    <FunctionImportMapping FunctionImportName="get_list_orders" FunctionName="DMSHAIModel.Store.get_list_orders">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DMSHAIModel.get_list_orders_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+          <ScalarProperty Name="PayType" ColumnName="PayType" />
+          <ScalarProperty Name="ShipType" ColumnName="ShipType" />
+          <ScalarProperty Name="Agency" ColumnName="Agency" />
+          <ScalarProperty Name="ReceiveAddress" ColumnName="ReceiveAddress" />
+          <ScalarProperty Name="ReceivePhone1" ColumnName="ReceivePhone1" />
+          <ScalarProperty Name="ReceivePhone2" ColumnName="ReceivePhone2" />
+          <ScalarProperty Name="ExpectDate" ColumnName="ExpectDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="KPIWorks">
-      <EntityTypeMapping TypeName="DMSHAIModel.KPIWork">
-        <MappingFragment StoreEntitySet="KPIWork">
-          <ScalarProperty Name="ExcelCol" ColumnName="ExcelCol" />
-          <ScalarProperty Name="STT" ColumnName="STT" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="StaffKPIs">
-      <EntityTypeMapping TypeName="DMSHAIModel.StaffKPI">
-        <MappingFragment StoreEntitySet="StaffKPI">
-          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
-          <ScalarProperty Name="ModiftTime" ColumnName="ModiftTime" />
-          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="PriceTotal" ColumnName="PriceTotal" />
+          <ScalarProperty Name="BrachCode" ColumnName="BrachCode" />
+          <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+          <ScalarProperty Name="C1Id" ColumnName="C1Id" />
+          <ScalarProperty Name="C1Code" ColumnName="C1Code" />
+          <ScalarProperty Name="C1Name" ColumnName="C1Name" />
+          <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+          <ScalarProperty Name="DateCode" ColumnName="DateCode" />
+          <ScalarProperty Name="SalePlace" ColumnName="SalePlace" />
+          <ScalarProperty Name="DStatus" ColumnName="DStatus" />
+          <ScalarProperty Name="DebtTimeLine" ColumnName="DebtTimeLine" />
+          <ScalarProperty Name="Store" ColumnName="Store" />
+          <ScalarProperty Name="Deputy" ColumnName="Deputy" />
+          <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
           <ScalarProperty Name="StaffId" ColumnName="StaffId" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="StaffCode" ColumnName="StaffCode" />
+          <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+          <ScalarProperty Name="ProductTotal" ColumnName="ProductTotal" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="get_list_orders_by_code" FunctionName="DMSHAIModel.Store.get_list_orders_by_code">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DMSHAIModel.get_list_orders_Result">
           <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+          <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+          <ScalarProperty Name="PayType" ColumnName="PayType" />
+          <ScalarProperty Name="ShipType" ColumnName="ShipType" />
+          <ScalarProperty Name="Agency" ColumnName="Agency" />
+          <ScalarProperty Name="ReceiveAddress" ColumnName="ReceiveAddress" />
+          <ScalarProperty Name="ReceivePhone1" ColumnName="ReceivePhone1" />
+          <ScalarProperty Name="ReceivePhone2" ColumnName="ReceivePhone2" />
+          <ScalarProperty Name="ExpectDate" ColumnName="ExpectDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="PriceTotal" ColumnName="PriceTotal" />
+          <ScalarProperty Name="BrachCode" ColumnName="BrachCode" />
+          <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+          <ScalarProperty Name="C1Id" ColumnName="C1Id" />
+          <ScalarProperty Name="C1Code" ColumnName="C1Code" />
+          <ScalarProperty Name="C1Name" ColumnName="C1Name" />
+          <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+          <ScalarProperty Name="DateCode" ColumnName="DateCode" />
+          <ScalarProperty Name="SalePlace" ColumnName="SalePlace" />
+          <ScalarProperty Name="DStatus" ColumnName="DStatus" />
+          <ScalarProperty Name="DebtTimeLine" ColumnName="DebtTimeLine" />
+          <ScalarProperty Name="Store" ColumnName="Store" />
+          <ScalarProperty Name="Deputy" ColumnName="Deputy" />
+          <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+          <ScalarProperty Name="StaffCode" ColumnName="StaffCode" />
+          <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+          <ScalarProperty Name="ProductTotal" ColumnName="ProductTotal" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="get_list_orders_product" FunctionName="DMSHAIModel.Store.get_list_orders_product">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DMSHAIModel.get_list_orders_product_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+          <ScalarProperty Name="PayType" ColumnName="PayType" />
+          <ScalarProperty Name="ShipType" ColumnName="ShipType" />
+          <ScalarProperty Name="Agency" ColumnName="Agency" />
+          <ScalarProperty Name="ReceiveAddress" ColumnName="ReceiveAddress" />
+          <ScalarProperty Name="ReceivePhone1" ColumnName="ReceivePhone1" />
+          <ScalarProperty Name="ReceivePhone2" ColumnName="ReceivePhone2" />
+          <ScalarProperty Name="ExpectDate" ColumnName="ExpectDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="PriceTotal" ColumnName="PriceTotal" />
+          <ScalarProperty Name="BrachCode" ColumnName="BrachCode" />
+          <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+          <ScalarProperty Name="C1Id" ColumnName="C1Id" />
+          <ScalarProperty Name="C1Code" ColumnName="C1Code" />
+          <ScalarProperty Name="C1Name" ColumnName="C1Name" />
+          <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+          <ScalarProperty Name="DateCode" ColumnName="DateCode" />
+          <ScalarProperty Name="SalePlace" ColumnName="SalePlace" />
+          <ScalarProperty Name="DStatus" ColumnName="DStatus" />
+          <ScalarProperty Name="DebtTimeLine" ColumnName="DebtTimeLine" />
+          <ScalarProperty Name="Store" ColumnName="Store" />
+          <ScalarProperty Name="Deputy" ColumnName="Deputy" />
+          <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+          <ScalarProperty Name="StaffCode" ColumnName="StaffCode" />
+          <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+          <ScalarProperty Name="PName" ColumnName="PName" />
+          <ScalarProperty Name="PCode" ColumnName="PCode" />
+          <ScalarProperty Name="PQuantity" ColumnName="PQuantity" />
+          <ScalarProperty Name="HasBill" ColumnName="HasBill" />
+          <ScalarProperty Name="PerPrice" ColumnName="PerPrice" />
+          <ScalarProperty Name="PPriceTotal" ColumnName="PPriceTotal" />
+          <ScalarProperty Name="OrderQuantity" ColumnName="OrderQuantity" />
+          <ScalarProperty Name="QuantityFinish" ColumnName="QuantityFinish" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

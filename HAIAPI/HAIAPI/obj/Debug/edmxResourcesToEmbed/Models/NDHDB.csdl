@@ -1916,6 +1916,7 @@
     <Property Name="ModifyDate" Type="DateTime" Precision="3" />
     <NavigationProperty Name="HaiOrder" Relationship="NDHDB1Model.FK__OrderProd__Order__27AED5D5" FromRole="OrderProduct" ToRole="HaiOrder" />
     <NavigationProperty Name="ProductInfo" Relationship="NDHDB1Model.FK__OrderProd__Produ__28A2FA0E" FromRole="OrderProduct" ToRole="ProductInfo" />
+    <Property Name="HasBill" Type="Int32" />
   </EntityType>
   <EntityType Name="OrderStaff">
     <Key>

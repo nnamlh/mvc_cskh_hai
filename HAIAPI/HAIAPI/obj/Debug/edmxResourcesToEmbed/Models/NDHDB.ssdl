@@ -686,6 +686,7 @@
     <Property Name="PerPrice" Type="float" />
     <Property Name="QuantityFinish" Type="int" />
     <Property Name="ModifyDate" Type="datetime" />
+    <Property Name="HasBill" Type="int" />
   </EntityType>
   <EntityType Name="OrderProductHistory">
     <Key>

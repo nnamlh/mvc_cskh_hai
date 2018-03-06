@@ -24,7 +24,6 @@ namespace NDHSITE.Models
             this.StaffCheckIns = new HashSet<StaffCheckIn>();
             this.StaffWithC2 = new HashSet<StaffWithC2>();
             this.C1Info = new HashSet<C1Info>();
-            this.StaffKPIs = new HashSet<StaffKPI>();
         }
     
         public string Id { get; set; }
@@ -69,7 +68,5 @@ namespace NDHSITE.Models
         public virtual ICollection<StaffWithC2> StaffWithC2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<C1Info> C1Info { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<StaffKPI> StaffKPIs { get; set; }
     }
 }

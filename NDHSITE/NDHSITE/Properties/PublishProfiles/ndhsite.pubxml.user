@@ -76,7 +76,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/22/2018 17:16:47</publishTime>
     </File>
     <File Include="bin/NDHSITE.dll">
-      <publishTime>02/02/2018 13:15:23</publishTime>
+      <publishTime>03/07/2018 05:00:56</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>01/22/2018 17:16:48</publishTime>
@@ -231,6 +231,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="haiupload/historytracking.xlsx">
       <publishTime>01/12/2017 14:42:06</publishTime>
     </File>
+    <File Include="haiupload/list_order_form.xlsx">
+      <publishTime>03/07/2018 04:06:20</publishTime>
+    </File>
     <File Include="haiupload/productremain.xlsx">
       <publishTime>01/05/2017 12:52:09</publishTime>
     </File>
@@ -259,7 +262,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/05/2017 12:52:10</publishTime>
     </File>
     <File Include="Models/NDHDB.edmx.diagram">
-      <publishTime>01/03/2018 16:45:55</publishTime>
+      <publishTime>03/06/2018 23:08:13</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>01/22/2018 17:18:15</publishTime>
@@ -454,7 +457,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/17/2017 14:27:23</publishTime>
     </File>
     <File Include="Views/Agency/ManageCII.cshtml">
-      <publishTime>11/17/2017 15:35:42</publishTime>
+      <publishTime>02/02/2018 15:43:03</publishTime>
     </File>
     <File Include="Views/Agency/ManageFarmer.cshtml">
       <publishTime>07/07/2017 16:04:42</publishTime>
@@ -616,13 +619,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/31/2017 15:18:22</publishTime>
     </File>
     <File Include="Views/Order/Detail.cshtml">
-      <publishTime>12/30/2017 02:08:06</publishTime>
+      <publishTime>03/07/2018 05:03:42</publishTime>
     </File>
     <File Include="Views/Order/ModifyProduct.cshtml">
       <publishTime>10/27/2017 00:12:07</publishTime>
     </File>
     <File Include="Views/Order/Show.cshtml">
-      <publishTime>01/03/2018 09:32:17</publishTime>
+      <publishTime>03/07/2018 04:12:37</publishTime>
     </File>
     <File Include="Views/Product/CatProduct.cshtml">
       <publishTime>10/31/2016 10:48:05</publishTime>
@@ -643,7 +646,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/23/2016 01:32:45</publishTime>
     </File>
     <File Include="Views/Role/Manager.cshtml">
-      <publishTime>07/07/2017 14:27:25</publishTime>
+      <publishTime>03/01/2018 17:19:17</publishTime>
     </File>
     <File Include="Views/Role/MobileFunction.cshtml">
       <publishTime>07/07/2017 14:24:06</publishTime>

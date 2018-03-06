@@ -19,7 +19,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/31/2017 15:54:45</publishTime>
     </File>
     <File Include="bin/HAIAPI.dll">
-      <publishTime>02/21/2018 23:04:01</publishTime>
+      <publishTime>03/06/2018 13:37:20</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
       <publishTime>08/31/2017 15:54:47</publishTime>
@@ -133,7 +133,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/31/2017 15:54:39</publishTime>
     </File>
     <File Include="Models/NDHDB.edmx.diagram">
-      <publishTime>01/03/2018 16:14:07</publishTime>
+      <publishTime>02/22/2018 00:27:49</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>01/22/2018 17:19:22</publishTime>
