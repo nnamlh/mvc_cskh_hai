@@ -1958,6 +1958,10 @@
     <Parameter Name="fdate" Type="varchar" Mode="In" />
     <Parameter Name="tdate" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="report_order_staff_sales_barcode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="fdate" Type="varchar" Mode="In" />
+    <Parameter Name="tdate" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="report_remain_product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Product" Type="nvarchar" Mode="In" />
     <Parameter Name="DFrom" Type="nvarchar" Mode="In" />

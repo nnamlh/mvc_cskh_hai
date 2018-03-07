@@ -1589,5 +1589,19 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="report_order_staff_sales_barcode" FunctionName="DMSHAIModel.Store.report_order_staff_sales_barcode">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DMSHAIModel.report_order_staff_sales_barcode_Result">
+          <ScalarProperty Name="BrachCode" ColumnName="BrachCode" />
+          <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+          <ScalarProperty Name="StaffCode" ColumnName="StaffCode" />
+          <ScalarProperty Name="Store" ColumnName="Store" />
+          <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+          <ScalarProperty Name="CountOrder" ColumnName="CountOrder" />
+          <ScalarProperty Name="SumPPrice" ColumnName="SumPPrice" />
+          <ScalarProperty Name="SumPPriceReal" ColumnName="SumPPriceReal" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

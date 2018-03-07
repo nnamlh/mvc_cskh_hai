@@ -76,7 +76,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/22/2018 17:16:47</publishTime>
     </File>
     <File Include="bin/NDHSITE.dll">
-      <publishTime>03/07/2018 15:24:48</publishTime>
+      <publishTime>03/07/2018 16:17:53</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>01/22/2018 17:16:48</publishTime>
@@ -251,6 +251,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="haiupload/report_order_detail.xlsx">
       <publishTime>01/02/2018 01:14:06</publishTime>
+    </File>
+    <File Include="haiupload/report_order_staff_barcode.xlsx">
+      <publishTime>03/07/2018 16:17:33</publishTime>
     </File>
     <File Include="haiupload/report_order_staff_sales.xlsx">
       <publishTime>03/07/2018 15:22:22</publishTime>
@@ -628,7 +631,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/27/2017 00:12:07</publishTime>
     </File>
     <File Include="Views/Order/Show.cshtml">
-      <publishTime>03/07/2018 15:15:38</publishTime>
+      <publishTime>03/07/2018 16:16:15</publishTime>
     </File>
     <File Include="Views/Product/CatProduct.cshtml">
       <publishTime>10/31/2016 10:48:05</publishTime>

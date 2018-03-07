@@ -299,6 +299,81 @@ namespace NDHSITE.Controllers
             return File(pathTo, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", string.Format("report-don-hang-" + DateTime.Now.ToString("ddMMyyyyhhmmss") + ".{0}", "xlsx"));
         }
 
+        public ActionResult ExcelStaffSalesBarcode(string DateFrom = "", string DateTo = "")
+        {
+
+            int permit = Utitl.CheckRoleShowInfo(db, User.Identity.Name);
+
+            var current = DateTime.Now;
+
+            DateTime dFrom;
+
+            DateTime dTo;
+
+            if (String.IsNullOrEmpty(DateFrom) || String.IsNullOrEmpty(DateTo))
+            {
+                dTo = current;
+                dFrom = current.AddMonths(-1);
+            }
+            else
+            {
+                dFrom = DateTime.ParseExact(DateFrom, "d/M/yyyy", null);
+                dTo = DateTime.ParseExact(DateTo, "d/MM/yyyy", null);
+            }
+
+            List<report_order_staff_sales_barcode_Result> data = new List<report_order_staff_sales_barcode_Result>();
+            data = db.report_order_staff_sales_barcode(dFrom.ToString("yyyy-MM-dd"), dTo.ToString("yyyy-MM-dd")).ToList();
+
+            if (permit == 2)
+            {
+                // get list cn
+                var branchPermit = db.UserBranchPermisses.Where(p => p.UserName == User.Identity.Name).Select(p => p.BranchCode).ToList();
+                data = data.Where(p => branchPermit.Contains(p.BrachCode)).ToList();
+            }
+
+            string pathRoot = Server.MapPath("~/haiupload/report_order_staff_barcode.xlsx");
+            string name = "donhang" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".xlsx";
+            string pathTo = Server.MapPath("~/temp/" + name);
+
+            System.IO.File.Copy(pathRoot, pathTo);
+
+            try
+            {
+                FileInfo newFile = new FileInfo(pathTo);
+
+                using (ExcelPackage package = new ExcelPackage(newFile))
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[1];
+                    worksheet.Cells[1, 3].Value = DateFrom;
+                    worksheet.Cells[2, 3].Value = DateTo;
+
+                    for (int i = 0; i < data.Count; i++)
+                    {
+                        worksheet.Cells[i + 5, 1].Value = data[i].BrachCode;
+                        worksheet.Cells[i + 5, 2].Value = data[i].StaffName;
+                        worksheet.Cells[i + 5, 3].Value = data[i].Store;
+                        worksheet.Cells[i + 5, 4].Value = data[i].CountOrder;
+                        worksheet.Cells[i + 5, 5].Value = data[i].SumPPrice;
+                        worksheet.Cells[i + 5, 6].Value = data[i].SumPPriceReal;
+                        worksheet.Cells[i + 5, 7].Value = (int)((data[i].SumPPriceReal / data[i].SumPPrice) * 100);
+
+                    }
+
+
+                    package.Save();
+                }
+
+            }
+            catch
+            {
+                return RedirectToAction("error", "home");
+            }
+
+
+            return File(pathTo, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", string.Format("report-don-hang-" + DateTime.Now.ToString("ddMMyyyyhhmmss") + ".{0}", "xlsx"));
+        }
+
+
         [HttpPost]
         public ActionResult UpdateProductType(string orderId, string productId, string type)
         {
