@@ -275,8 +275,6 @@ namespace HAIAPI.Controllers
                 if (String.IsNullOrEmpty(orderType))
                     throw new Exception("Sai thong tin dat hang");
 
-                
-
                 //
                 if (paser.product == null || paser.product.Count() == 0)
                     throw new Exception("Thieu thong tin san pham");
@@ -309,7 +307,10 @@ namespace HAIAPI.Controllers
                     UserCreate = paser.user,
                     DateCode = DateTime.Now.Date.ToString("ddMMyyyy"),
                     DebtTimeLine = paser.debtTime,
-                    DStatus = "incomplete"
+                    DStatus = "incomplete",
+                    C1Code = "",
+                    C1Id = "",
+                    C1Name = ""
                 };
 
                 if (paser.c1 == "000")

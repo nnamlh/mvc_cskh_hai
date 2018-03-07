@@ -106,6 +106,7 @@
                                         <th><strong>Cấp 1</strong></th>
                                         <th><strong>TT đơn hàng</strong></th>
                                         <th><strong>TT giao hàng</strong></th>
+                                        <th><strong>CheckIn</strong></th>
                                         <th><strong>Tống SL</strong></th>
                                         <th><strong>Tổng tiền</strong></th>
                                         <th>#</th>
@@ -153,6 +154,16 @@
                                                 else if (item.DStatus == "more")
                                                 {
                                                     <span>Giao nhiều hơn</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (item.OrderType == "checkinorder")
+                                                {
+                                                    <span>Trong checkin</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>Ngoài checkin</span>
                                                 }
                                             </td>
                                             <td>@item.ProductTotal</td>

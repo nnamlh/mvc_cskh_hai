@@ -115,6 +115,11 @@ namespace HAIAPI.Controllers
                         shipInfo = order.SType.Name
                     };
 
+                    if (order.OrderType == "checkinorder")
+                        yourOrder.inCheckin = 1;
+                    else
+                        yourOrder.inCheckin = 0;
+
                     if (order.PayType == "debt")
                     {
                         yourOrder.payInfo = order.PType.Name + " - " + order.DebtTimeLine + " ngày";

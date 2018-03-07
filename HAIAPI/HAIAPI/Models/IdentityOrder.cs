@@ -144,6 +144,8 @@ namespace HAIAPI.Models
 
         public string shipInfo { get; set; }
 
+        public int inCheckin { get; set; }
+
     }
 
     public class ProductOrderInfo

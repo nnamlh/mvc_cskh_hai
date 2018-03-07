@@ -200,6 +200,17 @@ namespace NDHSITE.Controllers
                             worksheet.Cells[i + 2, 20].Value = data[i].QuantityFinish % data[i].PQuantity;
                             worksheet.Cells[i + 2, 21].Value = data[i].QuantityFinish * data[i].PerPrice;
 
+                            if (data[i].OrderType == "checkinorder")
+                            {
+                                worksheet.Cells[i + 2, 22].Value = "Trong checkin";
+
+                            }
+                            else
+                            {
+                                worksheet.Cells[i + 2, 22].Value = "Ngoài checkin";
+
+                            }
+
                         }
                         catch
                         {

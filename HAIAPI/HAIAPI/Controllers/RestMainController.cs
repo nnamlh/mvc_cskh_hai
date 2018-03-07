@@ -396,7 +396,7 @@ namespace HAIAPI.Controllers
             {
                 // get list cn
                 var branchPermit = db.UserBranchPermisses.Where(p => p.UserName == User.Identity.Name).Select(p => p.BranchCode).ToList();
-                c2List = db.C2Info.Where(p => branchPermit.Contains(p.CInfoCommon.BranchCode)).ToList();
+                c2List = db.C2Info.Where(p => branchPermit.Contains(p.CInfoCommon.BranchCode) && p.OldData == 0).ToList();
             }
             else
             {
