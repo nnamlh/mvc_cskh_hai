@@ -149,6 +149,7 @@
         <AssociationConnector Association="DMSHAIModel.FK__ProductIn__Group__453F38BC" />
         <EntityTypeShape EntityType="DMSHAIModel.DeliveryStatu" Width="1.5" PointX="0.75" PointY="0.875" />
         <AssociationConnector Association="DMSHAIModel.FK__HaiOrder__DStatu__697C9932" />
+        <AssociationConnector Association="DMSHAIModel.FK__OrderProd__Staff__6F357288" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -11,7 +11,7 @@ namespace HAIAPI.Controllers
 {
     public class KPIController : RestMainController
     {
-
+        /*
         [HttpGet]
         public ResultCommonType ListKPITypes()
         {
@@ -171,6 +171,6 @@ namespace HAIAPI.Controllers
             return result;
 
         }
-
+        */
     }
 }

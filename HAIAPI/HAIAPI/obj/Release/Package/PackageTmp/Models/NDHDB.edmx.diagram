@@ -143,17 +143,9 @@
         <EntityTypeShape EntityType="NDHDB1Model.BarcodeChangeHistory" Width="1.5" PointX="22.375" PointY="3.75" />
         <EntityTypeShape EntityType="NDHDB1Model.BarcodeNotPermiss" Width="1.5" PointX="22.375" PointY="7.75" />
         <EntityTypeShape EntityType="NDHDB1Model.UserBranchPermiss" Width="1.5" PointX="23.375" PointY="11.75" />
-        <EntityTypeShape EntityType="NDHDB1Model.KPIDetail" Width="1.5" PointX="15.75" PointY="38.875" />
-        <EntityTypeShape EntityType="NDHDB1Model.KPIType" Width="1.5" PointX="8.25" PointY="45.25" />
-        <EntityTypeShape EntityType="NDHDB1Model.KPIWork" Width="1.5" PointX="13.5" PointY="49.125" />
-        <EntityTypeShape EntityType="NDHDB1Model.StaffKPI" Width="1.5" PointX="10.5" PointY="38.875" />
-        <AssociationConnector Association="NDHDB1Model.FK__StaffKPI__StaffI__174363E2" />
-        <AssociationConnector Association="NDHDB1Model.FK__KPIDetail__KPIWo__1DF06171" />
-        <AssociationConnector Association="NDHDB1Model.FK__KPIDetail__Staff__1CFC3D38" />
-        <AssociationConnector Association="NDHDB1Model.FK__StaffKPI__TypeId__1837881B" />
-        <AssociationConnector Association="NDHDB1Model.KPITemplate" />
         <EntityTypeShape EntityType="NDHDB1Model.DeliveryStatu" Width="1.5" PointX="23.375" PointY="14.875" />
         <AssociationConnector Association="NDHDB1Model.FK__HaiOrder__DStatu__25918339" />
+        <AssociationConnector Association="NDHDB1Model.FK__OrderProd__Staff__6F357288" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

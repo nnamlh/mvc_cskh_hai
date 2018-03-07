@@ -164,6 +164,21 @@ namespace NDHSITE.Controllers
             return File(pathTo, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", string.Format("ds-don-hang-" + DateTime.Now.ToString("ddMMyyyyhhmmss") + ".{0}", "xlsx"));
         }
 
+        [HttpPost]
+        public ActionResult UpdateProductType(string orderId, string productId, string type)
+        {
+            var orderProduct = db.OrderProducts.Where(p => p.ProductId == productId && p.OrderId == orderId).FirstOrDefault();
+
+            if (orderProduct == null)
+                return Json(new { id = 0 }, JsonRequestBehavior.AllowGet);
+
+            orderProduct.ProductType = type;
+
+            db.Entry(orderProduct).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return Json(new { id = 1 }, JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult Detail(string id)
         {
@@ -289,15 +304,16 @@ namespace NDHSITE.Controllers
             }
 
             // save history
-
+            var haiStaff = db.HaiStaffs.Where(p => p.UserLogin == User.Identity.Name).FirstOrDefault();
             var history = new OrderProductHistory()
             {
                 Id = Guid.NewGuid().ToString(),
                 CreateDate = DateTime.Now,
-                Notes = "Nhan vien cong ty cap nhat",
+                Notes = "Quan ly cong ty cap nhat",
                 OrderId = orderProduct.OrderId,
                 ProductId = orderProduct.ProductId,
-                Quantity = quantity
+                Quantity = quantity,
+                StaffId = haiStaff.Id
             };
 
             db.OrderProductHistories.Add(history);

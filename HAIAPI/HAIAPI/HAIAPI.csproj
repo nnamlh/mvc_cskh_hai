@@ -346,6 +346,9 @@
     <Compile Include="Models\FuncRole.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\get_list_orders_Result.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\HaiArea.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -381,15 +384,6 @@
     <Compile Include="Models\IdentityProduct.cs" />
     <Compile Include="Models\IdentityShowInfo.cs" />
     <Compile Include="Models\ImeiUser.cs">
-      <DependentUpon>NDHDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\KPIDetail.cs">
-      <DependentUpon>NDHDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\KPIType.cs">
-      <DependentUpon>NDHDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\KPIWork.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MessegeToHai.cs">
@@ -511,9 +505,6 @@
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StaffCheckIn.cs">
-      <DependentUpon>NDHDB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\StaffKPI.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StaffKPIRequest.cs" />

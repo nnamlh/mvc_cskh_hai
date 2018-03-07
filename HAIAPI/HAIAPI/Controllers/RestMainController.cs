@@ -63,8 +63,8 @@ namespace HAIAPI.Controllers
                 var paser = jsonserializer.Deserialize<MainInfoRequest>(requestContent);
                 history.Content = new JavaScriptSerializer().Serialize(paser);
 
-               // if (!mongoHelper.checkLoginSession(paser.user, paser.token))
-                  //  throw new Exception("Tài khoản bạn đã đăng nhập ở thiết bị khác.");
+                // if (!mongoHelper.checkLoginSession(paser.user, paser.token))
+                //  throw new Exception("Tài khoản bạn đã đăng nhập ở thiết bị khác.");
 
                 var checkUser = db.AspNetUsers.Where(p => p.UserName == paser.user).FirstOrDefault();
 
@@ -97,7 +97,7 @@ namespace HAIAPI.Controllers
                     if (paser.isUpdate == 1)
                     {
                         result.c2 = GetListC2(staff);
-                       
+
                     }
 
                     result.c1 = GetListC1(staff);
@@ -190,8 +190,8 @@ namespace HAIAPI.Controllers
                 var paser = jsonserializer.Deserialize<MainInfoRequest>(requestContent);
                 history.Content = new JavaScriptSerializer().Serialize(paser);
 
-              //  if (!mongoHelper.checkLoginSession(paser.user, paser.token))
-                   // throw new Exception("Tài khoản bạn đã đăng nhập ở thiết bị khác.");
+                //  if (!mongoHelper.checkLoginSession(paser.user, paser.token))
+                // throw new Exception("Tài khoản bạn đã đăng nhập ở thiết bị khác.");
 
                 var checkUser = db.AspNetUsers.Where(p => p.UserName == paser.user).FirstOrDefault();
 
@@ -218,7 +218,7 @@ namespace HAIAPI.Controllers
                 else if (cinfo.CType == "CI")
                 {
                     result.type = "Đại lý cấp 1";
-                   
+
                 }
                 else
                     result.type = "Chưa xác nhận";
@@ -284,7 +284,7 @@ namespace HAIAPI.Controllers
             List<AgencyInfo> agencyResult = new List<AgencyInfo>();
             var data = db.C2C1.Where(p => p.C1Code == c1Code).ToList();
 
-            foreach(var item in data)
+            foreach (var item in data)
             {
 
                 var c2 = db.C2Info.Where(p => p.Code == item.C2Code).FirstOrDefault();
@@ -391,7 +391,18 @@ namespace HAIAPI.Controllers
 
             List<C2Info> c2List = new List<C2Info>();
 
-            c2List = staff.StaffWithC2.Where(p => p.C2Info.IsActive == 1).OrderByDescending(p => p.GroupChoose).Select(p => p.C2Info).ToList();
+            int permit = HaiUtil.CheckRoleShowInfo(db, User.Identity.Name);
+            if (permit == 2)
+            {
+                // get list cn
+                var branchPermit = db.UserBranchPermisses.Where(p => p.UserName == User.Identity.Name).Select(p => p.BranchCode).ToList();
+                c2List = db.C2Info.Where(p => branchPermit.Contains(p.CInfoCommon.BranchCode)).ToList();
+            }
+            else
+            {
+                c2List = staff.StaffWithC2.Where(p => p.C2Info.IsActive == 1).OrderByDescending(p => p.GroupChoose).Select(p => p.C2Info).ToList();
+
+            }
 
             foreach (var item in c2List)
             {
@@ -404,7 +415,7 @@ namespace HAIAPI.Controllers
                 var c2c1 = db.C2C1.Where(p => p.C2Code == item.Code).ToList();
                 List<AgencyC2C1> agencyC2C1 = new List<AgencyC2C1>();
 
-                foreach(var item2 in c2c1)
+                foreach (var item2 in c2c1)
                 {
                     var checkC1 = db.C1Info.Where(p => p.Code == item2.C1Code).FirstOrDefault();
                     if (checkC1 != null)
@@ -418,7 +429,6 @@ namespace HAIAPI.Controllers
                         });
                     }
                 }
-
 
                 agencyResult.Add(new AgencyInfoC2()
                 {
@@ -510,7 +520,7 @@ namespace HAIAPI.Controllers
             {
                 topics.Add(cInfo.CType + "ALL");
                 topics.Add(cInfo.CType + cInfo.BranchCode);
-               // topics.Add(cInfo.CType + cInfo.HaiArea.Code);
+                // topics.Add(cInfo.CType + cInfo.HaiArea.Code);
             }
             else
             {

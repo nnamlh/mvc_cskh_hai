@@ -21,8 +21,10 @@ namespace HAIAPI.Models
         public Nullable<System.DateTime> CreateDate { get; set; }
         public string UserAction { get; set; }
         public string Notes { get; set; }
+        public string StaffId { get; set; }
     
         public virtual HaiOrder HaiOrder { get; set; }
         public virtual ProductInfo ProductInfo { get; set; }
+        public virtual HaiStaff HaiStaff { get; set; }
     }
 }

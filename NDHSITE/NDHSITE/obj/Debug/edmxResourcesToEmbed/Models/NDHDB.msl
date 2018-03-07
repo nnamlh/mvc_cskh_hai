@@ -666,6 +666,7 @@
     <EntitySetMapping Name="OrderProducts">
       <EntityTypeMapping TypeName="DMSHAIModel.OrderProduct">
         <MappingFragment StoreEntitySet="OrderProduct">
+          <ScalarProperty Name="ProductType" ColumnName="ProductType" />
           <ScalarProperty Name="HasBill" ColumnName="HasBill" />
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />

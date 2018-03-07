@@ -517,7 +517,7 @@
     <NavigationProperty Name="C1Info" Relationship="Self.StaffWithC1" FromRole="HaiStaff" ToRole="C1Info" />
     <NavigationProperty Name="SaveAgencyShopImages" Relationship="NDHDB1Model.FK__SaveAgenc__Staff__009508B4" FromRole="HaiStaff" ToRole="SaveAgencyShopImage" />
     <NavigationProperty Name="OrderStaffs" Relationship="NDHDB1Model.FK__OrderStaf__Staff__21F5FC7F" FromRole="HaiStaff" ToRole="OrderStaff" />
-    <NavigationProperty Name="StaffKPIs" Relationship="NDHDB1Model.FK__StaffKPI__StaffI__174363E2" FromRole="HaiStaff" ToRole="StaffKPI" />
+    <NavigationProperty Name="OrderProductHistories" Relationship="NDHDB1Model.FK__OrderProd__Staff__6F357288" FromRole="HaiStaff" ToRole="OrderProductHistory" />
   </EntityType>
   <EntityType Name="HappyBirthday">
     <Key>
@@ -1693,35 +1693,23 @@
     <EntitySet Name="BarcodeChangeHistories" EntityType="NDHDB1Model.BarcodeChangeHistory" />
     <EntitySet Name="BarcodeNotPermisses" EntityType="NDHDB1Model.BarcodeNotPermiss" />
     <EntitySet Name="UserBranchPermisses" EntityType="NDHDB1Model.UserBranchPermiss" />
-    <EntitySet Name="KPIDetails" EntityType="NDHDB1Model.KPIDetail" />
-    <EntitySet Name="KPITypes" EntityType="NDHDB1Model.KPIType" />
-    <EntitySet Name="KPIWorks" EntityType="NDHDB1Model.KPIWork" />
-    <EntitySet Name="StaffKPIs" EntityType="NDHDB1Model.StaffKPI" />
-    <AssociationSet Name="FK__StaffKPI__StaffI__174363E2" Association="NDHDB1Model.FK__StaffKPI__StaffI__174363E2">
-      <End Role="HaiStaff" EntitySet="HaiStaffs" />
-      <End Role="StaffKPI" EntitySet="StaffKPIs" />
-    </AssociationSet>
-    <AssociationSet Name="FK__KPIDetail__KPIWo__1DF06171" Association="NDHDB1Model.FK__KPIDetail__KPIWo__1DF06171">
-      <End Role="KPIWork" EntitySet="KPIWorks" />
-      <End Role="KPIDetail" EntitySet="KPIDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK__KPIDetail__Staff__1CFC3D38" Association="NDHDB1Model.FK__KPIDetail__Staff__1CFC3D38">
-      <End Role="StaffKPI" EntitySet="StaffKPIs" />
-      <End Role="KPIDetail" EntitySet="KPIDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK__StaffKPI__TypeId__1837881B" Association="NDHDB1Model.FK__StaffKPI__TypeId__1837881B">
-      <End Role="KPIType" EntitySet="KPITypes" />
-      <End Role="StaffKPI" EntitySet="StaffKPIs" />
-    </AssociationSet>
-    <AssociationSet Name="KPITemplate" Association="NDHDB1Model.KPITemplate">
-      <End Role="KPIType" EntitySet="KPITypes" />
-      <End Role="KPIWork" EntitySet="KPIWorks" />
-    </AssociationSet>
     <EntitySet Name="DeliveryStatus" EntityType="NDHDB1Model.DeliveryStatu" />
     <AssociationSet Name="FK__HaiOrder__DStatu__25918339" Association="NDHDB1Model.FK__HaiOrder__DStatu__25918339">
       <End Role="DeliveryStatu" EntitySet="DeliveryStatus" />
       <End Role="HaiOrder" EntitySet="HaiOrders" />
     </AssociationSet>
+    <AssociationSet Name="FK__OrderProd__Staff__6F357288" Association="NDHDB1Model.FK__OrderProd__Staff__6F357288">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="OrderProductHistory" EntitySet="OrderProductHistories" />
+    </AssociationSet>
+    <FunctionImport Name="get_list_orders" ReturnType="Collection(NDHDB1Model.get_list_orders_Result)">
+      <Parameter Name="fdate" Mode="In" Type="String" />
+      <Parameter Name="tdate" Mode="In" Type="String" />
+      <Parameter Name="ostt" Mode="In" Type="String" />
+      <Parameter Name="dstt" Mode="In" Type="String" />
+      <Parameter Name="staff" Mode="In" Type="String" />
+      <Parameter Name="c1" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="checkin_calendartype_group_Result">
     <Property Type="String" Name="Name" Nullable="true" MaxLength="512" />
@@ -1917,6 +1905,7 @@
     <NavigationProperty Name="HaiOrder" Relationship="NDHDB1Model.FK__OrderProd__Order__27AED5D5" FromRole="OrderProduct" ToRole="HaiOrder" />
     <NavigationProperty Name="ProductInfo" Relationship="NDHDB1Model.FK__OrderProd__Produ__28A2FA0E" FromRole="OrderProduct" ToRole="ProductInfo" />
     <Property Name="HasBill" Type="Int32" />
+    <Property Name="ProductType" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="OrderStaff">
     <Key>
@@ -1967,6 +1956,7 @@
     <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="HaiOrders" Relationship="NDHDB1Model.FK__HaiOrder__PayTyp__1590259A" FromRole="PayType" ToRole="HaiOrder" />
+    <Property Name="Idx" Type="Int32" />
   </EntityType>
   <EntityType Name="ShipType">
     <Key>
@@ -1976,6 +1966,7 @@
     <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="HaiOrders" Relationship="NDHDB1Model.FK__HaiOrder__ShipTy__168449D3" FromRole="ShipType" ToRole="HaiOrder" />
+    <Property Name="Idx" Type="Int32" />
   </EntityType>
   <Association Name="FK__HaiOrder__Agency__17786E0C">
     <End Type="NDHDB1Model.CInfoCommon" Role="CInfoCommon" Multiplicity="0..1" />
@@ -2110,6 +2101,8 @@
     <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="HaiOrder" Relationship="NDHDB1Model.FK__OrderProd__Order__38D961D7" FromRole="OrderProductHistory" ToRole="HaiOrder" />
     <NavigationProperty Name="ProductInfo" Relationship="NDHDB1Model.FK__OrderProd__Produ__39CD8610" FromRole="OrderProductHistory" ToRole="ProductInfo" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiStaff" Relationship="NDHDB1Model.FK__OrderProd__Staff__6F357288" FromRole="OrderProductHistory" ToRole="HaiStaff" />
   </EntityType>
   <Association Name="FK__OrderProd__Order__38D961D7">
     <End Type="NDHDB1Model.HaiOrder" Role="HaiOrder" Multiplicity="0..1" />
@@ -2230,108 +2223,6 @@
     <Property Name="UserName" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="BranchCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="KPIDetail">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="PlanPoint" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Perform" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="PlanPercent" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Point" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="StaffKPIId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="KPIWorkId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="KPIWork" Relationship="NDHDB1Model.FK__KPIDetail__KPIWo__1DF06171" FromRole="KPIDetail" ToRole="KPIWork" />
-    <NavigationProperty Name="StaffKPI" Relationship="NDHDB1Model.FK__KPIDetail__Staff__1CFC3D38" FromRole="KPIDetail" ToRole="StaffKPI" />
-    <Property Name="Number" Type="Int32" />
-  </EntityType>
-  <EntityType Name="KPIType">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="StaffKPIs" Relationship="NDHDB1Model.FK__StaffKPI__TypeId__1837881B" FromRole="KPIType" ToRole="StaffKPI" />
-    <NavigationProperty Name="KPIWorks" Relationship="NDHDB1Model.KPITemplate" FromRole="KPIType" ToRole="KPIWork" />
-  </EntityType>
-  <EntityType Name="KPIWork">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="STT" Type="Int32" />
-    <Property Name="ExcelCol" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="KPIDetails" Relationship="NDHDB1Model.FK__KPIDetail__KPIWo__1DF06171" FromRole="KPIWork" ToRole="KPIDetail" />
-    <NavigationProperty Name="KPITypes" Relationship="NDHDB1Model.KPITemplate" FromRole="KPIWork" ToRole="KPIType" />
-  </EntityType>
-  <EntityType Name="StaffKPI">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CreateTime" Type="DateTime" Precision="3" />
-    <Property Name="ModiftTime" Type="DateTime" Precision="3" />
-    <Property Name="TypeId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="HaiStaff" Relationship="NDHDB1Model.FK__StaffKPI__StaffI__174363E2" FromRole="StaffKPI" ToRole="HaiStaff" />
-    <NavigationProperty Name="KPIDetails" Relationship="NDHDB1Model.FK__KPIDetail__Staff__1CFC3D38" FromRole="StaffKPI" ToRole="KPIDetail" />
-    <NavigationProperty Name="KPIType" Relationship="NDHDB1Model.FK__StaffKPI__TypeId__1837881B" FromRole="StaffKPI" ToRole="KPIType" />
-  </EntityType>
-  <Association Name="FK__StaffKPI__StaffI__174363E2">
-    <End Type="NDHDB1Model.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
-    <End Type="NDHDB1Model.StaffKPI" Role="StaffKPI" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiStaff">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="StaffKPI">
-        <PropertyRef Name="StaffId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__KPIDetail__KPIWo__1DF06171">
-    <End Type="NDHDB1Model.KPIWork" Role="KPIWork" Multiplicity="0..1" />
-    <End Type="NDHDB1Model.KPIDetail" Role="KPIDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="KPIWork">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="KPIDetail">
-        <PropertyRef Name="KPIWorkId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__KPIDetail__Staff__1CFC3D38">
-    <End Type="NDHDB1Model.StaffKPI" Role="StaffKPI" Multiplicity="0..1" />
-    <End Type="NDHDB1Model.KPIDetail" Role="KPIDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="StaffKPI">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="KPIDetail">
-        <PropertyRef Name="StaffKPIId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__StaffKPI__TypeId__1837881B">
-    <End Type="NDHDB1Model.KPIType" Role="KPIType" Multiplicity="0..1" />
-    <End Type="NDHDB1Model.StaffKPI" Role="StaffKPI" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="KPIType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="StaffKPI">
-        <PropertyRef Name="TypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="KPITemplate">
-    <End Type="NDHDB1Model.KPIType" Role="KPIType" Multiplicity="*" />
-    <End Type="NDHDB1Model.KPIWork" Role="KPIWork" Multiplicity="*" />
-  </Association>
   <EntityType Name="DeliveryStatu">
     <Key>
       <PropertyRef Name="Id" />
@@ -2352,4 +2243,49 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__OrderProd__Staff__6F357288">
+    <End Type="NDHDB1Model.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
+    <End Type="NDHDB1Model.OrderProductHistory" Role="OrderProductHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderProductHistory">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="get_list_orders_Result">
+    <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="OrderType" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="PayType" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="ShipType" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Agency" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="ReceiveAddress" Nullable="true" />
+    <Property Type="String" Name="ReceivePhone1" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="ReceivePhone2" Nullable="true" MaxLength="32" />
+    <Property Type="DateTime" Name="ExpectDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="OrderStatus" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Notes" Nullable="true" />
+    <Property Type="String" Name="Code" Nullable="true" MaxLength="128" />
+    <Property Type="Double" Name="PriceTotal" Nullable="true" />
+    <Property Type="String" Name="BrachCode" Nullable="true" MaxLength="32" />
+    <Property Type="Int32" Name="OrderNumber" Nullable="true" />
+    <Property Type="String" Name="C1Id" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="C1Code" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="C1Name" Nullable="true" />
+    <Property Type="String" Name="UserCreate" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="DateCode" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="SalePlace" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="DStatus" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="DebtTimeLine" Nullable="true" />
+    <Property Type="String" Name="Store" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="Deputy" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="AgencyCode" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="StaffId" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="StaffCode" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="StaffName" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="ProductTotal" Nullable="true" />
+  </ComplexType>
 </Schema>

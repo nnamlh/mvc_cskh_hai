@@ -19,6 +19,8 @@ namespace HAIAPI.Models
         public string tdate { get; set; }
 
         public string place { get; set; }
+
+        public string processId { get; set; }
     }
 
     public class C2OrderRequest : RequestInfo

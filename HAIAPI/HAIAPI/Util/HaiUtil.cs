@@ -94,5 +94,18 @@ namespace HAIAPI.Util
         }
 
 
+        public static int CheckRoleShowInfo(NDHDBEntities db, string userName)
+        {
+            var user = db.AspNetUsers.Where(p => p.UserName == userName).FirstOrDefault();
+
+            if (user == null)
+                return 0;
+
+            var role = user.AspNetRoles.First();
+            if (role == null)
+                return 0;
+
+            return Convert.ToInt32(role.ShowInfoRole);
+        }
     }
 }

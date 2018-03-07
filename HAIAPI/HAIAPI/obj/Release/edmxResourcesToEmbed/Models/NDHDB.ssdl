@@ -502,8 +502,8 @@
     <Property Name="UserCreate" Type="nvarchar" MaxLength="128" />
     <Property Name="DateCode" Type="nvarchar" MaxLength="128" />
     <Property Name="SalePlace" Type="varchar" MaxLength="32" />
-    <Property Name="DebtTimeLine" Type="int" />
     <Property Name="DStatus" Type="varchar" MaxLength="128" />
+    <Property Name="DebtTimeLine" Type="int" />
   </EntityType>
   <EntityType Name="HaiPosition">
     <Key>
@@ -563,45 +563,6 @@
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="ModifyDate" Type="datetime" />
     <Property Name="IsUpdate" Type="int" />
-  </EntityType>
-  <EntityType Name="KPIDetail">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="PlanPoint" Type="nvarchar" MaxLength="128" />
-    <Property Name="Perform" Type="nvarchar" MaxLength="128" />
-    <Property Name="PlanPercent" Type="nvarchar" MaxLength="128" />
-    <Property Name="Point" Type="nvarchar" MaxLength="128" />
-    <Property Name="StaffKPIId" Type="nvarchar" MaxLength="128" />
-    <Property Name="KPIWorkId" Type="nvarchar" MaxLength="128" />
-    <Property Name="Number" Type="int" />
-  </EntityType>
-  <EntityType Name="KPITemplate">
-    <Key>
-      <PropertyRef Name="KPIWorkId" />
-      <PropertyRef Name="KPITypeId" />
-    </Key>
-    <Property Name="KPIWorkId" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="KPITypeId" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="Number" Type="int" />
-  </EntityType>
-  <EntityType Name="KPIType">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="Title" Type="nvarchar(max)" />
-    <Property Name="Notes" Type="nvarchar(max)" />
-  </EntityType>
-  <EntityType Name="KPIWork">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="Title" Type="nvarchar(max)" />
-    <Property Name="STT" Type="int" />
-    <Property Name="ExcelCol" Type="nvarchar" MaxLength="512" />
   </EntityType>
   <EntityType Name="MessegeToHai">
     <Key>
@@ -687,6 +648,7 @@
     <Property Name="QuantityFinish" Type="int" />
     <Property Name="ModifyDate" Type="datetime" />
     <Property Name="HasBill" Type="int" />
+    <Property Name="ProductType" Type="varchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="OrderProductHistory">
     <Key>
@@ -699,6 +661,7 @@
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="UserAction" Type="nvarchar" MaxLength="128" />
     <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="StaffId" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="OrderStaff">
     <Key>
@@ -990,17 +953,6 @@
     <Property Name="AgencyAddress" Type="nvarchar" MaxLength="512" />
     <Property Name="AgencyType" Type="nvarchar" MaxLength="32" />
     <Property Name="AgencyTypeName" Type="nvarchar" MaxLength="256" />
-  </EntityType>
-  <EntityType Name="StaffKPI">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="Title" Type="nvarchar(max)" />
-    <Property Name="StaffId" Type="nvarchar" MaxLength="128" />
-    <Property Name="CreateTime" Type="datetime" />
-    <Property Name="ModiftTime" Type="datetime" />
-    <Property Name="TypeId" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="StaffWithC1">
     <Key>
@@ -1383,7 +1335,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__HaiOrder__DStatu__25918339">
+  <Association Name="FK__HaiOrder__DStatu__697C9932">
     <End Role="DeliveryStatus" Type="Self.DeliveryStatus" Multiplicity="0..1" />
     <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1476,54 +1428,6 @@
       </Principal>
       <Dependent Role="HaiStaff">
         <PropertyRef Name="PositionId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__KPIDetail__KPIWo__1DF06171">
-    <End Role="KPIWork" Type="Self.KPIWork" Multiplicity="0..1" />
-    <End Role="KPIDetail" Type="Self.KPIDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="KPIWork">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="KPIDetail">
-        <PropertyRef Name="KPIWorkId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__KPIDetail__Staff__1CFC3D38">
-    <End Role="StaffKPI" Type="Self.StaffKPI" Multiplicity="0..1" />
-    <End Role="KPIDetail" Type="Self.KPIDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="StaffKPI">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="KPIDetail">
-        <PropertyRef Name="StaffKPIId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__KPITempla__KPITy__127EAEC5">
-    <End Role="KPIType" Type="Self.KPIType" Multiplicity="1" />
-    <End Role="KPITemplate" Type="Self.KPITemplate" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="KPIType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="KPITemplate">
-        <PropertyRef Name="KPITypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__KPITempla__KPIWo__118A8A8C">
-    <End Role="KPIWork" Type="Self.KPIWork" Multiplicity="1" />
-    <End Role="KPITemplate" Type="Self.KPITemplate" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="KPIWork">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="KPITemplate">
-        <PropertyRef Name="KPIWorkId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1644,6 +1548,18 @@
       </Principal>
       <Dependent Role="OrderProductHistory">
         <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderProd__Staff__6F357288">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
+    <End Role="OrderProductHistory" Type="Self.OrderProductHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderProductHistory">
+        <PropertyRef Name="StaffId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1791,30 +1707,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__StaffKPI__StaffI__174363E2">
-    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
-    <End Role="StaffKPI" Type="Self.StaffKPI" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiStaff">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="StaffKPI">
-        <PropertyRef Name="StaffId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__StaffKPI__TypeId__1837881B">
-    <End Role="KPIType" Type="Self.KPIType" Multiplicity="0..1" />
-    <End Role="StaffKPI" Type="Self.StaffKPI" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="KPIType">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="StaffKPI">
-        <PropertyRef Name="TypeId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__StaffWith__Staff__4C564A9F">
     <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="1" />
     <End Role="StaffWithC2" Type="Self.StaffWithC2" Multiplicity="*" />
@@ -1941,6 +1833,14 @@
     <Parameter Name="year" Type="int" Mode="In" />
     <Parameter Name="staffId" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="get_list_orders" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="fdate" Type="varchar" Mode="In" />
+    <Parameter Name="tdate" Type="varchar" Mode="In" />
+    <Parameter Name="ostt" Type="varchar" Mode="In" />
+    <Parameter Name="dstt" Type="varchar" Mode="In" />
+    <Parameter Name="staff" Type="varchar" Mode="In" />
+    <Parameter Name="c1" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="procduct_item_detail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="id" Type="nvarchar" Mode="In" />
   </Function>
@@ -1990,10 +1890,6 @@
     <EntitySet Name="HaiStaff" EntityType="Self.HaiStaff" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HappyBirthday" EntityType="Self.HappyBirthday" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ImeiUser" EntityType="Self.ImeiUser" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="KPIDetail" EntityType="Self.KPIDetail" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="KPITemplate" EntityType="Self.KPITemplate" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="KPIType" EntityType="Self.KPIType" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="KPIWork" EntityType="Self.KPIWork" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MessegeToHai" EntityType="Self.MessegeToHai" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MobileFunction" EntityType="Self.MobileFunction" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MobileRole" EntityType="Self.MobileRole" Schema="dbo" store:Type="Tables" />
@@ -2028,7 +1924,6 @@
     <EntitySet Name="SMSCode" EntityType="Self.SMSCode" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SMSHistory" EntityType="Self.SMSHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StaffCheckIn" EntityType="Self.StaffCheckIn" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="StaffKPI" EntityType="Self.StaffKPI" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StaffWithC1" EntityType="Self.StaffWithC1" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StaffWithC2" EntityType="Self.StaffWithC2" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="StoreAgencyId" EntityType="Self.StoreAgencyId" Schema="dbo" store:Type="Tables" />
@@ -2140,7 +2035,7 @@
       <End Role="CInfoCommon" EntitySet="CInfoCommon" />
       <End Role="HaiOrder" EntitySet="HaiOrder" />
     </AssociationSet>
-    <AssociationSet Name="FK__HaiOrder__DStatu__25918339" Association="Self.FK__HaiOrder__DStatu__25918339">
+    <AssociationSet Name="FK__HaiOrder__DStatu__697C9932" Association="Self.FK__HaiOrder__DStatu__697C9932">
       <End Role="DeliveryStatus" EntitySet="DeliveryStatus" />
       <End Role="HaiOrder" EntitySet="HaiOrder" />
     </AssociationSet>
@@ -2171,22 +2066,6 @@
     <AssociationSet Name="FK__HaiStaff__Positi__239E4DCF" Association="Self.FK__HaiStaff__Positi__239E4DCF">
       <End Role="HaiPosition" EntitySet="HaiPosition" />
       <End Role="HaiStaff" EntitySet="HaiStaff" />
-    </AssociationSet>
-    <AssociationSet Name="FK__KPIDetail__KPIWo__1DF06171" Association="Self.FK__KPIDetail__KPIWo__1DF06171">
-      <End Role="KPIWork" EntitySet="KPIWork" />
-      <End Role="KPIDetail" EntitySet="KPIDetail" />
-    </AssociationSet>
-    <AssociationSet Name="FK__KPIDetail__Staff__1CFC3D38" Association="Self.FK__KPIDetail__Staff__1CFC3D38">
-      <End Role="StaffKPI" EntitySet="StaffKPI" />
-      <End Role="KPIDetail" EntitySet="KPIDetail" />
-    </AssociationSet>
-    <AssociationSet Name="FK__KPITempla__KPITy__127EAEC5" Association="Self.FK__KPITempla__KPITy__127EAEC5">
-      <End Role="KPIType" EntitySet="KPIType" />
-      <End Role="KPITemplate" EntitySet="KPITemplate" />
-    </AssociationSet>
-    <AssociationSet Name="FK__KPITempla__KPIWo__118A8A8C" Association="Self.FK__KPITempla__KPIWo__118A8A8C">
-      <End Role="KPIWork" EntitySet="KPIWork" />
-      <End Role="KPITemplate" EntitySet="KPITemplate" />
     </AssociationSet>
     <AssociationSet Name="FK__MobileRol__Mobil__7D98A078" Association="Self.FK__MobileRol__Mobil__7D98A078">
       <End Role="MobileFunction" EntitySet="MobileFunction" />
@@ -2226,6 +2105,10 @@
     </AssociationSet>
     <AssociationSet Name="FK__OrderProd__Produ__3E923B2D" Association="Self.FK__OrderProd__Produ__3E923B2D">
       <End Role="ProductInfo" EntitySet="ProductInfo" />
+      <End Role="OrderProductHistory" EntitySet="OrderProductHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderProd__Staff__6F357288" Association="Self.FK__OrderProd__Staff__6F357288">
+      <End Role="HaiStaff" EntitySet="HaiStaff" />
       <End Role="OrderProductHistory" EntitySet="OrderProductHistory" />
     </AssociationSet>
     <AssociationSet Name="FK__OrderStaf__Order__2101D846" Association="Self.FK__OrderStaf__Order__2101D846">
@@ -2275,14 +2158,6 @@
     <AssociationSet Name="FK__StaffChec__Staff__47DBAE45" Association="Self.FK__StaffChec__Staff__47DBAE45">
       <End Role="HaiStaff" EntitySet="HaiStaff" />
       <End Role="StaffCheckIn" EntitySet="StaffCheckIn" />
-    </AssociationSet>
-    <AssociationSet Name="FK__StaffKPI__StaffI__174363E2" Association="Self.FK__StaffKPI__StaffI__174363E2">
-      <End Role="HaiStaff" EntitySet="HaiStaff" />
-      <End Role="StaffKPI" EntitySet="StaffKPI" />
-    </AssociationSet>
-    <AssociationSet Name="FK__StaffKPI__TypeId__1837881B" Association="Self.FK__StaffKPI__TypeId__1837881B">
-      <End Role="KPIType" EntitySet="KPIType" />
-      <End Role="StaffKPI" EntitySet="StaffKPI" />
     </AssociationSet>
     <AssociationSet Name="FK__StaffWith__Staff__4C564A9F" Association="Self.FK__StaffWith__Staff__4C564A9F">
       <End Role="HaiStaff" EntitySet="HaiStaff" />

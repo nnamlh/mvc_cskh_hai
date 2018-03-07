@@ -167,6 +167,8 @@ namespace HAIAPI.Models
         public int? quantityBox { get; set; }
 
         public int? hasBill { get; set; }
+
+        public string productType { get; set; }
     }
 
     public class ProductOrderHistory

@@ -1013,6 +1013,7 @@
     <EntitySetMapping Name="OrderProducts">
       <EntityTypeMapping TypeName="NDHDB1Model.OrderProduct">
         <MappingFragment StoreEntitySet="OrderProduct">
+          <ScalarProperty Name="ProductType" ColumnName="ProductType" />
           <ScalarProperty Name="HasBill" ColumnName="HasBill" />
           <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
           <ScalarProperty Name="QuantityFinish" ColumnName="QuantityFinish" />
@@ -1086,6 +1087,7 @@
     <EntitySetMapping Name="OrderProductHistories">
       <EntityTypeMapping TypeName="NDHDB1Model.OrderProductHistory">
         <MappingFragment StoreEntitySet="OrderProductHistory">
+          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
           <ScalarProperty Name="Notes" ColumnName="Notes" />
           <ScalarProperty Name="UserAction" ColumnName="UserAction" />
           <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
@@ -1174,59 +1176,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="KPIDetails">
-      <EntityTypeMapping TypeName="NDHDB1Model.KPIDetail">
-        <MappingFragment StoreEntitySet="KPIDetail">
-          <ScalarProperty Name="Number" ColumnName="Number" />
-          <ScalarProperty Name="KPIWorkId" ColumnName="KPIWorkId" />
-          <ScalarProperty Name="StaffKPIId" ColumnName="StaffKPIId" />
-          <ScalarProperty Name="Point" ColumnName="Point" />
-          <ScalarProperty Name="PlanPercent" ColumnName="PlanPercent" />
-          <ScalarProperty Name="Perform" ColumnName="Perform" />
-          <ScalarProperty Name="PlanPoint" ColumnName="PlanPoint" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="KPITypes">
-      <EntityTypeMapping TypeName="NDHDB1Model.KPIType">
-        <MappingFragment StoreEntitySet="KPIType">
-          <ScalarProperty Name="Notes" ColumnName="Notes" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="KPIWorks">
-      <EntityTypeMapping TypeName="NDHDB1Model.KPIWork">
-        <MappingFragment StoreEntitySet="KPIWork">
-          <ScalarProperty Name="ExcelCol" ColumnName="ExcelCol" />
-          <ScalarProperty Name="STT" ColumnName="STT" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="StaffKPIs">
-      <EntityTypeMapping TypeName="NDHDB1Model.StaffKPI">
-        <MappingFragment StoreEntitySet="StaffKPI">
-          <ScalarProperty Name="TypeId" ColumnName="TypeId" />
-          <ScalarProperty Name="ModiftTime" ColumnName="ModiftTime" />
-          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <AssociationSetMapping Name="KPITemplate" TypeName="NDHDB1Model.KPITemplate" StoreEntitySet="KPITemplate">
-      <EndProperty Name="KPIWork">
-        <ScalarProperty Name="Id" ColumnName="KPIWorkId" />
-      </EndProperty>
-      <EndProperty Name="KPIType">
-        <ScalarProperty Name="Id" ColumnName="KPITypeId" />
-      </EndProperty>
-    </AssociationSetMapping>
     <EntitySetMapping Name="DeliveryStatus">
       <EntityTypeMapping TypeName="NDHDB1Model.DeliveryStatu">
         <MappingFragment StoreEntitySet="DeliveryStatus">
@@ -1235,5 +1184,42 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="get_list_orders" FunctionName="NDHDB1Model.Store.get_list_orders">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="NDHDB1Model.get_list_orders_Result">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+          <ScalarProperty Name="PayType" ColumnName="PayType" />
+          <ScalarProperty Name="ShipType" ColumnName="ShipType" />
+          <ScalarProperty Name="Agency" ColumnName="Agency" />
+          <ScalarProperty Name="ReceiveAddress" ColumnName="ReceiveAddress" />
+          <ScalarProperty Name="ReceivePhone1" ColumnName="ReceivePhone1" />
+          <ScalarProperty Name="ReceivePhone2" ColumnName="ReceivePhone2" />
+          <ScalarProperty Name="ExpectDate" ColumnName="ExpectDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="OrderStatus" ColumnName="OrderStatus" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="PriceTotal" ColumnName="PriceTotal" />
+          <ScalarProperty Name="BrachCode" ColumnName="BrachCode" />
+          <ScalarProperty Name="OrderNumber" ColumnName="OrderNumber" />
+          <ScalarProperty Name="C1Id" ColumnName="C1Id" />
+          <ScalarProperty Name="C1Code" ColumnName="C1Code" />
+          <ScalarProperty Name="C1Name" ColumnName="C1Name" />
+          <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+          <ScalarProperty Name="DateCode" ColumnName="DateCode" />
+          <ScalarProperty Name="SalePlace" ColumnName="SalePlace" />
+          <ScalarProperty Name="DStatus" ColumnName="DStatus" />
+          <ScalarProperty Name="DebtTimeLine" ColumnName="DebtTimeLine" />
+          <ScalarProperty Name="Store" ColumnName="Store" />
+          <ScalarProperty Name="Deputy" ColumnName="Deputy" />
+          <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+          <ScalarProperty Name="StaffCode" ColumnName="StaffCode" />
+          <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+          <ScalarProperty Name="ProductTotal" ColumnName="ProductTotal" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

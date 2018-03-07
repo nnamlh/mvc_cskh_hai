@@ -672,6 +672,7 @@
           <Property Name="QuantityFinish" Type="int" />
           <Property Name="ModifyDate" Type="datetime" />
           <Property Name="HasBill" Type="int" />
+          <Property Name="ProductType" Type="varchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="OrderProductHistory">
           <Key>
@@ -684,6 +685,7 @@
           <Property Name="CreateDate" Type="datetime" />
           <Property Name="UserAction" Type="nvarchar" MaxLength="128" />
           <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="StaffId" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="OrderStaff">
           <Key>
@@ -1591,6 +1593,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__OrderProd__Staff__6F357288">
+          <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
+          <End Role="OrderProductHistory" Type="Self.OrderProductHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HaiStaff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderProductHistory">
+              <PropertyRef Name="StaffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__OrderStaf__Order__2101D846">
           <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="0..1" />
           <End Role="OrderStaff" Type="Self.OrderStaff" Multiplicity="*" />
@@ -2219,6 +2233,10 @@
           </AssociationSet>
           <AssociationSet Name="FK__OrderProd__Produ__3E923B2D" Association="Self.FK__OrderProd__Produ__3E923B2D">
             <End Role="ProductInfo" EntitySet="ProductInfo" />
+            <End Role="OrderProductHistory" EntitySet="OrderProductHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderProd__Staff__6F357288" Association="Self.FK__OrderProd__Staff__6F357288">
+            <End Role="HaiStaff" EntitySet="HaiStaff" />
             <End Role="OrderProductHistory" EntitySet="OrderProductHistory" />
           </AssociationSet>
           <AssociationSet Name="FK__OrderStaf__Order__2101D846" Association="Self.FK__OrderStaf__Order__2101D846">
@@ -2929,6 +2947,7 @@
           <NavigationProperty Name="StaffCheckIns" Relationship="Self.FK__StaffChec__Staff__47DBAE45" FromRole="HaiStaff" ToRole="StaffCheckIn" />
           <NavigationProperty Name="StaffWithC2" Relationship="Self.FK__StaffWith__Staff__4C564A9F" FromRole="HaiStaff" ToRole="StaffWithC2" />
           <NavigationProperty Name="C1Info" Relationship="Self.StaffWithC1" FromRole="HaiStaff" ToRole="C1Info" />
+          <NavigationProperty Name="OrderProductHistories" Relationship="DMSHAIModel.FK__OrderProd__Staff__6F357288" FromRole="HaiStaff" ToRole="OrderProductHistory" />
         </EntityType>
         <EntityType Name="HappyBirthday">
           <Key>
@@ -3035,6 +3054,7 @@
           <NavigationProperty Name="HaiOrder" Relationship="Self.FK__OrderProd__Order__27AED5D5" FromRole="OrderProduct" ToRole="HaiOrder" />
           <NavigationProperty Name="ProductInfo" Relationship="Self.FK__OrderProd__Produ__28A2FA0E" FromRole="OrderProduct" ToRole="ProductInfo" />
           <Property Name="HasBill" Type="Int32" />
+          <Property Name="ProductType" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="OrderProductHistory">
           <Key>
@@ -3049,6 +3069,8 @@
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="HaiOrder" Relationship="Self.FK__OrderProd__Order__3D9E16F4" FromRole="OrderProductHistory" ToRole="HaiOrder" />
           <NavigationProperty Name="ProductInfo" Relationship="Self.FK__OrderProd__Produ__3E923B2D" FromRole="OrderProductHistory" ToRole="ProductInfo" />
+          <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="HaiStaff" Relationship="DMSHAIModel.FK__OrderProd__Staff__6F357288" FromRole="OrderProductHistory" ToRole="HaiStaff" />
         </EntityType>
         <EntityType Name="OrderStaff">
           <Key>
@@ -4519,7 +4541,7 @@
             <Parameter Name="c1" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="get_list_orders_by_code" ReturnType="Collection(DMSHAIModel.get_list_orders_Result)">
-            <Parameter Name="code" Mode="In" Type="String" />
+          <Parameter Name="code" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="get_list_orders_product" ReturnType="Collection(DMSHAIModel.get_list_orders_product_Result)">
             <Parameter Name="fdate" Mode="In" Type="String" />
@@ -4529,6 +4551,10 @@
             <Parameter Name="staff" Mode="In" Type="String" />
             <Parameter Name="c1" Mode="In" Type="String" />
           </FunctionImport>
+          <AssociationSet Name="FK__OrderProd__Staff__6F357288" Association="DMSHAIModel.FK__OrderProd__Staff__6F357288">
+            <End Role="HaiStaff" EntitySet="HaiStaffs" />
+            <End Role="OrderProductHistory" EntitySet="OrderProductHistories" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="checkin_calendartype_group_Result">
           <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
@@ -4960,6 +4986,18 @@
           <Property Type="Int32" Name="OrderQuantity" Nullable="true" />
           <Property Type="Int32" Name="QuantityFinish" Nullable="true" />
         </ComplexType>
+        <Association Name="FK__OrderProd__Staff__6F357288">
+          <End Type="DMSHAIModel.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
+          <End Type="DMSHAIModel.OrderProductHistory" Role="OrderProductHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HaiStaff">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderProductHistory">
+              <PropertyRef Name="StaffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5631,6 +5669,7 @@
           <EntitySetMapping Name="OrderProducts">
             <EntityTypeMapping TypeName="DMSHAIModel.OrderProduct">
               <MappingFragment StoreEntitySet="OrderProduct">
+                <ScalarProperty Name="ProductType" ColumnName="ProductType" />
                 <ScalarProperty Name="HasBill" ColumnName="HasBill" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
@@ -5645,6 +5684,7 @@
           <EntitySetMapping Name="OrderProductHistories">
             <EntityTypeMapping TypeName="DMSHAIModel.OrderProductHistory">
               <MappingFragment StoreEntitySet="OrderProductHistory">
+                <ScalarProperty Name="StaffId" ColumnName="StaffId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />

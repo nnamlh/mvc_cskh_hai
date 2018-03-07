@@ -725,6 +725,7 @@
     <NavigationProperty Name="HaiOrder" Relationship="Self.FK__OrderProd__Order__27AED5D5" FromRole="OrderProduct" ToRole="HaiOrder" />
     <NavigationProperty Name="ProductInfo" Relationship="Self.FK__OrderProd__Produ__28A2FA0E" FromRole="OrderProduct" ToRole="ProductInfo" />
     <Property Name="HasBill" Type="Int32" />
+    <Property Name="ProductType" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="OrderProductHistory">
     <Key>

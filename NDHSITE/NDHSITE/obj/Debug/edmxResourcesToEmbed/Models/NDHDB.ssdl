@@ -667,6 +667,7 @@
     <Property Name="QuantityFinish" Type="int" />
     <Property Name="ModifyDate" Type="datetime" />
     <Property Name="HasBill" Type="int" />
+    <Property Name="ProductType" Type="varchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="OrderProductHistory">
     <Key>

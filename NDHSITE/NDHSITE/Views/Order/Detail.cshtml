@@ -47,7 +47,7 @@
 
 <ul id="myTab2" class="nav nav-pills">
     <li class="active">
-        <a href="#home-2" data-toggle="tab">Đơn hàng</a>
+        <a href="#home-2" data-toggle="tab">Mặt hàng</a>
     </li>
     <li>
         <a href="#profile-3" data-toggle="tab">Nhân viên thực hiện</a>
@@ -62,6 +62,7 @@
                     <tr>
                         <th><strong>Mã hàng</strong></th>
                         <th><strong>Tên hàng</strong></th>
+                        <th><strong>Loại hàng</strong></th>
                         <th><strong>SL đặt</strong></th>
                         <th><strong>Tổng tiền</strong></th>
                         <th><strong>Tông tiền thực</strong></th>
@@ -84,6 +85,16 @@
                         <tr>
                             <td>@item.ProductInfo.PCode</td>
                             <td>@item.ProductInfo.PName</td>
+                            <td>
+                                @if (Model.OrderStatus == "process")
+{
+                                <select class="chk" data-uid="@item.ProductId">
+                                    <option value="">Chưa chọn</option>
+                                    <option value="warehouse" @(item.ProductType == "warehouse" ? "selected" : "")>Hàng gửi kho</option>
+                                    <option value="new" @(item.ProductType == "new" ? "selected" : "")>Hàng xuất mới</option>
+                                </select>
+}
+                            </td>
                             <td>
                                 @NDHSITE.Util.HaiUtil.ConvertProductQuantityText(item.ProductInfo.Quantity, item.Quantity, item.ProductInfo.Unit)<br />
                             </td>
@@ -349,6 +360,26 @@
 
         }
 
+
+        $(".chk").change(function () {
+            var productId = $(this).attr("data-uid");
+            var type = $(this).val();
+            var orderId = '@Model.Id';
+
+            $.ajax({
+                type: "POST",
+                url: "/Order/UpdateProductType",
+                data: { orderId: orderId, productId: productId, type :  type},
+                success: function (response) {
+                    if (response.id === 1) {
+                        alert("Đã đổi");
+                    } else {
+                        alert("Không hoàn thành");
+                    }
+                }
+            });
+
+        });
     </script>
 
 }

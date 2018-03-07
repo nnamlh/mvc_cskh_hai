@@ -14,7 +14,7 @@ namespace HAIAPI.Controllers
     public class ManageOrderController : RestMainController
     {
 
-        //
+        /*
         [HttpPost]
         public YourOrderResult ShowOrderC2()
         {
@@ -93,7 +93,7 @@ namespace HAIAPI.Controllers
 
         }
 
-        //
+        /*
         [HttpGet]
         public List<ProductOrderHistory> OrderProductHistory(string orderId, string productId)
         {
@@ -126,6 +126,7 @@ namespace HAIAPI.Controllers
             return result;
         }
 
+        /*
         #region
         [HttpPost]
         public ResultInfo UpdateOrderProduct()
@@ -222,6 +223,7 @@ namespace HAIAPI.Controllers
             return result;
         }
         #endregion
+        */
 
         #region danh sach san pham
         [HttpGet]
@@ -290,7 +292,8 @@ namespace HAIAPI.Controllers
                         price = item.PriceTotal,
                         quantityBox = item.ProductInfo.Quantity,
                         unit = item.ProductInfo.Unit,
-                        hasBill = item.HasBill
+                        hasBill = item.HasBill,
+                        productType = item.ProductType
                     });
                 }
 
@@ -308,7 +311,7 @@ namespace HAIAPI.Controllers
         }
         #endregion
 
-
+        /*
         #region cap nhat giao du
         [HttpPost]
         public UpdateDeliveryCompleteResult CompleteDelivery()
@@ -413,6 +416,7 @@ namespace HAIAPI.Controllers
             return result;
         }
         #endregion
+         * */
 
         #region giao hang
         [HttpGet]
@@ -472,18 +476,20 @@ namespace HAIAPI.Controllers
 
                 //
                 // update process: nhan vien khoi tao
-                OrderStaff orderStaff = new OrderStaff()
+                var history = new OrderProductHistory()
                 {
                     Id = Guid.NewGuid().ToString(),
-                    CreateTime = DateTime.Now,
-                    OrderId = order.Id,
-                    Notes = "Cập nhật hàng",
-                    ProcessId = "updatedelivery",
+                    CreateDate = DateTime.Now,
+                    Notes = "Nhan vien cong ty cap nhat",
+                    OrderId = checkOrderProduct.OrderId,
+                    ProductId = checkOrderProduct.ProductId,
+                    Quantity = quantity,
                     StaffId = staff.Id
                 };
 
-                db.OrderStaffs.Add(orderStaff);
+                db.OrderProductHistories.Add(history);
                 db.SaveChanges();
+
 
             }
             catch (Exception e)

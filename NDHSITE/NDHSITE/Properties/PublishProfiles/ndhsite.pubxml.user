@@ -76,7 +76,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/22/2018 17:16:47</publishTime>
     </File>
     <File Include="bin/NDHSITE.dll">
-      <publishTime>03/07/2018 05:00:56</publishTime>
+      <publishTime>03/07/2018 11:35:54</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>01/22/2018 17:16:48</publishTime>
@@ -262,7 +262,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/05/2017 12:52:10</publishTime>
     </File>
     <File Include="Models/NDHDB.edmx.diagram">
-      <publishTime>03/06/2018 23:08:13</publishTime>
+      <publishTime>03/07/2018 11:34:29</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>01/22/2018 17:18:15</publishTime>
@@ -619,13 +619,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/31/2017 15:18:22</publishTime>
     </File>
     <File Include="Views/Order/Detail.cshtml">
-      <publishTime>03/07/2018 05:03:42</publishTime>
+      <publishTime>03/07/2018 10:01:27</publishTime>
     </File>
     <File Include="Views/Order/ModifyProduct.cshtml">
       <publishTime>10/27/2017 00:12:07</publishTime>
     </File>
     <File Include="Views/Order/Show.cshtml">
-      <publishTime>03/07/2018 04:12:37</publishTime>
+      <publishTime>03/07/2018 09:41:35</publishTime>
     </File>
     <File Include="Views/Product/CatProduct.cshtml">
       <publishTime>10/31/2016 10:48:05</publishTime>

@@ -74,6 +74,11 @@ namespace HAIAPI.Controllers
                     paser.c1Code = "";
                 }
 
+                if (String.IsNullOrEmpty(paser.processId))
+                {
+                    paser.processId = "";
+                }
+
 
                 //data = staff.OrderStaffs.Where(p => p.HaiOrder.CInfoCommon.CCode.Contains(paser.c2Code) && p.ProcessId == "create").Select(p => p.HaiOrder).OrderByDescending(p => p.CreateDate).ToPagedList(pageNumber, pageSize).ToList();
                  DateTime fromDate = DateTime.ParseExact(paser.fdate, "d/M/yyyy", null);
@@ -83,11 +88,11 @@ namespace HAIAPI.Controllers
                 var data = (from p in db.OrderStaffs
                             where DbFunctions.TruncateTime(p.CreateTime)
                                                >= DbFunctions.TruncateTime(fromDate) && DbFunctions.TruncateTime(p.CreateTime)
-                                               <= DbFunctions.TruncateTime(toDate) && p.ProcessId == "create" && p.HaiOrder.C1Code.Contains(paser.c1Code) 
-                                               && p.HaiOrder.SalePlace.Contains(paser.place) && p.HaiOrder.DStatus.Contains(paser.status)
+                                               <= DbFunctions.TruncateTime(toDate) && p.StaffId == staff.Id && p.HaiOrder.C1Code.Contains(paser.c1Code) 
+                                               && p.HaiOrder.SalePlace.Contains(paser.place) && p.HaiOrder.DStatus.Contains(paser.status) && p.HaiOrder.OrderStatus.Contains(paser.processId)
                             select p.HaiOrder).OrderByDescending(p => p.CreateDate).ToPagedList(pageNumber, pageSize);
-
-
+                 
+             //   var data = db.get_list_orders(fromDate.ToString("yyyy-MM-dd"), toDate.ToString("yyyy-MM-dd"), "%" + paser.processId + "%", "%" + paser.status + "%", "%" + staff.Code + "%", "%" + pa + "%").ToList();
                // List<YourOrder> orders = new List<YourOrder>();
 
                 foreach (var order in data)
