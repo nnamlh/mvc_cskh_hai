@@ -524,6 +524,9 @@
     <Compile Include="Models\report_order_detail_Result.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\report_order_staff_sales_Result.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\report_remain_product_Result.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
@@ -655,6 +658,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="haiupload\list_order_form.xlsx" />
+    <Content Include="haiupload\report_order_staff_sales.xlsx" />
     <None Include="Properties\PublishProfiles\home.pubxml" />
     <None Include="Properties\PublishProfiles\ndhsite.pubxml" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />

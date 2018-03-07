@@ -2227,6 +2227,10 @@
       <End Role="HaiStaff" EntitySet="HaiStaffs" />
       <End Role="OrderProductHistory" EntitySet="OrderProductHistories" />
     </AssociationSet>
+    <FunctionImport Name="report_order_staff_sales" ReturnType="Collection(DMSHAIModel.report_order_staff_sales_Result)">
+      <Parameter Name="fdate" Mode="In" Type="String" />
+      <Parameter Name="tdate" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="checkin_calendartype_group_Result">
     <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
@@ -2657,6 +2661,7 @@
     <Property Type="Double" Name="PPriceTotal" Nullable="true" />
     <Property Type="Int32" Name="OrderQuantity" Nullable="true" />
     <Property Type="Int32" Name="QuantityFinish" Nullable="true" />
+    <Property Type="String" Name="GoodType" Nullable="true" MaxLength="128" />
   </ComplexType>
   <Association Name="FK__OrderProd__Staff__6F357288">
     <End Type="DMSHAIModel.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
@@ -2670,4 +2675,16 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="report_order_staff_sales_Result">
+    <Property Type="String" Name="BrachCode" Nullable="true" MaxLength="32" />
+    <Property Type="String" Name="StaffName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="StaffCode" Nullable="true" MaxLength="20" />
+    <Property Type="Int32" Name="CountOrder" Nullable="true" />
+    <Property Type="Double" Name="SumPPrice" Nullable="true" />
+    <Property Type="Double" Name="SumPPriceReal" Nullable="true" />
+    <Property Type="Double" Name="SumPPriceHasBill" Nullable="true" />
+    <Property Type="Double" Name="SumPPriceNoBill" Nullable="true" />
+    <Property Type="Double" Name="SumPPriceInWarehouse" Nullable="true" />
+    <Property Type="Double" Name="SumPPriceInNew" Nullable="true" />
+  </ComplexType>
 </Schema>

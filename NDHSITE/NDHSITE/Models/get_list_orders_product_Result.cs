@@ -51,5 +51,6 @@ namespace NDHSITE.Models
         public Nullable<double> PPriceTotal { get; set; }
         public Nullable<int> OrderQuantity { get; set; }
         public Nullable<int> QuantityFinish { get; set; }
+        public string GoodType { get; set; }
     }
 }

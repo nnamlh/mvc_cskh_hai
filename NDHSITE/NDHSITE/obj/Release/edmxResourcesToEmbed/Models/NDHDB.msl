@@ -1569,6 +1569,23 @@
           <ScalarProperty Name="PPriceTotal" ColumnName="PPriceTotal" />
           <ScalarProperty Name="OrderQuantity" ColumnName="OrderQuantity" />
           <ScalarProperty Name="QuantityFinish" ColumnName="QuantityFinish" />
+          <ScalarProperty Name="GoodType" ColumnName="GoodType" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="report_order_staff_sales" FunctionName="DMSHAIModel.Store.report_order_staff_sales">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DMSHAIModel.report_order_staff_sales_Result">
+          <ScalarProperty Name="BrachCode" ColumnName="BrachCode" />
+          <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+          <ScalarProperty Name="StaffCode" ColumnName="StaffCode" />
+          <ScalarProperty Name="CountOrder" ColumnName="CountOrder" />
+          <ScalarProperty Name="SumPPrice" ColumnName="SumPPrice" />
+          <ScalarProperty Name="SumPPriceReal" ColumnName="SumPPriceReal" />
+          <ScalarProperty Name="SumPPriceHasBill" ColumnName="SumPPriceHasBill" />
+          <ScalarProperty Name="SumPPriceNoBill" ColumnName="SumPPriceNoBill" />
+          <ScalarProperty Name="SumPPriceInWarehouse" ColumnName="SumPPriceInWarehouse" />
+          <ScalarProperty Name="SumPPriceInNew" ColumnName="SumPPriceInNew" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

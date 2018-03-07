@@ -136,11 +136,69 @@ namespace NDHSITE.Controllers
                             worksheet.Cells[i + 2, 8].Value = data[i].ExpectDate;
                             worksheet.Cells[i + 2, 9].Value = data[i].C1Code;
                             worksheet.Cells[i + 2, 10].Value = data[i].C1Name;
-                            worksheet.Cells[i + 2, 11].Value = data[i].PName;
-                            worksheet.Cells[i + 2, 12].Value = data[i].OrderQuantity / data[i].PQuantity;
-                            worksheet.Cells[i + 2, 13].Value = data[i].OrderQuantity % data[i].PQuantity;
-                            worksheet.Cells[i + 2, 14].Value = data[i].QuantityFinish / data[i].PQuantity;
-                            worksheet.Cells[i + 2, 15].Value = data[i].QuantityFinish % data[i].PQuantity;
+
+                            if (data[i].OrderStatus == "process")
+                            {
+                                worksheet.Cells[i + 2, 11].Value = "Đang xử lý";
+                            }
+                            else if (data[i].OrderStatus == "finish")
+                            {
+                                worksheet.Cells[i + 2, 11].Value = "Hoàn thành";
+                            }
+                            else if (data[i].OrderStatus == "cancel")
+                            {
+                                worksheet.Cells[i + 2, 11].Value = "Đã hủy không giao";
+                            }
+
+                            if (data[i].QuantityFinish == 0)
+                            {
+                                worksheet.Cells[i + 2, 12].Value = "Chưa giao";
+                            }
+                            else if (data[i].QuantityFinish == data[i].OrderQuantity)
+                            {
+                                worksheet.Cells[i + 2, 12].Value = "Giao đủ";
+                            }
+                            else if (data[i].QuantityFinish > data[i].OrderQuantity)
+                            {
+                                worksheet.Cells[i + 2, 12].Value = "Giao nhiều hơn";
+                            }
+                            else
+                            {
+                                worksheet.Cells[i + 2, 12].Value = "Giao ít hơn";
+                            }
+
+
+                            //
+                            if (data[i].HasBill == 1)
+                            {
+                                worksheet.Cells[i + 2, 13].Value = "Có";
+                            }
+                            else
+                            {
+                                worksheet.Cells[i + 2, 13].Value = "Không";
+                            }
+
+                            // 
+                            if (data[i].GoodType == "warehouse")
+                            {
+                                worksheet.Cells[i + 2, 14].Value = "Hàng gửi kho";
+                            }
+                            else if (data[i].GoodType == "new")
+                            {
+                                worksheet.Cells[i + 2, 14].Value = "Hàng xuất mới";
+                            }
+                            else
+                            {
+                                worksheet.Cells[i + 2, 14].Value = "Không xác định";
+                            }
+
+                            worksheet.Cells[i + 2, 15].Value = data[i].PName;
+                            worksheet.Cells[i + 2, 16].Value = data[i].OrderQuantity / data[i].PQuantity;
+                            worksheet.Cells[i + 2, 17].Value = data[i].OrderQuantity % data[i].PQuantity;
+                            worksheet.Cells[i + 2, 18].Value = data[i].PPriceTotal;
+                            worksheet.Cells[i + 2, 19].Value = data[i].QuantityFinish / data[i].PQuantity;
+                            worksheet.Cells[i + 2, 20].Value = data[i].QuantityFinish % data[i].PQuantity;
+                            worksheet.Cells[i + 2, 21].Value = data[i].QuantityFinish * data[i].PerPrice;
 
                         }
                         catch
@@ -162,6 +220,83 @@ namespace NDHSITE.Controllers
 
 
             return File(pathTo, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", string.Format("ds-don-hang-" + DateTime.Now.ToString("ddMMyyyyhhmmss") + ".{0}", "xlsx"));
+        }
+
+
+        public ActionResult ExcelStaffSales(string DateFrom = "", string DateTo = "")
+        {
+
+            int permit = Utitl.CheckRoleShowInfo(db, User.Identity.Name);
+
+            var current = DateTime.Now;
+
+            DateTime dFrom;
+
+            DateTime dTo;
+
+            if (String.IsNullOrEmpty(DateFrom) || String.IsNullOrEmpty(DateTo))
+            {
+                dTo = current;
+                dFrom = current.AddMonths(-1);
+            }
+            else
+            {
+                dFrom = DateTime.ParseExact(DateFrom, "d/M/yyyy", null);
+                dTo = DateTime.ParseExact(DateTo, "d/MM/yyyy", null);
+            }
+
+            List<report_order_staff_sales_Result> data = new List<report_order_staff_sales_Result>();
+            data = db.report_order_staff_sales(dFrom.ToString("yyyy-MM-dd"), dTo.ToString("yyyy-MM-dd")).ToList();
+
+             if (permit == 2)
+            {
+                // get list cn
+                var branchPermit = db.UserBranchPermisses.Where(p => p.UserName == User.Identity.Name).Select(p => p.BranchCode).ToList();
+                data = data.Where(p => branchPermit.Contains(p.BrachCode)).ToList();
+            }
+
+             string pathRoot = Server.MapPath("~/haiupload/report_order_staff_sales.xlsx");
+            string name = "donhang" + DateTime.Now.ToString("ddMMyyyyHHmmss") + ".xlsx";
+            string pathTo = Server.MapPath("~/temp/" + name);
+
+            System.IO.File.Copy(pathRoot, pathTo);
+
+            try
+            {
+                FileInfo newFile = new FileInfo(pathTo);
+
+                using (ExcelPackage package = new ExcelPackage(newFile))
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[1];
+                    worksheet.Cells[1, 3].Value = DateFrom;
+                    worksheet.Cells[2, 3].Value = DateTo;
+
+                    for (int i = 0; i < data.Count; i++)
+                    {
+                        worksheet.Cells[i + 5, 1].Value = data[i].BrachCode;
+                        worksheet.Cells[i + 5, 2].Value = data[i].StaffName;
+                        worksheet.Cells[i + 5, 3].Value = data[i].CountOrder;
+                        worksheet.Cells[i + 5, 4].Value = data[i].SumPPrice;
+                        worksheet.Cells[i + 5, 5].Value = data[i].SumPPriceReal;
+                        worksheet.Cells[i + 5, 6].Value = (int)((data[i].SumPPriceReal / data[i].SumPPrice)*100);
+                        worksheet.Cells[i + 5, 7].Value = data[i].SumPPriceHasBill;
+                        worksheet.Cells[i + 5, 10].Value = data[i].SumPPriceNoBill;
+                        worksheet.Cells[i + 5, 11].Value = data[i].SumPPriceInNew;
+                        worksheet.Cells[i + 5, 12].Value = data[i].SumPPriceInWarehouse;
+                    }
+
+
+                    package.Save();
+                }
+
+            }
+            catch
+            {
+                return RedirectToAction("error", "home");
+            }
+
+
+            return File(pathTo, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", string.Format("report-don-hang-" + DateTime.Now.ToString("ddMMyyyyhhmmss") + ".{0}", "xlsx"));
         }
 
         [HttpPost]
@@ -279,7 +414,7 @@ namespace NDHSITE.Controllers
 
             var quantity = box + orderProduct.ProductInfo.Quantity * can;
 
-            orderProduct.QuantityFinish =  quantity;
+            orderProduct.QuantityFinish = quantity;
 
             db.Entry(orderProduct).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
@@ -320,7 +455,7 @@ namespace NDHSITE.Controllers
             db.SaveChanges();
 
 
-            return Json(new { id = 1, money = (quantity*orderProduct.PerPrice).Value.ToString("C", Util.Cultures.VietNam), stt = stt }, JsonRequestBehavior.AllowGet);
+            return Json(new { id = 1, money = (quantity * orderProduct.PerPrice).Value.ToString("C", Util.Cultures.VietNam), stt = stt }, JsonRequestBehavior.AllowGet);
 
         }
     }

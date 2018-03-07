@@ -680,6 +680,7 @@
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="UserAction" Type="nvarchar" MaxLength="128" />
     <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="StaffId" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="OrderStaff">
     <Key>
@@ -1587,6 +1588,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__OrderProd__Staff__6F357288">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
+    <End Role="OrderProductHistory" Type="Self.OrderProductHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderProductHistory">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__OrderStaf__Order__2101D846">
     <End Role="HaiOrder" Type="Self.HaiOrder" Multiplicity="0..1" />
     <End Role="OrderStaff" Type="Self.OrderStaff" Multiplicity="*" />
@@ -1941,6 +1954,10 @@
     <Parameter Name="fDate" Type="varchar" Mode="In" />
     <Parameter Name="tDate" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="report_order_staff_sales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="fdate" Type="varchar" Mode="In" />
+    <Parameter Name="tdate" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="report_remain_product" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Product" Type="nvarchar" Mode="In" />
     <Parameter Name="DFrom" Type="nvarchar" Mode="In" />
@@ -2215,6 +2232,10 @@
     </AssociationSet>
     <AssociationSet Name="FK__OrderProd__Produ__3E923B2D" Association="Self.FK__OrderProd__Produ__3E923B2D">
       <End Role="ProductInfo" EntitySet="ProductInfo" />
+      <End Role="OrderProductHistory" EntitySet="OrderProductHistory" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderProd__Staff__6F357288" Association="Self.FK__OrderProd__Staff__6F357288">
+      <End Role="HaiStaff" EntitySet="HaiStaff" />
       <End Role="OrderProductHistory" EntitySet="OrderProductHistory" />
     </AssociationSet>
     <AssociationSet Name="FK__OrderStaf__Order__2101D846" Association="Self.FK__OrderStaf__Order__2101D846">

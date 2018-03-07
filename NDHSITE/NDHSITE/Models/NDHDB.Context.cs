@@ -468,5 +468,18 @@ namespace NDHSITE.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<get_list_orders_product_Result>("get_list_orders_product", fdateParameter, tdateParameter, osttParameter, dsttParameter, staffParameter, c1Parameter);
         }
+    
+        public virtual ObjectResult<report_order_staff_sales_Result> report_order_staff_sales(string fdate, string tdate)
+        {
+            var fdateParameter = fdate != null ?
+                new ObjectParameter("fdate", fdate) :
+                new ObjectParameter("fdate", typeof(string));
+    
+            var tdateParameter = tdate != null ?
+                new ObjectParameter("tdate", tdate) :
+                new ObjectParameter("tdate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<report_order_staff_sales_Result>("report_order_staff_sales", fdateParameter, tdateParameter);
+        }
     }
 }
