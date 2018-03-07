@@ -387,6 +387,19 @@ namespace NDHSITE.Controllers
             db.Entry(orderProduct).State = EntityState.Modified;
             db.SaveChanges();
 
+            string typeName = "Chưa xác định";
+
+            if (type == "warehouse")
+                typeName= "Hàng gửi kho";
+            else if (type == "new")
+                typeName = "Hàng xuất mới";
+
+            var staff = orderProduct.HaiOrder.OrderStaffs.Where(p=> p.ProcessId == "create").FirstOrDefault();
+
+            if (staff != null)
+                 Utitl.Send("Đơn hàng " + orderProduct.HaiOrder.Code, "Đã thay đổi loại hàng: " + typeName,staff.HaiStaff.UserLogin , db, mongoHelp);
+
+
             return Json(new { id = 1 }, JsonRequestBehavior.AllowGet);
         }
 
@@ -429,6 +442,7 @@ namespace NDHSITE.Controllers
             return View(checkOrder);
         }
 
+        /*
         [HttpPost]
         public ActionResult Update(string Id, string PayType, string ShipType, string ExpectDate, string Sender)
         {
@@ -474,7 +488,7 @@ namespace NDHSITE.Controllers
 
             return RedirectToAction("detail", "order", new { id = Id });
         }
-
+        */
 
         [HttpPost]
         public ActionResult UpdateDelivery(string orderId, string productId, int? can, int? box)
@@ -529,6 +543,9 @@ namespace NDHSITE.Controllers
             db.OrderProductHistories.Add(history);
             db.SaveChanges();
 
+
+            Utitl.Send("Đơn hàng " + orderProduct.HaiOrder.Code, "Đã cập nhật số lượng giao " + HaiUtil.ConvertProductQuantityText(orderProduct.ProductInfo.Quantity, quantity, orderProduct.ProductInfo.Unit) +
+             "\nCho sản phẩm " + orderProduct.ProductInfo.PName, haiStaff.UserLogin, db, mongoHelp);
 
             return Json(new { id = 1, money = (quantity * orderProduct.PerPrice).Value.ToString("C", Util.Cultures.VietNam), stt = stt }, JsonRequestBehavior.AllowGet);
 

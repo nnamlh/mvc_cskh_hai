@@ -490,6 +490,9 @@ namespace HAIAPI.Controllers
                 db.OrderProductHistories.Add(history);
                 db.SaveChanges();
 
+                HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Đã cập nhật số lượng giao " + HaiUtil.ConvertProductQuantityText(checkOrderProduct.ProductInfo.Quantity, quantity, checkOrderProduct.ProductInfo.Unit) +
+             "\nCho sản phẩm " + checkOrderProduct.ProductInfo.PName, staff.UserLogin, db, mongoHelper);
+
 
             }
             catch (Exception e)

@@ -107,5 +107,24 @@ namespace HAIAPI.Util
 
             return Convert.ToInt32(role.ShowInfoRole);
         }
+
+        public static string ConvertProductQuantityText(int? box, int? quantity, string unit)
+        {
+            int? countCan = quantity / box;
+            int? countBox = quantity - countCan * box;
+
+            if (countCan == 0)
+            {
+                return countBox + " " + unit;
+            }
+
+            if (countBox == 0)
+            {
+                return countCan + " thùng";
+            }
+
+            return countCan + " thùng " + countBox + " " + unit;
+
+        }
     }
 }
