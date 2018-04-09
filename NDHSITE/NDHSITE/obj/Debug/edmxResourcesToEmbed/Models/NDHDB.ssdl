@@ -796,24 +796,15 @@
     <Property Name="PName" Type="nvarchar" MaxLength="256" />
     <Property Name="PCode" Type="nvarchar" MaxLength="128" />
     <Property Name="Unit" Type="nvarchar" MaxLength="128" />
-    <Property Name="Producer" Type="nvarchar" MaxLength="256" />
     <Property Name="CardPoint" Type="nvarchar" MaxLength="32" />
     <Property Name="BoxPoint" Type="nvarchar" MaxLength="32" />
     <Property Name="IsLock" Type="int" />
     <Property Name="Barcode" Type="nvarchar" MaxLength="32" />
     <Property Name="QuantityBox" Type="int" />
     <Property Name="IsBox" Type="int" />
-    <Property Name="Describe" Type="nvarchar(max)" />
-    <Property Name="Introduce" Type="nvarchar(max)" />
-    <Property Name="Notes" Type="nvarchar(max)" />
-    <Property Name="Other" Type="nvarchar(max)" />
     <Property Name="Thumbnail" Type="nvarchar(max)" />
-    <Property Name="Forcus" Type="int" />
-    <Property Name="New" Type="int" />
-    <Property Name="CreateTime" Type="datetime" />
     <Property Name="Price" Type="float" />
     <Property Name="PVat" Type="float" />
-    <Property Name="ShortDescibe" Type="nvarchar(max)" />
     <Property Name="Quantity" Type="int" />
     <Property Name="GroupId" Type="nvarchar" MaxLength="128" />
   </EntityType>

@@ -31,16 +31,16 @@ namespace NDHSITE.Controllers
                 search = "";
 
             ViewBag.SearchText = search;
-            int pageSize = 20;
+            int pageSize = 30;
             int pageNumber = (page ?? 1);
 
             ViewBag.PGroup = db.ProductGroups.Where(p => p.HasChild == 0).ToList();
-        
-            return View(db.ProductInfoes.Where(p => p.Barcode.Contains(search) || p.PName.Contains(search) || p.PCode.Contains(search)).OrderBy(p => p.CreateTime).ToPagedList(pageNumber, pageSize));
+
+            return View(db.ProductInfoes.Where(p => (p.PName.Contains(search) || p.PCode.Contains(search)) && p.IsLock == 0).OrderBy(p => p.PCode).ToPagedList(pageNumber, pageSize));
         }
 
         [HttpPost]
-        public ActionResult AddProduct(ProductInfo product, string IsBox, string Forcus, string New, HttpPostedFileBase Thumbnail, List<HttpPostedFileBase> files)
+        public ActionResult AddProduct(ProductInfo product, string IsBox, HttpPostedFileBase Thumbnail)
         {
             if (!Utitl.CheckUser(db, User.Identity.Name, "ManageProduct", 1))
                 return RedirectToAction("relogin", "home");
@@ -58,37 +58,6 @@ namespace NDHSITE.Controllers
                 product.IsBox = 1;
             else
                 product.IsBox = 0;
-
-            if (Forcus != null)
-                product.Forcus = 1;
-            else
-                product.Forcus = 0;
-
-            if (New != null)
-                product.New = 1;
-            else
-                product.New = 0;
-
-            product.CreateTime = DateTime.Now;
-
-            product.Thumbnail = UploadImage(Thumbnail, "/haiupload/product", ".png");
-            db.ProductInfoes.Add(product);
-            db.SaveChanges();
-
-            if (files != null)
-            {
-                foreach(var item in files)
-                {
-                    var imageProduct = new ProductImage()
-                    {
-                        Id = Guid.NewGuid().ToString(),
-                        ProductId = product.Id,
-                        ImageUrl = UploadImage(item, "/haiupload/product", ".png")
-                    };
-                    db.ProductImages.Add(imageProduct);
-                    db.SaveChanges();
-                }
-            }
 
             return RedirectToAction("manage", "product");
         }
@@ -137,7 +106,7 @@ namespace NDHSITE.Controllers
         }
 
         [HttpPost]
-        public ActionResult ModifyProduct(ProductInfo product, string IsBox, string Forcus, string New, HttpPostedFileBase Thumbnail, List<HttpPostedFileBase> files)
+        public ActionResult ModifyProduct(ProductInfo product, string IsBox, HttpPostedFileBase Thumbnail, List<HttpPostedFileBase> files)
         {
 
             if (!Utitl.CheckUser(db, User.Identity.Name, "ManageProduct", 1))
@@ -156,28 +125,15 @@ namespace NDHSITE.Controllers
                 productCheck.PCode = product.PCode;
 
             productCheck.PName = product.PName;
-            productCheck.Producer = product.Producer;
             productCheck.Unit = product.Unit;
             productCheck.QuantityBox = product.QuantityBox;
-            productCheck.Describe = product.Describe;
-            productCheck.Notes = product.Notes;
-            productCheck.Introduce = product.Introduce;
-            productCheck.Other = product.Other;
 
             if (Thumbnail != null)
             {
                 productCheck.Thumbnail = UploadImage(Thumbnail, "/haiupload/product", ".png");
             }
 
-            if (Forcus != null)
-                productCheck.Forcus = 1;
-            else
-                productCheck.Forcus = 0;
 
-            if (New != null)
-                productCheck.New = 1;
-            else
-                productCheck.New = 0;
 
             if (IsBox != null)
                 productCheck.IsBox = 1;
@@ -207,7 +163,7 @@ namespace NDHSITE.Controllers
             return RedirectToAction("modifyproduct", "product", new { id = productCheck.Id });
         }
 
-        /*
+
         [HttpPost]
         public ActionResult excelProduct(HttpPostedFileBase files)
         {
@@ -242,22 +198,19 @@ namespace NDHSITE.Controllers
 
                         string pName = Convert.ToString(sheet.Cells[i, 2].Value);
 
-                        string Material = Convert.ToString(sheet.Cells[i, 3].Value);
+                        string PGroup = Convert.ToString(sheet.Cells[i, 3].Value);
+                        string Unit = Convert.ToString(sheet.Cells[i, 4].Value);
 
-                        string Utility = Convert.ToString(sheet.Cells[i, 4].Value);
+                        int quantity = Convert.ToInt32(sheet.Cells[i, 5].Value);
 
-                        string Unit = Convert.ToString(sheet.Cells[i, 5].Value);
-                        string Producer = Convert.ToString(sheet.Cells[i, 6].Value);
-                        string PGroup = Convert.ToString(sheet.Cells[i, 7].Value);
+                        double price = Convert.ToDouble((sheet.Cells[i, 6].Value));
+                      
 
-                        string Acronym = Convert.ToString(sheet.Cells[i, 8].Value);
+                        string CardPoint = Convert.ToString(sheet.Cells[i, 8].Value);
 
-                        string CardPoint = Convert.ToString(sheet.Cells[i, 9].Value);
+                        int quantityBox = Convert.ToInt32(sheet.Cells[i, 9].Value);
 
-                        string BoxPoint = Convert.ToString(sheet.Cells[i, 10].Value);
 
-                        string PMajor = Convert.ToString(sheet.Cells[i, 11].Value);
-                        string Barcode = Convert.ToString(sheet.Cells[i, 12].Value);
 
                         if (pCode != null && pCode.Trim() != "")
                         {
@@ -271,13 +224,16 @@ namespace NDHSITE.Controllers
                                     Id = Guid.NewGuid().ToString(),
                                     PCode = pCode,
                                     PName = pName,
-                                    Material = Material,
                                     Unit = Unit,
-                                    Producer = Producer,
-                                    PGroup = PGroup,
                                     CardPoint = CardPoint,
-                                    BoxPoint = BoxPoint,
-                                    Barcode = Barcode
+                                    Price = price,
+                                    GroupId= PGroup,
+                                    Quantity = quantity,
+                                    QuantityBox = quantityBox,
+                                    IsLock = 0,
+                                    BoxPoint = "0",
+                                    IsBox = 0
+                                    
                                 };
 
                                 db.ProductInfoes.Add(productInfo);
@@ -285,13 +241,14 @@ namespace NDHSITE.Controllers
                             else
                             {
                                 checkDb.PName = pName;
-                                checkDb.Material = Material;
                                 checkDb.Unit = Unit;
-                                checkDb.Producer = Producer;
-                                checkDb.PGroup = PGroup;
                                 checkDb.CardPoint = CardPoint;
-                                checkDb.BoxPoint = BoxPoint;
-                                checkDb.Barcode = Barcode;
+                                checkDb.BoxPoint = "0";
+                                checkDb.Price = price;
+                                checkDb.Quantity = quantity;
+                                checkDb.QuantityBox = quantityBox;
+                                checkDb.GroupId = PGroup;
+                                checkDb.IsLock = 0;
                                 db.Entry(checkDb).State = System.Data.Entity.EntityState.Modified;
                                 db.SaveChanges();
                             }
@@ -308,7 +265,7 @@ namespace NDHSITE.Controllers
             }
             return RedirectToAction("manage", "product");
         }
-        */
+
         public ActionResult delete(string Id)
         {
             if (!Utitl.CheckUser(db, User.Identity.Name, "ManageProduct", 1))
@@ -495,9 +452,9 @@ namespace NDHSITE.Controllers
                 List<ProductSeri> data = new List<ProductSeri>();
 
                 if (productId == "-1")
-                  data = db.ProductSeris.Where(p => p.IsUse == isUse && p.SeriType == SeriType).OrderByDescending(p => p.BeginTime).ToList();
+                    data = db.ProductSeris.Where(p => p.IsUse == isUse && p.SeriType == SeriType).OrderByDescending(p => p.BeginTime).ToList();
                 else
-                   data = db.ProductSeris.Where(p => p.ProductId == productId && p.IsUse == isUse && p.SeriType == SeriType).OrderByDescending(p => p.BeginTime).ToList();
+                    data = db.ProductSeris.Where(p => p.ProductId == productId && p.IsUse == isUse && p.SeriType == SeriType).OrderByDescending(p => p.BeginTime).ToList();
 
                 using (ExcelPackage package = new ExcelPackage(newFile))
                 {

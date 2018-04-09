@@ -801,24 +801,15 @@
           <Property Name="PName" Type="nvarchar" MaxLength="256" />
           <Property Name="PCode" Type="nvarchar" MaxLength="128" />
           <Property Name="Unit" Type="nvarchar" MaxLength="128" />
-          <Property Name="Producer" Type="nvarchar" MaxLength="256" />
           <Property Name="CardPoint" Type="nvarchar" MaxLength="32" />
           <Property Name="BoxPoint" Type="nvarchar" MaxLength="32" />
           <Property Name="IsLock" Type="int" />
           <Property Name="Barcode" Type="nvarchar" MaxLength="32" />
           <Property Name="QuantityBox" Type="int" />
           <Property Name="IsBox" Type="int" />
-          <Property Name="Describe" Type="nvarchar(max)" />
-          <Property Name="Introduce" Type="nvarchar(max)" />
-          <Property Name="Notes" Type="nvarchar(max)" />
-          <Property Name="Other" Type="nvarchar(max)" />
           <Property Name="Thumbnail" Type="nvarchar(max)" />
-          <Property Name="Forcus" Type="int" />
-          <Property Name="New" Type="int" />
-          <Property Name="CreateTime" Type="datetime" />
           <Property Name="Price" Type="float" />
           <Property Name="PVat" Type="float" />
-          <Property Name="ShortDescibe" Type="nvarchar(max)" />
           <Property Name="Quantity" Type="int" />
           <Property Name="GroupId" Type="nvarchar" MaxLength="128" />
         </EntityType>
@@ -3196,24 +3187,15 @@
           <Property Name="PName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="PCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Unit" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="Producer" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Name="CardPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="BoxPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="IsLock" Type="Int32" />
           <Property Name="Barcode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
           <Property Name="QuantityBox" Type="Int32" />
           <Property Name="IsBox" Type="Int32" />
-          <Property Name="Describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Introduce" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Thumbnail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Forcus" Type="Int32" />
-          <Property Name="New" Type="Int32" />
-          <Property Name="CreateTime" Type="DateTime" Precision="3" />
           <Property Name="Price" Type="Double" />
           <Property Name="PVat" Type="Double" />
-          <Property Name="ShortDescibe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Quantity" Type="Int32" />
           <NavigationProperty Name="EventProducts" Relationship="Self.FK__EventProd__Produ__4EDDB18F" FromRole="ProductInfo" ToRole="EventProduct" />
           <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__Produc__5708E33C" FromRole="ProductInfo" ToRole="MSGPoint" />
@@ -5850,24 +5832,15 @@
                 <ScalarProperty Name="PName" ColumnName="PName" />
                 <ScalarProperty Name="PCode" ColumnName="PCode" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
-                <ScalarProperty Name="Producer" ColumnName="Producer" />
                 <ScalarProperty Name="CardPoint" ColumnName="CardPoint" />
                 <ScalarProperty Name="BoxPoint" ColumnName="BoxPoint" />
                 <ScalarProperty Name="IsLock" ColumnName="IsLock" />
                 <ScalarProperty Name="Barcode" ColumnName="Barcode" />
                 <ScalarProperty Name="QuantityBox" ColumnName="QuantityBox" />
                 <ScalarProperty Name="IsBox" ColumnName="IsBox" />
-                <ScalarProperty Name="Describe" ColumnName="Describe" />
-                <ScalarProperty Name="Introduce" ColumnName="Introduce" />
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="Other" ColumnName="Other" />
                 <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
-                <ScalarProperty Name="Forcus" ColumnName="Forcus" />
-                <ScalarProperty Name="New" ColumnName="New" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="PVat" ColumnName="PVat" />
-                <ScalarProperty Name="ShortDescibe" ColumnName="ShortDescibe" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
               </MappingFragment>
             </EntityTypeMapping>

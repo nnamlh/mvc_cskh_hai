@@ -75,38 +75,8 @@ namespace NDHSITE.Controllers
             }
         }
 
+
         /*
-        public ActionResult BranchJson()
-        {
-            var arr = db.HaiBranches.Select(p => new { Code = p.Code, Name = p.Name }).ToList();
-
-            return Json(arr, JsonRequestBehavior.AllowGet);
-        }
-
-
-        public ActionResult C1Json()
-        {
-            var arr = db.C1Info.Select(p => new { Code = p.Code, Name = p.StoreName }).ToList();
-
-            return Json(arr, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult StaffJson()
-        {
-            var arr = db.HaiStaffs.Where(p => p.IsDelete != 1).Select(p => new { Code = p.Code, Name = p.FullName }).ToList();
-
-            return Json(arr, JsonRequestBehavior.AllowGet);
-        }
-
-
-        public ActionResult C2Json()
-        {
-            var arr = db.C2Info.Select(p => new { Code = p.Code, Name = p.StoreName }).ToList();
-
-            return Json(arr, JsonRequestBehavior.AllowGet);
-        }
-        */
-
         [HttpPost]
         public ActionResult ManageCI(CInfoCommon info, C1Info c1, string birthday, string BranchCode)
         {
@@ -118,16 +88,7 @@ namespace NDHSITE.Controllers
 
             if (checkBranch == null)
                 return RedirectToAction("error", "home");
-            /*
-            // them moi
-
-            var wardInfo = db.Wards.Find(info.WardId);
-            if (wardInfo != null)
-            {
-                info.ProvinceName = wardInfo.District.Province.Name;
-                info.DistrictName = wardInfo.District.Name;
-            }*/
-
+          
             info.CName = c1.StoreName;
 
 
@@ -156,8 +117,9 @@ namespace NDHSITE.Controllers
             db.SaveChanges();
 
             return RedirectToAction("manageci", "agency", new { areaId = checkBranch.AreaId });
-        }
+        }*/
 
+        
         public ActionResult ModifyCI(string id)
         {
             if (!Utitl.CheckUser(db, User.Identity.Name, "ManageAgency", 1))
@@ -187,7 +149,7 @@ namespace NDHSITE.Controllers
             ViewBag.RoleList = db.AspNetRoles.Where(p => p.GroupRole == "CUS").ToList();
             return View();
         }
-
+ 
         [HttpPost]
         public ActionResult ModifyCI(CInfoCommon info, C1Info c1, string birthday, string BranchCode)
         {
@@ -417,8 +379,8 @@ namespace NDHSITE.Controllers
             var checkC1 = db.C1Info.Where(p => p.Code == c1).FirstOrDefault();
             if (checkC2 != null && checkC1 != null)
             {
-               var checkC2C1 = db.C2C1.Where(p => p.C1Code == c1 && p.C2Code == checkC2.Code).FirstOrDefault();
-               if (action == 1)
+                var checkC2C1 = db.C2C1.Where(p => p.C1Code == c1 && p.C2Code == checkC2.Code).FirstOrDefault();
+                if (action == 1)
                 {
                     // them
                     if (checkC2C1 == null)
@@ -437,7 +399,8 @@ namespace NDHSITE.Controllers
                         db.C2C1.Add(c2C1Add);
                         db.SaveChanges();
                     }
-                } else if (action == 2)
+                }
+                else if (action == 2)
                 {
                     // xoa
                     if (checkC2C1 != null)
@@ -722,7 +685,6 @@ namespace NDHSITE.Controllers
                             });
                         }
 
-
                     }
 
 
@@ -778,6 +740,173 @@ namespace NDHSITE.Controllers
 
             return RedirectToAction("managecii", "agency");
         }
+
+        [HttpPost]
+        public ActionResult excelAgencyC2Update(HttpPostedFileBase files)
+        {
+
+            if (!Utitl.CheckUser(db, User.Identity.Name, "ManageAgency", 1))
+                return RedirectToAction("relogin", "home");
+
+            if (files != null && files.ContentLength > 0)
+            {
+                string extension = System.IO.Path.GetExtension(files.FileName);
+                if (extension.Equals(".xlsx") || extension.Equals(".xls"))
+                {
+                    string fileSave = "cii_" + DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
+                    string path = Server.MapPath("~/temp/" + fileSave);
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+
+                    files.SaveAs(path);
+                    FileInfo newFile = new FileInfo(path);
+                    var package = new ExcelPackage(newFile);
+
+                    ExcelWorksheet sheet = package.Workbook.Worksheets[1];
+
+                    int totalRows = sheet.Dimension.End.Row;
+                    int totalCols = sheet.Dimension.End.Column;
+
+                    for (int i = 2; i <= totalRows; i++)
+                    {
+                        string code = Convert.ToString(sheet.Cells[i, 2].Value);
+
+                        string branch = Convert.ToString(sheet.Cells[i, 3].Value);
+
+                        string staffCode = Convert.ToString(sheet.Cells[i, 6].Value);
+
+                        string phone = Convert.ToString(sheet.Cells[i, 13].Value);
+
+                        string storeName = Convert.ToString(sheet.Cells[i, 4].Value);
+
+                        string deputy = Convert.ToString(sheet.Cells[i, 5].Value);
+
+                        string identityCard = Convert.ToString(sheet.Cells[i, 7].Value);
+                        string bussiness = Convert.ToString(sheet.Cells[i, 8].Value);
+
+                        string addressInfo = Convert.ToString(sheet.Cells[i, 9].Value);
+
+                        string province = Convert.ToString(sheet.Cells[i, 11].Value);
+
+                        string district = Convert.ToString(sheet.Cells[i, 10].Value);
+
+                        string rank = Convert.ToString(sheet.Cells[i, 16].Value);
+                        string group = Convert.ToString(sheet.Cells[i, 1].Value);
+
+                        string c1Code1 = Convert.ToString(sheet.Cells[i, 14].Value).Trim();
+                        string c1Code2 = Convert.ToString(sheet.Cells[i, 15].Value).Trim();
+
+
+                        var checkC2 = db.C2Info.Where(p => p.Code == code).FirstOrDefault();
+
+                        if (checkC2 != null)
+                        {
+                            var cinfo = checkC2.CInfoCommon;
+
+                            cinfo.IdentityCard = identityCard;
+                            cinfo.CName = storeName;
+                            cinfo.AddressInfo = addressInfo;
+                            cinfo.Phone = phone;
+                            cinfo.ProvinceName = province;
+                            cinfo.DistrictName = district;
+                            cinfo.CDeputy = deputy;
+                            cinfo.CRank = rank;
+                            cinfo.BusinessLicense = bussiness;
+
+                            db.Entry(cinfo).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
+
+                            checkC2.StoreName = storeName;
+                            checkC2.Deputy = deputy;
+                            
+                            
+                            db.Entry(checkC2).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
+
+                           checkC2.StaffWithC2.Clear();
+                            db.SaveChanges();
+
+
+                            HaiStaff staffInfo = null;
+                            if (!String.IsNullOrEmpty(staffCode))
+                            {
+                                staffInfo = db.HaiStaffs.Where(p => p.Code.Contains(staffCode.Trim())).FirstOrDefault();
+                            }
+                            if (staffInfo != null)
+                            {
+
+                                int groupChoose = 0;
+                                try
+                                {
+                                    groupChoose = Convert.ToInt32(group);
+                                }
+                                catch { }
+
+
+                                var staffC2 = new StaffWithC2()
+                                {
+                                    C2Id = checkC2.Id,
+                                    StaffId = staffInfo.Id,
+                                    GroupChoose = groupChoose
+                                };
+                                db.StaffWithC2.Add(staffC2);
+                                db.SaveChanges();
+
+                                // remove c1 of c2
+                                var allC1C2 = db.C2C1.Where(p => p.C2Code == code).ToList();
+
+                                allC1C2.Clear();
+
+                                db.SaveChanges();
+
+
+                                // input c1
+                                var checkC11 = db.C1Info.Where(p => p.Code == c1Code1).FirstOrDefault();
+                                if (checkC11 != null)
+                                {
+                                    var c2c1 = new C2C1()
+                                    {
+                                        Id = Guid.NewGuid().ToString(),
+                                        C1Code = checkC11.Code,
+                                        C2Code = checkC2.Code,
+                                        ModifyDate = DateTime.Now,
+                                        Priority = 1
+                                    };
+                                    db.C2C1.Add(c2c1);
+                                    db.SaveChanges();
+                                }
+
+                                var checkC12 = db.C1Info.Where(p => p.Code == c1Code2).FirstOrDefault();
+                                if (checkC12 != null)
+                                {
+                                    var c2c1 = new C2C1()
+                                    {
+                                        Id = Guid.NewGuid().ToString(),
+                                        C1Code = checkC12.Code,
+                                        C2Code = checkC2.Code,
+                                        ModifyDate = DateTime.Now,
+                                        Priority = 0
+                                    };
+                                    db.C2C1.Add(c2c1);
+                                    db.SaveChanges();
+                                }
+                            }
+
+                        }
+
+                    }
+
+                }
+            }
+
+            return RedirectToAction("managecii", "agency");
+        }
+
+
+
+
         public bool IsPhoneNumber(string number)
         {
             if (number.Length < 10 || number.Length > 11)
@@ -818,7 +947,7 @@ namespace NDHSITE.Controllers
             var temp = Convert.ToString(number);
             temp = temp.Substring(1);
             */
-       
+
             var count = Convert.ToString(number).Count();
             var temp = "";
             if (count == 1)
@@ -829,7 +958,7 @@ namespace NDHSITE.Controllers
                 temp = "0" + number;
             else
                 temp = number + "";
-         
+
             string code = province + temp;
 
             var store = new StoreAgencyId()

@@ -860,24 +860,15 @@
     <Property Name="PName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="PCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Unit" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Producer" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="CardPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="BoxPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="IsLock" Type="Int32" />
     <Property Name="Barcode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="QuantityBox" Type="Int32" />
     <Property Name="IsBox" Type="Int32" />
-    <Property Name="Describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Introduce" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Thumbnail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Forcus" Type="Int32" />
-    <Property Name="New" Type="Int32" />
-    <Property Name="CreateTime" Type="DateTime" Precision="3" />
     <Property Name="Price" Type="Double" />
     <Property Name="PVat" Type="Double" />
-    <Property Name="ShortDescibe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Quantity" Type="Int32" />
     <NavigationProperty Name="EventProducts" Relationship="Self.FK__EventProd__Produ__4EDDB18F" FromRole="ProductInfo" ToRole="EventProduct" />
     <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__Produc__5708E33C" FromRole="ProductInfo" ToRole="MSGPoint" />

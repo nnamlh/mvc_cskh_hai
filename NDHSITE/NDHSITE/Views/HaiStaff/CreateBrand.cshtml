@@ -91,9 +91,11 @@
 
                                 <thead>
                                     <tr>
-                                        <th>Tên chi nhánh</th>
-                                        <th>Thông tin</th>
-                                        <th>#</th>
+                                        <th>Mã</th>
+                                        <th>Tên</th>
+                                        <th>Điện thoại</th>
+                                        <th>Địa chỉ</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
 
@@ -101,14 +103,10 @@
                                     @foreach (var item in Model)
                                     {
                                         <tr>
+                                            <td>@item.Code</td>
                                             <td>@item.Name</td>
-                                            <td class="file-info valign-middle">
-                                                <span><strong class="semibold">Mã chi nhánh:</strong> @item.Code</span> <br />
-                                                <span><strong class="semibold">Mã khu vực:</strong> @item.HaiArea.Code</span> <br />
-                                                <span><strong class="semibold">Số điện thoái:</strong> @item.Phone</span> <br />
-                                                <span><strong class="semibold">Địa chỉ:</strong> @item.AddressInfo</span> <br />
-                                                <span><strong class="semibold">Thông tin thêm:</strong> @item.Notes</span>
-                                            </td>
+                                            <td>@item.Phone</td>
+                                            <td>@item.AddressInfo</td>
                                             <td class="text-center valign-middle">
                                                 <a  href="/haistaff/modifybranch/@item.Id" target="_blank">Sửa</a>
                                             </td>

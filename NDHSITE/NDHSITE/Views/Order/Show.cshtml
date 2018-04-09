@@ -123,7 +123,16 @@
                                             <td>@(item.ExpectDate != null ? item.ExpectDate.Value.ToString("dd/MM/yyyy") : "")</td>
                                             <td>@item.StaffName - @item.StaffCode</td>
                                             <td>@item.Store - @item.AgencyCode</td>
-                                            <td>@item.C1Name - @item.C1Code</td>
+                                            <td>
+                                                @if (item.SalePlace == "CI")
+                                                {
+                                                   <span>@item.C1Name - @item.C1Code</span>
+                                                }
+                                                else
+                                                {
+                                                    <span>Lấy tại chi nhánh @item.BrachCode</span>
+                                                }
+                                            </td>
                                             <td>
                                                 @if (item.OrderStatus == "process")
                                                 {
@@ -176,8 +185,7 @@
                                 </tbody>
                             </table>
                             Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-                            @Html.PagedListPager(Model, page => Url.Action("show",
-                                                                                                                                                                                                   new { page, OrderCode = ViewBag.OrderCode, DateFrom = ViewBag.DateFrom, DateTo = ViewBag.DateTo, StaffCode = ViewBag.StaffCode, ProcessId = ViewBag.ProcessId, StatusId = ViewBag.StatusId, SalePlace = ViewBag.SalePlace, C1Code = ViewBag.C1Code }))
+                            @Html.PagedListPager(Model, page => Url.Action("show", new { page, OrderCode = ViewBag.OrderCode, DateFrom = ViewBag.DateFrom, DateTo = ViewBag.DateTo, StaffCode = ViewBag.StaffCode, ProcessId = ViewBag.ProcessId, StatusId = ViewBag.StatusId, SalePlace = ViewBag.SalePlace, C1Code = ViewBag.C1Code }))
                         </div>
                     </div>
                     <div class="tab-pane fade" id="profile-3">

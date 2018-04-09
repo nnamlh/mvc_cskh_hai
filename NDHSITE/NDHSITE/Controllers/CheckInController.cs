@@ -79,6 +79,7 @@ namespace NDHSITE.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public ActionResult RemoveCalendar(string id)
         {
             if (!Utitl.CheckUser(db, User.Identity.Name, "CheckIn", 1))

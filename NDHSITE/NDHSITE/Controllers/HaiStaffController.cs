@@ -281,7 +281,7 @@ namespace NDHSITE.Controllers
         {
             if (!Utitl.CheckUser(db, User.Identity.Name, "ManageStaff", 0))
                 return RedirectToAction("relogin", "home");
-            int pageSize = 10;
+            int pageSize = 30;
             int pageNumber = (page ?? 1);
             ViewBag.AllArea = db.HaiAreas.ToList();
             ViewBag.AreaId = areaId;

@@ -538,6 +538,12 @@ namespace NDHSITE.Controllers
                 stt = "Giao ít hơn";
             }
 
+            var order = orderProduct.HaiOrder;
+            string deliveryStt = GetDeliveryStatus(order);
+            order.DStatus = deliveryStt;
+            db.Entry(order).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+
             // save history
             var haiStaff = db.HaiStaffs.Where(p => p.UserLogin == User.Identity.Name).FirstOrDefault();
             var history = new OrderProductHistory()
@@ -560,6 +566,34 @@ namespace NDHSITE.Controllers
 
             return Json(new { id = 1, money = (quantity * orderProduct.PerPrice).Value.ToString("C", Util.Cultures.VietNam), stt = stt }, JsonRequestBehavior.AllowGet);
 
+        }
+
+        private string GetDeliveryStatus(HaiOrder order)
+        {
+
+            int? totalOrder = 0;
+            int? totalDelivery = 0;
+            var products = order.OrderProducts;
+
+            foreach (var item in products)
+            {
+                totalOrder += item.Quantity;
+                totalDelivery += item.QuantityFinish;
+            }
+
+            if (totalDelivery == 0)
+                return "incomplete";
+
+            if (totalDelivery == totalOrder)
+                return "complete";
+
+            if (totalOrder > totalDelivery)
+                return "less";
+
+            if (totalOrder < totalDelivery)
+                return "more";
+
+            return "incomplete";
         }
     }
 }

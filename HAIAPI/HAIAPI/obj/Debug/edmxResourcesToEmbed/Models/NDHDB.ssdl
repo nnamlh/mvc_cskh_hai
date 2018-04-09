@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="NDHDB1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="NDHDB1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AgencySavePoint">
     <Key>
       <PropertyRef Name="EventId" />
@@ -777,24 +777,15 @@
     <Property Name="PName" Type="nvarchar" MaxLength="256" />
     <Property Name="PCode" Type="nvarchar" MaxLength="128" />
     <Property Name="Unit" Type="nvarchar" MaxLength="128" />
-    <Property Name="Producer" Type="nvarchar" MaxLength="256" />
     <Property Name="CardPoint" Type="nvarchar" MaxLength="32" />
     <Property Name="BoxPoint" Type="nvarchar" MaxLength="32" />
     <Property Name="IsLock" Type="int" />
     <Property Name="Barcode" Type="nvarchar" MaxLength="32" />
     <Property Name="QuantityBox" Type="int" />
     <Property Name="IsBox" Type="int" />
-    <Property Name="Describe" Type="nvarchar(max)" />
-    <Property Name="Introduce" Type="nvarchar(max)" />
-    <Property Name="Notes" Type="nvarchar(max)" />
-    <Property Name="Other" Type="nvarchar(max)" />
     <Property Name="Thumbnail" Type="nvarchar(max)" />
-    <Property Name="Forcus" Type="int" />
-    <Property Name="New" Type="int" />
-    <Property Name="CreateTime" Type="datetime" />
     <Property Name="Price" Type="float" />
     <Property Name="PVat" Type="float" />
-    <Property Name="ShortDescibe" Type="nvarchar(max)" />
     <Property Name="Quantity" Type="int" />
     <Property Name="GroupId" Type="nvarchar" MaxLength="128" />
   </EntityType>

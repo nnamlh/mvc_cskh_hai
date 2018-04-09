@@ -30,24 +30,15 @@ namespace NDHSITE.Models
         public string PName { get; set; }
         public string PCode { get; set; }
         public string Unit { get; set; }
-        public string Producer { get; set; }
         public string CardPoint { get; set; }
         public string BoxPoint { get; set; }
         public Nullable<int> IsLock { get; set; }
         public string Barcode { get; set; }
         public Nullable<int> QuantityBox { get; set; }
         public Nullable<int> IsBox { get; set; }
-        public string Describe { get; set; }
-        public string Introduce { get; set; }
-        public string Notes { get; set; }
-        public string Other { get; set; }
         public string Thumbnail { get; set; }
-        public Nullable<int> Forcus { get; set; }
-        public Nullable<int> New { get; set; }
-        public Nullable<System.DateTime> CreateTime { get; set; }
         public Nullable<double> Price { get; set; }
         public Nullable<double> PVat { get; set; }
-        public string ShortDescibe { get; set; }
         public Nullable<int> Quantity { get; set; }
         public string GroupId { get; set; }
     

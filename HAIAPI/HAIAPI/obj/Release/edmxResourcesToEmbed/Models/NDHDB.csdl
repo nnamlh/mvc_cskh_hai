@@ -664,21 +664,13 @@
     <Property Name="PName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="PCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Unit" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="Producer" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
     <Property Name="CardPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="BoxPoint" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="IsLock" Type="Int32" />
     <Property Name="Barcode" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
     <Property Name="QuantityBox" Type="Int32" />
     <Property Name="IsBox" Type="Int32" />
-    <Property Name="Describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Introduce" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Other" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Thumbnail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <Property Name="Forcus" Type="Int32" />
-    <Property Name="New" Type="Int32" />
-    <Property Name="CreateTime" Type="DateTime" Precision="3" />
     <NavigationProperty Name="EventProducts" Relationship="Self.FK__EventProd__Produ__4EDDB18F" FromRole="ProductInfo" ToRole="EventProduct" />
     <NavigationProperty Name="MSGPoints" Relationship="Self.FK__MSGPoint__Produc__5708E33C" FromRole="ProductInfo" ToRole="MSGPoint" />
     <NavigationProperty Name="ProductImages" Relationship="Self.FK__ProductIm__Produ__64ECEE3F" FromRole="ProductInfo" ToRole="ProductImage" />
@@ -686,7 +678,6 @@
     <NavigationProperty Name="PTrackings" Relationship="Self.FK__PTracking__Produ__00FF1D08" FromRole="ProductInfo" ToRole="PTracking" />
     <Property Name="Price" Type="Double" />
     <Property Name="PVat" Type="Double" />
-    <Property Name="ShortDescibe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="OrderProducts" Relationship="NDHDB1Model.FK__OrderProd__Produ__28A2FA0E" FromRole="ProductInfo" ToRole="OrderProduct" />
     <Property Name="Quantity" Type="Int32" />
     <NavigationProperty Name="OrderProductHistories" Relationship="NDHDB1Model.FK__OrderProd__Produ__39CD8610" FromRole="ProductInfo" ToRole="OrderProductHistory" />
@@ -1775,18 +1766,15 @@
   <ComplexType Name="product_list_Result">
     <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
     <Property Type="String" Name="PCode" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Unit" Nullable="true" MaxLength="128" />
+    <Property Type="Double" Name="Price" Nullable="true" />
+    <Property Type="Double" Name="PVat" Nullable="true" />
+    <Property Type="Int32" Name="QuantityBox" Nullable="true" />
     <Property Type="String" Name="Barcode" Nullable="true" MaxLength="32" />
     <Property Type="String" Name="PName" Nullable="true" MaxLength="256" />
     <Property Type="String" Name="Thumbnail" Nullable="true" />
-    <Property Type="Int32" Name="New" Nullable="true" />
-    <Property Type="Int32" Name="Forcus" Nullable="true" />
     <Property Type="String" Name="GroupId" Nullable="true" MaxLength="128" />
     <Property Type="String" Name="GroupName" Nullable="true" MaxLength="512" />
-    <Property Type="String" Name="ShortDescibe" Nullable="true" />
-    <Property Type="Double" Name="Price" Nullable="true" />
-    <Property Type="Double" Name="PVat" Nullable="true" />
-    <Property Type="String" Name="Unit" Nullable="true" MaxLength="128" />
-    <Property Type="Int32" Name="QuantityBox" Nullable="true" />
     <Property Type="Int32" Name="Quantity" Nullable="true" />
   </ComplexType>
   <EntityType Name="C2C1">

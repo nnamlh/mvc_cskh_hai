@@ -617,28 +617,19 @@
         <MappingFragment StoreEntitySet="ProductInfo">
           <ScalarProperty Name="GroupId" ColumnName="GroupId" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="ShortDescibe" ColumnName="ShortDescibe" />
           <ScalarProperty Name="PVat" ColumnName="PVat" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="PName" ColumnName="PName" />
           <ScalarProperty Name="PCode" ColumnName="PCode" />
           <ScalarProperty Name="Unit" ColumnName="Unit" />
-          <ScalarProperty Name="Producer" ColumnName="Producer" />
           <ScalarProperty Name="CardPoint" ColumnName="CardPoint" />
           <ScalarProperty Name="BoxPoint" ColumnName="BoxPoint" />
           <ScalarProperty Name="IsLock" ColumnName="IsLock" />
           <ScalarProperty Name="Barcode" ColumnName="Barcode" />
           <ScalarProperty Name="QuantityBox" ColumnName="QuantityBox" />
           <ScalarProperty Name="IsBox" ColumnName="IsBox" />
-          <ScalarProperty Name="Describe" ColumnName="Describe" />
-          <ScalarProperty Name="Introduce" ColumnName="Introduce" />
-          <ScalarProperty Name="Notes" ColumnName="Notes" />
-          <ScalarProperty Name="Other" ColumnName="Other" />
           <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
-          <ScalarProperty Name="Forcus" ColumnName="Forcus" />
-          <ScalarProperty Name="New" ColumnName="New" />
-          <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -924,18 +915,15 @@
         <ComplexTypeMapping TypeName="NDHDB1Model.product_list_Result">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="PCode" ColumnName="PCode" />
+          <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="PVat" ColumnName="PVat" />
+          <ScalarProperty Name="QuantityBox" ColumnName="QuantityBox" />
           <ScalarProperty Name="Barcode" ColumnName="Barcode" />
           <ScalarProperty Name="PName" ColumnName="PName" />
           <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
-          <ScalarProperty Name="New" ColumnName="New" />
-          <ScalarProperty Name="Forcus" ColumnName="Forcus" />
           <ScalarProperty Name="GroupId" ColumnName="GroupId" />
           <ScalarProperty Name="GroupName" ColumnName="GroupName" />
-          <ScalarProperty Name="ShortDescibe" ColumnName="ShortDescibe" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="PVat" ColumnName="PVat" />
-          <ScalarProperty Name="Unit" ColumnName="Unit" />
-          <ScalarProperty Name="QuantityBox" ColumnName="QuantityBox" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
         </ComplexTypeMapping>
       </ResultMapping>

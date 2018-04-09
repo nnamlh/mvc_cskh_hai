@@ -38,6 +38,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="#updateagencexcel" data-toggle="tab">
+                           Thay đổi thông tin
+                        </a>
+                    </li>
+                    <li>
                         <a href="/agency/manageci">
                             Đại lý cấp 1
                         </a>
@@ -260,6 +265,21 @@
                     <div class="tab-pane fade" id="addagencexcel">
                         <fieldset>
                             <form method="post" enctype="multipart/form-data" onsubmit="if(!confirm('Thêm đại lý cấp 2?')){return false;}" action="/agency/excelAgencyC2">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" class="form-control" name="files" />
+                                        </div>
+
+                                        <button class="btn-primary btn" type="submit">Cập nhật</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </fieldset>
+                    </div>
+                    <div class="tab-pane fade" id="updateagencexcel">
+                        <fieldset>
+                            <form method="post" enctype="multipart/form-data" onsubmit="if(!confirm('Thay đổi thông tin đại lý cấp 2?')){return false;}" action="/agency/excelAgencyC2Update">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">

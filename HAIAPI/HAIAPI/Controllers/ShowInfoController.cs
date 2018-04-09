@@ -49,6 +49,7 @@ namespace HAIAPI.Controllers
                 Sucess = 1
             };
             var result = new ProductDetailResult();
+            /*
             if (!mongoHelper.checkLoginSession(user, token))
                 return result;
 
@@ -86,7 +87,7 @@ namespace HAIAPI.Controllers
 
             log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
             mongoHelper.createHistoryAPI(log);
-
+            */
             return result;
 
         }
