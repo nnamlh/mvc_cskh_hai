@@ -494,5 +494,14 @@ namespace NDHSITE.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<report_order_staff_sales_barcode_Result>("report_order_staff_sales_barcode", fdateParameter, tdateParameter);
         }
+    
+        public virtual ObjectResult<find_staff_c1_Result> find_staff_c1(string search)
+        {
+            var searchParameter = search != null ?
+                new ObjectParameter("search", search) :
+                new ObjectParameter("search", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<find_staff_c1_Result>("find_staff_c1", searchParameter);
+        }
     }
 }

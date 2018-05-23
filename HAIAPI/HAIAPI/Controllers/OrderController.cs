@@ -434,12 +434,12 @@ namespace HAIAPI.Controllers
 
         #region lay danh sach c1 of c2
         [HttpGet]
-        public List<AgencyC2C1> GetSalePlaces(string id, string user)
+        public List<SubOwner> GetSalePlaces(string id, string user)
         {
 
-            List<AgencyC2C1> result = GetC2C1(id);
+            List<SubOwner> result = GetC2C1(id);
 
-            var place = new AgencyC2C1()
+            var place = new SubOwner()
             {
                 code = "000",
                 name = "Lấy tại chi nhánh",

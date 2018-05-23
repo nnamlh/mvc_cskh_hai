@@ -129,7 +129,9 @@ namespace HAIAPI.Models
 
         public string cname { get; set; }
 
-        public List<AgencyC2C1> c1 { get; set; }
+        public List<SubOwner> c1 { get; set; }
+
+        public string agencyType { get; set; }
 
     }
 

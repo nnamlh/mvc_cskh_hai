@@ -98,8 +98,8 @@ namespace HAIAPI.Controllers
                 db.C2Info.Add(c2);
                 db.SaveChanges();
 
-             //   db.Entry(staff).State = System.Data.Entity.EntityState.Modified;
-               // db.SaveChanges();
+                //   db.Entry(staff).State = System.Data.Entity.EntityState.Modified;
+                // db.SaveChanges();
 
                 var staffC2 = new StaffWithC2()
                 {
@@ -252,7 +252,7 @@ namespace HAIAPI.Controllers
                 cinfo.CDeputy = paser.deputy;
                 cinfo.CName = paser.name;
 
-              //  cinfo.Phone = paser.phone;
+                //  cinfo.Phone = paser.phone;
 
                 //cinfo.IdentityCard = paser.identityCard;
                 cinfo.BusinessLicense = paser.businessLicense;
@@ -359,29 +359,29 @@ namespace HAIAPI.Controllers
                 if (staff == null)
                     throw new Exception("Chỉ nhân viên công ty mới được quyền tạo");
 
-                var checkC2 = db.C2Info.Find(paser.id);
-                if (checkC2 == null)
+                var cinfo = db.CInfoCommons.Find(paser.id);
+                if (cinfo == null)
                 {
                     throw new Exception("Sai thông tin khách hàng");
                 }
 
-                CInfoCommon cinfo = checkC2.CInfoCommon;
+              //  CInfoCommon cinfo = checkC2.CInfoCommon;
                 cinfo.Lat = paser.lat;
                 cinfo.Lng = paser.lng;
                 db.Entry(cinfo).State = System.Data.Entity.EntityState.Modified;
-               
+
 
                 // save info
                 var agencyImage = new SaveAgencyShopImage()
                 {
                     Id = Guid.NewGuid().ToString(),
                     AddressFull = paser.address,
-                    Cinfo = checkC2.InfoId,
+                    Cinfo = cinfo.Id,
                     Country = paser.country,
                     District = paser.district,
                     Lat = paser.lat,
                     Province = paser.province,
-                    CreateTime =DateTime.Now,
+                    CreateTime = DateTime.Now,
                     StaffId = staff.Id,
                     Lng = paser.lng,
                     Ward = paser.ward,
@@ -391,7 +391,7 @@ namespace HAIAPI.Controllers
                 db.SaveAgencyShopImages.Add(agencyImage);
 
                 db.SaveChanges();
-                
+
 
             }
             catch (Exception e)
@@ -408,38 +408,34 @@ namespace HAIAPI.Controllers
         }
 
         [HttpGet]
-        public List<AgencyInfoC2> GetAgencyC2(string user, string token)
+        public List<AgencyInfo> GetAgency(string user, string token)
         {
 
             var log = new MongoHistoryAPI()
             {
-                APIUrl = "/api/agency/getagencyc2",
+                APIUrl = "/api/agency/getagency",
                 CreateTime = DateTime.Now,
                 Sucess = 1
             };
-            var result = new List<AgencyInfoC2>();
-         //   var requestContent = Request.Content.ReadAsStringAsync().Result;
+            var result = new List<AgencyInfo>();
+            if (!mongoHelper.checkLoginSession(user, token))
+                return result;
 
             try
             {
-             //   var jsonserializer = new JavaScriptSerializer();
-               // var paser = jsonserializer.Deserialize<RequestInfo>(requestContent);
-
-              //  if (!mongoHelper.checkLoginSession(user, token))
-                  //  throw new Exception("Wrong token and user login!");
-
                 var staff = db.HaiStaffs.Where(p => p.UserLogin == user).FirstOrDefault();
 
                 if (staff == null)
                     throw new Exception("Chỉ nhân viên công ty mới được quyền truy cập");
 
+                result.AddRange(GetStaffC2(staff));
 
-                result = GetListC2(staff);
+                result.AddRange(GetStaffC1(staff));
 
             }
             catch
             {
-                result = new List<AgencyInfoC2>();
+                result = new List<AgencyInfo>();
             }
 
             log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
@@ -460,12 +456,9 @@ namespace HAIAPI.Controllers
                 Sucess = 1
             };
             var result = new List<AgencyInfo>();
-            //   var requestContent = Request.Content.ReadAsStringAsync().Result;
 
             try
             {
-                //   var jsonserializer = new JavaScriptSerializer();
-                // var paser = jsonserializer.Deserialize<RequestInfo>(requestContent);
 
                 if (!mongoHelper.checkLoginSession(user, token))
                     throw new Exception("Wrong token and user login!");
@@ -530,7 +523,7 @@ namespace HAIAPI.Controllers
         /// c1 of c2
         ///
         [HttpGet]
-        public List<AgencyC2C1> GetC1C2(string code)
+        public List<SubOwner> GetC1C2(string code)
         {
 
             var log = new MongoHistoryAPI()
@@ -543,14 +536,14 @@ namespace HAIAPI.Controllers
 
             var c2c1 = db.C2C1.Where(p => p.C2Code == code).ToList();
 
-            List<AgencyC2C1> agencyC2C1 = new List<AgencyC2C1>();
+            List<SubOwner> agencyC2C1 = new List<SubOwner>();
 
             foreach (var item in c2c1)
             {
                 var checkC1 = db.C1Info.Where(p => p.Code == item.C1Code).FirstOrDefault();
                 if (checkC1 != null)
                 {
-                    agencyC2C1.Add(new AgencyC2C1()
+                    agencyC2C1.Add(new SubOwner()
                     {
                         code = checkC1.Code,
                         name = checkC1.Deputy,

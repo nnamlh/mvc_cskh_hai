@@ -19,6 +19,8 @@ namespace NDHSITE.Controllers
 
         public ActionResult ManageCI(int? page, string areaId = "-1", string search = "", int? type = 1)
         {
+
+
             // type 
 
             if (!Utitl.CheckUser(db, User.Identity.Name, "ManageAgency", 0))
@@ -119,7 +121,7 @@ namespace NDHSITE.Controllers
             return RedirectToAction("manageci", "agency", new { areaId = checkBranch.AreaId });
         }*/
 
-        
+
         public ActionResult ModifyCI(string id)
         {
             if (!Utitl.CheckUser(db, User.Identity.Name, "ManageAgency", 1))
@@ -149,7 +151,7 @@ namespace NDHSITE.Controllers
             ViewBag.RoleList = db.AspNetRoles.Where(p => p.GroupRole == "CUS").ToList();
             return View();
         }
- 
+
         [HttpPost]
         public ActionResult ModifyCI(CInfoCommon info, C1Info c1, string birthday, string BranchCode)
         {
@@ -258,15 +260,6 @@ namespace NDHSITE.Controllers
 
             }
         }
-
-        /*
-        public ActionResult JsonCI(string areaId)
-        {
-            var listCI = db.C1Info.Select(p => new { Name = p.StoreName + " - " + p.Deputy, Id = p.Id }).ToList();
-
-            return Json(listCI, JsonRequestBehavior.AllowGet);
-        }
-        */
 
         [HttpPost]
         public ActionResult ManageCII(CInfoCommon info, C2Info c2, string Province)
@@ -488,6 +481,109 @@ namespace NDHSITE.Controllers
             db.SaveChanges();
 
             return RedirectToAction("modifycii", "agency", new { id = agency.Id });
+        }
+
+
+        [HttpPost]
+        public ActionResult excelAgencyC1(HttpPostedFileBase files)
+        {
+
+            if (!Utitl.CheckUser(db, User.Identity.Name, "ManageAgency", 1))
+                return RedirectToAction("relogin", "home");
+
+            if (files != null && files.ContentLength > 0)
+            {
+                string extension = System.IO.Path.GetExtension(files.FileName);
+                if (extension.Equals(".xlsx") || extension.Equals(".xls"))
+                {
+                    string fileSave = "cii_" + DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
+                    string path = Server.MapPath("~/temp/" + fileSave);
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+
+                    files.SaveAs(path);
+                    FileInfo newFile = new FileInfo(path);
+                    var package = new ExcelPackage(newFile);
+
+                    ExcelWorksheet sheet = package.Workbook.Worksheets[1];
+
+                    int totalRows = sheet.Dimension.End.Row;
+                    int totalCols = sheet.Dimension.End.Column;
+                    List<ImportC2Result> listError = new List<ImportC2Result>();
+                    for (int i = 2; i <= totalRows; i++)
+                    {
+                        string code = Convert.ToString(sheet.Cells[i, 3].Value);
+
+                        string branch = Convert.ToString(sheet.Cells[i, 2].Value);
+
+                        string storeName = Convert.ToString(sheet.Cells[i, 4].Value);
+
+
+                        string province = Convert.ToString(sheet.Cells[i, 5].Value);
+
+                        var check = db.C1Info.Where(p => p.Code == code).FirstOrDefault();
+
+                        if (check == null)
+                        {
+                            var cInfo = new CInfoCommon()
+                            {
+                                Id = Guid.NewGuid().ToString(),
+                                Lat = 0,
+                                Lng = 0,
+                                CreateTime = DateTime.Now,
+                                BranchCode = branch,
+                                CName = storeName,
+                                CDeputy = "",
+                                ProvinceName = province,
+                                CCode = code
+                            };
+
+                            db.CInfoCommons.Add(cInfo);
+                            db.SaveChanges();
+
+                            var c1Info = new C1Info()
+                            {
+                                Id = Guid.NewGuid().ToString(),
+                                Code = code,
+                                Deputy = "",
+                                StoreName = storeName,
+                                IsLock = 0,
+                                IsActive = 1,
+                                InfoId = cInfo.Id
+                            };
+
+                            db.C1Info.Add(c1Info);
+                            db.SaveChanges();
+                        }
+                        else
+                        {
+                            var cinfo = check.CInfoCommon;
+
+                            cinfo.CCode = code;
+                            cinfo.CName = storeName;
+                            cinfo.ProvinceName = province;
+                            cinfo.BranchCode = branch;
+
+                            db.Entry(cinfo).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
+
+                            check.StoreName = storeName;
+                            check.IsLock = 0;
+                            check.IsActive = 1;
+                            db.Entry(check).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
+                        }
+
+                       
+                    }
+                }
+
+
+            }
+
+            return RedirectToAction("manageci", "agency");
         }
 
 
@@ -820,12 +916,12 @@ namespace NDHSITE.Controllers
 
                             checkC2.StoreName = storeName;
                             checkC2.Deputy = deputy;
-                            
-                            
+
+
                             db.Entry(checkC2).State = System.Data.Entity.EntityState.Modified;
                             db.SaveChanges();
 
-                           checkC2.StaffWithC2.Clear();
+                            checkC2.StaffWithC2.Clear();
                             db.SaveChanges();
 
 
@@ -1028,231 +1124,6 @@ namespace NDHSITE.Controllers
         }
 
 
-        // excel dai ly cii
-        /*
-        public ActionResult excelAgency(HttpPostedFileBase files)
-        {
-
-            if (!Utitl.CheckUser(db, User.Identity.Name, "ManageAgency", 1))
-                return RedirectToAction("relogin", "home");
-
-            if (files != null && files.ContentLength > 0)
-            {
-                string extension = System.IO.Path.GetExtension(files.FileName);
-                if (extension.Equals(".xlsx") || extension.Equals(".xls"))
-                {
-
-                    string fileSave = "cii_" + DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
-                    string path = Server.MapPath("~/temp/" + fileSave);
-                    if (System.IO.File.Exists(path))
-                    {
-                        System.IO.File.Delete(path);
-                    }
-
-                    files.SaveAs(path);
-                    FileInfo newFile = new FileInfo(path);
-                    var package = new ExcelPackage(newFile);
-                    ExcelWorksheet sheet = package.Workbook.Worksheets[1];
-
-                    int totalRows = sheet.Dimension.End.Row;
-                    int totalCols = sheet.Dimension.End.Column;
-
-                    for (int i = 2; i <= totalRows; i++)
-                    {
-                        string code = Convert.ToString(sheet.Cells[i, 2].Value);
-
-                        var check = db.C2Info.Where(p => p.Code == code).FirstOrDefault();
-
-                        if (check == null && !String.IsNullOrEmpty(code))
-                        {
-                            string branchCode = Convert.ToString(sheet.Cells[i, 1].Value).Trim();
-
-                            var branch = db.HaiBranches.Where(p => p.Code == branchCode).FirstOrDefault();
-
-                            if (branch != null)
-                            {
-
-                                string storeName = Convert.ToString(sheet.Cells[i, 3].Value);
-
-                                string deputy = Convert.ToString(sheet.Cells[i, 4].Value);
-
-                                string identityCard = Convert.ToString(sheet.Cells[i, 5].Value);
-
-                                string addressInfo = Convert.ToString(sheet.Cells[i, 7].Value);
-
-                                string province = Convert.ToString(sheet.Cells[i, 9].Value);
-                                string district = Convert.ToString(sheet.Cells[i, 8].Value);
-                                string phone = Convert.ToString(sheet.Cells[i, 11].Value);
-
-                                string fax = Convert.ToString(sheet.Cells[i, 12].Value);
-
-                                string email = Convert.ToString(sheet.Cells[i, 13].Value);
-                                string c1Code = Convert.ToString(sheet.Cells[i, 26].Value).Trim();
-
-                                var c1Check = db.C1Info.Where(p => p.Code == c1Code).FirstOrDefault();
-
-                                if (c1Check == null)
-                                    c1Check = db.C1Info.Where(p => p.Code == "0000000000").FirstOrDefault();
-
-                                var cInfo = new CInfoCommon()
-                                {
-                                    Id = Guid.NewGuid().ToString(),
-                                    CName = storeName,
-                                    IdentityCard = identityCard,
-                                    AddressInfo = addressInfo,
-                                    ProvinceName = province,
-                                    DistrictName = district,
-                                    Phone = phone,
-                                    Fax = fax,
-                                    Email = email,
-                                    CreateTime = DateTime.Now,
-                                    CType = "CII",
-                                    AreaId = branch.AreaId,
-                                    WardId = "11111",
-                                    BranchCode = branch.Code,
-                                    CCode = code,
-                                    CDeputy = deputy
-
-                                };
-
-
-                                var c2 = new C2Info()
-                                {
-                                    Id = Guid.NewGuid().ToString(),
-                                    InfoId = cInfo.Id,
-                                    C1Id = c1Check.Id,
-                                    Code = code,
-                                    IsLock = 0,
-                                    IsActive = 1,
-                                    StoreName = storeName,
-                                    Deputy = deputy
-                                };
-
-                                db.CInfoCommons.Add(cInfo);
-                                db.SaveChanges();
-
-
-                                db.C2Info.Add(c2);
-                                db.SaveChanges();
-                            }
-                        }
-
-                    }
-                }
-            }
-
-            return RedirectToAction("managecii", "agency");
-        }
-        */
-        /*
-        // excel nong dan
-        public ActionResult excelfarmer(HttpPostedFileBase files)
-        {
-
-            if (!Utitl.CheckUser(db, User.Identity.Name, "ManageAgency", 1))
-                return RedirectToAction("relogin", "home");
-
-
-            if (files != null && files.ContentLength > 0)
-            {
-                string extension = System.IO.Path.GetExtension(files.FileName);
-                if (extension.Equals(".xlsx") || extension.Equals(".xls"))
-                {
-
-                    string fileSave = "farmer_" + DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
-
-                    string path = Server.MapPath("~/temp/" + fileSave);
-
-                    if (System.IO.File.Exists(path))
-                    {
-                        System.IO.File.Delete(path);
-                    }
-
-                    files.SaveAs(path);
-                    FileInfo newFile = new FileInfo(path);
-                    var package = new ExcelPackage(newFile);
-                    ExcelWorksheet sheet = package.Workbook.Worksheets[1];
-
-                    int totalRows = sheet.Dimension.End.Row;
-                    int totalCols = sheet.Dimension.End.Column;
-
-                    for (int i = 2; i <= totalRows; i++)
-                    {
-
-                        string branch = Convert.ToString(sheet.Cells[i, 8].Value).Trim();
-
-                        var branchCheck = db.HaiBranches.Where(p => p.Code == branch).FirstOrDefault();
-
-                        if (branchCheck != null)
-                        {
-                            string code = Convert.ToString(sheet.Cells[i, 1].Value);
-
-                            string name = Convert.ToString(sheet.Cells[i, 3].Value);
-
-                            string identityCard = Convert.ToString(sheet.Cells[i, 9].Value);
-
-                            string addressInfo = Convert.ToString(sheet.Cells[i, 4].Value);
-
-                            string province = Convert.ToString(sheet.Cells[i, 7].Value);
-                            string district = Convert.ToString(sheet.Cells[i, 6].Value);
-                            string ward = Convert.ToString(sheet.Cells[i, 5].Value);
-
-                            string phone = Convert.ToString(sheet.Cells[i, 10].Value);
-
-                            string treeType = Convert.ToString(sheet.Cells[i, 11].Value);
-                            string tree = Convert.ToString(sheet.Cells[i, 12].Value);
-                            string acreage = Convert.ToString(sheet.Cells[i, 13].Value);
-
-                            var cInfo = new CInfoCommon()
-                            {
-                                Id = Guid.NewGuid().ToString(),
-                                CName = name,
-                                IdentityCard = identityCard,
-                                AddressInfo = addressInfo,
-                                ProvinceName = province,
-                                DistrictName = district,
-                                Phone = phone,
-                                CreateTime = DateTime.Now,
-                                CType = "FARMER",
-                                AreaId = branchCheck.AreaId,
-                                WardId = "11111",
-                                CCode = code,
-                                BranchCode = branchCheck.Code
-
-                            };
-
-                            var farmer = new FarmerInfo()
-                            {
-                                Id = Guid.NewGuid().ToString(),
-                                InfoId = cInfo.Id,
-                                Code = code,
-                                IsLock = 0,
-                                IsActive = 1,
-                                FarmerName = name,
-                                TreeType = treeType,
-                                Tree = tree,
-                                Acreage = acreage
-
-                            };
-
-                            db.CInfoCommons.Add(cInfo);
-                            db.SaveChanges();
-
-
-                            db.FarmerInfoes.Add(farmer);
-                            db.SaveChanges();
-                        }
-
-
-                    }
-
-
-                }
-            }
-
-            return RedirectToAction("managefarmer", "agency");
-        }
-        */
 
         // nông dân
 

@@ -80,26 +80,21 @@ namespace HAIAPI.Models
 
         public string haibranch { get; set; }
 
+        public string rank { get; set; }
+
+        public string group { get; set; }
+
+        public List<SubOwner> subOwner { get; set; }
+
     }
 
-    public class AgencyC2C1
+    public class SubOwner
     {
         public string code { get; set; }
         public string name { get; set; }
         public string store { get; set; }
 
         public int? priority { get; set; }
-    }
-
-    public class AgencyInfoC2 : AgencyInfo
-    {
-        public string c1Id { get; set; }
-
-        public string rank { get; set; }
-
-        public int? group { get; set; }
-
-        public List<AgencyC2C1> c1 { get; set; }
     }
 
 

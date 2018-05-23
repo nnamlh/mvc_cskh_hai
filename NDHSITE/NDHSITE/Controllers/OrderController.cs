@@ -129,85 +129,86 @@ namespace NDHSITE.Controllers
                             worksheet.Cells[i + 2, 1].Value = i + 1;
                             worksheet.Cells[i + 2, 2].Value = data[i].CreateDate;
                             worksheet.Cells[i + 2, 3].Value = data[i].Code;
-                            worksheet.Cells[i + 2, 4].Value = data[i].StaffName;
-                            worksheet.Cells[i + 2, 5].Value = data[i].StaffCode;
-                            worksheet.Cells[i + 2, 6].Value = data[i].AgencyCode;
-                            worksheet.Cells[i + 2, 7].Value = data[i].Store;
-                            worksheet.Cells[i + 2, 8].Value = data[i].ExpectDate;
-                            worksheet.Cells[i + 2, 9].Value = data[i].C1Code;
-                            worksheet.Cells[i + 2, 10].Value = data[i].C1Name;
+                            worksheet.Cells[i + 2, 4].Value = data[i].BrachCode;
+                            worksheet.Cells[i + 2, 5].Value = data[i].StaffName;
+                            worksheet.Cells[i + 2, 6].Value = data[i].StaffCode;
+                            worksheet.Cells[i + 2, 7].Value = data[i].AgencyCode;
+                            worksheet.Cells[i + 2, 8].Value = data[i].Store;
+                            worksheet.Cells[i + 2, 9].Value = data[i].ExpectDate;
+                            worksheet.Cells[i + 2, 10].Value = data[i].C1Code;
+                            worksheet.Cells[i + 2, 11].Value = data[i].C1Name;
 
                             if (data[i].OrderStatus == "process")
                             {
-                                worksheet.Cells[i + 2, 11].Value = "Đang xử lý";
+                                worksheet.Cells[i + 2, 12].Value = "Đang xử lý";
                             }
                             else if (data[i].OrderStatus == "finish")
                             {
-                                worksheet.Cells[i + 2, 11].Value = "Hoàn thành";
+                                worksheet.Cells[i + 2, 12].Value = "Hoàn thành";
                             }
                             else if (data[i].OrderStatus == "cancel")
                             {
-                                worksheet.Cells[i + 2, 11].Value = "Đã hủy không giao";
+                                worksheet.Cells[i + 2, 12].Value = "Đã hủy không giao";
                             }
 
                             if (data[i].QuantityFinish == 0)
                             {
-                                worksheet.Cells[i + 2, 12].Value = "Chưa giao";
+                                worksheet.Cells[i + 2, 13].Value = "Chưa giao";
                             }
                             else if (data[i].QuantityFinish == data[i].OrderQuantity)
                             {
-                                worksheet.Cells[i + 2, 12].Value = "Giao đủ";
+                                worksheet.Cells[i + 2, 13].Value = "Giao đủ";
                             }
                             else if (data[i].QuantityFinish > data[i].OrderQuantity)
                             {
-                                worksheet.Cells[i + 2, 12].Value = "Giao nhiều hơn";
+                                worksheet.Cells[i + 2, 13].Value = "Giao nhiều hơn";
                             }
                             else
                             {
-                                worksheet.Cells[i + 2, 12].Value = "Giao ít hơn";
+                                worksheet.Cells[i + 2, 13].Value = "Giao ít hơn";
                             }
 
 
                             //
                             if (data[i].HasBill == 1)
                             {
-                                worksheet.Cells[i + 2, 13].Value = "Có";
+                                worksheet.Cells[i + 2, 14].Value = "Có";
                             }
                             else
                             {
-                                worksheet.Cells[i + 2, 13].Value = "Không";
+                                worksheet.Cells[i + 2, 14].Value = "Không";
                             }
 
                             // 
                             if (data[i].GoodType == "warehouse")
                             {
-                                worksheet.Cells[i + 2, 14].Value = "Hàng gửi kho";
+                                worksheet.Cells[i + 2, 15].Value = "Hàng gửi kho";
                             }
                             else if (data[i].GoodType == "new")
                             {
-                                worksheet.Cells[i + 2, 14].Value = "Hàng xuất mới";
+                                worksheet.Cells[i + 2, 15].Value = "Hàng xuất mới";
                             }
                             else
                             {
-                                worksheet.Cells[i + 2, 14].Value = "Không xác định";
+                                worksheet.Cells[i + 2, 15].Value = "Không xác định";
                             }
 
-                            worksheet.Cells[i + 2, 15].Value = data[i].PName;
-                            worksheet.Cells[i + 2, 16].Value = data[i].OrderQuantity / data[i].PQuantity;
-                            worksheet.Cells[i + 2, 17].Value = data[i].OrderQuantity % data[i].PQuantity;
-                            worksheet.Cells[i + 2, 18].Value = data[i].PPriceTotal;
-                            worksheet.Cells[i + 2, 19].Value = data[i].QuantityFinish / data[i].PQuantity;
-                            worksheet.Cells[i + 2, 20].Value = data[i].QuantityFinish % data[i].PQuantity;
-                            worksheet.Cells[i + 2, 21].Value = data[i].QuantityFinish * data[i].PerPrice;
+                            worksheet.Cells[i + 2, 16].Value = data[i].PName;
+                            worksheet.Cells[i + 2, 17].Value = data[i].OrderQuantity / data[i].PQuantity;
+                            worksheet.Cells[i + 2, 18].Value = data[i].OrderQuantity % data[i].PQuantity;
+                            worksheet.Cells[i + 2, 19].Value = data[i].PPriceTotal;
+                            worksheet.Cells[i + 2, 20].Value = data[i].QuantityFinish / data[i].PQuantity;
+                            worksheet.Cells[i + 2, 21].Value = data[i].QuantityFinish % data[i].PQuantity;
+                            worksheet.Cells[i + 2, 22].Value = data[i].QuantityFinish * data[i].PerPrice;
 
                             if (data[i].OrderType == "checkinorder")
                             {
-                                worksheet.Cells[i + 2, 22].Value = "Trong checkin";
+                                worksheet.Cells[i + 2, 23].Value = "Trong checkin";
 
                             }
                             else
                             {
-                                worksheet.Cells[i + 2, 22].Value = "Ngoài checkin";
+                                worksheet.Cells[i + 2, 23].Value = "Ngoài checkin";
 
                             }
 

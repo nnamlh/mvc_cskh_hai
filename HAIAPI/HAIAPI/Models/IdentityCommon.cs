@@ -39,13 +39,13 @@ namespace HAIAPI.Models
 
         public List<string> function { get; set; }
 
-        public List<AgencyInfoC2> c2 { get; set; }
+     //   public List<AgencyInfoC2> c2 { get; set; }
 
-        public List<AgencyInfo> c1 { get; set; }
+     //   public List<AgencyInfo> c1 { get; set; }
 
-        public List<GroupInfo> productGroups { get; set; }
+      //  public List<GroupInfo> productGroups { get; set; }
 
-        public List<ProductInfoResult> products { get; set; }
+     //   public List<ProductInfoResult> products { get; set; }
 
     }
 

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="DMSHAIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="DMSHAIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="AgencySavePoint">
     <Key>
       <PropertyRef Name="EventId" />
@@ -1579,7 +1579,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrderProd__Staff__6F357288">
+  <Association Name="FK__OrderProd__Staff__6E414E4F">
     <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
     <End Role="OrderProductHistory" Type="Self.OrderProductHistory" Multiplicity="*" />
     <ReferentialConstraint>
@@ -1879,6 +1879,9 @@
     <Parameter Name="month" Type="varchar" Mode="In" />
     <Parameter Name="year" Type="varchar" Mode="In" />
     <Parameter Name="staffId" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="find_staff_c1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="search" Type="nvarchar" Mode="In" />
   </Function>
   <Function Name="get_decor_info" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="branch" Type="nvarchar" Mode="In" />
@@ -2229,7 +2232,7 @@
       <End Role="ProductInfo" EntitySet="ProductInfo" />
       <End Role="OrderProductHistory" EntitySet="OrderProductHistory" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrderProd__Staff__6F357288" Association="Self.FK__OrderProd__Staff__6F357288">
+    <AssociationSet Name="FK__OrderProd__Staff__6E414E4F" Association="Self.FK__OrderProd__Staff__6E414E4F">
       <End Role="HaiStaff" EntitySet="HaiStaff" />
       <End Role="OrderProductHistory" EntitySet="OrderProductHistory" />
     </AssociationSet>

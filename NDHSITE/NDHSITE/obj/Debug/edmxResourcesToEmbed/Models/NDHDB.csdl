@@ -2226,6 +2226,9 @@
       <Parameter Name="fdate" Mode="In" Type="String" />
       <Parameter Name="tdate" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="find_staff_c1" ReturnType="Collection(DMSHAIModel.find_staff_c1_Result)">
+      <Parameter Name="search" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="checkin_calendartype_group_Result">
     <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
@@ -2691,5 +2694,13 @@
     <Property Type="Int32" Name="CountOrder" Nullable="true" />
     <Property Type="Double" Name="SumPPrice" Nullable="true" />
     <Property Type="Double" Name="SumPPriceReal" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="find_staff_c1_Result">
+    <Property Type="String" Name="staffId" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="staffName" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="staffCode" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="c1Id" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="C1Name" Nullable="true" MaxLength="512" />
+    <Property Type="String" Name="c1Code" Nullable="true" MaxLength="32" />
   </ComplexType>
 </Schema>

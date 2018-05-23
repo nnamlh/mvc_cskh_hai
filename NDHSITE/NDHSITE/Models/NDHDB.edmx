@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DMSHAIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DMSHAIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AgencySavePoint">
           <Key>
             <PropertyRef Name="EventId" />
@@ -1584,7 +1584,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__OrderProd__Staff__6F357288">
+        <Association Name="FK__OrderProd__Staff__6E414E4F">
           <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
           <End Role="OrderProductHistory" Type="Self.OrderProductHistory" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1884,6 +1884,9 @@
           <Parameter Name="month" Type="varchar" Mode="In" />
           <Parameter Name="year" Type="varchar" Mode="In" />
           <Parameter Name="staffId" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="find_staff_c1" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="search" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="get_decor_info" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="branch" Type="nvarchar" Mode="In" />
@@ -2234,7 +2237,7 @@
             <End Role="ProductInfo" EntitySet="ProductInfo" />
             <End Role="OrderProductHistory" EntitySet="OrderProductHistory" />
           </AssociationSet>
-          <AssociationSet Name="FK__OrderProd__Staff__6F357288" Association="Self.FK__OrderProd__Staff__6F357288">
+          <AssociationSet Name="FK__OrderProd__Staff__6E414E4F" Association="Self.FK__OrderProd__Staff__6E414E4F">
             <End Role="HaiStaff" EntitySet="HaiStaff" />
             <End Role="OrderProductHistory" EntitySet="OrderProductHistory" />
           </AssociationSet>
@@ -4553,6 +4556,9 @@
             <Parameter Name="fdate" Mode="In" Type="String" />
             <Parameter Name="tdate" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="find_staff_c1" ReturnType="Collection(DMSHAIModel.find_staff_c1_Result)">
+            <Parameter Name="search" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="checkin_calendartype_group_Result">
           <Property Type="String" Name="TypeId" Nullable="true" MaxLength="128" />
@@ -5018,6 +5024,14 @@
           <Property Type="Int32" Name="CountOrder" Nullable="true" />
           <Property Type="Double" Name="SumPPrice" Nullable="true" />
           <Property Type="Double" Name="SumPPriceReal" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="find_staff_c1_Result">
+          <Property Type="String" Name="staffId" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="staffName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="staffCode" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="c1Id" Nullable="false" MaxLength="128" />
+          <Property Type="String" Name="C1Name" Nullable="true" MaxLength="512" />
+          <Property Type="String" Name="c1Code" Nullable="true" MaxLength="32" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -6615,6 +6629,18 @@
                 <ScalarProperty Name="CountOrder" ColumnName="CountOrder" />
                 <ScalarProperty Name="SumPPrice" ColumnName="SumPPrice" />
                 <ScalarProperty Name="SumPPriceReal" ColumnName="SumPPriceReal" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="find_staff_c1" FunctionName="DMSHAIModel.Store.find_staff_c1">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DMSHAIModel.find_staff_c1_Result">
+                <ScalarProperty Name="staffId" ColumnName="staffId" />
+                <ScalarProperty Name="staffName" ColumnName="staffName" />
+                <ScalarProperty Name="staffCode" ColumnName="staffCode" />
+                <ScalarProperty Name="c1Id" ColumnName="c1Id" />
+                <ScalarProperty Name="C1Name" ColumnName="C1Name" />
+                <ScalarProperty Name="c1Code" ColumnName="c1Code" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

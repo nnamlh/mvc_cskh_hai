@@ -35,7 +35,6 @@ namespace HAIAPI.Controllers
                 if (staff == null)
                     throw new Exception("Chỉ nhân viên công ty mới được quyền tạo");
 
-
                 // lay current month year and next
                 var currentYear = DateTime.Now.Year;
                 var currentMonth = DateTime.Now.Month;
@@ -607,6 +606,7 @@ namespace HAIAPI.Controllers
                                 {
                                     ctype = type.Id,
                                     cname = type.Name,
+                                    agencyType = agencyInfo.CType,
                                     code = item.AgencyCode,
                                     deputy = agencyInfo.CDeputy,
                                     name = agencyInfo.CName,
@@ -616,14 +616,14 @@ namespace HAIAPI.Controllers
                                 };
 
                                 var c2c1 = db.C2C1.Where(p => p.C2Code == item.AgencyCode).ToList();
-                                List<AgencyC2C1> agencyC2C1 = new List<AgencyC2C1>();
+                                List<SubOwner> agencyC2C1 = new List<SubOwner>();
 
                                 foreach (var item2 in c2c1)
                                 {
                                     var checkC1 = db.C1Info.Where(p => p.Code == item2.C1Code).FirstOrDefault();
                                     if (checkC1 != null)
                                     {
-                                        agencyC2C1.Add(new AgencyC2C1()
+                                        agencyC2C1.Add(new SubOwner()
                                         {
                                             code = checkC1.Code,
                                             name = checkC1.Deputy,

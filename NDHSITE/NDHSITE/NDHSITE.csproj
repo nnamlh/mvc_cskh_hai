@@ -221,21 +221,20 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AgencyController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CheckInController.cs" />
     <Compile Include="Controllers\DecorController.cs" />
     <Compile Include="Controllers\EditorController.cs" />
     <Compile Include="Controllers\EventManageController.cs" />
+    <Compile Include="Controllers\HAIDataController.cs" />
     <Compile Include="Controllers\HaiReportController.cs" />
     <Compile Include="Controllers\HaiStaffController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\KPIController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
-    <Compile Include="Controllers\ShowInfoController.cs" />
     <Compile Include="Controllers\TrackingController.cs" />
-    <Compile Include="Controllers\TreeController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UserImeiController.cs" />
     <Compile Include="Global.asax.cs">
@@ -351,6 +350,9 @@
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FarmerInfo.cs">
+      <DependentUpon>NDHDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\find_staff_c1_Result.cs">
       <DependentUpon>NDHDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\FuncGroup.cs">
@@ -751,15 +753,8 @@
     <Content Include="Views\Agency\ManageFarmer.cshtml" />
     <Content Include="Views\Agency\ModifyFarmer.cshtml" />
     <Content Include="Views\Product\ModifyProduct.cshtml" />
-    <Content Include="Views\ShowInfo\ShowCheckIn.cshtml" />
     <Content Include="Views\EventManage\ManageEvent.cshtml" />
     <Content Include="Views\EventManage\ModifyEvent.cshtml" />
-    <Content Include="Views\ShowInfo\ShowStaff.cshtml" />
-    <Content Include="Views\ShowInfo\ShowBranch.cshtml" />
-    <Content Include="Views\ShowInfo\ShowProduct.cshtml" />
-    <Content Include="Views\ShowInfo\ShowCII.cshtml" />
-    <Content Include="Views\ShowInfo\ShowCI.cshtml" />
-    <Content Include="Views\ShowInfo\ShowFarmer.cshtml" />
     <Content Include="Views\EventManage\eventAreaModify.cshtml" />
     <Content Include="Views\HaiStaff\ModifyBranch.cshtml" />
     <Content Include="Views\HaiStaff\ModifyArea.cshtml" />
@@ -775,16 +770,9 @@
     <Content Include="Views\EventManage\AwardManage.cshtml" />
     <Content Include="Views\EventManage\ModifyAward.cshtml" />
     <Content Include="Views\EventManage\ShowAppHistory.cshtml" />
-    <Content Include="Views\Tree\Manage.cshtml" />
-    <Content Include="Views\Tree\Modify.cshtml" />
-    <Content Include="Views\Tree\ShowTree.cshtml" />
     <Content Include="Views\EventManage\EventAreaFarmerModify.cshtml" />
-    <Content Include="Views\ShowInfo\ShowEvent.cshtml" />
-    <Content Include="Views\ShowInfo\ShowEventDetail.cshtml" />
     <Content Include="Views\EventManage\ShowSavePoint.cshtml" />
     <Content Include="Views\HaiReport\ChooseEvent.cshtml" />
-    <Content Include="Views\ShowInfo\ShowMsg.cshtml" />
-    <Content Include="Views\ShowInfo\UserInfo.cshtml" />
     <Content Include="Views\HaiReport\AgencyReport.cshtml" />
     <Content Include="Views\Account\AdminManage.cshtml" />
     <Content Include="Views\Notification\SendSMS.cshtml" />
@@ -798,8 +786,6 @@
     <Content Include="Views\Account\AddUser.cshtml" />
     <Content Include="Views\Account\UserInfo.cshtml" />
     <Content Include="Views\UserImei\CheckImei.cshtml" />
-    <Content Include="Views\ShowInfo\SMSHistory.cshtml" />
-    <Content Include="Views\ShowInfo\HappyBirthday.cshtml" />
     <Content Include="Views\Home\Policy.cshtml" />
     <Content Include="Views\Shared\_AdminSlideMenu.cshtml" />
     <Content Include="Views\Account\ChangeUserName.cshtml" />
@@ -819,8 +805,9 @@
     <Content Include="Views\Decor\Show.cshtml" />
     <Content Include="Views\CheckIn\ReportCheckIn.cshtml" />
     <Content Include="Views\HaiReport\ReportOrder.cshtml" />
-    <Content Include="Views\KPI\Template.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\HAIData\UpdateC1Staff.cshtml" />
+    <Content Include="Views\HAIData\UpdateC2C1.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -832,6 +819,7 @@
     <Folder Include="staff\" />
     <Folder Include="temp\" />
     <Folder Include="uploadfolder\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Project_Readme.html" />

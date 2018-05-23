@@ -78,11 +78,6 @@ namespace HAIAPI.Controllers
 
                 result.function = GetUserFunction(paser.user, "main");
 
-                if (paser.isUpdate == 1)
-                {
-                    result.products = GetProductCodeInfo();
-                    result.productGroups = GetGroupProduct();
-                }
 
                 if (role.GroupRole == "HAI")
                 {
@@ -94,14 +89,20 @@ namespace HAIAPI.Controllers
                     result.name = staff.FullName;
                     result.type = "Công ty HAI";
 
+                    /*
                     if (paser.isUpdate == 1)
                     {
                         result.c2 = GetListC2(staff);
 
+                        result.c1 = GetListC1(staff);
+                    
+                        if (paser.isUpdate == 1)
+                        {
+                            result.products = GetProductCodeInfo();
+                            result.productGroups = GetGroupProduct();
+                        }
                     }
-
-                    result.c1 = GetListC1(staff);
-
+                    */
                 }
                 else
                 {
@@ -120,8 +121,8 @@ namespace HAIAPI.Controllers
                     else
                         result.type = "Chưa xác nhận";
 
-                    result.c2 = new List<AgencyInfoC2>();
-                    result.c1 = new List<AgencyInfo>();
+                  //  result.c2 = new List<AgencyInfoC2>();
+                  //  result.c1 = new List<AgencyInfo>();
                 }
 
 
@@ -382,9 +383,9 @@ namespace HAIAPI.Controllers
             return groups;
         }
 
-        protected List<AgencyInfoC2> GetListC2(HaiStaff staff)
+        protected List<AgencyInfo> GetStaffC2(HaiStaff staff)
         {
-            List<AgencyInfoC2> agencyResult = new List<AgencyInfoC2>();
+            List<AgencyInfo> agencyResult = new List<AgencyInfo>();
 
             List<C2Info> c2List = new List<C2Info>();
 
@@ -410,14 +411,14 @@ namespace HAIAPI.Controllers
 
                 // danh sach c1
                 var c2c1 = db.C2C1.Where(p => p.C2Code == item.Code).ToList();
-                List<AgencyC2C1> agencyC2C1 = new List<AgencyC2C1>();
+                List<SubOwner> agencyC2C1 = new List<SubOwner>();
 
                 foreach (var item2 in c2c1)
                 {
                     var checkC1 = db.C1Info.Where(p => p.Code == item2.C1Code).FirstOrDefault();
                     if (checkC1 != null)
                     {
-                        agencyC2C1.Add(new AgencyC2C1()
+                        agencyC2C1.Add(new SubOwner()
                         {
                             code = checkC1.Code,
                             name = checkC1.Deputy,
@@ -427,7 +428,7 @@ namespace HAIAPI.Controllers
                     }
                 }
 
-                agencyResult.Add(new AgencyInfoC2()
+                agencyResult.Add(new AgencyInfo()
                 {
                     code = item.Code,
                     name = item.StoreName,
@@ -437,16 +438,64 @@ namespace HAIAPI.Controllers
                     lat = item.CInfoCommon.Lat == null ? 0 : item.CInfoCommon.Lat,
                     lng = item.CInfoCommon.Lng == null ? 0 : item.CInfoCommon.Lng,
                     phone = item.CInfoCommon.Phone,
-                    id = item.Id,
+                    id = item.CInfoCommon.Id,
                     rank = item.CInfoCommon.CRank,
-                    group = group,
+                    group = Convert.ToString(group),
                     identityCard = item.CInfoCommon.IdentityCard,
                     businessLicense = item.CInfoCommon.BusinessLicense,
                     province = item.CInfoCommon.ProvinceName,
                     district = item.CInfoCommon.DistrictName,
                     taxCode = item.CInfoCommon.TaxCode,
                     haibranch = item.CInfoCommon.BranchCode,
-                    c1 = agencyC2C1
+                    subOwner = agencyC2C1
+                });
+            }
+
+            return agencyResult;
+
+        }
+
+        protected List<AgencyInfo> GetStaffC1(HaiStaff staff)
+        {
+            List<AgencyInfo> agencyResult = new List<AgencyInfo>();
+
+            List<C1Info> c1List = new List<C1Info>();
+
+            int permit = HaiUtil.CheckRoleShowInfo(db, User.Identity.Name);
+            if (permit == 2)
+            {
+                // get list cn
+                var branchPermit = db.UserBranchPermisses.Where(p => p.UserName == User.Identity.Name).Select(p => p.BranchCode).ToList();
+                c1List = db.C1Info.Where(p => branchPermit.Contains(p.CInfoCommon.BranchCode)).ToList();
+            }
+            else
+            {
+                c1List = staff.C1Info.Where(p => p.IsActive == 1).OrderBy(p=> p.CInfoCommon.BranchCode).ToList();
+            }
+
+            foreach (var item in c1List)
+            {
+
+                agencyResult.Add(new AgencyInfo()
+                {
+                    code = item.Code,
+                    name = item.StoreName,
+                    type = "CI",
+                    deputy = item.Deputy,
+                    address = item.CInfoCommon.AddressInfo,
+                    lat = item.CInfoCommon.Lat == null ? 0 : item.CInfoCommon.Lat,
+                    lng = item.CInfoCommon.Lng == null ? 0 : item.CInfoCommon.Lng,
+                    phone = item.CInfoCommon.Phone,
+                    id = item.CInfoCommon.Id,
+                    rank = item.CInfoCommon.CRank,
+                    group = "CI",
+                    identityCard = item.CInfoCommon.IdentityCard,
+                    businessLicense = item.CInfoCommon.BusinessLicense,
+                    province = item.CInfoCommon.ProvinceName,
+                    district = item.CInfoCommon.DistrictName,
+                    taxCode = item.CInfoCommon.TaxCode,
+                    haibranch = item.CInfoCommon.BranchCode,
+                    subOwner = new List<SubOwner>()
                 });
             }
 
@@ -604,18 +653,18 @@ namespace HAIAPI.Controllers
             return mapDayOfWeeks[dt.DayOfWeek];
         }
 
-        protected List<AgencyC2C1> GetC2C1(string code)
+        protected List<SubOwner> GetC2C1(string code)
         {
             // danh sach c1
             var c2c1 = db.C2C1.Where(p => p.C2Code == code).ToList();
-            List<AgencyC2C1> agencyC2C1 = new List<AgencyC2C1>();
+            List<SubOwner> agencyC2C1 = new List<SubOwner>();
 
             foreach (var item2 in c2c1)
             {
                 var checkC1 = db.C1Info.Where(p => p.Code == item2.C1Code).FirstOrDefault();
                 if (checkC1 != null)
                 {
-                    agencyC2C1.Add(new AgencyC2C1()
+                    agencyC2C1.Add(new SubOwner()
                     {
                         code = checkC1.Code,
                         name = checkC1.Deputy,
