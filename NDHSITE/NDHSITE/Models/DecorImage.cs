@@ -15,18 +15,9 @@ namespace NDHSITE.Models
     public partial class DecorImage
     {
         public string Id { get; set; }
-        public Nullable<int> DaySend { get; set; }
-        public Nullable<int> MonthSend { get; set; }
-        public Nullable<int> YearSend { get; set; }
-        public string AgencyCode { get; set; }
-        public string AgencyType { get; set; }
         public string ImageUrl { get; set; }
         public Nullable<System.TimeSpan> CreateTime { get; set; }
-        public Nullable<double> Lat { get; set; }
-        public Nullable<double> Lng { get; set; }
         public string DecorGroup { get; set; }
-        public string StaffId { get; set; }
-    
-        public virtual HaiStaff HaiStaff { get; set; }
+        public string CalendarWorkID { get; set; }
     }
 }

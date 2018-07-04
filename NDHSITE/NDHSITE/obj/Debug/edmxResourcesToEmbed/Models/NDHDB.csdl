@@ -272,6 +272,13 @@
     <Property Name="Distance" Type="Double" />
     <Property Name="Perform" Type="Int32" />
     <Property Name="DayInWeek" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+    <Property Name="NoteCode" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="Country" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Province" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Ward" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AddressInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="District" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="CInfoCommon">
     <Key>
@@ -333,18 +340,10 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="DaySend" Type="Int32" />
-    <Property Name="MonthSend" Type="Int32" />
-    <Property Name="YearSend" Type="Int32" />
-    <Property Name="AgencyCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="AgencyType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="ImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="CreateTime" Type="Time" Precision="7" />
-    <Property Name="Lat" Type="Double" />
-    <Property Name="Lng" Type="Double" />
     <Property Name="DecorGroup" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="HaiStaff" Relationship="Self.FK__DecorImag__Staff__6F6A7CB2" FromRole="DecorImage" ToRole="HaiStaff" />
+    <Property Name="CalendarWorkID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="District">
     <Key>
@@ -610,7 +609,6 @@
     <Property Name="IsDelete" Type="Int32" />
     <Property Name="GPSDistance" Type="Int32" />
     <NavigationProperty Name="CalendarInfoes" Relationship="Self.FK__CalendarI__Staff__4297D63B" FromRole="HaiStaff" ToRole="CalendarInfo" />
-    <NavigationProperty Name="DecorImages" Relationship="Self.FK__DecorImag__Staff__6F6A7CB2" FromRole="HaiStaff" ToRole="DecorImage" />
     <NavigationProperty Name="HaiBranch" Relationship="Self.FK__HaiStaff__Branch__24927208" FromRole="HaiStaff" ToRole="HaiBranch" />
     <NavigationProperty Name="HaiDepartment" Relationship="Self.FK__HaiStaff__Depart__25869641" FromRole="HaiStaff" ToRole="HaiDepartment" />
     <NavigationProperty Name="HaiPosition" Relationship="Self.FK__HaiStaff__Positi__239E4DCF" FromRole="HaiStaff" ToRole="HaiPosition" />
@@ -1321,18 +1319,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__DecorImag__Staff__6F6A7CB2">
-    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
-    <End Role="DecorImage" Type="Self.DecorImage" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiStaff">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="DecorImage">
-        <PropertyRef Name="StaffId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__District__Provin__07C12930">
     <End Role="Province" Type="Self.Province" Multiplicity="0..1" />
     <End Role="District" Type="Self.District" Multiplicity="*" />
@@ -1932,10 +1918,6 @@
     <AssociationSet Name="FK__SaveAgenc__Cinfo__7FA0E47B" Association="Self.FK__SaveAgenc__Cinfo__7FA0E47B">
       <End Role="CInfoCommon" EntitySet="CInfoCommons" />
       <End Role="SaveAgencyShopImage" EntitySet="SaveAgencyShopImages" />
-    </AssociationSet>
-    <AssociationSet Name="FK__DecorImag__Staff__6F6A7CB2" Association="Self.FK__DecorImag__Staff__6F6A7CB2">
-      <End Role="HaiStaff" EntitySet="HaiStaffs" />
-      <End Role="DecorImage" EntitySet="DecorImages" />
     </AssociationSet>
     <AssociationSet Name="FK__District__Provin__07C12930" Association="Self.FK__District__Provin__07C12930">
       <End Role="Province" EntitySet="Provinces" />

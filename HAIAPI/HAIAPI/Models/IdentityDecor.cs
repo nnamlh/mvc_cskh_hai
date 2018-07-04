@@ -24,13 +24,7 @@ namespace HAIAPI.Models
 
     public class DecorImageRequest:RequestInfo
     {
-        public int day { get; set; }
-
-        public int month { get; set; }
-
-        public int year { get; set; }
-
-        public string agency { get; set; }
+        public string checkInId { get; set; }
 
         public string group { get; set; }
     }

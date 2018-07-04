@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\ThinkPad\Desktop\work temp\nong duoc hai\dmssite</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\THINK\Desktop\work temp\nong duoc hai\dmssite</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Antlr3.Runtime.dll">
@@ -76,7 +76,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/21/2018 02:01:45</publishTime>
     </File>
     <File Include="bin/NDHSITE.dll">
-      <publishTime>05/24/2018 02:02:13</publishTime>
+      <publishTime>07/05/2018 02:42:00</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>03/21/2018 02:00:59</publishTime>
@@ -268,7 +268,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/21/2018 02:00:54</publishTime>
     </File>
     <File Include="Models/NDHDB.edmx.diagram">
-      <publishTime>03/21/2018 02:00:53</publishTime>
+      <publishTime>07/05/2018 02:37:43</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>03/21/2018 02:00:55</publishTime>
@@ -556,7 +556,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/21/2018 02:00:53</publishTime>
     </File>
     <File Include="Views/HaiStaff/AddAgency.cshtml">
-      <publishTime>03/21/2018 02:00:53</publishTime>
+      <publishTime>05/25/2018 01:23:27</publishTime>
     </File>
     <File Include="Views/HaiStaff/CreateBranch.cshtml">
       <publishTime>10/19/2016 16:26:04</publishTime>
@@ -751,7 +751,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/21/2018 02:00:53</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/06/2018 02:46:06</publishTime>
+      <publishTime>07/05/2018 02:42:40</publishTime>
     </File>
   </ItemGroup>
 </Project>

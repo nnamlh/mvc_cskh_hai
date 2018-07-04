@@ -18,7 +18,6 @@ namespace NDHSITE.Models
         public HaiStaff()
         {
             this.CalendarInfoes = new HashSet<CalendarInfo>();
-            this.DecorImages = new HashSet<DecorImage>();
             this.OrderStaffs = new HashSet<OrderStaff>();
             this.SaveAgencyShopImages = new HashSet<SaveAgencyShopImage>();
             this.StaffCheckIns = new HashSet<StaffCheckIn>();
@@ -54,8 +53,6 @@ namespace NDHSITE.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CalendarInfo> CalendarInfoes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DecorImage> DecorImages { get; set; }
         public virtual HaiBranch HaiBranch { get; set; }
         public virtual HaiDepartment HaiDepartment { get; set; }
         public virtual HaiPosition HaiPosition { get; set; }

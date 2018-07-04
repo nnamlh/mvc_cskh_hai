@@ -18,7 +18,6 @@ namespace HAIAPI.Models
         public HaiStaff()
         {
             this.CalendarInfoes = new HashSet<CalendarInfo>();
-            this.DecorImages = new HashSet<DecorImage>();
             this.StaffCheckIns = new HashSet<StaffCheckIn>();
             this.StaffWithC2 = new HashSet<StaffWithC2>();
             this.C1Info = new HashSet<C1Info>();
@@ -54,8 +53,6 @@ namespace HAIAPI.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CalendarInfo> CalendarInfoes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DecorImage> DecorImages { get; set; }
         public virtual HaiBranch HaiBranch { get; set; }
         public virtual HaiDepartment HaiDepartment { get; set; }
         public virtual HaiPosition HaiPosition { get; set; }

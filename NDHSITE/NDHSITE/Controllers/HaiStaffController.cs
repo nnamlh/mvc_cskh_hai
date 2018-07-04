@@ -626,7 +626,17 @@ namespace NDHSITE.Controllers
             }
             else if (type == "c1")
             {
-                AddAgencyC1(staffCheck, AgencyId, files);
+                
+                if (action == 1)
+                {
+                    // thêm
+                    AddAgencyC1(staffCheck, AgencyId, files);
+                }
+                else if (action == 2)
+                {
+                    // xoa
+                    DeleteAgencyC1(staffCheck, AgencyId, files);
+                }
             }
 
             return RedirectToAction("AddAgency", "HaiStaff", new { id = id });
@@ -751,6 +761,58 @@ namespace NDHSITE.Controllers
             //  db.SaveChanges();
         }
 
+        private void DeleteAgencyC1(HaiStaff staff, string AgencyId, HttpPostedFileBase files)
+        {
+
+            if (files != null && files.ContentLength > 0)
+            {
+
+                string extension = System.IO.Path.GetExtension(files.FileName);
+                if (extension.Equals(".xlsx"))
+                {
+
+                    string fileSave = "staffci_" + DateTime.Now.ToString("ddMMyyyyhhmmss") + extension;
+                    string path = Server.MapPath("~/temp/" + fileSave);
+                    if (System.IO.File.Exists(path))
+                    {
+                        System.IO.File.Delete(path);
+                    }
+
+                    files.SaveAs(path);
+                    FileInfo newFile = new FileInfo(path);
+                    var package = new ExcelPackage(newFile);
+                    ExcelWorksheet sheet = package.Workbook.Worksheets[1];
+
+                    int totalRows = sheet.Dimension.End.Row;
+                    int totalCols = sheet.Dimension.End.Column;
+
+                    for (int i = 2; i <= totalRows; i++)
+                    {
+                        string code = Convert.ToString(sheet.Cells[i, 1].Value);
+                        var checkC2 = staff.C1Info.Where(p => p.Code == code).FirstOrDefault();
+                        if (checkC2 != null)
+                        {
+                            staff.C1Info.Remove(checkC2);
+                            db.SaveChanges();
+                        }
+                    }
+                }
+
+            }
+            else
+            {
+                var checkC1 = staff.C1Info.Where(p => p.Code == AgencyId).FirstOrDefault();
+
+                if (checkC1 != null)
+                {
+                    staff.C1Info.Remove(checkC1);
+                    db.SaveChanges();
+                }
+            }
+
+            // db.Entry(staff).State = System.Data.Entity.EntityState.Modified;
+            //  db.SaveChanges();
+        }
 
 
         private void AddAgencyC1(HaiStaff staff, string AgencyId, HttpPostedFileBase files)

@@ -10,7 +10,7 @@ namespace HAIAPI.Util
 {
     public class HaiUtil
     {
-        public static string HostName = "http://dms.nongduochai.vn/";
+        public static string HostName = "http://testdms.nongduochai.vn/";
         public static void SendNotifi(string title, string messenge, string user, NDHDBEntities db, MongoHelper mongoHelp)
         {
 

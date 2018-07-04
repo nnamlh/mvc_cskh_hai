@@ -104,7 +104,6 @@
         <AssociationConnector Association="DMSHAIModel.FK__HaiOrder__Agency__17786E0C" ManuallyRouted="false" />
         <AssociationConnector Association="DMSHAIModel.FK__MSGPoint__CInfoI__5614BF03" ManuallyRouted="false" />
         <AssociationConnector Association="DMSHAIModel.FK__SaveAgenc__Cinfo__7FA0E47B" ManuallyRouted="false" />
-        <AssociationConnector Association="DMSHAIModel.FK__DecorImag__Staff__6F6A7CB2" ManuallyRouted="false" />
         <AssociationConnector Association="DMSHAIModel.FK__District__Provin__07C12930" ManuallyRouted="false" />
         <AssociationConnector Association="DMSHAIModel.FK__Ward__Districtid__0C85DE4D" ManuallyRouted="false" />
         <AssociationConnector Association="DMSHAIModel.FK__EventArea__AreaI__54968AE5" ManuallyRouted="false" />

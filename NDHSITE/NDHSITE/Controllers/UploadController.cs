@@ -67,7 +67,7 @@ namespace NDHSITE.Controllers
 
 
         [HttpPost]
-        public ActionResult Decor(HttpPostedFileBase image, string extension, string user, string token, string agency, string group, double lng, double lat)
+        public ActionResult Decor(HttpPostedFileBase image, string extension, string user, string token, string checkInId, string group)
         {
             if (mongoHelp.checkLoginSession(user, token))
             {
@@ -76,10 +76,9 @@ namespace NDHSITE.Controllers
                 if (staff == null)
                     return Json(new { id = "0", msg = "Sai thong tin" }, JsonRequestBehavior.AllowGet);
 
+                var cWork = db.CalendarWorks.Find(checkInId);
 
-                CInfoCommon cinfo = db.CInfoCommons.Where(p => p.CCode == agency).FirstOrDefault();
-
-                if (cinfo == null)
+                if(cWork == null)
                     return Json(new { id = "0", msg = "Sai thong tin" }, JsonRequestBehavior.AllowGet);
 
 
@@ -105,7 +104,7 @@ namespace NDHSITE.Controllers
                         Width = 3000,
                         isSacle = false,
                         UploadPath = fsave,
-                        user = agency
+                        user = cWork.AgencyCode
                     };
 
                     ImageResult imageResult = imageUpload.RenameUploadFile(data, extension);
@@ -120,17 +119,10 @@ namespace NDHSITE.Controllers
                     var decor = new DecorImage()
                     {
                         Id = Guid.NewGuid().ToString(),
-                        AgencyCode = agency,
-                        AgencyType = cinfo.CType,
                         CreateTime = DateTime.Now.TimeOfDay,
-                        DaySend = DateTime.Now.Day,
                         DecorGroup = group,
-                        StaffId = staff.Id,
                         ImageUrl = urlThumbnail,
-                        Lat = lat,
-                        Lng = lng,
-                        MonthSend =DateTime.Now.Month,
-                        YearSend = DateTime.Now.Year
+                        CalendarWorkID = checkInId
                     };
 
                     db.DecorImages.Add(decor);

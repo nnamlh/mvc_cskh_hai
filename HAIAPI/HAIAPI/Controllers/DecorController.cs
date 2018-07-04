@@ -81,8 +81,8 @@ namespace HAIAPI.Controllers
                 if (staff == null)
                     throw new Exception("Chỉ nhân viên công ty mới được quyền");
 
-                var data = staff.DecorImages.Where(p => p.AgencyCode == paser.agency && p.DecorGroup == paser.group && p.DaySend == paser.day && p.MonthSend == paser.month && p.YearSend == paser.year).ToList();
-
+                var data = db.DecorImages.Where(p => p.CalendarWorkID == paser.checkInId).ToList();
+                
                 foreach(var item in data)
                 {
                     result.Add(new DecorImageResult()

@@ -81,7 +81,6 @@
         <AssociationConnector Association="NDHDB1Model.FK__EventCust__CInfo__3F6663D5" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDB1Model.FK__FarmerInf__InfoI__7EF6D905" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDB1Model.FK__MSGPoint__CInfoI__5614BF03" ManuallyRouted="false" />
-        <AssociationConnector Association="NDHDB1Model.FK__DecorImag__Staff__6F6A7CB2" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDB1Model.FK__District__Provin__07C12930" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDB1Model.FK__Ward__Districtid__0C85DE4D" ManuallyRouted="false" />
         <AssociationConnector Association="NDHDB1Model.FK__EventArea__AreaI__54968AE5" ManuallyRouted="false" />

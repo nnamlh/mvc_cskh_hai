@@ -36,5 +36,12 @@ namespace NDHSITE.Models
         public Nullable<double> Distance { get; set; }
         public Nullable<int> Perform { get; set; }
         public string DayInWeek { get; set; }
+        public string NoteCode { get; set; }
+        public string Country { get; set; }
+        public string Province { get; set; }
+        public string Ward { get; set; }
+        public string AddressInfo { get; set; }
+        public string Content { get; set; }
+        public string District { get; set; }
     }
 }

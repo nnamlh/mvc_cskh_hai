@@ -15,6 +15,13 @@ namespace HAIAPI.Models
         public List<CalendarType> status { get; set; }
 
         public List<string> month { get; set; }
+
+
+        public int max { get; set; }
+
+
+        public bool requireCheck { get; set; }
+
     }
 
     public class CheckCalendarUpdateResult : ResultInfo
@@ -108,6 +115,10 @@ namespace HAIAPI.Models
 
         public int? perform { get; set; }
 
+        public string content { get; set; }
+
+        public string address { get; set; }
+
 
     }
 
@@ -133,6 +144,10 @@ namespace HAIAPI.Models
 
         public string agencyType { get; set; }
 
+        public string content { get; set; }
+
+        public string checkInId { get; set; }
+
     }
 
     public class CalendarShowRequest : RequestInfo
@@ -150,6 +165,8 @@ namespace HAIAPI.Models
 
         public List<CalendarType> status { get; set; }
 
+        public bool checkFlexible { get; set; }
+
     }
     public class CheckInGetPlanRequest : RequestInfo
     {
@@ -165,6 +182,8 @@ namespace HAIAPI.Models
     public class CheckInTaskRequest : RequestInfo
     {
         public string code { get; set; }
+
+        public string checkInId { get; set; }
     }
 
     public class CheckInOutPlanRequest : RequestInfo
@@ -176,6 +195,25 @@ namespace HAIAPI.Models
         public double? lat { get; set; }
 
         public double? lng { get; set; }
+    }
+
+    public class CheckInFlexibleRequest : RequestInfo
+    {
+        public double? lat { get; set; }
+
+        public double? lng { get; set; }
+
+        public string country { get; set; }
+
+        public string province { get; set; }
+
+        public string district { get; set; }
+
+        public string ward { get; set; }
+
+        public string content { get; set; }
+
+        public string address { get; set; }
     }
 
     public class CheckInTaskResult : ResultInfo
@@ -207,6 +245,10 @@ namespace HAIAPI.Models
         public double? lng { get; set; }
 
         public double? distance { get; set; }
+
+        public string notes { get; set; }
+
+        public string noteCode { get; set; }
 
     }
 

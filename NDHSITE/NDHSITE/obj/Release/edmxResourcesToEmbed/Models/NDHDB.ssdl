@@ -262,6 +262,13 @@
     <Property Name="Distance" Type="float" />
     <Property Name="Perform" Type="int" />
     <Property Name="DayInWeek" Type="nvarchar" MaxLength="32" />
+    <Property Name="NoteCode" Type="varchar" MaxLength="128" />
+    <Property Name="Country" Type="nvarchar" MaxLength="128" />
+    <Property Name="Province" Type="nvarchar(max)" />
+    <Property Name="Ward" Type="nvarchar(max)" />
+    <Property Name="AddressInfo" Type="nvarchar(max)" />
+    <Property Name="Content" Type="nvarchar(max)" />
+    <Property Name="District" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="CInfoCommon">
     <Key>
@@ -313,17 +320,10 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="DaySend" Type="int" />
-    <Property Name="MonthSend" Type="int" />
-    <Property Name="YearSend" Type="int" />
-    <Property Name="AgencyCode" Type="nvarchar" MaxLength="128" />
-    <Property Name="AgencyType" Type="nvarchar" MaxLength="128" />
     <Property Name="ImageUrl" Type="nvarchar(max)" />
     <Property Name="CreateTime" Type="time" Precision="7" />
-    <Property Name="Lat" Type="float" />
-    <Property Name="Lng" Type="float" />
     <Property Name="DecorGroup" Type="nvarchar" MaxLength="128" />
-    <Property Name="StaffId" Type="nvarchar" MaxLength="128" />
+    <Property Name="CalendarWorkID" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="DeliveryStatus">
     <Key>
@@ -1120,18 +1120,6 @@
       </Principal>
       <Dependent Role="CInfoCommon">
         <PropertyRef Name="AgencyType" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__DecorImag__Staff__6F6A7CB2">
-    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
-    <End Role="DecorImage" Type="Self.DecorImage" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="HaiStaff">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="DecorImage">
-        <PropertyRef Name="StaffId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -2079,10 +2067,6 @@
     <AssociationSet Name="FK__CInfoComm__Agenc__4356F04A" Association="Self.FK__CInfoComm__Agenc__4356F04A">
       <End Role="AgencyType" EntitySet="AgencyType" />
       <End Role="CInfoCommon" EntitySet="CInfoCommon" />
-    </AssociationSet>
-    <AssociationSet Name="FK__DecorImag__Staff__6F6A7CB2" Association="Self.FK__DecorImag__Staff__6F6A7CB2">
-      <End Role="HaiStaff" EntitySet="HaiStaff" />
-      <End Role="DecorImage" EntitySet="DecorImage" />
     </AssociationSet>
     <AssociationSet Name="FK__District__Provin__07C12930" Association="Self.FK__District__Provin__07C12930">
       <End Role="Province" EntitySet="Province" />

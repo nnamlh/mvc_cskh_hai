@@ -65,6 +65,14 @@ namespace HAIAPI.Controllers
                 }
 
                 result.status = db.CalendarTypes.OrderBy(p => p.TGroup).ToList();
+
+                result.max = 60;
+
+
+                // check role
+
+                result.requireCheck = checkTT(user);
+
             }
             catch (Exception e)
             {
@@ -82,6 +90,23 @@ namespace HAIAPI.Controllers
         }
         #endregion
 
+
+        private bool checkTT(string user)
+        {
+            var userData = db.AspNetUsers.Where(p => p.UserName == user).FirstOrDefault();
+
+            var userRole = userData.AspNetRoles.FirstOrDefault();
+
+            if (userRole == null)
+                throw new Exception("sai quyen");
+
+            if (userRole.Name == "TT_CN")
+                return true;
+
+
+            return false;
+
+        }
 
         #region calendar check update
         [HttpPost]
@@ -332,6 +357,12 @@ namespace HAIAPI.Controllers
                 // lich chi tiet
                 foreach (var item in paser.items)
                 {
+
+                    if (item.status == "NoChoice")
+                    {
+                        continue;
+                    }
+
                     if (item.agencies == null || item.agencies.Count() == 0)
                     {
                         CalendarWork plan = new CalendarWork()
@@ -441,7 +472,7 @@ namespace HAIAPI.Controllers
                 var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
 
                 if (staff == null)
-                    throw new Exception("Chỉ nhân viên công ty mới được quyền tạo");
+                    throw new Exception("Chỉ nhân viên công ty mới được quyền");
 
                 var checkCalendar = db.CalendarInfoes.Where(p => p.CMonth == paser.month && p.CYear == paser.year && p.StaffId == staff.Id).FirstOrDefault();
 
@@ -491,9 +522,9 @@ namespace HAIAPI.Controllers
                 if (allItemInDay.Count > 0)
                 {
 
-                       itemDay.type = allItemInDay[0].TypeId;
-                      itemDay.notes = allItemInDay[0].Notes;
-                       itemDay.typeName = allItemInDay[0].TypeName;
+                    itemDay.type = allItemInDay[0].TypeId;
+                    itemDay.notes = allItemInDay[0].Notes;
+                    itemDay.typeName = allItemInDay[0].TypeName;
 
                     foreach (var agency in allItemInDay)
                     {
@@ -506,7 +537,9 @@ namespace HAIAPI.Controllers
                             name = agency.StoreName,
                             inPlan = agency.InPlan,
                             perform = agency.Perform,
-                            ctypename = agency.TypeName
+                            ctypename = agency.TypeName,
+                            content = agency.Content,
+                            address = agency.Ward + ", " + agency.District + ", " + agency.Province
                         });
 
                     }
@@ -585,6 +618,8 @@ namespace HAIAPI.Controllers
                 if (!compareDateCurrent(paser.day, paser.month, paser.year))
                     throw new Exception("Sai thông tin ngày tháng");
 
+                result.checkFlexible = !checkTT(paser.user);
+
                 result.checkin = new List<AgencyCheckIn>();
                 //result.outplan = new List<string>();
                 result.status = db.CalendarTypes.Where(p => p.OutPlan == 1).OrderBy(p => p.TGroup).ToList();
@@ -600,7 +635,29 @@ namespace HAIAPI.Controllers
                         {
                             var type = calendarType.Where(p => p.Id == item.TypeId).FirstOrDefault();
                             var agencyInfo = db.CInfoCommons.Where(p => p.CCode == item.AgencyCode).FirstOrDefault();
-                            if (type != null && agencyInfo != null)
+
+                            if (item.AgencyCode == "KVL")
+                            {
+                                var agency = new AgencyCheckIn()
+                                {
+                                    ctype = type.Id,
+                                    cname = type.Name,
+                                    agencyType = agencyInfo.CType,
+                                    code = item.AgencyCode,
+                                    deputy = agencyInfo.CDeputy,
+                                    name = agencyInfo.CName,
+                                    inPlan = item.InPlan,
+                                    lat = item.LatCheck != null ? item.LatCheck : 0,
+                                    lng = item.LngCheck != null ? item.LngCheck : 0,
+                                    content = item.Content,
+                                    c1 = new List<SubOwner>(),
+                                    checkInId = item.Id
+                                };
+
+                                result.checkin.Add(agency);
+
+                            }
+                            else if (type != null && agencyInfo != null)
                             {
                                 var agency = new AgencyCheckIn()
                                 {
@@ -612,7 +669,8 @@ namespace HAIAPI.Controllers
                                     name = agencyInfo.CName,
                                     inPlan = item.InPlan,
                                     lat = agencyInfo.Lat != null ? agencyInfo.Lat : 0,
-                                    lng = agencyInfo.Lng != null ? agencyInfo.Lng : 0
+                                    lng = agencyInfo.Lng != null ? agencyInfo.Lng : 0,
+                                    checkInId = item.Id
                                 };
 
                                 var c2c1 = db.C2C1.Where(p => p.C2Code == item.AgencyCode).ToList();
@@ -712,7 +770,7 @@ namespace HAIAPI.Controllers
                 if (checkUser == null)
                     throw new Exception("Lỗi");
 
-                var role = checkUser.AspNetRoles.FirstOrDefault();
+
 
                 // check inplan hay new plan
                 var cinfo = db.CInfoCommons.Where(p => p.CCode == paser.code).FirstOrDefault();
@@ -720,16 +778,24 @@ namespace HAIAPI.Controllers
                     throw new Exception("Sai mã khách hàng");
 
                 // check 
+                /*
                 var day = DateTime.Now.Day;
                 var month = DateTime.Now.Month;
                 var year = DateTime.Now.Year;
-
-                
-                //int timeRequireCheckIn = 0;
-
-                var processCheckIn = role.ProcessWorks.OrderBy(p => p.SortIndex).ToList();
-
+                */
                 List<TaskInfo> taskInfo = new List<TaskInfo>();
+                var processCheckIn = new List<ProcessWork>();
+                //int timeRequireCheckIn = 0;
+                if (paser.code == "KVL")
+                {
+                    processCheckIn = db.ProcessWorks.Where(p => p.Notes == "KVL").ToList();
+                }
+                else
+                {
+                    var role = checkUser.AspNetRoles.FirstOrDefault();
+                    processCheckIn = role.ProcessWorks.OrderBy(p => p.SortIndex).ToList();
+
+                }
                 foreach (var item in processCheckIn)
                 {
                     taskInfo.Add(new TaskInfo()
@@ -738,16 +804,15 @@ namespace HAIAPI.Controllers
                         name = item.ProcessName,
                         time = Convert.ToInt32(item.TimeRequire)
                     });
-                   // timeRequireCheckIn += Convert.ToInt32(item.TimeRequire);
                 }
-                
+
                 result.tasks = taskInfo;
                 result.agencyCode = cinfo.CCode;
                 result.agencyDeputy = cinfo.CDeputy;
                 result.agencyName = cinfo.CName;
 
                 // kiem tra lich
-                var checkCalendar = db.CalendarWorks.Where(p => p.CMonth == month && p.CYear == year && p.CDay == day && p.StaffId == staff.Id && p.AgencyCode == paser.code).FirstOrDefault();
+                var checkCalendar = db.CalendarWorks.Find(paser.checkInId);
 
                 if (checkCalendar != null)
                 {
@@ -780,7 +845,7 @@ namespace HAIAPI.Controllers
                         result.timeRemain = 0;
                     }
 
-                    saveHistoryProcess("begintask", checkCalendar.Id);
+                    // saveHistoryProcess("begintask", checkCalendar.Id);
 
                 }
 
@@ -902,7 +967,7 @@ namespace HAIAPI.Controllers
                         AllTime = 0,
                         Distance = 0,
                         TypeId = calendarType.Id,
-                        Notes = "Ngoai ke hoach",
+                        //   Notes = "Ngoai ke hoach",
                         StaffId = staff.Id,
                         DayInWeek = GetDayOfWeek(day, month, year),
                         LatCheck = paser.lat,
@@ -928,7 +993,92 @@ namespace HAIAPI.Controllers
 
         }
         #endregion
+        [HttpPost]
+        public ResultInfo CheckInFlexible()
+        {
+            var log = new MongoHistoryAPI()
+            {
+                APIUrl = "/api/checkin/checkinflexible",
+                CreateTime = DateTime.Now,
+                Sucess = 1
+            };
 
+            var result = new ResultInfo()
+            {
+                id = "1",
+                msg = "success"
+            };
+            var requestContent = Request.Content.ReadAsStringAsync().Result;
+            try
+            {
+                var jsonserializer = new JavaScriptSerializer();
+                var paser = jsonserializer.Deserialize<CheckInFlexibleRequest>(requestContent);
+                log.Content = new JavaScriptSerializer().Serialize(paser);
+
+                if (!mongoHelper.checkLoginSession(paser.user, paser.token))
+                    throw new Exception("Wrong token and user login!");
+
+                var staff = db.HaiStaffs.Where(p => p.UserLogin == paser.user).FirstOrDefault();
+
+                if (staff == null)
+                    throw new Exception("Chỉ nhân viên công ty mới được sử dụng");
+
+
+                if (checkTT(paser.user))
+                    throw new Exception("Không dành cho nhân viên thị trường");
+
+
+                var day = DateTime.Now.Day;
+                var month = DateTime.Now.Month;
+                var year = DateTime.Now.Year;
+                // tao lich
+                CalendarWork plan = new CalendarWork()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    CDate = "D" + day + "",
+                    CDay = day,
+                    CMonth = month,
+                    CYear = year,
+                    InPlan = 0,
+                    Perform = 0,
+                    CIn = 0,
+                    COut = 0,
+                    AllTime = 0,
+                    Distance = 0,
+                    TypeId = "FLEXIBLE",
+                    Notes = "CheckIn khong co dinh",
+                    StaffId = staff.Id,
+                    DayInWeek = GetDayOfWeek(day, month, year),
+                    LatCheck = paser.lat,
+                    LngCheck = paser.lng,
+                    TimeCheck = DateTime.Now,
+                    AddressInfo = paser.address,
+                    AgencyCode = "KVL",
+                    AgencyType = "KVL",
+                    Content = paser.content,
+                    Country = paser.country,
+                    Province = paser.province,
+                    Ward = paser.ward,
+                    District = paser.district
+                };
+
+                db.CalendarWorks.Add(plan);
+                db.SaveChanges();
+
+
+            }
+            catch (Exception e)
+            {
+                result.id = "0";
+                result.msg = e.Message;
+                log.Sucess = 0;
+            }
+
+            log.ReturnInfo = new JavaScriptSerializer().Serialize(result);
+            mongoHelper.createHistoryAPI(log);
+
+            return result;
+        }
 
         #region
         [HttpPost]
@@ -992,7 +1142,7 @@ namespace HAIAPI.Controllers
                         throw new Exception("Đã hoàn thành ghé thăm");
 
                     TimeSpan span = DateTime.Now.TimeOfDay.Subtract(checkCalendar.CInTime.Value);
-                   
+
                     int minuteDistance = span.Hours * 60 + span.Minutes;
                     if (minuteDistance >= timeRequireCheckIn)
                         minuteDistance = 0;
@@ -1001,7 +1151,7 @@ namespace HAIAPI.Controllers
 
                     if (minuteDistance > 0)
                         throw new Exception("Còn " + minuteDistance + " phút để có thể checkin");
-                        
+
                     checkCalendar.COut = 1;
                     checkCalendar.Perform = 1;
                     checkCalendar.COutTime = DateTime.Now.TimeOfDay;
@@ -1010,11 +1160,13 @@ namespace HAIAPI.Controllers
                     checkCalendar.LatCheck = paser.lat;
                     checkCalendar.LngCheck = paser.lng;
                     checkCalendar.AllTime = span.Hours * 60 + span.Minutes;
+                    checkCalendar.Notes = paser.notes;
+                    checkCalendar.NoteCode = paser.noteCode;
 
                     db.Entry(checkCalendar).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
 
-                    saveHistoryProcess("endtask", checkCalendar.Id);
+                    //saveHistoryProcess("endtask", checkCalendar.Id);
 
                 }
 

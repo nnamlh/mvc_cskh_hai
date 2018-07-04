@@ -248,6 +248,13 @@
     <EntitySetMapping Name="CalendarWorks">
       <EntityTypeMapping TypeName="DMSHAIModel.CalendarWork">
         <MappingFragment StoreEntitySet="CalendarWork">
+          <ScalarProperty Name="District" ColumnName="District" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="AddressInfo" ColumnName="AddressInfo" />
+          <ScalarProperty Name="Ward" ColumnName="Ward" />
+          <ScalarProperty Name="Province" ColumnName="Province" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="NoteCode" ColumnName="NoteCode" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="CDay" ColumnName="CDay" />
           <ScalarProperty Name="CMonth" ColumnName="CMonth" />
@@ -323,18 +330,11 @@
     <EntitySetMapping Name="DecorImages">
       <EntityTypeMapping TypeName="DMSHAIModel.DecorImage">
         <MappingFragment StoreEntitySet="DecorImage">
+          <ScalarProperty Name="CalendarWorkID" ColumnName="CalendarWorkID" />
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="DaySend" ColumnName="DaySend" />
-          <ScalarProperty Name="MonthSend" ColumnName="MonthSend" />
-          <ScalarProperty Name="YearSend" ColumnName="YearSend" />
-          <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
-          <ScalarProperty Name="AgencyType" ColumnName="AgencyType" />
           <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
           <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-          <ScalarProperty Name="Lat" ColumnName="Lat" />
-          <ScalarProperty Name="Lng" ColumnName="Lng" />
           <ScalarProperty Name="DecorGroup" ColumnName="DecorGroup" />
-          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
