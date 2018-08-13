@@ -1,4 +1,5 @@
 ﻿using HAIAPI.Models;
+using HAIAPI.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -365,7 +366,7 @@ namespace HAIAPI.Controllers
                     throw new Exception("Sai thông tin khách hàng");
                 }
 
-              //  CInfoCommon cinfo = checkC2.CInfoCommon;
+                //  CInfoCommon cinfo = checkC2.CInfoCommon;
                 cinfo.Lat = paser.lat;
                 cinfo.Lng = paser.lng;
                 db.Entry(cinfo).State = System.Data.Entity.EntityState.Modified;
@@ -559,6 +560,187 @@ namespace HAIAPI.Controllers
             return agencyC2C1;
         }
 
+
+        /// require reset locaion
+
+        [HttpGet]
+        public ResultInfo RequireResetLocation(string user, string token, string agency, string address)
+        {
+            var result = new ResultInfo()
+            {
+                id = "0",
+                msg = ""
+            };
+
+            try
+            {
+                if (!mongoHelper.checkLoginSession(user, token))
+                    throw new Exception("Tài khoản đã có người đăng nhập");
+
+                var checkAgency = db.CInfoCommons.Where(p => p.CCode == agency).FirstOrDefault();
+
+                if (checkAgency == null)
+                    throw new Exception("Sai thông tin");
+
+                var checkStaff = db.HaiStaffs.Where(p => p.UserLogin == user).FirstOrDefault();
+
+                if (checkStaff == null)
+                    throw new Exception("Sai thông tin");
+
+                var checkExsit = db.ResetLocations.Where(p => p.AgencyCode == agency && p.UserLogin == user && p.IsAppove == 0).FirstOrDefault();
+
+                if (checkExsit != null)
+                    throw new Exception("Đã gửi yêu cầu, đang đợi hệ thống xác nhận");
+
+                var locationReset = new ResetLocation()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    AgencyCode = checkAgency.CCode,
+                    UserLogin = user,
+                    CreateDate = DateTime.Now,
+                    IsAppove = 0,
+                    NewLocation = address,
+                    StaffId = checkStaff.Id
+                };
+
+                var checkLastUpdate = db.ResetLocations.Where(p => p.AgencyCode == agency).OrderByDescending(p => p.CreateDate).FirstOrDefault();
+
+                if (checkLastUpdate != null)
+                    locationReset.OldLocation = checkLastUpdate.NewLocation;
+                else
+                    locationReset.OldLocation = checkAgency.AddressInfo;
+
+                db.ResetLocations.Add(locationReset);
+
+                db.SaveChanges();
+
+            }
+            catch (Exception e)
+            {
+                result.id = "0";
+                result.msg = e.Message;
+            }
+
+            result.id = "1";
+
+            return result;
+
+        }
+
+        [HttpGet]
+        public ResultInfo GetListRequiredResetLocation(string user, string token)
+        {
+
+            var result = new ResultWithData()
+            {
+                id = "0",
+                msg = ""
+            };
+
+            try
+            {
+                if (!mongoHelper.checkLoginSession(user, token))
+                    throw new Exception("Tài khoản đã có người đăng nhập");
+
+                result.data = db.ResetLocations.Where(p => p.IsAppove == 0).OrderByDescending(p => p.CreateDate).Select(p=> new { StaffName = p.HaiStaff.FullName,
+                    OldLocation = p.OldLocation, NewLocation = p.NewLocation, AgencyCode = p.AgencyCode, RequiredId = p.Id}).ToList();
+
+            }
+            catch (Exception e)
+            {
+                result.id = "0";
+                result.msg = e.Message;
+            }
+
+            result.id = "1";
+
+            return result;
+        }
+
+        [HttpGet]
+        public ResultInfo ApproveResetLocation(string user, string token, string requireId, int approve)
+        {
+            var result = new ResultInfo()
+            {
+                id = "0",
+                msg = ""
+            };
+
+            try
+            {
+
+                if (!mongoHelper.checkLoginSession(user, token))
+                    throw new Exception("Tài khoản đã có người đăng nhập");
+
+                var checkRequire = db.ResetLocations.Find(requireId);
+
+                if (checkRequire == null)
+                    throw new Exception("Sai thông tin");
+
+                if (approve == 1)
+                {
+                    var findAgency = db.CInfoCommons.Where(p => p.CCode == checkRequire.AgencyCode).FirstOrDefault();
+
+                    findAgency.Lat = 0;
+                    findAgency.Lng = 0;
+
+                    db.Entry(findAgency).State = System.Data.Entity.EntityState.Modified;
+
+                    db.SaveChanges();
+
+                }
+
+                checkRequire.IsAppove = 1;
+                db.Entry(checkRequire).State = System.Data.Entity.EntityState.Modified;
+
+                db.SaveChanges();
+
+            } catch (Exception e)
+            {
+                result.id = "0";
+                result.msg = e.Message;
+            }
+
+            result.id = "1";
+
+            return result;
+        }
+
+        [HttpGet]
+        public ResultInfo UpdateLocation (string user, string token, string agency, double lat, double lng)
+        {
+            var result = new ResultInfo()
+            {
+                id = "0",
+                msg = ""
+            };
+
+            try
+            {
+                if (!mongoHelper.checkLoginSession(user, token))
+                    throw new Exception("Tài khoản đã có người đăng nhập");
+
+                var check = db.CInfoCommons.Where(p => p.CCode == agency).FirstOrDefault();
+
+                if (check == null)
+                    throw new Exception("Sai thông tin");
+
+                check.Lat = lat;
+                check.Lng = lng;
+
+                db.Entry(check).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+
+            } catch(Exception e)
+            {
+                result.id = "0";
+                result.msg = e.Message;
+            }
+
+            result.id = "1";
+
+            return result;
+        }
 
     }
 }

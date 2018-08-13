@@ -165,6 +165,8 @@
     <EntitySetMapping Name="CalendarTypes">
       <EntityTypeMapping TypeName="NDHDB1Model.CalendarType">
         <MappingFragment StoreEntitySet="CalendarType">
+          <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+          <ScalarProperty Name="Flexible" ColumnName="Flexible" />
           <ScalarProperty Name="OutPlan" ColumnName="OutPlan" />
           <ScalarProperty Name="InPlan" ColumnName="InPlan" />
           <ScalarProperty Name="Id" ColumnName="Id" />
@@ -179,6 +181,7 @@
     <EntitySetMapping Name="CalendarWorks">
       <EntityTypeMapping TypeName="NDHDB1Model.CalendarWork">
         <MappingFragment StoreEntitySet="CalendarWork">
+          <ScalarProperty Name="Flexible" ColumnName="Flexible" />
           <ScalarProperty Name="District" ColumnName="District" />
           <ScalarProperty Name="Content" ColumnName="Content" />
           <ScalarProperty Name="AddressInfo" ColumnName="AddressInfo" />
@@ -1217,5 +1220,19 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="ResetLocations">
+      <EntityTypeMapping TypeName="NDHDB1Model.ResetLocation">
+        <MappingFragment StoreEntitySet="ResetLocation">
+          <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="IsAppove" ColumnName="IsAppove" />
+          <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+          <ScalarProperty Name="NewLocation" ColumnName="NewLocation" />
+          <ScalarProperty Name="OldLocation" ColumnName="OldLocation" />
+          <ScalarProperty Name="AgencyCode" ColumnName="AgencyCode" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -22,5 +22,7 @@ namespace HAIAPI.Models
         public string Name { get; set; }
         public Nullable<int> InPlan { get; set; }
         public Nullable<int> OutPlan { get; set; }
+        public Nullable<int> Flexible { get; set; }
+        public string GroupType { get; set; }
     }
 }

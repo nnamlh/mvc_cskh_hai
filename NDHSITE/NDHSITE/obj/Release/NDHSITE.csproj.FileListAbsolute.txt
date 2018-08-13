@@ -646,6 +646,8 @@ D:\work\Project\005HAI\mvc_cskh_hai\NDHSITE\NDHSITE\bin\System.Web.Razor.xml
 D:\work\Project\005HAI\mvc_cskh_hai\NDHSITE\NDHSITE\bin\System.Web.WebPages.xml
 D:\work\Project\005HAI\mvc_cskh_hai\NDHSITE\NDHSITE\bin\System.Web.WebPages.Deployment.xml
 D:\work\Project\005HAI\mvc_cskh_hai\NDHSITE\NDHSITE\bin\System.Web.WebPages.Razor.xml
-D:\work\Project\005HAI\mvc_cskh_hai\NDHSITE\NDHSITE\obj\Release\NDHSITE.csprojResolveAssemblyReference.cache
 D:\work\Project\005HAI\mvc_cskh_hai\NDHSITE\NDHSITE\obj\Release\NDHSITE.dll
 D:\work\Project\005HAI\mvc_cskh_hai\NDHSITE\NDHSITE\obj\Release\NDHSITE.pdb
+D:\work\Project\005HAI\mvc_cskh_hai\NDHSITE\NDHSITE\obj\Release\NDHSITE.csprojAssemblyReference.cache
+D:\work\Project\005HAI\mvc_cskh_hai\NDHSITE\NDHSITE\obj\Release\NDHSITE.csproj.CoreCompileInputs.cache
+D:\work\Project\005HAI\mvc_cskh_hai\NDHSITE\NDHSITE\obj\Release\NDHSITE.csproj.CopyComplete

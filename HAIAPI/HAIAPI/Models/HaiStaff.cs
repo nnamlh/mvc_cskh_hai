@@ -24,6 +24,7 @@ namespace HAIAPI.Models
             this.SaveAgencyShopImages = new HashSet<SaveAgencyShopImage>();
             this.OrderStaffs = new HashSet<OrderStaff>();
             this.OrderProductHistories = new HashSet<OrderProductHistory>();
+            this.ResetLocations = new HashSet<ResetLocation>();
         }
     
         public string Id { get; set; }
@@ -68,5 +69,7 @@ namespace HAIAPI.Models
         public virtual ICollection<OrderStaff> OrderStaffs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderProductHistory> OrderProductHistories { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ResetLocation> ResetLocations { get; set; }
     }
 }

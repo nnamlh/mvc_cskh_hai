@@ -86,6 +86,8 @@ namespace HAIAPI.Models
 
         public List<SubOwner> subOwner { get; set; }
 
+        public string smsCode { get; set; }
+
     }
 
     public class SubOwner

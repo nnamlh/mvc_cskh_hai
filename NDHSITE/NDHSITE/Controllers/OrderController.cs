@@ -130,13 +130,22 @@ namespace NDHSITE.Controllers
                             worksheet.Cells[i + 2, 2].Value = data[i].CreateDate;
                             worksheet.Cells[i + 2, 3].Value = data[i].Code;
                             worksheet.Cells[i + 2, 4].Value = data[i].BrachCode;
-                            worksheet.Cells[i + 2, 5].Value = data[i].StaffName;
-                            worksheet.Cells[i + 2, 6].Value = data[i].StaffCode;
+                            worksheet.Cells[i + 2, 5].Value = data[i].StaffCode;
+                            worksheet.Cells[i + 2, 6].Value = data[i].StaffName;
+                        
                             worksheet.Cells[i + 2, 7].Value = data[i].AgencyCode;
                             worksheet.Cells[i + 2, 8].Value = data[i].Store;
+
                             worksheet.Cells[i + 2, 9].Value = data[i].ExpectDate;
+
                             worksheet.Cells[i + 2, 10].Value = data[i].C1Code;
                             worksheet.Cells[i + 2, 11].Value = data[i].C1Name;
+
+                            if (String.IsNullOrEmpty(data[i].C1Code))
+                            {
+                                worksheet.Cells[i + 2, 10].Value = data[i].BrachCode;
+                                worksheet.Cells[i + 2, 11].Value = "LẤY TẠI CN";
+                            }
 
                             if (data[i].OrderStatus == "process")
                             {
@@ -194,12 +203,15 @@ namespace NDHSITE.Controllers
                             }
 
                             worksheet.Cells[i + 2, 16].Value = data[i].PName;
+
                             worksheet.Cells[i + 2, 17].Value = data[i].OrderQuantity / data[i].PQuantity;
                             worksheet.Cells[i + 2, 18].Value = data[i].OrderQuantity % data[i].PQuantity;
                             worksheet.Cells[i + 2, 19].Value = data[i].PPriceTotal;
+
                             worksheet.Cells[i + 2, 20].Value = data[i].QuantityFinish / data[i].PQuantity;
                             worksheet.Cells[i + 2, 21].Value = data[i].QuantityFinish % data[i].PQuantity;
                             worksheet.Cells[i + 2, 22].Value = data[i].QuantityFinish * data[i].PerPrice;
+
 
                             if (data[i].OrderType == "checkinorder")
                             {
@@ -286,15 +298,15 @@ namespace NDHSITE.Controllers
                     for (int i = 0; i < data.Count; i++)
                     {
                         worksheet.Cells[i + 5, 1].Value = data[i].BrachCode;
-                        worksheet.Cells[i + 5, 2].Value = data[i].StaffName;
-                        worksheet.Cells[i + 5, 3].Value = data[i].CountOrder;
-                        worksheet.Cells[i + 5, 4].Value = data[i].SumPPrice;
-                        worksheet.Cells[i + 5, 5].Value = data[i].SumPPriceReal;
-                        worksheet.Cells[i + 5, 6].Value = (int)((data[i].SumPPriceReal / data[i].SumPPrice)*100);
-                        worksheet.Cells[i + 5, 7].Value = data[i].SumPPriceHasBill;
+                        worksheet.Cells[i + 5, 2].Value = data[i].StaffCode;
+                        worksheet.Cells[i + 5, 3].Value = data[i].StaffName;
+                        worksheet.Cells[i + 5, 4].Value = data[i].CountAgency;
+                        worksheet.Cells[i + 5, 5].Value = data[i].CountOrder;
+                        worksheet.Cells[i + 5, 6].Value = data[i].SumPPrice;
+                        worksheet.Cells[i + 5, 7].Value = data[i].SumPPriceReal;
+                        worksheet.Cells[i + 5, 8].Value = (int)((data[i].SumPPriceReal / data[i].SumPPrice)*100);
+                        worksheet.Cells[i + 5, 9].Value = data[i].SumPPriceHasBill;
                         worksheet.Cells[i + 5, 10].Value = data[i].SumPPriceNoBill;
-                        worksheet.Cells[i + 5, 11].Value = data[i].SumPPriceInNew;
-                        worksheet.Cells[i + 5, 12].Value = data[i].SumPPriceInWarehouse;
                     }
 
 

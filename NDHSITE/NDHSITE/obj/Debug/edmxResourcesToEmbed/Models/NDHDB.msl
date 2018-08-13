@@ -234,6 +234,8 @@
     <EntitySetMapping Name="CalendarTypes">
       <EntityTypeMapping TypeName="DMSHAIModel.CalendarType">
         <MappingFragment StoreEntitySet="CalendarType">
+          <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+          <ScalarProperty Name="Flexible" ColumnName="Flexible" />
           <ScalarProperty Name="OutPlan" ColumnName="OutPlan" />
           <ScalarProperty Name="InPlan" ColumnName="InPlan" />
           <ScalarProperty Name="Id" ColumnName="Id" />
@@ -248,6 +250,7 @@
     <EntitySetMapping Name="CalendarWorks">
       <EntityTypeMapping TypeName="DMSHAIModel.CalendarWork">
         <MappingFragment StoreEntitySet="CalendarWork">
+          <ScalarProperty Name="Flexible" ColumnName="Flexible" />
           <ScalarProperty Name="District" ColumnName="District" />
           <ScalarProperty Name="Content" ColumnName="Content" />
           <ScalarProperty Name="AddressInfo" ColumnName="AddressInfo" />
@@ -1385,12 +1388,11 @@
           <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
           <ScalarProperty Name="AllAgency" ColumnName="AllAgency" />
-          <ScalarProperty Name="AllAgencyCloser" ColumnName="AllAgencyCloser" />
           <ScalarProperty Name="AllAgencyCheckIn" ColumnName="AllAgencyCheckIn" />
           <ScalarProperty Name="AllDayCSBH" ColumnName="AllDayCSBH" />
-          <ScalarProperty Name="AllDayCSBH4" ColumnName="AllDayCSBH4" />
           <ScalarProperty Name="AllAgencyOrder" ColumnName="AllAgencyOrder" />
           <ScalarProperty Name="AllOrderPrice" ColumnName="AllOrderPrice" />
+          <ScalarProperty Name="AllOrder" ColumnName="AllOrder" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -1408,6 +1410,7 @@
           <ScalarProperty Name="AgencyPlanInDay" ColumnName="AgencyPlanInDay" />
           <ScalarProperty Name="AgencyOrder" ColumnName="AgencyOrder" />
           <ScalarProperty Name="OrderPrice" ColumnName="OrderPrice" />
+          <ScalarProperty Name="AllOrder" ColumnName="AllOrder" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
@@ -1575,8 +1578,7 @@
           <ScalarProperty Name="SumPPriceReal" ColumnName="SumPPriceReal" />
           <ScalarProperty Name="SumPPriceHasBill" ColumnName="SumPPriceHasBill" />
           <ScalarProperty Name="SumPPriceNoBill" ColumnName="SumPPriceNoBill" />
-          <ScalarProperty Name="SumPPriceInWarehouse" ColumnName="SumPPriceInWarehouse" />
-          <ScalarProperty Name="SumPPriceInNew" ColumnName="SumPPriceInNew" />
+          <ScalarProperty Name="CountAgency" ColumnName="CountAgency" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

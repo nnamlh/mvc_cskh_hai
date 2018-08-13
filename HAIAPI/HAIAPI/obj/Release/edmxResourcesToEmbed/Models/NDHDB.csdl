@@ -181,6 +181,8 @@
     <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <Property Name="InPlan" Type="Int32" />
     <Property Name="OutPlan" Type="Int32" />
+    <Property Name="Flexible" Type="Int32" />
+    <Property Name="GroupType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="CalendarWork">
     <Key>
@@ -215,6 +217,7 @@
     <Property Name="AddressInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="District" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Flexible" Type="Int32" />
   </EntityType>
   <EntityType Name="CInfoCommon">
     <Key>
@@ -516,6 +519,7 @@
     <NavigationProperty Name="SaveAgencyShopImages" Relationship="NDHDB1Model.FK__SaveAgenc__Staff__009508B4" FromRole="HaiStaff" ToRole="SaveAgencyShopImage" />
     <NavigationProperty Name="OrderStaffs" Relationship="NDHDB1Model.FK__OrderStaf__Staff__21F5FC7F" FromRole="HaiStaff" ToRole="OrderStaff" />
     <NavigationProperty Name="OrderProductHistories" Relationship="NDHDB1Model.FK__OrderProd__Staff__6F357288" FromRole="HaiStaff" ToRole="OrderProductHistory" />
+    <NavigationProperty Name="ResetLocations" Relationship="NDHDB1Model.FK__ResetLoca__Staff__74EE4BDE" FromRole="HaiStaff" ToRole="ResetLocation" />
   </EntityType>
   <EntityType Name="HappyBirthday">
     <Key>
@@ -1683,6 +1687,11 @@
       <Parameter Name="staff" Mode="In" Type="String" />
       <Parameter Name="c1" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="ResetLocations" EntityType="NDHDB1Model.ResetLocation" />
+    <AssociationSet Name="FK__ResetLoca__Staff__74EE4BDE" Association="NDHDB1Model.FK__ResetLoca__Staff__74EE4BDE">
+      <End Role="HaiStaff" EntitySet="HaiStaffs" />
+      <End Role="ResetLocation" EntitySet="ResetLocations" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="checkin_calendartype_group_Result">
     <Property Type="String" Name="Name" Nullable="true" MaxLength="512" />
@@ -2266,4 +2275,30 @@
     <Property Type="String" Name="StaffName" Nullable="true" MaxLength="100" />
     <Property Type="Int32" Name="ProductTotal" Nullable="true" />
   </ComplexType>
+  <EntityType Name="ResetLocation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="AgencyCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="OldLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NewLocation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="StaffId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IsAppove" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UserLogin" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HaiStaff" Relationship="NDHDB1Model.FK__ResetLoca__Staff__74EE4BDE" FromRole="ResetLocation" ToRole="HaiStaff" />
+  </EntityType>
+  <Association Name="FK__ResetLoca__Staff__74EE4BDE">
+    <End Type="NDHDB1Model.HaiStaff" Role="HaiStaff" Multiplicity="0..1" />
+    <End Type="NDHDB1Model.ResetLocation" Role="ResetLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ResetLocation">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

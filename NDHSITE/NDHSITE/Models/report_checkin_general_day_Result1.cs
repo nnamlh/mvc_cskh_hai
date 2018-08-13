@@ -24,5 +24,6 @@ namespace NDHSITE.Models
         public Nullable<int> AgencyPlanInDay { get; set; }
         public Nullable<int> AgencyOrder { get; set; }
         public Nullable<double> OrderPrice { get; set; }
+        public Nullable<int> AllOrder { get; set; }
     }
 }

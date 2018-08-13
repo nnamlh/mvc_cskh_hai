@@ -563,12 +563,11 @@ namespace NDHSITE.Controllers
                             worksheet.Cells[i + 4, 4].Value = data[i].Code;
                             worksheet.Cells[i + 4, 5].Value = data[i].FullName;
                             worksheet.Cells[i + 4, 6].Value = data[i].AllAgency;
-                            worksheet.Cells[i + 4, 7].Value = data[i].AllAgencyCloser;
-                            worksheet.Cells[i + 4, 8].Value = data[i].AllAgencyCheckIn;
-                            worksheet.Cells[i + 4, 9].Value = data[i].AllDayCSBH;
-                            worksheet.Cells[i + 4, 10].Value = data[i].AllDayCSBH4;
-                            worksheet.Cells[i + 4, 11].Value = data[i].AllAgencyOrder;
-                            worksheet.Cells[i + 4, 12].Value = data[i].AllOrderPrice;
+                            worksheet.Cells[i + 4, 7].Value = data[i].AllAgencyCheckIn;
+                            worksheet.Cells[i + 4, 8].Value = data[i].AllDayCSBH;
+                            worksheet.Cells[i + 4, 9].Value = data[i].AllAgencyOrder;
+                            worksheet.Cells[i + 4, 10].Value = data[i].AllOrder;
+                            worksheet.Cells[i + 4, 11].Value = data[i].AllOrderPrice;
                         }
                         catch
                         {
@@ -638,7 +637,8 @@ namespace NDHSITE.Controllers
                             worksheet.Cells[i + 4, 9].Value = data[i].AgencyCheckInOutPlanDay;
                             worksheet.Cells[i + 4, 10].Value = data[i].CheckInNotCSKH;
                             worksheet.Cells[i + 4, 11].Value = data[i].AgencyOrder;
-                            worksheet.Cells[i + 4, 12].Value = data[i].OrderPrice;
+                            worksheet.Cells[i + 4, 12].Value = data[i].AllOrder;
+                            worksheet.Cells[i + 4, 13].Value = data[i].OrderPrice;
                         }
                         catch
                         {

@@ -21,7 +21,6 @@ namespace NDHSITE.Models
         public Nullable<double> SumPPriceReal { get; set; }
         public Nullable<double> SumPPriceHasBill { get; set; }
         public Nullable<double> SumPPriceNoBill { get; set; }
-        public Nullable<double> SumPPriceInWarehouse { get; set; }
-        public Nullable<double> SumPPriceInNew { get; set; }
+        public Nullable<int> CountAgency { get; set; }
     }
 }

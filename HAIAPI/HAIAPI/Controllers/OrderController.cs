@@ -72,7 +72,7 @@ namespace HAIAPI.Controllers
                 });
                 */
                 // lay danh sach type
-                var payType = db.PayTypes.OrderBy(p=> p.Idx).ToList();
+                var payType = db.PayTypes.OrderBy(p => p.Idx).ToList();
                 List<IdentityCommon> paytypeAll = new List<IdentityCommon>();
                 foreach (var item in payType)
                 {
@@ -394,7 +394,7 @@ namespace HAIAPI.Controllers
                 HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Bạn vừa tạo đơn hàng cho " + cinfo.CName, staff.UserLogin, db, mongoHelper);
 
                 // c2
-               // HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Bạn có 1 đơn hàng được tạo bởi nhân viên Công ty H.A.I " + staff.FullName + "(" + staff.Code + ")", cinfo.UserLogin, db, mongoHelper);
+                // HaiUtil.SendNotifi("Đơn hàng " + order.Code, "Bạn có 1 đơn hàng được tạo bởi nhân viên Công ty H.A.I " + staff.FullName + "(" + staff.Code + ")", cinfo.UserLogin, db, mongoHelper);
 
             }
             catch (Exception e)
@@ -437,19 +437,22 @@ namespace HAIAPI.Controllers
         public List<SubOwner> GetSalePlaces(string id, string user)
         {
 
-            List<SubOwner> result = GetC2C1(id);
+            var staff = db.HaiStaffs.Where(p => p.UserLogin == user).FirstOrDefault();
+
+            if (staff == null)
+                return new List<SubOwner>();
+
+
+            List<SubOwner> result = GetC1(staff.HaiBranch.Code);
 
             var place = new SubOwner()
             {
                 code = "000",
                 name = "Lấy tại chi nhánh",
-                priority = 0
+                priority = 0,
+                store = "Chi nhánh: " + staff.HaiBranch.Name
             };
 
-            var staff = db.HaiStaffs.Where(p => p.UserLogin == user).FirstOrDefault();
-
-            if (staff != null)
-                place.store = "Chi nhánh: " + staff.HaiBranch.Name;
 
             // add them 
             result.Add(place);

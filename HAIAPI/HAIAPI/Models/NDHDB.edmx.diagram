@@ -145,6 +145,8 @@
         <EntityTypeShape EntityType="NDHDB1Model.DeliveryStatu" Width="1.5" PointX="23.375" PointY="14.875" />
         <AssociationConnector Association="NDHDB1Model.FK__HaiOrder__DStatu__25918339" />
         <AssociationConnector Association="NDHDB1Model.FK__OrderProd__Staff__6F357288" />
+        <EntityTypeShape EntityType="NDHDB1Model.ResetLocation" Width="1.5" PointX="23.375" PointY="17.75" />
+        <AssociationConnector Association="NDHDB1Model.FK__ResetLoca__Staff__74EE4BDE" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

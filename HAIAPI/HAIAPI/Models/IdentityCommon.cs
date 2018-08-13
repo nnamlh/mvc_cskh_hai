@@ -18,11 +18,10 @@ namespace HAIAPI.Models
         public string msg { get; set; }
     }
 
-    public class RequestInfo
-    {
-        public string user { get; set; }
-        public string token { get; set; }
 
+    public class ResultWithData : ResultInfo
+    {
+        public Object data { get; set; }
     }
 
 
@@ -38,15 +37,6 @@ namespace HAIAPI.Models
         public List<string> topics { get; set; }
 
         public List<string> function { get; set; }
-
-     //   public List<AgencyInfoC2> c2 { get; set; }
-
-     //   public List<AgencyInfo> c1 { get; set; }
-
-      //  public List<GroupInfo> productGroups { get; set; }
-
-     //   public List<ProductInfoResult> products { get; set; }
-
     }
 
 
@@ -83,6 +73,11 @@ namespace HAIAPI.Models
 
     }
 
+    public class RequestInfo
+    {
+        public string token { get; set; }
+        public string user { get; set; }
+    }
 
     public class MainInfoRequest : RequestInfo
     {

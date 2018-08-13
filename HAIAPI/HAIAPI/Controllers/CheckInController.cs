@@ -63,15 +63,20 @@ namespace HAIAPI.Controllers
                 {
                     result.month.Add(currentMonth + "/" + currentYear);
                 }
-
-                result.status = db.CalendarTypes.OrderBy(p => p.TGroup).ToList();
-
-                result.max = 60;
-
-
                 // check role
 
                 result.requireCheck = checkTT(user);
+
+                if (result.requireCheck)
+                {
+                    result.status = db.CalendarTypes.Where(p => p.InPlan == 1).OrderBy(p => p.TGroup).ToList();
+                }
+                else
+                {
+                    result.status = db.CalendarTypes.Where(p => p.Flexible == 1).OrderBy(p => p.TGroup).ToList();
+                }
+
+                result.max = 60;
 
             }
             catch (Exception e)
@@ -102,7 +107,6 @@ namespace HAIAPI.Controllers
 
             if (userRole.Name == "TT_CN")
                 return true;
-
 
             return false;
 
@@ -358,11 +362,6 @@ namespace HAIAPI.Controllers
                 foreach (var item in paser.items)
                 {
 
-                    if (item.status == "NoChoice")
-                    {
-                        continue;
-                    }
-
                     if (item.agencies == null || item.agencies.Count() == 0)
                     {
                         CalendarWork plan = new CalendarWork()
@@ -381,7 +380,8 @@ namespace HAIAPI.Controllers
                             TypeId = item.status,
                             Notes = item.notes,
                             StaffId = staff.Id,
-                            DayInWeek = GetDayOfWeek(item.day, paser.month, paser.year)
+                            DayInWeek = GetDayOfWeek(item.day, paser.month, paser.year),
+                            Flexible = 0
                         };
 
                         db.CalendarWorks.Add(plan);
@@ -412,7 +412,8 @@ namespace HAIAPI.Controllers
                                     TypeId = item.status,
                                     Notes = item.notes,
                                     StaffId = staff.Id,
-                                    DayInWeek = GetDayOfWeek(item.day, paser.month, paser.year)
+                                    DayInWeek = GetDayOfWeek(item.day, paser.month, paser.year),
+                                    Flexible = 0
                                 };
 
                                 db.CalendarWorks.Add(plan);
@@ -621,11 +622,32 @@ namespace HAIAPI.Controllers
                 result.checkFlexible = !checkTT(paser.user);
 
                 result.checkin = new List<AgencyCheckIn>();
-                //result.outplan = new List<string>();
-                result.status = db.CalendarTypes.Where(p => p.OutPlan == 1).OrderBy(p => p.TGroup).ToList();
+
+                if (result.checkFlexible)
+                {
+                    result.status = db.CalendarTypes.Where(p => p.Flexible == 1).OrderBy(p => p.TGroup).ToList();
+                } else
+                {
+                    result.status = db.CalendarTypes.Where(p => p.OutPlan == 1).OrderBy(p => p.TGroup).ToList();
+                }
 
                 var listPlan = db.CalendarWorks.Where(p => p.CMonth == paser.month && p.CYear == paser.year && p.CDay == paser.day && p.StaffId == staff.Id).ToList();
+
                 var calendarType = db.CalendarTypes.ToList();
+
+                if (listPlan.Count() > 0)
+                {
+                    var fistPlan = listPlan.Where(p => p.InPlan == 1).FirstOrDefault();
+
+                    if (fistPlan != null)
+                    {
+                        var type = calendarType.Where(p => p.Id == fistPlan.TypeId).FirstOrDefault();
+
+                        result.notes = fistPlan.Notes;
+                        result.title = type.Name;
+                    }
+                }
+
                 foreach (var item in listPlan)
                 {
                     if (!String.IsNullOrEmpty(item.AgencyCode))
@@ -746,7 +768,8 @@ namespace HAIAPI.Controllers
             var result = new CheckInTaskResult()
             {
                 id = "1",
-                msg = "success"
+                msg = "success",
+                flexible = 0
             };
 
             var requestContent = Request.Content.ReadAsStringAsync().Result;
@@ -771,7 +794,6 @@ namespace HAIAPI.Controllers
                     throw new Exception("Lỗi");
 
 
-
                 // check inplan hay new plan
                 var cinfo = db.CInfoCommons.Where(p => p.CCode == paser.code).FirstOrDefault();
                 if (cinfo == null)
@@ -788,14 +810,23 @@ namespace HAIAPI.Controllers
                 //int timeRequireCheckIn = 0;
                 if (paser.code == "KVL")
                 {
+                    result.flexible = 1;
                     processCheckIn = db.ProcessWorks.Where(p => p.Notes == "KVL").ToList();
                 }
                 else
                 {
                     var role = checkUser.AspNetRoles.FirstOrDefault();
+                    if (role.Name == "QB_CN")
+                        result.flexible = 1;
+                    else if (role.Name == "Administrator")
+                        result.flexible = 1;
+
                     processCheckIn = role.ProcessWorks.OrderBy(p => p.SortIndex).ToList();
 
                 }
+
+
+
                 foreach (var item in processCheckIn)
                 {
                     taskInfo.Add(new TaskInfo()
@@ -929,12 +960,13 @@ namespace HAIAPI.Controllers
                         AllTime = 0,
                         Distance = 0,
                         TypeId = calendarType.Id,
-                        Notes = "Ngoai ke hoach",
+                        Notes = "CHECKIN NGOAI KE HOACH",
                         StaffId = staff.Id,
                         DayInWeek = GetDayOfWeek(day, month, year),
                         LatCheck = paser.lat,
                         LngCheck = paser.lng,
-                        TimeCheck = DateTime.Now
+                        TimeCheck = DateTime.Now,
+                        Flexible = 0
                     };
 
                     db.CalendarWorks.Add(plan);
@@ -972,7 +1004,8 @@ namespace HAIAPI.Controllers
                         DayInWeek = GetDayOfWeek(day, month, year),
                         LatCheck = paser.lat,
                         LngCheck = paser.lng,
-                        TimeCheck = DateTime.Now
+                        TimeCheck = DateTime.Now,
+                        Flexible = 0
                     };
                     db.CalendarWorks.Add(calendar);
                     db.SaveChanges();
@@ -1027,6 +1060,9 @@ namespace HAIAPI.Controllers
                 if (checkTT(paser.user))
                     throw new Exception("Không dành cho nhân viên thị trường");
 
+                var calendarType = db.CalendarTypes.Where(p => p.Id == paser.typeId).FirstOrDefault();
+                if (calendarType == null)
+                    throw new Exception("Sai ke hoach");
 
                 var day = DateTime.Now.Day;
                 var month = DateTime.Now.Month;
@@ -1045,8 +1081,8 @@ namespace HAIAPI.Controllers
                     COut = 0,
                     AllTime = 0,
                     Distance = 0,
-                    TypeId = "FLEXIBLE",
-                    Notes = "CheckIn khong co dinh",
+                    TypeId = calendarType.Id,
+                    Notes = "CHECKIN KHONG CO DINH",
                     StaffId = staff.Id,
                     DayInWeek = GetDayOfWeek(day, month, year),
                     LatCheck = paser.lat,
@@ -1059,7 +1095,8 @@ namespace HAIAPI.Controllers
                     Country = paser.country,
                     Province = paser.province,
                     Ward = paser.ward,
-                    District = paser.district
+                    District = paser.district,
+                    Flexible = 1
                 };
 
                 db.CalendarWorks.Add(plan);
@@ -1141,17 +1178,19 @@ namespace HAIAPI.Controllers
                     if (checkCalendar.Perform == 1)
                         throw new Exception("Đã hoàn thành ghé thăm");
 
+                    
                     TimeSpan span = DateTime.Now.TimeOfDay.Subtract(checkCalendar.CInTime.Value);
 
                     int minuteDistance = span.Hours * 60 + span.Minutes;
+
                     if (minuteDistance >= timeRequireCheckIn)
                         minuteDistance = 0;
                     else
                         minuteDistance = timeRequireCheckIn - minuteDistance;
-
+                    /*
                     if (minuteDistance > 0)
                         throw new Exception("Còn " + minuteDistance + " phút để có thể checkin");
-
+                        */
                     checkCalendar.COut = 1;
                     checkCalendar.Perform = 1;
                     checkCalendar.COutTime = DateTime.Now.TimeOfDay;

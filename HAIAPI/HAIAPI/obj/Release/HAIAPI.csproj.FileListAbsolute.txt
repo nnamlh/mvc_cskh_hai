@@ -369,8 +369,10 @@ D:\work\Project\005HAI\mvc_cskh_hai\HAIAPI\HAIAPI\bin\System.Web.Razor.xml
 D:\work\Project\005HAI\mvc_cskh_hai\HAIAPI\HAIAPI\bin\System.Web.WebPages.xml
 D:\work\Project\005HAI\mvc_cskh_hai\HAIAPI\HAIAPI\bin\System.Web.WebPages.Deployment.xml
 D:\work\Project\005HAI\mvc_cskh_hai\HAIAPI\HAIAPI\bin\System.Web.WebPages.Razor.xml
-D:\work\Project\005HAI\mvc_cskh_hai\HAIAPI\HAIAPI\obj\Release\HAIAPI.csprojResolveAssemblyReference.cache
 D:\work\Project\005HAI\mvc_cskh_hai\HAIAPI\HAIAPI\obj\Release\Interop.LocationApiLib.dll
 D:\work\Project\005HAI\mvc_cskh_hai\HAIAPI\HAIAPI\obj\Release\HAIAPI.csproj.ResolveComReference.cache
 D:\work\Project\005HAI\mvc_cskh_hai\HAIAPI\HAIAPI\obj\Release\HAIAPI.dll
 D:\work\Project\005HAI\mvc_cskh_hai\HAIAPI\HAIAPI\obj\Release\HAIAPI.pdb
+D:\work\Project\005HAI\mvc_cskh_hai\HAIAPI\HAIAPI\obj\Release\HAIAPI.csproj.CoreCompileInputs.cache
+D:\work\Project\005HAI\mvc_cskh_hai\HAIAPI\HAIAPI\obj\Release\HAIAPI.csproj.CopyComplete
+D:\work\Project\005HAI\mvc_cskh_hai\HAIAPI\HAIAPI\obj\Release\HAIAPI.csprojAssemblyReference.cache

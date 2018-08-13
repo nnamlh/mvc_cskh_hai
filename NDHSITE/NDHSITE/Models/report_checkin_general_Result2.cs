@@ -18,11 +18,10 @@ namespace NDHSITE.Models
         public string Code { get; set; }
         public string BranchCode { get; set; }
         public Nullable<int> AllAgency { get; set; }
-        public Nullable<int> AllAgencyCloser { get; set; }
         public Nullable<int> AllAgencyCheckIn { get; set; }
         public Nullable<int> AllDayCSBH { get; set; }
-        public Nullable<int> AllDayCSBH4 { get; set; }
         public Nullable<int> AllAgencyOrder { get; set; }
         public Nullable<double> AllOrderPrice { get; set; }
+        public Nullable<int> AllOrder { get; set; }
     }
 }

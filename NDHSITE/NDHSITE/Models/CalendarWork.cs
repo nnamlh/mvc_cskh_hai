@@ -43,5 +43,6 @@ namespace NDHSITE.Models
         public string AddressInfo { get; set; }
         public string Content { get; set; }
         public string District { get; set; }
+        public Nullable<int> Flexible { get; set; }
     }
 }

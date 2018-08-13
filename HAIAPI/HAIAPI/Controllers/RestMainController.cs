@@ -433,6 +433,7 @@ namespace HAIAPI.Controllers
                     code = item.Code,
                     name = item.StoreName,
                     type = "CII",
+                    smsCode = item.SMSCode,
                     deputy = item.Deputy,
                     address = item.CInfoCommon.AddressInfo,
                     lat = item.CInfoCommon.Lat == null ? 0 : item.CInfoCommon.Lat,
@@ -675,6 +676,18 @@ namespace HAIAPI.Controllers
             }
 
             return agencyC2C1;
+        }
+
+        protected List<SubOwner> GetC1(string brandId)
+        {
+            return db.CInfoCommons.Where(p => p.BranchCode == brandId && p.CType == "CI").Select(p => new SubOwner()
+            {
+                code = p.CCode,
+                name = p.CDeputy,
+                store = p.CName,
+                priority = 1
+
+            }).ToList();
         }
 
     }

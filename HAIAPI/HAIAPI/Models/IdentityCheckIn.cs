@@ -167,6 +167,10 @@ namespace HAIAPI.Models
 
         public bool checkFlexible { get; set; }
 
+        public string notes { get; set; }
+
+        public string title { get; set; }
+
     }
     public class CheckInGetPlanRequest : RequestInfo
     {
@@ -214,6 +218,8 @@ namespace HAIAPI.Models
         public string content { get; set; }
 
         public string address { get; set; }
+
+        public string typeId { get; set; }
     }
 
     public class CheckInTaskResult : ResultInfo
@@ -229,6 +235,8 @@ namespace HAIAPI.Models
         public string agencyDeputy { get; set; }
 
         public int inPlan { get; set; }
+
+        public int flexible { get; set; }
     }
 
     public class TaskInfo

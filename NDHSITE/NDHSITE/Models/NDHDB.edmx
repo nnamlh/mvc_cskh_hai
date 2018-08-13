@@ -240,6 +240,8 @@
           <Property Name="Name" Type="nvarchar" MaxLength="512" />
           <Property Name="InPlan" Type="int" />
           <Property Name="OutPlan" Type="int" />
+          <Property Name="Flexible" Type="int" />
+          <Property Name="GroupType" Type="nvarchar" MaxLength="128" />
         </EntityType>
         <EntityType Name="CalendarWork">
           <Key>
@@ -274,6 +276,7 @@
           <Property Name="AddressInfo" Type="nvarchar(max)" />
           <Property Name="Content" Type="nvarchar(max)" />
           <Property Name="District" Type="nvarchar(max)" />
+          <Property Name="Flexible" Type="int" />
         </EntityType>
         <EntityType Name="CInfoCommon">
           <Key>
@@ -2559,6 +2562,8 @@
           <Property Name="Name" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
           <Property Name="InPlan" Type="Int32" />
           <Property Name="OutPlan" Type="Int32" />
+          <Property Name="Flexible" Type="Int32" />
+          <Property Name="GroupType" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="CalendarWork">
           <Key>
@@ -2593,6 +2598,7 @@
           <Property Name="AddressInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="District" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Flexible" Type="Int32" />
         </EntityType>
         <EntityType Name="CInfoCommon">
           <Key>
@@ -4788,12 +4794,11 @@
           <Property Type="String" Name="Code" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="BranchCode" Nullable="true" MaxLength="20" />
           <Property Type="Int32" Name="AllAgency" Nullable="true" />
-          <Property Type="Int32" Name="AllAgencyCloser" Nullable="true" />
           <Property Type="Int32" Name="AllAgencyCheckIn" Nullable="true" />
           <Property Type="Int32" Name="AllDayCSBH" Nullable="true" />
-          <Property Type="Int32" Name="AllDayCSBH4" Nullable="true" />
           <Property Type="Int32" Name="AllAgencyOrder" Nullable="true" />
           <Property Type="Double" Name="AllOrderPrice" Nullable="true" />
+          <Property Type="Int32" Name="AllOrder" Nullable="true" />
         </ComplexType>
         <ComplexType Name="report_checkin_general_day_Result1">
           <Property Type="String" Name="Id" Nullable="false" MaxLength="128" />
@@ -4807,6 +4812,7 @@
           <Property Type="Int32" Name="AgencyPlanInDay" Nullable="true" />
           <Property Type="Int32" Name="AgencyOrder" Nullable="true" />
           <Property Type="Double" Name="OrderPrice" Nullable="true" />
+          <Property Type="Int32" Name="AllOrder" Nullable="true" />
         </ComplexType>
         <ComplexType Name="report_order_detail_Result">
           <Property Type="DateTime" Name="CreateDate" Nullable="true" Precision="23" />
@@ -4978,9 +4984,8 @@
           <Property Type="Double" Name="SumPPriceReal" Nullable="true" />
           <Property Type="Double" Name="SumPPriceHasBill" Nullable="true" />
           <Property Type="Double" Name="SumPPriceNoBill" Nullable="true" />
-          <Property Type="Double" Name="SumPPriceInWarehouse" Nullable="true" />
-          <Property Type="Double" Name="SumPPriceInNew" Nullable="true" />
-        </ComplexType>
+          <Property Type="Int32" Name="CountAgency" Nullable="true" />
+          </ComplexType>
         <ComplexType Name="report_order_staff_sales_barcode_Result">
           <Property Type="String" Name="BrachCode" Nullable="true" MaxLength="32" />
           <Property Type="String" Name="StaffName" Nullable="true" MaxLength="100" />
@@ -5238,6 +5243,8 @@
           <EntitySetMapping Name="CalendarTypes">
             <EntityTypeMapping TypeName="DMSHAIModel.CalendarType">
               <MappingFragment StoreEntitySet="CalendarType">
+                <ScalarProperty Name="GroupType" ColumnName="GroupType" />
+                <ScalarProperty Name="Flexible" ColumnName="Flexible" />
                 <ScalarProperty Name="OutPlan" ColumnName="OutPlan" />
                 <ScalarProperty Name="InPlan" ColumnName="InPlan" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -5252,6 +5259,7 @@
           <EntitySetMapping Name="CalendarWorks">
             <EntityTypeMapping TypeName="DMSHAIModel.CalendarWork">
               <MappingFragment StoreEntitySet="CalendarWork">
+                <ScalarProperty Name="Flexible" ColumnName="Flexible" />
                 <ScalarProperty Name="District" ColumnName="District" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
                 <ScalarProperty Name="AddressInfo" ColumnName="AddressInfo" />
@@ -6389,12 +6397,11 @@
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="BranchCode" ColumnName="BranchCode" />
                 <ScalarProperty Name="AllAgency" ColumnName="AllAgency" />
-                <ScalarProperty Name="AllAgencyCloser" ColumnName="AllAgencyCloser" />
                 <ScalarProperty Name="AllAgencyCheckIn" ColumnName="AllAgencyCheckIn" />
                 <ScalarProperty Name="AllDayCSBH" ColumnName="AllDayCSBH" />
-                <ScalarProperty Name="AllDayCSBH4" ColumnName="AllDayCSBH4" />
                 <ScalarProperty Name="AllAgencyOrder" ColumnName="AllAgencyOrder" />
                 <ScalarProperty Name="AllOrderPrice" ColumnName="AllOrderPrice" />
+                <ScalarProperty Name="AllOrder" ColumnName="AllOrder" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -6412,6 +6419,7 @@
                 <ScalarProperty Name="AgencyPlanInDay" ColumnName="AgencyPlanInDay" />
                 <ScalarProperty Name="AgencyOrder" ColumnName="AgencyOrder" />
                 <ScalarProperty Name="OrderPrice" ColumnName="OrderPrice" />
+                <ScalarProperty Name="AllOrder" ColumnName="AllOrder" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -6579,9 +6587,8 @@
                 <ScalarProperty Name="SumPPriceReal" ColumnName="SumPPriceReal" />
                 <ScalarProperty Name="SumPPriceHasBill" ColumnName="SumPPriceHasBill" />
                 <ScalarProperty Name="SumPPriceNoBill" ColumnName="SumPPriceNoBill" />
-                <ScalarProperty Name="SumPPriceInWarehouse" ColumnName="SumPPriceInWarehouse" />
-                <ScalarProperty Name="SumPPriceInNew" ColumnName="SumPPriceInNew" />
-              </ComplexTypeMapping>
+                <ScalarProperty Name="CountAgency" ColumnName="CountAgency" />
+                </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="report_order_staff_sales_barcode" FunctionName="DMSHAIModel.Store.report_order_staff_sales_barcode">

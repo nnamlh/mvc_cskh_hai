@@ -216,6 +216,8 @@
     <Property Name="Name" Type="nvarchar" MaxLength="512" />
     <Property Name="InPlan" Type="int" />
     <Property Name="OutPlan" Type="int" />
+    <Property Name="Flexible" Type="int" />
+    <Property Name="GroupType" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="CalendarWork">
     <Key>
@@ -250,6 +252,7 @@
     <Property Name="AddressInfo" Type="nvarchar(max)" />
     <Property Name="Content" Type="nvarchar(max)" />
     <Property Name="District" Type="nvarchar(max)" />
+    <Property Name="Flexible" Type="int" />
   </EntityType>
   <EntityType Name="CInfoCommon">
     <Key>
@@ -837,6 +840,19 @@
     <Property Name="UserType" Type="nvarchar" MaxLength="128" />
     <Property Name="CreateDate" Type="datetime" />
     <Property Name="ModifyDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ResetLocation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="AgencyCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="OldLocation" Type="nvarchar(max)" />
+    <Property Name="NewLocation" Type="nvarchar(max)" />
+    <Property Name="UserLogin" Type="nvarchar" MaxLength="128" />
+    <Property Name="StaffId" Type="nvarchar" MaxLength="128" />
+    <Property Name="IsAppove" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
   </EntityType>
   <EntityType Name="RoleCheckImei">
     <Key>
@@ -1650,6 +1666,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__ResetLoca__Staff__74EE4BDE">
+    <End Role="HaiStaff" Type="Self.HaiStaff" Multiplicity="0..1" />
+    <End Role="ResetLocation" Type="Self.ResetLocation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="HaiStaff">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ResetLocation">
+        <PropertyRef Name="StaffId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__SaveAgenc__Cinfo__7FA0E47B">
     <End Role="CInfoCommon" Type="Self.CInfoCommon" Multiplicity="0..1" />
     <End Role="SaveAgencyShopImage" Type="Self.SaveAgencyShopImage" Multiplicity="*" />
@@ -1894,6 +1922,7 @@
     <EntitySet Name="Province" EntityType="Self.Province" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PTracking" EntityType="Self.PTracking" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RegFirebase" EntityType="Self.RegFirebase" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ResetLocation" EntityType="Self.ResetLocation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="RoleCheckImei" EntityType="Self.RoleCheckImei" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SaveAgencyShopImage" EntityType="Self.SaveAgencyShopImage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SendSmsHistory" EntityType="Self.SendSmsHistory" Schema="dbo" store:Type="Tables" />
@@ -2121,6 +2150,10 @@
     <AssociationSet Name="FK__PTracking__Produ__00FF1D08" Association="Self.FK__PTracking__Produ__00FF1D08">
       <End Role="ProductInfo" EntitySet="ProductInfo" />
       <End Role="PTracking" EntitySet="PTracking" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ResetLoca__Staff__74EE4BDE" Association="Self.FK__ResetLoca__Staff__74EE4BDE">
+      <End Role="HaiStaff" EntitySet="HaiStaff" />
+      <End Role="ResetLocation" EntitySet="ResetLocation" />
     </AssociationSet>
     <AssociationSet Name="FK__SaveAgenc__Cinfo__7FA0E47B" Association="Self.FK__SaveAgenc__Cinfo__7FA0E47B">
       <End Role="CInfoCommon" EntitySet="CInfoCommon" />

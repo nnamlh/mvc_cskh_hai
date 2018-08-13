@@ -107,6 +107,7 @@ namespace HAIAPI.Models
         public virtual DbSet<BarcodeNotPermiss> BarcodeNotPermisses { get; set; }
         public virtual DbSet<UserBranchPermiss> UserBranchPermisses { get; set; }
         public virtual DbSet<DeliveryStatu> DeliveryStatus { get; set; }
+        public virtual DbSet<ResetLocation> ResetLocations { get; set; }
     
         public virtual ObjectResult<checkin_calendartype_group_Result> checkin_calendartype_group(Nullable<int> month, Nullable<int> year, string staffId)
         {

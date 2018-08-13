@@ -235,6 +235,8 @@
     <Property Name="Name" Type="nvarchar" MaxLength="512" />
     <Property Name="InPlan" Type="int" />
     <Property Name="OutPlan" Type="int" />
+    <Property Name="Flexible" Type="int" />
+    <Property Name="GroupType" Type="nvarchar" MaxLength="128" />
   </EntityType>
   <EntityType Name="CalendarWork">
     <Key>
@@ -269,6 +271,7 @@
     <Property Name="AddressInfo" Type="nvarchar(max)" />
     <Property Name="Content" Type="nvarchar(max)" />
     <Property Name="District" Type="nvarchar(max)" />
+    <Property Name="Flexible" Type="int" />
   </EntityType>
   <EntityType Name="CInfoCommon">
     <Key>

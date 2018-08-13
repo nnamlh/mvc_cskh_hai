@@ -12,6 +12,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Antlr3.Runtime.dll">
       <publishTime>03/21/2018 02:00:28</publishTime>
     </File>
+    <File Include="bin/Antlr3.Runtime.pdb">
+      <publishTime>03/21/2018 02:00:28</publishTime>
+    </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>03/21/2018 02:00:28</publishTime>
     </File>
@@ -19,7 +22,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/21/2018 02:00:28</publishTime>
     </File>
     <File Include="bin/HAIAPI.dll">
-      <publishTime>07/05/2018 03:32:26</publishTime>
+      <publishTime>08/13/2018 03:20:57</publishTime>
+    </File>
+    <File Include="bin/HAIAPI.pdb">
+      <publishTime>08/13/2018 03:20:57</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
       <publishTime>03/21/2018 02:00:28</publishTime>
@@ -133,7 +139,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/21/2018 02:00:24</publishTime>
     </File>
     <File Include="Models/NDHDB.edmx.diagram">
-      <publishTime>07/05/2018 00:25:39</publishTime>
+      <publishTime>08/13/2018 00:14:49</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>03/21/2018 02:00:28</publishTime>
@@ -169,7 +175,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/12/2017 00:06:57</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/04/2018 17:43:21</publishTime>
+      <publishTime>08/06/2018 02:29:05</publishTime>
     </File>
   </ItemGroup>
 </Project>
